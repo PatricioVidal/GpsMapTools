@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F07EE602-114A-4111-AD1C-E079D8C71E11}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GpsYv.ManejadorDeMapa</RootNamespace>
+    <AssemblyName>GpsYv.ManejadorDeMapa</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>GpsYv.ManejadorDeMapa.Programa</StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tst, Version=1.0.1487.21665, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ternary Search Tree Dictionary\Tst.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ManejadorBase.cs" />
+    <Compile Include="PDIs\ArregladorDeLetras.cs" />
+    <Compile Include="PDIs\ArregladorDePalabrasPorTipo.cs" />
+    <Compile Include="PDIs\BuscadorDeErrores.cs" />
+    <Compile Include="PDIs\BuscadorDeDuplicados.cs" />
+    <Compile Include="Campo.cs" />
+    <Compile Include="CampoComentario.cs" />
+    <Compile Include="CampoCoordenadas.cs" />
+    <Compile Include="CampoGenérico.cs" />
+    <Compile Include="CampoTipo.cs" />
+    <Compile Include="CampoNombre.cs" />
+    <Compile Include="CaracterísticaDePDIs.cs" />
+    <Compile Include="CaracterísticasDePolilíneas.cs" />
+    <Compile Include="Comentario.cs" />
+    <Compile Include="Coordenadas.cs" />
+    <Compile Include="ElementoDelMapa.cs" />
+    <Compile Include="ElementoDesconocido.cs" />
+    <Compile Include="EscritorFormatoPolish.cs" />
+    <Compile Include="EscuchadorDeEstatus.cs" />
+    <Compile Include="EscuchadorDeEstatusPorOmisión.cs" />
+    <Compile Include="Interface\InterfaceBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\InterfaceBase.Designer.cs">
+      <DependentUpon>InterfaceBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\InterfaceManejadorDeMapa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\InterfaceManejadorDeMapa.Designer.cs">
+      <DependentUpon>InterfaceManejadorDeMapa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IEscuchadorDeEstatus.cs" />
+    <Compile Include="Interface\InterfaceMapa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\InterfaceMapa.Designer.cs">
+      <DependentUpon>InterfaceMapa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeDuplicados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeDuplicados.Designer.cs">
+      <DependentUpon>InterfaceDeDuplicados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeEliminados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeEliminados.Designer.cs">
+      <DependentUpon>InterfaceDeEliminados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeErrores.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeErrores.Designer.cs">
+      <DependentUpon>InterfaceDeErrores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeModificados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceDeModificados.Designer.cs">
+      <DependentUpon>InterfaceDeModificados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LectorDeArchivo.cs" />
+    <Compile Include="LectorDeFormatoPolish.cs" />
+    <Compile Include="ManejadorDeMapa.cs" />
+    <Compile Include="Interface\PDIs\InterfaceManejador.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PDIs\InterfaceManejador.Designer.cs">
+      <DependentUpon>InterfaceManejador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PDIs\ManejadorDePDIs.cs" />
+    <Compile Include="Poligono.cs" />
+    <Compile Include="Polilínea.cs" />
+    <Compile Include="ProcesadorBase.cs" />
+    <Compile Include="ProcesadorDePDIs.cs" />
+    <Compile Include="Programa.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interface\InterfaceBase.resx">
+      <DependentUpon>InterfaceBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\InterfaceManejadorDeMapa.resx">
+      <DependentUpon>InterfaceManejadorDeMapa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PDIs\InterfaceManejador.resx">
+      <DependentUpon>InterfaceManejador.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\InterfaceMapa.resx">
+      <DependentUpon>InterfaceMapa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PDIs\InterfaceDeDuplicados.resx">
+      <DependentUpon>InterfaceDeDuplicados.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PDIs\InterfaceDeEliminados.resx">
+      <DependentUpon>InterfaceDeEliminados.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PDIs\InterfaceDeErrores.resx">
+      <DependentUpon>InterfaceDeErrores.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PDIs\InterfaceDeModificados.resx">
+      <DependentUpon>InterfaceDeModificados.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\VentanaDeAcerca.resx">
+      <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="CaracterísticasDePDIs.csv" />
+    <None Include="CaracterísticasDePolilíneas.csv" />
+    <None Include="ConversionDeLetras.csv" />
+    <None Include="CorrecciónDePalabrasPorTipo.csv" />
+    <None Include="CaracterísticasDePolígonos.csv" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PDI.cs" />
+    <Compile Include="Interface\VentanaDeAcerca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\VentanaDeAcerca.Designer.cs">
+      <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaracterísticasDePolígonos.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cambios.txt" />
+    <Content Include="Interface\GPS_YV.png" />
+    <Content Include="Leeme.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)*.csv $(TargetDir)
+copy $(ProjectDir)*.txt $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

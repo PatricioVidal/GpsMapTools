@@ -1,0 +1,74 @@
+﻿// Esta data se creo copiando la información del manual PDF del
+// usuario de cGPSmapper v2.4,sección 11.3.3,pag. 95-97.
+//
+// La información fue copiada como texto a este archivo y se usó
+// el remplazo usando Expresiones Regulares en Visual Estudio
+// con los siguentes parámetros:
+//
+//   Find what: N {.*} :z {.*}\n
+//   Replace with: \1,Gray,\2\n
+//
+// Luego se cambió manualmente el color de cada polígono. Los
+// colores tiene que ser de la lista:
+// http://msdn2.microsoft.com/en-us/library/system.drawing.knowncolor.aspx
+// Si el color no existe entonces se usa el color Negro. 
+//
+// El tipo 0x00 se usa como tipo por defecto.
+//
+// NOTA: El tipo "0x3b" esta repetido en documento PDF y debe 
+// eliminarse para evitar el error:
+//   "An item with the same key has already been added."
+// al correr el programa.
+//
+// Formato: Tipo, Color, Descripción.
+0x00,LightGray,
+0x01,WhiteSmoke,City
+0x02,WhiteSmoke,City
+0x03,WhiteSmoke,City
+0x04,DarkGreen,Military
+0x05,Gray,Car Park (Parking Lot)
+0x06,Gray,Parking Garage
+0x07,Gray,Airport
+0x08,Gray,Shopping Centre
+0x09,Gray,Marina
+0x0a,Gray,University
+0x0b,Gray,Hospital
+0x0c,Gray,Industrial
+0x0d,Gray,Reservation
+0x0e,Gray,Airport Runway
+0x13,Brown,Man made area
+0x14,LightGreen,National park
+0x15,LightGreen,National park
+0x16,LightGreen,National park
+0x17,LightGreen,City Park
+0x18,LightGreen,Golf
+0x19,LightGreen,Sport
+0x1a,LightGray,Cemetery
+0x1e,LightGreen,State Park
+0x1f,LightGreen,State Park
+0x28,Blue,Ocean
+0x32,Blue,Sea
+0x3b,Blue,Blue-Unknown
+0x3c,Blue,Lake
+0x3d,Blue,Lake
+0x3e,Blue,Lake
+0x3f,Blue,Lake
+0x40,Blue,Lake
+0x41,Blue,Lake
+0x42,Blue,Lake
+0x43,Blue,Lake
+0x44,Blue,Lake
+0x45,Blue,Blue-Unknown
+0x46,Blue,River
+0x47,Blue,River
+0x48,Blue,River
+0x49,Blue,River
+0x4b,Gray,Background
+0x4c,Blue,Intermittent River/Lake
+0x4d,White,Glacier
+0x4e,Green,Orchard or plantation
+0x4f,Green,Scrub
+0x50,Green,Woods
+0x51,Yellow,Wetland
+0x52,WhiteSmoke,Tundra
+0x53,LightGreen,Flats

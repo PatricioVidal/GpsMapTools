@@ -1,0 +1,112 @@
+Lo próximo para hacer:
+- Mejorar la ventana de confirmación de duplicados a borrar para los casos de muchos duplicados a borrar.
+- Añadir escala al mapa.
+- Implementar la lógica para guardar los cambios hechos a los PDIs.
+- Verificar que todos los elementos del mapa son conocidos.
+- Verificar que polígonos y polilíneas tienen coordenadas a nivel 0.
+- Verificar que polígonos y polilíneas tienen tipos válidos.
+- Implementar el diccionario.
+- Dibuja carreteras basado en RouteParams?
+- Actualizar elementos cuando se guarda el mapa?
+- Usar eventos para las páginas de pestañas.
+- Listar el tipo de modificación?
+- Hacer el ícono de la aplicación con el gráfico de GPS_YV.
+- Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
+
+Versión 1.0
+- Ahora se maneja correctamente PDIs con coordenadas a niveles distinto de 0 (pero se reporta en los errores de PDIs).
+- Arreglada la lógica de detección de errores en PDIs para evitar excepciones cuando un mismo PDI tiene varios errores a la vez.
+- Actualizadas las características de polilíneas y PDIs.
+
+  Estadísticas de PDIs:
+       Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
+    "58090.mp",  1713,          58,         19,          2,      19
+    "58170.mp",  6837,          82,          8,        189,       1
+    "58220.mp",  6460,         408,         30,         58,      28
+    "58370.mp",  1808,          14,         46,          8,       2
+    "58460.mp",   980,          17,        151,          4,       0
+
+Versión 0.9
+- Se implementó la lectura correcta del formato con RGN10/20/40/80.
+- Se consolidó las descripciones de PDIs.
+
+  Estadísticas de PDIs:
+       Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
+    "58170.mp",  6837,          82,          8,        189,       0
+    "58220.mp",  6460,         408,         30,         58,       7
+    "58370.mp",  1808,          14,         46,          8,      12
+
+Versión 0.8
+- Cambio de nombre a "ManejadorDeMapa".
+- Extendida la lógica del Buscador de Duplicados para encontrar nombres similares y siglas.
+- Implementada lógica para variar los parámetros de búsqueda de duplicados.
+- Cambiado el "Arreglador de Prefijos" a "Arreglador de Palabras" (incluyendo Banco del Caribe -> Bancaribe, etc.).
+- Cambiada la lógica de Posibles PDIs Duplicados para eliminar los que se seleccionen.
+- Ahora se asegura que los nombres de los PDIs estén en mayúscula.
+- Se eliminan espacios en blanco extras en los nombres de los PDIs.
+- Se verifica que los PDI tengan tipos conocidos y coordenadas definidas.
+- Añadida visualización de los elementos del mapa.
+- Añadido acercamiento/alejamiento del mapa con la rueda del ratón.
+- Añadido restauración de la ventana de visualización del mapa usando el doble-click del ratón.
+- Añadidas coordenadas del cursor al mapa.
+- Añadida la descripción de elementos.
+- Añadido los polígonos y polilíneas al mapa.
+- Ahora los menus de Guardar son mas estándar
+- Ahora se usan eventos para la actualización de listas.
+- Actualizada la ventana de Acerca.
+- Empezadas las pruebas automáticas
+- Cambiado el concepto Tipo de texto a número hexadecimal.
+- Estadísticas de 58170.mp:
+    PDIs -> Todos: 6837, Modificados:  99, Duplicados:  8, Eliminados: 189
+- Estadísticas de 58220.mp:
+    PDIs -> Todos: 6460, Modificados: 416, Duplicados: 30, Eliminados:  58
+
+Versión 0.7 (19/2/2008)
+- Actualizada la lógica para que se pueda procesar el mismo tipo de PDIs al arreglar prefijos.
+- Añadido a las pestañas el número de elementos.
+- Añadida la distancia entre PDIs duplicados.
+- Añadida la funcionalidad de eliminar duplicados manualmente.
+
+Version 0.6 (18/2/2008)
+- Añadida la fuente a Control de Versiones.
+- Cambiadas las listas a modo virtual para mejorar la velocidad de visualización.
+- Ahora se muestra en la interface los cambios hechos.
+- Ya está la estructura suficientemente madura para que otros puedan colaborar con el código.
+- Se comenzó la corrección de prefijos basado en abreviaciones y el tipo de PDI.
+- Se comenzó la implementación se la búsqueda y eliminación de PDIs duplicados.
+
+Version 0.5 (13/3/2008)
+- Ahora se fuerza el uso de punto decimal para lectura/escritura de números.
+- Ahora los PDIs mantienen el número de elemento.
+- Se implementó la lectura del CampoCoordenada (Data0) de forma generica.
+- Se mejoró el reuso de código.
+
+Version 0.4 (11/2/2008)
+- Lectura y escritura de archivos ahora usan la codificación 1252 para evitar usar la que tiene el sistema operativo por defecto.
+
+Versión 0.3 (10/2/2008)
+- Varias mejoras en la estructura del programa.
+- Se implementó la lógica para mostrar y registrar errores en el programa. 
+- El registro de errores se graba en el archivo <programa>.Error.log en el directorio de trabajo. 
+- Arreglada barra de progreso para que llegue al 100%.
+- Ahora la barra de progreso se limpia cuando termina la lectura del archivo.
+- Arreglado error cuando se manda a procesar algo y todavía no se ha leído un archivo.
+- Añadidos [RGN10] y [RGN20] como identificador de PDI.
+- Finalizada la clase/módulo para arreglar las letras con acentos y la ñ.
+- Implementado el guardado del archivo corregido.
+
+Versión 0.2 (8/2/2008)
+- Se cambiaros las referencias a "Mapdekode" por "Formato Polish".
+- Añadido filtro .mp para leer los archivos.
+- La lista de PDIs está ahora dentro de un Componente tabulador con miras a futuras expansiones.
+- Añadido mensaje de estatus, barra de progreso, y mensaje de información en la barra de estatus.
+- Se creo la clase ManejadorDePDIs para contener toda la lógica relacionada con PDIs.
+- Se cambio Punto por PuntoDeInteres.
+- Se implementó la lectura e interpretación de las coordenadas como números. para separar la latitud y longitud.
+- Los nombres de los PDIs ahora se convierten automaticamente a mayúsculas.
+- Se empezó la clase/módulo para arreglar las letras con acentos y la ñ.
+
+Versión 0.1 (7/2/2008)
+- Lectura de archivos formato Polish (.txt).
+- Mostrar PDIs (Nombre, Tipo, y Coordenadas) en la applicación.
+ 

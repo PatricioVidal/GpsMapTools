@@ -1,0 +1,330 @@
+// Esta data se creo copiando la información del manual PDF del
+// usuario de cGPSmapper v2.4,sección 11.3.1,pag. 83-91.
+//
+// La información fue copiada como texto a este archivo y se usó
+// el remplazo usando Expresiones Regulares en Visual Estudio
+// con los siguentes parámetros:
+//
+//   Find what: N {.*} :z :z {.*}\n
+//   Find what: N {.*-.*} :z-:z :z {.*}\n
+//   Find what: N {.*-.*} :z-:z :z-:z {.*}\n
+//   Replace with: \1,\2\n
+//
+// Luego se cambió manualmente el color de cada polígono. Los
+// colores tiene que ser de la lista:
+// http://msdn2.microsoft.com/en-us/library/system.drawing.knowncolor.aspx
+// Si el color no existe entonces se usa el color Negro. 
+//
+// El tipo 0x00 se usa como tipo por defecto.
+//
+// Formato: Tipo (rango:Tipo-Tipo), Descripción.
+0x01-0x05,City name (Point, fat, big)
+0x06-0x0A,City name (Point, big)
+0x0B,City name (Point, small)
+0x0C,City name (Point, small)
+0x0D,City name (Point, small)
+0x0E-0x1100,City name (Point, big)
+0x1200,Marino
+0x1400-0x153F,Region name (no Point, big)
+0x1601,Fog Horn   
+0x1602,Radio Beacon   
+0x1603,Racon    
+0x1604,Daybeacon, red Triangle  
+0x1605,Daybeacon, green Square  
+0x1606,Daybeacon, white Diamond  
+0x1607,unlit Navaid, white  
+0x1608,unlit Navaid, red  
+0x1609,unlit Navaid, green  
+0x160A,unlit Navaid, black  
+0x160B,unlit Navaid, yellow or amber
+0x160c,Centro de Gravedad
+0x160C,unlit Navaid, orange  
+0x160D,unlit Navaid, multi coloured 
+0x160E,Navaid, unknown   
+0x160F,lighted Navaid, white  
+0x1610,lighted Navaid, red  
+0x1611,lighted Navaid, green  
+0x1612,lighted Navaid, yellow or amber
+0x1613,lighted Navaid, orange  
+0x1614,lighted Navaid, violet  
+0x1615,lighted Navaid, blue  
+0x1616,lighted Navaid, multi coloured 
+0x1700,Fog Horn   
+0x1701,Navaid
+0x1702,Radio Beacon   
+0x1703,Racon    
+0x1704,Daybeacon, red Triangle  
+0x1705,Daybeacon, green Square  
+0x1706,Daybeacon, white Diamond  
+0x1707,unlit Navaid, white  
+0x1708,unlit Navaid, red  
+0x1709,unlit Navaid, green  
+0x170A,unlit Navaid, black  
+0x170B,unlit Navaid, yellow or amber
+0x170C,unlit Navaid, orange  
+0x170D,unlit Navaid, multi coloured 
+0x170E,Navaid, unknown   
+0x170F,lighted Navaid, white  
+0x1710,lighted Navaid, red  
+0x1711,lighted Navaid, green  
+0x1712,lighted Navaid, yellow or amber
+0x1713,lighted Navaid, orange  
+0x1714,lighted Navaid, violet  
+0x1715,lighted Navaid, blue  
+0x1716,lighted Navaid, multi coloured 
+0x1801,Fog Horn   
+0x1802,Radio Beacon   
+0x1803,Racon    
+0x1804,Daybeacon, red Triangle  
+0x1805,Daybeacon, green Square  
+0x1806,Daybeacon, white Diamond  
+0x1807,unlit Navaid, white  
+0x1808,unlit Navaid, red  
+0x1809,unlit Navaid, green  
+0x180A,unlit Navaid, black  
+0x180B,unlit Navaid, yellow or amber
+0x180C,unlit Navaid, orange  
+0x180D,unlit Navaid, multi coloured 
+0x180E,Navaid, unknown   
+0x180F,lighted Navaid, white  
+0x1810,lighted Navaid, red  
+0x1810,lighted Navaid, red
+0x1811,lighted Navaid, green  
+0x1812,lighted Navaid, yellow or amber
+0x1813,lighted Navaid, orange  
+0x1814,lighted Navaid, violet  
+0x1815,lighted Navaid, blue  
+0x1816,lighted Navaid, multi coloured 
+0x1901,Fog Horn   
+0x1902,Radio Beacon   
+0x1903,Racon    
+0x1904,Daybeacon, red Triangle  
+0x1905,Daybeacon, green Square  
+0x1906,Daybeacon, white Diamond  
+0x1907,unlit Navaid, white  
+0x1908,unlit Navaid, red  
+0x1909,unlit Navaid, green  
+0x190A,unlit Navaid, black  
+0x190B,unlit Navaid, yellow or amber
+0x190C,unlit Navaid, orange  
+0x190D,unlit Navaid, multi coloured 
+0x190E,Navaid, unknown   
+0x190F,lighted Navaid, white  
+0x1910,lighted Navaid, red  
+0x1911,lighted Navaid, green  
+0x1912,lighted Navaid, yellow or amber
+0x1913,lighted Navaid, orange  
+0x1914,lighted Navaid, violet  
+0x1915,lighted Navaid, blue  
+0x1916,lighted Navaid, multi coloured 
+0x1A01,Fog Horn   
+0x1A02,Radio Beacon   
+0x1A03,Racon    
+0x1A04,Daybeacon, red Triangle  
+0x1A05,Daybeacon, green Square  
+0x1A06,Daybeacon, white Diamond  
+0x1A07,unlit Navaid, white  
+0x1A08,unlit Navaid, red  
+0x1A09,unlit Navaid, green  
+0x1A0A,unlit Navaid, black  
+0x1A0B,unlit Navaid, yellow or amber
+0x1A0C,unlit Navaid, orange  
+0x1A0D,unlit Navaid, multi coloured 
+0x1A0E,Navaid, unknown   
+0x1A0F,lighted Navaid, white  
+0x1A10,lighted Navaid, red  
+0x1A11,lighted Navaid, green  
+0x1A12,lighted Navaid, yellow or amber
+0x1A13,lighted Navaid, orange  
+0x1A14,lighted Navaid, violet  
+0x1A15,lighted Navaid, blue  
+0x1A16,lighted Navaid, multi coloured 
+0x1B01,Fog Horn   
+0x1B02,Radio Beacon   
+0x1B03,Racon    
+0x1B04,Daybeacon, red Triangle  
+0x1B05,Daybeacon, green Square  
+0x1B06,Daybeacon, white Diamond  
+0x1B07,unlit Navaid, white  
+0x1B08,unlit Navaid, red  
+0x1B09,unlit Navaid, green  
+0x1B0A,unlit Navaid, black  
+0x1B0B,unlit Navaid, yellow or amber
+0x1B0C,unlit Navaid, orange  
+0x1B0D,unlit Navaid, multi coloured 
+0x1B0E,Navaid, unknown   
+0x1B0F,lighted Navaid, white  
+0x1B10,lighted Navaid, red  
+0x1b11,Confluencia
+0x1B11,lighted Navaid, green  
+0x1B12,lighted Navaid, yellow or amber
+0x1B13,lighted Navaid, orange  
+0x1B14,lighted Navaid, violet  
+0x1B15,lighted Navaid, blue  
+0x1B16,lighted Navaid, multi coloured 
+0x1C00,Unclassified Obstruction
+0x1C01,Wreck    
+0x1C02,Submerged Wreck, dangerous  
+0x1C03,Submerged Wreck, non-dangerous  
+0x1C04,Wreck, cleared by Wire-drag 
+0x1C05,Obstruction, visible at high Water
+0x1C06,Obstruction, awash   
+0x1C07,Obstruction, submerged   
+0x1C08,Obstruction, cleared by Wire-drag 
+0x1C09,Rock, awash   
+0x1C0A,Rock, submerged at low Water
+0x1C0B,Sounding    
+0x1d00,Tide prediction
+0x1D01,Tide Prediction   
+0x1E00-0x1E3F,Region name (no Point, middle)
+0x1f00,County/parish name
+0x2200,HW Exit (restroom) 
+0x2500,HW Exit (toll booth)
+0x2800,Label 
+0x2A00,Dining (Other)
+0x2A01,Dining (American)
+0x2A02,Dining (Asian)
+0x2A03,Dining (Barbecue)
+0x2A04,Dining (Chinese)
+0x2A05,Dining (Deli/Bakery)
+0x2A06,Dining (International)
+0x2A07,Fast Food
+0x2A08,Dining (Italian)
+0x2A09,Dining (Mexican)
+0x2A0A,Dining (Pizza)
+0x2A0B,Dining (Sea Food)
+0x2A0C,Dining (Steak/Grill)
+0x2A0D,Dining (Bagel/Donut)
+0x2A0E,Dining (Cafe/Diner)
+0x2A0F,Dining (French)
+0x2A10,Dining (German)
+0x2A11,Dining (British Isles)
+0x2a12,Special food products 
+0x2B01,Hotel/Motel
+0x2B03,Camping/RV-Park
+0x2c00,Attraction
+0x2c01,Amusement/Theme park
+0x2C02,Museum/History
+0x2C03,Library
+0x2C04,Landmark
+0x2C05,School
+0x2C06,Park
+0x2C07,Zoo
+0x2C08,Sport spark, Stadium (point)
+0x2C09,Fair, Conference (point)
+0x2C0A,Vineyard/Winery (point)
+0x2C0B,Place of Worship
+0x2d01,Live theatre
+0x2D02,Bar
+0x2D03,Cinema
+0x2D04,Casino
+0x2D05,Golf
+0x2D06,Ski Centre
+0x2D07,Bowling
+0x2D08,Ice/Sporting
+0x2D09,Swimming
+0x2D0A,Sports (point)
+0x2D0B,Sport Airport
+0x2e00,Shopping 
+0x2E01,Department Store
+0x2E02,Grocery
+0x2E03,General Merchandiser
+0x2E04,Shopping Centre
+0x2E05,Pharmacy
+0x2E06,Convenience Store
+0x2E07,Apparel
+0x2E08,House and Garden
+0x2E09,Home Furnishing
+0x2E0a,Special Retail
+0x2E0b,Computer/Software
+0x2F00,Generic Service
+0x2F01,Fuel/Gas
+0x2F02,Car Rental
+0x2F03,Car Repair
+0x2F04,Airport
+0x2F05,Post Office
+0x2F06,Bank
+0x2F07,Car Dealer (point)
+0x2F08,Bus Station
+0x2F09,Marina
+0x2F0A,Wrecker Service
+0x2F0B,Parking
+0x2F0C,Restroom
+0x2F0D,Automobile Club
+0x2F0E,Car Wash
+0x2F0F,Garmin Dealer
+0x2F10,Personal Service
+0x2F11,Business Service
+0x2F12,Communication
+0x2F13,Repair Service
+0x2F14,Social Service
+0x2F15,Utility
+0x2F16,Truck/Lorry Stop
+0x2f17,Transit service
+0x3001,Police Station
+0x3002,Hospital
+0x3003,Public Office
+0x3004,Justice
+0x3005,Concert hall (point)
+0x3007,Government office
+0x3008,Fire department
+0x4100,Fishing spot
+0x4200,Wreck
+0x4300,Marina
+0x4700,Boat ramp
+0x4a00,Picnic Area
+0x4c00,Information
+0x4e00,Restroom
+0x4f00,Shower
+0x5300,Skiing
+0x5500,Dam
+0x5600,Controlled area
+0x5700,Danger Area
+0x5904,Heliport
+0x5a00,Mile marker
+0x5c00,Diving area
+0x6401,Bridge
+0x6402,Building
+0x6403,Cemetery
+0x6404,Church
+0x6406,Crossing
+0x6407,Dam
+0x6409,Levee
+0x640B,Military
+0x640C,Mine
+0x640D,Oil Field
+0x640E,Park
+0x6411,Tower
+0x6412,Trail
+0x6413,Tunnel
+0x6414,Drink water
+0x6502,Sand Bar
+0x650C,Island
+0x650E,Rapids
+0x6601,Arch
+0x6604,Beach
+0x6618,Wooded area
+0x660A,Forest
+0x660F,Pillar
+0x6614,Rock
+0x6616,Summit
+0x1713,lighted Navaid, orange  
+0x1613,lighted Navaid, orange  
+0x1B14,lighted Navaid, violet  
+0x1A14,lighted Navaid, violet  
+0x1914,lighted Navaid, violet  
+0x1814,lighted Navaid, violet  
+0x1714,lighted Navaid, violet  
+0x1614,lighted Navaid, violet  
+0x1B15,lighted Navaid, blue  
+0x1A15,lighted Navaid, blue  
+0x1915,lighted Navaid, blue  
+0x1815,lighted Navaid, blue  
+0x1715,lighted Navaid, blue  
+0x1615,lighted Navaid, blue  
+0x1B16,lighted Navaid, multi coloured 
+0x1A16,lighted Navaid, multi coloured 
+0x1916,lighted Navaid, multi coloured 
+0x1816,lighted Navaid, multi coloured 
+0x1716,lighted Navaid, multi coloured 
+0x1616,lighted Navaid, multi coloured 

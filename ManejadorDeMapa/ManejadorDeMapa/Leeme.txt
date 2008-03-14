@@ -1,0 +1,1 @@
+﻿Para ejecutar esta aplicación se debe instalar el Microsoft .NET Framework 3.5 http://www.microsoft.com/downloads/details.aspx?familyid=333325FD-AE52-4E35-B531-508D977D32A6&displaylang=en
