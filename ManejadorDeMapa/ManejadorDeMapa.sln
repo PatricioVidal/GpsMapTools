@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54B82A62-58F2-4F96-A3FE-95908E23C32E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Pruebas", "ManejadorDeMapa.Pruebas\ManejadorDeMapa.Pruebas.csproj", "{7E361239-BD1B-4CD9-974B-CFF0B456A297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa", "ManejadorDeMapa\ManejadorDeMapa.csproj", "{F07EE602-114A-4111-AD1C-E079D8C71E11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Información", "{D85C74CE-E6A7-44AE-81D7-A9430E8166F5}"
+	ProjectSection(SolutionItems) = preProject
+		Informacion\CaracterísticasDePDIs.cGPSmapper.csv = Informacion\CaracterísticasDePDIs.cGPSmapper.csv
+		Informacion\CaracterísticasDePDIs.Garmin City Select.csv = Informacion\CaracterísticasDePDIs.Garmin City Select.csv
+		Informacion\CaracterísticasDePDIs.JoseH.csv = Informacion\CaracterísticasDePDIs.JoseH.csv
+		Informacion\Garmin City Select North America Elements.txt = Informacion\Garmin City Select North America Elements.txt
+		Informacion\Garmin POIs.txt = Informacion\Garmin POIs.txt
+		Ternary Search Tree Dictionary\Tst_doc.chm = Ternary Search Tree Dictionary\Tst_doc.chm
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs07.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ManejadorDeMapa.Pruebas\\ManejadorDeMapa.Pruebas.csproj
+		SccProjectName1 = ManejadorDeMapa.Pruebas
+		SccLocalPath1 = ManejadorDeMapa.Pruebas
+		SccProjectUniqueName2 = ManejadorDeMapa\\ManejadorDeMapa.csproj
+		SccProjectName2 = ManejadorDeMapa
+		SccLocalPath2 = ManejadorDeMapa
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E361239-BD1B-4CD9-974B-CFF0B456A297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E361239-BD1B-4CD9-974B-CFF0B456A297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E361239-BD1B-4CD9-974B-CFF0B456A297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E361239-BD1B-4CD9-974B-CFF0B456A297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D85C74CE-E6A7-44AE-81D7-A9430E8166F5} = {54B82A62-58F2-4F96-A3FE-95908E23C32E}
+	EndGlobalSection
+EndGlobal
