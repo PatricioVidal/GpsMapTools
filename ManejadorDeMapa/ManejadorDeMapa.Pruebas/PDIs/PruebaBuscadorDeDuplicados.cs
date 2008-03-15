@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using GpsYv.ManejadorDeMapa;
+using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.PDIs.Pruebas
+namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
 {
   [TestFixture]
   public class PruebaBuscadorDeDuplicados
