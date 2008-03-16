@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaceDeModificados
+  partial class InterfaseDeEliminados
   {
     /// <summary> 
     /// Required designer variable.
@@ -31,8 +31,8 @@
       this.miLista = new System.Windows.Forms.ListView();
       this.miColumnaNúmeroDeElemento = new System.Windows.Forms.ColumnHeader();
       this.miColumnaTipo = new System.Windows.Forms.ColumnHeader();
-      this.miColumnaNombreOriginal = new System.Windows.Forms.ColumnHeader();
-      this.miColumnaNombreFinal = new System.Windows.Forms.ColumnHeader();
+      this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
+      this.miColumnaRazón = new System.Windows.Forms.ColumnHeader();
       this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
@@ -42,14 +42,14 @@
             this.miColumnaNúmeroDeElemento,
             this.miColumnaTipo,
             this.miColumnaDescripción,
-            this.miColumnaNombreOriginal,
-            this.miColumnaNombreFinal});
+            this.miColumnaNombre,
+            this.miColumnaRazón});
       this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miLista.GridLines = true;
       this.miLista.Location = new System.Drawing.Point(0, 0);
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(603, 484);
-      this.miLista.TabIndex = 1;
+      this.miLista.Size = new System.Drawing.Size(578, 495);
+      this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       // 
@@ -61,28 +61,28 @@
       // 
       this.miColumnaTipo.Text = "Tipo";
       // 
-      // miColumnaNombreOriginal
+      // miColumnaNombre
       // 
-      this.miColumnaNombreOriginal.Text = "Nombre Original";
-      this.miColumnaNombreOriginal.Width = 319;
+      this.miColumnaNombre.Text = "Nombre";
+      this.miColumnaNombre.Width = 319;
       // 
-      // miColumnaNombreFinal
+      // miColumnaRazón
       // 
-      this.miColumnaNombreFinal.Text = "Nombre Final";
-      this.miColumnaNombreFinal.Width = 284;
+      this.miColumnaRazón.Text = "Razón";
+      this.miColumnaRazón.Width = 284;
       // 
       // miColumnaDescripción
       // 
       this.miColumnaDescripción.Text = "Descripción";
       this.miColumnaDescripción.Width = 130;
       // 
-      // PDIsModificados
+      // PDIsEliminados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miLista);
-      this.Name = "PDIsModificados";
-      this.Size = new System.Drawing.Size(603, 484);
+      this.Name = "PDIsEliminados";
+      this.Size = new System.Drawing.Size(578, 495);
       this.ResumeLayout(false);
 
     }
@@ -92,8 +92,8 @@
     private System.Windows.Forms.ListView miLista;
     private System.Windows.Forms.ColumnHeader miColumnaNúmeroDeElemento;
     private System.Windows.Forms.ColumnHeader miColumnaTipo;
-    private System.Windows.Forms.ColumnHeader miColumnaNombreOriginal;
-    private System.Windows.Forms.ColumnHeader miColumnaNombreFinal;
+    private System.Windows.Forms.ColumnHeader miColumnaNombre;
+    private System.Windows.Forms.ColumnHeader miColumnaRazón;
     private System.Windows.Forms.ColumnHeader miColumnaDescripción;
   }
 }

@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaceManejador
+  partial class InterfaseManejador
   {
     /// <summary> 
     /// Required designer variable.
@@ -28,10 +28,10 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaceManejador));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejador));
       this.miControladorDePestañasDePDIs = new System.Windows.Forms.TabControl();
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
-      this.miInterfaceDeMapa = new GpsYv.ManejadorDeMapa.Interface.InterfaceMapa();
+      this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
       this.miLista = new System.Windows.Forms.ListView();
       this.miColumnaNúmero = new System.Windows.Forms.ColumnHeader();
@@ -41,13 +41,13 @@
       this.miColumnaLatitud = new System.Windows.Forms.ColumnHeader();
       this.miColumnaLongitud = new System.Windows.Forms.ColumnHeader();
       this.miPáginaModificados = new System.Windows.Forms.TabPage();
-      this.miInterfacePDIsModificados = new GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceDeModificados();
+      this.miInterfasePDIsModificados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDeModificados();
       this.miPáginaPosiblesDuplicados = new System.Windows.Forms.TabPage();
-      this.miInterfacePDIsDuplicados = new GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceDeDuplicados();
+      this.miInterfasePDIsDuplicados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDeDuplicados();
       this.miPáginaEliminados = new System.Windows.Forms.TabPage();
-      this.miInterfacePDIsEliminados = new GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceDeEliminados();
+      this.miInterfasePDIsEliminados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDeEliminados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
-      this.miInterfacePDIsErrores = new GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceDeErrores();
+      this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDeErrores();
       this.miControladorDePestañasDePDIs.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -74,7 +74,7 @@
       // 
       // miPáginaMapa
       // 
-      this.miPáginaMapa.Controls.Add(this.miInterfaceDeMapa);
+      this.miPáginaMapa.Controls.Add(this.miInterfaseDeMapa);
       this.miPáginaMapa.Location = new System.Drawing.Point(4, 22);
       this.miPáginaMapa.Name = "miPáginaMapa";
       this.miPáginaMapa.Size = new System.Drawing.Size(583, 405);
@@ -82,21 +82,21 @@
       this.miPáginaMapa.Text = "Mapa";
       this.miPáginaMapa.UseVisualStyleBackColor = true;
       // 
-      // miInterfaceDeMapa
+      // miInterfaseDeMapa
       // 
-      this.miInterfaceDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miInterfaceDeMapa.EscuchadorDeEstatus = null;
-      this.miInterfaceDeMapa.Location = new System.Drawing.Point(0, 0);
-      this.miInterfaceDeMapa.ManejadorDeMapa = null;
-      this.miInterfaceDeMapa.MuestraPDIs = true;
-      this.miInterfaceDeMapa.MuestraPolígonos = false;
-      this.miInterfaceDeMapa.MuestraPolilíneas = false;
-      this.miInterfaceDeMapa.MuestraTodoElMapa = true;
-      this.miInterfaceDeMapa.MuestraTodosLosElementos = false;
-      this.miInterfaceDeMapa.Name = "miInterfaceDeMapa";
-      this.miInterfaceDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaceDeMapa.RectánguloVisibleEnCoordenadas")));
-      this.miInterfaceDeMapa.Size = new System.Drawing.Size(583, 405);
-      this.miInterfaceDeMapa.TabIndex = 0;
+      this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
+      this.miInterfaseDeMapa.Location = new System.Drawing.Point(0, 0);
+      this.miInterfaseDeMapa.ManejadorDeMapa = null;
+      this.miInterfaseDeMapa.MuestraPDIs = true;
+      this.miInterfaseDeMapa.MuestraPolígonos = false;
+      this.miInterfaseDeMapa.MuestraPolilíneas = false;
+      this.miInterfaseDeMapa.MuestraTodoElMapa = true;
+      this.miInterfaseDeMapa.MuestraTodosLosElementos = false;
+      this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
+      this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
+      this.miInterfaseDeMapa.Size = new System.Drawing.Size(583, 405);
+      this.miInterfaseDeMapa.TabIndex = 0;
       // 
       // miPáginaDeTodos
       // 
@@ -162,7 +162,7 @@
       // 
       // miPáginaModificados
       // 
-      this.miPáginaModificados.Controls.Add(this.miInterfacePDIsModificados);
+      this.miPáginaModificados.Controls.Add(this.miInterfasePDIsModificados);
       this.miPáginaModificados.Location = new System.Drawing.Point(4, 22);
       this.miPáginaModificados.Name = "miPáginaModificados";
       this.miPáginaModificados.Padding = new System.Windows.Forms.Padding(3);
@@ -171,20 +171,20 @@
       this.miPáginaModificados.Text = "Modificados";
       this.miPáginaModificados.UseVisualStyleBackColor = true;
       // 
-      // miInterfacePDIsModificados
+      // miInterfasePDIsModificados
       // 
-      this.miInterfacePDIsModificados.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miInterfacePDIsModificados.EscuchadorDeEstatus = null;
-      this.miInterfacePDIsModificados.Location = new System.Drawing.Point(3, 3);
-      this.miInterfacePDIsModificados.ManejadorDeMapa = null;
-      this.miInterfacePDIsModificados.Name = "miInterfacePDIsModificados";
-      this.miInterfacePDIsModificados.Size = new System.Drawing.Size(577, 399);
-      this.miInterfacePDIsModificados.TabIndex = 0;
+      this.miInterfasePDIsModificados.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfasePDIsModificados.EscuchadorDeEstatus = null;
+      this.miInterfasePDIsModificados.Location = new System.Drawing.Point(3, 3);
+      this.miInterfasePDIsModificados.ManejadorDeMapa = null;
+      this.miInterfasePDIsModificados.Name = "miInterfasePDIsModificados";
+      this.miInterfasePDIsModificados.Size = new System.Drawing.Size(577, 399);
+      this.miInterfasePDIsModificados.TabIndex = 0;
       // 
       // miPáginaPosiblesDuplicados
       // 
       this.miPáginaPosiblesDuplicados.BackColor = System.Drawing.Color.Transparent;
-      this.miPáginaPosiblesDuplicados.Controls.Add(this.miInterfacePDIsDuplicados);
+      this.miPáginaPosiblesDuplicados.Controls.Add(this.miInterfasePDIsDuplicados);
       this.miPáginaPosiblesDuplicados.Location = new System.Drawing.Point(4, 22);
       this.miPáginaPosiblesDuplicados.Name = "miPáginaPosiblesDuplicados";
       this.miPáginaPosiblesDuplicados.Size = new System.Drawing.Size(583, 405);
@@ -192,19 +192,19 @@
       this.miPáginaPosiblesDuplicados.Text = "Posible Duplicados";
       this.miPáginaPosiblesDuplicados.UseVisualStyleBackColor = true;
       // 
-      // miInterfacePDIsDuplicados
+      // miInterfasePDIsDuplicados
       // 
-      this.miInterfacePDIsDuplicados.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miInterfacePDIsDuplicados.EscuchadorDeEstatus = null;
-      this.miInterfacePDIsDuplicados.Location = new System.Drawing.Point(0, 0);
-      this.miInterfacePDIsDuplicados.ManejadorDeMapa = null;
-      this.miInterfacePDIsDuplicados.Name = "miInterfacePDIsDuplicados";
-      this.miInterfacePDIsDuplicados.Size = new System.Drawing.Size(583, 405);
-      this.miInterfacePDIsDuplicados.TabIndex = 0;
+      this.miInterfasePDIsDuplicados.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfasePDIsDuplicados.EscuchadorDeEstatus = null;
+      this.miInterfasePDIsDuplicados.Location = new System.Drawing.Point(0, 0);
+      this.miInterfasePDIsDuplicados.ManejadorDeMapa = null;
+      this.miInterfasePDIsDuplicados.Name = "miInterfasePDIsDuplicados";
+      this.miInterfasePDIsDuplicados.Size = new System.Drawing.Size(583, 405);
+      this.miInterfasePDIsDuplicados.TabIndex = 0;
       // 
       // miPáginaEliminados
       // 
-      this.miPáginaEliminados.Controls.Add(this.miInterfacePDIsEliminados);
+      this.miPáginaEliminados.Controls.Add(this.miInterfasePDIsEliminados);
       this.miPáginaEliminados.Location = new System.Drawing.Point(4, 22);
       this.miPáginaEliminados.Name = "miPáginaEliminados";
       this.miPáginaEliminados.Size = new System.Drawing.Size(583, 405);
@@ -212,19 +212,19 @@
       this.miPáginaEliminados.Text = "Eliminados";
       this.miPáginaEliminados.UseVisualStyleBackColor = true;
       // 
-      // miInterfacePDIsEliminados
+      // miInterfasePDIsEliminados
       // 
-      this.miInterfacePDIsEliminados.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miInterfacePDIsEliminados.EscuchadorDeEstatus = null;
-      this.miInterfacePDIsEliminados.Location = new System.Drawing.Point(0, 0);
-      this.miInterfacePDIsEliminados.ManejadorDeMapa = null;
-      this.miInterfacePDIsEliminados.Name = "miInterfacePDIsEliminados";
-      this.miInterfacePDIsEliminados.Size = new System.Drawing.Size(583, 405);
-      this.miInterfacePDIsEliminados.TabIndex = 0;
+      this.miInterfasePDIsEliminados.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfasePDIsEliminados.EscuchadorDeEstatus = null;
+      this.miInterfasePDIsEliminados.Location = new System.Drawing.Point(0, 0);
+      this.miInterfasePDIsEliminados.ManejadorDeMapa = null;
+      this.miInterfasePDIsEliminados.Name = "miInterfasePDIsEliminados";
+      this.miInterfasePDIsEliminados.Size = new System.Drawing.Size(583, 405);
+      this.miInterfasePDIsEliminados.TabIndex = 0;
       // 
       // miPáginaErrores
       // 
-      this.miPáginaErrores.Controls.Add(this.miInterfacePDIsErrores);
+      this.miPáginaErrores.Controls.Add(this.miInterfasePDIsErrores);
       this.miPáginaErrores.Location = new System.Drawing.Point(4, 22);
       this.miPáginaErrores.Name = "miPáginaErrores";
       this.miPáginaErrores.Padding = new System.Windows.Forms.Padding(3);
@@ -233,22 +233,22 @@
       this.miPáginaErrores.Text = "Errores";
       this.miPáginaErrores.UseVisualStyleBackColor = true;
       // 
-      // miInterfacePDIsErrores
+      // miInterfasePDIsErrores
       // 
-      this.miInterfacePDIsErrores.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miInterfacePDIsErrores.EscuchadorDeEstatus = null;
-      this.miInterfacePDIsErrores.Location = new System.Drawing.Point(3, 3);
-      this.miInterfacePDIsErrores.ManejadorDeMapa = null;
-      this.miInterfacePDIsErrores.Name = "miInterfacePDIsErrores";
-      this.miInterfacePDIsErrores.Size = new System.Drawing.Size(577, 399);
-      this.miInterfacePDIsErrores.TabIndex = 2;
+      this.miInterfasePDIsErrores.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfasePDIsErrores.EscuchadorDeEstatus = null;
+      this.miInterfasePDIsErrores.Location = new System.Drawing.Point(3, 3);
+      this.miInterfasePDIsErrores.ManejadorDeMapa = null;
+      this.miInterfasePDIsErrores.Name = "miInterfasePDIsErrores";
+      this.miInterfasePDIsErrores.Size = new System.Drawing.Size(577, 399);
+      this.miInterfasePDIsErrores.TabIndex = 2;
       // 
-      // InterfaceManejadorDePDIs
+      // InterfaseManejadorDePDIs
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miControladorDePestañasDePDIs);
-      this.Name = "InterfaceManejadorDePDIs";
+      this.Name = "InterfaseManejadorDePDIs";
       this.Size = new System.Drawing.Size(591, 431);
       this.miControladorDePestañasDePDIs.ResumeLayout(false);
       this.miPáginaMapa.ResumeLayout(false);
@@ -272,15 +272,15 @@
     private System.Windows.Forms.ColumnHeader miColumnaLatitud;
     private System.Windows.Forms.ColumnHeader miColumnaLongitud;
     private System.Windows.Forms.TabPage miPáginaModificados;
-    private InterfaceDeModificados miInterfacePDIsModificados;
+    private InterfaseDeModificados miInterfasePDIsModificados;
     private System.Windows.Forms.TabPage miPáginaPosiblesDuplicados;
-    private InterfaceDeDuplicados miInterfacePDIsDuplicados;
+    private InterfaseDeDuplicados miInterfasePDIsDuplicados;
     private System.Windows.Forms.TabPage miPáginaEliminados;
-    private InterfaceDeEliminados miInterfacePDIsEliminados;
+    private InterfaseDeEliminados miInterfasePDIsEliminados;
     private System.Windows.Forms.TabPage miPáginaMapa;
-    private InterfaceMapa miInterfaceDeMapa;
+    private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.ColumnHeader miColumnaDescripción;
     private System.Windows.Forms.TabPage miPáginaErrores;
-    private InterfaceDeErrores miInterfacePDIsErrores;
+    private InterfaseDeErrores miInterfasePDIsErrores;
   }
 }

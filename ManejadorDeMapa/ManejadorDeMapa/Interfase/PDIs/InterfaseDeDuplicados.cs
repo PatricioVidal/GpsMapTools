@@ -7,9 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaceDeDuplicados : InterfaceBase
+  public partial class InterfaseDeDuplicados : InterfaseBase
   {
     #region Campos
     private ManejadorDePDIs miManejadorDePDIs;
@@ -69,7 +69,7 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceDeDuplicados()
+    public InterfaseDeDuplicados()
     {
       InitializeComponent();
 
@@ -246,7 +246,7 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
 
       // Busca el rango visible para los PDIs.
       IList<ElementoDelMapa> elementos = new List<ElementoDelMapa>(pdis.ToArray());
-      RectangleF rectánguloQueEncierra = InterfaceMapa.RectanguloQueEncierra(elementos);
+      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(elementos);
       float margen = 0.0001f;
       RectangleF rectánguloVisible = new RectangleF(
         (float)rectánguloQueEncierra.X - margen,
@@ -257,11 +257,11 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
       // Dibuja los PDIs como PDIs adicionales para resaltarlos.
       miMapa.PuntosAddicionales.Clear();
       PDI pdiDeSeleccionado = misPDIs[información.Item.Index];
-      miMapa.PuntosAddicionales.Add(new InterfaceMapa.PuntoAdicional(
+      miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
         pdiDeSeleccionado.Coordenadas, miPincelDePDI, 13));
       foreach (PDI pdi in pdis)
       {
-        miMapa.PuntosAddicionales.Add(new InterfaceMapa.PuntoAdicional(
+        miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
           pdi.Coordenadas, miPincelDePDIDuplicado, 7));
       }
 

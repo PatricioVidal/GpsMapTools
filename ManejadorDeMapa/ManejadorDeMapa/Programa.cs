@@ -23,7 +23,7 @@ namespace GpsYv.ManejadorDeMapa
       Application.SetCompatibleTextRenderingDefault(false);
       try
       {
-        Application.Run(new Interface.InterfaceManejadorDeMapa());
+        Application.Run(new Interfase.InterfaseManejadorDeMapa());
       }
       catch (Exception e)
       {
@@ -41,7 +41,7 @@ namespace GpsYv.ManejadorDeMapa
     public static void MuestraExcepción(Exception laExcepción)
     {
       // Crea un archivo de registro.
-      string archivoDeRegistro = Interface.VentanaDeAcerca.AssemblyTitle + ".Error.log";
+      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyTitle + ".Error.log";
       using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
         string encabezado = DateTime.Now + ": " + laExcepción.Message;
@@ -60,7 +60,7 @@ namespace GpsYv.ManejadorDeMapa
       }
       MessageBox.Show(
         mensaje,
-        Interface.VentanaDeAcerca.AssemblyTitle,
+        Interfase.VentanaDeAcerca.AssemblyTitle,
         MessageBoxButtons.OK,
         MessageBoxIcon.Error);
     }

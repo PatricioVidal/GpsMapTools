@@ -6,14 +6,14 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaceDeEliminados : InterfaceBase
+  public partial class InterfaseDeEliminados : InterfaseBase
   {
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceDeEliminados()
+    public InterfaseDeEliminados()
     {
       InitializeComponent();
     }

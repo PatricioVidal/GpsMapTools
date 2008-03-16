@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaceDeErrores : InterfaceBase
+  public partial class InterfaseDeErrores : InterfaseBase
   {
     #region Campos
     private ManejadorDePDIs miManejadorDePDIs;
@@ -51,7 +51,7 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceDeErrores()
+    public InterfaseDeErrores()
     {
       InitializeComponent();
     }

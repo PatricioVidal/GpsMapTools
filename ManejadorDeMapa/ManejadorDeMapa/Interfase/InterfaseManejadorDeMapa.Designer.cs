@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface
+﻿namespace GpsYv.ManejadorDeMapa.Interfase
 {
-    partial class InterfaceManejadorDeMapa
+    partial class InterfaseManejadorDeMapa
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaceManejadorDeMapa));
+          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeMapa));
           this.miMenuPrincipal = new System.Windows.Forms.MenuStrip();
           this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAbrirArchivo = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +53,7 @@
           this.miPaginaDeElementos = new System.Windows.Forms.TabPage();
           this.miControladorDePestañas = new System.Windows.Forms.TabControl();
           this.miPáginaMapa = new System.Windows.Forms.TabPage();
-          this.miInterfaceDeMapa = new GpsYv.ManejadorDeMapa.Interface.InterfaceMapa();
+          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miPáginaTodos = new System.Windows.Forms.TabPage();
           this.miListaDeElementos = new System.Windows.Forms.ListView();
           this.miColumnaNumero = new System.Windows.Forms.ColumnHeader();
@@ -62,7 +62,7 @@
           this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
           this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
           this.miPaginaDePDIs = new System.Windows.Forms.TabPage();
-          this.miInterfaceManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceManejador();
+          this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -275,7 +275,7 @@
           // 
           // miPáginaMapa
           // 
-          this.miPáginaMapa.Controls.Add(this.miInterfaceDeMapa);
+          this.miPáginaMapa.Controls.Add(this.miInterfaseDeMapa);
           this.miPáginaMapa.Location = new System.Drawing.Point(4, 22);
           this.miPáginaMapa.Name = "miPáginaMapa";
           this.miPáginaMapa.Padding = new System.Windows.Forms.Padding(3);
@@ -284,22 +284,22 @@
           this.miPáginaMapa.Text = "Mapa";
           this.miPáginaMapa.UseVisualStyleBackColor = true;
           // 
-          // miInterfaceDeMapa
+          // miInterfaseDeMapa
           // 
-          this.miInterfaceDeMapa.BackColor = System.Drawing.Color.Transparent;
-          this.miInterfaceDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miInterfaceDeMapa.EscuchadorDeEstatus = null;
-          this.miInterfaceDeMapa.Location = new System.Drawing.Point(3, 3);
-          this.miInterfaceDeMapa.ManejadorDeMapa = null;
-          this.miInterfaceDeMapa.MuestraPDIs = false;
-          this.miInterfaceDeMapa.MuestraPolígonos = false;
-          this.miInterfaceDeMapa.MuestraPolilíneas = false;
-          this.miInterfaceDeMapa.MuestraTodoElMapa = true;
-          this.miInterfaceDeMapa.MuestraTodosLosElementos = true;
-          this.miInterfaceDeMapa.Name = "miInterfaceDeMapa";
-          this.miInterfaceDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaceDeMapa.RectánguloVisibleEnCoordenadas")));
-          this.miInterfaceDeMapa.Size = new System.Drawing.Size(762, 460);
-          this.miInterfaceDeMapa.TabIndex = 1;
+          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
+          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
+          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
+          this.miInterfaseDeMapa.ManejadorDeMapa = null;
+          this.miInterfaseDeMapa.MuestraPDIs = false;
+          this.miInterfaseDeMapa.MuestraPolígonos = false;
+          this.miInterfaseDeMapa.MuestraPolilíneas = false;
+          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
+          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
+          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
+          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
+          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
+          this.miInterfaseDeMapa.TabIndex = 1;
           // 
           // miPáginaTodos
           // 
@@ -358,7 +358,7 @@
           // 
           // miPaginaDePDIs
           // 
-          this.miPaginaDePDIs.Controls.Add(this.miInterfaceManejadorDePDIs);
+          this.miPaginaDePDIs.Controls.Add(this.miInterfaseManejadorDePDIs);
           this.miPaginaDePDIs.Location = new System.Drawing.Point(4, 22);
           this.miPaginaDePDIs.Name = "miPaginaDePDIs";
           this.miPaginaDePDIs.Padding = new System.Windows.Forms.Padding(3);
@@ -367,17 +367,17 @@
           this.miPaginaDePDIs.Text = "PDIs";
           this.miPaginaDePDIs.UseVisualStyleBackColor = true;
           // 
-          // miInterfaceManejadorDePDIs
+          // miInterfaseManejadorDePDIs
           // 
-          this.miInterfaceManejadorDePDIs.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miInterfaceManejadorDePDIs.EscuchadorDeEstatus = null;
-          this.miInterfaceManejadorDePDIs.Location = new System.Drawing.Point(3, 3);
-          this.miInterfaceManejadorDePDIs.ManejadorDeMapa = null;
-          this.miInterfaceManejadorDePDIs.Name = "miInterfaceManejadorDePDIs";
-          this.miInterfaceManejadorDePDIs.Size = new System.Drawing.Size(770, 486);
-          this.miInterfaceManejadorDePDIs.TabIndex = 0;
+          this.miInterfaseManejadorDePDIs.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseManejadorDePDIs.EscuchadorDeEstatus = null;
+          this.miInterfaseManejadorDePDIs.Location = new System.Drawing.Point(3, 3);
+          this.miInterfaseManejadorDePDIs.ManejadorDeMapa = null;
+          this.miInterfaseManejadorDePDIs.Name = "miInterfaseManejadorDePDIs";
+          this.miInterfaseManejadorDePDIs.Size = new System.Drawing.Size(770, 486);
+          this.miInterfaseManejadorDePDIs.TabIndex = 0;
           // 
-          // InterfaceManejadorDeMapa
+          // InterfaseManejadorDeMapa
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -387,7 +387,7 @@
           this.Controls.Add(this.miMenuPrincipal);
           this.MainMenuStrip = this.miMenuPrincipal;
           this.MinimumSize = new System.Drawing.Size(300, 200);
-          this.Name = "InterfaceManejadorDeMapa";
+          this.Name = "InterfaseManejadorDeMapa";
           this.miMenuPrincipal.ResumeLayout(false);
           this.miMenuPrincipal.PerformLayout();
           this.miEstatus.ResumeLayout(false);
@@ -425,12 +425,12 @@
         private System.Windows.Forms.ToolStripMenuItem miMenuArreglarPalabrasDePDIs;
         private System.Windows.Forms.ToolStripMenuItem miMenuArreglarTodoEnPDIs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private GpsYv.ManejadorDeMapa.Interface.PDIs.InterfaceManejador miInterfaceManejadorDePDIs;
+        private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador miInterfaseManejadorDePDIs;
         private System.Windows.Forms.ToolStripMenuItem buscaDuplicadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miMenuGuardar;
         private System.Windows.Forms.TabControl miControladorDePestañas;
         private System.Windows.Forms.TabPage miPáginaMapa;
-        private InterfaceMapa miInterfaceDeMapa;
+        private InterfaseMapa miInterfaseDeMapa;
         private System.Windows.Forms.TabPage miPáginaTodos;
         private System.Windows.Forms.ListView miListaDeElementos;
         private System.Windows.Forms.ColumnHeader miColumnaNumero;

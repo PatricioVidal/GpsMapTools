@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaceDeEliminados
+  partial class InterfaseDeErrores
   {
     /// <summary> 
     /// Required designer variable.
@@ -31,9 +31,9 @@
       this.miLista = new System.Windows.Forms.ListView();
       this.miColumnaNúmeroDeElemento = new System.Windows.Forms.ColumnHeader();
       this.miColumnaTipo = new System.Windows.Forms.ColumnHeader();
+      this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
       this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
       this.miColumnaRazón = new System.Windows.Forms.ColumnHeader();
-      this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
       // miLista
@@ -48,7 +48,7 @@
       this.miLista.GridLines = true;
       this.miLista.Location = new System.Drawing.Point(0, 0);
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(578, 495);
+      this.miLista.Size = new System.Drawing.Size(528, 460);
       this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
@@ -61,6 +61,11 @@
       // 
       this.miColumnaTipo.Text = "Tipo";
       // 
+      // miColumnaDescripción
+      // 
+      this.miColumnaDescripción.Text = "Descripción";
+      this.miColumnaDescripción.Width = 130;
+      // 
       // miColumnaNombre
       // 
       this.miColumnaNombre.Text = "Nombre";
@@ -71,18 +76,13 @@
       this.miColumnaRazón.Text = "Razón";
       this.miColumnaRazón.Width = 284;
       // 
-      // miColumnaDescripción
-      // 
-      this.miColumnaDescripción.Text = "Descripción";
-      this.miColumnaDescripción.Width = 130;
-      // 
-      // PDIsEliminados
+      // InterfasePDIsErrores
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miLista);
-      this.Name = "PDIsEliminados";
-      this.Size = new System.Drawing.Size(578, 495);
+      this.Name = "InterfasePDIsErrores";
+      this.Size = new System.Drawing.Size(528, 460);
       this.ResumeLayout(false);
 
     }
@@ -92,8 +92,8 @@
     private System.Windows.Forms.ListView miLista;
     private System.Windows.Forms.ColumnHeader miColumnaNúmeroDeElemento;
     private System.Windows.Forms.ColumnHeader miColumnaTipo;
+    private System.Windows.Forms.ColumnHeader miColumnaDescripción;
     private System.Windows.Forms.ColumnHeader miColumnaNombre;
     private System.Windows.Forms.ColumnHeader miColumnaRazón;
-    private System.Windows.Forms.ColumnHeader miColumnaDescripción;
   }
 }

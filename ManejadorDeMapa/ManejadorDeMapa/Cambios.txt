@@ -70,7 +70,7 @@ Versión 0.7 (19/2/2008)
 Version 0.6 (18/2/2008)
 - Añadida la fuente a Control de Versiones.
 - Cambiadas las listas a modo virtual para mejorar la velocidad de visualización.
-- Ahora se muestra en la interface los cambios hechos.
+- Ahora se muestra en la interfase los cambios hechos.
 - Ya está la estructura suficientemente madura para que otros puedan colaborar con el código.
 - Se comenzó la corrección de prefijos basado en abreviaciones y el tipo de PDI.
 - Se comenzó la implementación se la búsqueda y eliminación de PDIs duplicados.

@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Diagnostics;
 
-namespace GpsYv.ManejadorDeMapa.Interface
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  public partial class InterfaceMapa : InterfaceBase
+  public partial class InterfaseMapa : InterfaseBase
   {
     #region Campos
     private bool miHayUnMapa = false;
@@ -182,7 +182,7 @@ namespace GpsYv.ManejadorDeMapa.Interface
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceMapa()
+    public InterfaseMapa()
     {
       InitializeComponent();
 

@@ -8,7 +8,7 @@ using System.Text;
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Interface para un escuchador de estatus.
+  /// Interfase para un escuchador de estatus.
   /// </summary>
   public interface IEscuchadorDeEstatus
   {

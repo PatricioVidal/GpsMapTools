@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaceDeDuplicados
+  partial class InterfaseDeDuplicados
   {
     /// <summary> 
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaceDeDuplicados));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeDuplicados));
       this.miLista = new System.Windows.Forms.ListView();
       this.miColumnaNúmeroDeElemento = new System.Windows.Forms.ColumnHeader();
       this.miColumnaTipo = new System.Windows.Forms.ColumnHeader();
@@ -37,7 +37,7 @@
       this.miColumnaCoordenadas = new System.Windows.Forms.ColumnHeader();
       this.miColumnaDistancia = new System.Windows.Forms.ColumnHeader();
       this.miRecipienteDividido = new System.Windows.Forms.SplitContainer();
-      this.miMapa = new GpsYv.ManejadorDeMapa.Interface.InterfaceMapa();
+      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.panel1 = new System.Windows.Forms.Panel();
       this.miTextoNumeroDePDIsSelecionados = new System.Windows.Forms.Label();
       this.miBotonEliminarPDIs = new System.Windows.Forms.Button();
@@ -272,14 +272,14 @@
       this.miTextoDistancia.TabIndex = 1;
       this.miTextoDistancia.Text = "0 m";
       // 
-      // InterfacePDIsDuplicados
+      // InterfasePDIsDuplicados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miRecipienteDividido);
       this.Controls.Add(this.panel1);
       this.Controls.Add(this.panel3);
-      this.Name = "InterfacePDIsDuplicados";
+      this.Name = "InterfasePDIsDuplicados";
       this.Size = new System.Drawing.Size(607, 450);
       this.miRecipienteDividido.Panel1.ResumeLayout(false);
       this.miRecipienteDividido.Panel2.ResumeLayout(false);
@@ -308,7 +308,7 @@
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Label miTextoNumeroDePDIsSelecionados;
     private System.Windows.Forms.Button miBotonEliminarPDIs;
-    private InterfaceMapa miMapa;
+    private InterfaseMapa miMapa;
     private System.Windows.Forms.ColumnHeader miColumnaDescripción;
     private System.Windows.Forms.Panel panel3;
     private System.Windows.Forms.TrackBar miBarraDeDistancia;

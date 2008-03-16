@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GpsYv.ManejadorDeMapa.Interface
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  public partial class InterfaceBase : UserControl
+  public partial class InterfaseBase : UserControl
   {
     #region Campos
     private ManejadorDeMapa miManejadorDeMapa;
@@ -70,7 +70,7 @@ namespace GpsYv.ManejadorDeMapa.Interface
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceBase()
+    public InterfaseBase()
     {
       InitializeComponent();
     }

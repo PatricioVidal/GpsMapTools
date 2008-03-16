@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 
-namespace GpsYv.ManejadorDeMapa.Interface
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  public partial class InterfaceManejadorDeMapa : Form
+  public partial class InterfaseManejadorDeMapa : Form
   {
     #region Campos
     private ManejadorDeMapa miManejadorDeMapa;
@@ -19,7 +19,7 @@ namespace GpsYv.ManejadorDeMapa.Interface
     #endregion
 
     #region Métodos Públicos
-    public InterfaceManejadorDeMapa()
+    public InterfaseManejadorDeMapa()
     {
       InitializeComponent();
 
@@ -39,14 +39,14 @@ namespace GpsYv.ManejadorDeMapa.Interface
       miManejadorDeMapa.MapaNuevo += EnElementosModificados;
       miManejadorDeMapa.ElementosModificados += EnElementosModificados;
 
-      // Asigna las propiedades de la interface de PDIs.
-      miInterfaceManejadorDePDIs.ManejadorDeMapa = miManejadorDeMapa;
-      miInterfaceManejadorDePDIs.EscuchadorDeEstatus = miEscuchadorDeEstatus;
-      miInterfaceManejadorDePDIs.Tag = miPaginaDePDIs;
+      // Asigna las propiedades de la interfase de PDIs.
+      miInterfaseManejadorDePDIs.ManejadorDeMapa = miManejadorDeMapa;
+      miInterfaseManejadorDePDIs.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+      miInterfaseManejadorDePDIs.Tag = miPaginaDePDIs;
 
-      // Asigna las propiedades de la interface de mapa.
-      miInterfaceDeMapa.ManejadorDeMapa = miManejadorDeMapa;
-      miInterfaceDeMapa.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+      // Asigna las propiedades de la interfase de mapa.
+      miInterfaseDeMapa.ManejadorDeMapa = miManejadorDeMapa;
+      miInterfaseDeMapa.EscuchadorDeEstatus = miEscuchadorDeEstatus;
     }
     #endregion
       
@@ -121,7 +121,7 @@ namespace GpsYv.ManejadorDeMapa.Interface
 
     private void EnMenuAcerca(object sender, EventArgs e)
     {
-      Form ventanaDeAcerca = new Interface.VentanaDeAcerca();
+      Form ventanaDeAcerca = new Interfase.VentanaDeAcerca();
       ventanaDeAcerca.ShowDialog();
     }
 

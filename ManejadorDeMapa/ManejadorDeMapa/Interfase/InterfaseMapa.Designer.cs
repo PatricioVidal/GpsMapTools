@@ -1,6 +1,6 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface
+﻿namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  partial class InterfaceMapa
+  partial class InterfaseMapa
   {
     /// <summary> 
     /// Required designer variable.

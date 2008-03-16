@@ -13,7 +13,7 @@ using System.Threading;
 using System.IO;
 using NUnit.Framework;
 using NUnit.Extensions.Forms;
-using GpsYv.ManejadorDeMapa.Interface;
+using GpsYv.ManejadorDeMapa.Interfase;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas
 {
@@ -53,11 +53,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     {
       #region Inicialización.
       // Comienza applicación.
-      InterfaceManejadorDeMapa formaPrincipal = new InterfaceManejadorDeMapa();
+      InterfaseManejadorDeMapa formaPrincipal = new InterfaseManejadorDeMapa();
       formaPrincipal.Show();
       formaPrincipal.TopMost = true;
 
-      // Crea los probadores de los elementos de la interface.
+      // Crea los probadores de los elementos de la interfase.
       TabControlTester controladorDePestañasPrincipal = new TabControlTester("miControladorDePestañasPrincipal");
       TabControlTester controladorDePestañasDePDIs = new TabControlTester("miControladorDePestañasDePDIs");
       TabControl.TabPageCollection pestañasPDIs = controladorDePestañasDePDIs.Properties.TabPages;

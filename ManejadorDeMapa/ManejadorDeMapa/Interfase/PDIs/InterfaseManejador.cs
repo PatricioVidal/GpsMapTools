@@ -7,13 +7,13 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 
-namespace GpsYv.ManejadorDeMapa.Interface.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaceManejador : InterfaceBase
+  public partial class InterfaseManejador : InterfaseBase
   {
     #region Campos
     private List<ListViewItem> misItemsDeLista = new List<ListViewItem>();
-    private readonly InterfaceBase[] misInterfaces;
+    private readonly InterfaseBase[] misInterfases;
     private const string FormatoDeCoordenada = "0.00000";
     private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
     #endregion
@@ -28,9 +28,9 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
       {
         base.ManejadorDeMapa = value;
 
-        foreach (InterfaceBase interfaceBase in misInterfaces)
+        foreach (InterfaseBase interfaseBase in misInterfases)
         {
-          interfaceBase.ManejadorDeMapa = value;
+          interfaseBase.ManejadorDeMapa = value;
         }
       }
     }
@@ -45,9 +45,9 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
       {
         base.EscuchadorDeEstatus = value;
 
-        foreach (InterfaceBase interfaceBase in misInterfaces)
+        foreach (InterfaseBase interfaseBase in misInterfases)
         {
-          interfaceBase.EscuchadorDeEstatus = value;
+          interfaseBase.EscuchadorDeEstatus = value;
         }
       }
     }
@@ -57,26 +57,26 @@ namespace GpsYv.ManejadorDeMapa.Interface.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaceManejador()
+    public InterfaseManejador()
     {
       InitializeComponent();
 
       // Usar el punto para separar decimales.
       miFormatoNumérico.NumberDecimalSeparator = ".";
 
-      // Crea el vector de interfaces.
-      misInterfaces = new InterfaceBase[] {
-        miInterfaceDeMapa,
-        miInterfacePDIsDuplicados,
-        miInterfacePDIsEliminados,
-        miInterfacePDIsErrores,
-        miInterfacePDIsModificados};
+      // Crea el vector de interfases.
+      misInterfases = new InterfaseBase[] {
+        miInterfaseDeMapa,
+        miInterfasePDIsDuplicados,
+        miInterfasePDIsEliminados,
+        miInterfasePDIsErrores,
+        miInterfasePDIsModificados};
 
       // Asignar las propiedades correspondientes.
-      miInterfacePDIsDuplicados.Tag = miPáginaPosiblesDuplicados;
-      miInterfacePDIsEliminados.Tag = miPáginaEliminados;
-      miInterfacePDIsModificados.Tag = miPáginaModificados;
-      miInterfacePDIsErrores.Tag = miPáginaErrores;
+      miInterfasePDIsDuplicados.Tag = miPáginaPosiblesDuplicados;
+      miInterfasePDIsEliminados.Tag = miPáginaEliminados;
+      miInterfasePDIsModificados.Tag = miPáginaModificados;
+      miInterfasePDIsErrores.Tag = miPáginaErrores;
     }
     #endregion
 

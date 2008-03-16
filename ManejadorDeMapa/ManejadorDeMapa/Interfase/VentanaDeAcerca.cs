@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace GpsYv.ManejadorDeMapa.Interface
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
   partial class VentanaDeAcerca : Form
   {

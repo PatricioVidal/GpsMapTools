@@ -1,4 +1,4 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interface
+﻿namespace GpsYv.ManejadorDeMapa.Interfase
 {
   partial class VentanaDeAcerca
   {
