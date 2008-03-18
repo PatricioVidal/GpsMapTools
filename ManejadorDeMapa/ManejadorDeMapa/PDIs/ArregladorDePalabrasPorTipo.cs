@@ -46,13 +46,20 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
       #region Arregla el nombre del PDI.
       int tipo = elPDI.Tipo;
+      string nombreACorregir = elPDI.Nombre;
 
       // Remueve los espacios en blanco alrededor.
-      string nombreCorregido = elPDI.Nombre.Trim();
+      string nombreCorregido = nombreACorregir.Trim();
 
       // Remueve espacios en blanco extra entre medio de las palabras.
       string[] palabras = nombreCorregido.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
       nombreCorregido = string.Join(" ", palabras);
+      if (nombreCorregido != nombreACorregir)
+      {
+        elPDI.CambiaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
+        modificóElemento = true;
+        nombreACorregir = nombreCorregido;
+      }
 
       // Corrige las palabras basado en el tipo.
       IList<CorrecciónDePalabras> listaDeCorrecciónDePalabras = miLectorDeCorrecciónDePalabrasPorTipo.ListaDeCorrecciónDePalabras;
@@ -64,27 +71,24 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         {
           // Añade un espacio en blanco alrededor del nombre para asi hacer
           // búsquedas por palabras completas.
-          string nombreACorregir = " " + elPDI.Nombre + " ";
+          nombreACorregir = " " + nombreACorregir + " ";
           foreach (string posiblePalabra in correcciónDePalabras.PosiblesPalabras)
           {
             // Añade un espacio en blanco al final del nombre para hacer
             // búsquedas por palabras completas.
-            nombreACorregir = nombreACorregir.Replace(" " + posiblePalabra + " ", correcciónDePalabras.PalabraFinal + " ");
-          }
+            nombreCorregido = nombreACorregir.Replace(" " + posiblePalabra + " ", " " + correcciónDePalabras.PalabraFinal + " ");
 
-          // Remueve los espacios en blanco que se pudo haber añadido.
-          nombreCorregido = nombreACorregir.Trim();
+            if (nombreCorregido != nombreACorregir)
+            {
+              // Remueve los espacios en blanco que se pudo haber añadido.
+              elPDI.CambiaNombre(nombreCorregido.Trim(), "Cambio de palabra");
+              modificóElemento = true;
+              nombreACorregir = nombreCorregido;
+            }
+          }
         }
       }
       #endregion
-
-      if (nombreCorregido != elPDI.Nombre)
-      {
-        modificóElemento = true;
-
-        // Actualiza el campo del nombre.
-        elPDI.Nombre = nombreCorregido;
-      }
 
       return modificóElemento;
     }

@@ -105,7 +105,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           ListViewItem itemParaLaListaDePDIs = new ListViewItem(
             new string[] { 
             puntoDeInterés.Número.ToString(),
-            puntoDeInterés.TipoComoTexto(), 
+            puntoDeInterés.Tipo.ToString(), 
             puntoDeInterés.Descripción,
             puntoDeInterés.Nombre, 
             puntoDeInterés.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),

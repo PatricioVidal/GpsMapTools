@@ -66,6 +66,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfase\PDIs\MenuEditorDePDI.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Interfase\PDIs\MenuEditorDePDI.Designer.cs">
+      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfase\PDIs\VentanaCambiarTipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfase\PDIs\VentanaCambiarTipo.Designer.cs">
+      <DependentUpon>VentanaCambiarTipo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManejadorBase.cs" />
     <Compile Include="PDIs\ArregladorDeLetras.cs" />
     <Compile Include="PDIs\ArregladorDePalabrasPorTipo.cs" />
@@ -177,6 +189,10 @@
       <DependentUpon>InterfaseDeModificados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\PDIs\VentanaCambiarTipo.resx">
+      <DependentUpon>VentanaCambiarTipo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -213,6 +229,7 @@
       <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
     </Compile>
     <Compile Include="CaracterísticasDePolígonos.cs" />
+    <Compile Include="Tipo.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

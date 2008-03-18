@@ -40,7 +40,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           ListViewItem itemParaLaListaDePDIsModificados = new ListViewItem(
             new string[] { 
                 pdi.Número.ToString(),
-                pdi.TipoComoTexto(), 
+                pdi.Tipo.ToString(), 
                 pdi.Descripción,
                 pdi.Nombre, 
                 pdi.RazónParaEliminación});

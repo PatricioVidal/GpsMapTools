@@ -100,7 +100,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           new string[] { 
             elementoDelMapa.Número.ToString(),
             elementoDelMapa.Clase,
-            elementoDelMapa.TipoComoTexto(),
+            elementoDelMapa.Tipo.ToString(),
             elementoDelMapa.Descripción,
             elementoDelMapa.Nombre},
             -1);

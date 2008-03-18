@@ -44,10 +44,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       bool modificóElemento = false;
 
       #region Arregla el nombre del PDI.
-      string nombreOriginal = elPDI.Nombre;
+      string nombreACorregir = elPDI.Nombre;
 
       // Cambia el nombre a mayúsculas.
-      string nombreArreglado = nombreOriginal.ToUpper();
+      string nombreCorregido = nombreACorregir.ToUpper();
 
       // Arregla la letras no permitidas.
       IDictionary<char, char> diccionarioDeLetras = miLectorDeConversiónDeLetras.DiccionarioDeLetras;
@@ -55,17 +55,16 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       {
         char letraOriginal = par.Key;
         char letraArreglada = par.Value;
-        nombreArreglado = nombreArreglado.Replace(letraOriginal, letraArreglada);
+        nombreCorregido = nombreCorregido.Replace(letraOriginal, letraArreglada);
       }
       #endregion
 
-      // Si el nombre cambio entonces actualizar el PDI y reportar el cambio.
-      if (nombreArreglado != nombreOriginal)
+      // Si el nombre cambió entonces actualizar el PDI y reportar el cambio.
+      if (nombreCorregido != nombreACorregir)
       {
-        modificóElemento = true;
-
         // Actualiza el campo del nombre.
-        elPDI.Nombre = nombreArreglado;
+        elPDI.CambiaNombre(nombreCorregido, "Cambio de Letras");
+        modificóElemento = true;
       }
 
       return modificóElemento;

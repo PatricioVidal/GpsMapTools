@@ -14,14 +14,14 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     public const string IdentificadorDeTipo = "Type";
-    private readonly int miTipo;
+    private readonly Tipo miTipo = Tipo.TipoVacio;
     #endregion
 
     #region Propiedades
     /// <summary>
     /// Devuelve el tipo.
     /// </summary>
-    public int Tipo
+    public Tipo Tipo
     {
       get
       {
@@ -36,26 +36,28 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elTexto">El texto de la etiqueta.</param>
     public CampoTipo(string elTexto)
-      : base(IdentificadorDeTipo)
+      : this (new Tipo (elTexto))
     {
-      miTipo = Convert.ToInt32(elTexto, 16);
     }
 
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elTipo">El tipo.</param>
+    public CampoTipo(Tipo elTipo)
+      : base(IdentificadorDeTipo)
+    {
+      miTipo = elTipo;
+    }
+
+    
     /// <summary>
     /// Devuelve un texto representando el campo.
     /// </summary>
     public override string ToString()
     {
-      string texto = string.Empty;
-
-      // Solo genera el texto para tipos válidos.
-      if (miTipo > 0)
-      {
-        texto = "0x" + miTipo.ToString("x2");
-      }
-
-      return texto;
+      return miTipo.ToString();
     }
 
 

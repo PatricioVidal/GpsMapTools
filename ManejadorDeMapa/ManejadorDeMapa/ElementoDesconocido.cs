@@ -12,6 +12,12 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public class ElementoDesconocido : ElementoDelMapa
   {
+    #region Campos
+    private static readonly Dictionary<Tipo, string> misDescripciones = new Dictionary<Tipo, string>() {
+      { Tipo.TipoVacio, string.Empty} 
+    };
+    #endregion
+
     #region Métodos Públicos
     /// <summary>
     /// Constructor.
@@ -28,7 +34,7 @@ namespace GpsYv.ManejadorDeMapa
       : base(elManejadorDeMapa,
               elNúmero,
               laClase,
-              "",
+              misDescripciones,
               losCampos)
     {
     }

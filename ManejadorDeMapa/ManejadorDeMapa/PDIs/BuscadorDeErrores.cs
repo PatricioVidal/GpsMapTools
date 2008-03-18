@@ -51,11 +51,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       List<string> errores = new List<string>();
 
       #region Verifica que el tipo de PDI es conocido.
-      int tipo = elPDI.Tipo;
+      Tipo tipo = elPDI.Tipo;
       bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {
-        errores.Add("El tipo (" + elPDI.TipoComoTexto() + ") no es conocido");
+        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
       }
       #endregion 
 

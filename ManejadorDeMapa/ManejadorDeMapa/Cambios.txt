@@ -9,9 +9,15 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Actualizar elementos cuando se guarda el mapa?
 - Usar eventos para las páginas de pestañas.
-- Listar el tipo de modificación?
 - Hacer el ícono de la aplicación con el gráfico de GPS_YV.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
+
+
+Version 1.1
+- Añadida la opción para cambiar el tipo de PDI en la Interfase de Errores.
+- Arreglada la lógica de correción de palabras por tipo.
+- Ahora se lista el tipo de modificación.
+- Creada clase Tipo.
 
 Versión 1.0
 - Ahora se maneja correctamente PDIs con coordenadas a niveles distinto de 0 (pero se reporta en los errores de PDIs).

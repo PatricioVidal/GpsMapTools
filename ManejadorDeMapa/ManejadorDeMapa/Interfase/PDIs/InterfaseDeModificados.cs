@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
+  /// <summary>
+  /// Interfase de PDIs modificados.
+  /// </summary>
   public partial class InterfaseDeModificados : InterfaseBase
   {
     /// <summary>
@@ -40,10 +43,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           ListViewItem itemParaLaListaDePDIsModificados = new ListViewItem(
             new string[] { 
                 pdi.Número.ToString(),
-                pdi.TipoComoTexto(), 
+                pdi.Tipo.ToString(), 
                 pdi.Descripción,
-                pdi.Original.Nombre, 
-                pdi.Nombre});
+                pdi.Nombre, 
+                pdi.Modificaciones});
           miLista.Items.Add(itemParaLaListaDePDIsModificados);
         }
       }

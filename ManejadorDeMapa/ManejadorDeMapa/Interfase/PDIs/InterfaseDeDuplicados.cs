@@ -140,7 +140,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       ListViewItem item = new ListViewItem(
               new string[] { 
                 elPdi.Número.ToString(),
-                elPdi.TipoComoTexto(), 
+                elPdi.Tipo.ToString(), 
                 elPdi.Descripción,
                 elPdi.Nombre,
                 elPdi.Coordenadas.ToString(),

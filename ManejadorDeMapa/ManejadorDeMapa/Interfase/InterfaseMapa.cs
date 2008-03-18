@@ -10,6 +10,9 @@ using System.Diagnostics;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
+  /// <summary>
+  /// Interfase de Mapa gráfico.
+  /// </summary>
   public partial class InterfaseMapa : InterfaseBase
   {
     #region Campos
@@ -460,7 +463,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if (elemento is Polígono)
         {
           Polígono polígono = (Polígono)elemento;
-          int tipo = polígono.Tipo;
+          Tipo tipo = polígono.Tipo;
           DibujaPolígono(polígono, CaracterísticasDePolígonos.Pincel(tipo));
         }
       }
@@ -514,7 +517,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if (elemento is Polilínea)
         {
           Polilínea polilínea = (Polilínea)elemento;
-          int tipo = polilínea.Tipo;
+          Tipo tipo = polilínea.Tipo;
           DibujaPolilínea(polilínea, CaracterísticasDePolilíneas.Lápiz(tipo));
         }
       }

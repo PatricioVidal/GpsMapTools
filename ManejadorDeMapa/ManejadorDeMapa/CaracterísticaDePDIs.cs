@@ -19,21 +19,21 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Diccionario de descripciones por tipo de PDIs.
     /// </summary>
-    public readonly static IDictionary<int, string> Descripciones = new Dictionary<int, string>();
+    public readonly static IDictionary<Tipo, string> Descripciones = new Dictionary<Tipo, string>();
 
 
     /// <summary>
     /// Devuelve la descripción para un tipo de PDIs dado.
     /// </summary>
     /// <param name="elTipo">El tipo de PDIs.</param>
-    public static string Descripción(int elTipo)
+    public static string Descripción(Tipo elTipo)
     {
       string descripcion;
       bool existe = Descripciones.TryGetValue(elTipo, out descripcion);
       if (!existe)
       {
         // Descripcion por defecto.
-        descripcion = Descripciones[0];
+        descripcion = Descripciones[Tipo.TipoVacio];
       }
       return descripcion;
     }
@@ -42,11 +42,11 @@ namespace GpsYv.ManejadorDeMapa
     #region Métodos Privados
     private class LectorDeCaracterísticasDePDIs : LectorDeArchivo
     {
-      public readonly IDictionary<int, string> misDescripciones;
+      public readonly IDictionary<Tipo, string> misDescripciones;
 
       public LectorDeCaracterísticasDePDIs(
         string elArchivo,
-        IDictionary<int, string> lasDescripciones)
+        IDictionary<Tipo, string> lasDescripciones)
       {
         misDescripciones = lasDescripciones;
 
@@ -88,7 +88,7 @@ namespace GpsYv.ManejadorDeMapa
           }
           for (int tipo = primerTipo; tipo <= últimoTipo; ++tipo)
           {
-            Descripciones[tipo] = descripción;
+            Descripciones[new Tipo(tipo)] = descripción;
           }
         }
       }
@@ -104,6 +104,11 @@ namespace GpsYv.ManejadorDeMapa
       LectorDeCaracterísticasDePDIs lector = new LectorDeCaracterísticasDePDIs(
         miArchivoDeCaracterísticasDePDIs,
         Descripciones);
+
+      if (!Descripciones.ContainsKey(Tipo.TipoVacio))
+      {
+        Descripciones[Tipo.TipoVacio] = string.Empty;
+      }
     }
     #endregion
   }

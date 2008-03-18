@@ -14,6 +14,9 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private readonly string miTexto = string.Empty;
+    private static readonly Dictionary<Tipo, string> misDescripciones = new Dictionary<Tipo, string>() {
+      { Tipo.TipoVacio, "Comentario"} 
+    };
     #endregion
 
     #region Propiedades
@@ -43,7 +46,7 @@ namespace GpsYv.ManejadorDeMapa
       : base(elManejadorDeMapa,
              elNúmero,
              ";",
-             "Comentario",
+             misDescripciones,
              GeneraCampos(elComentario))
     {
       miTexto = ((CampoComentario)Campos[0]).Texto;

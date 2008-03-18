@@ -18,28 +18,28 @@ namespace GpsYv.ManejadorDeMapa
     /// Diccionario de lápices por tipo de polilinea.
     /// </summary>
     /// <remarks>
-    public readonly static IDictionary<int, Pen> misLápices = new Dictionary<int, Pen>();
+    public readonly static IDictionary<Tipo, Pen> misLápices = new Dictionary<Tipo, Pen>();
     #endregion
 
     #region Campos y Métodos Públicos
     /// <summary>
     /// Diccionario de descripciones por tipo de polilinea.
     /// </summary>
-    public readonly static IDictionary<int, string> Descripciones = new Dictionary<int, string>();
+    public readonly static IDictionary<Tipo, string> Descripciones = new Dictionary<Tipo, string>();
 
 
     /// <summary>
     /// Devuelve el lápiz para un tipo de polilinea dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polilinea.</param>
-    public static Pen Lápiz(int elTipo)
+    public static Pen Lápiz(Tipo elTipo)
     {
       Pen lápiz;
       bool existe = misLápices.TryGetValue(elTipo, out lápiz);
       if (!existe)
       {
         // Lápiz por defecto.
-        lápiz = misLápices[0];
+        lápiz = misLápices[Tipo.TipoVacio];
       }
       return lápiz;
     }
@@ -49,14 +49,14 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve la descripción para un tipo de polilínea dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polígono.</param>
-    public static string Descripción(int elTipo)
+    public static string Descripción(Tipo elTipo)
     {
       string descripcion;
       bool existe = Descripciones.TryGetValue(elTipo, out descripcion);
       if (!existe)
       {
         // Descripcion por defecto.
-        descripcion = Descripciones[0];
+        descripcion = Descripciones[Tipo.TipoVacio];
       }
       return descripcion;
     }
@@ -64,13 +64,13 @@ namespace GpsYv.ManejadorDeMapa
     #region Métodos Privados
     private class LectorDeCaracterísticasDePolilíneas : LectorDeArchivo
     {
-      public readonly IDictionary<int, Pen> misLápices;
-      public readonly IDictionary<int, string> misDescripciones;
+      public readonly IDictionary<Tipo, Pen> misLápices;
+      public readonly IDictionary<Tipo, string> misDescripciones;
 
       public LectorDeCaracterísticasDePolilíneas(
         string elArchivo,
-        IDictionary<int, Pen> losLápices,
-        IDictionary<int, string> lasDescripciones)
+        IDictionary<Tipo, Pen> losLápices,
+        IDictionary<Tipo, string> lasDescripciones)
       {
         misLápices = losLápices;
         misDescripciones = lasDescripciones;
@@ -99,7 +99,7 @@ namespace GpsYv.ManejadorDeMapa
           }
 
           // Lee las cuatro partes.
-          int tipo = Convert.ToInt32(partes[0], 16);
+          Tipo tipo = new Tipo(partes[0]);
           Color color = Color.FromName(partes[1]);
           int ancho = int.Parse(partes[2]);
           string descripción = partes[3];

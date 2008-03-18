@@ -17,28 +17,28 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Diccionario de pinceles por tipo de polígono.
     /// </summary>
-    public readonly static IDictionary<int, Brush> misPinceles = new Dictionary<int, Brush>();
+    public readonly static IDictionary<Tipo, Brush> misPinceles = new Dictionary<Tipo, Brush>();
     #endregion
 
     #region Campos y Métodos Públicos
     /// <summary>
     /// Diccionario de descripciones por tipo de polígono.
     /// </summary>
-    public readonly static IDictionary<int, string> Descripciones = new Dictionary<int, string>();
+    public readonly static IDictionary<Tipo, string> Descripciones = new Dictionary<Tipo, string>();
 
     
     /// <summary>
     /// Devuelve el pincel para un tipo de polígono dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polígono.</param>
-    public static Brush Pincel(int elTipo)
+    public static Brush Pincel(Tipo elTipo)
     {
       Brush pincel;
       bool existe = misPinceles.TryGetValue(elTipo, out pincel);
       if (!existe)
       {
         // Pincel por defecto.
-        pincel = misPinceles[0];
+        pincel = misPinceles[Tipo.TipoVacio];
       }
       return pincel;
     }
@@ -48,14 +48,14 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve la descripción para un tipo de polígono dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polígono.</param>
-    public static string Descripción(int elTipo)
+    public static string Descripción(Tipo elTipo)
     {
       string descripcion;  
       bool existe = Descripciones.TryGetValue(elTipo, out descripcion);
       if (!existe)
       {
         // Descripcion por defecto.
-        descripcion = Descripciones[0];
+        descripcion = Descripciones[Tipo.TipoVacio];
       }
       return descripcion;
     }
@@ -64,13 +64,13 @@ namespace GpsYv.ManejadorDeMapa
     #region Métodos Privados
     private class LectorDeCaracterísticasDePolígonos : LectorDeArchivo
     {
-      public readonly IDictionary<int, Brush> misPinceles;
-      public readonly IDictionary<int, string> misDescripciones;
+      public readonly IDictionary<Tipo, Brush> misPinceles;
+      public readonly IDictionary<Tipo, string> misDescripciones;
 
       public LectorDeCaracterísticasDePolígonos(
         string elArchivo,
-        IDictionary<int, Brush> losPinceles,
-        IDictionary<int, string> lasDescripciones)
+        IDictionary<Tipo, Brush> losPinceles,
+        IDictionary<Tipo, string> lasDescripciones)
       {
         misPinceles = losPinceles;
         misDescripciones = lasDescripciones;
@@ -99,7 +99,7 @@ namespace GpsYv.ManejadorDeMapa
           }
 
           // Lee las tres partes.
-          int tipo = Convert.ToInt32(partes[0], 16);
+          Tipo tipo = new Tipo(partes[0]);
           Brush pincel = new SolidBrush(Color.FromName(partes[1]));
           string descripción = partes[2];
 

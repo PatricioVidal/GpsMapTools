@@ -17,13 +17,17 @@ namespace GpsYv.ManejadorDeMapa
     private readonly int miNúmero;
     private readonly string miClase = string.Empty;
     private string miNombre = string.Empty;
-    private readonly CampoTipo miTipo = new CampoTipo("0");
-    private readonly string miDescripción = string.Empty;
+    private Tipo miTipo = Tipo.TipoVacio;
+    private string miDescripción = string.Empty;
     private readonly IList<Campo> misCampos;
     private bool miFuéModificado = false;
+    private List<string> misModificacionesDeNombre = new List<string>();
+    private List<string> misModificacionesDeTipo = new List<string>();
     private bool miFuéEliminado = false;
     private string miRazónParaEliminación = string.Empty;
     private ElementoDelMapa miOriginal = null;
+    private readonly IDictionary<Tipo, string> misDescripcionesPorTipo;
+    private static readonly string SeparadorDeModificaciones = " -> ";
     #endregion
 
     #region Propiedades
@@ -72,44 +76,17 @@ namespace GpsYv.ManejadorDeMapa
       {
         return miNombre;
       }
-
-      set
-      {
-        // Cambia el nombre solo si el nuevo valor es distinto.
-        if (value != miNombre)
-        {
-          miOriginal = (ElementoDelMapa)Clone();
-          miNombre = value;
-
-          // Busca y actualiza el campo del nombre.
-          IList<Campo> campos = misCampos;
-          for (int i = 0; i < misCampos.Count; ++i)
-          {
-            if (campos[i] is CampoNombre)
-            {
-              // Remplaza el campo.
-              campos[i] = new CampoNombre(miNombre);
-
-              // Solo se cambia el primer campo nombre.
-              break;
-            }
-          }
-
-          miFuéModificado = true;
-          miManejadorDeMapa.SeModificóUnElemento();
-        }
-      }
     }
 
 
     /// <summary>
     /// Devuelve el tipo del elemento.
     /// </summary>
-    public int Tipo
+    public Tipo Tipo
     {
       get
       {
-        return miTipo.Tipo;
+        return miTipo;
       }
     }
 
@@ -163,6 +140,41 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Obtiene las modificaciones hechas al elemento.
+    /// </summary>
+    public string Modificaciones
+    {
+      get
+      {
+        StringBuilder modificaciones = new StringBuilder();
+
+        // Añade las modificaciones de nombre.
+        if (misModificacionesDeNombre.Count > 0)
+        {
+          modificaciones.Append("[Nombre: " + miOriginal.Nombre);
+          foreach (string modificación in misModificacionesDeNombre)
+          {
+            modificaciones.Append(modificación);
+          }
+          modificaciones.Append("]");
+        }
+
+        // Añade las modificaciones de Tipo.
+        if (misModificacionesDeTipo.Count > 0)
+        {
+          modificaciones.Append("[Tipo: " + miOriginal.Tipo);
+          foreach (string modificación in misModificacionesDeTipo)
+          {
+            modificaciones.Append(modificación);
+          }
+          modificaciones.Append("]");
+        }
+
+        return modificaciones.ToString();
+      }
+    }
+
+    /// <summary>
     /// Devuelve la razón para la eliminación.
     /// </summary>
     public string RazónParaEliminación
@@ -202,54 +214,114 @@ namespace GpsYv.ManejadorDeMapa
       ManejadorDeMapa elManejadorDeMapa,
       int elNúmero,
       string laClase,
-      IDictionary<int, string> lasDescripcionesPorTipo,
+      IDictionary<Tipo, string> lasDescripcionesPorTipo,
       IList<Campo> losCampos)
-      : this (elManejadorDeMapa,
-              elNúmero,
-              laClase,
-              BuscaDescripción(lasDescripcionesPorTipo, losCampos),
-              losCampos)
-    {
-    }
-
-
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número del elemento.</param>
-    /// <param name="laClase">La clase de elemento.</param>
-    /// <param name="laDescripcion">La descripción.</param>
-    /// <param name="losCampos">Los campos del elemento.</param>
-    public ElementoDelMapa(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      string laDescripcion,
-      IList<Campo> losCampos)
-    {
+     {
       // Guarda variables.
       miManejadorDeMapa = elManejadorDeMapa;
       miNúmero = elNúmero;
       miClase = laClase;
-      miDescripción = laDescripcion;
       misCampos = losCampos;
+      misDescripcionesPorTipo = lasDescripcionesPorTipo;
 
       // Busca los campos conocidos.
       foreach (Campo campo in losCampos)
       {
         if (campo is CampoTipo)
         {
-          miTipo = (CampoTipo)campo;
+          miTipo = ((CampoTipo)campo).Tipo;
         }
         else if (campo is CampoNombre)
         {
           miNombre = ((CampoNombre)campo).Nombre;
         }
       }
+
+      bool existe = misDescripcionesPorTipo.TryGetValue(miTipo, out miDescripción);
+      if (!existe)
+      {
+        miDescripción = string.Empty;
+      }
+    }
+
+
+    /// <summary>
+    /// Cambia el nombre del elemento.
+    /// </summary>
+    /// <param name="elNombreNuevo">El nombre nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void CambiaNombre(string elNombreNuevo, string laRazón)
+    {
+      // Avisa que de va a modificar un elemento.
+      SeVaAModificarElemento();
+
+      // Actualiza el nombre.
+      miNombre = elNombreNuevo;
+      misModificacionesDeNombre.Add(
+        SeparadorDeModificaciones + laRazón + 
+        SeparadorDeModificaciones + elNombreNuevo);
+
+      // Busca y actualiza el campo del nombre.
+      IList<Campo> campos = misCampos;
+      for (int i = 0; i < misCampos.Count; ++i)
+      {
+        if (campos[i] is CampoNombre)
+        {
+          // Remplaza el campo.
+          campos[i] = new CampoNombre(miNombre);
+
+          // Solo se cambia el primer campo nombre.
+          break;
+        }
+      }
+
+      // Avisa que se modificó un elemento.
+      miManejadorDeMapa.SeModificóUnElemento();
     }
 
     
+    /// <summary>
+    /// Cambia el tipo del elemento.
+    /// </summary>
+    /// <param name="elTipoNuevo">El tipo nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void CambiaTipo(Tipo elTipoNuevo, string laRazón)
+    {
+      // Avisa que se va a modificar un elemento.
+      SeVaAModificarElemento();
+
+      // Actualiza el tipo.
+      miTipo = elTipoNuevo;
+      misModificacionesDeTipo.Add(
+        SeparadorDeModificaciones + laRazón +
+        SeparadorDeModificaciones + elTipoNuevo);
+
+      // Busca y actualiza el campo del tipo.
+      IList<Campo> campos = misCampos;
+      for (int i = 0; i < misCampos.Count; ++i)
+      {
+        if (campos[i] is CampoTipo)
+        {
+          // Remplaza el campo.
+          campos[i] = new CampoTipo(miTipo);
+
+          // Solo se cambia el primer campo tipo.
+          break;
+        }
+      }
+
+      // Actualiza la descripción.
+      bool existe = misDescripcionesPorTipo.TryGetValue(miTipo, out miDescripción);
+      if (!existe)
+      {
+        miDescripción = string.Empty;
+      }
+
+      // Avisa que se modificó un elemento.
+      miManejadorDeMapa.SeModificóUnElemento();
+    }
+
+
     /// <summary>
     /// Marca el elemento para ser eliminado.
     /// </summary>
@@ -263,17 +335,6 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve el tipo del elemento en forma de texto.
-    /// </summary>
-    public string TipoComoTexto()
-    {
-      string texto = miTipo.ToString();
-
-      return texto;
-    }
-
-
-    /// <summary>
     /// Devuelve una copia de este objeto.
     /// </summary>
     public abstract object Clone();
@@ -281,10 +342,10 @@ namespace GpsYv.ManejadorDeMapa
 
     #region Métodos Protegidos y Privados
     private static string BuscaDescripción(
-      IDictionary<int, string> lasDescripcionesPorTipo,
+      IDictionary<Tipo, string> lasDescripcionesPorTipo,
       IList<Campo> losCampos)
     {
-      int tipo = int.MinValue;
+      Tipo? tipo = null;
       foreach (Campo campo in losCampos)
       {
         if (campo is CampoTipo)
@@ -295,12 +356,28 @@ namespace GpsYv.ManejadorDeMapa
 
       // Busca la descripción.
       string descripción = string.Empty;
-      if (tipo != int.MinValue)
+      if (tipo != null)
       {
-        lasDescripcionesPorTipo.TryGetValue(tipo, out descripción);
+        bool existe = lasDescripcionesPorTipo.TryGetValue(tipo.Value, out descripción);
+        if (!existe)
+        {
+          descripción = string.Empty;
+        }
       }
 
       return descripción;
+    }
+
+
+    private void SeVaAModificarElemento()
+    {
+      miFuéModificado = true;
+
+      // Guarda el original si todavíano se ha hecho.
+      if (miOriginal == null)
+      {
+        miOriginal = (ElementoDelMapa)Clone();
+      }
     }
     #endregion
   }

@@ -20,11 +20,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
       string clase = "clase";
       string nombre = "Nombre";
-      int tipo = 0xc;
+      string tipo = "0xc";
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
         new CampoComentario ("Comentario"),
-        new CampoTipo (tipo.ToString("x"))
+        new CampoTipo (tipo)
       };
       
       // Llama al constructor.
@@ -40,7 +40,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       Assert.AreEqual(null, objectoDePrueba.Original, "Original");
       Assert.AreEqual(string.Empty, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(tipo, objectoDePrueba.Tipo, "Tipo");
+      Assert.AreEqual(new Tipo(tipo), objectoDePrueba.Tipo, "Tipo");
     }
 
 
@@ -72,12 +72,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       Assert.AreEqual(null, objectoDePrueba.Original, "Original");
       Assert.AreEqual(razón, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(0, objectoDePrueba.Tipo, "Tipo");
+      Assert.AreEqual(Tipo.TipoVacio, objectoDePrueba.Tipo, "Tipo");
     }
 
 
     [Test]
-    public void PruebaPropiedadNombre()
+    public void PruebaCambiaNombre()
     {
       // Inicialización.
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
@@ -93,8 +93,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreNotEqual(nuevoNombre, nombre);
       ElementoDesconocido original = (ElementoDesconocido)objectoDePrueba.Clone();
 
-      // Llama la propiedad a probar.
-      objectoDePrueba.Nombre = nuevoNombre;
+      // Llama el método a probar.
+      objectoDePrueba.CambiaNombre(nuevoNombre, "Razón");
 
       // Prueba Propiedades.
       Assert.AreEqual(campos, objectoDePrueba.Campos, "Campos");
@@ -106,7 +106,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       AseguraElementoEsEquivalente(original, objectoDePrueba.Original, "Original");
       Assert.AreEqual(string.Empty, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(0, objectoDePrueba.Tipo, "Tipo");
+      Assert.AreEqual(Tipo.TipoVacio, objectoDePrueba.Tipo, "Tipo");
     }
 
 

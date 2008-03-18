@@ -124,7 +124,7 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve una variable lógica que indica si un objeto
     /// dado es igual.
     /// </summary>
-    /// <param name="elObjecto">EL objecto dado.</param>
+    /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
       // Si el objeto es nulo entonces no puede ser igual.
@@ -141,8 +141,7 @@ namespace GpsYv.ManejadorDeMapa
 
       // Compara latitud y longitud.
       Coordenadas comparador = (Coordenadas)elObjecto;
-      bool esIgual = ((Latitud == comparador.Latitud) &&
-        (Longitud == comparador.Longitud));
+      bool esIgual = (this == comparador);
 
       return esIgual;
     }
