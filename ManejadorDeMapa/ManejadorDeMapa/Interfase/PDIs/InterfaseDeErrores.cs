@@ -124,6 +124,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         int númeroDeErrores = miLista.Items.Count;
         pestaña.Text = "Errores (" + númeroDeErrores + ")";
       }
+
+      // Activa el menú de Edición si hay elementos en la lista.
+      if (miLista.Items.Count > 0)
+      {
+        miMenúEditorDePDI.Enabled = true;
+      }
+      else
+      {
+        miMenúEditorDePDI.Enabled = false;
+      }
     }
 
 

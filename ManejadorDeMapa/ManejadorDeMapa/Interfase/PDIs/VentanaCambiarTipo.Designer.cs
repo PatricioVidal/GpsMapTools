@@ -179,6 +179,7 @@
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "VentanaCambiarTipo";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.TopMost = true;
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();

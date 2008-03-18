@@ -36,9 +36,9 @@
       this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
       this.miColumnaCoordenadas = new System.Windows.Forms.ColumnHeader();
       this.miColumnaRazón = new System.Windows.Forms.ColumnHeader();
+      this.miMenúEditorDePDI = new GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI();
       this.miDivision = new System.Windows.Forms.SplitContainer();
       this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
-      this.miMenúEditorDePDI = new GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI();
       this.miDivision.Panel1.SuspendLayout();
       this.miDivision.Panel2.SuspendLayout();
       this.miDivision.SuspendLayout();
@@ -94,6 +94,16 @@
       this.miColumnaRazón.Text = "Razón";
       this.miColumnaRazón.Width = 284;
       // 
+      // miMenúEditorDePDI
+      // 
+      this.miMenúEditorDePDI.Enabled = false;
+      this.miMenúEditorDePDI.ManejadorDePDIs = null;
+      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
+      this.miMenúEditorDePDI.PDI = null;
+      this.miMenúEditorDePDI.ShowImageMargin = false;
+      this.miMenúEditorDePDI.Size = new System.Drawing.Size(128, 48);
+      this.miMenúEditorDePDI.Text = "MenúEditorDePDI";
+      // 
       // miDivision
       // 
       this.miDivision.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -127,15 +137,6 @@
       this.miMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapa.RectánguloVisibleEnCoordenadas")));
       this.miMapa.Size = new System.Drawing.Size(837, 198);
       this.miMapa.TabIndex = 0;
-      // 
-      // miMenúEditorDePDI
-      // 
-      this.miMenúEditorDePDI.ManejadorDePDIs = null;
-      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
-      this.miMenúEditorDePDI.PDI = null;
-      this.miMenúEditorDePDI.ShowImageMargin = false;
-      this.miMenúEditorDePDI.Size = new System.Drawing.Size(122, 26);
-      this.miMenúEditorDePDI.Text = "MenúEditorDePDI";
       // 
       // InterfaseDeErrores
       // 

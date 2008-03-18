@@ -74,7 +74,7 @@
       // miColumnaModificaciones
       // 
       this.miColumnaModificaciones.Text = "Modificaciones";
-      this.miColumnaModificaciones.Width = 284;
+      this.miColumnaModificaciones.Width = 400;
       // 
       // InterfaseDeModificados
       // 
