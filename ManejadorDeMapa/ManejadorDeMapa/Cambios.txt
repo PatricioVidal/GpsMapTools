@@ -12,6 +12,8 @@ Lo próximo para hacer:
 - Hacer el ícono de la aplicación con el gráfico de GPS_YV.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Version 1.2
+- Corregida y actualizada la lógica para cambiar el Tipo de PDI.
 
 Version 1.1
 - Añadida la opción para cambiar el tipo de PDI en la Interfase de Errores.
