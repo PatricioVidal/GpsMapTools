@@ -15,9 +15,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   public partial class VentanaCambiarTipo : Form
   {
     #region Campos
-    private PDI miPDI;
-    private Tipo miTipoOriginal;
-    private Tipo miTipoNuevo;
+    private PDI miPDI = null;
+    private Tipo miTipoOriginal = Tipo.TipoVacio;
+    private Tipo miTipoNuevo = Tipo.TipoVacio;
     private string miError = null;
     #endregion
 
@@ -38,15 +38,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
       set
       {
-        miPDI = value;
-        miTipoOriginal = miPDI.Tipo;
+        if (value != null)
+        {
+          miPDI = value;
+          miTipoOriginal = miPDI.Tipo;
+          miTipoNuevo = miTipoOriginal;
 
-        // Pone el texto del PDI y el tipo original.
-        miTextoNombrePDI.Text = miPDI.Nombre;
-        miTextCoordenadasPDI.Text = miPDI.Coordenadas.ToString();
-        miTextoTipoOriginal.Text = miTipoOriginal.ToString();
-        miTextoDescripciónOriginal.Text = CaracterísticasDePDIs.Descripción(miTipoOriginal);
-
+          // Pone el texto del PDI y el tipo original.
+          miTextoNombrePDI.Text = miPDI.Nombre;
+          miTextCoordenadasPDI.Text = miPDI.Coordenadas.ToString();
+          miTextoTipoOriginal.Text = miTipoOriginal.ToString();
+          miTextoDescripciónOriginal.Text = CaracterísticasDePDIs.Descripción(miTipoOriginal);
+        }
+        else
+        {
+          Inicializa();
+        }
       }
     }
 
@@ -91,8 +98,28 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           DialogResult = DialogResult.Cancel;
         }
 
+        // Aseguremonos de que inicializamos todo.
+        Inicializa();
+
+        // Cierra la ventana.
         Close();
       }
+    }
+
+
+    private void Inicializa()
+    {
+      // Inicializa los campos.
+      miPDI = null;
+      miTipoOriginal = Tipo.TipoVacio;
+      miTipoNuevo = Tipo.TipoVacio;
+      miError = null;
+
+      // Inicializa la interfase.
+      miTextoNombrePDI.Text = string.Empty;
+      miTextCoordenadasPDI.Text = string.Empty;
+      miTextoTipoOriginal.Text = string.Empty;
+      miTextoDescripciónOriginal.Text = string.Empty;
     }
 
     
@@ -106,11 +133,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void EnTipoNuevoCambió(object elEnviador, EventArgs losArgumentos)
     {
       // Borra el mensaje de error.
+      miError = null;
       miProveedorDeErrorDeTipo.SetError(miTextoTipoNuevo, string.Empty);
 
       // Si hay texto entonces tratamos de convertirlo a tipo.
       // Si no, entonces dejamos el tipo original.
-      if (!string.IsNullOrEmpty(miEtiquetaTipoNuevo.Text))
+      if (!string.IsNullOrEmpty(miTextoTipoNuevo.Text))
       {
         string tipoComoTexto = "0x" + miTextoTipoNuevo.Text;
          
@@ -118,7 +146,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         try
         {
           miTipoNuevo = new Tipo(tipoComoTexto);
-          miError = null;
 
           // Pone el texto de descripción.
           bool existe = CaracterísticasDePDIs.Descripciones.ContainsKey(miTipoNuevo);
@@ -129,6 +156,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           else
           {
             miTextoDescripción.Text = "<desconocido>";
+            miError = "Tipo Desconocido." ;
           }
         }
         // Si hay errores entonces ponemos el error.
@@ -136,6 +164,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         {
           miTextoDescripción.Text = "???";
           miError = "Tipo Inválido: " + e.Message;
+          miProveedorDeErrorDeTipo.SetError(miTextoTipoNuevo, miError);
         }
       }
       else

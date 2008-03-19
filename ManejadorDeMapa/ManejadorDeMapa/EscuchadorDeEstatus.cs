@@ -105,7 +105,9 @@ namespace GpsYv.ManejadorDeMapa
         if ((diferencia > miMinimaDiferenciaDeProgresoParaReportar)
           || (progreso == 0))
         {
-          miBarraDeProgreso.Value = progreso;
+          // Protege el progreso a mostrar en la Interfase en caso de
+          // que mas de un elemento accese este objeto.
+          miBarraDeProgreso.Value = Math.Min(progreso, (int)ProgresoMáximo); ;
           miÚltimoProgreso = progreso;
 
           // Habilitar la barra de progreso si el progreso es mayor que cero.

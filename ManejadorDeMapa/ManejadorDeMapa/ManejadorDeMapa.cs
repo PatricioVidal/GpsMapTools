@@ -108,22 +108,26 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elArchivo"></param>
     public void Abrir(string elArchivo)
     {
-      miArchivo = elArchivo;
-      miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
-
-      // Por ahora el único formato es el Polish.
-      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
-    
-      // Genera las listas.
-      misPDIs.Clear();
-      foreach (ElementoDelMapa elemento in misElementos)
+      // Nos aseguramos que nadie modifique el manejador durante esta operación.
+      lock (misPDIs)
       {
-        if (elemento is PDI)
+        miArchivo = elArchivo;
+        miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
+
+        // Por ahora el único formato es el Polish.
+        LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
+
+        // Genera las listas.
+        misPDIs.Clear();
+        foreach (ElementoDelMapa elemento in misElementos)
         {
-          misPDIs.Add((PDI)elemento);
+          if (elemento is PDI)
+          {
+            misPDIs.Add((PDI)elemento);
+          }
         }
       }
-  
+
       // Genera el evento de lectura de mapa nuevo.
       SeAbrioUnMapaNuevo();
     }
