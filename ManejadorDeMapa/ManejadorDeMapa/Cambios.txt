@@ -14,6 +14,8 @@ Lo próximo para hacer:
 Versión 1.3
 - Añadida escala al mapa.
 - Evita que el acercamiento del mapa sea < 1m, y que el alejamiento del mapa sea > 500km.
+- Actualizados la lista de PDIs válidos.
+- Actualizada la lista de corrección de palabras por tipo de PDI.
 
 Version 1.2
 - Corregida y actualizada la lógica para cambiar el Tipo de PDI.
