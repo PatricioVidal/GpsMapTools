@@ -70,11 +70,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
       CasoDeProcesamientoDePDIs[] casos = new CasoDeProcesamientoDePDIs[] {
         //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
-        new CasoDeProcesamientoDePDIs( "58090.mp",  1713,          87,         19,          2,      19),
-        new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         202,         10,        189,       1),
-        new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         680,         32,         58,      28),
-        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          40,         46,          8,       2),
-        new CasoDeProcesamientoDePDIs( "58460.mp",   980,          53,        151,          4,       0),
+        new CasoDeProcesamientoDePDIs( "58090.mp",  1713,          87,         19,          2,     117),
+        new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         202,         10,        189,     400),
+        new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         680,         32,         58,     201),
+        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          40,         46,          8,     335),
+        new CasoDeProcesamientoDePDIs( "58460.mp",   980,          53,        151,          4,     235),
       };
 
       foreach (CasoDeProcesamientoDePDIs caso in casos)
