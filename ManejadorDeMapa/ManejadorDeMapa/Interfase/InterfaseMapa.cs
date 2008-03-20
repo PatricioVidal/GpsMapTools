@@ -725,7 +725,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Calcula el largo del segmento de la escala en metros.
       // Para eso calculamos las coordenadas de los extremos del segmento 
       // y con las coordenadas calculamos la distancia en metros.
-      Point origenDelSegmentoEnPixels = new Point(miOffsetDeEscalaEnPixels.X, miAreaDeDibujo.Bottom - miOffsetDeEscalaEnPixels.Y);
+      int bordeDeAbajoEnPixels = this.ClientRectangle.Bottom;
+      Point origenDelSegmentoEnPixels = new Point(miOffsetDeEscalaEnPixels.X, bordeDeAbajoEnPixels - miOffsetDeEscalaEnPixels.Y);
       PointF origenDelSegmentoEnCoordenadas = PixelsACoordenadas(origenDelSegmentoEnPixels);
       Point finalDelSegmentoMínimoEnPixels = new Point(origenDelSegmentoEnPixels.X + miLargoDelSegmentoMínimoEnPixels, origenDelSegmentoEnPixels.Y);
       PointF finalDelSegmentoMínimoEnCoordenadas = PixelsACoordenadas(finalDelSegmentoMínimoEnPixels);
