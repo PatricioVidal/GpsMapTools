@@ -262,7 +262,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectDir)*.csv $(TargetDir)
-copy $(ProjectDir)*.txt $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)*.csv" $(TargetDir)
+copy "$(ProjectDir)*.txt" $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
