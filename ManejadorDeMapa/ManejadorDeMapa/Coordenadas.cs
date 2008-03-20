@@ -20,6 +20,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public readonly double Longitud;
 
+
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -29,6 +30,17 @@ namespace GpsYv.ManejadorDeMapa
     {
       Latitud = laLatitud;
       Longitud = laLongitud;
+    }
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="lasCoordenadas">Las coordenadas.</param>
+    public Coordenadas(PointF lasCoordenadas)
+    {
+      Latitud = lasCoordenadas.Y;
+      Longitud = lasCoordenadas.X;
     }
 
 
@@ -64,6 +76,16 @@ namespace GpsYv.ManejadorDeMapa
     public static implicit operator PointF(Coordenadas lasCoordenadas)
     {
       return new PointF((float)lasCoordenadas.Longitud, (float)lasCoordenadas.Latitud);
+    }
+
+
+    /// <summary>
+    /// Conversion de coordenadas a PointF.
+    /// </summary>
+    /// <param name="lasCoordenadas">Las coordenadas.</param>
+    public static implicit operator Coordenadas(PointF lasCoordenadas)
+    {
+      return new Coordenadas(lasCoordenadas);
     }
 
 

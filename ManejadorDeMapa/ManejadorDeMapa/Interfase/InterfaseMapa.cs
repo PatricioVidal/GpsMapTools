@@ -19,31 +19,54 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private bool miHayUnMapa = false;
 
     // Objetos para dibujar los elementos.
-    private readonly Brush miPincelDeFondoParaTiempo = new SolidBrush(Color.White);
-    private readonly Brush miPincelParaTiempo = new SolidBrush(Color.Gray);
+    private readonly Brush miPincelDeFondoParaTiempo = Brushes.White;
+    private readonly Brush miPincelParaTiempo = Brushes.Gray;
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
-    private readonly Brush miPincelParaPDI = new SolidBrush(Color.Black);
-    private readonly Brush miPincelParaPDIModificado = new SolidBrush(Color.Yellow);
-    private readonly Brush miPincelParaPDIEliminado = new SolidBrush(Color.Red);
-    private Pen miLápizParaBorde = new Pen(Color.LightGray, 2);
+    private readonly Brush miPincelParaPDI = Brushes.Black;
+    private readonly Brush miPincelParaPDIModificado = Brushes.Yellow;
+    private readonly Brush miPincelParaPDIEliminado = Brushes.Red;
+    private Pen miLápizParaBorde = Pens.LightGray;
     private readonly Font miLetraParaNombre = new Font("Arial", 8);
-    private readonly Brush miPincelDeFondoParaNombre = new SolidBrush(Color.White);
-    private readonly Brush miPincelParaNombre = new SolidBrush(Color.Black);
+    private readonly Brush miPincelDeFondoParaNombre = Brushes.White;
+    private readonly Brush miPincelParaNombre = Brushes.Black;
 
     // Parametros para dibujar los elementos.
     private Graphics miGráficador;
-    private float miEscalaDeCoordenadasAPixeles;
+    private double miEscalaDeCoordenadasAPixeles;
     private PointF miOrigenEnCoordenadas;
     private Rectangle miAreaDeDibujo;
 
+    // Manejo del area visible.
     private RectangleF miRectánguloDeDataEnCoordenadas = new RectangleF(0, 0, 1, 1);
     private RectangleF miRectánguloVisibleEnCoordenadas = new RectangleF(0, 0, 1, 1);
     private RectangleF miRectánguloVisibleActivoEnCoordenadas = new RectangleF(0, 0, 1, 1);
     private bool miMuestraTodoElMapa = true;
 
     private List<PuntoAdicional> misPuntosAdicionales = new List<PuntoAdicional>();
-
     private bool miRatónEstaSobreElMapa = false;
+
+    #region Escala.
+    private static readonly Point miOffsetDeEscalaEnPixels = new Point(5, 10);
+    private readonly Font miLetraParaEscala = new Font("Arial", 8);
+    private readonly Brush miPincelDeFondoParaEscala = Brushes.White;
+    private readonly Brush miPincelParaEscala = Brushes.Black;
+    private readonly Pen miLápizDeFondoParaEscala = new Pen(Color.White, 3);
+    private readonly Pen miLápizParaEscala = Pens.Black;
+
+    /// <summary>
+    /// Largo mínimo en pixels del segmento de la escala.
+    /// </summary>
+    /// <remarks>
+    /// Este valor garantiza que la distancia entre los marcadores de la escala
+    /// sea suficiente para dibujar la distancia.
+    /// </remarks>
+    private static readonly int miLargoDelSegmentoMínimoEnPixels = 50;
+
+    /// <summary>
+    ///  Largo mínimo en metros del segmento de la escala.
+    /// </summary>
+    private double miLargoDelSegmentoMínimoEnMetros = 0;
+    #endregion
     #endregion
 
     #region Clases
@@ -81,7 +104,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
     }
     #endregion
-
 
     #region Propiedades
     /// <summary>
@@ -379,6 +401,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         DibujaPuntosAdicionales();
       }
 
+      DibujaEscala();
+
       // Muestra el tiempo que tomo pintar el mapa.
       timer.Stop();
       DibujaTextoConFondo(
@@ -404,8 +428,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miEscalaDeCoordenadasAPixeles = Math.Min(escalaEnLatitud, escalaEnLongitud);
 
       // Calcula origen para que el mapa esté centrado.
-      float rangoVisibleDeLatitud = rectánguloDelClienteEnPixeles.Height / miEscalaDeCoordenadasAPixeles;
-      float rangoVisibleDeLongitud = rectánguloDelClienteEnPixeles.Width / miEscalaDeCoordenadasAPixeles;
+      float rangoVisibleDeLatitud = (float)(rectánguloDelClienteEnPixeles.Height / miEscalaDeCoordenadasAPixeles);
+      float rangoVisibleDeLongitud = (float)(rectánguloDelClienteEnPixeles.Width / miEscalaDeCoordenadasAPixeles);
       miOrigenEnCoordenadas = new PointF(
         miRectánguloVisibleActivoEnCoordenadas.X - ((rangoVisibleDeLongitud - miRectánguloVisibleActivoEnCoordenadas.Width) / 2),
         miRectánguloVisibleActivoEnCoordenadas.Y - ((rangoVisibleDeLatitud - miRectánguloVisibleActivoEnCoordenadas.Height) / 2));
@@ -666,8 +690,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       int abajo = this.ClientRectangle.Bottom;
       int y = abajo - losPixeles.Y;
-      float longitud = (losPixeles.X / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.X;
-      float latitud = (y / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.Y;
+      float longitud = (float)(losPixeles.X / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.X;
+      float latitud = (float)(y / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.Y;
 
       return new PointF(longitud, latitud);
     }
@@ -695,6 +719,76 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
     }
 
+
+    private void DibujaEscala()
+    {
+      // Calcula el largo del segmento de la escala en metros.
+      // Para eso calculamos las coordenadas de los extremos del segmento 
+      // y con las coordenadas calculamos la distancia en metros.
+      Point origenDelSegmentoEnPixels = new Point(miOffsetDeEscalaEnPixels.X, miAreaDeDibujo.Bottom - miOffsetDeEscalaEnPixels.Y);
+      PointF origenDelSegmentoEnCoordenadas = PixelsACoordenadas(origenDelSegmentoEnPixels);
+      Point finalDelSegmentoMínimoEnPixels = new Point(origenDelSegmentoEnPixels.X + miLargoDelSegmentoMínimoEnPixels, origenDelSegmentoEnPixels.Y);
+      PointF finalDelSegmentoMínimoEnCoordenadas = PixelsACoordenadas(finalDelSegmentoMínimoEnPixels);
+      miLargoDelSegmentoMínimoEnMetros = Coordenadas.Distancia(origenDelSegmentoEnCoordenadas, finalDelSegmentoMínimoEnCoordenadas);
+
+      // Descompone el largo del segmento mínimo en exponente y mantisa.
+      int exponenteDelSegmentoMínimo = (int)Math.Log10(miLargoDelSegmentoMínimoEnMetros);
+      double mantisaDelSegmentoMínimo = miLargoDelSegmentoMínimoEnMetros / Math.Pow(10, exponenteDelSegmentoMínimo);
+
+      // Como queremos mostrar la escala en números enteros tenemos que hacer
+      // que la mantisa de la escala sea el menor número entero que sea mayor 
+      // o igual que la mantisa del segmento mínimo.
+      // Por ejemplo, si el largo del segmento mínimo es 93m, entonces el 
+      // exponente es 1 y la mantisa es 9,3 (93 = 9,3 * 10^1). Como en la
+      // escala queremos mostar 100m en vez de 93m, entonces usamos una
+      // mantisa de 10.
+      int mantisaDeLaEscala = (int)Math.Ceiling(mantisaDelSegmentoMínimo);
+      int largoDelSegmentoEnMetros = mantisaDeLaEscala * (int)Math.Pow(10, exponenteDelSegmentoMínimo);
+
+      // Como la escala que vamos a mostrar puede ser mayor que la escala
+      // del segmento mínimo (por ejemplo: 100m en vez de 93m), entonces
+      // tenemos que ajustar el largo del segmento a dibujar.
+      double factor = largoDelSegmentoEnMetros / miLargoDelSegmentoMínimoEnMetros;
+      int intervaloEnPixels = (int)Math.Round(miLargoDelSegmentoMínimoEnPixels * factor);
+
+      // Pone la unidad de la escala (metros o kilómetros).
+      string unidad;
+      int exponenteDeLaEscala;
+      if (exponenteDelSegmentoMínimo < 3)
+      {
+        unidad = "m";
+        exponenteDeLaEscala = 0;
+      }
+      else
+      {
+        unidad = "km";
+        exponenteDeLaEscala = 3;
+      }
+      int largoDelSegmentoEnMetrosOKilómetros = (int)Math.Round(largoDelSegmentoEnMetros / Math.Pow(10, exponenteDeLaEscala)); 
+
+      #region Dibuja la Escala
+      // Construye los puntos del segmento y los marcadores.
+      int largoMarcador = 5;
+      Point marcadorIzquierdo = new Point(origenDelSegmentoEnPixels.X, origenDelSegmentoEnPixels.Y - largoMarcador);
+      Point finalDelSegmento = new Point(origenDelSegmentoEnPixels.X + intervaloEnPixels, origenDelSegmentoEnPixels.Y);
+      Point marcadorDerecho = new Point(origenDelSegmentoEnPixels.X + intervaloEnPixels, origenDelSegmentoEnPixels.Y - largoMarcador);
+      Point[] líneas = new Point[] {
+        marcadorIzquierdo,
+        origenDelSegmentoEnPixels,
+        finalDelSegmento,
+        marcadorDerecho};
+
+      // Dibuja el segmento y los marcadores con un fondo para que
+      // tenga un buen contraste.
+      miGráficador.DrawLines(miLápizDeFondoParaEscala, líneas);
+      miGráficador.DrawLines(miLápizParaEscala, líneas);
+
+      // Dibuja el texto.
+      string texto = largoDelSegmentoEnMetrosOKilómetros + " " + unidad;
+      DibujaTextoConFondo(texto, origenDelSegmentoEnPixels.X + 2, origenDelSegmentoEnPixels.Y - 14, miLetraParaEscala, miPincelParaEscala, miPincelDeFondoParaEscala);
+      #endregion
+    }
+
     
     private void EnDobleClick(object sender, EventArgs e)
     {
@@ -709,13 +803,21 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         int delta = losArgumentosDelRatón.Delta;
         if (delta > 0)
         {
-          float zoom = 1.2f;
-          ZoomMapa(zoom, losArgumentosDelRatón.Location);
+          // Acerca el mapa si el segmento de la escala es más de 1m.
+          if (miLargoDelSegmentoMínimoEnMetros > 1)
+          {
+            float zoom = 1.2f;
+            ZoomMapa(zoom, losArgumentosDelRatón.Location);
+          }
         }
         else if (delta < 0)
         {
-          float zoom = 0.8f;
-          ZoomMapa(zoom, losArgumentosDelRatón.Location);
+          // Aleja el mapa si el segmento de la escala es menos de 500km.
+          if (miLargoDelSegmentoMínimoEnMetros < 500000)
+          {
+            float zoom = 0.8f;
+            ZoomMapa(zoom, losArgumentosDelRatón.Location);
+          }
         }
       }
     }
