@@ -8,8 +8,11 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Actualizar elementos cuando se guarda el mapa?
 - Usar eventos para las páginas de pestañas.
-- Hacer el ícono de la aplicación con el gráfico de GPS_YV.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
+
+Version 1.4
+- Creado el instalador.
+- Añadido el ícono de la aplicación con el gráfico de GPS_YV.
 
 Versión 1.3
 - Añadida escala al mapa.

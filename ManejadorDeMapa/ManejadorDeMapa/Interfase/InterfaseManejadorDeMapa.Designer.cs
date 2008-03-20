@@ -93,13 +93,13 @@
             this.miMenuGuardarComo,
             this.miMenuSalir});
           this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-          this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+          this.archivoToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
           this.archivoToolStripMenuItem.Text = "Archivo";
           // 
           // miMenuAbrirArchivo
           // 
           this.miMenuAbrirArchivo.Name = "miMenuAbrirArchivo";
-          this.miMenuAbrirArchivo.Size = new System.Drawing.Size(152, 22);
+          this.miMenuAbrirArchivo.Size = new System.Drawing.Size(154, 22);
           this.miMenuAbrirArchivo.Text = "&Abrir";
           this.miMenuAbrirArchivo.Click += new System.EventHandler(this.EnMenuAbrir);
           // 
@@ -107,7 +107,7 @@
           // 
           this.miMenuGuardar.Enabled = false;
           this.miMenuGuardar.Name = "miMenuGuardar";
-          this.miMenuGuardar.Size = new System.Drawing.Size(152, 22);
+          this.miMenuGuardar.Size = new System.Drawing.Size(154, 22);
           this.miMenuGuardar.Text = "Guardar";
           this.miMenuGuardar.Click += new System.EventHandler(this.EnMenuGuardar);
           // 
@@ -115,14 +115,14 @@
           // 
           this.miMenuGuardarComo.Enabled = false;
           this.miMenuGuardarComo.Name = "miMenuGuardarComo";
-          this.miMenuGuardarComo.Size = new System.Drawing.Size(152, 22);
+          this.miMenuGuardarComo.Size = new System.Drawing.Size(154, 22);
           this.miMenuGuardarComo.Text = "Guardar Como";
           this.miMenuGuardarComo.Click += new System.EventHandler(this.EnMenuGuardarComo);
           // 
           // miMenuSalir
           // 
           this.miMenuSalir.Name = "miMenuSalir";
-          this.miMenuSalir.Size = new System.Drawing.Size(152, 22);
+          this.miMenuSalir.Size = new System.Drawing.Size(154, 22);
           this.miMenuSalir.Text = "&Salir";
           this.miMenuSalir.Click += new System.EventHandler(this.EnMenuSalir);
           // 
@@ -136,25 +136,25 @@
             this.buscaDuplicadosToolStripMenuItem,
             this.buscarErroresToolStripMenuItem});
           this.miMenuProcesarPDIs.Name = "miMenuProcesarPDIs";
-          this.miMenuProcesarPDIs.Size = new System.Drawing.Size(42, 20);
+          this.miMenuProcesarPDIs.Size = new System.Drawing.Size(41, 20);
           this.miMenuProcesarPDIs.Text = "PDIs";
           // 
           // miMenuArreglarTodoEnPDIs
           // 
           this.miMenuArreglarTodoEnPDIs.Name = "miMenuArreglarTodoEnPDIs";
-          this.miMenuArreglarTodoEnPDIs.Size = new System.Drawing.Size(183, 22);
+          this.miMenuArreglarTodoEnPDIs.Size = new System.Drawing.Size(184, 22);
           this.miMenuArreglarTodoEnPDIs.Text = "Procesar Todo";
           this.miMenuArreglarTodoEnPDIs.Click += new System.EventHandler(this.EnMenuProcesarTodoEnPDIs);
           // 
           // toolStripSeparator1
           // 
           this.toolStripSeparator1.Name = "toolStripSeparator1";
-          this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+          this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
           // 
           // miMenuArreglarLetrasEnPDIs
           // 
           this.miMenuArreglarLetrasEnPDIs.Name = "miMenuArreglarLetrasEnPDIs";
-          this.miMenuArreglarLetrasEnPDIs.Size = new System.Drawing.Size(183, 22);
+          this.miMenuArreglarLetrasEnPDIs.Size = new System.Drawing.Size(184, 22);
           this.miMenuArreglarLetrasEnPDIs.Text = "1. Arreglar Letras";
           this.miMenuArreglarLetrasEnPDIs.Click += new System.EventHandler(this.EnMenuArreglarLetrasEnPDIs);
           // 
@@ -169,14 +169,14 @@
           // buscaDuplicadosToolStripMenuItem
           // 
           this.buscaDuplicadosToolStripMenuItem.Name = "buscaDuplicadosToolStripMenuItem";
-          this.buscaDuplicadosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+          this.buscaDuplicadosToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
           this.buscaDuplicadosToolStripMenuItem.Text = "3. Buscar Duplicados";
           this.buscaDuplicadosToolStripMenuItem.Click += new System.EventHandler(this.EnMenuBuscarDuplicadosEnPDIs);
           // 
           // buscarErroresToolStripMenuItem
           // 
           this.buscarErroresToolStripMenuItem.Name = "buscarErroresToolStripMenuItem";
-          this.buscarErroresToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+          this.buscarErroresToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
           this.buscarErroresToolStripMenuItem.Text = "4. Buscar Errores";
           this.buscarErroresToolStripMenuItem.Click += new System.EventHandler(this.EnMenuBuscarErroresEnPDIs);
           // 
@@ -186,15 +186,15 @@
             this.acercaToolStripMenuItem,
             this.miMenuAcerca});
           this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-          this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+          this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
           this.ayudaToolStripMenuItem.Text = "Ayuda";
           // 
           // acercaToolStripMenuItem
           // 
-          this.acercaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+          this.acercaToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.acercaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.HotTrack;
           this.acercaToolStripMenuItem.Name = "acercaToolStripMenuItem";
-          this.acercaToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+          this.acercaToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
           this.acercaToolStripMenuItem.Text = "www.gpsyv.net";
           this.acercaToolStripMenuItem.ToolTipText = "Va a www.gpsyv.net";
           this.acercaToolStripMenuItem.Click += new System.EventHandler(this.EnMenuPáginaWeb);
@@ -202,7 +202,7 @@
           // miMenuAcerca
           // 
           this.miMenuAcerca.Name = "miMenuAcerca";
-          this.miMenuAcerca.Size = new System.Drawing.Size(155, 22);
+          this.miMenuAcerca.Size = new System.Drawing.Size(165, 22);
           this.miMenuAcerca.Text = "Acerca";
           this.miMenuAcerca.Click += new System.EventHandler(this.EnMenuAcerca);
           // 
@@ -385,6 +385,7 @@
           this.Controls.Add(this.miControladorDePestañasPrincipal);
           this.Controls.Add(this.miEstatus);
           this.Controls.Add(this.miMenuPrincipal);
+          this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
           this.MainMenuStrip = this.miMenuPrincipal;
           this.MinimumSize = new System.Drawing.Size(300, 200);
           this.Name = "InterfaseManejadorDeMapa";

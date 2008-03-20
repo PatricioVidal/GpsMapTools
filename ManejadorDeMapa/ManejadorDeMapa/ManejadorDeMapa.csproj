@@ -32,6 +32,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <ApplicationIcon>Interfase\GPS_YV.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -207,11 +208,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="CaracterísticasDePDIs.csv" />
-    <None Include="CaracterísticasDePolilíneas.csv" />
-    <None Include="ConversionDeLetras.csv" />
-    <None Include="CorrecciónDePalabrasPorTipo.csv" />
-    <None Include="CaracterísticasDePolígonos.csv" />
+    <Content Include="CaracterísticasDePDIs.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CaracterísticasDePolilíneas.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConversionDeLetras.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CorrecciónDePalabrasPorTipo.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CaracterísticasDePolígonos.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -249,8 +260,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cambios.txt" />
-    <Content Include="Interfase\GPS_YV.png" />
+    <Content Include="Cambios.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Interfase\GPS_YV.png" />
+    <None Include="Interfase\GPS_YV.ico" />
     <Content Include="Leeme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -262,7 +276,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)*.csv" $(TargetDir)
-copy "$(ProjectDir)*.txt" $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

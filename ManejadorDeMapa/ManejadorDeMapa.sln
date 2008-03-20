@@ -17,9 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Informació
 		Ternary Search Tree Dictionary\Tst_doc.chm = Ternary Search Tree Dictionary\Tst_doc.chm
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalación", "Instalación\Instalación.vdproj", "{B551FA61-71A2-419B-A611-F33523779D47}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs07.codeplex.com/
 		SccLocalPath0 = .
@@ -29,6 +31,9 @@ Global
 		SccProjectUniqueName2 = ManejadorDeMapa\\ManejadorDeMapa.csproj
 		SccProjectName2 = ManejadorDeMapa
 		SccLocalPath2 = ManejadorDeMapa
+		SccProjectUniqueName3 = Instalación\\Instalación.vdproj
+		SccProjectName3 = Instalación
+		SccLocalPath3 = Instalación
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +48,8 @@ Global
 		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B551FA61-71A2-419B-A611-F33523779D47}.Debug|Any CPU.ActiveCfg = Debug
+		{B551FA61-71A2-419B-A611-F33523779D47}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
