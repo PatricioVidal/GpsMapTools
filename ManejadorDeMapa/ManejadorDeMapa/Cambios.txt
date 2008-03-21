@@ -11,7 +11,7 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.6
-
+- Interno: Movido todo lo relacionado a PDIs al namespace PDIs.
 
 Version 1.5
 - Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 

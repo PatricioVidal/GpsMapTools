@@ -75,12 +75,12 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.PDIs
 {
   /// <summary>
   /// Clase que contiene las características de los PDIs.
   /// </summary>
-  static class CaracterísticasDePDIs
+  public static class CaracterísticasDePDIs
   {
     #region Campos
     private static readonly string miArchivoDeCaracterísticasDePDIs = @"PDIs\CaracterísticasDePDIs.csv";

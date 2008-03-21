@@ -76,6 +76,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {

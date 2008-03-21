@@ -77,6 +77,7 @@ using System.IO;
 using System.Threading;
 using System.Globalization;
 using System.Drawing;
+using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa
 {

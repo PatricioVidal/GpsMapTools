@@ -74,7 +74,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.PDIs
 {
   /// <summary>
   /// Representa un Punto De Interés (PDI/POI)
