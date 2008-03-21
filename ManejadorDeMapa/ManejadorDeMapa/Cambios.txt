@@ -12,6 +12,8 @@ Lo próximo para hacer:
 
 Version 1.5
 - Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 
+- Ahora las listas de PDIs Eliminados, Modificados, y Errores se pueden ordenar por culumna cuando el usuario click en los títulos.
+- Extendida la lista de PDIs conocidos.
 - Ahora la configuración de la búsqueda de duplicados se mantiene de una sesion a la otra.
 - Se movieron los archivos csv relacionados a PDIs al directorio PDIs.
 - Se renombraron algunos archivos csv para que tuvieran un nombre mas claro.

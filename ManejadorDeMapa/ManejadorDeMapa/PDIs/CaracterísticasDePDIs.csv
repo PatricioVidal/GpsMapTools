@@ -210,3 +210,35 @@
 0x1c0a,Rock submerged at low water/Roca sumergida con marea baja
 0x1c0b,Possible grounding risk/Sondeo
 0x1d00,Tide prediction/Prediccion de mareas
+// MARINOS-ESPECIALES NO APARECEN EN LOS GPS
+0x160c,Unlit navaid orange
+0x160d,Unlit navaid multi colored
+0x1610,Navaid red
+0x1611,Navaid green
+0x1613,Navaid orange
+0x1616,Navaid multi colored
+0x1700,Navaid
+0x170f,Navaid white
+0x1710,Navaid red
+0x1711,Navaid green
+0x1712,Navaid yellow/amber
+0x1713,Navaid orange
+0x1716,Navaid multi colored
+0x180f,Navaid white
+0x1810,Navaid red
+0x1811,Navaid green
+0x1812,Navaid yellow/amber
+0x1815,Navaid blue
+0x190f,Navaid white
+0x1910,Navaid red
+0x1911,Navaid green
+0x1916,Navaid multi colored
+0x1a0f,Navaid white
+0x1a16,Navaid multi colored
+0x1b07,Unlit navaid white
+0x1b0f,Navaid white
+0x1b10,Navaid red
+0x1b11,Navaid green
+0x1b12,Navaid yellow/amber
+0x1b13,Navaid orange
+0x1b16,Navaid multi colored

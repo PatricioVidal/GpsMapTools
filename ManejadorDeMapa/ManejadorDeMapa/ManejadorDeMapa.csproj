@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfase\OrdenadorDeColumnas.cs" />
     <Compile Include="Interfase\PDIs\MenuEditorDePDI.cs">
       <SubType>Component</SubType>
     </Compile>

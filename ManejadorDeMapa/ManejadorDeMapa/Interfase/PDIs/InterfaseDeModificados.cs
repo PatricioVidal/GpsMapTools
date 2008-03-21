@@ -84,12 +84,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// </summary>
   public partial class InterfaseDeModificados : InterfaseBase
   {
+    #region Campos
+    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
+    #endregion
+
     /// <summary>
     /// Constructor.
     /// </summary>
     public InterfaseDeModificados()
     {
       InitializeComponent();
+
+      // Crea el ordenador de columnas.
+      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
     }
 
 

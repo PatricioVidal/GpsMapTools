@@ -86,6 +86,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    {
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -215,7 +228,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
         "ProductCode" = "8:{978699A1-02BB-4AAC-AC3B-65FD5E143FEF}"
-        "PackageCode" = "8:{B39A1CC9-EA10-4DA1-A10C-A4B3024C1E65}"
+        "PackageCode" = "8:{8433870E-2C65-46C7-A38F-E6A062210402}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -224,13 +237,13 @@
         "ProductVersion" = "8:1.5.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:www.gpsyv.net"
+        "ARPHELPLINK" = "8:http://www.gpsyv.net"
         "Title" = "8:Instalación del GpsYv.ManejadorDeMapa"
         "Subject" = "8:"
         "ARPCONTACT" = "8:www.gpsyv.net"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Manejador de Mapas de GPS (GPS Map Manager)"
-        "ARPURLINFOABOUT" = "8:www.gpsyv.net"
+        "ARPURLINFOABOUT" = "8:http://www.gpsyv.net"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -749,7 +762,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3C10C772320340E795531628B9017C52"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Release\\GpsYv.ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Debug\\GpsYv.ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"

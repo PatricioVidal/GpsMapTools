@@ -70,69 +70,98 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Linq;
 using System.Text;
+using System.Collections;
 using System.Windows.Forms;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  public partial class InterfaseDeEliminados : InterfaseBase
+  /// <summary>
+  /// Ordenador de columans.
+  /// </summary>
+  class OrdenadorDeColumnas : IComparer
   {
     #region Campos
-    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
+    private readonly ListView miLista;
+    private int miColumnaAOrdenar = -1;
     #endregion
 
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeEliminados()
+    /// <param name="laLista">La lista a ordenar.</param>
+    public OrdenadorDeColumnas(ListView laLista)
     {
-      InitializeComponent();
+      miLista = laLista;
 
-      // Crea el ordenador de columnas.
-      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
+      laLista.ListViewItemSorter = this;
+      miLista.ColumnClick += EnClickDeLaColumna;
     }
 
-
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    public int Compare(object elPrimerObjeto, object elSegundoObjecto)
     {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // Vacia las lista.
-      miLista.Items.Clear();
-
-      // Añade los PDIs.
-      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
-      foreach (PDI pdi in pdis)
+      // No ordenamos hasta que el usuario click en una columna.
+      if (miColumnaAOrdenar < 0)
       {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
+        return 0;
+      }
+
+      ListViewItem primerItem = (ListViewItem)elPrimerObjeto;
+      ListViewItem segundoItem = (ListViewItem)elSegundoObjecto;
+
+      // Compara los texto de la columna a ordenar.
+      int comparasión = String.Compare(
+        primerItem.SubItems[miColumnaAOrdenar].Text,
+        segundoItem.SubItems[miColumnaAOrdenar].Text);
+
+      // El signo del resultado depende de como queremos ordenar la lista.
+      int resultado = 0;
+      switch (miLista.Sorting)
+      {
+        case SortOrder.Ascending:
+          resultado = comparasión;
+          break;
+        case SortOrder.Descending:
+          resultado = -comparasión;
+          break;
+      }
+
+      return resultado;
+    }
+    #endregion
+
+
+    #region Métodos Privados
+    private void EnClickDeLaColumna(object elEnviador, ColumnClickEventArgs losArgumentos)
+    {
+      int columnaSeleccionada = losArgumentos.Column;
+
+      // Si es la misma columna entonces cambiamos el sentido del orden.
+      // Si no, entonces ordemans de menor a mayor.
+      if (miColumnaAOrdenar == columnaSeleccionada)
+      {
+        // Cambiamos el sentido.
+        switch (miLista.Sorting)
         {
-          ListViewItem itemParaLaListaDePDIsModificados = new ListViewItem(
-            new string[] { 
-                pdi.Número.ToString(),
-                pdi.Tipo.ToString(), 
-                pdi.Descripción,
-                pdi.Nombre, 
-                pdi.RazónParaEliminación});
-          miLista.Items.Add(itemParaLaListaDePDIsModificados);
+          case SortOrder.Ascending:
+            miLista.Sorting = SortOrder.Descending;
+            break;
+          case SortOrder.Descending:
+            miLista.Sorting = SortOrder.Ascending;
+            break;
         }
       }
-
-      // Actualiza la Pestaña.
-      if ((Tag != null) && (Tag is TabPage))
+      else
       {
-        TabPage pestaña = (TabPage)Tag;
-        int númeroDeEliminados = miLista.Items.Count;
-        pestaña.Text = "Eliminados (" + númeroDeEliminados + ")";
+        miColumnaAOrdenar = columnaSeleccionada;
+        miLista.Sorting = SortOrder.Ascending;
       }
+
+      // Ordena la lista.
+      miLista.Sort();
     }
+    #endregion
   }
 }

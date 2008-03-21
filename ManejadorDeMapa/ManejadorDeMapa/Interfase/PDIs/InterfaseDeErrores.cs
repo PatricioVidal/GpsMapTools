@@ -90,6 +90,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private ManejadorDePDIs miManejadorDePDIs;
     private List<PDI> misPDIs = new List<PDI>();
     private Brush miPincelDePDI = new SolidBrush(Color.Orange);
+    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
     #endregion
 
     #region Propiedades
@@ -149,6 +150,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     public InterfaseDeErrores()
     {
       InitializeComponent();
+
+      // Crea el ordenador de columnas.
+      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
     }
 
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)

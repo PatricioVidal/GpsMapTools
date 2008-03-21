@@ -101,7 +101,7 @@
       this.miMenúEditorDePDI.Name = "miMenuDeContexto";
       this.miMenúEditorDePDI.PDI = null;
       this.miMenúEditorDePDI.ShowImageMargin = false;
-      this.miMenúEditorDePDI.Size = new System.Drawing.Size(128, 48);
+      this.miMenúEditorDePDI.Size = new System.Drawing.Size(122, 26);
       this.miMenúEditorDePDI.Text = "MenúEditorDePDI";
       // 
       // miDivision
