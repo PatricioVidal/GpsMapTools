@@ -240,14 +240,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{76ADE553-45FB-4116-A05A-DDD5ACED2965}"
-        "PackageCode" = "8:{B269AE9D-4002-40D4-9935-DDACA0B39A29}"
+        "ProductCode" = "8:{18F4026B-6359-42E2-8ED1-4C157CCD11C1}"
+        "PackageCode" = "8:{45A9F7D7-00A8-4964-BF42-938A1F4C0AF9}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.0"
+        "ProductVersion" = "8:1.7.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"
@@ -775,7 +775,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3C10C772320340E795531628B9017C52"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Debug\\GpsYv.ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Release\\GpsYv.ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"

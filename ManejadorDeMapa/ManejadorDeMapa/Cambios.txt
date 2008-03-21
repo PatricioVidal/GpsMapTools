@@ -10,6 +10,9 @@ Lo próximo para hacer:
 - Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.7
+
+
 Versión 1.6
 - Arreglada la lógica en la Ventana de Cambiar Tipo de PDI.
 - Cambiado "Símbolo" a "Caracter".
