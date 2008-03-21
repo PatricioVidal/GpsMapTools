@@ -10,6 +10,9 @@ Lo próximo para hacer:
 - Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.6
+
+
 Version 1.5
 - Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 
 - Ahora las listas de PDIs Eliminados, Modificados, y Errores se pueden ordenar por culumna cuando el usuario click en los títulos.

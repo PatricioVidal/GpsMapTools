@@ -15,26 +15,26 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
+        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3C10C772320340E795531628B9017C52"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
+        "OwnerKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -62,6 +62,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    {
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -129,14 +142,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_335E84CCF81D35543B13BF0363C191ED"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+                    "_335E84CCF81D35543B13BF0363C191ED"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -227,14 +240,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{978699A1-02BB-4AAC-AC3B-65FD5E143FEF}"
-        "PackageCode" = "8:{8433870E-2C65-46C7-A38F-E6A062210402}"
+        "ProductCode" = "8:{76ADE553-45FB-4116-A05A-DDD5ACED2965}"
+        "PackageCode" = "8:{B269AE9D-4002-40D4-9935-DDACA0B39A29}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.5.0"
+        "ProductVersion" = "8:1.6.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"
