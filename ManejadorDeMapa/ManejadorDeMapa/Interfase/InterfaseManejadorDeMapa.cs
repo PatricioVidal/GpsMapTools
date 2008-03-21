@@ -100,7 +100,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Asigna los ToolTips de los menús.
       miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
-      miMenúEliminarSímbolosEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeSímbolosEnNombres.Descripción;
+      miMenúEliminarCaracteresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
       miMenuArreglarPalabrasDePDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
       miMenúBuscaDuplicados.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
@@ -286,9 +286,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenúEliminarSímbolosEnPDIs(object sender, EventArgs e)
+    private void EnMenúEliminarCaracteresEnPDIs(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.EliminaSímbolosInválidos();
+      miManejadorDeMapa.ManejadorDePDIs.EliminaCaracteresInválidos();
     }
 
     

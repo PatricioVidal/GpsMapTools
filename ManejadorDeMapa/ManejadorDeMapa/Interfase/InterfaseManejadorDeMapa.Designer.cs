@@ -38,7 +38,7 @@
           this.miMenuPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuProcesarTodoEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-          this.miMenúEliminarSímbolosEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúEliminarCaracteresEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarLetrasEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarPalabrasDePDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscaDuplicados = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,7 +132,7 @@
           this.miMenuPDIs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenuProcesarTodoEnPDIs,
             this.toolStripSeparator1,
-            this.miMenúEliminarSímbolosEnPDIs,
+            this.miMenúEliminarCaracteresEnPDIs,
             this.miMenuArreglarLetrasEnPDIs,
             this.miMenuArreglarPalabrasDePDIs,
             this.miMenúBuscaDuplicados,
@@ -154,12 +154,12 @@
           this.toolStripSeparator1.Name = "toolStripSeparator1";
           this.toolStripSeparator1.Size = new System.Drawing.Size(245, 6);
           // 
-          // miMenúEliminarSímbolosEnPDIs
+          // miMenúEliminarCaracteresEnPDIs
           // 
-          this.miMenúEliminarSímbolosEnPDIs.Name = "miMenúEliminarSímbolosEnPDIs";
-          this.miMenúEliminarSímbolosEnPDIs.Size = new System.Drawing.Size(248, 22);
-          this.miMenúEliminarSímbolosEnPDIs.Text = "1. Elimina Símbolos en Nombres ";
-          this.miMenúEliminarSímbolosEnPDIs.Click += new System.EventHandler(this.EnMenúEliminarSímbolosEnPDIs);
+          this.miMenúEliminarCaracteresEnPDIs.Name = "miMenúEliminarCaracteresEnPDIs";
+          this.miMenúEliminarCaracteresEnPDIs.Size = new System.Drawing.Size(248, 22);
+          this.miMenúEliminarCaracteresEnPDIs.Text = "1. Elimina Caracteres ";
+          this.miMenúEliminarCaracteresEnPDIs.Click += new System.EventHandler(this.EnMenúEliminarCaracteresEnPDIs);
           // 
           // miMenuArreglarLetrasEnPDIs
           // 
@@ -452,7 +452,7 @@
         private System.Windows.Forms.ColumnHeader miColumnaDescripción;
         private System.Windows.Forms.ColumnHeader miColumnaNombre;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErrores;
-        private System.Windows.Forms.ToolStripMenuItem miMenúEliminarSímbolosEnPDIs;
+        private System.Windows.Forms.ToolStripMenuItem miMenúEliminarCaracteresEnPDIs;
     }
 }
 

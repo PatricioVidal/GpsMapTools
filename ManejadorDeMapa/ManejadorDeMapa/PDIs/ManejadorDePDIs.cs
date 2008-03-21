@@ -81,7 +81,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   public class ManejadorDePDIs : ManejadorBase<PDI>
   {
     #region Campos
-    private readonly EliminadorDeSímbolosEnNombres miEliminadorDeSímbolosEnNombres;
+    private readonly EliminadorDeCaracteres miEliminadorDeCaracteres;
     private readonly ArregladorDeLetras miArregladorDeLetras;
     private readonly ArregladorDePalabrasPorTipo miArregladorDePrefijos;
     private readonly BuscadorDeDuplicados miBuscadorDePDIsDuplicados;
@@ -155,7 +155,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       : base (elManejadorDeMapa, losPuntosDeInteres, elEscuchadorDeEstatus)
     {
       // Crea los procesadores.
-      miEliminadorDeSímbolosEnNombres = new EliminadorDeSímbolosEnNombres(this, elEscuchadorDeEstatus);
+      miEliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
       miArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
       miArregladorDePrefijos = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
       miBuscadorDePDIsDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
@@ -164,12 +164,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
 
     /// <summary>
-    /// Elimina Símbolos Inválidos en los nombres de PDIs.
+    /// Elimina Caracteres Inválidos en los nombres de PDIs.
     /// </summary>
     /// <returns>El número de PDIs modificados.</returns>
-    public int EliminaSímbolosInválidos()
+    public int EliminaCaracteresInválidos()
     {
-      int númeroDePDIsModificados =  miEliminadorDeSímbolosEnNombres.Procesa();
+      int númeroDePDIsModificados =  miEliminadorDeCaracteres.Procesa();
       return númeroDePDIsModificados;
     }
 
@@ -217,7 +217,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     public void ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
-      int númeroDePDIsModificados = EliminaSímbolosInválidos();
+      int númeroDePDIsModificados = EliminaCaracteresInválidos();
       númeroDePDIsModificados += ArreglarLetras();
       númeroDePDIsModificados += ArreglarPalabras();
       númeroDePDIsModificados += BuscadorDeDuplicados.Procesa();

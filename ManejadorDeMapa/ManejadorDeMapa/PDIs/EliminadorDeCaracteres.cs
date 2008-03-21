@@ -78,12 +78,12 @@ using System.Threading;
 namespace GpsYv.ManejadorDeMapa.PDIs
 {
   /// <summary>
-  /// Eliminador de Símbolos en Nombres de PDIs.
+  /// Eliminador de Caracteres en Nombres de PDIs.
   /// </summary>
-  public class EliminadorDeSímbolosEnNombres : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class EliminadorDeCaracteres : ProcesadorBase<ManejadorDePDIs, PDI>
   {
     #region Campos
-    private readonly LectorDeSimbolosAEliminar miLectorDeSimbolosAEliminar;
+    private readonly LectorDeCaracteresAEliminar miLectorDeCaracteresAEliminar;
     #endregion
 
     #region Métodos Públicos
@@ -91,7 +91,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Descripción de éste procesador.
     /// </summary>
     public static readonly string Descripción =
-      "Elimina Símbolos inválidos en los nombres de PDIs.";
+      "Elimina Caracteres inválidos en los nombres de PDIs.";
 
 
     /// <summary>
@@ -99,12 +99,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// </summary>
     /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public EliminadorDeSímbolosEnNombres(
+    public EliminadorDeCaracteres(
       ManejadorDePDIs elManejadorDePDIs,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDePDIs, elEscuchadorDeEstatus)
     {
-      miLectorDeSimbolosAEliminar = new LectorDeSimbolosAEliminar(elEscuchadorDeEstatus);
+      miLectorDeCaracteresAEliminar = new LectorDeCaracteresAEliminar(elEscuchadorDeEstatus);
     }
     #endregion
 
@@ -118,15 +118,15 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     {
       bool modificóElemento = false;
 
-      #region Elimina los Símbolos Inválidos.
+      #region Elimina los Caracteres Inválidos.
       string nombreACorregir = elPDI.Nombre;
       string nombreCorregido = nombreACorregir;
 
       // Arregla la letras no permitidas.
-      IList<char> símbolosInválidos = miLectorDeSimbolosAEliminar.ListaDeSímbolosInválidos;
-      foreach (char símboloInválido in símbolosInválidos)
+      IList<char> caracteresInválidos = miLectorDeCaracteresAEliminar.ListaDeCaracteresInválidos;
+      foreach (char caracterInválido in caracteresInválidos)
       {
-        nombreCorregido = nombreACorregir.Replace(símboloInválido.ToString(), string.Empty);
+        nombreCorregido = nombreACorregir.Replace(caracterInválido.ToString(), string.Empty);
       }
       #endregion
 
@@ -134,7 +134,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elPDI.CambiaNombre(nombreCorregido, "Eliminación de Simbolos Inválidos");
+        elPDI.CambiaNombre(nombreCorregido, "Eliminación de Caracteres Inválidos");
         modificóElemento = true;
       }
 
@@ -143,21 +143,21 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     #endregion
 
     #region Clases Privadas
-    private class LectorDeSimbolosAEliminar : LectorDeArchivo
+    private class LectorDeCaracteresAEliminar : LectorDeArchivo
     {
       #region Campos
-      private static readonly string miArchivoDeSimbolosAEliminar = @"PDIs\SimbolosAEliminar.csv";
-      private List<char> miListaDeSímbolos = new List<char>();
+      private static readonly string miArchivoDeCaracteresAEliminar = @"PDIs\CaracteresAEliminar.csv";
+      private List<char> miListaDeCaracteres = new List<char>();
       #endregion
 
       /// <summary>
-      /// Obtiene la Lista de Símbolos Inválidos.
+      /// Obtiene la Lista de Caracteres Inválidos.
       /// </summary>
-      public IList<char> ListaDeSímbolosInválidos 
+      public IList<char> ListaDeCaracteresInválidos 
       {
         get
         {
-          return miListaDeSímbolos;
+          return miListaDeCaracteres;
         }
       }
 
@@ -165,10 +165,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       /// Constructor.
       /// </summary>
       /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-      public LectorDeSimbolosAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      public LectorDeCaracteresAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeSimbolosAEliminar);
+        Abrir(miArchivoDeCaracteresAEliminar);
       }
 
       #region Métodos Protegidos y Privados
@@ -185,12 +185,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           // Verifica que tenemos una sola letra.
           if (línea.Length != 1)
           {
-            throw new ArgumentException("Se encontró más de un símbolo en la linea: " + línea);
+            throw new ArgumentException("Se encontró más de un caracter en la linea: " + línea);
           }
 
-          // Añade el símbolo a la lista.
-          char símbolo = línea[0];
-          miListaDeSímbolos.Add(símbolo);
+          // Añade el aaracter a la lista.
+          char caracter = línea[0];
+          miListaDeCaracteres.Add(caracter);
         }
       }
       #endregion

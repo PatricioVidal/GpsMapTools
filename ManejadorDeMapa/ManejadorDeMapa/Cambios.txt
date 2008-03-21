@@ -12,6 +12,7 @@ Lo próximo para hacer:
 
 Versión 1.6
 - Arreglada la lógica en la Ventana de Cambiar Tipo de PDI.
+- Cambiado "Símbolo" a "Caracter".
 - Interno: Movido todo lo relacionado a PDIs al namespace PDIs.
 - Interno: Añadidas pruebas para la Ventana de Cambiar Tipo de PDI.
 

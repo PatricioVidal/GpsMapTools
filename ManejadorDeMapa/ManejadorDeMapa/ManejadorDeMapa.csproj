@@ -152,7 +152,7 @@
     <Compile Include="Interfase\PDIs\InterfaseManejador.Designer.cs">
       <DependentUpon>InterfaseManejador.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\EliminadorDeSímbolosEnNombres.cs" />
+    <Compile Include="PDIs\EliminadorDeCaracteres.cs" />
     <Compile Include="PDIs\ManejadorDePDIs.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
@@ -267,7 +267,7 @@
     <None Include="app.config" />
     <None Include="Interfase\GPS_YV.png" />
     <None Include="Interfase\GPS_YV.ico" />
-    <Content Include="PDIs\SimbolosAEliminar.csv">
+    <Content Include="PDIs\CaracteresAEliminar.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Leeme.txt" />
