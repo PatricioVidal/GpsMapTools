@@ -36,7 +36,7 @@
 //-----------------------------------------------------------------------------
 //
 // GpsYv.ManejadorDeMapa (GPS Map Manager) is an application to Manage 
-// GPS Maps // in Polish format (.mp).  It is written in C# using the 
+// GPS Maps in Polish format (.mp).  It is written in C# using the 
 // .NET Framework 3.5.
 //
 // This program was born by the need of the GPS Group of Venezuela,
