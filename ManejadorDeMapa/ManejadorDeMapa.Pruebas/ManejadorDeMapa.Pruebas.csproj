@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="PDIs\PruebaBuscadorDeDuplicados.cs" />
     <Compile Include="PruebaElementoDesconocido.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PruebasDeIntegración.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +68,9 @@
       <Project>{F07EE602-114A-4111-AD1C-E079D8C71E11}</Project>
       <Name>ManejadorDeMapa</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

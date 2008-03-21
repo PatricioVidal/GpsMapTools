@@ -15,20 +15,20 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
-        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3C10C772320340E795531628B9017C52"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
+        "OwnerKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -55,6 +55,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -71,6 +79,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -100,14 +116,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_335E84CCF81D35543B13BF0363C191ED"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_335E84CCF81D35543B13BF0363C191ED"
+                    "_7A73E23E97D8D974CFE6C5B02E1C4FAB"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -198,14 +214,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{18965B09-D08C-4598-93F9-867BC66BA9D3}"
-        "PackageCode" = "8:{80315E68-023E-442A-8B93-684690FAF31C}"
+        "ProductCode" = "8:{978699A1-02BB-4AAC-AC3B-65FD5E143FEF}"
+        "PackageCode" = "8:{B39A1CC9-EA10-4DA1-A10C-A4B3024C1E65}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.4.0"
+        "ProductVersion" = "8:1.5.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:www.gpsyv.net"

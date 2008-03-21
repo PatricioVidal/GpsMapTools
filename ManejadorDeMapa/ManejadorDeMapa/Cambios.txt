@@ -10,6 +10,9 @@ Lo próximo para hacer:
 - Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Version 1.5
+- Añadida la licencia al código fuente.
+
 Version 1.4
 - Creado el instalador.
 - Añadido el ícono de la aplicación con el gráfico de GPS_YV.

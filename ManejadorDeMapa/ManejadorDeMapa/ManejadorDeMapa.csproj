@@ -155,7 +155,6 @@
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
     <Compile Include="ProcesadorBase.cs" />
-    <Compile Include="ProcesadorDePDIs.cs" />
     <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfase\InterfaseBase.resx">
@@ -266,6 +265,8 @@
     <None Include="Interfase\GPS_YV.png" />
     <None Include="Interfase\GPS_YV.ico" />
     <Content Include="Leeme.txt" />
+    <Content Include="Licencia.htm" />
+    <Content Include="License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
