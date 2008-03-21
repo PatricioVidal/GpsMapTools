@@ -127,8 +127,16 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     {
       List<string> errores = new List<string>();
 
-      #region Verifica que el tipo de PDI es conocido.
+      #region Verifica que el tipo de PDI no es vacio.
       Tipo tipo = elPDI.Tipo;
+      bool esVacio = (tipo == Tipo.TipoVacio);
+      if (esVacio)
+      {
+        errores.Add("El tipo está vacío.");
+      }
+      #endregion 
+
+      #region Verifica que el tipo de PDI es conocido.
       bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {

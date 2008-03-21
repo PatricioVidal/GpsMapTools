@@ -233,7 +233,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PDI.cs" />
+    <Compile Include="PDIs\PDI.cs" />
     <Compile Include="Interfase\VentanaDeAcerca.cs">
       <SubType>Form</SubType>
     </Compile>

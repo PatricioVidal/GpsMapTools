@@ -179,7 +179,9 @@
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "VentanaCambiarTipo";
+      this.RightToLeftLayout = true;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+      this.Text = "Cambiar Tipo de PDI";
       this.TopMost = true;
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();

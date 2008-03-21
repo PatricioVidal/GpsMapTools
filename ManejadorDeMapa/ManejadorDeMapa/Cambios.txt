@@ -11,7 +11,9 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.6
+- Arreglada la lógica en la Ventana de Cambiar Tipo de PDI.
 - Interno: Movido todo lo relacionado a PDIs al namespace PDIs.
+- Interno: Añadidas pruebas para la Ventana de Cambiar Tipo de PDI.
 
 Version 1.5
 - Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 

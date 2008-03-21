@@ -8,8 +8,8 @@
     <ProjectGuid>{7E361239-BD1B-4CD9-974B-CFF0B456A297}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GpsYv.ManejadorDePDIs.Pruebas</RootNamespace>
-    <AssemblyName>GpsYv.ManejadorDePDIs.Pruebas</AssemblyName>
+    <RootNamespace>GpsYv.ManejadorDeMapa.Pruebas</RootNamespace>
+    <AssemblyName>GpsYv.ManejadorDeMapa.Pruebas</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfase\PDIs\PruebaVentanaCambiarTipo.cs" />
     <Compile Include="PDIs\PruebaBuscadorDeDuplicados.cs" />
     <Compile Include="PruebaElementoDesconocido.cs" />
     <Compile Include="PruebasDeIntegración.cs" />
@@ -81,6 +82,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)..\ManejadorDeMapa\bin\$(ConfigurationName)\*.csv" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)..\ManejadorDeMapa\*.csv" "$(TargetDir)" /S /Y
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

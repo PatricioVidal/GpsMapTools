@@ -77,6 +77,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
@@ -166,11 +167,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         }
         else
         {
-          DialogResult = DialogResult.Cancel;
+          DialogResult = DialogResult.None;
         }
-
-        // Aseguremonos de que inicializamos todo.
-        Inicializa();
 
         // Cierra la ventana.
         Close();
