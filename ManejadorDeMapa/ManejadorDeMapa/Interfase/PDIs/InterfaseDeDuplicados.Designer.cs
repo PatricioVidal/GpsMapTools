@@ -182,6 +182,7 @@
       // 
       this.miBarraDeDistancia.AutoSize = false;
       this.miBarraDeDistancia.BackColor = System.Drawing.SystemColors.Window;
+      this.miBarraDeDistancia.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::GpsYv.ManejadorDeMapa.Properties.Settings.Default, "DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.miBarraDeDistancia.LargeChange = 20;
       this.miBarraDeDistancia.Location = new System.Drawing.Point(6, 18);
       this.miBarraDeDistancia.Maximum = 20;
@@ -189,7 +190,7 @@
       this.miBarraDeDistancia.Name = "miBarraDeDistancia";
       this.miBarraDeDistancia.Size = new System.Drawing.Size(153, 32);
       this.miBarraDeDistancia.TabIndex = 2;
-      this.miBarraDeDistancia.Value = 3;
+      this.miBarraDeDistancia.Value = global::GpsYv.ManejadorDeMapa.Properties.Settings.Default.DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados;
       this.miBarraDeDistancia.ValueChanged += new System.EventHandler(this.EnCambióBarraDeDistancia);
       // 
       // panel3
@@ -240,13 +241,14 @@
       // 
       this.miBarraDeParecidoDeNombre.AutoSize = false;
       this.miBarraDeParecidoDeNombre.BackColor = System.Drawing.SystemColors.Window;
+      this.miBarraDeParecidoDeNombre.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::GpsYv.ManejadorDeMapa.Properties.Settings.Default, "DistanciaHammingBuscarPDIsDuplicados", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.miBarraDeParecidoDeNombre.LargeChange = 2;
       this.miBarraDeParecidoDeNombre.Location = new System.Drawing.Point(6, 18);
       this.miBarraDeParecidoDeNombre.Maximum = 7;
       this.miBarraDeParecidoDeNombre.Name = "miBarraDeParecidoDeNombre";
       this.miBarraDeParecidoDeNombre.Size = new System.Drawing.Size(137, 32);
       this.miBarraDeParecidoDeNombre.TabIndex = 3;
-      this.miBarraDeParecidoDeNombre.Value = 3;
+      this.miBarraDeParecidoDeNombre.Value = global::GpsYv.ManejadorDeMapa.Properties.Settings.Default.DistanciaHammingBuscarPDIsDuplicados;
       this.miBarraDeParecidoDeNombre.ValueChanged += new System.EventHandler(this.EnCambioBarraDeParecidoDelNombre);
       // 
       // groupBox1
@@ -272,14 +274,14 @@
       this.miTextoDistancia.TabIndex = 1;
       this.miTextoDistancia.Text = "0 m";
       // 
-      // InterfasePDIsDuplicados
+      // InterfaseDeDuplicados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miRecipienteDividido);
       this.Controls.Add(this.panel1);
       this.Controls.Add(this.panel3);
-      this.Name = "InterfasePDIsDuplicados";
+      this.Name = "InterfaseDeDuplicados";
       this.Size = new System.Drawing.Size(607, 450);
       this.miRecipienteDividido.Panel1.ResumeLayout(false);
       this.miRecipienteDividido.Panel2.ResumeLayout(false);
