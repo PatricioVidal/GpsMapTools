@@ -163,6 +163,14 @@ namespace GpsYv.ManejadorDeMapa
       }
       set
       {
+        // Nos aseguramos que el Control interno de la barra de 
+        // progreso no sea nulo para prevenir una excepción cuando
+        // el programa se cierra y todavía se está procesando algo.
+        if (miBarraDeProgreso.ProgressBar == null)
+        {
+          return;
+        }
+
         int progreso = (int)value;
         long diferencia = Math.Abs(progreso - miÚltimoProgreso);
 
