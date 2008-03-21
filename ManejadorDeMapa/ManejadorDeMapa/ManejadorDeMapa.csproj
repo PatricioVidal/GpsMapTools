@@ -90,7 +90,7 @@
     <Compile Include="CampoGenérico.cs" />
     <Compile Include="CampoTipo.cs" />
     <Compile Include="CampoNombre.cs" />
-    <Compile Include="CaracterísticaDePDIs.cs" />
+    <Compile Include="PDIs\CaracterísticaDePDIs.cs" />
     <Compile Include="CaracterísticasDePolilíneas.cs" />
     <Compile Include="Comentario.cs" />
     <Compile Include="Coordenadas.cs" />
@@ -151,6 +151,7 @@
     <Compile Include="Interfase\PDIs\InterfaseManejador.Designer.cs">
       <DependentUpon>InterfaseManejador.cs</DependentUpon>
     </Compile>
+    <Compile Include="PDIs\EliminadorDeSímbolosEnNombres.cs" />
     <Compile Include="PDIs\ManejadorDePDIs.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
@@ -207,16 +208,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="CaracterísticasDePDIs.csv">
+    <Content Include="PDIs\CaracterísticasDePDIs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CaracterísticasDePolilíneas.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ConversionDeLetras.csv">
+    <Content Include="PDIs\LetrasAReemplazar.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CorrecciónDePalabrasPorTipo.csv">
+    <Content Include="PDIs\CorrecciónDePalabrasPorTipo.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CaracterísticasDePolígonos.csv">
@@ -262,8 +263,12 @@
     <Content Include="Cambios.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="app.config" />
     <None Include="Interfase\GPS_YV.png" />
     <None Include="Interfase\GPS_YV.ico" />
+    <Content Include="PDIs\SimbolosAEliminar.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Leeme.txt" />
     <Content Include="Licencia.htm" />
     <Content Include="License.txt" />

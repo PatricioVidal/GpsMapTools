@@ -81,7 +81,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   public class ManejadorDePDIs : ManejadorBase<PDI>
   {
     #region Campos
-    private readonly ArregladorDeLetrasEnPDIs miArregladorDeLetras;
+    private readonly EliminadorDeSímbolosEnNombres miEliminadorDeSímbolosEnNombres;
+    private readonly ArregladorDeLetras miArregladorDeLetras;
     private readonly ArregladorDePalabrasPorTipo miArregladorDePrefijos;
     private readonly BuscadorDeDuplicados miBuscadorDePDIsDuplicados;
     private readonly BuscadorDeErrores miBuscadorDeErrores;
@@ -97,6 +98,13 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Descripción de la acción "Procesar Todo".
+    /// </summary>
+    public static readonly string DescripciónProcesarTodo =
+      "Procesa todo lo relacionado con de PDIs. Los pasos se hacen en el orden indicado por el número en el menú.";
+
+
     /// <summary>
     /// Obtiene el Buscador de Duplicados.
     /// </summary>
@@ -146,10 +154,23 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base (elManejadorDeMapa, losPuntosDeInteres, elEscuchadorDeEstatus)
     {
-      miArregladorDeLetras = new ArregladorDeLetrasEnPDIs(this, elEscuchadorDeEstatus);
+      // Crea los procesadores.
+      miEliminadorDeSímbolosEnNombres = new EliminadorDeSímbolosEnNombres(this, elEscuchadorDeEstatus);
+      miArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
       miArregladorDePrefijos = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
       miBuscadorDePDIsDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
+    }
+
+
+    /// <summary>
+    /// Elimina Símbolos Inválidos en los nombres de PDIs.
+    /// </summary>
+    /// <returns>El número de PDIs modificados.</returns>
+    public int EliminaSímbolosInválidos()
+    {
+      int númeroDePDIsModificados =  miEliminadorDeSímbolosEnNombres.Procesa();
+      return númeroDePDIsModificados;
     }
 
 
@@ -196,7 +217,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     public void ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
-      int númeroDePDIsModificados = ArreglarLetras();
+      int númeroDePDIsModificados = EliminaSímbolosInválidos();
+      númeroDePDIsModificados += ArreglarLetras();
       númeroDePDIsModificados += ArreglarPalabras();
       númeroDePDIsModificados += BuscadorDeDuplicados.Procesa();
       BuscaErrores();

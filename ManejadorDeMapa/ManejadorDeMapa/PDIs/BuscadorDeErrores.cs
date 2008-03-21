@@ -88,6 +88,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
     #region Métodos Públicos
     /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
+
+
+    /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>

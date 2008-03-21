@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa
   static class CaracterísticasDePDIs
   {
     #region Campos
-    private static readonly string miArchivoDeCaracterísticasDePDIs = "CaracterísticasDePDIs.csv";
+    private static readonly string miArchivoDeCaracterísticasDePDIs = @"PDIs\CaracterísticasDePDIs.csv";
     #endregion
 
     #region Campos y Métodos Públicos

@@ -11,6 +11,10 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Version 1.5
+- Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 
+- Ahora la configuración de la búsqueda de duplicados se mantiene de una sesion a la otra.
+- Se movieron los archivos csv relacionados a PDIs al directorio PDIs.
+- Se renombraron algunos archivos csv para que tuvieran un nombre mas claro.
 - Añadida la licencia al código fuente.
 
 Version 1.4

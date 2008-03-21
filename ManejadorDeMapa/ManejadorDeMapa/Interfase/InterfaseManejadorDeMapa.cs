@@ -78,6 +78,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using GpsYv.ManejadorDeMapa.Properties;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -96,6 +97,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Pone el nombre.
       this.Text = VentanaDeAcerca.AssemblyDescription + " - " + VentanaDeAcerca.AssemblyCompany;
+
+      // Asigna los ToolTips de los menús.
+      miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
+      miMenúEliminarSímbolosEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeSímbolosEnNombres.Descripción;
+      miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
+      miMenuArreglarPalabrasDePDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
+      miMenúBuscaDuplicados.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
+      miMenúBuscarErrores.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores.Descripción;
 
       // Crea y asigna el escuchador de estatus.
       miEscuchadorDeEstatus = new EscuchadorDeEstatus(
@@ -276,6 +285,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miManejadorDeMapa.ManejadorDePDIs.ProcesarTodo();
     }
 
+
+    private void EnMenúEliminarSímbolosEnPDIs(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDePDIs.EliminaSímbolosInválidos();
+    }
+
+    
     private void EnMenuBuscarDuplicadosEnPDIs(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePDIs.BuscadorDeDuplicados.Procesa();
@@ -291,6 +307,61 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenuPáginaWeb(object elEnviador, EventArgs losArgumentos)
     {
       System.Diagnostics.Process.Start("IExplore.exe", ((ToolStripItem)elEnviador).Text);
+    }
+
+
+    private void EnCargarForma(object sender, EventArgs e)
+    {
+      // Este código esta basado en http://www.codeproject.com/KB/cs/UserSettings.aspx
+
+      // Lee la posición y el tamaño de la Forma de la configuración
+      // del usuario. Estos valores se asignan solo si son válidos.
+      if (Settings.Default.PosiciónDeLaFormaPrincipal != null)
+      {
+        if (
+          (Settings.Default.PosiciónDeLaFormaPrincipal.X >= 0) &
+          (Settings.Default.PosiciónDeLaFormaPrincipal.Y >= 0))
+        {
+          this.Location = Settings.Default.PosiciónDeLaFormaPrincipal;
+        }
+      }
+      if (Settings.Default.TamañoDeLaFormaPrincipal != null)
+      {
+        if (
+          (Settings.Default.TamañoDeLaFormaPrincipal.Width >= MinimumSize.Width) &
+          (Settings.Default.TamañoDeLaFormaPrincipal.Height >= MinimumSize.Height))
+        {
+          this.Size = Settings.Default.TamañoDeLaFormaPrincipal;
+        }
+      }
+    }
+
+
+    private void EnCerrarForma(object sender, FormClosingEventArgs e)
+    {
+      // Este código esta basado en http://www.codeproject.com/KB/cs/UserSettings.aspx
+
+      // Guarda la posición y el tamaño de la Forma a la configuración
+      // del usuario.  
+      // Si la Forma está Minimizada o Maximizada entonces hay que
+      // guardar los valores de la propiedad "RestoreBounds".
+      switch (this.WindowState)
+      {
+        case FormWindowState.Normal:
+          Settings.Default.PosiciónDeLaFormaPrincipal = this.Location;
+          Settings.Default.TamañoDeLaFormaPrincipal = this.Size;
+          break;
+        default:
+          Settings.Default.PosiciónDeLaFormaPrincipal = this.RestoreBounds.Location;
+          Settings.Default.TamañoDeLaFormaPrincipal = this.RestoreBounds.Size;
+          break;
+      }
+
+      // Guarda configuración en disco.
+      // El archivo es guardado en:
+      // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
+      // Ver aquí para detalles: http://blogs.msdn.com/rprabhu/articles/433979.aspx 
+      Settings.Default.Save();
     }
     #endregion
   }

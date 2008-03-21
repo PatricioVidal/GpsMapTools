@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   /// <summary>
   /// Arreglador de letras en PDIs.
   /// </summary>
-  public class ArregladorDeLetrasEnPDIs : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class ArregladorDeLetras : ProcesadorBase<ManejadorDePDIs, PDI>
   {
     #region Campos
     private readonly LectorDeConversiónDeLetras miLectorDeConversiónDeLetras;
@@ -90,11 +90,18 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
     #region Métodos Públicos
     /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción =
+      "Arregla Letras reemplazando letras inválidas en los nombres de PDIs.";
+
+
+    /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ArregladorDeLetrasEnPDIs(
+    public ArregladorDeLetras(
       ManejadorDePDIs elManejadorDePDIs,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDePDIs, elEscuchadorDeEstatus)
@@ -120,8 +127,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       string nombreCorregido = nombreACorregir.ToUpper();
 
       // Arregla la letras no permitidas.
-      IDictionary<char, char> diccionarioDeLetras = miLectorDeConversiónDeLetras.DiccionarioDeLetras;
-      foreach (KeyValuePair<char, char> par in diccionarioDeLetras)
+      IDictionary<char, char> diccionarioDeLetrasReemplazar = miLectorDeConversiónDeLetras.DiccionarioDeLetrasAReemplazar;
+      foreach (KeyValuePair<char, char> par in diccionarioDeLetrasReemplazar)
       {
         char letraOriginal = par.Key;
         char letraArreglada = par.Value;
@@ -145,14 +152,14 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     private class LectorDeConversiónDeLetras : LectorDeArchivo
     {
       #region Campos
-      private static readonly string miArchivoDeConversionDeLetras = "ConversionDeLetras.csv";
+      private static readonly string miArchivoDeLetrasAReemplazar = @"PDIs\LetrasAReemplazar.csv";
       private Dictionary<char, char> miDiccionarioDeLetras = new Dictionary<char, char>();
       #endregion
 
       /// <summary>
-      /// Obtiene el diccionario de letras.
+      /// Obtiene el diccionario de letras a reemplazar.
       /// </summary>
-      public IDictionary<char, char> DiccionarioDeLetras
+      public IDictionary<char, char> DiccionarioDeLetrasAReemplazar
       {
         get
         {
@@ -167,7 +174,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       public LectorDeConversiónDeLetras(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeConversionDeLetras);
+        Abrir(miArchivoDeLetrasAReemplazar);
       }
 
       #region Métodos Protegidos y Privados

@@ -136,11 +136,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
       CasoDeProcesamientoDePDIs[] casos = new CasoDeProcesamientoDePDIs[] {
         //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
-        new CasoDeProcesamientoDePDIs( "58090.mp",  1713,          87,         19,          2,     117),
-        new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         202,         10,        189,     400),
-        new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         680,         32,         58,     201),
-        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          40,         46,          8,     335),
-        new CasoDeProcesamientoDePDIs( "58460.mp",   980,          53,        151,          4,     235),
+        new CasoDeProcesamientoDePDIs( "58090.mp",  1713,         147,         19,          2,     117),
+        new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         368,         10,        189,     400),
+        new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         811,         32,         58,     201),
+        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          62,         46,          8,     335),
+        new CasoDeProcesamientoDePDIs( "58460.mp",   980,          83,        151,          4,     235),
       };
 
       foreach (CasoDeProcesamientoDePDIs caso in casos)
@@ -159,8 +159,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         controladorDePestañasPrincipal.SelectTab(2);
 
         // Manda a procesar todos los PDIs.
-        ToolStripMenuItemTester menuArreglarTodoEnPDIs = new ToolStripMenuItemTester("miMenuArreglarTodoEnPDIs");
-        menuArreglarTodoEnPDIs.Click();
+        ToolStripMenuItemTester menuProcesarTodoEnPDIs = new ToolStripMenuItemTester("miMenuProcesarTodoEnPDIs");
+        menuProcesarTodoEnPDIs.Click();
 
         // Verifica el número de PDIs en las pestañas.
         Assert.AreEqual("Todos (" + caso.Todos + ")", pestañaTodos.Text, identificación + "PDIs.Todos.Text");

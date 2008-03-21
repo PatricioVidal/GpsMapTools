@@ -77,9 +77,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Manejador de Mapa")]
-[assembly: AssemblyDescription("Manejador de Mapa")]
+[assembly: AssemblyDescription("Manejador de Mapa (http://www.gpsyv.net)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GPS_YV (http://www.gpsyv.net)")]
+[assembly: AssemblyCompany("GPS_YV")]
 [assembly: AssemblyProduct("Manejador de Mapa")]
 [assembly: AssemblyCopyright("Copyright ©  2008")]
 [assembly: AssemblyTrademark("")]

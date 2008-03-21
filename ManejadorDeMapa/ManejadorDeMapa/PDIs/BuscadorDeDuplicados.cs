@@ -99,6 +99,14 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
     #region Propiedades
     /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción = 
+      "Busca PDIs duplicados basado en distancia y parecido del nombre.\n" + 
+      "Duplicados exactos son eliminados.";
+
+    
+    /// <summary>
     /// Obtiene o pone la distancia máxima de búsqueda.
     /// </summary>
     public int DistanciaMáxima

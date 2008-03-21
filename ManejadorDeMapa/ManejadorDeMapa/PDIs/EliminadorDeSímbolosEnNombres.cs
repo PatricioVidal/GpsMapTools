@@ -69,24 +69,21 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace GpsYv.ManejadorDeMapa.PDIs
 {
   /// <summary>
-  /// Arreglador de letras en PDIs.
+  /// Eliminador de Símbolos en Nombres de PDIs.
   /// </summary>
-  public class ArregladorDePalabrasPorTipo : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class EliminadorDeSímbolosEnNombres : ProcesadorBase<ManejadorDePDIs, PDI>
   {
     #region Campos
-    private readonly LectorDeCorrecciónDePalabrasPorTipo miLectorDeCorrecciónDePalabrasPorTipo;
+    private readonly LectorDeSimbolosAEliminar miLectorDeSimbolosAEliminar;
     #endregion
 
     #region Métodos Públicos
@@ -94,7 +91,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Descripción de éste procesador.
     /// </summary>
     public static readonly string Descripción =
-      "Arregla Palabras reemplazando palabras inválidas en los nombres de PDIs.";
+      "Elimina Símbolos inválidos en los nombres de PDIs.";
 
 
     /// <summary>
@@ -102,12 +99,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// </summary>
     /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ArregladorDePalabrasPorTipo(
-      ManejadorDePDIs elManejadorDePDIs, 
+    public EliminadorDeSímbolosEnNombres(
+      ManejadorDePDIs elManejadorDePDIs,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDePDIs, elEscuchadorDeEstatus)
     {
-      miLectorDeCorrecciónDePalabrasPorTipo = new LectorDeCorrecciónDePalabrasPorTipo(elEscuchadorDeEstatus);
+      miLectorDeSimbolosAEliminar = new LectorDeSimbolosAEliminar(elEscuchadorDeEstatus);
     }
     #endregion
 
@@ -121,107 +118,46 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     {
       bool modificóElemento = false;
 
-      #region Arregla el nombre del PDI.
-      int tipo = elPDI.Tipo;
+      #region Elimina los Símbolos Inválidos.
       string nombreACorregir = elPDI.Nombre;
+      string nombreCorregido = nombreACorregir;
 
-      // Remueve los espacios en blanco alrededor.
-      string nombreCorregido = nombreACorregir.Trim();
-
-      // Remueve espacios en blanco extra entre medio de las palabras.
-      string[] palabras = nombreCorregido.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-      nombreCorregido = string.Join(" ", palabras);
-      if (nombreCorregido != nombreACorregir)
+      // Arregla la letras no permitidas.
+      IList<char> símbolosInválidos = miLectorDeSimbolosAEliminar.ListaDeSímbolosInválidos;
+      foreach (char símboloInválido in símbolosInválidos)
       {
-        elPDI.CambiaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
-        modificóElemento = true;
-        nombreACorregir = nombreCorregido;
-      }
-
-      // Corrige las palabras basado en el tipo.
-      IList<CorrecciónDePalabras> listaDeCorrecciónDePalabras = miLectorDeCorrecciónDePalabrasPorTipo.ListaDeCorrecciónDePalabras;
-      foreach (CorrecciónDePalabras correcciónDePalabras in listaDeCorrecciónDePalabras)
-      {
-        // Si acertamos el tipo de PDI entonces procedemos a
-        // buscar las palabras. 
-        if (tipo == correcciónDePalabras.Tipo)
-        {
-          // Añade un espacio en blanco alrededor del nombre para asi hacer
-          // búsquedas por palabras completas.
-          nombreACorregir = " " + nombreACorregir + " ";
-          foreach (string posiblePalabra in correcciónDePalabras.PosiblesPalabras)
-          {
-            // Añade un espacio en blanco al final del nombre para hacer
-            // búsquedas por palabras completas.
-            nombreCorregido = nombreACorregir.Replace(" " + posiblePalabra + " ", " " + correcciónDePalabras.PalabraFinal + " ");
-
-            if (nombreCorregido != nombreACorregir)
-            {
-              // Remueve los espacios en blanco que se pudo haber añadido.
-              elPDI.CambiaNombre(nombreCorregido.Trim(), "Cambio de palabra");
-              modificóElemento = true;
-              nombreACorregir = nombreCorregido;
-            }
-          }
-        }
+        nombreCorregido = nombreACorregir.Replace(símboloInválido.ToString(), string.Empty);
       }
       #endregion
+
+      // Si el nombre cambió entonces actualizar el PDI y reportar el cambio.
+      if (nombreCorregido != nombreACorregir)
+      {
+        // Actualiza el campo del nombre.
+        elPDI.CambiaNombre(nombreCorregido, "Eliminación de Simbolos Inválidos");
+        modificóElemento = true;
+      }
 
       return modificóElemento;
     }
     #endregion
 
     #region Clases Privadas
-    /// <summary>
-    /// Representa un par posibles palabras y la palabra final.
-    /// </summary>
-    private struct CorrecciónDePalabras
-    {
-      /// <summary>
-      /// Tipo.
-      /// </summary>
-      public int Tipo;
-
-      /// <summary>
-      /// Posibles palabras.
-      /// </summary>
-      public string[] PosiblesPalabras;
-
-      /// <summary>
-      /// Palabra final.
-      /// </summary>
-      public string PalabraFinal;
-
-      /// <summary>
-      /// Constructor.
-      /// </summary>
-      /// <param name="elTipo">El tipo.</param>
-      /// <param name="lasPosiblesPalabras">Las posibles palabras.</param>
-      /// <param name="laPalabraFinal">La palabra Final.</param>
-      public CorrecciónDePalabras(int elTipo, string[] lasPosiblesPalabras, string laPalabraFinal)
-      {
-        Tipo = elTipo;
-        PosiblesPalabras = lasPosiblesPalabras;
-        PalabraFinal = laPalabraFinal;
-      }
-    }
-
-
-    private class LectorDeCorrecciónDePalabrasPorTipo : LectorDeArchivo
+    private class LectorDeSimbolosAEliminar : LectorDeArchivo
     {
       #region Campos
-      private static readonly string miArchivoDeConversionDePalabras = @"PDIs\CorrecciónDePalabrasPorTipo.csv";
-      private List<CorrecciónDePalabras> miListaDeCorrecciónDePalabras = new List<CorrecciónDePalabras>();
+      private static readonly string miArchivoDeSimbolosAEliminar = @"PDIs\SimbolosAEliminar.csv";
+      private List<char> miListaDeSímbolos = new List<char>();
       #endregion
 
       /// <summary>
-      /// Obtiene la lista de corrección de palabras.
+      /// Obtiene la Lista de Símbolos Inválidos.
       /// </summary>
-      public IList<CorrecciónDePalabras> ListaDeCorrecciónDePalabras
+      public IList<char> ListaDeSímbolosInválidos 
       {
         get
         {
-          return miListaDeCorrecciónDePalabras;
+          return miListaDeSímbolos;
         }
       }
 
@@ -229,13 +165,13 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       /// Constructor.
       /// </summary>
       /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-      public LectorDeCorrecciónDePalabrasPorTipo(IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      public LectorDeSimbolosAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeConversionDePalabras);
+        Abrir(miArchivoDeSimbolosAEliminar);
       }
 
-
+      #region Métodos Protegidos y Privados
       protected override void ProcesaLínea(string laLínea)
       {
         // Elimina espacios en blanco.
@@ -246,33 +182,18 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         bool laLíneaEsComentario = línea.StartsWith("//");
         if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
         {
-          // Separa las palabras.
-          string[] partes = línea.Split(',');
-
-          // Verifica que tenemos tres partes.
-          if (partes.Length != 3)
+          // Verifica que tenemos una sola letra.
+          if (línea.Length != 1)
           {
-            throw new ArgumentException("No se encontraron 3 partes separadas por coma en la linea: " + línea);
+            throw new ArgumentException("Se encontró más de un símbolo en la linea: " + línea);
           }
 
-          // Lee las tres partes.
-          string[] tipos = partes[0].Split('-');
-          string[] posiblePalabras = partes[1].Split('|');
-          string palabraFinal = partes[2];
-
-          // Llena la lista.
-          int primerTipo = Convert.ToInt32(tipos[0], 16);
-          int últimoTipo = primerTipo;
-          if (tipos.Length > 1)
-          {
-            últimoTipo = Convert.ToInt32(tipos[1], 16);
-          }
-          for (int tipo = primerTipo; tipo <= últimoTipo; ++tipo)
-          {
-            miListaDeCorrecciónDePalabras.Add(new CorrecciónDePalabras(tipo, posiblePalabras, palabraFinal));
-          }
+          // Añade el símbolo a la lista.
+          char símbolo = línea[0];
+          miListaDeSímbolos.Add(símbolo);
         }
       }
+      #endregion
     }
     #endregion
   }

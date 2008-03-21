@@ -22,5 +22,53 @@ namespace GpsYv.ManejadorDeMapa.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados {
+            get {
+                return ((int)(this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados"]));
+            }
+            set {
+                this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int DistanciaHammingBuscarPDIsDuplicados {
+            get {
+                return ((int)(this["DistanciaHammingBuscarPDIsDuplicados"]));
+            }
+            set {
+                this["DistanciaHammingBuscarPDIsDuplicados"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-32000, -32000")]
+        public global::System.Drawing.Point PosiciónDeLaFormaPrincipal {
+            get {
+                return ((global::System.Drawing.Point)(this["PosiciónDeLaFormaPrincipal"]));
+            }
+            set {
+                this["PosiciónDeLaFormaPrincipal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size TamañoDeLaFormaPrincipal {
+            get {
+                return ((global::System.Drawing.Size)(this["TamañoDeLaFormaPrincipal"]));
+            }
+            set {
+                this["TamañoDeLaFormaPrincipal"] = value;
+            }
+        }
     }
 }
