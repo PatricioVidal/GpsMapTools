@@ -104,7 +104,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (!existe)
       {
         // Descripcion por defecto.
-        descripcion = Descripciones[Tipo.TipoVacio];
+        descripcion = Descripciones[Tipo.TipoNulo];
       }
       return descripcion;
     }
@@ -176,9 +176,9 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         miArchivoDeCaracterísticasDePDIs,
         Descripciones);
 
-      if (!Descripciones.ContainsKey(Tipo.TipoVacio))
+      if (!Descripciones.ContainsKey(Tipo.TipoNulo))
       {
-        Descripciones[Tipo.TipoVacio] = string.Empty;
+        Descripciones[Tipo.TipoNulo] = string.Empty;
       }
     }
     #endregion

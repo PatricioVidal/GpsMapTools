@@ -88,8 +88,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   {
     #region Campos
     private PDI miPDI = null;
-    private Tipo miTipoOriginal = Tipo.TipoVacio;
-    private Tipo miTipoNuevo = Tipo.TipoVacio;
+    private Tipo miTipoOriginal = Tipo.TipoNulo;
+    private Tipo miTipoNuevo = Tipo.TipoNulo;
     private string miError = null;
     #endregion
 
@@ -180,8 +180,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     {
       // Inicializa los campos.
       miPDI = null;
-      miTipoOriginal = Tipo.TipoVacio;
-      miTipoNuevo = Tipo.TipoVacio;
+      miTipoOriginal = Tipo.TipoNulo;
+      miTipoNuevo = Tipo.TipoNulo;
       miError = null;
 
       // Inicializa la interfase.

@@ -141,7 +141,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       Assert.AreEqual(null, objectoDePrueba.Original, "Original");
       Assert.AreEqual(razón, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(Tipo.TipoVacio, objectoDePrueba.Tipo, "Tipo");
+      Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.Tipo, "Tipo");
     }
 
 
@@ -175,7 +175,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       AseguraElementoEsEquivalente(original, objectoDePrueba.Original, "Original");
       Assert.AreEqual(string.Empty, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(Tipo.TipoVacio, objectoDePrueba.Tipo, "Tipo");
+      Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.Tipo, "Tipo");
     }
 
 

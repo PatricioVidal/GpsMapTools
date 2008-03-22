@@ -110,7 +110,7 @@ namespace GpsYv.ManejadorDeMapa
       if (!existe)
       {
         // Lápiz por defecto.
-        lápiz = misLápices[Tipo.TipoVacio];
+        lápiz = misLápices[Tipo.TipoNulo];
       }
       return lápiz;
     }
@@ -127,7 +127,7 @@ namespace GpsYv.ManejadorDeMapa
       if (!existe)
       {
         // Descripcion por defecto.
-        descripcion = Descripciones[Tipo.TipoVacio];
+        descripcion = Descripciones[Tipo.TipoNulo];
       }
       return descripcion;
     }

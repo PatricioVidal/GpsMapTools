@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private static readonly Dictionary<Tipo, string> misDescripciones = new Dictionary<Tipo, string>() {
-      { Tipo.TipoVacio, string.Empty} 
+      { Tipo.TipoNulo, string.Empty} 
     };
     #endregion
 

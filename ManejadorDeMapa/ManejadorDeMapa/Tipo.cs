@@ -87,9 +87,9 @@ namespace GpsYv.ManejadorDeMapa
 
     #region Propiedades
     /// <summary>
-    /// Representa un tipo vacio.
+    /// Representa un tipo nulo.
     /// </summary>
-    public static readonly Tipo TipoVacio = new Tipo(0);
+    public static readonly Tipo TipoNulo = new Tipo(0);
     #endregion
 
     #region Métodos Públicos
@@ -127,16 +127,6 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       return texto;
-    }
-
-
-    /// <summary>
-    /// Conversion a número entero.
-    /// </summary>
-    /// <param name="elTipo">EL tipo.</param>
-    public static implicit operator int(Tipo elTipo)
-    {
-      return elTipo.miValor;
     }
 
 

@@ -129,7 +129,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
       #region Verifica que el tipo de PDI no es vacio.
       Tipo tipo = elPDI.Tipo;
-      bool esVacio = (tipo == Tipo.TipoVacio);
+      bool esVacio = (tipo == Tipo.TipoNulo);
       if (esVacio)
       {
         errores.Add("El tipo está vacío.");

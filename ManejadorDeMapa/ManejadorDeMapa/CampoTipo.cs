@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     public const string IdentificadorDeTipo = "Type";
-    private readonly Tipo miTipo = Tipo.TipoVacio;
+    private readonly Tipo miTipo = Tipo.TipoNulo;
     #endregion
 
     #region Propiedades

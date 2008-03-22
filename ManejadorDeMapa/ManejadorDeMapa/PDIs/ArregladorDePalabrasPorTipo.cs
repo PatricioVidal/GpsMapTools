@@ -122,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       bool modificóElemento = false;
 
       #region Arregla el nombre del PDI.
-      int tipo = elPDI.Tipo;
+      Tipo tipo = elPDI.Tipo;
       string nombreACorregir = elPDI.Nombre;
 
       // Remueve los espacios en blanco alrededor.
@@ -180,17 +180,17 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       /// <summary>
       /// Tipo.
       /// </summary>
-      public int Tipo;
+      public readonly Tipo Tipo;
 
       /// <summary>
       /// Posibles palabras.
       /// </summary>
-      public string[] PosiblesPalabras;
+      public readonly string[] PosiblesPalabras;
 
       /// <summary>
       /// Palabra final.
       /// </summary>
-      public string PalabraFinal;
+      public readonly string PalabraFinal;
 
       /// <summary>
       /// Constructor.
@@ -198,7 +198,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       /// <param name="elTipo">El tipo.</param>
       /// <param name="lasPosiblesPalabras">Las posibles palabras.</param>
       /// <param name="laPalabraFinal">La palabra Final.</param>
-      public CorrecciónDePalabras(int elTipo, string[] lasPosiblesPalabras, string laPalabraFinal)
+      public CorrecciónDePalabras(Tipo elTipo, string[] lasPosiblesPalabras, string laPalabraFinal)
       {
         Tipo = elTipo;
         PosiblesPalabras = lasPosiblesPalabras;
@@ -269,7 +269,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           }
           for (int tipo = primerTipo; tipo <= últimoTipo; ++tipo)
           {
-            miListaDeCorrecciónDePalabras.Add(new CorrecciónDePalabras(tipo, posiblePalabras, palabraFinal));
+            miListaDeCorrecciónDePalabras.Add(new CorrecciónDePalabras(new Tipo(tipo), posiblePalabras, palabraFinal));
           }
         }
       }

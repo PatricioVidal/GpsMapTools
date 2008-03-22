@@ -86,7 +86,7 @@ namespace GpsYv.ManejadorDeMapa
     private readonly int miNúmero;
     private readonly string miClase = string.Empty;
     private string miNombre = string.Empty;
-    private Tipo miTipo = Tipo.TipoVacio;
+    private Tipo miTipo = Tipo.TipoNulo;
     private string miDescripción = string.Empty;
     private readonly IList<Campo> misCampos;
     private bool miFuéModificado = false;
