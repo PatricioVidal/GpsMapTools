@@ -11,6 +11,7 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.7
+- Arreglada la forma que el campo de Tipo (Type) es grabado en disco.
 - Actualizado para tener 100% de cobertura en las Pruebas de Ventana de Cambio de Tipo.
 - Interno: Cambiado "TipoVacio" a "TipoNulo".
 

@@ -90,6 +90,18 @@ namespace GpsYv.ManejadorDeMapa
     /// Representa un tipo nulo.
     /// </summary>
     public static readonly Tipo TipoNulo = new Tipo(0);
+
+
+    /// <summary>
+    /// Obtiene el valor númerico del tipo.
+    /// </summary>
+    public int Valor
+    {
+      get
+      {
+        return miValor;
+      }
+    }
     #endregion
 
     #region Métodos Públicos
