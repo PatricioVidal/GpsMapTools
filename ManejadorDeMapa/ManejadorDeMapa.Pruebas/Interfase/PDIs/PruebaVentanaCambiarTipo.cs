@@ -133,7 +133,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
 
@@ -154,12 +158,16 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // Llama al método a probar.
         objectoDePrueba.Show();
 
-        // Apreta el botón de "Cambiar". 
+        // Apreta el botón de "Cancelar". 
         botónCancelar.Click();
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.Cancel, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
 
@@ -173,6 +181,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
         objectoDePrueba.PDI = pdi;
 
+        // Crea un tipo válido.
+        string númeroTipoNuevoVálido = "100";
+        Tipo tipoNuevoVálido = new Tipo("0x" + númeroTipoNuevoVálido);
+        Assert.IsTrue(CaracterísticasDePDIs.Descripciones.ContainsKey(tipoNuevoVálido), "El tipo nuevo debe ser conocido.");
+
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
         TextBoxTester textoTipoNuevo = new TextBoxTester("miTextoTipoNuevo", objectoDePrueba);
@@ -182,21 +195,24 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         objectoDePrueba.Show();
 
         // Simula el usuario poniendo un tipo válido.
-        string númeroTipoNuevoVálido = "100";
-        Tipo tipoNuevoVálido = new Tipo("0x" + númeroTipoNuevoVálido);
-        Assert.IsTrue(CaracterísticasDePDIs.Descripciones.ContainsKey(tipoNuevoVálido), "El tipo nuevo debe ser conocido.");
+        textoTipoNuevo.Properties.Focus();
         textoTipoNuevo.Enter(númeroTipoNuevoVálido);
 
         // Apreta el botón de "Cambiar". 
+        botónCambiar.Properties.Focus();
         botónCambiar.Click();
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.OK, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipoNuevoVálido.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipoNuevoVálido, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
 
-      #region Caso 4: El usuario cambia el tipo inicial por uno inválido.
+      #region Caso 4: El usuario cambia el tipo inicial por uno desconocido.
       {
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo original.
@@ -205,6 +221,62 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // Inicializa objecto de prueba.
         VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
         objectoDePrueba.PDI = pdi;
+
+        // Crea un tipo desconocido.
+        string númeroTipoNuevoDesconocido = "bbbb";
+        Tipo tipoNuevoDesconocido = new Tipo("0x" + númeroTipoNuevoDesconocido);
+        Assert.IsFalse(CaracterísticasDePDIs.Descripciones.ContainsKey(tipoNuevoDesconocido), "El tipo nuevo debe ser desconocido.");
+
+        // Crea los probadores de los elementos de la interfase.
+        ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
+        TextBoxTester textoTipoNuevo = new TextBoxTester("miTextoTipoNuevo", objectoDePrueba);
+        #endregion
+
+        // Llama al método a probar.
+        objectoDePrueba.Show();
+
+        // Simula el usuario poniendo un tipo desconocido.
+        textoTipoNuevo.Properties.Focus();
+        textoTipoNuevo.Enter(númeroTipoNuevoDesconocido);
+
+        // Apreta el botón de "Cambiar". 
+        botónCambiar.Properties.Focus();
+        botónCambiar.Click();
+
+        // Probar propiedades.
+        Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
+        Assert.AreEqual(tipoNuevoDesconocido, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
+      }
+      #endregion
+
+      #region Caso 5: El usuario cambia el tipo inicial por uno inválido.
+      {
+        // En este caso el método Show() debería retornar None,
+        // y la propiedad TipoNuevo debería ser el tipo original.
+
+        #region Inicialización.
+        // Inicializa objecto de prueba.
+        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        objectoDePrueba.PDI = pdi;
+
+        // Crea un tipo inválido.
+        // Un tipo inválido es aquel que genera una excepción cuando
+        // se trata de construir una clase Tipo con el.
+        string númeroTipoNuevoInválido = "ww";
+        bool tipoEsInválido = false;
+        try
+        {
+          new Tipo("0x" + númeroTipoNuevoInválido);
+        }
+        catch
+        {
+          tipoEsInválido = true;
+        }
+        Assert.IsTrue(tipoEsInválido, "El tipo nuevo debe ser inválido.");
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
@@ -215,21 +287,24 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         objectoDePrueba.Show();
 
         // Simula el usuario poniendo un tipo inválido.
-        string númeroTipoNuevoInválido = "bbbb";
-        Tipo tipoNuevoInválido = new Tipo("0x" + númeroTipoNuevoInválido);
-        Assert.IsFalse(CaracterísticasDePDIs.Descripciones.ContainsKey(tipoNuevoInválido), "El tipo nuevo debe ser desconocido.");
+        textoTipoNuevo.Properties.Focus();
         textoTipoNuevo.Enter(númeroTipoNuevoInválido);
 
         // Apreta el botón de "Cambiar". 
+        botónCambiar.Properties.Focus();
         botónCambiar.Click();
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipoNuevoInválido.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
 
-      #region Caso 5: El usuario empiezar a cambiar el tipo, pero al final lo borra y lo deja en blanco.
+      #region Caso 6: El usuario empiezar a cambiar el tipo, pero al final lo borra y lo deja en blanco.
       {
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo original.
@@ -248,19 +323,25 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         objectoDePrueba.Show();
 
         // Simula el usuario empezando a cambiar el tipo y despues dejandolo en blanco.
+        textoTipoNuevo.Properties.Focus();
         textoTipoNuevo.Enter("123");
         textoTipoNuevo.Properties.Text = string.Empty;
 
         // Apreta el botón de "Cambiar". 
+        botónCambiar.Properties.Focus();
         botónCambiar.Click();
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
 
-      #region Caso 6: El usuario empiezar a cambiar el tipo, pero al final cancela.
+      #region Caso 7: El usuario empiezar a cambiar el tipo, pero al final cancela.
       {
         // En este caso el método Show() debería retornar Cancel,
         // y la propiedad TipoNuevo debería ser el tipo original.
@@ -287,7 +368,46 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.Cancel, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo.ToString(), objectoDePrueba.TipoNuevo.ToString(), "TipoNuevo");
+        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
+      }
+      #endregion
+
+      #region Caso 8: Se usa con un PDI nulo.
+      {
+        // En este caso el método Show() debería retornar None,
+        // y la propiedad TipoNuevo debería ser el tipo original.
+
+        #region Inicialización.
+        // Inicializa objecto de prueba.
+        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        objectoDePrueba.PDI = null;
+
+        // Crea los probadores de los elementos de la interfase.
+        ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
+        TextBoxTester textoTipoNuevo = new TextBoxTester("miTextoTipoNuevo", objectoDePrueba);
+        #endregion
+
+        // Llama al método a probar.
+        objectoDePrueba.Show();
+
+        // Simula el usuario empezando a cambiar el tipo y despues dejandolo en blanco.
+        textoTipoNuevo.Properties.Focus();
+        textoTipoNuevo.Enter("100");
+        textoTipoNuevo.Properties.Text = string.Empty;
+
+        // Apreta el botón de "Cambiar". 
+        botónCambiar.Properties.Focus();
+        botónCambiar.Click();
+
+        // Probar propiedades.
+        Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+
+        // Cierra la ventana.
+        objectoDePrueba.Close();
       }
       #endregion
     }
