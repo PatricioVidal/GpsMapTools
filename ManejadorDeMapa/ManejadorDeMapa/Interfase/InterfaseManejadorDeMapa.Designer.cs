@@ -54,6 +54,7 @@
           this.miPaginaDeElementos = new System.Windows.Forms.TabPage();
           this.miControladorDePestañas = new System.Windows.Forms.TabControl();
           this.miPáginaMapa = new System.Windows.Forms.TabPage();
+          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miPáginaTodos = new System.Windows.Forms.TabPage();
           this.miListaDeElementos = new System.Windows.Forms.ListView();
           this.miColumnaNumero = new System.Windows.Forms.ColumnHeader();
@@ -62,8 +63,8 @@
           this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
           this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
           this.miPaginaDePDIs = new System.Windows.Forms.TabPage();
-          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
+          this.miMenuAceptarModificaciones = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -90,41 +91,46 @@
           // 
           this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenuAbrirArchivo,
+            this.miMenuAceptarModificaciones,
             this.miMenuGuardar,
             this.miMenuGuardarComo,
             this.miMenuSalir});
           this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-          this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-          this.archivoToolStripMenuItem.Text = "Archivo";
+          this.archivoToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+          this.archivoToolStripMenuItem.Text = "Mapa";
           // 
           // miMenuAbrirArchivo
           // 
           this.miMenuAbrirArchivo.Name = "miMenuAbrirArchivo";
-          this.miMenuAbrirArchivo.Size = new System.Drawing.Size(152, 22);
+          this.miMenuAbrirArchivo.Size = new System.Drawing.Size(199, 22);
           this.miMenuAbrirArchivo.Text = "&Abrir";
+          this.miMenuAbrirArchivo.ToolTipText = "Abre un mapa.";
           this.miMenuAbrirArchivo.Click += new System.EventHandler(this.EnMenuAbrir);
           // 
           // miMenuGuardar
           // 
           this.miMenuGuardar.Enabled = false;
           this.miMenuGuardar.Name = "miMenuGuardar";
-          this.miMenuGuardar.Size = new System.Drawing.Size(152, 22);
+          this.miMenuGuardar.Size = new System.Drawing.Size(199, 22);
           this.miMenuGuardar.Text = "Guardar";
+          this.miMenuGuardar.ToolTipText = "Guarda el mapa con el mismo nombre.";
           this.miMenuGuardar.Click += new System.EventHandler(this.EnMenuGuardar);
           // 
           // miMenuGuardarComo
           // 
           this.miMenuGuardarComo.Enabled = false;
           this.miMenuGuardarComo.Name = "miMenuGuardarComo";
-          this.miMenuGuardarComo.Size = new System.Drawing.Size(152, 22);
+          this.miMenuGuardarComo.Size = new System.Drawing.Size(199, 22);
           this.miMenuGuardarComo.Text = "Guardar Como";
+          this.miMenuGuardarComo.ToolTipText = "Guarda el mapa con el un nombre nuevo.";
           this.miMenuGuardarComo.Click += new System.EventHandler(this.EnMenuGuardarComo);
           // 
           // miMenuSalir
           // 
           this.miMenuSalir.Name = "miMenuSalir";
-          this.miMenuSalir.Size = new System.Drawing.Size(152, 22);
+          this.miMenuSalir.Size = new System.Drawing.Size(199, 22);
           this.miMenuSalir.Text = "&Salir";
+          this.miMenuSalir.ToolTipText = "Cierra la aplicación.";
           this.miMenuSalir.Click += new System.EventHandler(this.EnMenuSalir);
           // 
           // miMenuPDIs
@@ -145,47 +151,47 @@
           // miMenuProcesarTodoEnPDIs
           // 
           this.miMenuProcesarTodoEnPDIs.Name = "miMenuProcesarTodoEnPDIs";
-          this.miMenuProcesarTodoEnPDIs.Size = new System.Drawing.Size(248, 22);
+          this.miMenuProcesarTodoEnPDIs.Size = new System.Drawing.Size(243, 22);
           this.miMenuProcesarTodoEnPDIs.Text = "Procesar Todo";
           this.miMenuProcesarTodoEnPDIs.Click += new System.EventHandler(this.EnMenuProcesarTodoEnPDIs);
           // 
           // toolStripSeparator1
           // 
           this.toolStripSeparator1.Name = "toolStripSeparator1";
-          this.toolStripSeparator1.Size = new System.Drawing.Size(245, 6);
+          this.toolStripSeparator1.Size = new System.Drawing.Size(240, 6);
           // 
           // miMenúEliminarCaracteresEnPDIs
           // 
           this.miMenúEliminarCaracteresEnPDIs.Name = "miMenúEliminarCaracteresEnPDIs";
-          this.miMenúEliminarCaracteresEnPDIs.Size = new System.Drawing.Size(248, 22);
+          this.miMenúEliminarCaracteresEnPDIs.Size = new System.Drawing.Size(243, 22);
           this.miMenúEliminarCaracteresEnPDIs.Text = "1. Elimina Caracteres ";
           this.miMenúEliminarCaracteresEnPDIs.Click += new System.EventHandler(this.EnMenúEliminarCaracteresEnPDIs);
           // 
           // miMenuArreglarLetrasEnPDIs
           // 
           this.miMenuArreglarLetrasEnPDIs.Name = "miMenuArreglarLetrasEnPDIs";
-          this.miMenuArreglarLetrasEnPDIs.Size = new System.Drawing.Size(248, 22);
+          this.miMenuArreglarLetrasEnPDIs.Size = new System.Drawing.Size(243, 22);
           this.miMenuArreglarLetrasEnPDIs.Text = "2. Arregla Letras en Nombres";
           this.miMenuArreglarLetrasEnPDIs.Click += new System.EventHandler(this.EnMenuArreglarLetrasEnPDIs);
           // 
           // miMenuArreglarPalabrasDePDIs
           // 
           this.miMenuArreglarPalabrasDePDIs.Name = "miMenuArreglarPalabrasDePDIs";
-          this.miMenuArreglarPalabrasDePDIs.Size = new System.Drawing.Size(248, 22);
+          this.miMenuArreglarPalabrasDePDIs.Size = new System.Drawing.Size(243, 22);
           this.miMenuArreglarPalabrasDePDIs.Text = "3. Arreglar Palabras en Nombres";
           this.miMenuArreglarPalabrasDePDIs.Click += new System.EventHandler(this.EnMenuArreglarPalabrasEnPDIs);
           // 
           // miMenúBuscaDuplicados
           // 
           this.miMenúBuscaDuplicados.Name = "miMenúBuscaDuplicados";
-          this.miMenúBuscaDuplicados.Size = new System.Drawing.Size(248, 22);
+          this.miMenúBuscaDuplicados.Size = new System.Drawing.Size(243, 22);
           this.miMenúBuscaDuplicados.Text = "4. Buscar Duplicados";
           this.miMenúBuscaDuplicados.Click += new System.EventHandler(this.EnMenuBuscarDuplicadosEnPDIs);
           // 
           // miMenúBuscarErrores
           // 
           this.miMenúBuscarErrores.Name = "miMenúBuscarErrores";
-          this.miMenúBuscarErrores.Size = new System.Drawing.Size(248, 22);
+          this.miMenúBuscarErrores.Size = new System.Drawing.Size(243, 22);
           this.miMenúBuscarErrores.Text = "5. Buscar Errores";
           this.miMenúBuscarErrores.Click += new System.EventHandler(this.EnMenuBuscarErroresEnPDIs);
           // 
@@ -293,6 +299,23 @@
           this.miPáginaMapa.Text = "Mapa";
           this.miPáginaMapa.UseVisualStyleBackColor = true;
           // 
+          // miInterfaseDeMapa
+          // 
+          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
+          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
+          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
+          this.miInterfaseDeMapa.ManejadorDeMapa = null;
+          this.miInterfaseDeMapa.MuestraPDIs = false;
+          this.miInterfaseDeMapa.MuestraPolígonos = false;
+          this.miInterfaseDeMapa.MuestraPolilíneas = false;
+          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
+          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
+          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
+          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
+          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
+          this.miInterfaseDeMapa.TabIndex = 1;
+          // 
           // miPáginaTodos
           // 
           this.miPáginaTodos.Controls.Add(this.miListaDeElementos);
@@ -359,23 +382,6 @@
           this.miPaginaDePDIs.Text = "PDIs";
           this.miPaginaDePDIs.UseVisualStyleBackColor = true;
           // 
-          // miInterfaseDeMapa
-          // 
-          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
-          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
-          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
-          this.miInterfaseDeMapa.ManejadorDeMapa = null;
-          this.miInterfaseDeMapa.MuestraPDIs = false;
-          this.miInterfaseDeMapa.MuestraPolígonos = false;
-          this.miInterfaseDeMapa.MuestraPolilíneas = false;
-          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
-          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
-          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
-          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
-          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
-          this.miInterfaseDeMapa.TabIndex = 1;
-          // 
           // miInterfaseManejadorDePDIs
           // 
           this.miInterfaseManejadorDePDIs.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -385,6 +391,14 @@
           this.miInterfaseManejadorDePDIs.Name = "miInterfaseManejadorDePDIs";
           this.miInterfaseManejadorDePDIs.Size = new System.Drawing.Size(770, 486);
           this.miInterfaseManejadorDePDIs.TabIndex = 0;
+          // 
+          // miMenuAceptarModificaciones
+          // 
+          this.miMenuAceptarModificaciones.Enabled = false;
+          this.miMenuAceptarModificaciones.Name = "miMenuAceptarModificaciones";
+          this.miMenuAceptarModificaciones.Size = new System.Drawing.Size(199, 22);
+          this.miMenuAceptarModificaciones.Text = "Aceptar Modificaciones";
+          this.miMenuAceptarModificaciones.Click += new System.EventHandler(this.EnMenúAceptarModificaciones);
           // 
           // InterfaseManejadorDeMapa
           // 
@@ -453,6 +467,7 @@
         private System.Windows.Forms.ColumnHeader miColumnaNombre;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErrores;
         private System.Windows.Forms.ToolStripMenuItem miMenúEliminarCaracteresEnPDIs;
+        private System.Windows.Forms.ToolStripMenuItem miMenuAceptarModificaciones;
     }
 }
 

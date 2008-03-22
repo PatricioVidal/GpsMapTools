@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private readonly ManejadorDeMapa miManejadorDeMapa;
-    private readonly int miNúmero;
+    private int miNúmero;
     private readonly string miClase = string.Empty;
     private string miNombre = string.Empty;
     private Tipo miTipo = Tipo.TipoNulo;
@@ -400,6 +400,42 @@ namespace GpsYv.ManejadorDeMapa
       miRazónParaEliminación = laRazón;
       miFuéEliminado = true;
       miManejadorDeMapa.SeModificóUnElemento();
+    }
+
+
+    /// <summary>
+    /// Hace que el elemento se re-genere.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Si el elemento no hay sido modificado o eliminado entonces no pasa nada.
+    /// </para>
+    /// <para>
+    /// Si el elemento ha sido modificado entonces se borra el estado de
+    /// modificado y la copia original.
+    /// </para>
+    /// <para>
+    /// Si el elemento ha sido eliminado se genera un excepción.
+    /// </para>
+    /// </remarks>
+    /// <param name="elNuevoNùmeroDelElemento">El nuevo nùmero del Elemento regenerado.</param>
+    public void Regenera(int elNuevoNùmeroDelElemento)
+    {
+      if (miFuéEliminado)
+      {
+        // Si el elemento ha sido eliminado se genera un excepción.
+        throw new InvalidOperationException("No de puede regenerar un elemento está eliminado: " + ToString());
+      }
+      else if (miFuéModificado)
+      {
+        // Si el elemento ha sido modificado entonces se borra el estado de
+        // modificado y la copia original.
+        miFuéModificado = false;
+        misModificacionesDeNombre.Clear();
+        misModificacionesDeTipo.Clear();
+        miOriginal = null;
+        miNúmero = elNuevoNùmeroDelElemento;
+      }
     }
 
 

@@ -107,6 +107,13 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Propiedades
+    public readonly static string DescripciónAceptarModificaciones =
+      "Acepta las modificaciones a los elementos del mapa. \n" +
+      " - Elementos marcados como eliminados son eliminados definitivamente.\n" +
+      " - Elementos modificados son re-inicializados borrando el estado de modificados.\n" +
+      " - Las listas de errores, duplicados, conflictos, etc. son borradas.";
+
+
     /// <summary>
     /// Devuelve los elementos del mapa.
     /// </summary>
@@ -177,42 +184,143 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elArchivo"></param>
     public void Abrir(string elArchivo)
     {
-      // Nos aseguramos que nadie modifique el manejador durante esta operación.
-      lock (misPDIs)
-      {
-        miArchivo = elArchivo;
-        miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
+      miArchivo = elArchivo;
+      miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
 
-        // Por ahora el único formato es el Polish.
-        LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
+      // Por ahora el único formato es el Polish.
+      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
 
-        // Genera las listas.
-        misPDIs.Clear();
-        foreach (ElementoDelMapa elemento in misElementos)
-        {
-          if (elemento is PDI)
-          {
-            misPDIs.Add((PDI)elemento);
-          }
-        }
-      }
+      IList<ElementoDelMapa> losElementos = lector.ElementosDelMapa;
 
-      // Genera el evento de lectura de mapa nuevo.
-      SeAbrioUnMapaNuevo();
+      CreaMapaNuevo(losElementos);
     }
 
 
     /// <summary>
     /// Guarda los cambios.
     /// </summary>
-    public void Guarda(string elArchivo)
+    public void GuardaEnFormatoPolish(string elArchivo)
     {
-      // Guarda los cambios.
-      new EscritorDeFormatoPolish(elArchivo, misElementos, miEscuchadorDeEstatus);
+      // Crea las diferentes listas de elementos a guardar.
+      // EL primer elemento de cada lista tiene que ser el encabezado.
+      List<ElementoDelMapa> elementosSinEliminar = new List<ElementoDelMapa>();
+      List<ElementoDelMapa> elementosEliminados = new List<ElementoDelMapa>();
+      List<ElementoDelMapa> originalDeLosElementosModificados = new List<ElementoDelMapa>();
+      List<ElementoDelMapa> finalDeLosElementosModificados = new List<ElementoDelMapa>();
+      List<ElementoDelMapa> elementosConErrores = new List<ElementoDelMapa>();
+      foreach (ElementoDelMapa elemento in misElementos)
+      {
+        bool esElEncabezado = (elemento.Clase == "IMG ID");
+        if (esElEncabezado)
+        {
+          // Todas las listas necesitan el encabezado para generar
+          // mapas válidos.
+          elementosSinEliminar.Add(elemento);
+          originalDeLosElementosModificados.Add(elemento);
+          finalDeLosElementosModificados.Add(elemento);
+          elementosEliminados.Add(elemento);
+          elementosConErrores.Add(elemento);
+        }
+        else if (!elemento.FuéEliminado)
+        {
+          // Si el elemento no fué eliminado entonces se añade a las lista
+          // de elementos sin eliminar.  
+          elementosSinEliminar.Add(elemento);
 
-      // Actualiza el archivo.
+          // Si el elemento fué modificado entonces se añade a
+          // las listas de elementos modificados. 
+          if (elemento.FuéModificado)
+          {
+            originalDeLosElementosModificados.Add(elemento.Original);
+            finalDeLosElementosModificados.Add(elemento);
+          }
+        }
+        else
+        {
+          // Si el elemento fué eliminado entonces solo se añade a la
+          // lista de elemento eliminados.
+          elementosEliminados.Add(elemento);
+        }
+      }
+
+      // Añade los errores de los distinto manejadores.
+      foreach (PDI pdi in miManejadorDePDIs.Errores.Keys)
+      {
+        elementosConErrores.Add(pdi);
+      }
+
+      #region Guarda los diferentes archivos.
+      // Guarda el mapa nuevo.
+      new EscritorDeFormatoPolish(elArchivo, elementosSinEliminar, miEscuchadorDeEstatus);
+
+      // Crea el nobre del archivo base.
+      string directorio = Path.GetFullPath(Path.GetDirectoryName(elArchivo));
+      string nombre = Path.GetFileNameWithoutExtension(elArchivo);
+      string archivoBase = Path.Combine(directorio, nombre);
+
+      // Guarda los elementos eliminados.
+      if (elementosEliminados.Count > 1)
+      {
+        string archivo = archivoBase + ".Eliminados.mp";
+        new EscritorDeFormatoPolish(archivo, elementosEliminados, miEscuchadorDeEstatus);
+      }
+
+      // Guarda los originales de los elementos modificados.
+      if (originalDeLosElementosModificados.Count > 1)
+      {
+        string archivo = archivoBase + ".Modificados.Originales.mp";
+        new EscritorDeFormatoPolish(archivo, originalDeLosElementosModificados, miEscuchadorDeEstatus);
+      }
+
+      // Guarda los finales de los elementos modificados.
+      if (finalDeLosElementosModificados.Count > 1)
+      {
+        string archivo = archivoBase + ".Modificados.Finales.mp";
+        new EscritorDeFormatoPolish(archivo, finalDeLosElementosModificados, miEscuchadorDeEstatus);
+      }
+
+      // Guarda los finales de los elementos modificados.
+      if (elementosConErrores.Count > 1)
+      {
+        string archivo = archivoBase + ".Errores.mp";
+        new EscritorDeFormatoPolish(archivo, elementosConErrores, miEscuchadorDeEstatus);
+      }
+      #endregion
+
+      // Actualiza el archivo activo.
       miArchivo = elArchivo;
       miEscuchadorDeEstatus.ArchivoActivo = elArchivo;
+    }
+
+
+    /// <summary>
+    /// Acepta las modificaciones de los elementos.
+    /// </summary>
+    /// <para>
+    /// Elementos eliminados son eliminados completamente.
+    /// </para>
+    /// <para>
+    /// Elementos modificados son re-inicializados borrando el estado
+    /// de modificados y la copia original.
+    /// </para>
+    /// </remarks>
+    public void AceptaModificaciones()
+    {
+      /// Genera la nueva lista de elementos del mapa.
+      List<ElementoDelMapa> elementosNuevos = new List<ElementoDelMapa>();
+      int númeroDeElemento = 1;
+      foreach (ElementoDelMapa elemento in misElementos)
+      {
+        if (!elemento.FuéEliminado)
+        {
+          elemento.Regenera(númeroDeElemento);
+          elementosNuevos.Add(elemento);
+          ++númeroDeElemento;
+        }
+      }
+
+      // Crea el Nuevo mapa con los elementos nuevos.
+      CreaMapaNuevo(elementosNuevos);
     }
 
 
@@ -271,9 +379,36 @@ namespace GpsYv.ManejadorDeMapa
 
     #region Métodos Privados
     /// <summary>
-    /// Genera el evento indicando que se modificaron elementos.
+    /// Crea un mapa nuevo.
     /// </summary>
-    private void SeAbrioUnMapaNuevo()
+    /// <param name="losElementos">Los elementos del mapa nuevo.</param>
+    private void CreaMapaNuevo(IList<ElementoDelMapa> losElementos)
+    {
+      // Asigna los elementos del mapa.
+      misElementos = losElementos;
+
+      // Crea todas las listas especializadas.
+      misPDIs.Clear();
+      foreach (ElementoDelMapa elemento in misElementos)
+      {
+        if (elemento is PDI)
+        {
+          misPDIs.Add((PDI)elemento);
+        }
+      }
+
+      // Borra el estado de eventos de modificación.
+      miHayEventosDeModificaciónDeElementoPendientes = false;
+
+      // Genera el evento de mapa nuevo.
+      HayUnMapaNuevo();
+    }
+
+    
+    /// <summary>
+    /// Genera el evento indicando que hay un mapa nuevo.
+    /// </summary>
+    private void HayUnMapaNuevo()
     {
       if (MapaNuevo != null)
       {

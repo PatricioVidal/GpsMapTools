@@ -99,6 +99,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       this.Text = VentanaDeAcerca.AssemblyDescription + " - " + VentanaDeAcerca.AssemblyCompany;
 
       // Asigna los ToolTips de los menús.
+      miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
       miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
       miMenúEliminarCaracteresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
@@ -116,7 +117,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miManejadorDeMapa = new ManejadorDeMapa(miEscuchadorDeEstatus);
 
       // Maneja eventos de modificación de elementos.
-      miManejadorDeMapa.MapaNuevo += EnElementosModificados;
+      miManejadorDeMapa.MapaNuevo += EnMapaNuevo;
       miManejadorDeMapa.ElementosModificados += EnElementosModificados;
 
       // Asigna las propiedades de la interfase de PDIs.
@@ -158,7 +159,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
             }
             catch (Exception e)
             {
-              Programa.MuestraExcepción(e);
+              Programa.MuestraExcepción("Error leyendo archivo " + archivo, e);
             }
             break;
         }
@@ -166,8 +167,35 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
+    private void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      // Deshabilita los menus de Guardar.
+      miMenuGuardar.Enabled = false;
+      miMenuGuardarComo.Enabled = false;
+      miMenuAceptarModificaciones.Enabled = false;
+
+      // Actualiza la lista de elementos.
+      ActualizaLista();
+    }
+
+
     private void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
+      // Actualiza la lista de elementos.
+      ActualizaLista();
+
+      // Habilita los menus de Guardar.
+      miMenuGuardar.Enabled = true;
+      miMenuGuardarComo.Enabled = true;
+      miMenuAceptarModificaciones.Enabled = true;
+    }
+
+
+    private void ActualizaLista()
+    {
+      // Desabilita las actulizaciones de la lista.
+      miListaDeElementos.SuspendLayout();
+
       // Vacia la lista.
       misItemsDeListaDeElementos.Clear();
 
@@ -190,12 +218,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Pone el número de elementos virtuales.
       miListaDeElementos.VirtualListSize = misItemsDeListaDeElementos.Count;
 
+      // Habilita las actulizaciones de la lista.
+      miListaDeElementos.ResumeLayout(false);
+
       // Actualiza la Pestaña.
       this.miPaginaDeElementos.Text = "Elementos (" + miListaDeElementos.VirtualListSize + ")";
-
-      // Habilita los menus de Guardar.
-      miMenuGuardar.Enabled = true;
-      miMenuGuardarComo.Enabled = true;
     }
 
 
@@ -234,7 +261,20 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       DialogResult respuesta = ventanaDeGuardar.ShowDialog();
       if (respuesta == DialogResult.OK)
       {
-        miManejadorDeMapa.Guarda(ventanaDeGuardar.FileName);
+        GuardaMapa(ventanaDeGuardar.FileName);
+      }
+    }
+
+
+    private void GuardaMapa(string elArchivo)
+    {
+      try
+      {
+        miManejadorDeMapa.GuardaEnFormatoPolish(elArchivo);
+      }
+      catch (Exception e)
+      {
+        Programa.MuestraExcepción("Error guardando archivo " + elArchivo, e);
       }
     }
 
@@ -257,7 +297,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         MessageBoxIcon.Warning);
       if (respuesta == DialogResult.Yes)
       {
-        miManejadorDeMapa.Guarda(archivo);
+        GuardaMapa(archivo);
       }
     }
 
@@ -362,6 +402,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
       // Ver aquí para detalles: http://blogs.msdn.com/rprabhu/articles/433979.aspx 
       Settings.Default.Save();
+    }
+
+
+    private void EnMenúAceptarModificaciones(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.AceptaModificaciones();
     }
     #endregion
   }

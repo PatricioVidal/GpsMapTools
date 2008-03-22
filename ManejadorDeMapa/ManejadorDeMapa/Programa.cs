@@ -74,6 +74,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -98,7 +99,7 @@ namespace GpsYv.ManejadorDeMapa
       }
       catch (Exception e)
       {
-        MuestraExcepción(e);
+        MuestraExcepción("Error irrecuperable. La aplicación va a cerrar.", e);
       }
       Trace.Unindent();
       Trace.Flush();
@@ -108,29 +109,32 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Muestra información sobre una excepción dada.
     /// </summary>
+    /// <param name="elMensaje">El mensaje.</param>
     /// <param name="laExcepción">La excepción dada.</param>
-    public static void MuestraExcepción(Exception laExcepción)
+    public static void MuestraExcepción(string elMensaje, Exception laExcepción)
     {
       // Crea un archivo de registro.
       string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyTitle + ".Error.log";
       using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
-        string encabezado = DateTime.Now + ": " + laExcepción.Message;
+        string encabezado = DateTime.Now + ": " + elMensaje;
         registro.WriteLine(encabezado);
         registro.WriteLine(laExcepción);
         registro.WriteLine();
       }
 
       // Muestra la excepción al usuario.
-      string mensaje = laExcepción.Message;
+      StringBuilder mensaje = new StringBuilder();
+      mensaje.AppendLine(elMensaje);
+      mensaje.AppendLine(laExcepción.Message);
       Exception innerException = laExcepción.InnerException;
       while (innerException != null)
       {
-        mensaje += "\n"+ innerException.Message;
+        mensaje.AppendLine(innerException.Message);
         innerException = innerException.InnerException;
       }
       MessageBox.Show(
-        mensaje,
+        mensaje.ToString(),
         Interfase.VentanaDeAcerca.AssemblyTitle,
         MessageBoxButtons.OK,
         MessageBoxIcon.Error);

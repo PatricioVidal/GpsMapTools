@@ -107,16 +107,23 @@ namespace GpsYv.ManejadorDeMapa
       // Usar el punto para separar decimales.
       miFormatoNumérico.NumberDecimalSeparator = ".";
 
-      // Reporta estatus.
-      elEscuchadorDeEstatus.Estatus = "Guardando ...";
-      elEscuchadorDeEstatus.Progreso = 0;
-
-      // Establece el límite superior de la barra de progreso.
-      int númeroDeElementos = losElementodDelMapa.Count;
-      elEscuchadorDeEstatus.ProgresoMáximo = númeroDeElementos;
-
       try
       {
+        // Hacer una copia si el archivo existe.
+        if (File.Exists(elArchivo))
+        {
+          bool sobreEscribe = true;
+          File.Copy(elArchivo, elArchivo + ".bak", sobreEscribe);
+        }
+
+        // Reporta estatus.
+        elEscuchadorDeEstatus.Estatus = "Escribiendo " + elArchivo + " ...";
+        elEscuchadorDeEstatus.Progreso = 0;
+
+        // Establece el límite superior de la barra de progreso.
+        int númeroDeElementos = losElementodDelMapa.Count;
+        elEscuchadorDeEstatus.ProgresoMáximo = númeroDeElementos;
+
         using (StreamWriter escritor = new StreamWriter(elArchivo, false, miCodificaciónPorDefecto))
         {
           // Guarda todos los elementos.
@@ -166,12 +173,6 @@ namespace GpsYv.ManejadorDeMapa
 
     private void Guarda(ElementoDelMapa elElemento, StreamWriter elEscritor)
     {
-      // Salirse si el elemeto está eliminado.
-      if (elElemento.FuéEliminado)
-      {
-        return;
-      }
-
       // Escribe la clase.
       string clase = elElemento.Clase;
       elEscritor.WriteLine("[" + clase + "]");
@@ -190,7 +191,7 @@ namespace GpsYv.ManejadorDeMapa
           break;
       }
 
-
+      // Guarda los campos del elemento.
       foreach (Campo campo in elElemento.Campos)
       {
         if (campo is CampoComentario)

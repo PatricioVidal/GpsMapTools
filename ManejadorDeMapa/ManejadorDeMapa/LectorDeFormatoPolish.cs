@@ -88,8 +88,22 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private readonly ManejadorDeMapa miManejadorDeMapa;
-    private IList<ElementoDelMapa> misElementosDelMapa;
+    private readonly List<ElementoDelMapa> misElementosDelMapa = new List<ElementoDelMapa>();
     private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Obtiene los elementos del mapa leídos.
+    /// </summary>
+    public IList<ElementoDelMapa> ElementosDelMapa
+    {
+      get
+      {
+        return misElementosDelMapa;
+      }
+    }
+
     #endregion
 
     #region Métodos Públicos
@@ -103,14 +117,12 @@ namespace GpsYv.ManejadorDeMapa
       : base(elEscuchadorDeEstatus)
     {
       miManejadorDeMapa = elManejadorDeMapa;
-      misElementosDelMapa = elManejadorDeMapa.Elementos;
-      misElementosDelMapa.Clear();
 
       // Usar el punto para separar decimales.
       miFormatoNumérico.NumberDecimalSeparator = ".";
 
       // Abre el archivo.
-      Abrir(elArchivo);
+      Lee(elArchivo);
 
       // Reporta el número de elementos leídos.
       int númeroDeElementos = misElementosDelMapa.Count;
