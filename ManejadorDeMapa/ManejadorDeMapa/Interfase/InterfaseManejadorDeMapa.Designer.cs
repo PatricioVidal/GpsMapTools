@@ -30,7 +30,7 @@
         {
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeMapa));
           this.miMenuPrincipal = new System.Windows.Forms.MenuStrip();
-          this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúMapa = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAbrirArchivo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuGuardar = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuGuardarComo = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +43,7 @@
           this.miMenuArreglarPalabrasDePDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscaDuplicados = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarErrores = new System.Windows.Forms.ToolStripMenuItem();
-          this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúAyuda = new System.Windows.Forms.ToolStripMenuItem();
           this.acercaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAcerca = new System.Windows.Forms.ToolStripMenuItem();
           this.miEstatus = new System.Windows.Forms.StatusStrip();
@@ -54,7 +54,6 @@
           this.miPaginaDeElementos = new System.Windows.Forms.TabPage();
           this.miControladorDePestañas = new System.Windows.Forms.TabControl();
           this.miPáginaMapa = new System.Windows.Forms.TabPage();
-          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miPáginaTodos = new System.Windows.Forms.TabPage();
           this.miListaDeElementos = new System.Windows.Forms.ListView();
           this.miColumnaNumero = new System.Windows.Forms.ColumnHeader();
@@ -63,8 +62,9 @@
           this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
           this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
           this.miPaginaDePDIs = new System.Windows.Forms.TabPage();
-          this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
           this.miMenuAceptarModificaciones = new System.Windows.Forms.ToolStripMenuItem();
+          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
+          this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -78,26 +78,26 @@
           // miMenuPrincipal
           // 
           this.miMenuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
+            this.miMenúMapa,
             this.miMenuPDIs,
-            this.ayudaToolStripMenuItem});
+            this.miMenúAyuda});
           this.miMenuPrincipal.Location = new System.Drawing.Point(0, 0);
           this.miMenuPrincipal.Name = "miMenuPrincipal";
           this.miMenuPrincipal.Size = new System.Drawing.Size(784, 24);
           this.miMenuPrincipal.TabIndex = 0;
           this.miMenuPrincipal.Text = "MenuPrincipal";
           // 
-          // archivoToolStripMenuItem
+          // miMenúMapa
           // 
-          this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+          this.miMenúMapa.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenuAbrirArchivo,
             this.miMenuAceptarModificaciones,
             this.miMenuGuardar,
             this.miMenuGuardarComo,
             this.miMenuSalir});
-          this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-          this.archivoToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-          this.archivoToolStripMenuItem.Text = "Mapa";
+          this.miMenúMapa.Name = "miMenúMapa";
+          this.miMenúMapa.Size = new System.Drawing.Size(49, 20);
+          this.miMenúMapa.Text = "Mapa";
           // 
           // miMenuAbrirArchivo
           // 
@@ -164,14 +164,14 @@
           // 
           this.miMenúEliminarCaracteresEnPDIs.Name = "miMenúEliminarCaracteresEnPDIs";
           this.miMenúEliminarCaracteresEnPDIs.Size = new System.Drawing.Size(243, 22);
-          this.miMenúEliminarCaracteresEnPDIs.Text = "1. Elimina Caracteres ";
+          this.miMenúEliminarCaracteresEnPDIs.Text = "1. Eliminar Caracteres Inválidos";
           this.miMenúEliminarCaracteresEnPDIs.Click += new System.EventHandler(this.EnMenúEliminarCaracteresEnPDIs);
           // 
           // miMenuArreglarLetrasEnPDIs
           // 
           this.miMenuArreglarLetrasEnPDIs.Name = "miMenuArreglarLetrasEnPDIs";
           this.miMenuArreglarLetrasEnPDIs.Size = new System.Drawing.Size(243, 22);
-          this.miMenuArreglarLetrasEnPDIs.Text = "2. Arregla Letras en Nombres";
+          this.miMenuArreglarLetrasEnPDIs.Text = "2. Arreglar Letras en Nombres";
           this.miMenuArreglarLetrasEnPDIs.Click += new System.EventHandler(this.EnMenuArreglarLetrasEnPDIs);
           // 
           // miMenuArreglarPalabrasDePDIs
@@ -195,14 +195,14 @@
           this.miMenúBuscarErrores.Text = "5. Buscar Errores";
           this.miMenúBuscarErrores.Click += new System.EventHandler(this.EnMenuBuscarErroresEnPDIs);
           // 
-          // ayudaToolStripMenuItem
+          // miMenúAyuda
           // 
-          this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+          this.miMenúAyuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.acercaToolStripMenuItem,
             this.miMenuAcerca});
-          this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-          this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-          this.ayudaToolStripMenuItem.Text = "Ayuda";
+          this.miMenúAyuda.Name = "miMenúAyuda";
+          this.miMenúAyuda.Size = new System.Drawing.Size(53, 20);
+          this.miMenúAyuda.Text = "Ayuda";
           // 
           // acercaToolStripMenuItem
           // 
@@ -299,23 +299,6 @@
           this.miPáginaMapa.Text = "Mapa";
           this.miPáginaMapa.UseVisualStyleBackColor = true;
           // 
-          // miInterfaseDeMapa
-          // 
-          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
-          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
-          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
-          this.miInterfaseDeMapa.ManejadorDeMapa = null;
-          this.miInterfaseDeMapa.MuestraPDIs = false;
-          this.miInterfaseDeMapa.MuestraPolígonos = false;
-          this.miInterfaseDeMapa.MuestraPolilíneas = false;
-          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
-          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
-          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
-          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
-          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
-          this.miInterfaseDeMapa.TabIndex = 1;
-          // 
           // miPáginaTodos
           // 
           this.miPáginaTodos.Controls.Add(this.miListaDeElementos);
@@ -382,6 +365,31 @@
           this.miPaginaDePDIs.Text = "PDIs";
           this.miPaginaDePDIs.UseVisualStyleBackColor = true;
           // 
+          // miMenuAceptarModificaciones
+          // 
+          this.miMenuAceptarModificaciones.Enabled = false;
+          this.miMenuAceptarModificaciones.Name = "miMenuAceptarModificaciones";
+          this.miMenuAceptarModificaciones.Size = new System.Drawing.Size(199, 22);
+          this.miMenuAceptarModificaciones.Text = "Aceptar Modificaciones";
+          this.miMenuAceptarModificaciones.Click += new System.EventHandler(this.EnMenúAceptarModificaciones);
+          // 
+          // miInterfaseDeMapa
+          // 
+          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
+          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
+          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
+          this.miInterfaseDeMapa.ManejadorDeMapa = null;
+          this.miInterfaseDeMapa.MuestraPDIs = false;
+          this.miInterfaseDeMapa.MuestraPolígonos = false;
+          this.miInterfaseDeMapa.MuestraPolilíneas = false;
+          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
+          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
+          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
+          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
+          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
+          this.miInterfaseDeMapa.TabIndex = 1;
+          // 
           // miInterfaseManejadorDePDIs
           // 
           this.miInterfaseManejadorDePDIs.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -391,14 +399,6 @@
           this.miInterfaseManejadorDePDIs.Name = "miInterfaseManejadorDePDIs";
           this.miInterfaseManejadorDePDIs.Size = new System.Drawing.Size(770, 486);
           this.miInterfaseManejadorDePDIs.TabIndex = 0;
-          // 
-          // miMenuAceptarModificaciones
-          // 
-          this.miMenuAceptarModificaciones.Enabled = false;
-          this.miMenuAceptarModificaciones.Name = "miMenuAceptarModificaciones";
-          this.miMenuAceptarModificaciones.Size = new System.Drawing.Size(199, 22);
-          this.miMenuAceptarModificaciones.Text = "Aceptar Modificaciones";
-          this.miMenuAceptarModificaciones.Click += new System.EventHandler(this.EnMenúAceptarModificaciones);
           // 
           // InterfaseManejadorDeMapa
           // 
@@ -433,12 +433,12 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip miMenuPrincipal;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miMenúMapa;
         private System.Windows.Forms.ToolStripMenuItem miMenuAbrirArchivo;
         private System.Windows.Forms.ToolStripMenuItem miMenuGuardarComo;
         private System.Windows.Forms.ToolStripMenuItem miMenuSalir;
         private System.Windows.Forms.ToolStripMenuItem miMenuPDIs;
-        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miMenúAyuda;
         private System.Windows.Forms.StatusStrip miEstatus;
         private System.Windows.Forms.TabControl miControladorDePestañasPrincipal;
         private System.Windows.Forms.TabPage miPaginaDePDIs;
