@@ -331,17 +331,22 @@ namespace GpsYv.ManejadorDeMapa
         SeparadorDeModificaciones + elNombreNuevo);
 
       // Busca y actualiza el campo del nombre.
-      IList<Campo> campos = misCampos;
+      bool encontróCampoNombre = false;
       for (int i = 0; i < misCampos.Count; ++i)
       {
-        if (campos[i] is CampoNombre)
+        if (misCampos[i] is CampoNombre)
         {
-          // Remplaza el campo.
-          campos[i] = new CampoNombre(miNombre);
+          encontróCampoNombre = true;
 
-          // Solo se cambia el primer campo nombre.
-          break;
+          // Remplaza el campo.
+          misCampos[i] = new CampoNombre(miNombre);
         }
+      }
+      
+      // Añade el campo tipo si no se encontró.
+      if (!encontróCampoNombre)
+      {
+        misCampos.Add(new CampoNombre(miNombre));
       }
 
       // Avisa que se modificó un elemento.
@@ -366,17 +371,22 @@ namespace GpsYv.ManejadorDeMapa
         SeparadorDeModificaciones + elTipoNuevo);
 
       // Busca y actualiza el campo del tipo.
-      IList<Campo> campos = misCampos;
+      bool encontróCampoTipo = false;
       for (int i = 0; i < misCampos.Count; ++i)
       {
-        if (campos[i] is CampoTipo)
+        if (misCampos[i] is CampoTipo)
         {
-          // Remplaza el campo.
-          campos[i] = new CampoTipo(miTipo);
+          encontróCampoTipo = true;
 
-          // Solo se cambia el primer campo tipo.
-          break;
+          // Remplaza el campo.
+          misCampos[i] = new CampoTipo(miTipo);
         }
+      }
+
+      // Añade el campo tipo si no se encontró.
+      if (!encontróCampoTipo)
+      {
+        misCampos.Add(new CampoTipo(miTipo));
       }
 
       // Actualiza la descripción.
