@@ -32,6 +32,7 @@
           this.miMenuPrincipal = new System.Windows.Forms.MenuStrip();
           this.miMenúMapa = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAbrirArchivo = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenuAceptarModificaciones = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuGuardar = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuGuardarComo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuSalir = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +55,7 @@
           this.miPaginaDeElementos = new System.Windows.Forms.TabPage();
           this.miControladorDePestañas = new System.Windows.Forms.TabControl();
           this.miPáginaMapa = new System.Windows.Forms.TabPage();
+          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miPáginaTodos = new System.Windows.Forms.TabPage();
           this.miListaDeElementos = new System.Windows.Forms.ListView();
           this.miColumnaNumero = new System.Windows.Forms.ColumnHeader();
@@ -62,8 +64,6 @@
           this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
           this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
           this.miPaginaDePDIs = new System.Windows.Forms.TabPage();
-          this.miMenuAceptarModificaciones = new System.Windows.Forms.ToolStripMenuItem();
-          this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
@@ -107,6 +107,14 @@
           this.miMenuAbrirArchivo.ToolTipText = "Abre un mapa.";
           this.miMenuAbrirArchivo.Click += new System.EventHandler(this.EnMenuAbrir);
           // 
+          // miMenuAceptarModificaciones
+          // 
+          this.miMenuAceptarModificaciones.Enabled = false;
+          this.miMenuAceptarModificaciones.Name = "miMenuAceptarModificaciones";
+          this.miMenuAceptarModificaciones.Size = new System.Drawing.Size(199, 22);
+          this.miMenuAceptarModificaciones.Text = "Aceptar Modificaciones";
+          this.miMenuAceptarModificaciones.Click += new System.EventHandler(this.EnMenúAceptarModificaciones);
+          // 
           // miMenuGuardar
           // 
           this.miMenuGuardar.Enabled = false;
@@ -121,7 +129,7 @@
           this.miMenuGuardarComo.Enabled = false;
           this.miMenuGuardarComo.Name = "miMenuGuardarComo";
           this.miMenuGuardarComo.Size = new System.Drawing.Size(199, 22);
-          this.miMenuGuardarComo.Text = "Guardar Como";
+          this.miMenuGuardarComo.Text = "Guardar Como ...";
           this.miMenuGuardarComo.ToolTipText = "Guarda el mapa con el un nombre nuevo.";
           this.miMenuGuardarComo.Click += new System.EventHandler(this.EnMenuGuardarComo);
           // 
@@ -299,6 +307,23 @@
           this.miPáginaMapa.Text = "Mapa";
           this.miPáginaMapa.UseVisualStyleBackColor = true;
           // 
+          // miInterfaseDeMapa
+          // 
+          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
+          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
+          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
+          this.miInterfaseDeMapa.ManejadorDeMapa = null;
+          this.miInterfaseDeMapa.MuestraPDIs = false;
+          this.miInterfaseDeMapa.MuestraPolígonos = false;
+          this.miInterfaseDeMapa.MuestraPolilíneas = false;
+          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
+          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
+          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
+          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
+          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
+          this.miInterfaseDeMapa.TabIndex = 1;
+          // 
           // miPáginaTodos
           // 
           this.miPáginaTodos.Controls.Add(this.miListaDeElementos);
@@ -364,31 +389,6 @@
           this.miPaginaDePDIs.TabIndex = 0;
           this.miPaginaDePDIs.Text = "PDIs";
           this.miPaginaDePDIs.UseVisualStyleBackColor = true;
-          // 
-          // miMenuAceptarModificaciones
-          // 
-          this.miMenuAceptarModificaciones.Enabled = false;
-          this.miMenuAceptarModificaciones.Name = "miMenuAceptarModificaciones";
-          this.miMenuAceptarModificaciones.Size = new System.Drawing.Size(199, 22);
-          this.miMenuAceptarModificaciones.Text = "Aceptar Modificaciones";
-          this.miMenuAceptarModificaciones.Click += new System.EventHandler(this.EnMenúAceptarModificaciones);
-          // 
-          // miInterfaseDeMapa
-          // 
-          this.miInterfaseDeMapa.BackColor = System.Drawing.Color.Transparent;
-          this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
-          this.miInterfaseDeMapa.Location = new System.Drawing.Point(3, 3);
-          this.miInterfaseDeMapa.ManejadorDeMapa = null;
-          this.miInterfaseDeMapa.MuestraPDIs = false;
-          this.miInterfaseDeMapa.MuestraPolígonos = false;
-          this.miInterfaseDeMapa.MuestraPolilíneas = false;
-          this.miInterfaseDeMapa.MuestraTodoElMapa = true;
-          this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
-          this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
-          this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
-          this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
-          this.miInterfaseDeMapa.TabIndex = 1;
           // 
           // miInterfaseManejadorDePDIs
           // 

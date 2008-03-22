@@ -10,7 +10,7 @@ Lo próximo para hacer:
 
 Versión 1.7
 - Arreglada la forma que el campo de Tipo (Type) es escrito en los archivos.
-- Implementada la lógica para guardar archivos con los cambios hechos a los elementos.  Ahora al grabar el mapa se crean archivos con loe elementos eliminados, modificados, y errores.
+- Implementada la lógica para guardar archivos con los cambios hechos a los elementos.  Ahora al grabar el mapa se crean archivos con los elementos eliminados, modificados, y errores.
 - Añadido menú para aceptar las modificaciones a los elementos del mapa. Elementos marcados como eliminados son eliminados definitivamente. Elementos modificados son re-inicializados borrando el estado de modificados.  Las listas de errores y duplicados son borradas.
 - Interno: Actualizadas las Pruebas de Ventana de Cambio de Tipo para tener 100% de cobertura.
 - Interno: Cambiado "TipoVacio" a "TipoNulo".

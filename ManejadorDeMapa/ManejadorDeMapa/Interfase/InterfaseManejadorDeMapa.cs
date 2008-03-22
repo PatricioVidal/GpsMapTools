@@ -156,6 +156,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
             try
             {
               miManejadorDeMapa.Abrir(archivo);
+
+              // Deshabilita el menu de Guardar porque el mapa se acaba de leer.
+              miMenuGuardar.Enabled = false;
+
+              // Habilita el menú de "Guardar Como ..." porque hay un mapa en memoria.
+              miMenuGuardarComo.Enabled = true;
             }
             catch (Exception e)
             {
@@ -170,8 +176,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Deshabilita los menus de Guardar.
-      miMenuGuardar.Enabled = false;
-      miMenuGuardarComo.Enabled = false;
       miMenuAceptarModificaciones.Enabled = false;
 
       // Actualiza la lista de elementos.
@@ -186,7 +190,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Habilita los menus de Guardar.
       miMenuGuardar.Enabled = true;
-      miMenuGuardarComo.Enabled = true;
       miMenuAceptarModificaciones.Enabled = true;
     }
 
@@ -271,6 +274,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       try
       {
         miManejadorDeMapa.GuardaEnFormatoPolish(elArchivo);
+
+        // Deshabilita el menu de Guardar porque se acaba de guardar el mapa.
+        miMenuGuardar.Enabled = false;
       }
       catch (Exception e)
       {
