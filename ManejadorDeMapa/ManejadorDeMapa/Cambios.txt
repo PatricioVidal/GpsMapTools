@@ -8,6 +8,9 @@ Lo próximo para hacer:
 - Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.8
+
+
 Versión 1.7
 - Arreglada la forma que el campo de Tipo (Type) es escrito en los archivos.
 - Implementada la lógica para guardar archivos con los cambios hechos a los elementos.  Ahora al grabar el mapa se crean archivos con los elementos eliminados, modificados, y errores.
