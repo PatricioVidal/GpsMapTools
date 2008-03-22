@@ -121,7 +121,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       {
         misDescripciones = lasDescripciones;
 
-        Abrir(elArchivo);
+        Lee(elArchivo);
       }
 
 

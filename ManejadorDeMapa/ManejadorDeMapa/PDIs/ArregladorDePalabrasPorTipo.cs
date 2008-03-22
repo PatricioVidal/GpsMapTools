@@ -232,7 +232,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       public LectorDeCorrecciónDePalabrasPorTipo(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeConversionDePalabras);
+        Lee(miArchivoDeConversionDePalabras);
       }
 
 

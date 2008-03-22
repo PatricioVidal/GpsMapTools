@@ -146,7 +146,7 @@ namespace GpsYv.ManejadorDeMapa
         misLápices = losLápices;
         misDescripciones = lasDescripciones;
 
-        Abrir(elArchivo);
+        Lee(elArchivo);
       }
 
 

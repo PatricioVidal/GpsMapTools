@@ -168,7 +168,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       public LectorDeCaracteresAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeCaracteresAEliminar);
+        Lee(miArchivoDeCaracteresAEliminar);
       }
 
       #region Métodos Protegidos y Privados

@@ -133,10 +133,10 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Abre un archivo.
+    /// Lee un archivo.
     /// </summary>
     /// <param name="elArchivo">El archivo a abrir.</param>
-    public void Abrir(string elArchivo)
+    public void Lee(string elArchivo)
     {
       // Abre el archivo en modo de texto y empieza a leerlo
       // linea por linea.

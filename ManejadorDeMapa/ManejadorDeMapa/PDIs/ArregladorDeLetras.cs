@@ -174,7 +174,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       public LectorDeConversiónDeLetras(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Abrir(miArchivoDeLetrasAReemplazar);
+        Lee(miArchivoDeLetrasAReemplazar);
       }
 
       #region Métodos Protegidos y Privados
