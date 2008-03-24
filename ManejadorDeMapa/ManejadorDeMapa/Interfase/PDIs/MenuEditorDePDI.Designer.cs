@@ -28,8 +28,14 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
-      this.Text = "InterfaseEditorDePDI";
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuEditorDePDI));
+      this.SuspendLayout();
+      // 
+      // MenuEditorDePDI
+      // 
+      resources.ApplyResources(this, "$this");
+      this.ResumeLayout(false);
+
     }
 
     #endregion

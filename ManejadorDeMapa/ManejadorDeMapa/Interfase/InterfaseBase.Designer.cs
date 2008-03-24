@@ -28,14 +28,14 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseBase));
       this.SuspendLayout();
       // 
-      // InterfaseConManejadorDeMapa
+      // InterfaseBase
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Name = "InterfaseConManejadorDeMapa";
-      this.Size = new System.Drawing.Size(464, 437);
+      this.Name = "InterfaseBase";
       this.ResumeLayout(false);
 
     }

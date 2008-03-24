@@ -30,6 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.Windows.Forms.ColumnHeader columnaNúmero;
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseListaDeElementos));
       System.Windows.Forms.ColumnHeader columnaTipo;
       System.Windows.Forms.ColumnHeader columnaDescripción;
       System.Windows.Forms.ColumnHeader columnaNombre;
@@ -42,22 +43,19 @@
       // 
       // columnaNúmero
       // 
-      columnaNúmero.Text = "#";
-      columnaNúmero.Width = 45;
+      resources.ApplyResources(columnaNúmero, "columnaNúmero");
       // 
       // columnaTipo
       // 
-      columnaTipo.Text = "Tipo";
+      resources.ApplyResources(columnaTipo, "columnaTipo");
       // 
       // columnaDescripción
       // 
-      columnaDescripción.Text = "Descripción";
-      columnaDescripción.Width = 130;
+      resources.ApplyResources(columnaDescripción, "columnaDescripción");
       // 
       // columnaNombre
       // 
-      columnaNombre.Text = "Nombre";
-      columnaNombre.Width = 250;
+      resources.ApplyResources(columnaNombre, "columnaNombre");
       // 
       // miOrdenadorDeColumnaDeLista
       // 
@@ -73,7 +71,7 @@
             columnaNombre});
       this.FullRowSelect = true;
       this.GridLines = true;
-      this.Size = new System.Drawing.Size(513, 444);
+      resources.ApplyResources(this, "$this");
       this.View = System.Windows.Forms.View.Details;
       this.VirtualMode = true;
       this.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ObtieneItemDeLista);

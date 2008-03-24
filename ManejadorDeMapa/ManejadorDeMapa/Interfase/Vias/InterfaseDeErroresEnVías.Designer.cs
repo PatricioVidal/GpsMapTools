@@ -39,12 +39,14 @@
       this.miDivision.SuspendLayout();
       this.SuspendLayout();
       // 
+      // columnaRazón
+      // 
+      resources.ApplyResources(columnaRazón, "columnaRazón");
+      // 
       // miDivision
       // 
-      this.miDivision.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miDivision.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.miDivision, "miDivision");
       this.miDivision.Name = "miDivision";
-      this.miDivision.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // miDivision.Panel1
       // 
@@ -53,35 +55,23 @@
       // miDivision.Panel2
       // 
       this.miDivision.Panel2.Controls.Add(this.miMapaDeVíaSeleccionada);
-      this.miDivision.Size = new System.Drawing.Size(579, 502);
-      this.miDivision.SplitterDistance = 299;
-      this.miDivision.TabIndex = 4;
       // 
       // miLista
       // 
       this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnaRazón});
-      this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
-      this.miLista.Location = new System.Drawing.Point(0, 0);
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(579, 299);
-      this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       this.miLista.VirtualMode = true;
       // 
-      // columnaRazón
-      // 
-      columnaRazón.Text = "Razón";
-      columnaRazón.Width = 284;
-      // 
       // miMapaDeVíaSeleccionada
       // 
-      this.miMapaDeVíaSeleccionada.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miMapaDeVíaSeleccionada, "miMapaDeVíaSeleccionada");
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
-      this.miMapaDeVíaSeleccionada.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
       this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
@@ -91,16 +81,13 @@
       this.miMapaDeVíaSeleccionada.MuestraVías = false;
       this.miMapaDeVíaSeleccionada.Name = "miMapaDeVíaSeleccionada";
       this.miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas")));
-      this.miMapaDeVíaSeleccionada.Size = new System.Drawing.Size(579, 199);
-      this.miMapaDeVíaSeleccionada.TabIndex = 0;
       // 
       // InterfaseDeErroresEnVías
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miDivision);
       this.Name = "InterfaseDeErroresEnVías";
-      this.Size = new System.Drawing.Size(579, 502);
       this.miDivision.Panel1.ResumeLayout(false);
       this.miDivision.Panel2.ResumeLayout(false);
       this.miDivision.ResumeLayout(false);

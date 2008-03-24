@@ -10,11 +10,12 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseMapaDeVíaSeleccionada));
       this.SuspendLayout();
       // 
       // InterfaseMapaDeVíaSeleccionada
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.Name = "InterfaseMapaDeVíaSeleccionada";
       this.ResumeLayout(false);
 

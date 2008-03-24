@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseMapa));
       this.miGráficoDelMapa = new System.Windows.Forms.PictureBox();
       ((System.ComponentModel.ISupportInitialize)(this.miGráficoDelMapa)).BeginInit();
       this.SuspendLayout();
@@ -35,11 +36,8 @@
       // miGráficoDelMapa
       // 
       this.miGráficoDelMapa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.miGráficoDelMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miGráficoDelMapa.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.miGráficoDelMapa, "miGráficoDelMapa");
       this.miGráficoDelMapa.Name = "miGráficoDelMapa";
-      this.miGráficoDelMapa.Size = new System.Drawing.Size(545, 452);
-      this.miGráficoDelMapa.TabIndex = 0;
       this.miGráficoDelMapa.TabStop = false;
       this.miGráficoDelMapa.DoubleClick += new System.EventHandler(this.EnDobleClick);
       this.miGráficoDelMapa.MouseLeave += new System.EventHandler(this.EnRatónSaliendo);
@@ -47,13 +45,12 @@
       this.miGráficoDelMapa.Paint += new System.Windows.Forms.PaintEventHandler(this.EnPintar);
       this.miGráficoDelMapa.MouseEnter += new System.EventHandler(this.EnRatónEntrando);
       // 
-      // Mapa
+      // InterfaseMapa
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miGráficoDelMapa);
-      this.Name = "Mapa";
-      this.Size = new System.Drawing.Size(545, 452);
+      this.Name = "InterfaseMapa";
       ((System.ComponentModel.ISupportInitialize)(this.miGráficoDelMapa)).EndInit();
       this.ResumeLayout(false);
 

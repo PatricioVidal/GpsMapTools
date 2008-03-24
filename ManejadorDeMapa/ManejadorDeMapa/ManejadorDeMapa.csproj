@@ -226,6 +226,10 @@
       <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\PDIs\MenuEditorDePDI.resx">
+      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfase\PDIs\VentanaCambiarTipoDePDI.resx">
       <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
       <SubType>Designer</SubType>

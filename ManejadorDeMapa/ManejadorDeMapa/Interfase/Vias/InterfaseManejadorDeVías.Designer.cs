@@ -52,28 +52,21 @@
       this.miControladorDePestañas.Controls.Add(this.miPáginaMapa);
       this.miControladorDePestañas.Controls.Add(this.miPáginaDeTodos);
       this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
-      this.miControladorDePestañas.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miControladorDePestañas.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
       this.miControladorDePestañas.Name = "miControladorDePestañas";
       this.miControladorDePestañas.SelectedIndex = 0;
-      this.miControladorDePestañas.Size = new System.Drawing.Size(594, 457);
-      this.miControladorDePestañas.TabIndex = 5;
       // 
       // miPáginaMapa
       // 
       this.miPáginaMapa.Controls.Add(this.miInterfaseDeMapa);
-      this.miPáginaMapa.Location = new System.Drawing.Point(4, 22);
+      resources.ApplyResources(this.miPáginaMapa, "miPáginaMapa");
       this.miPáginaMapa.Name = "miPáginaMapa";
-      this.miPáginaMapa.Size = new System.Drawing.Size(586, 431);
-      this.miPáginaMapa.TabIndex = 4;
-      this.miPáginaMapa.Text = "Mapa";
       this.miPáginaMapa.UseVisualStyleBackColor = true;
       // 
       // miInterfaseDeMapa
       // 
-      this.miInterfaseDeMapa.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miInterfaseDeMapa, "miInterfaseDeMapa");
       this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
-      this.miInterfaseDeMapa.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseDeMapa.ManejadorDeMapa = null;
       this.miInterfaseDeMapa.MuestraPDIs = false;
       this.miInterfaseDeMapa.MuestraPolígonos = false;
@@ -83,26 +76,18 @@
       this.miInterfaseDeMapa.MuestraVías = true;
       this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
       this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
-      this.miInterfaseDeMapa.Size = new System.Drawing.Size(586, 431);
-      this.miInterfaseDeMapa.TabIndex = 0;
       // 
       // miPáginaDeTodos
       // 
       this.miPáginaDeTodos.Controls.Add(this.miDivisión);
-      this.miPáginaDeTodos.Location = new System.Drawing.Point(4, 22);
+      resources.ApplyResources(this.miPáginaDeTodos, "miPáginaDeTodos");
       this.miPáginaDeTodos.Name = "miPáginaDeTodos";
-      this.miPáginaDeTodos.Padding = new System.Windows.Forms.Padding(3);
-      this.miPáginaDeTodos.Size = new System.Drawing.Size(586, 431);
-      this.miPáginaDeTodos.TabIndex = 0;
-      this.miPáginaDeTodos.Text = "Todos";
       this.miPáginaDeTodos.UseVisualStyleBackColor = true;
       // 
       // miDivisión
       // 
-      this.miDivisión.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miDivisión.Location = new System.Drawing.Point(3, 3);
+      resources.ApplyResources(this.miDivisión, "miDivisión");
       this.miDivisión.Name = "miDivisión";
-      this.miDivisión.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // miDivisión.Panel1
       // 
@@ -111,29 +96,22 @@
       // miDivisión.Panel2
       // 
       this.miDivisión.Panel2.Controls.Add(this.miMapaDeVíaSeleccionada);
-      this.miDivisión.Size = new System.Drawing.Size(580, 425);
-      this.miDivisión.SplitterDistance = 212;
-      this.miDivisión.TabIndex = 4;
       // 
       // miLista
       // 
       this.miLista.Activation = System.Windows.Forms.ItemActivation.OneClick;
-      this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
-      this.miLista.Location = new System.Drawing.Point(0, 0);
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(580, 212);
-      this.miLista.TabIndex = 3;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       this.miLista.VirtualMode = true;
       // 
       // miMapaDeVíaSeleccionada
       // 
-      this.miMapaDeVíaSeleccionada.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miMapaDeVíaSeleccionada, "miMapaDeVíaSeleccionada");
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
-      this.miMapaDeVíaSeleccionada.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
       this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
@@ -143,37 +121,27 @@
       this.miMapaDeVíaSeleccionada.MuestraVías = false;
       this.miMapaDeVíaSeleccionada.Name = "miMapaDeVíaSeleccionada";
       this.miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas")));
-      this.miMapaDeVíaSeleccionada.Size = new System.Drawing.Size(580, 209);
-      this.miMapaDeVíaSeleccionada.TabIndex = 0;
       // 
       // miPáginaErrores
       // 
       this.miPáginaErrores.Controls.Add(this.miInterfaseDeErroresEnVías);
-      this.miPáginaErrores.Location = new System.Drawing.Point(4, 22);
+      resources.ApplyResources(this.miPáginaErrores, "miPáginaErrores");
       this.miPáginaErrores.Name = "miPáginaErrores";
-      this.miPáginaErrores.Padding = new System.Windows.Forms.Padding(3);
-      this.miPáginaErrores.Size = new System.Drawing.Size(586, 431);
-      this.miPáginaErrores.TabIndex = 5;
-      this.miPáginaErrores.Text = "Errores";
       this.miPáginaErrores.UseVisualStyleBackColor = true;
       // 
       // miInterfaseDeErroresEnVías
       // 
-      this.miInterfaseDeErroresEnVías.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miInterfaseDeErroresEnVías, "miInterfaseDeErroresEnVías");
       this.miInterfaseDeErroresEnVías.EscuchadorDeEstatus = null;
-      this.miInterfaseDeErroresEnVías.Location = new System.Drawing.Point(3, 3);
       this.miInterfaseDeErroresEnVías.ManejadorDeMapa = null;
       this.miInterfaseDeErroresEnVías.Name = "miInterfaseDeErroresEnVías";
-      this.miInterfaseDeErroresEnVías.Size = new System.Drawing.Size(580, 425);
-      this.miInterfaseDeErroresEnVías.TabIndex = 0;
       // 
       // InterfaseManejadorDeVías
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miControladorDePestañas);
       this.Name = "InterfaseManejadorDeVías";
-      this.Size = new System.Drawing.Size(594, 457);
       this.miControladorDePestañas.ResumeLayout(false);
       this.miPáginaMapa.ResumeLayout(false);
       this.miPáginaDeTodos.ResumeLayout(false);

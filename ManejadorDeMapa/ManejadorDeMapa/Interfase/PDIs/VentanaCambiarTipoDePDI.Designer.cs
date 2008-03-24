@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaCambiarTipoDePDI));
       this.miTextoTipoNuevo = new System.Windows.Forms.TextBox();
       this.miBotónCambiar = new System.Windows.Forms.Button();
       this.miBotónCancelar = new System.Windows.Forms.Button();
@@ -48,53 +49,35 @@
       // 
       // miTextoTipoNuevo
       // 
-      this.miTextoTipoNuevo.Location = new System.Drawing.Point(24, 19);
+      resources.ApplyResources(this.miTextoTipoNuevo, "miTextoTipoNuevo");
       this.miTextoTipoNuevo.Name = "miTextoTipoNuevo";
-      this.miTextoTipoNuevo.Size = new System.Drawing.Size(50, 20);
-      this.miTextoTipoNuevo.TabIndex = 2;
       this.miTextoTipoNuevo.TextChanged += new System.EventHandler(this.EnTipoNuevoCambió);
       this.miTextoTipoNuevo.Validated += new System.EventHandler(this.TipoValidado);
       // 
       // miBotónCambiar
       // 
-      this.miBotónCambiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.miBotónCambiar.Location = new System.Drawing.Point(221, 156);
+      resources.ApplyResources(this.miBotónCambiar, "miBotónCambiar");
       this.miBotónCambiar.Name = "miBotónCambiar";
-      this.miBotónCambiar.Size = new System.Drawing.Size(75, 23);
-      this.miBotónCambiar.TabIndex = 0;
-      this.miBotónCambiar.Text = "Cambiar";
       this.miBotónCambiar.UseVisualStyleBackColor = true;
       this.miBotónCambiar.Click += new System.EventHandler(this.EnBotónCambiar);
       // 
       // miBotónCancelar
       // 
-      this.miBotónCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      resources.ApplyResources(this.miBotónCancelar, "miBotónCancelar");
       this.miBotónCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.miBotónCancelar.Location = new System.Drawing.Point(302, 156);
       this.miBotónCancelar.Name = "miBotónCancelar";
-      this.miBotónCancelar.Size = new System.Drawing.Size(75, 23);
-      this.miBotónCancelar.TabIndex = 1;
-      this.miBotónCancelar.Text = "Cancelar";
       this.miBotónCancelar.UseVisualStyleBackColor = true;
       this.miBotónCancelar.Click += new System.EventHandler(this.EnBotónCancelar);
       // 
       // miTextoDescripción
       // 
-      this.miTextoDescripción.AutoSize = true;
-      this.miTextoDescripción.Location = new System.Drawing.Point(80, 22);
+      resources.ApplyResources(this.miTextoDescripción, "miTextoDescripción");
       this.miTextoDescripción.Name = "miTextoDescripción";
-      this.miTextoDescripción.Size = new System.Drawing.Size(0, 13);
-      this.miTextoDescripción.TabIndex = 3;
       // 
       // miEtiquetaTipoNuevo
       // 
-      this.miEtiquetaTipoNuevo.AutoSize = true;
-      this.miEtiquetaTipoNuevo.Location = new System.Drawing.Point(6, 22);
+      resources.ApplyResources(this.miEtiquetaTipoNuevo, "miEtiquetaTipoNuevo");
       this.miEtiquetaTipoNuevo.Name = "miEtiquetaTipoNuevo";
-      this.miEtiquetaTipoNuevo.Size = new System.Drawing.Size(21, 13);
-      this.miEtiquetaTipoNuevo.TabIndex = 4;
-      this.miEtiquetaTipoNuevo.Text = " 0x";
-      this.miEtiquetaTipoNuevo.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
       // groupBox1
       // 
@@ -102,41 +85,27 @@
       this.groupBox1.Controls.Add(this.miEtiquetaTipoNuevo);
       this.groupBox1.Controls.Add(this.miTextoDescripción);
       this.groupBox1.ForeColor = System.Drawing.SystemColors.Highlight;
-      this.groupBox1.Location = new System.Drawing.Point(12, 94);
+      resources.ApplyResources(this.groupBox1, "groupBox1");
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(365, 50);
-      this.groupBox1.TabIndex = 5;
       this.groupBox1.TabStop = false;
-      this.groupBox1.Text = "Tipo Nuevo";
       // 
       // groupBox2
       // 
       this.groupBox2.Controls.Add(this.miTextoDescripciónOriginal);
       this.groupBox2.Controls.Add(this.miTextoTipoOriginal);
-      this.groupBox2.Location = new System.Drawing.Point(12, 36);
+      resources.ApplyResources(this.groupBox2, "groupBox2");
       this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(365, 52);
-      this.groupBox2.TabIndex = 6;
       this.groupBox2.TabStop = false;
-      this.groupBox2.Text = "Tipo Original";
       // 
       // miTextoDescripciónOriginal
       // 
-      this.miTextoDescripciónOriginal.AutoSize = true;
-      this.miTextoDescripciónOriginal.Location = new System.Drawing.Point(80, 22);
+      resources.ApplyResources(this.miTextoDescripciónOriginal, "miTextoDescripciónOriginal");
       this.miTextoDescripciónOriginal.Name = "miTextoDescripciónOriginal";
-      this.miTextoDescripciónOriginal.Size = new System.Drawing.Size(63, 13);
-      this.miTextoDescripciónOriginal.TabIndex = 1;
-      this.miTextoDescripciónOriginal.Text = "Descripción";
       // 
       // miTextoTipoOriginal
       // 
-      this.miTextoTipoOriginal.AutoSize = true;
-      this.miTextoTipoOriginal.Location = new System.Drawing.Point(6, 22);
+      resources.ApplyResources(this.miTextoTipoOriginal, "miTextoTipoOriginal");
       this.miTextoTipoOriginal.Name = "miTextoTipoOriginal";
-      this.miTextoTipoOriginal.Size = new System.Drawing.Size(66, 13);
-      this.miTextoTipoOriginal.TabIndex = 0;
-      this.miTextoTipoOriginal.Text = "Tipo Original";
       // 
       // miProveedorDeErrorDeTipo
       // 
@@ -146,29 +115,22 @@
       // 
       this.miTextoNombrePDI.AutoEllipsis = true;
       this.miTextoNombrePDI.ForeColor = System.Drawing.SystemColors.Highlight;
-      this.miTextoNombrePDI.Location = new System.Drawing.Point(9, 9);
+      resources.ApplyResources(this.miTextoNombrePDI, "miTextoNombrePDI");
       this.miTextoNombrePDI.Name = "miTextoNombrePDI";
-      this.miTextoNombrePDI.Size = new System.Drawing.Size(206, 13);
-      this.miTextoNombrePDI.TabIndex = 7;
-      this.miTextoNombrePDI.Text = "PDI";
       // 
       // miTextCoordenadasPDI
       // 
       this.miTextCoordenadasPDI.AutoEllipsis = true;
       this.miTextCoordenadasPDI.ForeColor = System.Drawing.SystemColors.Highlight;
-      this.miTextCoordenadasPDI.Location = new System.Drawing.Point(221, 9);
+      resources.ApplyResources(this.miTextCoordenadasPDI, "miTextCoordenadasPDI");
       this.miTextCoordenadasPDI.Name = "miTextCoordenadasPDI";
-      this.miTextCoordenadasPDI.Size = new System.Drawing.Size(156, 13);
-      this.miTextCoordenadasPDI.TabIndex = 8;
-      this.miTextCoordenadasPDI.Text = "Coordenadas";
       // 
-      // VentanaCambiarTipo
+      // VentanaCambiarTipoDePDI
       // 
       this.AcceptButton = this.miBotónCambiar;
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.miBotónCancelar;
-      this.ClientSize = new System.Drawing.Size(389, 191);
       this.Controls.Add(this.miTextCoordenadasPDI);
       this.Controls.Add(this.miTextoNombrePDI);
       this.Controls.Add(this.groupBox2);
@@ -178,10 +140,7 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "VentanaCambiarTipo";
-      this.RightToLeftLayout = true;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "Cambiar Tipo de PDI";
+      this.Name = "VentanaCambiarTipoDePDI";
       this.TopMost = true;
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
