@@ -75,35 +75,35 @@ using System.Text;
 using Tst;
 using System.Collections;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
   /// Buscador de errores en PDIs.
   /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class BuscadorDeErrores : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IDictionary<PDI, string> misErrores;
+    private readonly IDictionary<Vía, string> misErrores;
     #endregion
 
     #region Métodos Públicos
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
+    public static readonly string Descripción = "Busca errores en las Vías.";
 
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
+    /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
     public BuscadorDeErrores(
-      ManejadorDePDIs elManejadorDePDIs,
+      ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePDIs, elEscuchadorDeEstatus)
+      : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      misErrores = elManejadorDePDIs.Errores;
+      misErrores = elManejadorDeVías.Errores;
     }
     #endregion
 
@@ -119,36 +119,36 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
 
     /// <summary>
-    /// Procesa un PDI.
+    /// Procesa na Vía.
     /// </summary>
-    /// <param name="elPDI">El PDI.</param>
+    /// <param name="elElemento">La Vía.</param>
     /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    protected override bool ProcesaElemento(Vía laVía)
     {
       List<string> errores = new List<string>();
 
       #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPDI.Tipo;
+      Tipo tipo = laVía.Tipo;
       bool esVacio = (tipo == Tipo.TipoNulo);
       if (esVacio)
       {
         errores.Add("El tipo está vacío.");
       }
-      #endregion 
+      #endregion
 
       #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
+      bool esConocido = CaracterísticasDePolilíneas.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {
-        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
+        errores.Add("El tipo (" + laVía.Tipo.ToString() + ") no es conocido");
       }
-      #endregion 
+      #endregion
 
       #region Verifica las coordenadas.
       // El PDI debe tener un campo de coordenadas y además tienen que
       // tener nivel zero.
       CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in elPDI.Campos)
+      foreach (Campo campo in laVía.Campos)
       {
         if (campo is CampoCoordenadas)
         {
@@ -170,7 +170,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (errores.Count > 0)
       {
         string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(elPDI, todosLosErrores);
+        misErrores.Add(laVía, todosLosErrores);
       }
 
       // Este método nunca modifica elementos.
@@ -187,7 +187,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       base.TerminoDeProcesar();
 
       // Reporta estatus.
-      Estatus = "PDIs con Errores: " + misErrores.Count;
+      Estatus = "Vías con Errores: " + misErrores.Count;
     }
     #endregion
   }

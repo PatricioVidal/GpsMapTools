@@ -78,6 +78,7 @@ using System.Threading;
 using System.Globalization;
 using System.Drawing;
 using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -220,8 +221,29 @@ namespace GpsYv.ManejadorDeMapa
     {
       IList<Campo> campos = LeeCampos();
 
-      // Añade la polilínea.
-      misElementosDelMapa.Add(new Polilínea(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+
+      // Busca el tipo de polilínea.
+      Tipo tipo = Tipo.TipoNulo;
+      foreach (Campo campo in campos)
+      {
+        if (campo is CampoTipo)
+        {
+          tipo = ((CampoTipo)campo).Tipo;
+        }
+      }
+
+      // Si el tipo es de Vía entonces crea una Vía.
+      // Si no, entonces crea una Polilínea.
+      if ((tipo != Tipo.TipoNulo) && (TiposDeVías.Tipos.Contains(tipo)))
+      {
+        // Añade la Vía.
+        misElementosDelMapa.Add(new Vía(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+      }
+      else
+      {
+        // Añade la polilínea.
+        misElementosDelMapa.Add(new Polilínea(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+      }
     }
 
 

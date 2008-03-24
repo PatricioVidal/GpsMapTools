@@ -87,10 +87,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #region Campos
     private ManejadorDeMapa miManejadorDeMapa;
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private List<ListViewItem> misItemsDeListaDeElementos = new List<ListViewItem>();
     #endregion
 
     #region Métodos Públicos
+    /// <summary>
+    /// Constructor.
+    /// </summary>
     public InterfaseManejadorDeMapa()
     {
       InitializeComponent();
@@ -98,14 +100,21 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Pone el nombre.
       this.Text = VentanaDeAcerca.AssemblyDescription + " - " + VentanaDeAcerca.AssemblyCompany;
 
-      // Asigna los ToolTips de los menús.
+      #region Asigna los ToolTips de los menús.
       miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
+
+      // PDIs.
       miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
       miMenúEliminarCaracteresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
       miMenuArreglarPalabrasDePDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
-      miMenúBuscaDuplicados.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
-      miMenúBuscarErrores.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores.Descripción;
+      miMenúBuscaDuplicadosEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
+      miMenúBuscarErroresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores.Descripción;
+
+      // Vías.
+      miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
+      miMenúBuscarErroresEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeErrores.Descripción;
+      #endregion
 
       // Crea y asigna el escuchador de estatus.
       miEscuchadorDeEstatus = new EscuchadorDeEstatus(
@@ -120,14 +129,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miManejadorDeMapa.MapaNuevo += EnMapaNuevo;
       miManejadorDeMapa.ElementosModificados += EnElementosModificados;
 
+      // Pone el método llenador de items.
+      miLista.PoneLlenadorDeItems(LlenaItems);
+
+      // Asigna las propiedades de la interfase de mapa.
+      miInterfaseDeMapa.ManejadorDeMapa = miManejadorDeMapa;
+      miInterfaseDeMapa.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+
       // Asigna las propiedades de la interfase de PDIs.
       miInterfaseManejadorDePDIs.ManejadorDeMapa = miManejadorDeMapa;
       miInterfaseManejadorDePDIs.EscuchadorDeEstatus = miEscuchadorDeEstatus;
       miInterfaseManejadorDePDIs.Tag = miPaginaDePDIs;
 
-      // Asigna las propiedades de la interfase de mapa.
-      miInterfaseDeMapa.ManejadorDeMapa = miManejadorDeMapa;
-      miInterfaseDeMapa.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+      // Asigna las propiedades de la interfase de Vías.
+      miInterfaseManejadorDeVías.ManejadorDeMapa = miManejadorDeMapa;
+      miInterfaseManejadorDeVías.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+      miInterfaseManejadorDeVías.Tag = miPáginaDeVías;
     }
     #endregion
       
@@ -179,14 +196,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miMenuAceptarModificaciones.Enabled = false;
 
       // Actualiza la lista de elementos.
-      ActualizaLista();
+      miLista.RegeneraLista();
     }
 
 
     private void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       // Actualiza la lista de elementos.
-      ActualizaLista();
+      miLista.RegeneraLista();
 
       // Habilita los menus de Guardar.
       miMenuGuardar.Enabled = true;
@@ -194,38 +211,26 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void ActualizaLista()
+    private void LlenaItems(IList<ListViewItem> losItems)
     {
-      // Desabilita las actulizaciones de la lista.
-      miListaDeElementos.SuspendLayout();
-
-      // Vacia la lista.
-      misItemsDeListaDeElementos.Clear();
-
       // Añade los elementos.
       IList<ElementoDelMapa> elementosDelMapa = miManejadorDeMapa.Elementos;
-      misItemsDeListaDeElementos.Capacity = elementosDelMapa.Count;
       foreach (ElementoDelMapa elementoDelMapa in elementosDelMapa)
       {
         ListViewItem item = new ListViewItem(
           new string[] { 
             elementoDelMapa.Número.ToString(),
-            elementoDelMapa.Clase,
             elementoDelMapa.Tipo.ToString(),
             elementoDelMapa.Descripción,
-            elementoDelMapa.Nombre},
+            elementoDelMapa.Nombre,
+            elementoDelMapa.Clase},
             -1);
-        misItemsDeListaDeElementos.Add(item);
+        item.Tag = elementoDelMapa;
+        losItems.Add(item);
       }
 
-      // Pone el número de elementos virtuales.
-      miListaDeElementos.VirtualListSize = misItemsDeListaDeElementos.Count;
-
-      // Habilita las actulizaciones de la lista.
-      miListaDeElementos.ResumeLayout(false);
-
       // Actualiza la Pestaña.
-      this.miPaginaDeElementos.Text = "Elementos (" + miListaDeElementos.VirtualListSize + ")";
+      this.miPaginaDeElementos.Text = "Elementos (" + losItems.Count + ")";
     }
 
 
@@ -305,12 +310,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         GuardaMapa(archivo);
       }
-    }
-
-
-    private void ObtieneItemDeListaDeElementos(object elEnviador, RetrieveVirtualItemEventArgs elArgumento)
-    {
-      elArgumento.Item = misItemsDeListaDeElementos[elArgumento.ItemIndex];
     }
 
 
@@ -414,6 +413,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúAceptarModificaciones(object sender, EventArgs e)
     {
       miManejadorDeMapa.AceptaModificaciones();
+    }
+
+
+    private void EnMenuProcesarTodoEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.ProcesarTodo();
+    }
+
+
+    private void EnMenúBuscarErroresEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.BuscaErrores();
     }
     #endregion
   }

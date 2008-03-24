@@ -71,123 +71,121 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
 using System.Text;
-using Tst;
+using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
 using System.Collections;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  /// <summary>
-  /// Buscador de errores en PDIs.
-  /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
+  public partial class InterfaseMapaDeVíaSeleccionada : InterfaseMapa
   {
-    #region Campos
-    private readonly IDictionary<PDI, string> misErrores;
+    #region
+    private ListView miLista;
+    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
     #endregion
 
     #region Métodos Públicos
     /// <summary>
-    /// Descripción de éste procesador.
+    /// Constructor.
     /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
+    public InterfaseMapaDeVíaSeleccionada()
+    {
+      InitializeComponent();
+    }
 
 
     /// <summary>
-    /// Constructor.
+    /// Conecta a una lista.
     /// </summary>
-    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public BuscadorDeErrores(
-      ManejadorDePDIs elManejadorDePDIs,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePDIs, elEscuchadorDeEstatus)
+    /// <param name="laLista">La lista.</param>
+    /// <remarks>
+    /// El Tag de los items de la lista tiene que ser una vía.
+    /// </remarks>
+    public void Conecta(ListView laLista)
     {
-      misErrores = elManejadorDePDIs.Errores;
+      // Desconectar el evento si ya estabamos conectados a una lista.
+      if (miLista != null)
+      {
+        miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
+        miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
+      }
+
+      // Esta clase es muy lenta con listas que no están en modo virtual. 
+      // Entonces solo permitimos listas virtuales.
+      if (!laLista.VirtualMode)
+      {
+        throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
+      }
+
+      // Conectar el evento a la lista.
+      miLista = laLista;
+      miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
+      miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
     }
     #endregion
 
-    #region Métodos Protegidos.
-    /// <summary>
-    /// Este método se llama antes de comenzar a procesar los elementos.
-    /// </summary>
-    protected override void ComenzóAProcesar()
+    #region Métodos Privados
+    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentosDelRatón)
     {
-      misErrores.Clear();
-      base.ComenzóAProcesar();
+      DibujaVías(miLista.SelectedIndices);
     }
 
 
-    /// <summary>
-    /// Procesa un PDI.
-    /// </summary>
-    /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
     {
-      List<string> errores = new List<string>();
+      DibujaVías(miLista.SelectedIndices);
+    }
 
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPDI.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
-      {
-        errores.Add("El tipo está vacío.");
-      }
-      #endregion 
 
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
+    private void DibujaVías(IEnumerable losIndicesSeleccionados)
+    {
+      List<Vía> vías = new List<Vía>();
+      foreach (int indice in losIndicesSeleccionados)
       {
-        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
-      }
-      #endregion 
+        ListViewItem item = miLista.Items[indice];
 
-      #region Verifica las coordenadas.
-      // El PDI debe tener un campo de coordenadas y además tienen que
-      // tener nivel zero.
-      CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in elPDI.Campos)
-      {
-        if (campo is CampoCoordenadas)
+        // El Tag del item de la lista tiene que ser una vía.
+        Vía vía = item.Tag as Vía;
+        if (vía == null)
         {
-          campoCoordenadas = (CampoCoordenadas)campo;
-          break;
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es: " + vía);
         }
+
+        // Añade la vía a la lista.
+        vías.Add(vía);
       }
-      if (campoCoordenadas == null)
+
+      if (vías.Count > 0)
       {
-        errores.Add("No tiene coordenadas.");
+        // Busca el rango visible para la vía.
+        float margen = 0.0005f;
+        RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(
+          new List<ElementoDelMapa>(vías.ToArray()));
+        RectangleF rectánguloVisible = new RectangleF(
+          rectánguloQueEncierra.X - margen,
+          rectánguloQueEncierra.Y - margen,
+          rectánguloQueEncierra.Width + (2 * margen),
+          rectánguloQueEncierra.Height + (2 * margen));
+
+        // Dibuja la vías como polilíneas adicional para resaltarla.
+        PolilíneasAdicionales.Clear();
+        foreach (Vía vía in vías)
+        {
+          PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
+           vía.Coordenadas, miLápiz));
+        }
+
+        // Muestra el mapa en la region deseada.
+        Enabled = true;
+        RectánguloVisibleEnCoordenadas = rectánguloVisible;
+        MuestraTodoElMapa = false;
+        Refresh();
       }
-      else if (campoCoordenadas.Nivel != 0)
-      {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
-      }
-      #endregion
-
-      // Chequea si hay errores.
-      if (errores.Count > 0)
-      {
-        string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(elPDI, todosLosErrores);
-      }
-
-      // Este método nunca modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
-    }
-
-
-    /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
-    /// </summary>
-    protected override void TerminoDeProcesar()
-    {
-      base.TerminoDeProcesar();
-
-      // Reporta estatus.
-      Estatus = "PDIs con Errores: " + misErrores.Count;
     }
     #endregion
   }

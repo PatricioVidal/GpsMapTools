@@ -84,7 +84,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// <summary>
   /// Ventana para cambiar el tipo de PDI.
   /// </summary>
-  public partial class VentanaCambiarTipo : Form
+  public partial class VentanaCambiarTipoDePDI : Form
   {
     #region Campos
     private PDI miPDI = null;
@@ -150,7 +150,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public VentanaCambiarTipo()
+    public VentanaCambiarTipoDePDI()
     {
       InitializeComponent();
     }

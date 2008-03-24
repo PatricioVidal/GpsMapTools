@@ -76,28 +76,85 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaseDeEliminados : InterfaseBase
+  public partial class InterfaseManejadorDePDIs : InterfaseBase
   {
     #region Campos
-    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
+    private readonly InterfaseBase[] misInterfases;
+    private const string FormatoDeCoordenada = "0.00000";
+    private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
     #endregion
 
+    #region Propiedades
     /// <summary>
-    /// Constructor.
+    /// Obtiene o pone el manejador de mapa.
     /// </summary>
-    public InterfaseDeEliminados()
+    public override ManejadorDeMapa ManejadorDeMapa
     {
-      InitializeComponent();
+      set
+      {
+        base.ManejadorDeMapa = value;
 
-      // Crea el ordenador de columnas.
-      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
+        foreach (InterfaseBase interfaseBase in misInterfases)
+        {
+          interfaseBase.ManejadorDeMapa = value;
+        }
+      }
     }
 
 
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+
+        foreach (InterfaseBase interfaseBase in misInterfases)
+        {
+          interfaseBase.EscuchadorDeEstatus = value;
+        }
+      }
+    }
+    #endregion
+
+    #region Métodos Públicos
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    public InterfaseManejadorDePDIs()
+    {
+      InitializeComponent();
+
+      // Usar el punto para separar decimales.
+      miFormatoNumérico.NumberDecimalSeparator = ".";
+
+      // Crea el vector de interfases.
+      misInterfases = new InterfaseBase[] {
+        miInterfaseDeMapa,
+        miInterfasePDIsDuplicados,
+        miInterfasePDIsEliminados,
+        miInterfasePDIsErrores,
+        miInterfasePDIsModificados};
+
+      // Asignar las propiedades correspondientes.
+      miInterfasePDIsDuplicados.Tag = miPáginaPosiblesDuplicados;
+      miInterfasePDIsEliminados.Tag = miPáginaEliminados;
+      miInterfasePDIsModificados.Tag = miPáginaModificados;
+      miInterfasePDIsErrores.Tag = miPáginaErrores;
+
+      // Pone el método llenador de items.
+      miLista.PoneLlenadorDeItems(LlenaItems);
+    }
+    #endregion
+
+    #region Métodos Privados
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       EnElementosModificados(elEnviador, losArgumentos);
@@ -106,34 +163,35 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      // Vacia las lista.
-      miLista.Items.Clear();
+      miLista.RegeneraLista();
+    }
 
-      // Añade los PDIs.
-      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
+
+    private void LlenaItems(IList<ListViewItem> losItems)
+    {
+      // Añade los elementos.
+      IList<PDI> pdis = ManejadorDeMapa.PDIs;
       foreach (PDI pdi in pdis)
       {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
-        {
-          ListViewItem itemParaLaListaDePDIsModificados = new ListViewItem(
-            new string[] { 
-                pdi.Número.ToString(),
-                pdi.Tipo.ToString(), 
-                pdi.Descripción,
-                pdi.Nombre, 
-                pdi.RazónParaEliminación});
-          miLista.Items.Add(itemParaLaListaDePDIsModificados);
-        }
+        // Añade el PDI a la lista.
+        ListViewItem item = new ListViewItem(
+          new string[] { 
+            pdi.Número.ToString(),
+            pdi.Tipo.ToString(), 
+            pdi.Descripción,
+            pdi.Nombre, 
+            pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
+            pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)},
+            -1);
+        item.Tag = pdi;
+        losItems.Add(item);
       }
 
-      // Actualiza la Pestaña.
-      if ((Tag != null) && (Tag is TabPage))
-      {
-        TabPage pestaña = (TabPage)Tag;
-        int númeroDeEliminados = miLista.Items.Count;
-        pestaña.Text = "Eliminados (" + númeroDeEliminados + ")";
-      }
+      // Actualiza las Pestañas.
+      miPáginaDeTodos.Text = "Todos (" + losItems.Count + ")";
+      TabPage pestaña = (TabPage)Tag;
+      pestaña.Text = "PDIs (" + losItems.Count + ")";
     }
+    #endregion
   }
 }

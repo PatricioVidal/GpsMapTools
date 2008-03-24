@@ -9,7 +9,9 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.8
-
+- Interno: Creada la estructura para el manejo de vías.
+- Interno: Creada clase base para listas de elementos.
+- Interno: Re-structurado el código para mejorar re-uso y evitar repetición de código.
 
 Versión 1.7
 - Arreglada la forma que el campo de Tipo (Type) es escrito en los archivos.

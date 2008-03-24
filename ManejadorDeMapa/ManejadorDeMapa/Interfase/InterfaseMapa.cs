@@ -79,6 +79,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Diagnostics;
 using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -115,6 +116,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private bool miMuestraTodoElMapa = true;
 
     private List<PuntoAdicional> misPuntosAdicionales = new List<PuntoAdicional>();
+    private List<PolilíneaAdicional> misPolilíneasAdicionales = new List<PolilíneaAdicional>();
     private bool miRatónEstaSobreElMapa = false;
 
     #region Escala.
@@ -143,7 +145,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     #region Clases
     /// <summary>
-    /// Define un PDI addicinal para dibujar en el mapa.
+    /// Define un punto adicional para dibujar en el mapa.
     /// </summary>
     public class PuntoAdicional
     {
@@ -166,13 +168,41 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       /// Constructor.
       /// </summary>
       /// <param name="lasCoordenadas">Las Coordenadas.</param>
-      /// <param name="elPincel">El pincel para dibujar el PDI.</param>
-      /// <param name="elTamaño">El tamaño del PDI.</param>
+      /// <param name="elPincel">El pincel para dibujar el punto.</param>
+      /// <param name="elTamaño">El tamaño del punto.</param>
       public PuntoAdicional(PointF lasCoordenadas, Brush elPincel, int elTamaño)
       {
         Coordenadas = lasCoordenadas;
         Pincel = elPincel;
         Tamaño = elTamaño;
+      }
+    }
+    
+    
+    /// <summary>
+    /// Define una polilínea adicional para dibujar en el mapa.
+    /// </summary>
+    public class PolilíneaAdicional
+    {
+      /// <summary>
+      /// Obtiene las coordenadas.
+      /// </summary>
+      public readonly Coordenadas[] Coordenadas;
+
+      /// <summary>
+      /// Obtiene el lápiz.
+      /// </summary>
+      public readonly Pen Lápiz;
+
+      /// <summary>
+      /// Constructor.
+      /// </summary>
+      /// <param name="lasCoordenadas">Las Coordenadas.</param>
+      /// <param name="elLápiz">El lápiz para dibujar la polilínea.</param>
+      public PolilíneaAdicional(Coordenadas[] lasCoordenadas, Pen elLápiz)
+      {
+        Coordenadas = lasCoordenadas;
+        Lápiz = elLápiz;
       }
     }
     #endregion
@@ -215,6 +245,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [Bindable(true)]
     [Description("Muestra los PDIs")]
     public bool MuestraPDIs { get; set; }
+
+
+    /// <summary>
+    /// Obtiene o pone una variable lógica que indica que se
+    /// muestren las Vías.
+    /// </summary>
+    [Browsable(true)]
+    [Bindable(true)]
+    [Description("Muestra las Vías")]
+    public bool MuestraVías { get; set; }
 
 
     /// <summary>
@@ -371,6 +411,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         return misPuntosAdicionales;
       }
     }
+
+
+    /// <summary>
+    /// Obtiene la lista de polilíneas addicionales para pintar.
+    /// </summary>
+    public IList<PolilíneaAdicional> PolilíneasAdicionales
+    {
+      get
+      {
+        return misPolilíneasAdicionales;
+      }
+    }
     #endregion
 
     #region Métodos Privados
@@ -445,32 +497,40 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       Rectangle borde = CoordenadasAPixels(miRectánguloDeDataEnCoordenadas);
       miGráficador.DrawRectangle(miLápizParaBorde, borde);
 
+      // El orden de dibujo es:
+      //  - Polígonos.
+      //  - Polilíneas adicionales.
+      //  - Polilíneas.
+      //  - Vías.
+      //  - Puntos adicionales.
+      //  - PDIs.
+
       // Dibuja los elementos si tenemos un manejador de mapa válido.
       if (ManejadorDeMapa != null)
       {
-        // El orden de dibujo es:
-        //  - Polígonos.
-        //  - Polilíneas.
-        //  - PDIs.
-        //  - Puntos adicionales.
-
         if (MuestraPolígonos | MuestraTodosLosElementos)
         {
           DibujaPolígonos();
         }
+
+        DibujaPolilíneasAdicionales();
 
         if (MuestraPolilíneas | MuestraTodosLosElementos)
         {
           DibujaPolilíneas();
         }
 
+        if (MuestraVías | MuestraTodosLosElementos)
+        {
+          DibujaVías();
+        }
+
+        DibujaPuntosAdicionales();
+
         if (MuestraPDIs | MuestraTodosLosElementos)
         {
           DibujaPDIs();
         }
-
-        // Dibuja los puntos adicionales de último para garantizar que se vean.
-        DibujaPuntosAdicionales();
       }
 
       DibujaEscala();
@@ -510,42 +570,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void DibujaPDIs()
     {
-      // Dibuja los PDIs sin modificar ni eliminados.
-      foreach (ElementoDelMapa elemento in ManejadorDeMapa.Elementos)
+      // Primero dibuja los PDIs sin modificar ni eliminados.
+      foreach (PDI pdi in ManejadorDeMapa.PDIs)
       {
-        if (elemento is PDI)
+        if (!pdi.FuéModificado && !pdi.FuéEliminado)
         {
-          PDI pdi = (PDI)elemento;
-          if (!pdi.FuéModificado && !pdi.FuéEliminado)
-          {
-            DibujaPDI(pdi, miPincelParaPDI, 3);
-          }
+          DibujaPDI(pdi, miPincelParaPDI, 3);
         }
       }
 
-      // Dibuja los PDIs modificados.
-      foreach (ElementoDelMapa elemento in ManejadorDeMapa.Elementos)
+      // Después dibuja los PDIs modificados para que estén
+      // sobre los PDI sin modificar.
+      foreach (PDI pdi in ManejadorDeMapa.PDIs)
       {
-        if (elemento is PDI)
+        if (pdi.FuéModificado)
         {
-          PDI pdi = (PDI)elemento;
-          if (pdi.FuéModificado)
-          {
-            DibujaPDI(pdi, miPincelParaPDIModificado, 5);
-          }
+          DibujaPDI(pdi, miPincelParaPDIModificado, 5);
         }
       }
 
-      // Dibuja los PDIs eliminados.
-      foreach (ElementoDelMapa elemento in ManejadorDeMapa.Elementos)
+      // Finalmente dibuja los PDIs eliminados.
+      foreach (PDI pdi in ManejadorDeMapa.PDIs)
       {
-        if (elemento is PDI)
+        if (pdi.FuéEliminado)
         {
-          PDI pdi = (PDI)elemento;
-          if (pdi.FuéEliminado)
-          {
-            DibujaPDI(pdi, miPincelParaPDIEliminado, 5);
-          }
+          DibujaPDI(pdi, miPincelParaPDIEliminado, 5);
         }
       }
     }
@@ -553,15 +602,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void DibujaPolígonos()
     {
-      // Dibuja los PDIs sin modificar ni eliminados.
-      foreach (ElementoDelMapa elemento in ManejadorDeMapa.Elementos)
+      // Dibuja los Polígonos.
+      foreach (Polígono polígono in ManejadorDeMapa.Polígonos)
       {
-        if (elemento is Polígono)
-        {
-          Polígono polígono = (Polígono)elemento;
-          Tipo tipo = polígono.Tipo;
-          DibujaPolígono(polígono, CaracterísticasDePolígonos.Pincel(tipo));
-        }
+        Tipo tipo = polígono.Tipo;
+        DibujaPolígono(polígono, CaracterísticasDePolígonos.Pincel(tipo));
       }
     }
 
@@ -607,24 +652,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void DibujaPolilíneas()
     {
-      // Dibuja los PDIs sin modificar ni eliminados.
-      foreach (ElementoDelMapa elemento in ManejadorDeMapa.Elementos)
+      // Dibuja las Polilíneas.
+      foreach (Polilínea polilínea in ManejadorDeMapa.Polilíneas)
       {
-        if (elemento is Polilínea)
-        {
-          Polilínea polilínea = (Polilínea)elemento;
-          Tipo tipo = polilínea.Tipo;
-          DibujaPolilínea(polilínea, CaracterísticasDePolilíneas.Lápiz(tipo));
-        }
+        Tipo tipo = polilínea.Tipo;
+        DibujaPolilínea(polilínea.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
+      }
+    }
+
+
+    private void DibujaVías()
+    {
+      // Dibuja las Vías.
+      foreach (Vía vía in ManejadorDeMapa.Vías)
+      {
+        Tipo tipo = vía.Tipo;
+        DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
       }
     }
 
 
     private void DibujaPolilínea(
-      Polilínea laPolilínea,
+      Coordenadas[] laPolilínea,
       Pen elLapiz)
     {
-      Point[] puntos = CoordenadasAPixels(laPolilínea.Coordenadas);
+      Point[] puntos = CoordenadasAPixels(laPolilínea);
       
       // Nos salimos si la polilínea no es visible.
       if (!SonPuntosVisibles(puntos))
@@ -637,9 +689,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
+    private void DibujaPolilíneasAdicionales()
+    {
+      // Dibuja las polilíneas adicionales.
+      foreach (PolilíneaAdicional polilínea in misPolilíneasAdicionales)
+      {
+        DibujaPolilínea(polilínea.Coordenadas, polilínea.Lápiz);
+      }
+    }
+
+
     private void DibujaPuntosAdicionales()
     {
-      // Dibuja los PDI adicionales.
+      // Dibuja los puntos adicionales.
       foreach (PuntoAdicional punto in misPuntosAdicionales)
       {
         DibujaPunto(punto.Coordenadas, punto.Pincel, punto.Tamaño);

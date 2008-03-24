@@ -69,58 +69,45 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
+
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Globalization;
-using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Vías
 {
-  public partial class InterfaseManejador : InterfaseBase
+  public class ManejadorDeVías : ManejadorBase<Vía>
   {
     #region Campos
-    private List<ListViewItem> misItemsDeLista = new List<ListViewItem>();
-    private readonly InterfaseBase[] misInterfases;
-    private const string FormatoDeCoordenada = "0.00000";
-    private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
+    private readonly BuscadorDeErrores miBuscadorDeErrores;
+    private IDictionary<Vía, string> misErrores = new Dictionary<Vía, string>();
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando se encuentran errores.
+    /// </summary>
+    public event EventHandler EncontraronErrores;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene o pone el manejador de mapa.
+    /// Descripción de la acción "Procesar Todo".
     /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
-    {
-      set
-      {
-        base.ManejadorDeMapa = value;
-
-        foreach (InterfaseBase interfaseBase in misInterfases)
-        {
-          interfaseBase.ManejadorDeMapa = value;
-        }
-      }
-    }
+    public static readonly string DescripciónProcesarTodo =
+      "Procesa todo lo relacionado con las Vías. Los pasos se hacen en el orden indicado por el número en el menú.";
 
 
     /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
+    /// Devuelve los PDIs con errores.
     /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    public IDictionary<Vía, string> Errores
     {
-      set
+      get
       {
-        base.EscuchadorDeEstatus = value;
-
-        foreach (InterfaseBase interfaseBase in misInterfases)
-        {
-          interfaseBase.EscuchadorDeEstatus = value;
-        }
+        return misErrores;
       }
     }
     #endregion
@@ -129,79 +116,54 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseManejador()
+    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
+    /// <param name="lasVías">Las Vías.</param>
+    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
+    public ManejadorDeVías(
+      ManejadorDeMapa elManejadorDeMapa,
+      IList<Vía> lasVías,
+      IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      : base(elManejadorDeMapa, lasVías, elEscuchadorDeEstatus)
     {
-      InitializeComponent();
+      // Crea los procesadores.
+      miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
+    }
 
-      // Usar el punto para separar decimales.
-      miFormatoNumérico.NumberDecimalSeparator = ".";
 
-      // Crea el vector de interfases.
-      misInterfases = new InterfaseBase[] {
-        miInterfaseDeMapa,
-        miInterfasePDIsDuplicados,
-        miInterfasePDIsEliminados,
-        miInterfasePDIsErrores,
-        miInterfasePDIsModificados};
+    /// <summary>
+    /// Busca Errores.
+    /// </summary>
+    public void BuscaErrores()
+    {
+      miBuscadorDeErrores.Procesa();
 
-      // Asignar las propiedades correspondientes.
-      miInterfasePDIsDuplicados.Tag = miPáginaPosiblesDuplicados;
-      miInterfasePDIsEliminados.Tag = miPáginaEliminados;
-      miInterfasePDIsModificados.Tag = miPáginaModificados;
-      miInterfasePDIsErrores.Tag = miPáginaErrores;
+      // Envía evento.
+      if (EncontraronErrores != null)
+      {
+        EncontraronErrores(this, new EventArgs());
+      }
+    }
+
+
+    /// <summary>
+    /// Hace todas las correcciones a PDIs.
+    /// </summary>
+    public void ProcesarTodo()
+    {
+      // Hacer todos las operaciones en orden.
+      int númeroDeVíasModificadas = 0;
+      BuscaErrores();
+
+      // Reporta estatus.
+      EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDeVíasModificadas + " modificaciones a Vías.";
     }
     #endregion
 
     #region Métodos Privados
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // Vacia la lista.
-      misItemsDeLista.Clear();
-
-      // Añade los elementos.
-      IList<ElementoDelMapa> elementosDelMapa = ManejadorDeMapa.Elementos;
-      misItemsDeLista.Capacity = elementosDelMapa.Count;
-      foreach (ElementoDelMapa elementoDelMapa in elementosDelMapa)
-      {
-        if (elementoDelMapa is PDI)
-        {
-          PDI puntoDeInterés = (PDI)elementoDelMapa;
-
-          // Añade el PDI a la lista.
-          ListViewItem itemParaLaListaDePDIs = new ListViewItem(
-            new string[] { 
-            puntoDeInterés.Número.ToString(),
-            puntoDeInterés.Tipo.ToString(), 
-            puntoDeInterés.Descripción,
-            puntoDeInterés.Nombre, 
-            puntoDeInterés.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
-            puntoDeInterés.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)},
-              -1);
-          misItemsDeLista.Add(itemParaLaListaDePDIs);
-        }
-      }
-
-      // Pone el número de elementos virtuales.
-      miLista.VirtualListSize = misItemsDeLista.Count;
-
-      // Actualiza las Pestañas.
-      miPáginaDeTodos.Text = "Todos (" + miLista.VirtualListSize + ")";
-      if ((Tag != null) && (Tag is TabPage))
-      {
-        TabPage pestaña = (TabPage)Tag;
-        pestaña.Text = "PDIs (" + miLista.VirtualListSize + ")";
-      }
-    }
-
-    private void ObtieneItemDeListaDePDIs(object elEnviador, RetrieveVirtualItemEventArgs elArgumento)
-    {
-      elArgumento.Item = misItemsDeLista[elArgumento.ItemIndex];
+      // Borra las listas.
+      misErrores.Clear();
     }
     #endregion
   }

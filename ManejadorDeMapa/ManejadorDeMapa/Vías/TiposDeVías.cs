@@ -71,72 +71,68 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Interfase de PDIs modificados.
+  /// Contiene los tipos que representan vías.
   /// </summary>
-  public partial class InterfaseDeModificados : InterfaseBase
+  class TiposDeVías
   {
     #region Campos
-    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
+    private static readonly string miArchivoDeTiposDeVías = @"Vías\TiposDeVías.csv";
     #endregion
+
+    /// <summary>
+    /// Lista con los tipos de vías.
+    /// </summary>
+    public readonly static IList<Tipo> Tipos = new List<Tipo>();
+
+  
+    #region Métodos Privados
+    private class LectorTiposDeVías : LectorDeArchivo
+    {
+      private readonly IList<Tipo> misTipos;
+
+      public LectorTiposDeVías(
+        string elArchivo,
+        IList<Tipo> losTipos)
+      {
+        misTipos = losTipos;
+
+        Lee(elArchivo);
+      }
+
+
+      protected override void ProcesaLínea(string laLínea)
+      {
+        // Elimina espacios en blanco.
+        string línea = laLínea.Trim();
+
+        // Saltarse lineas en blanco y comentarios.
+        bool laLíneaEstaEnBlanco = (línea == string.Empty);
+        bool laLíneaEsComentario = línea.StartsWith("//");
+        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
+        {
+          // Añade el tipo.
+          misTipos.Add(new Tipo(línea));
+        }
+      }
+    }
+
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeModificados()
+    static TiposDeVías()
     {
-      InitializeComponent();
-
-      // Crea el ordenador de columnas.
-      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
+      // Lee las características de polígonos.
+      LectorTiposDeVías lector = new LectorTiposDeVías(
+        miArchivoDeTiposDeVías,
+        Tipos);
     }
-
-
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // Vacia las lista.
-      miLista.Items.Clear();
-
-      // Añade los PDIs.
-      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
-      foreach (PDI pdi in pdis)
-      {
-        // Si el PDI fué cambiado y no eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéModificado && !pdi.FuéEliminado)
-        {
-          ListViewItem itemParaLaListaDePDIsModificados = new ListViewItem(
-            new string[] { 
-                pdi.Número.ToString(),
-                pdi.Tipo.ToString(), 
-                pdi.Descripción,
-                pdi.Nombre, 
-                pdi.Modificaciones});
-          miLista.Items.Add(itemParaLaListaDePDIsModificados);
-        }
-      }
-
-      // Actualiza la Pestaña.
-      if ((Tag != null) && (Tag is TabPage))
-      {
-        TabPage pestaña = (TabPage)Tag;
-        int númeroDeModificados = miLista.Items.Count;
-        pestaña.Text = "Modificados (" + númeroDeModificados + ")";
-      }
-    }
+    #endregion
   }
 }

@@ -71,123 +71,68 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Text;
-using Tst;
-using System.Collections;
+using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  /// <summary>
-  /// Buscador de errores en PDIs.
-  /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
+  public partial class InterfaseDePDIsEliminados : InterfaseBase
   {
-    #region Campos
-    private readonly IDictionary<PDI, string> misErrores;
-    #endregion
-
-    #region Métodos Públicos
-    /// <summary>
-    /// Descripción de éste procesador.
-    /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
-
-
+    #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public BuscadorDeErrores(
-      ManejadorDePDIs elManejadorDePDIs,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePDIs, elEscuchadorDeEstatus)
+    public InterfaseDePDIsEliminados()
     {
-      misErrores = elManejadorDePDIs.Errores;
+      InitializeComponent();
+
+      // Pone el método llenador de items.
+      miLista.PoneLlenadorDeItems(LlenaItems);
     }
     #endregion
 
-    #region Métodos Protegidos.
-    /// <summary>
-    /// Este método se llama antes de comenzar a procesar los elementos.
-    /// </summary>
-    protected override void ComenzóAProcesar()
+    #region Métodos Privados
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      misErrores.Clear();
-      base.ComenzóAProcesar();
+      EnElementosModificados(elEnviador, losArgumentos);
     }
 
 
-    /// <summary>
-    /// Procesa un PDI.
-    /// </summary>
-    /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      List<string> errores = new List<string>();
+      miLista.RegeneraLista();
+    }
 
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPDI.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
-      {
-        errores.Add("El tipo está vacío.");
-      }
-      #endregion 
 
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
+    private void LlenaItems(IList<ListViewItem> losItems)
+    {
+      // Añade los elementos.
+      IList<PDI> pdis = ManejadorDeMapa.PDIs;
+      foreach (PDI pdi in pdis)
       {
-        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
-      }
-      #endregion 
-
-      #region Verifica las coordenadas.
-      // El PDI debe tener un campo de coordenadas y además tienen que
-      // tener nivel zero.
-      CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in elPDI.Campos)
-      {
-        if (campo is CampoCoordenadas)
+        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
+        if (pdi.FuéEliminado)
         {
-          campoCoordenadas = (CampoCoordenadas)campo;
-          break;
+          ListViewItem item = new ListViewItem(
+            new string[] { 
+                pdi.Número.ToString(),
+                pdi.Tipo.ToString(), 
+                pdi.Descripción,
+                pdi.Nombre, 
+                pdi.RazónParaEliminación});
+          item.Tag = pdi;
+          losItems.Add(item);
         }
       }
-      if (campoCoordenadas == null)
-      {
-        errores.Add("No tiene coordenadas.");
-      }
-      else if (campoCoordenadas.Nivel != 0)
-      {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
-      }
-      #endregion
 
-      // Chequea si hay errores.
-      if (errores.Count > 0)
-      {
-        string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(elPDI, todosLosErrores);
-      }
-
-      // Este método nunca modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
-    }
-
-
-    /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
-    /// </summary>
-    protected override void TerminoDeProcesar()
-    {
-      base.TerminoDeProcesar();
-
-      // Reporta estatus.
-      Estatus = "PDIs con Errores: " + misErrores.Count;
+      // Actualiza la Pestaña.
+      TabPage pestaña = (TabPage)Tag;
+      int númeroDeEliminados = losItems.Count;
+      pestaña.Text = "Eliminados (" + númeroDeEliminados + ")";
     }
     #endregion
   }

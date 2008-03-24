@@ -80,14 +80,12 @@ using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaseDeDuplicados : InterfaseBase
+  public partial class InterfaseDePDIsDuplicados : InterfaseBase
   {
     #region Campos
     private ManejadorDePDIs miManejadorDePDIs;
-    private List<PDI> misPDIs = new List<PDI>();
-    private Dictionary<ListViewGroup, List<PDI>> miPDIsPorGrupo = new Dictionary<ListViewGroup, List<PDI>>();
     private Brush miPincelDePDI = new SolidBrush(Color.Black);
-    private Brush miPincelDePDIDuplicado = new SolidBrush(Color.Orange);
+    private Brush miPincelDePDIDuplicado = new SolidBrush(Color.Yellow);
     private Color miColorDeFondoOriginal;
     #endregion
 
@@ -140,7 +138,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeDuplicados()
+    public InterfaseDePDIsDuplicados()
     {
       InitializeComponent();
 
@@ -168,7 +166,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.SuspendLayout();
       miLista.Items.Clear();
       miLista.Groups.Clear();
-      misPDIs.Clear();
       foreach (KeyValuePair<PDI, IList<PDI>> item in miManejadorDePDIs.GruposDeDuplicados)
       {
         PDI pdiBase = item.Key;
@@ -178,17 +175,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
         // Crea un grupo para cada conjunto de duplicados.
         ListViewGroup grupo = new ListViewGroup(pdiBase.Nombre);
+        grupo.Tag = pdis;
         miLista.Groups.Add(grupo);
-        miPDIsPorGrupo[grupo] = pdis;
 
         // Añade todos los PDIs.
         miLista.Items.Add(CreaItemDeLista(pdiBase, grupo, 0));
-        misPDIs.Add(pdiBase);
         foreach (PDI duplicado in duplicados)
         {
           double distancia = Coordenadas.Distancia(pdiBase.Coordenadas, duplicado.Coordenadas);
           miLista.Items.Add(CreaItemDeLista(duplicado, grupo, distancia));
-          misPDIs.Add(duplicado);
         }
       }
       miLista.ResumeLayout(false);
@@ -219,6 +214,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
               },
               elGrupo);
 
+      item.Tag = elPdi;
       item.Checked = false;
 
       return item;
@@ -272,7 +268,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       {
         if (item.Checked)
         {
-          pdisAEliminar.Add(misPDIs[item.Index]);
+          pdisAEliminar.Add((PDI)item.Tag);
         }
       }
 
@@ -313,7 +309,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       ListView lista = (ListView)laLista;
       ListViewHitTestInfo información = lista.HitTest(losArgumentosDelRatón.Location);
       ListViewGroup grupo = información.Item.Group;
-      List<PDI> pdis = miPDIsPorGrupo[grupo];
+      List<PDI> pdis = (List<PDI>)grupo.Tag;
 
       // Busca el rango visible para los PDIs.
       IList<ElementoDelMapa> elementos = new List<ElementoDelMapa>(pdis.ToArray());
@@ -327,9 +323,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
       // Dibuja los PDIs como PDIs adicionales para resaltarlos.
       miMapa.PuntosAddicionales.Clear();
-      PDI pdiDeSeleccionado = misPDIs[información.Item.Index];
+      PDI pdiSeleccionado = (PDI)información.Item.Tag;
       miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-        pdiDeSeleccionado.Coordenadas, miPincelDePDI, 13));
+        pdiSeleccionado.Coordenadas, miPincelDePDI, 13));
       foreach (PDI pdi in pdis)
       {
         miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(

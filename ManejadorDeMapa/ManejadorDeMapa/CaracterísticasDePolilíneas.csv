@@ -1,19 +1,4 @@
-﻿// Ese diccionario se creo copiando la información del manual PDF del
-// usuario de cGPSmapper v2.4,sección 11.3.2,pag. 93-95.
-// </para>
-// <para>
-// La información fue copiada como texto al código y se usó
-// el remplazo usando Expresiones Regulares con los siguentes 
-// parámetros:
-// </para>
-//   Find what: N {.*} :z {.*}\n
-//   Replace with:       {\"\1,Gray,1,\2\n
-// <para>
-// Luego se cambió manualmente el color y ancho de cada lápiz.
-// </para>
-// </remarks>
-
-// Esta data se creo copiando la información del manual PDF del
+﻿// Esta data se creo copiando la información del manual PDF del
 // usuario de cGPSmapper v2.4,sección 11.3.2,pag. 93-95.
 //
 // La información fue copiada como texto a este archivo y se usó

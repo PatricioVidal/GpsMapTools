@@ -88,7 +88,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Diccionario de pinceles por tipo de polígono.
     /// </summary>
-    public readonly static IDictionary<Tipo, Brush> misPinceles = new Dictionary<Tipo, Brush>();
+    private readonly static IDictionary<Tipo, Brush> misPinceles = new Dictionary<Tipo, Brush>();
     #endregion
 
     #region Campos y Métodos Públicos
@@ -135,8 +135,8 @@ namespace GpsYv.ManejadorDeMapa
     #region Métodos Privados
     private class LectorDeCaracterísticasDePolígonos : LectorDeArchivo
     {
-      public readonly IDictionary<Tipo, Brush> misPinceles;
-      public readonly IDictionary<Tipo, string> misDescripciones;
+      private readonly IDictionary<Tipo, Brush> misPinceles;
+      private readonly IDictionary<Tipo, string> misDescripciones;
 
       public LectorDeCaracterísticasDePolígonos(
         string elArchivo,

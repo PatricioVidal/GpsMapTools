@@ -160,7 +160,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
       menuCambiarTipo.Click += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        VentanaCambiarTipo ventanaCambiarTipo = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI ventanaCambiarTipo = new VentanaCambiarTipoDePDI();
         ventanaCambiarTipo.PDI = miPDI;
         DialogResult resultado = ventanaCambiarTipo.ShowDialog();
         if (resultado == DialogResult.OK)

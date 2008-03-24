@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfase\PDIs\PruebaVentanaCambiarTipo.cs" />
+    <Compile Include="Interfase\PDIs\PruebaVentanaCambiarTipoDePDI.cs" />
     <Compile Include="PDIs\PruebaBuscadorDeDuplicados.cs" />
     <Compile Include="PruebaElementoDesconocido.cs" />
     <Compile Include="PruebasDeIntegración.cs" />

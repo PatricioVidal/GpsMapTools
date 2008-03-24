@@ -76,6 +76,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -87,11 +88,15 @@ namespace GpsYv.ManejadorDeMapa
     #region Campos
     private IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
     private IList<PDI> misPDIs = new List<PDI>();
+    private IList<Vía> misVías = new List<Vía>();
+    private IList<Polilínea> misPolilíneas = new List<Polilínea>();
+    private IList<Polígono> misPolígonos = new List<Polígono>();
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private string miArchivo = null;
     private int miNúmeroDeSuspenciónDeEventos = 0;
     private bool miHayEventosDeModificaciónDeElementoPendientes = false;
     private readonly ManejadorDePDIs miManejadorDePDIs;
+    private readonly ManejadorDeVías miManejadorDeVías;
     #endregion
 
     #region Eventos
@@ -127,6 +132,54 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Devuelve los PDIs.
+    /// </summary>
+    public IList<PDI> PDIs
+    {
+      get
+      {
+        return misPDIs;
+      }
+    }
+
+
+    /// <summary>
+    /// Devuelve las Vías.
+    /// </summary>
+    public IList<Vía> Vías
+    {
+      get
+      {
+        return misVías;
+      }
+    }
+
+
+    /// <summary>
+    /// Devuelve las Polilíneas.
+    /// </summary>
+    public IList<Polilínea> Polilíneas
+    {
+      get
+      {
+        return misPolilíneas;
+      }
+    }
+
+
+    /// <summary>
+    /// Devuelve los Polígonos.
+    /// </summary>
+    public IList<Polígono> Polígonos
+    {
+      get
+      {
+        return misPolígonos;
+      }
+    }
+
+
+    /// <summary>
     /// Devuelve el manejador de PDIs.
     /// </summary>
     public ManejadorDePDIs ManejadorDePDIs
@@ -134,6 +187,18 @@ namespace GpsYv.ManejadorDeMapa
       get
       {
         return miManejadorDePDIs;
+      }
+    }
+
+
+    /// <summary>
+    /// Devuelve el manejador de Vías.
+    /// </summary>
+    public ManejadorDeVías ManejadorDeVías
+    {
+      get
+      {
+        return miManejadorDeVías;
       }
     }
 
@@ -175,6 +240,7 @@ namespace GpsYv.ManejadorDeMapa
       Trace.WriteLine("Inicializando ManejadorDeMapa");
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
       miManejadorDePDIs = new ManejadorDePDIs(this, misPDIs, elEscuchadorDeEstatus);
+      miManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
     }
 
 
@@ -306,7 +372,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </remarks>
     public void AceptaModificaciones()
     {
-      /// Genera la nueva lista de elementos del mapa.
+      // Genera la nueva lista de elementos del mapa.
       List<ElementoDelMapa> elementosNuevos = new List<ElementoDelMapa>();
       int númeroDeElemento = 1;
       foreach (ElementoDelMapa elemento in misElementos)
@@ -389,11 +455,26 @@ namespace GpsYv.ManejadorDeMapa
 
       // Crea todas las listas especializadas.
       misPDIs.Clear();
+      misVías.Clear();
+      misPolilíneas.Clear();
+      misPolígonos.Clear();
       foreach (ElementoDelMapa elemento in misElementos)
       {
         if (elemento is PDI)
         {
           misPDIs.Add((PDI)elemento);
+        }
+        else if (elemento is Vía)
+        {
+          misVías.Add((Vía)elemento);
+        }
+        else if (elemento is Polilínea)
+        {
+          misPolilíneas.Add((Polilínea)elemento);
+        }
+        else if (elemento is Polígono)
+        {
+          misPolígonos.Add((Polígono)elemento);
         }
       }
 

@@ -69,125 +69,37 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Tst;
-using System.Collections;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Buscador de errores en PDIs.
+  /// Representa una Vía.
   /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class Vía : Polilínea
   {
-    #region Campos
-    private readonly IDictionary<PDI, string> misErrores;
-    #endregion
-
     #region Métodos Públicos
-    /// <summary>
-    /// Descripción de éste procesador.
-    /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
-
-
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public BuscadorDeErrores(
-      ManejadorDePDIs elManejadorDePDIs,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePDIs, elEscuchadorDeEstatus)
+    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
+    /// <param name="elNúmero">El número de la Polilínea.</param>
+    /// <param name="laClase">La clase de la Polilínea.</param>
+    /// <param name="losCampos">Los campos de la Polilínea.</param>
+    public Vía(
+      ManejadorDeMapa elManejadorDeMapa,
+      int elNúmero,
+      string laClase,
+      IList<Campo> losCampos)
+      : base(elManejadorDeMapa,
+             elNúmero,
+             laClase,
+             losCampos)
     {
-      misErrores = elManejadorDePDIs.Errores;
-    }
-    #endregion
-
-    #region Métodos Protegidos.
-    /// <summary>
-    /// Este método se llama antes de comenzar a procesar los elementos.
-    /// </summary>
-    protected override void ComenzóAProcesar()
-    {
-      misErrores.Clear();
-      base.ComenzóAProcesar();
-    }
-
-
-    /// <summary>
-    /// Procesa un PDI.
-    /// </summary>
-    /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
-    {
-      List<string> errores = new List<string>();
-
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPDI.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
-      {
-        errores.Add("El tipo está vacío.");
-      }
-      #endregion 
-
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
-      {
-        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
-      }
-      #endregion 
-
-      #region Verifica las coordenadas.
-      // El PDI debe tener un campo de coordenadas y además tienen que
-      // tener nivel zero.
-      CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in elPDI.Campos)
-      {
-        if (campo is CampoCoordenadas)
-        {
-          campoCoordenadas = (CampoCoordenadas)campo;
-          break;
-        }
-      }
-      if (campoCoordenadas == null)
-      {
-        errores.Add("No tiene coordenadas.");
-      }
-      else if (campoCoordenadas.Nivel != 0)
-      {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
-      }
-      #endregion
-
-      // Chequea si hay errores.
-      if (errores.Count > 0)
-      {
-        string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(elPDI, todosLosErrores);
-      }
-
-      // Este método nunca modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
-    }
-
-
-    /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
-    /// </summary>
-    protected override void TerminoDeProcesar()
-    {
-      base.TerminoDeProcesar();
-
-      // Reporta estatus.
-      Estatus = "PDIs con Errores: " + misErrores.Count;
     }
     #endregion
   }

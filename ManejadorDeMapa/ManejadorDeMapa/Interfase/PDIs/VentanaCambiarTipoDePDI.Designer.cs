@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class VentanaCambiarTipo
+  partial class VentanaCambiarTipoDePDI
   {
     /// <summary>
     /// Required designer variable.

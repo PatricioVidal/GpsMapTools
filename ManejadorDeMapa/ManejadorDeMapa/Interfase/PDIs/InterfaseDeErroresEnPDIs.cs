@@ -84,13 +84,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// <summary>
   /// Interfase de Errores de PDIs.
   /// </summary>
-  public partial class InterfaseDeErrores : InterfaseBase
+  public partial class InterfaseDeErroresEnPDIs : InterfaseBase
   {
     #region Campos
+    private List<ListViewItem> misItems = new List<ListViewItem>();
     private ManejadorDePDIs miManejadorDePDIs;
-    private List<PDI> misPDIs = new List<PDI>();
     private Brush miPincelDePDI = new SolidBrush(Color.Orange);
-    private readonly OrdenadorDeColumnas miOrdenadorDeColumnas;
     #endregion
 
     #region Propiedades
@@ -147,12 +146,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeErrores()
+    public InterfaseDeErroresEnPDIs()
     {
       InitializeComponent();
 
-      // Crea el ordenador de columnas.
-      miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
+      // Pone el método llenador de items.
+      miLista.PoneLlenadorDeItems(LlenaItems);
     }
 
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
@@ -169,10 +168,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     
     private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
     {
-      // Vacia las listas.
-      miLista.Items.Clear();
-      misPDIs.Clear();
+      miLista.RegeneraLista();
+    }
 
+    private void LlenaItems(IList<ListViewItem> losItems)
+    {
       // Añade los PDIs.
       IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
       foreach (KeyValuePair<PDI, string> error in errores)
@@ -188,20 +188,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
                 pdi.Nombre, 
                 pdi.Coordenadas.ToString(),
                 razón});
-        miLista.Items.Add(item);
-        misPDIs.Add(pdi);
+        item.Tag = pdi;
+        losItems.Add(item);
       }
 
       // Actualiza la Pestaña.
-      if ((Tag != null) && (Tag is TabPage))
-      {
-        TabPage pestaña = (TabPage)Tag;
-        int númeroDeErrores = miLista.Items.Count;
-        pestaña.Text = "Errores (" + númeroDeErrores + ")";
-      }
+      TabPage pestaña = (TabPage)Tag;
+      int númeroDeErrores = losItems.Count;
+      pestaña.Text = "Errores (" + númeroDeErrores + ")";
 
       // Activa el menú de Edición si hay elementos en la lista.
-      if (miLista.Items.Count > 0)
+      if (losItems.Count > 0)
       {
         miMenúEditorDePDI.Enabled = true;
       }
@@ -218,7 +215,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       ListView lista = (ListView)laLista;
       ListViewHitTestInfo información = lista.HitTest(losArgumentosDelRatón.Location);
       ListViewItem item = información.Item;
-      PDI pdi = misPDIs[item.Index];
+      PDI pdi = (PDI)item.Tag;
 
       // Pone el PDI para el menu de edición.
       miMenúEditorDePDI.PDI = pdi;

@@ -87,7 +87,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
   /// Clase para probar la Venatana de Cambiar el Tipo de PDI.
   /// </summary>
   [TestFixture]
-  public class PruebaVentanaCambiarTipo
+  public class PruebaVentanaCambiarTipoDePDI
   {
     /// <summary>
     /// Prueba el método ShowDialog().
@@ -118,7 +118,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea los probadores de los elementos de la interfase.
@@ -148,7 +148,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea los probadores de los elementos de la interfase.
@@ -178,7 +178,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea un tipo válido.
@@ -219,7 +219,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea un tipo desconocido.
@@ -260,7 +260,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea un tipo inválido.
@@ -311,7 +311,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea los probadores de los elementos de la interfase.
@@ -348,7 +348,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = pdi;
 
         // Crea los probadores de los elementos de la interfase.
@@ -382,7 +382,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         #region Inicialización.
         // Inicializa objecto de prueba.
-        VentanaCambiarTipo objectoDePrueba = new VentanaCambiarTipo();
+        VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDI = null;
 
         // Crea los probadores de los elementos de la interfase.

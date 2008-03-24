@@ -80,6 +80,12 @@ using System.Windows.Forms;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
+  /// <summary>
+  /// Clase base de Interfase al usuario.
+  /// </summary>
+  /// <remarks>
+  /// Esta clase responde a los eventos del manejador de mapa.
+  /// </remarks>
   public partial class InterfaseBase : UserControl
   {
     #region Campos

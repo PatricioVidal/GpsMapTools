@@ -42,8 +42,12 @@
           this.miMenúEliminarCaracteresEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarLetrasEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarPalabrasDePDIs = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenúBuscaDuplicados = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenúBuscarErrores = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúBuscaDuplicadosEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúBuscarErroresEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúVías = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúProcesarTodoEnVías = new System.Windows.Forms.ToolStripMenuItem();
+          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+          this.miMenúBuscarErroresEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúAyuda = new System.Windows.Forms.ToolStripMenuItem();
           this.acercaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAcerca = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,14 +61,12 @@
           this.miPáginaMapa = new System.Windows.Forms.TabPage();
           this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
           this.miPáginaTodos = new System.Windows.Forms.TabPage();
-          this.miListaDeElementos = new System.Windows.Forms.ListView();
-          this.miColumnaNumero = new System.Windows.Forms.ColumnHeader();
+          this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
           this.miColumnaClase = new System.Windows.Forms.ColumnHeader();
-          this.miColumnaTipo = new System.Windows.Forms.ColumnHeader();
-          this.miColumnaDescripción = new System.Windows.Forms.ColumnHeader();
-          this.miColumnaNombre = new System.Windows.Forms.ColumnHeader();
           this.miPaginaDePDIs = new System.Windows.Forms.TabPage();
-          this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador();
+          this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs();
+          this.miPáginaDeVías = new System.Windows.Forms.TabPage();
+          this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -73,6 +75,7 @@
           this.miPáginaMapa.SuspendLayout();
           this.miPáginaTodos.SuspendLayout();
           this.miPaginaDePDIs.SuspendLayout();
+          this.miPáginaDeVías.SuspendLayout();
           this.SuspendLayout();
           // 
           // miMenuPrincipal
@@ -80,6 +83,7 @@
           this.miMenuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenúMapa,
             this.miMenuPDIs,
+            this.miMenúVías,
             this.miMenúAyuda});
           this.miMenuPrincipal.Location = new System.Drawing.Point(0, 0);
           this.miMenuPrincipal.Name = "miMenuPrincipal";
@@ -149,8 +153,8 @@
             this.miMenúEliminarCaracteresEnPDIs,
             this.miMenuArreglarLetrasEnPDIs,
             this.miMenuArreglarPalabrasDePDIs,
-            this.miMenúBuscaDuplicados,
-            this.miMenúBuscarErrores});
+            this.miMenúBuscaDuplicadosEnPDIs,
+            this.miMenúBuscarErroresEnPDIs});
           this.miMenuPDIs.Name = "miMenuPDIs";
           this.miMenuPDIs.Size = new System.Drawing.Size(42, 20);
           this.miMenuPDIs.Text = "PDIs";
@@ -189,19 +193,49 @@
           this.miMenuArreglarPalabrasDePDIs.Text = "3. Arreglar Palabras en Nombres";
           this.miMenuArreglarPalabrasDePDIs.Click += new System.EventHandler(this.EnMenuArreglarPalabrasEnPDIs);
           // 
-          // miMenúBuscaDuplicados
+          // miMenúBuscaDuplicadosEnPDIs
           // 
-          this.miMenúBuscaDuplicados.Name = "miMenúBuscaDuplicados";
-          this.miMenúBuscaDuplicados.Size = new System.Drawing.Size(243, 22);
-          this.miMenúBuscaDuplicados.Text = "4. Buscar Duplicados";
-          this.miMenúBuscaDuplicados.Click += new System.EventHandler(this.EnMenuBuscarDuplicadosEnPDIs);
+          this.miMenúBuscaDuplicadosEnPDIs.Name = "miMenúBuscaDuplicadosEnPDIs";
+          this.miMenúBuscaDuplicadosEnPDIs.Size = new System.Drawing.Size(243, 22);
+          this.miMenúBuscaDuplicadosEnPDIs.Text = "4. Buscar Duplicados";
+          this.miMenúBuscaDuplicadosEnPDIs.Click += new System.EventHandler(this.EnMenuBuscarDuplicadosEnPDIs);
           // 
-          // miMenúBuscarErrores
+          // miMenúBuscarErroresEnPDIs
           // 
-          this.miMenúBuscarErrores.Name = "miMenúBuscarErrores";
-          this.miMenúBuscarErrores.Size = new System.Drawing.Size(243, 22);
-          this.miMenúBuscarErrores.Text = "5. Buscar Errores";
-          this.miMenúBuscarErrores.Click += new System.EventHandler(this.EnMenuBuscarErroresEnPDIs);
+          this.miMenúBuscarErroresEnPDIs.Name = "miMenúBuscarErroresEnPDIs";
+          this.miMenúBuscarErroresEnPDIs.Size = new System.Drawing.Size(243, 22);
+          this.miMenúBuscarErroresEnPDIs.Text = "5. Buscar Errores";
+          this.miMenúBuscarErroresEnPDIs.Click += new System.EventHandler(this.EnMenuBuscarErroresEnPDIs);
+          // 
+          // miMenúVías
+          // 
+          this.miMenúVías.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miMenúProcesarTodoEnVías,
+            this.toolStripSeparator2,
+            this.miMenúBuscarErroresEnVías});
+          this.miMenúVías.Name = "miMenúVías";
+          this.miMenúVías.Size = new System.Drawing.Size(40, 20);
+          this.miMenúVías.Text = "Vías";
+          this.miMenúVías.ToolTipText = "Menús para Vías";
+          // 
+          // miMenúProcesarTodoEnVías
+          // 
+          this.miMenúProcesarTodoEnVías.Name = "miMenúProcesarTodoEnVías";
+          this.miMenúProcesarTodoEnVías.Size = new System.Drawing.Size(160, 22);
+          this.miMenúProcesarTodoEnVías.Text = "Procesar Todo";
+          this.miMenúProcesarTodoEnVías.Click += new System.EventHandler(this.EnMenuProcesarTodoEnVías);
+          // 
+          // toolStripSeparator2
+          // 
+          this.toolStripSeparator2.Name = "toolStripSeparator2";
+          this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+          // 
+          // miMenúBuscarErroresEnVías
+          // 
+          this.miMenúBuscarErroresEnVías.Name = "miMenúBuscarErroresEnVías";
+          this.miMenúBuscarErroresEnVías.Size = new System.Drawing.Size(160, 22);
+          this.miMenúBuscarErroresEnVías.Text = "1. Buscar Errores";
+          this.miMenúBuscarErroresEnVías.Click += new System.EventHandler(this.EnMenúBuscarErroresEnVías);
           // 
           // miMenúAyuda
           // 
@@ -268,6 +302,7 @@
           // 
           this.miControladorDePestañasPrincipal.Controls.Add(this.miPaginaDeElementos);
           this.miControladorDePestañasPrincipal.Controls.Add(this.miPaginaDePDIs);
+          this.miControladorDePestañasPrincipal.Controls.Add(this.miPáginaDeVías);
           this.miControladorDePestañasPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
           this.miControladorDePestañasPrincipal.Location = new System.Drawing.Point(0, 24);
           this.miControladorDePestañasPrincipal.Name = "miControladorDePestañasPrincipal";
@@ -319,6 +354,7 @@
           this.miInterfaseDeMapa.MuestraPolilíneas = false;
           this.miInterfaseDeMapa.MuestraTodoElMapa = true;
           this.miInterfaseDeMapa.MuestraTodosLosElementos = true;
+          this.miInterfaseDeMapa.MuestraVías = false;
           this.miInterfaseDeMapa.Name = "miInterfaseDeMapa";
           this.miInterfaseDeMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseDeMapa.RectánguloVisibleEnCoordenadas")));
           this.miInterfaseDeMapa.Size = new System.Drawing.Size(762, 460);
@@ -326,7 +362,7 @@
           // 
           // miPáginaTodos
           // 
-          this.miPáginaTodos.Controls.Add(this.miListaDeElementos);
+          this.miPáginaTodos.Controls.Add(this.miLista);
           this.miPáginaTodos.Location = new System.Drawing.Point(4, 22);
           this.miPáginaTodos.Name = "miPáginaTodos";
           this.miPáginaTodos.Padding = new System.Windows.Forms.Padding(3);
@@ -335,49 +371,25 @@
           this.miPáginaTodos.Text = "Todos";
           this.miPáginaTodos.UseVisualStyleBackColor = true;
           // 
-          // miListaDeElementos
+          // miLista
           // 
-          this.miListaDeElementos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.miColumnaNumero,
-            this.miColumnaClase,
-            this.miColumnaTipo,
-            this.miColumnaDescripción,
-            this.miColumnaNombre});
-          this.miListaDeElementos.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.miListaDeElementos.FullRowSelect = true;
-          this.miListaDeElementos.GridLines = true;
-          this.miListaDeElementos.Location = new System.Drawing.Point(3, 3);
-          this.miListaDeElementos.Name = "miListaDeElementos";
-          this.miListaDeElementos.Size = new System.Drawing.Size(762, 460);
-          this.miListaDeElementos.TabIndex = 1;
-          this.miListaDeElementos.UseCompatibleStateImageBehavior = false;
-          this.miListaDeElementos.View = System.Windows.Forms.View.Details;
-          this.miListaDeElementos.VirtualMode = true;
-          this.miListaDeElementos.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ObtieneItemDeListaDeElementos);
-          // 
-          // miColumnaNumero
-          // 
-          this.miColumnaNumero.Text = "#";
+          this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.miColumnaClase});
+          this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miLista.FullRowSelect = true;
+          this.miLista.GridLines = true;
+          this.miLista.Location = new System.Drawing.Point(3, 3);
+          this.miLista.Name = "miLista";
+          this.miLista.Size = new System.Drawing.Size(762, 460);
+          this.miLista.TabIndex = 1;
+          this.miLista.UseCompatibleStateImageBehavior = false;
+          this.miLista.View = System.Windows.Forms.View.Details;
+          this.miLista.VirtualMode = true;
           // 
           // miColumnaClase
           // 
           this.miColumnaClase.Text = "Clase";
           this.miColumnaClase.Width = 85;
-          // 
-          // miColumnaTipo
-          // 
-          this.miColumnaTipo.Text = "Tipo";
-          this.miColumnaTipo.Width = 67;
-          // 
-          // miColumnaDescripción
-          // 
-          this.miColumnaDescripción.Text = "Descripción";
-          this.miColumnaDescripción.Width = 115;
-          // 
-          // miColumnaNombre
-          // 
-          this.miColumnaNombre.Text = "Nombre";
-          this.miColumnaNombre.Width = 467;
           // 
           // miPaginaDePDIs
           // 
@@ -399,6 +411,26 @@
           this.miInterfaseManejadorDePDIs.Name = "miInterfaseManejadorDePDIs";
           this.miInterfaseManejadorDePDIs.Size = new System.Drawing.Size(770, 486);
           this.miInterfaseManejadorDePDIs.TabIndex = 0;
+          // 
+          // miPáginaDeVías
+          // 
+          this.miPáginaDeVías.Controls.Add(this.miInterfaseManejadorDeVías);
+          this.miPáginaDeVías.Location = new System.Drawing.Point(4, 22);
+          this.miPáginaDeVías.Name = "miPáginaDeVías";
+          this.miPáginaDeVías.Size = new System.Drawing.Size(776, 492);
+          this.miPáginaDeVías.TabIndex = 2;
+          this.miPáginaDeVías.Text = "Vías";
+          this.miPáginaDeVías.UseVisualStyleBackColor = true;
+          // 
+          // miInterfaseManejadorDeVías
+          // 
+          this.miInterfaseManejadorDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.miInterfaseManejadorDeVías.EscuchadorDeEstatus = null;
+          this.miInterfaseManejadorDeVías.Location = new System.Drawing.Point(0, 0);
+          this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
+          this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
+          this.miInterfaseManejadorDeVías.Size = new System.Drawing.Size(776, 492);
+          this.miInterfaseManejadorDeVías.TabIndex = 0;
           // 
           // InterfaseManejadorDeMapa
           // 
@@ -425,6 +457,7 @@
           this.miPáginaMapa.ResumeLayout(false);
           this.miPáginaTodos.ResumeLayout(false);
           this.miPaginaDePDIs.ResumeLayout(false);
+          this.miPáginaDeVías.ResumeLayout(false);
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -452,22 +485,24 @@
         private System.Windows.Forms.ToolStripMenuItem miMenuArreglarPalabrasDePDIs;
         private System.Windows.Forms.ToolStripMenuItem miMenuProcesarTodoEnPDIs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejador miInterfaseManejadorDePDIs;
-        private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicados;
+        private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs miInterfaseManejadorDePDIs;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicadosEnPDIs;
         private System.Windows.Forms.ToolStripMenuItem miMenuGuardar;
         private System.Windows.Forms.TabControl miControladorDePestañas;
         private System.Windows.Forms.TabPage miPáginaMapa;
         private InterfaseMapa miInterfaseDeMapa;
         private System.Windows.Forms.TabPage miPáginaTodos;
-        private System.Windows.Forms.ListView miListaDeElementos;
-        private System.Windows.Forms.ColumnHeader miColumnaNumero;
+        private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
         private System.Windows.Forms.ColumnHeader miColumnaClase;
-        private System.Windows.Forms.ColumnHeader miColumnaTipo;
-        private System.Windows.Forms.ColumnHeader miColumnaDescripción;
-        private System.Windows.Forms.ColumnHeader miColumnaNombre;
-        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErrores;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnPDIs;
         private System.Windows.Forms.ToolStripMenuItem miMenúEliminarCaracteresEnPDIs;
         private System.Windows.Forms.ToolStripMenuItem miMenuAceptarModificaciones;
+        private System.Windows.Forms.ToolStripMenuItem miMenúVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnVías;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnVías;
+        private System.Windows.Forms.TabPage miPáginaDeVías;
+        private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías miInterfaseManejadorDeVías;
     }
 }
 

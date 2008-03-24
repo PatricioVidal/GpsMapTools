@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaseDeDuplicados
+  partial class InterfaseDePDIsDuplicados
   {
     /// <summary> 
     /// Required designer variable.
@@ -28,7 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeDuplicados));
+      this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsDuplicados));
+      GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista ordenadorDeColumnaDeLista;
       this.miLista = new System.Windows.Forms.ListView();
       this.miColumnaNúmeroDeElemento = new System.Windows.Forms.ColumnHeader();
       this.miColumnaTipo = new System.Windows.Forms.ColumnHeader();
@@ -49,6 +51,7 @@
       this.miBarraDeParecidoDeNombre = new System.Windows.Forms.TrackBar();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.miTextoDistancia = new System.Windows.Forms.Label();
+      ordenadorDeColumnaDeLista = new GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista(this.components);
       this.miRecipienteDividido.Panel1.SuspendLayout();
       this.miRecipienteDividido.Panel2.SuspendLayout();
       this.miRecipienteDividido.SuspendLayout();
@@ -140,6 +143,7 @@
       this.miMapa.MuestraPolilíneas = false;
       this.miMapa.MuestraTodoElMapa = true;
       this.miMapa.MuestraTodosLosElementos = true;
+      this.miMapa.MuestraVías = false;
       this.miMapa.Name = "miMapa";
       this.miMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapa.RectánguloVisibleEnCoordenadas")));
       this.miMapa.Size = new System.Drawing.Size(607, 164);
@@ -274,14 +278,18 @@
       this.miTextoDistancia.TabIndex = 1;
       this.miTextoDistancia.Text = "0 m";
       // 
-      // InterfaseDeDuplicados
+      // ordenadorDeColumnaDeLista
+      // 
+      ordenadorDeColumnaDeLista.Lista = this.miLista;
+      // 
+      // InterfaseDePDIsDuplicados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miRecipienteDividido);
       this.Controls.Add(this.panel1);
       this.Controls.Add(this.panel3);
-      this.Name = "InterfaseDeDuplicados";
+      this.Name = "InterfaseDePDIsDuplicados";
       this.Size = new System.Drawing.Size(607, 450);
       this.miRecipienteDividido.Panel1.ResumeLayout(false);
       this.miRecipienteDividido.Panel2.ResumeLayout(false);

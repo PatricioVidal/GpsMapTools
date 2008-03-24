@@ -70,97 +70,87 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Collections;
 using System.Windows.Forms;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
   /// <summary>
-  /// Ordenador de columans.
+  /// Interfase de Lista de elementos.
   /// </summary>
-  class OrdenadorDeColumnas : IComparer
+  public partial class InterfaseListaDeElementos : ListView
   {
     #region Campos
-    private readonly ListView miLista;
-    private int miColumnaAOrdenar = -1;
+    private List<ListViewItem> misItems = new List<ListViewItem>();
+    private LlenadorDeItems miLlenadorDeItems = null;
     #endregion
 
     #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="laLista">La lista a ordenar.</param>
-    public OrdenadorDeColumnas(ListView laLista)
+    public InterfaseListaDeElementos()
     {
-      miLista = laLista;
+      InitializeComponent();
 
-      laLista.ListViewItemSorter = this;
-      miLista.ColumnClick += EnClickDeLaColumna;
+      miOrdenadorDeColumnaDeLista.ItemsDeLaListaVirtual = misItems;
     }
 
-    public int Compare(object elPrimerObjeto, object elSegundoObjecto)
+
+    /// <summary>
+    /// Método que llena los items.
+    /// </summary>
+    /// <param name="losItems">Los items.</param>
+    /// <remarks>
+    /// El método que llena los items tiene que ser asignado antes de
+    /// llamar a <see cref="RegeneraLista"/>.
+    /// </remarks>
+    public delegate void LlenadorDeItems(IList<ListViewItem> losItems);
+
+
+    /// <summary>
+    /// Pone el método Llenador de Items.
+    /// </summary>
+    /// <param name="elLlenadorDeItems">El método Llenador de Items.</param>
+    public void PoneLlenadorDeItems(LlenadorDeItems elLlenadorDeItems)
     {
-      // No ordenamos hasta que el usuario click en una columna.
-      if (miColumnaAOrdenar < 0)
+      miLlenadorDeItems = elLlenadorDeItems;
+    }
+
+
+    /// <summary>
+    /// Regenera la lista de elementos.
+    /// </summary>
+    public void RegeneraLista()
+    {
+      // Lanza una excepción si no hay un llenador de lista.
+      if (miLlenadorDeItems == null)
       {
-        return 0;
+        throw new InvalidOperationException("No hay un Llenador de Items.  Llame ConectaLlenadorDeItems() antes de llamar LlenaLista().");
       }
 
-      ListViewItem primerItem = (ListViewItem)elPrimerObjeto;
-      ListViewItem segundoItem = (ListViewItem)elSegundoObjecto;
+      // Desabilita la lista e inicializa la lista de items.
+      Enabled = false;
+      misItems.Clear();
 
-      // Compara los texto de la columna a ordenar.
-      int comparasión = String.Compare(
-        primerItem.SubItems[miColumnaAOrdenar].Text,
-        segundoItem.SubItems[miColumnaAOrdenar].Text);
+      // Llama al llenador de la lista.
+      miLlenadorDeItems(misItems);
 
-      // El signo del resultado depende de como queremos ordenar la lista.
-      int resultado = 0;
-      switch (miLista.Sorting)
-      {
-        case SortOrder.Ascending:
-          resultado = comparasión;
-          break;
-        case SortOrder.Descending:
-          resultado = -comparasión;
-          break;
-      }
-
-      return resultado;
+      // Pone el número de elementos virtuales y habilita la lista.
+      VirtualListSize = misItems.Count;
+      Enabled = true; ;
     }
     #endregion
 
-
     #region Métodos Privados
-    private void EnClickDeLaColumna(object elEnviador, ColumnClickEventArgs losArgumentos)
+    private void ObtieneItemDeLista(object elEnviador, RetrieveVirtualItemEventArgs elArgumento)
     {
-      int columnaSeleccionada = losArgumentos.Column;
-
-      // Si es la misma columna entonces cambiamos el sentido del orden.
-      // Si no, entonces ordemans de menor a mayor.
-      if (miColumnaAOrdenar == columnaSeleccionada)
-      {
-        // Cambiamos el sentido.
-        switch (miLista.Sorting)
-        {
-          case SortOrder.Ascending:
-            miLista.Sorting = SortOrder.Descending;
-            break;
-          case SortOrder.Descending:
-            miLista.Sorting = SortOrder.Ascending;
-            break;
-        }
-      }
-      else
-      {
-        miColumnaAOrdenar = columnaSeleccionada;
-        miLista.Sorting = SortOrder.Ascending;
-      }
-
-      // Ordena la lista.
-      miLista.Sort();
+      elArgumento.Item = misItems[elArgumento.ItemIndex];
     }
     #endregion
   }
