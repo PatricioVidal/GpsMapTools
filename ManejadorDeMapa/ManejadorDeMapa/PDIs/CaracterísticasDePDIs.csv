@@ -47,6 +47,19 @@
 0x2f0e,Car wash/Auto lavado
 0x2f16,Truck stop/Parada de camiones
 // CIUDADES
+0x1,Large city (over 10M)/Ciudad grande mayor 10M
+0x2,Large city (5-10M))/Ciudad Grande 5-10M
+0x3,Large city (2-5M)/Ciudad Grande 2-5M
+0x4,Large city (1-2M))/Ciudad Grande 1-2M
+0x5,Medium city (0.5-1M)/Ciudad Media 0.5-1M
+0x6,Medium city (200-500K)/Ciudad Media 200-500K
+0x7,Medium city (100-200K))/Ciudad Media 100-200K
+0x9,Small city (20-50K)/
+0xa,Small city/town (10-20K)/
+0xb,Small city/town (5-10K)/
+0xc,Settlement (2-5K)/
+0xd,Settlement (1-2K)/
+0xe,Settlement (500-1K)/
 0x100,Large city (over 10M)/Ciudad grande mayor 10M
 0x200,Large city (5-10M))/Ciudad Grande 5-10M
 0x300,Large city (2-5M)/Ciudad Grande 2-5M
