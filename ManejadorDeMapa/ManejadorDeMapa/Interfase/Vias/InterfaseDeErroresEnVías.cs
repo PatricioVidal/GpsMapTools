@@ -146,12 +146,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
-      // Crea el ordenador de columnas.
-      //miOrdenadorDeColumnas = new OrdenadorDeColumnas(miLista);
-
-      // Conecta el mapa a la lista para ver los elementos seleccionados.
-      miMapaDeVíaSeleccionada.Conecta(miLista);
-
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
     }
@@ -176,7 +170,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void LlenaItems(IList<ListViewItem> losItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade las Vías.
       IDictionary<Vía, string> errores = ManejadorDeMapa.ManejadorDeVías.Errores;
@@ -184,22 +178,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         Vía vía = error.Key;
         string razón = error.Value;
-
-        ListViewItem item = new ListViewItem(
-          new string[] { 
-                vía.Número.ToString(),
-                vía.Tipo.ToString(), 
-                vía.Descripción,
-                vía.Nombre, 
-                razón});
-        item.Tag = vía;
-        losItems.Add(item);
+        laLista.AñadeItem(vía, razón);
       }
 
       // Actualiza la Pestaña.
       TabPage pestaña = (TabPage)Tag;
-      int númeroDeErrores = losItems.Count;
-      pestaña.Text = "Errores (" + númeroDeErrores + ")";
+      pestaña.Text = "Errores (" + errores.Count + ")";
     }
     #endregion
   }

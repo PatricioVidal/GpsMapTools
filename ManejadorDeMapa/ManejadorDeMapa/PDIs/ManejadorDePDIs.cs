@@ -212,9 +212,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
 
     /// <summary>
-    /// Hace todas las correcciones a PDIs.
+    /// Procesa todas las correcciones a PDIs.
     /// </summary>
-    public void ProcesarTodo()
+    /// <returns>El número de PDIs modificados.</returns>
+    public int ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
       int númeroDePDIsModificados = EliminaCaracteresInválidos();
@@ -225,6 +226,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDePDIsModificados + " modificaciones a PDI(s).";
+
+      return númeroDePDIsModificados;
     }
     #endregion
 

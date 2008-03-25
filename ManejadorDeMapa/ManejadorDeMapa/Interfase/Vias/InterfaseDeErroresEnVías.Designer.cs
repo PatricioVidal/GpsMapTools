@@ -30,9 +30,9 @@
     {
       System.Windows.Forms.ColumnHeader columnaRazón;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeErroresEnVías));
-      this.miDivision = new System.Windows.Forms.SplitContainer();
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
-      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada();
+      this.miDivision = new System.Windows.Forms.SplitContainer();
+      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       columnaRazón = new System.Windows.Forms.ColumnHeader();
       this.miDivision.Panel1.SuspendLayout();
       this.miDivision.Panel2.SuspendLayout();
@@ -42,6 +42,18 @@
       // columnaRazón
       // 
       resources.ApplyResources(columnaRazón, "columnaRazón");
+      // 
+      // miLista
+      // 
+      this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            columnaRazón});
+      resources.ApplyResources(this.miLista, "miLista");
+      this.miLista.FullRowSelect = true;
+      this.miLista.GridLines = true;
+      this.miLista.Name = "miLista";
+      this.miLista.UseCompatibleStateImageBehavior = false;
+      this.miLista.View = System.Windows.Forms.View.Details;
+      this.miLista.VirtualMode = true;
       // 
       // miDivision
       // 
@@ -56,22 +68,11 @@
       // 
       this.miDivision.Panel2.Controls.Add(this.miMapaDeVíaSeleccionada);
       // 
-      // miLista
-      // 
-      this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            columnaRazón});
-      resources.ApplyResources(this.miLista, "miLista");
-      this.miLista.FullRowSelect = true;
-      this.miLista.GridLines = true;
-      this.miLista.Name = "miLista";
-      this.miLista.UseCompatibleStateImageBehavior = false;
-      this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
-      // 
       // miMapaDeVíaSeleccionada
       // 
       resources.ApplyResources(this.miMapaDeVíaSeleccionada, "miMapaDeVíaSeleccionada");
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
+      this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
       this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
@@ -98,7 +99,7 @@
     #endregion
 
     private System.Windows.Forms.SplitContainer miDivision;
-    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada miMapaDeVíaSeleccionada;
+    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
 
   }

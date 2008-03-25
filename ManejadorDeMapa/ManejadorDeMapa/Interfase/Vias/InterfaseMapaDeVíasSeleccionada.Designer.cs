@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  partial class InterfaseMapaDeVíaSeleccionada
+  partial class InterfaseMapaDeVíasSeleccionada
   {
     #region Component Designer generated code
 
@@ -10,7 +10,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseMapaDeVíaSeleccionada));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseMapaDeVíasSeleccionada));
       this.SuspendLayout();
       // 
       // InterfaseMapaDeVíaSeleccionada

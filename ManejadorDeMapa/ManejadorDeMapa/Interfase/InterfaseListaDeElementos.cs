@@ -90,6 +90,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private LlenadorDeItems miLlenadorDeItems = null;
     #endregion
 
+    #region Propiedades
+    /// <summary>
+    /// Obtiene el número de elementos en la lista.
+    /// </summary>
+    public int NúmeroDeElementos
+    {
+      get
+      {
+        return misItems.Count;
+      }
+    }
+    #endregion
+
     #region Métodos Públicos
     /// <summary>
     /// Constructor.
@@ -105,12 +118,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <summary>
     /// Método que llena los items.
     /// </summary>
-    /// <param name="losItems">Los items.</param>
+    /// <param name="laLista">La lista.</param>
     /// <remarks>
+    /// <para>
+    /// Los items se añaden a la lista llamando a <see cref="AñadeItem"/>.
+    /// llamar a <see cref="RegeneraLista"/>.
+    /// </para>
+    /// <para>
     /// El método que llena los items tiene que ser asignado antes de
     /// llamar a <see cref="RegeneraLista"/>.
+    /// </para>
     /// </remarks>
-    public delegate void LlenadorDeItems(IList<ListViewItem> losItems);
+    public delegate void LlenadorDeItems(InterfaseListaDeElementos laLista);
 
 
     /// <summary>
@@ -139,11 +158,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       misItems.Clear();
 
       // Llama al llenador de la lista.
-      miLlenadorDeItems(misItems);
+      miLlenadorDeItems(this);
 
       // Pone el número de elementos virtuales y habilita la lista.
       VirtualListSize = misItems.Count;
       Enabled = true; ;
+    }
+
+
+    /// <summary>
+    /// Añade un item a la lista.
+    /// </summary>
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    {
+      List<string> subItems = new List<string> {
+                elElemento.Número.ToString().PadLeft(6),
+                elElemento.Tipo.ToString(), 
+                elElemento.Descripción,
+                elElemento.Nombre};
+      subItems.AddRange(losSubItemsAdicionales);
+
+      ListViewItem item = new ListViewItem(subItems.ToArray());
+      item.Tag = elElemento;
+      misItems.Add(item);
     }
     #endregion
 

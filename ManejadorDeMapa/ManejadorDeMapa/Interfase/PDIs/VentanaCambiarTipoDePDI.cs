@@ -87,40 +87,75 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   public partial class VentanaCambiarTipoDePDI : Form
   {
     #region Campos
-    private PDI miPDI = null;
-    private Tipo miTipoOriginal = Tipo.TipoNulo;
+    private IList<PDI> misPDIs = null;
     private Tipo miTipoNuevo = Tipo.TipoNulo;
     private string miError = null;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene o pone el tipo de PDI.
+    /// Obtiene o pone loa lista de PDIs.
     /// </summary>
-    /// <remarks>
-    /// Si el tipo del PDI es cambiado en la interfase, el nuevo valor
-    /// se guarda en ésta propiedad.
-    /// </remarks>
-    public PDI PDI
+    public IList<PDI> PDIs
     {
       get
       {
-        return miPDI;
+        return misPDIs;
       }
 
       set
       {
         if (value != null)
         {
-          miPDI = value;
-          miTipoOriginal = miPDI.Tipo;
-          miTipoNuevo = miTipoOriginal;
+          misPDIs = value;
+          miTipoNuevo = Tipo.TipoNulo;
 
           // Pone el texto del PDI y el tipo original.
-          miTextoNombrePDI.Text = miPDI.Nombre;
-          miTextCoordenadasPDI.Text = miPDI.Coordenadas.ToString();
-          miTextoTipoOriginal.Text = miTipoOriginal.ToString();
-          miTextoDescripciónOriginal.Text = CaracterísticasDePDIs.Descripción(miTipoOriginal);
+          if (misPDIs.Count == 1)
+          {
+            // Un solo PDI.
+            // Muestra los atributos.
+            PDI pdi = misPDIs[0];
+            miTextoNombrePDI.Text = pdi.Nombre;
+            miTextoCoordenadasPDI.Text = pdi.Coordenadas.ToString();
+            miTextoTipoOriginal.Text = pdi.Tipo.ToString();
+            miTextoDescripciónOriginal.Text = CaracterísticasDePDIs.Descripción(pdi.Tipo);
+          }
+          else if (misPDIs.Count > 1)
+          {
+            // Multiple PDIs.
+            miTextoNombrePDI.Text = "<Múltiple PDIs>";
+            miTextoCoordenadasPDI.Text = string.Empty;
+
+            // Buscar si tiene un tipo único.
+            Tipo tipoÚnico = misPDIs[0].Tipo;
+            bool tieneTipoÚnico = true;
+            foreach (PDI pdi in misPDIs)
+            {
+              if (pdi.Tipo != tipoÚnico)
+              {
+                tieneTipoÚnico = false;
+                tipoÚnico = Tipo.TipoNulo;
+                break;
+              }
+            }
+
+            // Muestra las características del tipo solo si es único.
+            if (tieneTipoÚnico)
+            {
+              miTextoTipoOriginal.Text = tipoÚnico.ToString();
+              miTextoDescripciónOriginal.Text = CaracterísticasDePDIs.Descripción(tipoÚnico);
+            }
+            else
+            {
+              miTextoTipoOriginal.Text = "....";
+              miTextoDescripciónOriginal.Text = "<Múltiple tipos>";
+            }
+          }
+          else
+          {
+            Inicializa();
+          }
         }
         else
         {
@@ -161,13 +196,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     {
       if (EsTipoVálido())
       {
-        if (miTipoNuevo != miTipoOriginal)
+        if (miTipoNuevo != Tipo.TipoNulo)
         {
           DialogResult = DialogResult.OK;
         }
         else
         {
-          DialogResult = DialogResult.None;
+          DialogResult = DialogResult.Cancel;
         }
 
         // Cierra la ventana.
@@ -179,14 +214,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void Inicializa()
     {
       // Inicializa los campos.
-      miPDI = null;
-      miTipoOriginal = Tipo.TipoNulo;
+      misPDIs = null;
       miTipoNuevo = Tipo.TipoNulo;
       miError = null;
 
       // Inicializa la interfase.
-      miTextoNombrePDI.Text = string.Empty;
-      miTextCoordenadasPDI.Text = string.Empty;
+      miTextoNombrePDI.Text = "<No hay PDIs seleccionados>";
+      miTextoCoordenadasPDI.Text = string.Empty;
       miTextoTipoOriginal.Text = string.Empty;
       miTextoDescripciónOriginal.Text = string.Empty;
     }
@@ -239,7 +273,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       else
       {
         miTextoDescripción.Text = string.Empty;
-        miTipoNuevo = miTipoOriginal;
+        miTipoNuevo = Tipo.TipoNulo;
       }
     }
 

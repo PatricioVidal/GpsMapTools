@@ -167,30 +167,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     }
 
 
-    private void LlenaItems(IList<ListViewItem> losItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
       IList<PDI> pdis = ManejadorDeMapa.PDIs;
       foreach (PDI pdi in pdis)
       {
-        // Añade el PDI a la lista.
-        ListViewItem item = new ListViewItem(
-          new string[] { 
-            pdi.Número.ToString(),
-            pdi.Tipo.ToString(), 
-            pdi.Descripción,
-            pdi.Nombre, 
-            pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
-            pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)},
-            -1);
-        item.Tag = pdi;
-        losItems.Add(item);
+        laLista.AñadeItem(
+          pdi,
+          pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
+          pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico));
       }
 
       // Actualiza las Pestañas.
-      miPáginaDeTodos.Text = "Todos (" + losItems.Count + ")";
+      miPáginaDeTodos.Text = "Todos (" + laLista.NúmeroDeElementos + ")";
       TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "PDIs (" + losItems.Count + ")";
+      pestaña.Text = "PDIs (" + laLista.NúmeroDeElementos + ")";
     }
     #endregion
   }

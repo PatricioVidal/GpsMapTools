@@ -144,7 +144,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -201,7 +201,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivisión.Panel1</value>
@@ -245,7 +245,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivisión.Panel2</value>
@@ -329,7 +329,7 @@
     <value>miInterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeErroresEnVías, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeErroresEnVías, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
@@ -401,6 +401,6 @@
     <value>InterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

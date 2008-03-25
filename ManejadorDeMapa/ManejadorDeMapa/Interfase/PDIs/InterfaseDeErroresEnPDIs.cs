@@ -89,7 +89,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     #region Campos
     private List<ListViewItem> misItems = new List<ListViewItem>();
     private ManejadorDePDIs miManejadorDePDIs;
-    private Brush miPincelDePDI = new SolidBrush(Color.Orange);
     #endregion
 
     #region Propiedades
@@ -152,6 +151,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
+
+      // Escucha el evnto de edición de PDIs.
+      miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
+      {
+        miManejadorDePDIs.BuscaErrores();
+      };
     }
 
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
@@ -171,7 +176,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.RegeneraLista();
     }
 
-    private void LlenaItems(IList<ListViewItem> losItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los PDIs.
       IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
@@ -179,26 +184,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       {
         PDI pdi = error.Key;
         string razón = error.Value;
-
-        ListViewItem item = new ListViewItem(
-          new string[] { 
-                pdi.Número.ToString(),
-                pdi.Tipo.ToString(), 
-                pdi.Descripción,
-                pdi.Nombre, 
-                pdi.Coordenadas.ToString(),
-                razón});
-        item.Tag = pdi;
-        losItems.Add(item);
+        laLista.AñadeItem(pdi, pdi.Coordenadas.ToString(), razón);
       }
 
       // Actualiza la Pestaña.
       TabPage pestaña = (TabPage)Tag;
-      int númeroDeErrores = losItems.Count;
+      int númeroDeErrores = errores.Count;
       pestaña.Text = "Errores (" + númeroDeErrores + ")";
 
       // Activa el menú de Edición si hay elementos en la lista.
-      if (losItems.Count > 0)
+      if (errores.Count > 0)
       {
         miMenúEditorDePDI.Enabled = true;
       }
@@ -206,38 +201,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       {
         miMenúEditorDePDI.Enabled = false;
       }
-    }
-
-
-    private void EnClick(object laLista, MouseEventArgs losArgumentosDelRatón)
-    {
-      // Obtiene el grupo seleccionado.
-      ListView lista = (ListView)laLista;
-      ListViewHitTestInfo información = lista.HitTest(losArgumentosDelRatón.Location);
-      ListViewItem item = información.Item;
-      PDI pdi = (PDI)item.Tag;
-
-      // Pone el PDI para el menu de edición.
-      miMenúEditorDePDI.PDI = pdi;
-
-      // Busca el rango visible para el PDI.
-      float margen = 0.0005f;
-      RectangleF rectánguloVisible = new RectangleF(
-        (float)pdi.Coordenadas.Longitud - margen,
-        (float)pdi.Coordenadas.Latitud - margen,
-        (2 * margen),
-        (2 * margen));
-
-      // Dibuja los PDIs como PDIs adicionales para resaltarlos.
-      miMapa.PuntosAddicionales.Clear();
-      miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-        pdi.Coordenadas, miPincelDePDI, 13));
-
-      // Muestra el mapa en la region deseada.
-      miMapa.Enabled = true;
-      miMapa.RectánguloVisibleEnCoordenadas = rectánguloVisible;
-      miMapa.MuestraTodoElMapa = false;
-      miMapa.Refresh();
     }
     #endregion
   }

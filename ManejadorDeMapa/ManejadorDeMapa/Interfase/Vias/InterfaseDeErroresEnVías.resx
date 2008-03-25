@@ -128,19 +128,10 @@
     <value>284</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miDivision.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="miDivision.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miDivision.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
-  </data>
   <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -154,13 +145,22 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivision.Panel1</value>
   </data>
   <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miDivision.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miDivision.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miDivision.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
   </data>
   <data name="&gt;&gt;miDivision.Panel1.Name" xml:space="preserve">
     <value>miDivision.Panel1</value>
@@ -198,7 +198,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivision.Panel2</value>
@@ -258,6 +258,6 @@
     <value>InterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

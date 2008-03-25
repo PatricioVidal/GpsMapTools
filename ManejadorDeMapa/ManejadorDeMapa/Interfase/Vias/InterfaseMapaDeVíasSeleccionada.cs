@@ -82,70 +82,87 @@ using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  public partial class InterfaseMapaDeVíaSeleccionada : InterfaseMapa
+  /// <summary>
+  /// Interfase de Mapa de Vías seleccionadas.
+  /// </summary>
+  public partial class InterfaseMapaDeVíasSeleccionada : InterfaseMapa
   {
-    #region
+    #region Campos
     private ListView miLista;
     private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
     #endregion
 
-    #region Métodos Públicos
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone la lista con los elementos del mapa.
+    /// </summary>
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser una Vía.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
+    {
+      get
+      {
+        return miLista;
+      }
+      set
+      {
+        // Desconectar el evento si ya estabamos conectados a una lista.
+        if (miLista != null)
+        {
+          miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
+          miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
+        }
+
+        // Esta clase es muy lenta con listas que no están en modo virtual. 
+        // Entonces solo permitimos listas virtuales.
+        if (!value.VirtualMode)
+        {
+          throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
+        }
+
+        // Conectar el evento a la lista.
+        miLista = value;
+        miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
+        miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
+      }
+    }
+    #endregion
+
+    #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseMapaDeVíaSeleccionada()
+    public InterfaseMapaDeVíasSeleccionada()
     {
       InitializeComponent();
-    }
-
-
-    /// <summary>
-    /// Conecta a una lista.
-    /// </summary>
-    /// <param name="laLista">La lista.</param>
-    /// <remarks>
-    /// El Tag de los items de la lista tiene que ser una vía.
-    /// </remarks>
-    public void Conecta(ListView laLista)
-    {
-      // Desconectar el evento si ya estabamos conectados a una lista.
-      if (miLista != null)
-      {
-        miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
-        miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
-      }
-
-      // Esta clase es muy lenta con listas que no están en modo virtual. 
-      // Entonces solo permitimos listas virtuales.
-      if (!laLista.VirtualMode)
-      {
-        throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
-      }
-
-      // Conectar el evento a la lista.
-      miLista = laLista;
-      miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
-      miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
     }
     #endregion
 
     #region Métodos Privados
     private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentosDelRatón)
     {
-      DibujaVías(miLista.SelectedIndices);
+      DibujaVías();
     }
 
 
     private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
     {
-      DibujaVías(miLista.SelectedIndices);
+      DibujaVías();
     }
 
 
-    private void DibujaVías(IEnumerable losIndicesSeleccionados)
+    private void DibujaVías()
     {
+      // Nos salimos si no hay elementos seleccionados.
+      if (miLista.SelectedIndices.Count == 0)
+      {
+        return;
+      }
+
       List<Vía> vías = new List<Vía>();
-      foreach (int indice in losIndicesSeleccionados)
+      foreach (int indice in miLista.SelectedIndices)
       {
         ListViewItem item = miLista.Items[indice];
 
@@ -160,32 +177,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         vías.Add(vía);
       }
 
-      if (vías.Count > 0)
+      // Busca el rango visible para la vía.
+      float margen = 0.0005f;
+      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(
+        new List<ElementoDelMapa>(vías.ToArray()));
+      RectangleF rectánguloVisible = new RectangleF(
+        rectánguloQueEncierra.X - margen,
+        rectánguloQueEncierra.Y - margen,
+        rectánguloQueEncierra.Width + (2 * margen),
+        rectánguloQueEncierra.Height + (2 * margen));
+
+      // Dibuja la vías como polilíneas adicional para resaltarla.
+      PolilíneasAdicionales.Clear();
+      foreach (Vía vía in vías)
       {
-        // Busca el rango visible para la vía.
-        float margen = 0.0005f;
-        RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(
-          new List<ElementoDelMapa>(vías.ToArray()));
-        RectangleF rectánguloVisible = new RectangleF(
-          rectánguloQueEncierra.X - margen,
-          rectánguloQueEncierra.Y - margen,
-          rectánguloQueEncierra.Width + (2 * margen),
-          rectánguloQueEncierra.Height + (2 * margen));
-
-        // Dibuja la vías como polilíneas adicional para resaltarla.
-        PolilíneasAdicionales.Clear();
-        foreach (Vía vía in vías)
-        {
-          PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
-           vía.Coordenadas, miLápiz));
-        }
-
-        // Muestra el mapa en la region deseada.
-        Enabled = true;
-        RectánguloVisibleEnCoordenadas = rectánguloVisible;
-        MuestraTodoElMapa = false;
-        Refresh();
+        PolilíneasAdicionales.Add(
+          new InterfaseMapa.PolilíneaAdicional(vía.Coordenadas, miLápiz));
       }
+
+      // Muestra el mapa en la region deseada.
+      Enabled = true;
+      RectánguloVisibleEnCoordenadas = rectánguloVisible;
+      MuestraTodoElMapa = false;
+      Refresh();
     }
     #endregion
   }

@@ -87,37 +87,52 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   public partial class MenuEditorDePDI : ContextMenuStrip
   {
     #region Campos
-    private PDI miPDI = null;
+    private ListView miLista = null;
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando se editan PDIs.
+    /// </summary>
+    public event EventHandler EditóPDIs;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene o pone el PDI a editar.
+    /// Obtiene o pone la lista con los elementos del mapa.
     /// </summary>
-    public PDI PDI
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser un PDI.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
     {
       get
       {
-        return miPDI;
+        return miLista;
       }
-
       set
       {
-        miPDI = value;
+        miLista = value;
 
-        if (miPDI != null)
+        if (miLista != null)
         {
-          foreach (ToolStripMenuItem menu in Items)
+          // Desconecta el menú si ya estabamos conectados a una lista.
+          if (miLista != null)
           {
-            menu.Enabled = true;
+            miLista.ContextMenuStrip = null;
           }
-        }
-        else
-        {
-          foreach (ToolStripMenuItem menu in Items)
+
+          // Esta clase es muy lenta con listas que no están en modo virtual. 
+          // Entonces solo permitimos listas virtuales.
+          miLista = value;
+          if (!miLista.VirtualMode)
           {
-            menu.Enabled = false;
+            throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
           }
+
+          // Conecta el menú a la lista.
+          miLista.ContextMenuStrip = this;
         }
       }
     }
@@ -126,6 +141,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Obtiene o pone el manejador de PDIs.
     /// </summary>
+    [Browsable (true)]
     public ManejadorDePDIs ManejadorDePDIs
     {
       get;
@@ -144,6 +160,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       // Inicialización.
       Name = "miMenuDeContexto";
       Size = new System.Drawing.Size(153, 48);
+      AutoSize = true;
 
       // Añade los menús.
       AddMenuParaCambiarTipo();
@@ -155,23 +172,59 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     {
       ToolStripMenuItem menuCambiarTipo = new ToolStripMenuItem();
       menuCambiarTipo.Text = "Cambiar Tipo";
-      menuCambiarTipo.Enabled = false;
       Items.Add(menuCambiarTipo);
 
-      menuCambiarTipo.Click += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        VentanaCambiarTipoDePDI ventanaCambiarTipo = new VentanaCambiarTipoDePDI();
-        ventanaCambiarTipo.PDI = miPDI;
-        DialogResult resultado = ventanaCambiarTipo.ShowDialog();
-        if (resultado == DialogResult.OK)
-        {
-          // Cambia el tipo.
-          PDI.CambiaTipo(ventanaCambiarTipo.TipoNuevo, "Cambio Manual");
+      menuCambiarTipo.Click += EnMenúCambiarTipo;
+    }
 
-          // Busca los errores de nuevo.
-          ManejadorDePDIs.BuscaErrores();
+
+    private void EnMenúCambiarTipo(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay PDIs.
+      if (miLista.SelectedIndices.Count == 0)
+      {
+        return;
+      }
+
+      List<PDI> pdis = new List<PDI>();
+      foreach (int indice in miLista.SelectedIndices)
+      {
+        ListViewItem item = miLista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser una vía.
+        PDI pdi = item.Tag as PDI;
+        if (pdi == null)
+        {
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es: " + pdi);
         }
-      };
+
+        // Añade el PDI a la lista.
+        pdis.Add(pdi);
+      }
+
+      // Muestra la ventana para cambiar el Tipo.
+      VentanaCambiarTipoDePDI ventanaCambiarTipo = new VentanaCambiarTipoDePDI();
+      ventanaCambiarTipo.PDIs = pdis;
+      DialogResult resultado = ventanaCambiarTipo.ShowDialog();
+      if (resultado == DialogResult.OK)
+      {
+        // Cambia los tipos evitando que se generen eventos con
+        // cada cambio.
+        ManejadorDePDIs.SuspendeEventos();
+        foreach (PDI pdi in pdis)
+        {
+          pdi.CambiaTipo(ventanaCambiarTipo.TipoNuevo, "Cambio Manual");
+        }
+
+        // Envía el evento indicando que se editaron PDIs.
+        if (EditóPDIs != null)
+        {
+          EditóPDIs(this, new EventArgs());
+        }
+
+        // Restablece los eventos.
+        ManejadorDePDIs.RestableceEventos();
+      }
     }
     #endregion
   }

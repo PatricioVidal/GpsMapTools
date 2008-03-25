@@ -138,9 +138,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         miInterfaseDeErroresEnVías
       };
 
-      // Conecta la lista al mapa de vía seleccionada.
-      miMapaDeVíaSeleccionada.Conecta(miLista);
-
       // Asignar las propiedades correspondientes.
       miInterfaseDeErroresEnVías.Tag = miPáginaErrores;
 
@@ -162,28 +159,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void LlenaItems(IList<ListViewItem> losItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
       IList<Vía> vías = ManejadorDeMapa.Vías;
       foreach (Vía vía in vías)
       {
-        // Añade la vía a la lista.
-        ListViewItem item = new ListViewItem(
-          new string[] { 
-            vía.Número.ToString(),
-            vía.Tipo.ToString(), 
-            vía.Descripción,
-            vía.Nombre},
-            -1);
-        item.Tag = vía;
-        losItems.Add(item);
+        laLista.AñadeItem(vía);
       }
 
       // Actualiza las Pestañas.
-      miPáginaDeTodos.Text = "Todas (" + losItems.Count + ")";
+      miPáginaDeTodos.Text = "Todas (" + vías.Count + ")";
       TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "Vías (" + losItems.Count + ")";
+      pestaña.Text = "Vías (" + vías.Count + ")";
     }
     #endregion
   }

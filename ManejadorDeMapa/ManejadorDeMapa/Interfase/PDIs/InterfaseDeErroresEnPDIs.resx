@@ -157,7 +157,7 @@
     <value>False</value>
   </data>
   <data name="miMenúEditorDePDI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 26</value>
+    <value>128, 48</value>
   </data>
   <data name="miMenúEditorDePDI.Text" xml:space="preserve">
     <value>MenúEditorDePDI</value>
@@ -166,7 +166,7 @@
     <value>miMenúEditorDePDI</value>
   </data>
   <data name="&gt;&gt;miMenúEditorDePDI.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -184,7 +184,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>division.Panel1</value>
@@ -228,7 +228,7 @@
     <value>miMapa</value>
   </data>
   <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
     <value>division.Panel2</value>
@@ -294,6 +294,6 @@
     <value>InterfaseDeErroresEnPDIs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

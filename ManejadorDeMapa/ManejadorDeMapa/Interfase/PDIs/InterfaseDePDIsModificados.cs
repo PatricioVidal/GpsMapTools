@@ -109,7 +109,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     }
 
 
-    private void LlenaItems(IList<ListViewItem> misItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los PDIs.
       IList<PDI> pdis = ManejadorDeMapa.PDIs;
@@ -118,22 +118,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Si el PDI fué cambiado y no eliminado entonces añadelo a la lista de cambios.
         if (pdi.FuéModificado && !pdi.FuéEliminado)
         {
-          ListViewItem item = new ListViewItem(
-            new string[] { 
-                pdi.Número.ToString(),
-                pdi.Tipo.ToString(), 
-                pdi.Descripción,
-                pdi.Nombre, 
-                pdi.Modificaciones});
-          item.Tag = pdi;
-          misItems.Add(item);
+          laLista.AñadeItem(pdi, pdi.Modificaciones);
         }
       }
 
       // Actualiza la Pestaña.
       TabPage pestaña = (TabPage)Tag;
-      int númeroDeModificados = misItems.Count;
-      pestaña.Text = "Modificados (" + númeroDeModificados + ")";
+      pestaña.Text = "Modificados (" + laLista.NúmeroDeElementos + ")";
     }
   }
 }

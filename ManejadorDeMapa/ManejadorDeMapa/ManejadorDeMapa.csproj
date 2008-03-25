@@ -81,6 +81,12 @@
     <Compile Include="Interfase\OrdenadorDeColumnaDeLista.Designer.cs">
       <DependentUpon>OrdenadorDeColumnaDeLista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.Designer.cs">
+      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfase\PDIs\MenuEditorDePDI.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -105,11 +111,11 @@
     <Compile Include="Interfase\Vias\InterfaseManejadorDeVías.Designer.cs">
       <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseMapaDeVíaSeleccionada.cs">
+    <Compile Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseMapaDeVíaSeleccionada.Designer.cs">
-      <DependentUpon>InterfaseMapaDeVíaSeleccionada.cs</DependentUpon>
+    <Compile Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.Designer.cs">
+      <DependentUpon>InterfaseMapaDeVíasSeleccionada.cs</DependentUpon>
     </Compile>
     <Compile Include="ManejadorBase.cs" />
     <Compile Include="PDIs\ArregladorDeLetras.cs" />
@@ -226,6 +232,10 @@
       <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.resx">
+      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfase\PDIs\MenuEditorDePDI.resx">
       <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -242,8 +252,8 @@
       <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vias\InterfaseMapaDeVíaSeleccionada.resx">
-      <DependentUpon>InterfaseMapaDeVíaSeleccionada.cs</DependentUpon>
+    <EmbeddedResource Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.resx">
+      <DependentUpon>InterfaseMapaDeVíasSeleccionada.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

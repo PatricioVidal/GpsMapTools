@@ -35,7 +35,7 @@
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
       this.miDivisión = new System.Windows.Forms.SplitContainer();
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
-      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada();
+      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeErroresEnVías();
       this.miControladorDePestañas.SuspendLayout();
@@ -112,6 +112,7 @@
       // 
       resources.ApplyResources(this.miMapaDeVíaSeleccionada, "miMapaDeVíaSeleccionada");
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
+      this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
       this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
@@ -162,7 +163,7 @@
     private System.Windows.Forms.TabPage miPáginaErrores;
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
     private System.Windows.Forms.SplitContainer miDivisión;
-    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada miMapaDeVíaSeleccionada;
+    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
     private InterfaseDeErroresEnVías miInterfaseDeErroresEnVías;
   }
 }

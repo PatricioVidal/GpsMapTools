@@ -33,8 +33,8 @@
       System.Windows.Forms.ColumnHeader columnaRazón;
       System.Windows.Forms.SplitContainer division;
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
+      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados();
       this.miMenúEditorDePDI = new GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI();
-      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       columnaCoordenadas = new System.Windows.Forms.ColumnHeader();
       columnaRazón = new System.Windows.Forms.ColumnHeader();
       division = new System.Windows.Forms.SplitContainer();
@@ -77,20 +77,12 @@
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       this.miLista.VirtualMode = true;
-      this.miLista.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EnClick);
-      // 
-      // miMenúEditorDePDI
-      // 
-      resources.ApplyResources(this.miMenúEditorDePDI, "miMenúEditorDePDI");
-      this.miMenúEditorDePDI.ManejadorDePDIs = null;
-      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
-      this.miMenúEditorDePDI.PDI = null;
-      this.miMenúEditorDePDI.ShowImageMargin = false;
       // 
       // miMapa
       // 
       resources.ApplyResources(this.miMapa, "miMapa");
       this.miMapa.EscuchadorDeEstatus = null;
+      this.miMapa.Lista = this.miLista;
       this.miMapa.ManejadorDeMapa = null;
       this.miMapa.MuestraPDIs = false;
       this.miMapa.MuestraPolígonos = false;
@@ -100,6 +92,14 @@
       this.miMapa.MuestraVías = false;
       this.miMapa.Name = "miMapa";
       this.miMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapa.RectánguloVisibleEnCoordenadas")));
+      // 
+      // miMenúEditorDePDI
+      // 
+      resources.ApplyResources(this.miMenúEditorDePDI, "miMenúEditorDePDI");
+      this.miMenúEditorDePDI.Lista = this.miLista;
+      this.miMenúEditorDePDI.ManejadorDePDIs = null;
+      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
+      this.miMenúEditorDePDI.ShowImageMargin = false;
       // 
       // InterfaseDeErroresEnPDIs
       // 
@@ -118,6 +118,6 @@
 
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
     private MenuEditorDePDI miMenúEditorDePDI;
-    private InterfaseMapa miMapa;
+    private InterfaseMapaDePDIsSeleccionados miMapa;
   }
 }

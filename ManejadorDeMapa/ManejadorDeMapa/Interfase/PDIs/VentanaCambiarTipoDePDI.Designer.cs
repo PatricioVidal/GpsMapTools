@@ -41,7 +41,7 @@
       this.miTextoTipoOriginal = new System.Windows.Forms.Label();
       this.miProveedorDeErrorDeTipo = new System.Windows.Forms.ErrorProvider(this.components);
       this.miTextoNombrePDI = new System.Windows.Forms.Label();
-      this.miTextCoordenadasPDI = new System.Windows.Forms.Label();
+      this.miTextoCoordenadasPDI = new System.Windows.Forms.Label();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.miProveedorDeErrorDeTipo)).BeginInit();
@@ -120,10 +120,10 @@
       // 
       // miTextCoordenadasPDI
       // 
-      this.miTextCoordenadasPDI.AutoEllipsis = true;
-      this.miTextCoordenadasPDI.ForeColor = System.Drawing.SystemColors.Highlight;
-      resources.ApplyResources(this.miTextCoordenadasPDI, "miTextCoordenadasPDI");
-      this.miTextCoordenadasPDI.Name = "miTextCoordenadasPDI";
+      this.miTextoCoordenadasPDI.AutoEllipsis = true;
+      this.miTextoCoordenadasPDI.ForeColor = System.Drawing.SystemColors.Highlight;
+      resources.ApplyResources(this.miTextoCoordenadasPDI, "miTextCoordenadasPDI");
+      this.miTextoCoordenadasPDI.Name = "miTextCoordenadasPDI";
       // 
       // VentanaCambiarTipoDePDI
       // 
@@ -131,7 +131,7 @@
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.miBotónCancelar;
-      this.Controls.Add(this.miTextCoordenadasPDI);
+      this.Controls.Add(this.miTextoCoordenadasPDI);
       this.Controls.Add(this.miTextoNombrePDI);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
@@ -164,6 +164,6 @@
     private System.Windows.Forms.ErrorProvider miProveedorDeErrorDeTipo;
     private System.Windows.Forms.Label miTextoNombrePDI;
     private System.Windows.Forms.TextBox miTextoTipoNuevo;
-    private System.Windows.Forms.Label miTextCoordenadasPDI;
+    private System.Windows.Forms.Label miTextoCoordenadasPDI;
   }
 }

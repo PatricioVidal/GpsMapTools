@@ -441,6 +441,15 @@ namespace GpsYv.ManejadorDeMapa
         SeModificóElemento();
       }
     }
+
+    public void ProcesarTodo()
+    {
+      int númeroDeElementosModificados = 0;
+      númeroDeElementosModificados += miManejadorDePDIs.ProcesarTodo();
+      númeroDeElementosModificados += miManejadorDeVías.ProcesarTodo();
+
+      miEscuchadorDeEstatus.Estatus = "Se modificaron " + númeroDeElementosModificados + " elemento(s)";
+    }
     #endregion
 
     #region Métodos Privados

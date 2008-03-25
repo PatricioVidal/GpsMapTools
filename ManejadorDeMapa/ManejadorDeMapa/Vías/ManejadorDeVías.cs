@@ -148,7 +148,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Hace todas las correcciones a PDIs.
     /// </summary>
-    public void ProcesarTodo()
+    /// <returns>El número de Vías modificadas.</returns>
+    public int ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
       int númeroDeVíasModificadas = 0;
@@ -156,6 +157,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDeVíasModificadas + " modificaciones a Vías.";
+
+      return númeroDeVíasModificadas;
     }
     #endregion
 

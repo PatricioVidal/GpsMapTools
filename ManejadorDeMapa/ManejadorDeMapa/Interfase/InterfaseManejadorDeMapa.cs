@@ -107,7 +107,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
       miMenúEliminarCaracteresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
-      miMenuArreglarPalabrasDePDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
+      miMenuArreglarPalabrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
       miMenúBuscaDuplicadosEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
       miMenúBuscarErroresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores.Descripción;
 
@@ -211,26 +211,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void LlenaItems(IList<ListViewItem> losItems)
+    private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
       IList<ElementoDelMapa> elementosDelMapa = miManejadorDeMapa.Elementos;
       foreach (ElementoDelMapa elementoDelMapa in elementosDelMapa)
       {
-        ListViewItem item = new ListViewItem(
-          new string[] { 
-            elementoDelMapa.Número.ToString(),
-            elementoDelMapa.Tipo.ToString(),
-            elementoDelMapa.Descripción,
-            elementoDelMapa.Nombre,
-            elementoDelMapa.Clase},
-            -1);
-        item.Tag = elementoDelMapa;
-        losItems.Add(item);
+        laLista.AñadeItem(elementoDelMapa, elementoDelMapa.Clase);
       }
 
       // Actualiza la Pestaña.
-      this.miPaginaDeElementos.Text = "Elementos (" + losItems.Count + ")";
+      this.miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
     }
 
 
@@ -425,6 +416,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúBuscarErroresEnVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.BuscaErrores();
+    }
+
+
+    private void EnMenúProcesarTodo(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ProcesarTodo();
     }
     #endregion
   }

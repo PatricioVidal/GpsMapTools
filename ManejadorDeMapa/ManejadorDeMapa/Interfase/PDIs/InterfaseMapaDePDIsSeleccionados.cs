@@ -74,56 +74,130 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  public partial class InterfaseDePDIsEliminados : InterfaseBase
+  public partial class InterfaseMapaDePDIsSeleccionados : InterfaseMapa
   {
+    #region Campos
+    private ListView miLista = null;
+    private Brush miPincelDePDI = new SolidBrush(Color.Yellow);
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone la lista con los elementos del mapa.
+    /// </summary>
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser un PDI.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
+    {
+      get
+      {
+        return miLista;
+      }
+      set
+      {
+        // Desconectar los eventos si ya estabamos conectados a una lista.
+        if (miLista != null)
+        {
+          miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
+          miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
+        }
+
+        // Esta clase es muy lenta con listas que no están en modo virtual. 
+        // Entonces solo permitimos listas virtuales.
+        miLista = value;
+        if (!miLista.VirtualMode)
+        {
+          throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
+        }
+
+        // Conectar los eventos a la lista.
+        miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
+        miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
+      }
+    }
+    #endregion
+
     #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsEliminados()
+    public InterfaseMapaDePDIsSeleccionados()
     {
       InitializeComponent();
-
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
     }
     #endregion
 
     #region Métodos Privados
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentosDelRatón)
     {
-      EnElementosModificados(elEnviador, losArgumentos);
+      DibujaPDIs();
     }
 
 
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
     {
-      miLista.RegeneraLista();
+      DibujaPDIs();
     }
 
 
-    private void LlenaItems(InterfaseListaDeElementos laLista)
+    private void DibujaPDIs()
     {
-      // Añade los elementos.
-      IList<PDI> pdis = ManejadorDeMapa.PDIs;
-      foreach (PDI pdi in pdis)
+      // Nos salimos si no hay elementos seleccionados.
+      if (miLista.SelectedIndices.Count == 0)
       {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
-        {
-          laLista.AñadeItem(pdi, pdi.RazónParaEliminación);
-        }
+        return;
       }
 
-      // Actualiza la Pestaña.
-      TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "Eliminados (" + laLista.NúmeroDeElementos + ")";
+      List<PDI> pdis = new List<PDI>();
+      foreach (int indice in miLista.SelectedIndices)
+      {
+        ListViewItem item = miLista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser una vía.
+        PDI pdi = item.Tag as PDI;
+        if (pdi == null)
+        {
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es: " + pdi);
+        }
+
+        // Añade el PDI a la lista.
+        pdis.Add(pdi);
+      }
+
+      // Busca el rango visible para la vía.
+      float margen = 0.0005f;
+      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(
+        new List<ElementoDelMapa>(pdis.ToArray()));
+      RectangleF rectánguloVisible = new RectangleF(
+        rectánguloQueEncierra.X - margen,
+        rectánguloQueEncierra.Y - margen,
+        rectánguloQueEncierra.Width + (2 * margen),
+        rectánguloQueEncierra.Height + (2 * margen));
+
+      // Dibuja la vías como polilíneas adicional para resaltarla.
+      PuntosAddicionales.Clear();
+      foreach (PDI pdi in pdis)
+      {
+        // Dibuja los PDIs como PDIs adicionales para resaltarlos.
+        PuntosAddicionales.Add(
+          new InterfaseMapa.PuntoAdicional(pdi.Coordenadas, miPincelDePDI, 13));
+      }
+
+      // Muestra el mapa en la region deseada.
+      Enabled = true;
+      RectánguloVisibleEnCoordenadas = rectánguloVisible;
+      MuestraTodoElMapa = false;
+      Refresh();
     }
     #endregion
   }

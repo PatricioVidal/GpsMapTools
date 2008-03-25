@@ -21,7 +21,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       #region Campos
       private int miColumnaAOrdenar = -1;
       private ListView miLista = null;
-      private List<ListViewItem> misItems = null;
+      private List<ListViewItem> misItemsDeLaListaVirtual = null;
       #endregion
 
       #region Propiedades
@@ -35,12 +35,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         get
         {
-          return misItems;
+          return misItemsDeLaListaVirtual;
         }
 
         set
         {
-          misItems = value;
+          misItemsDeLaListaVirtual = value;
         }
       }
 
@@ -147,7 +147,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         // Ordena la lista.
         if (miLista.VirtualMode)
         {
-          misItems.Sort(this);
+          if (misItemsDeLaListaVirtual == null)
+          {
+            throw new InvalidOperationException("Para Listas Virtuales se tiene que pones la propiedad ItemsDeLaListaVirtual.");
+          }
+
+          misItemsDeLaListaVirtual.Sort(this);
           miLista.Refresh();
         }
         else
