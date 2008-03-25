@@ -202,7 +202,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         }
         else
         {
-          DialogResult = DialogResult.Cancel;
+          DialogResult = DialogResult.None;
         }
 
         // Cierra la ventana.

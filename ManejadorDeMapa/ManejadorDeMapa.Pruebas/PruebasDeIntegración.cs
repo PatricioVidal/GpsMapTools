@@ -139,7 +139,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         new CasoDeProcesamientoDePDIs( "58090.mp",  1713,         147,         19,          2,      85),
         new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         368,         10,        189,     239),
         new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         811,         32,         58,     192),
-        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          62,         46,          8,     324),
+        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          62,         46,          8,     250),
         new CasoDeProcesamientoDePDIs( "58460.mp",   980,          83,        151,          4,     216),
       };
 

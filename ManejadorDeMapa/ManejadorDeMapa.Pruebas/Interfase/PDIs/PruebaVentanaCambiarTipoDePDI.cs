@@ -108,18 +108,18 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
           new CampoTipo (tipo),
           new CampoCoordenadas (CampoCoordenadas.IdentificadorDeCoordenadas, 0, coordenadas)
         };
-      PDI pdi = new PDI(manejadorDeMapa, 1, clase, campos);
+      List<PDI> pdis = new List<PDI>{new PDI(manejadorDeMapa, 1, clase, campos)};
       #endregion
 
       #region Caso 1: Apenas aparece la ventana el usuario apreta "Cambiar"
       {
         // En este caso el método Show() debería retornar None,
-        // Y la propiedad TipoNuevo debería ser el tipo original.
+        // Y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
@@ -133,8 +133,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -144,12 +144,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 2: Apenas aparece la ventana el usuario apreta "Cancelar"
       {
         // En este caso el método Show() debería retornar Cancel,
-        // Y la propiedad TipoNuevo debería ser el tipo original.
+        // Y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCancelar = new ButtonTester("miBotónCancelar", objectoDePrueba);
@@ -163,8 +163,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.Cancel, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -179,7 +179,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea un tipo válido.
         string númeroTipoNuevoVálido = "100";
@@ -205,7 +205,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // Probar propiedades.
         Assert.AreEqual(DialogResult.OK, objectoDePrueba.DialogResult, "DialogResult");
         Assert.AreEqual(tipoNuevoVálido, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -215,12 +215,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 4: El usuario cambia el tipo inicial por uno desconocido.
       {
         // En este caso el método Show() debería retornar None,
-        // y la propiedad TipoNuevo debería ser el tipo original.
+        // y la propiedad TipoNuevo debería ser el tipo desconocido.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea un tipo desconocido.
         string númeroTipoNuevoDesconocido = "bbbb";
@@ -246,7 +246,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
         Assert.AreEqual(tipoNuevoDesconocido, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -256,12 +256,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 5: El usuario cambia el tipo inicial por uno inválido.
       {
         // En este caso el método Show() debería retornar None,
-        // y la propiedad TipoNuevo debería ser el tipo original.
+        // y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea un tipo inválido.
         // Un tipo inválido es aquel que genera una excepción cuando
@@ -296,8 +296,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -307,12 +307,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 6: El usuario empiezar a cambiar el tipo, pero al final lo borra y lo deja en blanco.
       {
         // En este caso el método Show() debería retornar None,
-        // y la propiedad TipoNuevo debería ser el tipo original.
+        // y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
@@ -333,8 +333,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.None, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
-        Assert.AreEqual(pdi, objectoDePrueba.PDI, "PDI");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(pdis, objectoDePrueba.PDIs, "PDIs");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -344,12 +344,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 7: El usuario empiezar a cambiar el tipo, pero al final cancela.
       {
         // En este caso el método Show() debería retornar Cancel,
-        // y la propiedad TipoNuevo debería ser el tipo original.
+        // y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = pdi;
+        objectoDePrueba.PDIs = pdis;
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCancelar = new ButtonTester("miBotónCancelar", objectoDePrueba);
@@ -368,7 +368,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
 
         // Probar propiedades.
         Assert.AreEqual(DialogResult.Cancel, objectoDePrueba.DialogResult, "DialogResult");
-        Assert.AreEqual(tipo, objectoDePrueba.TipoNuevo, "TipoNuevo");
+        Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.TipoNuevo, "TipoNuevo");
 
         // Cierra la ventana.
         objectoDePrueba.Close();
@@ -378,12 +378,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
       #region Caso 8: Se usa con un PDI nulo.
       {
         // En este caso el método Show() debería retornar None,
-        // y la propiedad TipoNuevo debería ser el tipo original.
+        // y la propiedad TipoNuevo debería ser el tipo nulo.
 
         #region Inicialización.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
-        objectoDePrueba.PDI = null;
+        objectoDePrueba.PDIs = null;
 
         // Crea los probadores de los elementos de la interfase.
         ButtonTester botónCambiar = new ButtonTester("miBotónCambiar", objectoDePrueba);
