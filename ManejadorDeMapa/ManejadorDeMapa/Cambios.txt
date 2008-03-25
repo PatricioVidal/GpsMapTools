@@ -8,6 +8,9 @@ Lo próximo para hacer:
 - Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.9
+
+
 Versión 1.8
 - Se actualizó la lista de PDIs conocidos.
 - Ahora se permite cambiar el tipo de PDI en selección múltiple.
