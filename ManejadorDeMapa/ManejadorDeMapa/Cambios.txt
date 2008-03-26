@@ -9,7 +9,8 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.9
-
+- Interno: Añadida documentación faltante de métodos. 
+- Interno: Creada clase base para los mapas con elementos seleccionados. 
 
 Versión 1.8
 - Se actualizó la lista de PDIs conocidos.
