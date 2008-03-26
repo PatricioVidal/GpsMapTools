@@ -77,45 +77,132 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
 using System.Collections;
-using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
   /// <summary>
-  /// Interfase Mapa de PDIs seleccionados.
+  /// Interfase de Mapa de Vías seleccionadas.
   /// </summary>
-  public partial class InterfaseMapaDePDIsSeleccionados : InterfaseMapaDeElementosSeleccionados
+  public partial class InterfaseMapaDeElementosSeleccionados : InterfaseMapa
   {
     #region Campos
-    private Brush miPincelDePDI = new SolidBrush(Color.Yellow);
+    private ListView miLista;
+    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone la lista con los elementos del mapa.
+    /// </summary>
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser una Vía.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
+    {
+      get
+      {
+        return miLista;
+      }
+      set
+      {
+        // Desconectar el evento si ya estabamos conectados a una lista.
+        if (miLista != null)
+        {
+          miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
+          miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
+        }
+
+        // Esta clase es muy lenta con listas que no están en modo virtual. 
+        // Entonces solo permitimos listas virtuales.
+        if (!value.VirtualMode)
+        {
+          throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
+        }
+
+        // Conectar el evento a la lista.
+        miLista = value;
+        miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
+        miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
+      }
+    }
     #endregion
 
     #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseMapaDePDIsSeleccionados()
+    public InterfaseMapaDeElementosSeleccionados()
     {
       InitializeComponent();
     }
     #endregion
 
     #region Métodos Privados
+    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentosDelRatón)
+    {
+      DibujaElementos();
+    }
+
+
+    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
+    {
+      DibujaElementos();
+    }
+
+
+    private void DibujaElementos()
+    {
+      // Nos salimos si no hay elementos seleccionados.
+      if (miLista.SelectedIndices.Count == 0)
+      {
+        return;
+      }
+
+      List<ElementoDelMapa> elementos = new List<ElementoDelMapa>();
+      foreach (int indice in miLista.SelectedIndices)
+      {
+        ListViewItem item = miLista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser una vía.
+        ElementoDelMapa elemento = item.Tag as ElementoDelMapa;
+        if (elemento == null)
+        {
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Elemento de Mapa, pero es: " + elemento);
+        }
+
+        // Añade la vía a la lista.
+        elementos.Add(elemento);
+      }
+
+      // Busca el rango visible para la vía.
+      float margen = 0.0005f;
+      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(elementos);
+      RectangleF rectánguloVisible = new RectangleF(
+        rectánguloQueEncierra.X - margen,
+        rectánguloQueEncierra.Y - margen,
+        rectánguloQueEncierra.Width + (2 * margen),
+        rectánguloQueEncierra.Height + (2 * margen));
+
+      DibujaObjectosAdicionales(elementos);
+
+      // Muestra el mapa en la region deseada.
+      Enabled = true;
+      RectánguloVisibleEnCoordenadas = rectánguloVisible;
+      MuestraTodoElMapa = false;
+      Refresh();
+    }
+
+
     /// <summary>
     /// Dibuja los objectos adicionales en el mapa. 
     /// </summary>
     /// <param name="losElementos">Los elementos seleccionados.</param>
-    protected override void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
+    protected virtual void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
     {
-      // Dibuja la vías como polilíneas adicional para resaltarlas.
-      PuntosAddicionales.Clear();
-      foreach (PDI pdi in losElementos)
-      {
-        // Dibuja los PDIs como PDIs adicionales para resaltarlos.
-        PuntosAddicionales.Add(
-          new InterfaseMapa.PuntoAdicional(pdi.Coordenadas, miPincelDePDI, 13));
-      }
+      throw new NotImplementedException("La clase derivada debe implementar el método DibujaObjectossAdicionales(IList<ElementoDelMapa> losElementos)");
     }
     #endregion
   }
