@@ -78,6 +78,9 @@ using System.Text;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
+  /// <summary>
+  /// Manejador de Vías.
+  /// </summary>
   public class ManejadorDeVías : ManejadorBase<Vía>
   {
     #region Campos
@@ -163,6 +166,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Borra las listas.

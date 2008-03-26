@@ -190,7 +190,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Procesa una línea.
     /// </summary>
-    /// <param name="línea">La línea.</param>
+    /// <param name="laLínea">La línea.</param>
     protected abstract void ProcesaLínea(string laLínea);
 
 

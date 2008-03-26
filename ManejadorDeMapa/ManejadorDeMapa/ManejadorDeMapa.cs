@@ -112,6 +112,9 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Descripción del método AceptarModificaciones().
+    /// </summary>
     public readonly static string DescripciónAceptarModificaciones =
       "Acepta las modificaciones a los elementos del mapa. \n" +
       " - Elementos marcados como eliminados son eliminados definitivamente.\n" +
@@ -362,6 +365,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Acepta las modificaciones de los elementos.
     /// </summary>
+    /// <remarks>
     /// <para>
     /// Elementos eliminados son eliminados completamente.
     /// </para>
@@ -442,6 +446,10 @@ namespace GpsYv.ManejadorDeMapa
       }
     }
 
+
+    /// <summary>
+    /// Procesa todo lo que se puede procesar.
+    /// </summary>
     public void ProcesarTodo()
     {
       int númeroDeElementosModificados = 0;

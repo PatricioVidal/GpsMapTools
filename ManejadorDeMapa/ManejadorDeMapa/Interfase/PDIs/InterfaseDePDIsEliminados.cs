@@ -80,6 +80,9 @@ using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
+  /// <summary>
+  /// Interfase para PDIs eliminados.
+  /// </summary>
   public partial class InterfaseDePDIsEliminados : InterfaseBase
   {
     #region Constructor
@@ -96,12 +99,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       EnElementosModificados(elEnviador, losArgumentos);
     }
 
 
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();

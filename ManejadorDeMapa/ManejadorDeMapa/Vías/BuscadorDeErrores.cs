@@ -121,7 +121,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Procesa na Vía.
     /// </summary>
-    /// <param name="elElemento">La Vía.</param>
+    /// <param name="laVía">La Vía.</param>
     /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
     protected override bool ProcesaElemento(Vía laVía)
     {

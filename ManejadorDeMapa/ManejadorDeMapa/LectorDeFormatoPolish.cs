@@ -132,6 +132,10 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Procesa una línea dado.
+    /// </summary>
+    /// <param name="laLínea">La línea dada.</param>
     protected override void ProcesaLínea(string laLínea)
     {
       // Elimina espacios en blanco.

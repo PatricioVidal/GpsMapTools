@@ -154,11 +154,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #endregion
 
     #region Métodos Protegidos
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected virtual void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       throw new InvalidOperationException(this.GetType() + " tiene que implementar método EnMapaNuevo(...)");
     }
 
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected virtual void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       throw new InvalidOperationException(this.GetType() + " tiene que implementar método EnElementosModificados(...)");

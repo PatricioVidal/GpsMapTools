@@ -233,6 +233,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
+    /// <param name="laFormaPrincipal">La Forma principal.</param>
     /// <param name="elComponenteDelTextoDeEstatus">El componente del Texto de Estatus.</param>
     /// <param name="elComponenteDeLaBarraDeProgreso">El componente de la Barra de Progreso.</param>
     /// <param name="elComponenteDelTextoDeCoordenadas">El componente del Texto de Coordenadas.</param>

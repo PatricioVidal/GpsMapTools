@@ -115,7 +115,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
-    /// <param name="elElemento">El PDI.</param>
+    /// <param name="elPDI">El PDI.</param>
     /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
     protected override bool ProcesaElemento(PDI elPDI)
     {

@@ -81,12 +81,19 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public class CampoCoordenadas : Campo
   {
-    #region Campos
-    public const string IdentificadorDeCoordenadas = "Data";
-    public const string IdentificadorDeCoordenadasAlterno = "Origin";
-    #endregion
-
     #region Propiedades
+    /// <summary>
+    /// Identificador.
+    /// </summary>
+    public const string IdentificadorDeCoordenadas = "Data";
+
+
+    /// <summary>
+    /// Identificador alterno.
+    /// </summary>
+    public const string IdentificadorDeCoordenadasAlterno = "Origin";
+
+
     /// <summary>
     /// Coordenadas vacia.
     /// </summary>

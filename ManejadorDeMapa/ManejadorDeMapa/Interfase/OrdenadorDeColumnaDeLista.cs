@@ -9,6 +9,9 @@ using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
+  /// <summary>
+  /// Ordenador de columnas para Listas tipo <see cref="ListView"/>.
+  /// </summary>
   public partial class OrdenadorDeColumnaDeLista : Component
   {
     #region Campos

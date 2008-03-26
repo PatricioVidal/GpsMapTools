@@ -291,7 +291,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Obtiene o pone la region visible.
     /// </summary>
     /// <remarks>
-    /// Esta region solo tiene efecto si <cref = "MuestraTodoElMapa"/>
+    /// Esta region solo tiene efecto si <see cref="MuestraTodoElMapa"/>
     /// es falsa.
     /// </remarks>
     [Browsable(true)]
@@ -426,6 +426,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Indicamos que hay un mapa presente.
@@ -449,7 +454,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       Refresh();
     }
 
-    
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miRectánguloDeDataEnCoordenadas = RectanguloQueEncierra(ManejadorDeMapa.Elementos);

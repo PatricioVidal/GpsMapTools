@@ -88,7 +88,6 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Diccionario de lápices por tipo de polilinea.
     /// </summary>
-    /// <remarks>
     public readonly static IDictionary<Tipo, Pen> misLápices = new Dictionary<Tipo, Pen>();
     #endregion
 

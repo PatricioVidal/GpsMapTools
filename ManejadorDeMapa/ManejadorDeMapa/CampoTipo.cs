@@ -82,11 +82,16 @@ namespace GpsYv.ManejadorDeMapa
   public class CampoTipo : Campo
   {
     #region Campos
-    public const string IdentificadorDeTipo = "Type";
     private readonly Tipo miTipo = Tipo.TipoNulo;
     #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Identificador.
+    /// </summary>
+    public const string IdentificadorDeTipo = "Type";
+
+
     /// <summary>
     /// Devuelve el tipo.
     /// </summary>

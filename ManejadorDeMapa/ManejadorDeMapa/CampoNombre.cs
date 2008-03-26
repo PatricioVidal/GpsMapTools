@@ -82,11 +82,15 @@ namespace GpsYv.ManejadorDeMapa
   public class CampoNombre : Campo
   {
     #region Campos
-    public const string IdentificadorDeEtiqueta = "Label";
     private readonly string miNombre;
     #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Identificador.
+    /// </summary>
+    public const string IdentificadorDeEtiqueta = "Label";
+
     /// <summary>
     /// Devuelve el nombre.
     /// </summary>

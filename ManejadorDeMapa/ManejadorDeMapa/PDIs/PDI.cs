@@ -162,6 +162,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       return clone;
     }
 
+
+    /// <summary>
+    /// Retorna una variable lógica indicando si un PDI dado
+    /// tien la misma información que este PDI.
+    /// </summary>
+    /// <param name="elPDI">El PDI dado.</param>
     public bool TieneLaMismaInformación(PDI elPDI)
     {
       bool tieneLaMismaInformación = false;

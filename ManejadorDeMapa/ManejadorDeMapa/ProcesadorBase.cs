@@ -144,6 +144,11 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
+    /// <summary>
+    /// Indexador por número índice.
+    /// </summary>
+    /// <param name="elIndice">El número índice dado.</param>
+    /// <returns>El elemento el el índice dado.</returns>
     public K this[int elIndice]
     {
       get

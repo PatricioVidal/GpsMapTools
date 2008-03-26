@@ -82,6 +82,9 @@ using GpsYv.ManejadorDeMapa.Properties;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
+  /// <summary>
+  /// Interfase del manejador de mapa.
+  /// </summary>
   public partial class InterfaseManejadorDeMapa : Form
   {
     #region Campos
@@ -190,6 +193,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     private void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Deshabilita los menus de Guardar.
@@ -200,6 +208,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     private void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       // Actualiza la lista de elementos.

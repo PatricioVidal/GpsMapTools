@@ -78,6 +78,9 @@ using System.Text;
 
 namespace GpsYv.ManejadorDeMapa.PDIs
 {
+  /// <summary>
+  /// Manejados de PDIs.
+  /// </summary>
   public class ManejadorDePDIs : ManejadorBase<PDI>
   {
     #region Campos
@@ -232,6 +235,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Borra las listas.

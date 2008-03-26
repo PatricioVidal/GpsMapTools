@@ -132,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     ///  2-4 -> Encuentra parecidos.
     ///  6+  -> Es como mucho, todo es parecido a todo. 
     /// </remarks>
-    /// <seealso cref="http://en.wikipedia.org/wiki/Hamming_distance"/>
+    /// <see>http://en.wikipedia.org/wiki/Hamming_distance</see>
     public int DistanciaHamming
     {
       get
@@ -151,7 +151,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="ManejadorDePDIs">El manejador de PDIs.</param>
+    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
     public BuscadorDeDuplicados(
       ManejadorDePDIs elManejadorDePDIs,
@@ -179,7 +179,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
-    /// <param name="elElemento">El PDI.</param>
+    /// <param name="elPDI">El PDI.</param>
     /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
     protected override bool ProcesaElemento(PDI elPDI)
     {

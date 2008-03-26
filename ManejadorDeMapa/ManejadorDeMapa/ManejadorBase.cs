@@ -153,6 +153,11 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected abstract void EnMapaNuevo(object elEnviador, EventArgs losArgumentos);
     #endregion
   }

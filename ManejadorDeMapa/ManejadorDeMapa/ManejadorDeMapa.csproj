@@ -75,6 +75,12 @@
     <Compile Include="Interfase\InterfaseListaDeElementos.Designer.cs">
       <DependentUpon>InterfaseListaDeElementos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfase\InterfaseMapaDeElementosSeleccionados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\InterfaseMapaDeElementosSeleccionados.Designer.cs">
+      <DependentUpon>InterfaseMapaDeElementosSeleccionados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfase\OrdenadorDeColumnaDeLista.cs">
       <SubType>Component</SubType>
     </Compile>
