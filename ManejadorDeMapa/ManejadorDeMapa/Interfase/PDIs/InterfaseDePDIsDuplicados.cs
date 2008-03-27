@@ -92,6 +92,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private Color miColorDeFondoOriginal;
     #endregion
 
+    #region Eventos
+    /// <summary>
+    /// Evento cuando hay PDIs duplicados.
+    /// </summary>
+    public event EventHandler<NúmeroDeElementosEventArgs> PDIsDuplicados;
+    #endregion
+
     #region Propiedades
     /// <summary>
     /// Obtiene o pone el manejador de mapa.
@@ -201,12 +208,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       }
       miLista.ResumeLayout(false);
 
-      // Actualiza la Pestaña.
-      if ((Tag != null) && (Tag is TabPage))
+      // Genera el evento.
+      if (PDIsDuplicados != null)
       {
-        TabPage pestaña = (TabPage)Tag;
-        int númeroDePosiblesDuplicados = miLista.Groups.Count;
-        pestaña.Text = "Posibles Duplicados (" + númeroDePosiblesDuplicados + ")";
+        int númeroDeDuplicados = miManejadorDePDIs.GruposDeDuplicados.Count;
+        PDIsDuplicados(this, new NúmeroDeElementosEventArgs(númeroDeDuplicados));
       }
 
       // Actualiza el Número de PDIs a Eliminar.

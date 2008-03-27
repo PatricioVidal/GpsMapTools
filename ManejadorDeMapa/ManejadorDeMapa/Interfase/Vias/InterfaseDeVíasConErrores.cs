@@ -78,17 +78,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
   /// Interfase de Errores de PDIs.
   /// </summary>
-  public partial class InterfaseDeErroresEnPDIs : InterfaseBase
+  public partial class InterfaseDeViasConErrores : InterfaseBase
   {
     #region Campos
-    private List<ListViewItem> misItems = new List<ListViewItem>();
-    private ManejadorDePDIs miManejadorDePDIs;
+    private ManejadorDeVías miManejadorDeVías;
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando hay Vías con errores.
+    /// </summary>
+    public event EventHandler<NúmeroDeElementosEventArgs> VíasConErrores;
     #endregion
 
     #region Propiedades
@@ -100,9 +107,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       set
       {
         // Deja de manejar los eventos.
-        if (miManejadorDePDIs != null)
+        if (miManejadorDeVías != null)
         {
-          miManejadorDePDIs.EncontraronErrores -= EnEncontraronErrores;
+          miManejadorDeVías.EncontraronErrores -= EnEncontraronErrores;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -111,18 +118,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Maneja eventos.
         if (value != null)
         {
-          miManejadorDePDIs = value.ManejadorDePDIs;
+          miManejadorDeVías = value.ManejadorDeVías;
 
-          if (miManejadorDePDIs != null)
+          if (miManejadorDeVías != null)
           {
-            miManejadorDePDIs.EncontraronErrores += EnEncontraronErrores;
+            miManejadorDeVías.EncontraronErrores += EnEncontraronErrores;
           }
 
           // Pone el manejador de mapa en la interfase de mapa.
-          miMapa.ManejadorDeMapa = value;
+          miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
 
-          // Pone el manejador de PDIs en la interfase de edición de PDIs.
-          miMenúEditorDePDI.ManejadorDePDIs = value.ManejadorDePDIs;
+          // Pone el manejador de vías en el menú editor de vías.
+          miMenuEditorDeVías.ManejadorDeVías = miManejadorDeVías;
         }
       }
     }
@@ -136,29 +143,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       set
       {
         base.EscuchadorDeEstatus = value;
-        miMapa.EscuchadorDeEstatus = value;
+        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
       }
     }
     #endregion
 
-    #region Métodos
+    #region Constructor.
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeErroresEnPDIs()
+    public InterfaseDeViasConErrores()
     {
       InitializeComponent();
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
-
-      // Escucha el evnto de edición de PDIs.
-      miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        miManejadorDePDIs.BuscaErrores();
-      };
     }
+    #endregion
 
+    #region Métodos Privados
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -180,36 +183,28 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       // No es necesario hacer nada aqui.
     }
 
-    
+
     private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
+
+      // Genera el evento.
+      if (VíasConErrores != null)
+      {
+        VíasConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+      }
     }
+
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
-      // Añade los PDIs.
-      IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
-      foreach (KeyValuePair<PDI, string> error in errores)
+      // Añade las Vías.
+      IDictionary<Vía, string> errores = ManejadorDeMapa.ManejadorDeVías.Errores;
+      foreach (KeyValuePair<Vía, string> error in errores)
       {
-        PDI pdi = error.Key;
+        Vía vía = error.Key;
         string razón = error.Value;
-        laLista.AñadeItem(pdi, pdi.Coordenadas.ToString(), razón);
-      }
-
-      // Actualiza la Pestaña.
-      TabPage pestaña = (TabPage)Tag;
-      int númeroDeErrores = errores.Count;
-      pestaña.Text = "Errores (" + númeroDeErrores + ")";
-
-      // Activa el menú de Edición si hay elementos en la lista.
-      if (errores.Count > 0)
-      {
-        miMenúEditorDePDI.Enabled = true;
-      }
-      else
-      {
-        miMenúEditorDePDI.Enabled = false;
+        laLista.AñadeItem(vía, razón);
       }
     }
     #endregion

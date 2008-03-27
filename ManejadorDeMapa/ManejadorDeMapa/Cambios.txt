@@ -5,10 +5,11 @@ Lo próximo para hacer:
 - Verificar que polígonos y polilíneas tienen tipos válidos.
 - Implementar el diccionario.
 - Dibuja carreteras basado en RouteParams?
-- Usar eventos para las páginas de pestañas.
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.9
+- Añadidos indicadores visuales en las pestañas para indicar elementos modificados y con errores.
+- Interno: Ahora se usan eventos para las páginas de pestañas.
 - Interno: Añadida documentación faltante de métodos. 
 - Interno: Creada clase base para los mapas con elementos seleccionados. 
 

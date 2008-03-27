@@ -85,6 +85,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// </summary>
   public partial class InterfaseDePDIsEliminados : InterfaseBase
   {
+    #region Eventos
+    /// <summary>
+    /// Evento cuando hay PDIs eliminados.
+    /// </summary>
+    public event EventHandler<NúmeroDeElementosEventArgs> PDIsEliminados;
+    #endregion
+
     #region Constructor
     /// <summary>
     /// Constructor.
@@ -118,6 +125,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
+
+      // Genera el evento.
+      if (PDIsEliminados != null)
+      {
+        PDIsEliminados(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+      }
     }
 
 
@@ -133,10 +146,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           laLista.AñadeItem(pdi, pdi.RazónParaEliminación);
         }
       }
-
-      // Actualiza la Pestaña.
-      TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "Eliminados (" + laLista.NúmeroDeElementos + ")";
     }
     #endregion
   }

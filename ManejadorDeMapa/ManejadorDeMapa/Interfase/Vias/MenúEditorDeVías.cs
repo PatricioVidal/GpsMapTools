@@ -72,128 +72,162 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase de Errores de PDIs.
+  /// Menú para editar PDIs.
   /// </summary>
-  public partial class InterfaseDeErroresEnVías : InterfaseBase
+  public partial class MenuEditorDeVías : ContextMenuStrip
   {
     #region Campos
-    private ManejadorDeVías miManejadorDeVías;
+    private ListView miLista = null;
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando se editan Vías.
+    /// </summary>
+    public event EventHandler EditóVías;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene o pone el manejador de mapa.
+    /// Obtiene o pone la lista con los elementos del mapa.
     /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser un PDI.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
     {
+      get
+      {
+        return miLista;
+      }
       set
       {
-        // Deja de manejar los eventos.
-        if (miManejadorDeVías != null)
+        miLista = value;
+
+        if (miLista != null)
         {
-          miManejadorDeVías.EncontraronErrores -= EnEncontraronErrores;
-        }
-
-        // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-
-        // Maneja eventos.
-        if (value != null)
-        {
-          miManejadorDeVías = value.ManejadorDeVías;
-
-          if (miManejadorDeVías != null)
+          // Desconecta el menú si ya estabamos conectados a una lista.
+          if (miLista != null)
           {
-            miManejadorDeVías.EncontraronErrores += EnEncontraronErrores;
+            miLista.ContextMenuStrip = null;
           }
 
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
+          // Esta clase es muy lenta con listas que no están en modo virtual. 
+          // Entonces solo permitimos listas virtuales.
+          miLista = value;
+          if (!miLista.VirtualMode)
+          {
+            throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
+          }
+
+          // Conecta el menú a la lista.
+          miLista.ContextMenuStrip = this;
         }
       }
     }
 
 
     /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
+    /// Obtiene o pone el manejador de Vías.
     /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    [Browsable(true)]
+    public ManejadorDeVías ManejadorDeVías
     {
-      set
-      {
-        base.EscuchadorDeEstatus = value;
-        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
-      }
+      get;
+      set;
     }
     #endregion
 
-    #region Constructor.
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeErroresEnVías()
+    public MenuEditorDeVías()
     {
       InitializeComponent();
 
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
+      // Inicialización.
+      Name = "miMenuDeContexto";
+      Size = new System.Drawing.Size(153, 48);
+      AutoSize = true;
+
+      // Añade los menús.
+      AddAñadeMenúCambiarCoordenadasANivel0();
     }
     #endregion
 
     #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    private void AddAñadeMenúCambiarCoordenadasANivel0()
     {
-      EnEncontraronErrores(elEnviador, losArgumentos);
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Cambiar coordenadas a Nivel 0";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúCambiarCoordenadasANivel0;
     }
 
 
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    private void EnMenúCambiarCoordenadasANivel0(object elObjecto, EventArgs losArgumentos)
     {
-      // No es necesario hacer nada aqui.
-    }
-
-
-    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-    }
-
-
-    private void LlenaItems(InterfaseListaDeElementos laLista)
-    {
-      // Añade las Vías.
-      IDictionary<Vía, string> errores = ManejadorDeMapa.ManejadorDeVías.Errores;
-      foreach (KeyValuePair<Vía, string> error in errores)
+      // Retornamos si no hay Vías seleccionadas.
+      if (miLista.SelectedIndices.Count == 0)
       {
-        Vía vía = error.Key;
-        string razón = error.Value;
-        laLista.AñadeItem(vía, razón);
+        return;
       }
 
-      // Actualiza la Pestaña.
-      TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "Errores (" + errores.Count + ")";
+      List<Vía> vías = new List<Vía>();
+      foreach (int indice in miLista.SelectedIndices)
+      {
+        ListViewItem item = miLista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser una vía.
+        Vía vía = item.Tag as Vía;
+        if (vía == null)
+        {
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es nulo");
+        }
+
+        // Añade la vía a la lista.
+        vías.Add(vía);
+      }
+
+      // Muestra la ventana de confirmación.
+      DialogResult resultado = MessageBox.Show(
+        "Esta seguro de que quiere cambiar las coordenadas a nivel 0?",
+        "Cambiar Vía",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+      if (resultado == DialogResult.Yes)
+      {
+        // Cambia las coordenadas evitando que se generen eventos con
+        // cada cambio.
+        ManejadorDeVías.SuspendeEventos();
+        foreach (Vía vía in vías)
+        {
+
+        }
+
+        // Envía el evento indicando que se editaron PDIs.
+        if (EditóVías != null)
+        {
+          EditóVías(this, new EventArgs());
+        }
+
+        // Restablece los eventos.
+        ManejadorDeVías.RestableceEventos();
+      }
     }
     #endregion
   }

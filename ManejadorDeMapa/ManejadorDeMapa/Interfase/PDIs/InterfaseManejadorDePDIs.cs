@@ -90,6 +90,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private readonly InterfaseBase[] misInterfases;
     private const string FormatoDeCoordenada = "0.00000";
     private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
+    private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando cambió el estado máximo de las Pestañas.
+    /// </summary>
+    public event EventHandler<ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs> CambióEstadoMáximoDePestañas;
     #endregion
 
     #region Propiedades
@@ -146,14 +154,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         miInterfasePDIsErrores,
         miInterfasePDIsModificados};
 
-      // Asignar las propiedades correspondientes.
-      miInterfasePDIsDuplicados.Tag = miPáginaPosiblesDuplicados;
-      miInterfasePDIsEliminados.Tag = miPáginaEliminados;
-      miInterfasePDIsModificados.Tag = miPáginaModificados;
-      miInterfasePDIsErrores.Tag = miPáginaErrores;
+      // Escucha los eventos para actualizar las pestañas.
+      miInterfasePDIsDuplicados.PDIsDuplicados += EnPDIsDuplicados;
+      miInterfasePDIsEliminados.PDIsEliminados += EnPDIsEliminados;
+      miInterfasePDIsModificados.PDIsModificados += EnPDIsModificados;
+      miInterfasePDIsErrores.PDIsConErrores += EnPDIsConErrores;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
+
+      // Crea el diccionario de índices de pestañas.
+      TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
+      for (int i = 0; i < pestañas.Count; ++i)
+      {
+        misIndicesDePestañas[pestañas[i]] = i;
+      }
+
+      // Maneja evento de cambio de Estado Máximo de Pestañas.
+      miControladorDePestañas.CambióEstadoMáximoDePestañas +=
+        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
+        {
+          if (CambióEstadoMáximoDePestañas != null)
+          {
+            CambióEstadoMáximoDePestañas(this, losArgumentos);
+          }
+        };
     }
     #endregion
 
@@ -177,6 +202,71 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
+
+      // Actualiza la Pestaña.
+      miPáginaDeTodos.Text = "Todos (" + miLista.NúmeroDeElementos + ")";
+    }
+
+
+    private void EnPDIsModificados(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDePDIsModificados = losArgumentos.NúmeroDeElementos;
+
+      // Cambia el texto de la pestaña.
+      miPáginaModificados.Text = "Modificados (" + númeroDePDIsModificados + ")";
+
+      // Si hay PDIs modificados entonces cambia el estado de la pestaña a Alerta.
+      // Si no, entonces cambia el estado de la pestaña a Nada.
+      if (númeroDePDIsModificados > 0)
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaModificados],
+          ControladorDePestañas.EstadoDePestaña.Alerta);
+      }
+      else
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaModificados],
+          ControladorDePestañas.EstadoDePestaña.Nada);
+      }
+    }
+
+
+    private void EnPDIsEliminados(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDePDIsEliminados = losArgumentos.NúmeroDeElementos;
+      miPáginaEliminados.Text = "Eliminados (" + númeroDePDIsEliminados + ")";
+    }
+
+
+    private void EnPDIsDuplicados(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDePDIsDuplicados = losArgumentos.NúmeroDeElementos;
+      miPáginaPosiblesDuplicados.Text = "Posibles Duplicados (" + númeroDePDIsDuplicados + ")";
+    }
+
+
+    private void EnPDIsConErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDePDIsConErrores = losArgumentos.NúmeroDeElementos;
+
+      // Cambia el texto de la pestaña.
+      miPáginaErrores.Text = "Errores (" + númeroDePDIsConErrores + ")";
+
+      // Si hay PDIs con errores entonces cambia el estado de la pestaña a Error.
+      // Si no, entonces cambia el estado de la pestaña a Nada.
+      if (númeroDePDIsConErrores > 0)
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaErrores],
+          ControladorDePestañas.EstadoDePestaña.Error);
+      }
+      else
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaErrores],
+          ControladorDePestañas.EstadoDePestaña.Nada);
+      }
     }
 
 
@@ -191,11 +281,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
           pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico));
       }
-
-      // Actualiza las Pestañas.
-      miPáginaDeTodos.Text = "Todos (" + laLista.NúmeroDeElementos + ")";
-      TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "PDIs (" + laLista.NúmeroDeElementos + ")";
     }
     #endregion
   }

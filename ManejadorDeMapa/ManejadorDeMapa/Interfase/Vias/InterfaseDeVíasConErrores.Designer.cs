@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  partial class InterfaseDeErroresEnVías
+  partial class InterfaseDeViasConErrores
   {
     /// <summary> 
     /// Required designer variable.
@@ -29,7 +29,8 @@
     private void InitializeComponent()
     {
       System.Windows.Forms.ColumnHeader columnaRazón;
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeErroresEnVías));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeViasConErrores));
+      this.miMenuEditorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías();
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
       this.miDivision = new System.Windows.Forms.SplitContainer();
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
@@ -43,10 +44,18 @@
       // 
       resources.ApplyResources(columnaRazón, "columnaRazón");
       // 
+      // miMenuEditorDeVías
+      // 
+      this.miMenuEditorDeVías.Lista = this.miLista;
+      this.miMenuEditorDeVías.ManejadorDeVías = null;
+      this.miMenuEditorDeVías.Name = "miMenuDeContexto";
+      resources.ApplyResources(this.miMenuEditorDeVías, "miMenuEditorDeVías");
+      // 
       // miLista
       // 
       this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnaRazón});
+      this.miLista.ContextMenuStrip = this.miMenuEditorDeVías;
       resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
@@ -101,6 +110,7 @@
     private System.Windows.Forms.SplitContainer miDivision;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
+    private MenuEditorDeVías miMenuEditorDeVías;
 
   }
 }

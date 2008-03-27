@@ -119,13 +119,13 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     {
       #region Inicialización.
       // Comienza applicación.
-      InterfaseManejadorDeMapa formaPrincipal = new InterfaseManejadorDeMapa();
-      formaPrincipal.Show();
-      formaPrincipal.TopMost = true;
+      InterfaseManejadorDeMapa interfaseManejadorDeMapa = new InterfaseManejadorDeMapa();
+      interfaseManejadorDeMapa.Show();
+      interfaseManejadorDeMapa.TopMost = true;
 
       // Crea los probadores de los elementos de la interfase.
       TabControlTester controladorDePestañasPrincipal = new TabControlTester("miControladorDePestañasPrincipal");
-      TabControlTester controladorDePestañasDePDIs = new TabControlTester("miControladorDePestañasDePDIs");
+      TabControlTester controladorDePestañasDePDIs = new TabControlTester("miInterfaseManejadorDePDIs.miControladorDePestañas");
       TabControl.TabPageCollection pestañasPDIs = controladorDePestañasDePDIs.Properties.TabPages;
       TabPage pestañaTodos = pestañasPDIs[1];
       TabPage pestañaModificados = pestañasPDIs[2];

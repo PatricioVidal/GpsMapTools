@@ -90,6 +90,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #region Campos
     private ManejadorDeMapa miManejadorDeMapa;
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
+    private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     #endregion
 
     #region Métodos Públicos
@@ -142,12 +143,33 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Asigna las propiedades de la interfase de PDIs.
       miInterfaseManejadorDePDIs.ManejadorDeMapa = miManejadorDeMapa;
       miInterfaseManejadorDePDIs.EscuchadorDeEstatus = miEscuchadorDeEstatus;
-      miInterfaseManejadorDePDIs.Tag = miPaginaDePDIs;
 
       // Asigna las propiedades de la interfase de Vías.
       miInterfaseManejadorDeVías.ManejadorDeMapa = miManejadorDeMapa;
       miInterfaseManejadorDeVías.EscuchadorDeEstatus = miEscuchadorDeEstatus;
-      miInterfaseManejadorDeVías.Tag = miPáginaDeVías;
+
+      // Crea el diccionario de índices de pestañas.
+      TabControl.TabPageCollection pestañas = miControladorDePestañasPrincipal.TabPages;
+      for (int i = 0; i < pestañas.Count; ++i)
+      {
+        misIndicesDePestañas[pestañas[i]] = i;
+      }
+
+      // Maneja evento de cambio de Estado Máximo de Pestañas de PDIs.
+      miInterfaseManejadorDePDIs.CambióEstadoMáximoDePestañas +=
+        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
+        {
+          miControladorDePestañasPrincipal.PoneEstadoDePestaña(
+            misIndicesDePestañas[miPaginaDePDIs], losArgumentos.EstadoMáximoDePestañas);
+        };
+
+      // Maneja evento de cambio de Estado Máximo de Pestañas de Vías.
+      miInterfaseManejadorDeVías.CambióEstadoMáximoDePestañas +=
+        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
+        {
+          miControladorDePestañasPrincipal.PoneEstadoDePestaña(
+            misIndicesDePestañas[miPáginaDeVías], losArgumentos.EstadoMáximoDePestañas);
+        };
     }
     #endregion
       
@@ -233,8 +255,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         laLista.AñadeItem(elementoDelMapa, elementoDelMapa.Clase);
       }
 
-      // Actualiza la Pestaña.
-      this.miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
+      // Actualiza las Pestañas.
+      miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
+      miPaginaDePDIs.Text = "PDIs (" + miManejadorDeMapa.PDIs.Count + ")";
+      miPáginaDeVías.Text = "Vías (" + miManejadorDeMapa.Vías.Count + ")";
     }
 
 

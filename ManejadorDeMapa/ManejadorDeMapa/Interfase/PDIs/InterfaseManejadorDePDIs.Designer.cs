@@ -28,10 +28,11 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       System.Windows.Forms.ColumnHeader columnaLatitud;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDePDIs));
       System.Windows.Forms.ColumnHeader columnaLongitud;
-      this.miControladorDePestañasDePDIs = new System.Windows.Forms.TabControl();
+      this.miControladorDePestañas = new GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas();
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
       this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
@@ -43,10 +44,10 @@
       this.miPáginaEliminados = new System.Windows.Forms.TabPage();
       this.miInterfasePDIsEliminados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
-      this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDeErroresEnPDIs();
+      this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress();
       columnaLatitud = new System.Windows.Forms.ColumnHeader();
       columnaLongitud = new System.Windows.Forms.ColumnHeader();
-      this.miControladorDePestañasDePDIs.SuspendLayout();
+      this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
       this.miPáginaModificados.SuspendLayout();
@@ -63,17 +64,17 @@
       // 
       resources.ApplyResources(columnaLongitud, "columnaLongitud");
       // 
-      // miControladorDePestañasDePDIs
+      // miControladorDePestañas
       // 
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaMapa);
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaDeTodos);
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaModificados);
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaPosiblesDuplicados);
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaEliminados);
-      this.miControladorDePestañasDePDIs.Controls.Add(this.miPáginaErrores);
-      resources.ApplyResources(this.miControladorDePestañasDePDIs, "miControladorDePestañasDePDIs");
-      this.miControladorDePestañasDePDIs.Name = "miControladorDePestañasDePDIs";
-      this.miControladorDePestañasDePDIs.SelectedIndex = 0;
+      this.miControladorDePestañas.Controls.Add(this.miPáginaMapa);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaDeTodos);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaModificados);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaPosiblesDuplicados);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaEliminados);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
+      resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
+      this.miControladorDePestañas.Name = "miControladorDePestañas";
+      this.miControladorDePestañas.SelectedIndex = 0;
       // 
       // miPáginaMapa
       // 
@@ -178,9 +179,9 @@
       // 
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.miControladorDePestañasDePDIs);
+      this.Controls.Add(this.miControladorDePestañas);
       this.Name = "InterfaseManejadorDePDIs";
-      this.miControladorDePestañasDePDIs.ResumeLayout(false);
+      this.miControladorDePestañas.ResumeLayout(false);
       this.miPáginaMapa.ResumeLayout(false);
       this.miPáginaDeTodos.ResumeLayout(false);
       this.miPáginaModificados.ResumeLayout(false);
@@ -193,7 +194,7 @@
 
     #endregion
 
-    private System.Windows.Forms.TabControl miControladorDePestañasDePDIs;
+    private GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas miControladorDePestañas;
     private System.Windows.Forms.TabPage miPáginaDeTodos;
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
     private System.Windows.Forms.TabPage miPáginaModificados;
@@ -205,6 +206,6 @@
     private System.Windows.Forms.TabPage miPáginaMapa;
     private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.TabPage miPáginaErrores;
-    private InterfaseDeErroresEnPDIs miInterfasePDIsErrores;
+    private InterfaseDePDIsConErroress miInterfasePDIsErrores;
   }
 }

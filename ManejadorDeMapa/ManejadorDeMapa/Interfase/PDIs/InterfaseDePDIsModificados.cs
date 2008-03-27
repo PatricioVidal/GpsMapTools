@@ -86,6 +86,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   public partial class InterfaseDePDIsModificados : InterfaseBase
   {
     /// <summary>
+    /// Evento cuando hay PDIs modificados.
+    /// </summary>
+    public event EventHandler<NúmeroDeElementosEventArgs> PDIsModificados;
+
+    /// <summary>
     /// Constructor.
     /// </summary>
     public InterfaseDePDIsModificados()
@@ -116,6 +121,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
+
+      // Genera el evento.
+      if (PDIsModificados != null)
+      {
+        PDIsModificados(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+      }
     }
 
 
@@ -131,10 +142,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           laLista.AñadeItem(pdi, pdi.Modificaciones);
         }
       }
-
-      // Actualiza la Pestaña.
-      TabPage pestaña = (TabPage)Tag;
-      pestaña.Text = "Modificados (" + laLista.NúmeroDeElementos + ")";
     }
   }
 }

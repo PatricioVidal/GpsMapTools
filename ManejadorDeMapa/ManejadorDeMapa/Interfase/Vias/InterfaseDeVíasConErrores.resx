@@ -127,6 +127,9 @@
   <data name="columnaRazón.Width" type="System.Int32, mscorlib">
     <value>284</value>
   </data>
+  <metadata name="miMenuEditorDeVías.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -145,13 +148,22 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.9.3006.42260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivision.Panel1</value>
   </data>
   <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miMenuEditorDeVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 48</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDeVías.Name" xml:space="preserve">
+    <value>miMenuEditorDeVías</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDeVías.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías, GpsYv.ManejadorDeMapa, Version=1.9.3006.42260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="miDivision.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -198,7 +210,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada, GpsYv.ManejadorDeMapa, Version=1.9.3006.42260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivision.Panel2</value>
@@ -237,7 +249,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;miDivision.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -258,6 +270,6 @@
     <value>InterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.9.3006.42260, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

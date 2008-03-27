@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeVías));
-      this.miControladorDePestañas = new System.Windows.Forms.TabControl();
+      this.miControladorDePestañas = new GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas();
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
       this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
@@ -37,7 +37,7 @@
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
-      this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeErroresEnVías();
+      this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -156,7 +156,7 @@
 
     #endregion
 
-    private System.Windows.Forms.TabControl miControladorDePestañas;
+    private GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas miControladorDePestañas;
     private System.Windows.Forms.TabPage miPáginaMapa;
     private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.TabPage miPáginaDeTodos;
@@ -164,6 +164,6 @@
     private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
     private System.Windows.Forms.SplitContainer miDivisión;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
-    private InterfaseDeErroresEnVías miInterfaseDeErroresEnVías;
+    private InterfaseDeViasConErrores miInterfaseDeErroresEnVías;
   }
 }

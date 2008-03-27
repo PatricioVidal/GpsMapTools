@@ -74,29 +74,28 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Globalization;
 using GpsYv.ManejadorDeMapa.PDIs;
-using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
   /// <summary>
-  /// Interfase manejador de Vías.
+  /// Interfase de Errores de PDIs.
   /// </summary>
-  public partial class InterfaseManejadorDeVías : InterfaseBase
+  public partial class InterfaseDePDIsConErroress : InterfaseBase
   {
     #region Campos
-    private readonly InterfaseBase[] misInterfases;
-    private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
+    private List<ListViewItem> misItems = new List<ListViewItem>();
+    private ManejadorDePDIs miManejadorDePDIs;
     #endregion
 
     #region Eventos
     /// <summary>
-    /// Evento cuando cambió el estado máximo de las Pestañas.
+    /// Evento cuando hay PDIs con errores.
     /// </summary>
-    public event EventHandler<ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs> CambióEstadoMáximoDePestañas;
+    public event EventHandler<NúmeroDeElementosEventArgs> PDIsConErrores;
     #endregion
 
     #region Propiedades
@@ -107,11 +106,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       set
       {
+        // Deja de manejar los eventos.
+        if (miManejadorDePDIs != null)
+        {
+          miManejadorDePDIs.EncontraronErrores -= EnEncontraronErrores;
+        }
+
+        // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
 
-        foreach (InterfaseBase interfaseBase in misInterfases)
+        // Maneja eventos.
+        if (value != null)
         {
-          interfaseBase.ManejadorDeMapa = value;
+          miManejadorDePDIs = value.ManejadorDePDIs;
+
+          if (miManejadorDePDIs != null)
+          {
+            miManejadorDePDIs.EncontraronErrores += EnEncontraronErrores;
+          }
+
+          // Pone el manejador de mapa en la interfase de mapa.
+          miMapa.ManejadorDeMapa = value;
+
+          // Pone el manejador de PDIs en la interfase de edición de PDIs.
+          miMenúEditorDePDI.ManejadorDePDIs = value.ManejadorDePDIs;
         }
       }
     }
@@ -125,60 +143,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         base.EscuchadorDeEstatus = value;
-
-        foreach (InterfaseBase interfaseBase in misInterfases)
-        {
-          interfaseBase.EscuchadorDeEstatus = value;
-        }
+        miMapa.EscuchadorDeEstatus = value;
       }
     }
     #endregion
 
-    #region Métodos Públicos
+    #region Métodos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseManejadorDeVías()
+    public InterfaseDePDIsConErroress()
     {
       InitializeComponent();
-
-      // Crea la lista de interfases.
-      misInterfases = new InterfaseBase[] {
-        miInterfaseDeMapa,
-        miMapaDeVíaSeleccionada,
-        miInterfaseDeErroresEnVías
-      };
-
-      // Asignar las propiedades correspondientes.
-      miInterfaseDeErroresEnVías.Tag = miPáginaErrores;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
 
-      // Escucha los eventos para actualizar las pestañas.
-      miInterfaseDeErroresEnVías.VíasConErrores += EnVíasConErrores;
-
-
-      // Crea el diccionario de índices de pestañas.
-      TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
-      for (int i = 0; i < pestañas.Count; ++i)
+      // Escucha el evnto de edición de PDIs.
+      miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        misIndicesDePestañas[pestañas[i]] = i;
-      }
-      
-      // Maneja evento de cambio de Estado Máximo de Pestañas.
-      miControladorDePestañas.CambióEstadoMáximoDePestañas +=
-        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
-        {
-          if (CambióEstadoMáximoDePestañas != null)
-          {
-            CambióEstadoMáximoDePestañas(this, losArgumentos);
-          }
-        };
+        miManejadorDePDIs.BuscaErrores();
+      };
     }
-    #endregion
 
-    #region Métodos Privados
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -186,7 +173,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnElementosModificados(elEnviador, losArgumentos);
+      EnEncontraronErrores(elEnviador, losArgumentos);
     }
 
 
@@ -197,44 +184,40 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      miLista.RegeneraLista();
-
-      // Actualiza la Pestaña.
-      miPáginaDeTodos.Text = "Todas (" + miLista.NúmeroDeElementos + ")";
+      // No es necesario hacer nada aqui.
     }
 
+    
+    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
+    {
+      miLista.RegeneraLista();
+
+      // Genera el evento.
+      if (PDIsConErrores != null)
+      {
+        PDIsConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+      }
+    }
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
-      // Añade los elementos.
-      IList<Vía> vías = ManejadorDeMapa.Vías;
-      foreach (Vía vía in vías)
+      // Añade los PDIs.
+      IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
+      foreach (KeyValuePair<PDI, string> error in errores)
       {
-        laLista.AñadeItem(vía);
+        PDI pdi = error.Key;
+        string razón = error.Value;
+        laLista.AñadeItem(pdi, pdi.Coordenadas.ToString(), razón);
       }
-    }
 
-
-    private void EnVíasConErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
-    {
-      int númeroDeVíasConErrores = losArgumentos.NúmeroDeElementos;
-
-      // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = "Errores (" + númeroDeVíasConErrores + ")";
-
-      // Si hay Vías con errores entonces cambia el estado de la pestaña a Error.
-      // Si no, entonces cambia el estado de la pestaña a Nada.
-      if (númeroDeVíasConErrores > 0)
+      // Activa el menú de Edición si hay elementos en la lista.
+      if (errores.Count > 0)
       {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Error);
+        miMenúEditorDePDI.Enabled = true;
       }
       else
       {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Nada);
+        miMenúEditorDePDI.Enabled = false;
       }
     }
     #endregion

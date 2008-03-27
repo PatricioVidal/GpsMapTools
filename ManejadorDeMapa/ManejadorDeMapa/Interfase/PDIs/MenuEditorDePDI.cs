@@ -191,11 +191,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       {
         ListViewItem item = miLista.Items[indice];
 
-        // El Tag del item de la lista tiene que ser una vía.
+        // El Tag del item de la lista tiene que ser un PDI.
         PDI pdi = item.Tag as PDI;
         if (pdi == null)
         {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es: " + pdi);
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser un PDI, pero es nulo.");
         }
 
         // Añade el PDI a la lista.
