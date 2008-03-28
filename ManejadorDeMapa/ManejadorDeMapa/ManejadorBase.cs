@@ -111,6 +111,18 @@ namespace GpsYv.ManejadorDeMapa
         return misElementos;
       }
     }
+
+
+    /// <summary>
+    /// Obtiene el manejador del mapa.
+    /// </summary>
+    public ManejadorDeMapa ManejadorDeMapa
+    {
+      get
+      {
+        return miManejadorDeMapa;
+      }
+    }
     #endregion
 
     #region Métodos Públicos

@@ -77,102 +77,32 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
 using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase.Vias
 {
   /// <summary>
-  /// Interfase de Errores de PDIs.
+  /// Interfase de Vías modificadas.
   /// </summary>
-  public partial class InterfaseDeViasConErrores : InterfaseBase
+  public partial class InterfaseDeVíasModificadas : InterfaseBase
   {
-    #region Campos
-    private ManejadorDeVías miManejadorDeVías;
-    #endregion
-
-    #region Eventos
     /// <summary>
-    /// Evento cuando hay Vías con errores.
+    /// Evento cuando hay Vías modificadas.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> VíasConErrores;
-    #endregion
+    public event EventHandler<NúmeroDeElementosEventArgs> VíasModificadas;
 
-    #region Propiedades
-    /// <summary>
-    /// Obtiene o pone el manejador de mapa.
-    /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
-    {
-      set
-      {
-        // Deja de manejar los eventos.
-        if (miManejadorDeVías != null)
-        {
-          miManejadorDeVías.EncontraronErrores -= EnEncontraronErrores;
-        }
-
-        // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-
-        // Maneja eventos.
-        if (value != null)
-        {
-          miManejadorDeVías = value.ManejadorDeVías;
-
-          if (miManejadorDeVías != null)
-          {
-            miManejadorDeVías.EncontraronErrores += EnEncontraronErrores;
-          }
-
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
-
-          // Pone el manejador de vías en el menú editor de vías.
-          miMenuEditorDeVías.ManejadorDeVías = miManejadorDeVías;
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
-    /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      set
-      {
-        base.EscuchadorDeEstatus = value;
-        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
-      }
-    }
-    #endregion
-
-    #region Constructor.
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeViasConErrores()
+    public InterfaseDeVíasModificadas()
     {
       InitializeComponent();
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
-
-
-      // Escucha el evento de edición de Vías.
-      miMenuEditorDeVías.EditóVías += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        // Borra llas lineas adicionales que estén en el mapa.
-        miMapaDeVíaSeleccionada.PolilíneasAdicionales.Clear();
-
-        // Busca errores otra vez.
-        miManejadorDeVías.BuscaErrores();
-      };
     }
-    #endregion
 
-    #region Métodos Privados
+
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -180,7 +110,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnEncontraronErrores(elEnviador, losArgumentos);
+      EnElementosModificados(elEnviador, losArgumentos);
     }
 
 
@@ -191,18 +121,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      // No es necesario hacer nada aqui.
-    }
-
-
-    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
-    {
       miLista.RegeneraLista();
 
       // Genera el evento.
-      if (VíasConErrores != null)
+      if (VíasModificadas != null)
       {
-        VíasConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        VíasModificadas(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
       }
     }
 
@@ -210,14 +134,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade las Vías.
-      IDictionary<Vía, string> errores = ManejadorDeMapa.ManejadorDeVías.Errores;
-      foreach (KeyValuePair<Vía, string> error in errores)
+      IList<Vía> vías = ManejadorDeMapa.Vías;
+      foreach (Vía vía in vías)
       {
-        Vía vía = error.Key;
-        string razón = error.Value;
-        laLista.AñadeItem(vía, razón);
+        // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
+        if (vía.FuéModificado && !vía.FuéEliminado)
+        {
+          laLista.AñadeItem(vía, vía.Modificaciones);
+        }
       }
     }
-    #endregion
   }
 }

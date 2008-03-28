@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeVías));
       this.miControladorDePestañas = new GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas();
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
@@ -38,6 +39,8 @@
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores();
+      this.miPáginaModificadas = new System.Windows.Forms.TabPage();
+      this.miInterfaseDeVíasModificadas = new GpsYv.ManejadorDeMapa.Interfase.Vias.InterfaseDeVíasModificadas();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -45,12 +48,14 @@
       this.miDivisión.Panel2.SuspendLayout();
       this.miDivisión.SuspendLayout();
       this.miPáginaErrores.SuspendLayout();
+      this.miPáginaModificadas.SuspendLayout();
       this.SuspendLayout();
       // 
       // miControladorDePestañas
       // 
       this.miControladorDePestañas.Controls.Add(this.miPáginaMapa);
       this.miControladorDePestañas.Controls.Add(this.miPáginaDeTodos);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaModificadas);
       this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
       resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
       this.miControladorDePestañas.Name = "miControladorDePestañas";
@@ -137,6 +142,20 @@
       this.miInterfaseDeErroresEnVías.ManejadorDeMapa = null;
       this.miInterfaseDeErroresEnVías.Name = "miInterfaseDeErroresEnVías";
       // 
+      // miPáginaModificadas
+      // 
+      this.miPáginaModificadas.Controls.Add(this.miInterfaseDeVíasModificadas);
+      resources.ApplyResources(this.miPáginaModificadas, "miPáginaModificadas");
+      this.miPáginaModificadas.Name = "miPáginaModificadas";
+      this.miPáginaModificadas.UseVisualStyleBackColor = true;
+      // 
+      // miInterfaseDeVíasModificadas
+      // 
+      resources.ApplyResources(this.miInterfaseDeVíasModificadas, "miInterfaseDeVíasModificadas");
+      this.miInterfaseDeVíasModificadas.EscuchadorDeEstatus = null;
+      this.miInterfaseDeVíasModificadas.ManejadorDeMapa = null;
+      this.miInterfaseDeVíasModificadas.Name = "miInterfaseDeVíasModificadas";
+      // 
       // InterfaseManejadorDeVías
       // 
       resources.ApplyResources(this, "$this");
@@ -150,6 +169,7 @@
       this.miDivisión.Panel2.ResumeLayout(false);
       this.miDivisión.ResumeLayout(false);
       this.miPáginaErrores.ResumeLayout(false);
+      this.miPáginaModificadas.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -165,5 +185,7 @@
     private System.Windows.Forms.SplitContainer miDivisión;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
     private InterfaseDeViasConErrores miInterfaseDeErroresEnVías;
+    private System.Windows.Forms.TabPage miPáginaModificadas;
+    private GpsYv.ManejadorDeMapa.Interfase.Vias.InterfaseDeVíasModificadas miInterfaseDeVíasModificadas;
   }
 }

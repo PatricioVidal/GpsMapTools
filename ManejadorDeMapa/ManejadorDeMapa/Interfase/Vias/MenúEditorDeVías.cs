@@ -78,11 +78,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
+using System.IO;
+using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Menú para editar PDIs.
+  /// Menú para editar Vías.
   /// </summary>
   public partial class MenuEditorDeVías : ContextMenuStrip
   {
@@ -163,12 +165,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       AutoSize = true;
 
       // Añade los menús.
-      AddAñadeMenúCambiarCoordenadasANivel0();
+      AñadeMenúGuardarArchivoPDIs();
+      AñadeMenúCambiarCoordenadasANivel0();
     }
     #endregion
 
     #region Métodos Privados
-    private void AddAñadeMenúCambiarCoordenadasANivel0()
+    private void AñadeMenúCambiarCoordenadasANivel0()
     {
       ToolStripMenuItem menú = new ToolStripMenuItem();
       menú.Text = "Cambiar coordenadas a Nivel 0";
@@ -176,6 +179,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Items.Add(menú);
 
       menú.Click += EnMenúCambiarCoordenadasANivel0;
+    }
+
+
+    private void AñadeMenúGuardarArchivoPDIs()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Guarda archivo de PDIs para localización de Vía(s)";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúGuardarArchivoPDIs;
     }
 
 
@@ -187,6 +201,59 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         return;
       }
 
+      // Muestra la ventana de confirmación.
+      DialogResult resultado = MessageBox.Show(
+        "Esta seguro de que quiere cambiar las coordenadas a nivel 0?",
+        "Cambiar Vía(s)",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+      if (resultado == DialogResult.Yes)
+      {
+        // Cambia las coordenadas evitando que se generen eventos con
+        // cada cambio.
+        ManejadorDeVías.SuspendeEventos();
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          int númeroDeCampos = vía.Campos.Count;
+          for (int i = 0; i < númeroDeCampos; ++i)
+          {
+            Campo campo = vía.Campos[i];
+            if (campo is CampoCoordenadas)
+            {
+              CampoCoordenadas campoACambiar = (CampoCoordenadas)campo;
+
+              // Cambia el campo si no está a nivel cero.
+              int nivel = 0;
+              if (campoACambiar.Nivel != nivel)
+              {
+                // Genera el nuevo campo.
+                CampoCoordenadas campoNuevo = new CampoCoordenadas(
+                  campoACambiar.Identificador,
+                  nivel,
+                  campoACambiar.Coordenadas);
+
+                // Cambia el campo.
+                vía.CambiaCampo(campoNuevo, campoACambiar, "Cambio a nivel 0");
+              }
+            }
+          }
+        }
+
+        // Envía el evento indicando que se editaron PDIs.
+        if (EditóVías != null)
+        {
+          EditóVías(this, new EventArgs());
+        }
+
+        // Restablece los eventos.
+        ManejadorDeVías.RestableceEventos();
+      }
+    }
+
+
+    private IList<Vía> ObtieneVíasSeleccionadas()
+    {
       List<Vía> vías = new List<Vía>();
       foreach (int indice in miLista.SelectedIndices)
       {
@@ -202,32 +269,73 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Añade la vía a la lista.
         vías.Add(vía);
       }
+      return vías;
+    }
 
-      // Muestra la ventana de confirmación.
-      DialogResult resultado = MessageBox.Show(
-        "Esta seguro de que quiere cambiar las coordenadas a nivel 0?",
-        "Cambiar Vía",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-      if (resultado == DialogResult.Yes)
+
+    private void EnMenúGuardarArchivoPDIs(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      if (miLista.SelectedIndices.Count == 0)
       {
-        // Cambia las coordenadas evitando que se generen eventos con
-        // cada cambio.
-        ManejadorDeVías.SuspendeEventos();
+        return;
+      }
+
+      // Crea el nombre del archivo de salida.
+      string archivo = Path.GetFullPath(ManejadorDeVías.ManejadorDeMapa.Archivo);
+      string directorio = Path.GetDirectoryName(archivo);
+      string nombre = Path.GetFileName(archivo);
+      string nombreDeSalida = Path.ChangeExtension(nombre, ".PDIsDeVías.mp");
+
+      // Ventana de guardar.
+      SaveFileDialog ventanaDeGuardar = new SaveFileDialog();
+      ventanaDeGuardar.Title = "Guarda archivo de PDIs para localización de Vía(s)";
+      ventanaDeGuardar.AutoUpgradeEnabled = true;
+      ventanaDeGuardar.AddExtension = true;
+      ventanaDeGuardar.CheckPathExists = true;
+      ventanaDeGuardar.Filter = ManejadorDeMapa.FiltrosDeExtensiones;
+      ventanaDeGuardar.InitialDirectory = directorio;
+      ventanaDeGuardar.FileName = nombreDeSalida;
+      ventanaDeGuardar.OverwritePrompt = true;
+      ventanaDeGuardar.ValidateNames = true;
+      DialogResult respuesta = ventanaDeGuardar.ShowDialog();
+      if (respuesta == DialogResult.OK)
+      {
+        // El primer elemento de cada lista tiene que ser el encabezado.
+        List<ElementoDelMapa> elementos = new List<ElementoDelMapa> { ManejadorDeVías.ManejadorDeMapa.Encabezado };
+
+        // Genera la lista de PDIs.
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
         foreach (Vía vía in vías)
         {
+          // Crea los campos para el PDI.
+          List<Campo> campos = new List<Campo> {
+            new CampoNombre("Vía #" + vía.Número),
+            new CampoCoordenadas(
+              "Data0",
+              0,
+              vía.Coordenadas[0]),
+            new CampoTipo("0x1604"),
+            new CampoGenérico("EndLevel", "3")
+          };
 
+          // Crea el PDI y añadelo a la lista.
+          PDI pdi = new PDI(
+            ManejadorDeVías.ManejadorDeMapa,
+            0,
+            "POI",
+            campos);
+          elementos.Add(pdi);  
         }
 
-        // Envía el evento indicando que se editaron PDIs.
-        if (EditóVías != null)
-        {
-          EditóVías(this, new EventArgs());
-        }
-
-        // Restablece los eventos.
-        ManejadorDeVías.RestableceEventos();
+        // Guarda el archivo.
+        new EscritorDeFormatoPolish(
+          ventanaDeGuardar.FileName,
+          elementos,
+          ManejadorDeVías.EscuchadorDeEstatus);
       }
+
+
     }
     #endregion
   }

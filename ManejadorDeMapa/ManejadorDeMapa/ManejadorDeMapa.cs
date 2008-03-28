@@ -86,6 +86,7 @@ namespace GpsYv.ManejadorDeMapa
   public class ManejadorDeMapa
   {
     #region Campos
+    private ElementoDelMapa miEncabezado = null;
     private IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
     private IList<PDI> misPDIs = new List<PDI>();
     private IList<Vía> misVías = new List<Vía>();
@@ -121,6 +122,17 @@ namespace GpsYv.ManejadorDeMapa
       " - Elementos modificados son re-inicializados borrando el estado de modificados.\n" +
       " - Las listas de errores, duplicados, conflictos, etc. son borradas.";
 
+
+    /// <summary>
+    /// Obtiene el encabezado del mapa.
+    /// </summary>
+    public ElementoDelMapa Encabezado
+    {
+      get
+      {
+        return miEncabezado;
+      }
+    }
 
     /// <summary>
     /// Devuelve los elementos del mapa.
@@ -268,33 +280,28 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Guarda los cambios.
     /// </summary>
-    public void GuardaEnFormatoPolish(string elArchivo)
+    /// <param name="elArchivo">El archivo a guardar.</param>
+    /// <param name="elComentario">El Comentario para la primera línea del archivo.</param>
+    public void GuardaEnFormatoPolish(string elArchivo, string elComentario)
     {
-      // Crea las diferentes listas de elementos a guardar.
-      // EL primer elemento de cada lista tiene que ser el encabezado.
-      List<ElementoDelMapa> elementosSinEliminar = new List<ElementoDelMapa>();
-      List<ElementoDelMapa> elementosEliminados = new List<ElementoDelMapa>();
-      List<ElementoDelMapa> originalDeLosElementosModificados = new List<ElementoDelMapa>();
-      List<ElementoDelMapa> finalDeLosElementosModificados = new List<ElementoDelMapa>();
-      List<ElementoDelMapa> elementosConErrores = new List<ElementoDelMapa>();
+      #region Crea las diferentes listas de elementos a guardar.
+      // Crea un comentario para ponerlo como el primer elemento de cada archivo.
+      ElementoDelMapa comentario = new Comentario(this, 0, "; " + elComentario);
+      List<ElementoDelMapa> elementosDelMapa = new List<ElementoDelMapa> { comentario};
+
+      // Las listas especiales necesitan el encabezado para poder ser leídas correctamente
+      // por programas como el cGPSmapper, GPSMapEdit, etc.
+      List<ElementoDelMapa> elementosEliminados = new List<ElementoDelMapa> { comentario, miEncabezado };
+      List<ElementoDelMapa> originalDeLosElementosModificados = new List<ElementoDelMapa> { comentario, miEncabezado };
+      List<ElementoDelMapa> finalDeLosElementosModificados = new List<ElementoDelMapa> { comentario, miEncabezado };
+      List<ElementoDelMapa> elementosConErrores = new List<ElementoDelMapa> { comentario, miEncabezado };
       foreach (ElementoDelMapa elemento in misElementos)
       {
-        bool esElEncabezado = (elemento.Clase == "IMG ID");
-        if (esElEncabezado)
-        {
-          // Todas las listas necesitan el encabezado para generar
-          // mapas válidos.
-          elementosSinEliminar.Add(elemento);
-          originalDeLosElementosModificados.Add(elemento);
-          finalDeLosElementosModificados.Add(elemento);
-          elementosEliminados.Add(elemento);
-          elementosConErrores.Add(elemento);
-        }
-        else if (!elemento.FuéEliminado)
+        if (!elemento.FuéEliminado)
         {
           // Si el elemento no fué eliminado entonces se añade a las lista
-          // de elementos sin eliminar.  
-          elementosSinEliminar.Add(elemento);
+          // de elementos del mapa.  
+          elementosDelMapa.Add(elemento);
 
           // Si el elemento fué modificado entonces se añade a
           // las listas de elementos modificados. 
@@ -311,16 +318,23 @@ namespace GpsYv.ManejadorDeMapa
           elementosEliminados.Add(elemento);
         }
       }
+      #endregion
 
-      // Añade los errores de los distinto manejadores.
+      #region Añade los errores de los distinto manejadores.
       foreach (PDI pdi in miManejadorDePDIs.Errores.Keys)
       {
         elementosConErrores.Add(pdi);
       }
 
+      foreach (Vía vía in miManejadorDeVías.Errores.Keys)
+      {
+        elementosConErrores.Add(vía);
+      }
+      #endregion
+
       #region Guarda los diferentes archivos.
       // Guarda el mapa nuevo.
-      new EscritorDeFormatoPolish(elArchivo, elementosSinEliminar, miEscuchadorDeEstatus);
+      new EscritorDeFormatoPolish(elArchivo, elementosDelMapa, miEscuchadorDeEstatus);
 
       // Crea el nobre del archivo base.
       string directorio = Path.GetFullPath(Path.GetDirectoryName(elArchivo));
@@ -470,14 +484,19 @@ namespace GpsYv.ManejadorDeMapa
       // Asigna los elementos del mapa.
       misElementos = losElementos;
 
-      // Crea todas las listas especializadas.
+      // Busca el encabezado y crea todas las listas especializadas.
+      miEncabezado = null;
       misPDIs.Clear();
       misVías.Clear();
       misPolilíneas.Clear();
       misPolígonos.Clear();
       foreach (ElementoDelMapa elemento in misElementos)
       {
-        if (elemento is PDI)
+        if (elemento.Clase == "IMG ID")
+        {
+          miEncabezado = elemento;
+        }
+        else if (elemento is PDI)
         {
           misPDIs.Add((PDI)elemento);
         }

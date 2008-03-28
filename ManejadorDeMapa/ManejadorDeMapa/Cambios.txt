@@ -8,6 +8,7 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.9
+- Añadido menú de contexto en la página de errores de vías para: 1) cambiar vías a nivel 0, y 2) guardar un archivo con PDIs para localizar las vías.
 - Añadidos indicadores visuales en las pestañas para indicar elementos modificados y con errores.
 - Interno: Ahora se usan eventos para las páginas de pestañas.
 - Interno: Añadida documentación faltante de métodos. 

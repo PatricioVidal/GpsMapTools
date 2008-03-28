@@ -159,9 +159,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
 
-      // Escucha el evnto de edición de PDIs.
+      // Escucha el evento de edición de PDIs.
       miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
       {
+        // Borra los puntos adicionales que estén en el mapa.
+        miMapa.PuntosAddicionales.Clear();
+
+        // Busca errores otra vez.
         miManejadorDePDIs.BuscaErrores();
       };
     }

@@ -146,6 +146,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       misInterfases = new InterfaseBase[] {
         miInterfaseDeMapa,
         miMapaDeVíaSeleccionada,
+        miInterfaseDeVíasModificadas,
         miInterfaseDeErroresEnVías
       };
 
@@ -156,8 +157,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha los eventos para actualizar las pestañas.
+      miInterfaseDeVíasModificadas.VíasModificadas += EnVíasModificadas;
       miInterfaseDeErroresEnVías.VíasConErrores += EnVíasConErrores;
-
 
       // Crea el diccionario de índices de pestañas.
       TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
@@ -211,6 +212,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       foreach (Vía vía in vías)
       {
         laLista.AñadeItem(vía);
+      }
+    }
+
+
+    private void EnVíasModificadas(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDeVíasModificadas = losArgumentos.NúmeroDeElementos;
+
+      // Cambia el texto de la pestaña.
+      miPáginaModificadas.Text = "Modificadas (" + númeroDeVíasModificadas + ")";
+
+      // Si hay Vías modificadas entonces cambia el estado de la pestaña a Alerta.
+      // Si no, entonces cambia el estado de la pestaña a Nada.
+      if (númeroDeVíasModificadas > 0)
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaModificadas],
+          ControladorDePestañas.EstadoDePestaña.Alerta);
+      }
+      else
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaModificadas],
+          ControladorDePestañas.EstadoDePestaña.Nada);
       }
     }
 

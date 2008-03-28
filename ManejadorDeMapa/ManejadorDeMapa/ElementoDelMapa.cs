@@ -92,6 +92,7 @@ namespace GpsYv.ManejadorDeMapa
     private bool miFuéModificado = false;
     private List<string> misModificacionesDeNombre = new List<string>();
     private List<string> misModificacionesDeTipo = new List<string>();
+    private List<string> misOtrasModificaciones = new List<string>();
     private bool miFuéEliminado = false;
     private string miRazónParaEliminación = string.Empty;
     private ElementoDelMapa miOriginal = null;
@@ -237,6 +238,15 @@ namespace GpsYv.ManejadorDeMapa
             modificaciones.Append(modificación);
           }
           modificaciones.Append("]");
+        }
+
+        // Añade las otras modificaciones.
+        if (misOtrasModificaciones.Count > 0)
+        {
+          foreach (string modificación in misOtrasModificaciones)
+          {
+            modificaciones.Append(modificación);
+          }
         }
 
         return modificaciones.ToString();
@@ -402,6 +412,48 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Cambia el nombre del elemento.
+    /// </summary>
+    /// <param name="elCampoNuevo">El campo nuevo.</param>
+    /// <param name="elCampoACambiar">El campo a cambiar.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void CambiaCampo(Campo elCampoNuevo, Campo elCampoACambiar, string laRazón)
+    {
+      // Busca y actualiza el campo del nombre.
+      bool encontróCampo = false;
+      for (int i = 0; i < misCampos.Count; ++i)
+      {
+        if (object.ReferenceEquals(misCampos[i], elCampoACambiar))
+        {
+          encontróCampo = true;
+
+          #region Remplaza el campo.
+          SeVaAModificarElemento();
+
+          // Añade la razón del cambio.
+          this.misOtrasModificaciones.Add(
+            "[Coordenadas: " + 
+            SeparadorDeModificaciones + laRazón +
+            "]");
+
+          // Asigna el nuevo campo.
+          misCampos[i] = elCampoNuevo;
+
+          // Avísale al manejador de mapa que se cambió un elemento.
+          miManejadorDeMapa.SeModificóUnElemento();
+          #endregion
+        }
+      }
+
+      // Añade el campo tipo si no se encontró.
+      if (!encontróCampo)
+      {
+        throw new ArgumentException("El elemento no tiene el campo: " + elCampoACambiar);
+      }
+    }
+
+
+    /// <summary>
     /// Marca el elemento para ser eliminado.
     /// </summary>
     /// <param name="laRazón"></param>
@@ -488,7 +540,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       miFuéModificado = true;
 
-      // Guarda el original si todavíano se ha hecho.
+      // Guarda el original si todavía no se ha hecho.
       if (miOriginal == null)
       {
         miOriginal = (ElementoDelMapa)Clone();

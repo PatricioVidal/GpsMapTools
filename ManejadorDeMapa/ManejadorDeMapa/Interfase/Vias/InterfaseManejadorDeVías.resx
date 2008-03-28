@@ -134,7 +134,7 @@
 </value>
   </data>
   <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 431</value>
+    <value>586, 430</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
@@ -144,7 +144,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -153,10 +153,10 @@
     <value>0</value>
   </data>
   <data name="miPáginaMapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="miPáginaMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 431</value>
+    <value>586, 430</value>
   </data>
   <data name="miPáginaMapa.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -192,7 +192,7 @@
     <value>0, 0</value>
   </data>
   <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 212</value>
+    <value>580, 211</value>
   </data>
   <data name="miLista.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -201,7 +201,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivisión.Panel1</value>
@@ -245,7 +245,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíaSeleccionada, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivisión.Panel2</value>
@@ -266,10 +266,10 @@
     <value>1</value>
   </data>
   <data name="miDivisión.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 425</value>
+    <value>580, 424</value>
   </data>
   <data name="miDivisión.SplitterDistance" type="System.Int32, mscorlib">
-    <value>212</value>
+    <value>211</value>
   </data>
   <data name="miDivisión.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -287,13 +287,13 @@
     <value>0</value>
   </data>
   <data name="miPáginaDeTodos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="miPáginaDeTodos.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="miPáginaDeTodos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 431</value>
+    <value>586, 430</value>
   </data>
   <data name="miPáginaDeTodos.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -313,6 +313,54 @@
   <data name="&gt;&gt;miPáginaDeTodos.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="miInterfaseDeVíasModificadas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseDeVíasModificadas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseDeVíasModificadas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miInterfaseDeVíasModificadas.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Name" xml:space="preserve">
+    <value>miInterfaseDeVíasModificadas</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vias.InterfaseDeVíasModificadas, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Parent" xml:space="preserve">
+    <value>miPáginaModificadas</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasModificadas.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaModificadas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaModificadas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaModificadas.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="miPáginaModificadas.Text" xml:space="preserve">
+    <value>Modificadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Name" xml:space="preserve">
+    <value>miPáginaModificadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="miInterfaseDeErroresEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -320,7 +368,7 @@
     <value>3, 3</value>
   </data>
   <data name="miInterfaseDeErroresEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 425</value>
+    <value>580, 424</value>
   </data>
   <data name="miInterfaseDeErroresEnVías.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -329,7 +377,7 @@
     <value>miInterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeErroresEnVías, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
@@ -338,13 +386,13 @@
     <value>0</value>
   </data>
   <data name="miPáginaErrores.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="miPáginaErrores.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="miPáginaErrores.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 431</value>
+    <value>586, 430</value>
   </data>
   <data name="miPáginaErrores.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -362,7 +410,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miPáginaErrores.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -380,7 +428,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>$this</value>
@@ -401,6 +449,6 @@
     <value>InterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.35567, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.9.3008.41969, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

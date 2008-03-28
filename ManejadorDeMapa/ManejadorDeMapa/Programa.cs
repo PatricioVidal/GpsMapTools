@@ -114,7 +114,7 @@ namespace GpsYv.ManejadorDeMapa
     public static void MuestraExcepción(string elMensaje, Exception laExcepción)
     {
       // Crea un archivo de registro.
-      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyTitle + ".Error.log";
+      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyName + ".Error.log";
       using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
         string encabezado = DateTime.Now + ": " + elMensaje;
@@ -135,7 +135,7 @@ namespace GpsYv.ManejadorDeMapa
       }
       MessageBox.Show(
         mensaje.ToString(),
-        Interfase.VentanaDeAcerca.AssemblyTitle,
+        Interfase.VentanaDeAcerca.AssemblyName,
         MessageBoxButtons.OK,
         MessageBoxIcon.Error);
     }

@@ -79,6 +79,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 using GpsYv.ManejadorDeMapa.Properties;
+using System.Reflection;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -281,9 +282,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Crea el nombre del archivo de salida.
       string directorio = Path.GetDirectoryName(archivo);
-      string nombre = Path.GetFileNameWithoutExtension(archivo) + ".Corregido";
-      string extensión = Path.GetExtension(archivo);
-      string archivoDeSalida = nombre + extensión;
+      string nombre = Path.GetFileName(archivo);
+      string nombreDeSalida = Path.ChangeExtension(nombre , ".Corregido.mp");
 
       // Ventana de guardar.
       SaveFileDialog ventanaDeGuardar = new SaveFileDialog();
@@ -291,7 +291,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       ventanaDeGuardar.CheckPathExists = true;
       ventanaDeGuardar.Filter = ManejadorDeMapa.FiltrosDeExtensiones;
       ventanaDeGuardar.InitialDirectory = directorio;
-      ventanaDeGuardar.FileName = archivoDeSalida;
+      ventanaDeGuardar.FileName = nombreDeSalida;
       ventanaDeGuardar.OverwritePrompt = true;
       ventanaDeGuardar.ValidateNames = true;
       DialogResult respuesta = ventanaDeGuardar.ShowDialog();
@@ -306,7 +306,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       try
       {
-        miManejadorDeMapa.GuardaEnFormatoPolish(elArchivo);
+        miManejadorDeMapa.GuardaEnFormatoPolish(
+          elArchivo, 
+          "Generado por " +
+          VentanaDeAcerca.AssemblyName + " " + 
+          VentanaDeAcerca.AssemblyVersion + " - " +
+          VentanaDeAcerca.AssemblyDescription);
 
         // Deshabilita el menu de Guardar porque se acaba de guardar el mapa.
         miMenuGuardar.Enabled = false;

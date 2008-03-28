@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public VentanaDeAcerca()
     {
       InitializeComponent();
-      this.Text = String.Format("Acerca {0}", AssemblyTitle);
+      this.Text = String.Format("Acerca {0}", AssemblyName);
       this.labelProductName.Text = AssemblyProduct;
       this.labelVersion.Text = String.Format("Version {0}   ({1})", AssemblyVersion, FechaDelAssembly.ToString("MMM. d, yyyy"));
       this.labelCopyright.Text = AssemblyCopyright;
@@ -95,24 +95,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     #region Assembly Attribute Accessors
 
-    public static string AssemblyTitle
+    public static string AssemblyName
     {
       get
       {
-        object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-        if (attributes.Length > 0)
-        {
-          AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-          if (titleAttribute.Title != "")
-          {
-            return titleAttribute.Title;
-          }
-        }
-        return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+        return Assembly.GetExecutingAssembly().GetName().Name;
       }
     }
 
-    public string AssemblyVersion
+    public static string AssemblyVersion
     {
       get
       {

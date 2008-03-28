@@ -118,6 +118,12 @@
     <Compile Include="Interfase\Vias\InterfaseDeVíasConErrores.Designer.cs">
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfase\Vias\InterfaseDeVíasModificadas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vias\InterfaseDeVíasModificadas.Designer.cs">
+      <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfase\Vias\InterfaseManejadorDeVías.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -269,6 +275,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfase\Vias\InterfaseDeVíasConErrores.resx">
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\Vias\InterfaseDeVíasModificadas.resx">
+      <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfase\Vias\InterfaseManejadorDeVías.resx">
