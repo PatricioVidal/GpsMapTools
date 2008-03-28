@@ -229,7 +229,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
               {
                 // Genera el nuevo campo.
                 CampoCoordenadas campoNuevo = new CampoCoordenadas(
-                  campoACambiar.Identificador,
+                  "Data0",
                   nivel,
                   campoACambiar.Coordenadas);
 
