@@ -35,12 +35,12 @@
       this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
       this.miDivisión = new System.Windows.Forms.SplitContainer();
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
+      this.miLista = new InterfaseListaDeVías();
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores();
       this.miPáginaModificadas = new System.Windows.Forms.TabPage();
-      this.miInterfaseDeVíasModificadas = new GpsYv.ManejadorDeMapa.Interfase.Vias.InterfaseDeVíasModificadas();
+      this.miInterfaseDeVíasModificadas = new InterfaseDeVíasModificadas();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -181,11 +181,11 @@
     private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.TabPage miPáginaDeTodos;
     private System.Windows.Forms.TabPage miPáginaErrores;
-    private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
+    private InterfaseListaDeVías miLista;
     private System.Windows.Forms.SplitContainer miDivisión;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
     private InterfaseDeViasConErrores miInterfaseDeErroresEnVías;
     private System.Windows.Forms.TabPage miPáginaModificadas;
-    private GpsYv.ManejadorDeMapa.Interfase.Vias.InterfaseDeVíasModificadas miInterfaseDeVíasModificadas;
+    private InterfaseDeVíasModificadas miInterfaseDeVíasModificadas;
   }
 }

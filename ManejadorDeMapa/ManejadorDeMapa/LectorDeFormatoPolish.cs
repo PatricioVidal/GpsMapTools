@@ -317,6 +317,10 @@ namespace GpsYv.ManejadorDeMapa
                 CampoCoordenadas coordenadas = ExtraeCoordenadas(identificadorConNivel, nivel.Value, texto);
                 campos.Add(coordenadas);
                 break;
+              case CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta:
+                CampoParámetrosDeRuta parámetrosDeRuta = new CampoParámetrosDeRuta(texto);
+                campos.Add(parámetrosDeRuta);
+                break;
               default:
                 campos.Add(new CampoGenérico(identificadorConNivel, texto));
                 break;

@@ -99,14 +99,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       int índiceLímiteDeVelocidad = 2;
       int índiceDeClaseDeRuta = 3;
       string parámetrosDeRuta = "2,3,0";
-      string identificador = "ID";
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
         new CampoComentario ("Comentario"),
         new CampoTipo (tipo),
-        new CampoParámetrosDeRuta(
-          identificador,
-          parámetrosDeRuta)
+        new CampoParámetrosDeRuta(parámetrosDeRuta)
       };
 
       // Llama al constructor.
@@ -117,7 +114,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       Assert.That(clase, Is.EqualTo(objectoEnPrueba.Clase), "Clase");
       Assert.That(descripción, Is.EqualTo(objectoEnPrueba.Descripción), "Descripción");
       Assert.That(objectoEnPrueba.FuéEliminado, Is.False, "FuéEliminado");
-      Assert.That( objectoEnPrueba.FuéModificado, Is.False, "FuéModificado");
+      Assert.That(objectoEnPrueba.FuéModificado, Is.False, "FuéModificado");
       Assert.That(nombre, Is.EqualTo(objectoEnPrueba.Nombre), "Nombre");
       Assert.That(número, Is.EqualTo(objectoEnPrueba.Número), "Número");
       Assert.That(objectoEnPrueba.Original, Is.Null, "Original");

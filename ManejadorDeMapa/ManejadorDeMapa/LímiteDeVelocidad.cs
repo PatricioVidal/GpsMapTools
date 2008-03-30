@@ -79,10 +79,10 @@ namespace GpsYv.ManejadorDeMapa
   /// <summary>
   /// Representa un límite de velocidad.
   /// </summary>
-  public class LímiteDeVelocidad
+  public struct LímiteDeVelocidad
   {
     #region Campos
-    private readonly string[] misTextos = new string[] {
+    private static readonly string[] misTextos = new string[] {
       "(0) 3mph / 5kph",
       "(1) 15mph / 20kph",
       "(2) 25mph / 40kph",

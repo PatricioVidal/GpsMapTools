@@ -120,34 +120,40 @@
     <Compile Include="Interfase\PDIs\VentanaCambiarTipoDePDI.Designer.cs">
       <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseDeVíasConErrores.cs">
+    <Compile Include="Interfase\Vías\InterfaseDeVíasConErrores.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseDeVíasConErrores.Designer.cs">
+    <Compile Include="Interfase\Vías\InterfaseDeVíasConErrores.Designer.cs">
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseDeVíasModificadas.cs">
+    <Compile Include="Interfase\Vías\InterfaseDeVíasModificadas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseDeVíasModificadas.Designer.cs">
+    <Compile Include="Interfase\Vías\InterfaseDeVíasModificadas.Designer.cs">
       <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\Vias\InterfaseManejadorDeVías.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vias\InterfaseManejadorDeVías.Designer.cs">
-      <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.Designer.cs">
-      <DependentUpon>InterfaseMapaDeVíasSeleccionada.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vias\MenúEditorDeVías.cs">
+    <Compile Include="Interfase\Vías\InterfaseListaDeVías.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Interfase\Vias\MenúEditorDeVías.Designer.cs">
+    <Compile Include="Interfase\Vías\InterfaseListaDeVías.Designer.cs">
+      <DependentUpon>InterfaseListaDeVías.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfaseManejadorDeVías.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfaseManejadorDeVías.Designer.cs">
+      <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionada.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionada.Designer.cs">
+      <DependentUpon>InterfaseMapaDeVíasSeleccionada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfase\Vías\MenúEditorDeVías.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vías\MenúEditorDeVías.Designer.cs">
       <DependentUpon>MenúEditorDeVías.cs</DependentUpon>
     </Compile>
     <Compile Include="LímiteDeVelocidad.cs" />
@@ -282,19 +288,19 @@
       <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vias\InterfaseDeVíasConErrores.resx">
+    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasConErrores.resx">
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vias\InterfaseDeVíasModificadas.resx">
+    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasModificadas.resx">
       <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vias\InterfaseManejadorDeVías.resx">
+    <EmbeddedResource Include="Interfase\Vías\InterfaseManejadorDeVías.resx">
       <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vias\InterfaseMapaDeVíasSeleccionada.resx">
+    <EmbeddedResource Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionada.resx">
       <DependentUpon>InterfaseMapaDeVíasSeleccionada.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

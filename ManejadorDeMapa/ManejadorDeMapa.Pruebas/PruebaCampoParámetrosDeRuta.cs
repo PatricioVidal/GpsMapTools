@@ -96,13 +96,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         int índiceLímiteDeVelocidad = 2;
         int índiceDeClaseDeRuta = 3;
         string parámetrosDeRuta = "2,3,0";
-        string identificador = "ID";
 
         // Llama al constructor en prueba.
-        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(identificador, parámetrosDeRuta);
+        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(parámetrosDeRuta);
 
         // Prueba Propiedades.
-        Assert.AreEqual(identificador, objectoEnPrueba.Identificador, "Identificador");
+        Assert.AreEqual(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta, objectoEnPrueba.Identificador, "Identificador");
         Assert.AreEqual(índiceDeClaseDeRuta, objectoEnPrueba.ClaseDeRuta.Indice, "ClaseDeRuta.Indice");
         Assert.AreEqual(índiceLímiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad.Indice, "LímiteDeVelocidad.Indice");
       }
@@ -119,7 +118,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Llama al constructor en prueba.
         try
         {
-          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta("ID", parametrosDeRutaInválidos);
+          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(parametrosDeRutaInválidos);
         }
         catch (Exception e)
         {

@@ -79,70 +79,60 @@ using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vias
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
+
   /// <summary>
-  /// Interfase de Vías modificadas.
+  /// Interfase de lista de vías.
   /// </summary>
-  public partial class InterfaseDeVíasModificadas : InterfaseBase
+  public partial class InterfaseListaDeVías : InterfaseListaDeElementos
   {
-    /// <summary>
-    /// Evento cuando hay Vías modificadas.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> VíasModificadas;
+    private const int AnchoDeColumnaPorDefecto = 110;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeVíasModificadas()
+    public InterfaseListaDeVías()
     {
       InitializeComponent();
 
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
+      #region Añade las columnas de Párametros de Ruta.
+      ColumnHeader columnaLímiteDeVelocidad = new ColumnHeader();
+      columnaLímiteDeVelocidad.Text = "Límite de Velocidad";
+      columnaLímiteDeVelocidad.Width = AnchoDeColumnaPorDefecto;
+      
+      ColumnHeader columnaClaseDeRuta = new ColumnHeader();
+      columnaClaseDeRuta.Text = "Clase de Ruta";
+      columnaClaseDeRuta.Width = AnchoDeColumnaPorDefecto;
+
+      this.Columns.AddRange(new ColumnHeader[] {
+        columnaLímiteDeVelocidad,
+        columnaClaseDeRuta});
+      #endregion
     }
 
 
     /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
+    /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public override void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
     {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (VíasModificadas != null)
+      // Verifica que el elemento es una Vía.
+      if (!(elElemento is Vía))
       {
-        VíasModificadas(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        throw new ArgumentException("El elemento debe ser tipo Vía. pero es " + elElemento.GetType());
       }
-    }
 
+      // Añade la Vía a la lista.
+      Vía vía = (Vía)elElemento;
+      List<string> subItems = new List<string> {
+          vía.LímiteDeVelocidad.ToString(),
+          vía.ClaseDeRuta.ToString()};
+      subItems.AddRange(losSubItemsAdicionales);
 
-    private void LlenaItems(InterfaseListaDeElementos laLista)
-    {
-      // Añade las Vías.
-      IList<Vía> vías = ManejadorDeMapa.Vías;
-      foreach (Vía vía in vías)
-      {
-        // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
-        if (vía.FuéModificado && !vía.FuéEliminado)
-        {
-          laLista.AñadeItem(vía, vía.Modificaciones);
-        }
-      }
+      base.AñadeItem(vía, subItems.ToArray());
     }
   }
 }

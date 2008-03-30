@@ -79,10 +79,10 @@ namespace GpsYv.ManejadorDeMapa
   /// <summary>
   /// Representa una clase de ruta.
   /// </summary>
-  public class ClaseDeRuta
+  public struct ClaseDeRuta
   {
     #region Campos
-    private readonly string[] misTextos = new string[] {
+    private static readonly string[] misTextos = new string[] {
       "(0) Calle Residencial/Callejón/Calle de Tierra/Camino",
       "(1) Calle con Curvas",
       "(2) Calle Arterial / Otras Autopistas",

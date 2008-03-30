@@ -69,104 +69,80 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Representa un Campo de Parámetros de Ruta.
+  /// Interfase de Vías modificadas.
   /// </summary>
-  public class CampoParámetrosDeRuta : Campo
+  public partial class InterfaseDeVíasModificadas : InterfaseBase
   {
-    #region Campos
-    private readonly ClaseDeRuta miClaseDeRuta;
-    private readonly LímiteDeVelocidad miLímiteDeVelocidad;
-    private readonly string miTexto;
-    #endregion
-
-    #region Propiedades
     /// <summary>
-    /// Identificador.
+    /// Evento cuando hay Vías modificadas.
     /// </summary>
-    public const string IdentificadorDeParámetrosDeRuta = "RouteParam";
+    public event EventHandler<NúmeroDeElementosEventArgs> VíasModificadas;
 
-
-    /// <summary>
-    /// Campo de Parámetros de Rutas nulo.
-    /// </summary>
-    static readonly public CampoParámetrosDeRuta Nulo = new CampoParámetrosDeRuta(string.Empty);
-
-
-    /// <summary>
-    /// Obtiene la clase de ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
-      {
-        return miClaseDeRuta;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene el Límite de Velocidad.
-    /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
-    {
-      get
-      {
-        return miLímiteDeVelocidad;
-      }
-    }
-    #endregion
-
-    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="losParámetrosDeRuta">Los parámetros de ruta.</param>
-    public CampoParámetrosDeRuta(
-      string losParámetrosDeRuta)
-      : base(IdentificadorDeParámetrosDeRuta)
+    public InterfaseDeVíasModificadas()
     {
-      miTexto = losParámetrosDeRuta;
+      InitializeComponent();
 
-      if (losParámetrosDeRuta == string.Empty)
-      {
-        miClaseDeRuta = ClaseDeRuta.Nula;
-        miLímiteDeVelocidad = LímiteDeVelocidad.Nulo;
-      }
-      else
-      {
-        string[] partes = losParámetrosDeRuta.Split(',');
-
-        // Verifica el número de partes.
-        const int mínimoNúmeroDePartes = 2;
-        if (partes.Length < mínimoNúmeroDePartes)
-        {
-          throw new ArgumentException("Los parámetros de rutas deben tener al menos " +
-            mínimoNúmeroDePartes + " elementos separados por coma, pero es: " + losParámetrosDeRuta);
-        }
-
-        // Lée los parametros.
-        miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
-        miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
-      }
+      // Pone el método llenador de items.
+      miLista.PoneLlenadorDeItems(LlenaItems);
     }
 
 
     /// <summary>
-    /// Devuelve un texto representando el campo.
+    /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    public override string ToString()
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      return miTexto;
+      EnElementosModificados(elEnviador, losArgumentos);
     }
-    #endregion
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      miLista.RegeneraLista();
+
+      // Genera el evento.
+      if (VíasModificadas != null)
+      {
+        VíasModificadas(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+      }
+    }
+
+
+    private void LlenaItems(InterfaseListaDeElementos laLista)
+    {
+      // Añade las Vías.
+      IList<Vía> vías = ManejadorDeMapa.Vías;
+      foreach (Vía vía in vías)
+      {
+        // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
+        if (vía.FuéModificado && !vía.FuéEliminado)
+        {
+          laLista.AñadeItem(vía, vía.Modificaciones);
+        }
+      }
+    }
   }
 }
