@@ -69,44 +69,46 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Representa un límite de velocidad.
   /// </summary>
-  public class Vía : Polilínea
+  public class LímiteDeVelocidad
   {
     #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
+    private readonly string[] misTextos = new string[] {
+      "(0) 3mph / 5kph",
+      "(1) 15mph / 20kph",
+      "(2) 25mph / 40kph",
+      "(3) 35mph / 60kph",
+      "(4) 50mph / 80kph",
+      "(5) 60mph / 90kph",
+      "(6) 70mph / 110kph",
+      "(7) Sín Límite"};
+    private readonly int miIndice;
+    #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Límite de velocidad nulo.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
-      }
-    }
+    static readonly public LímiteDeVelocidad Nulo = new LímiteDeVelocidad(int.MinValue);
 
 
     /// <summary>
-    /// Obtiene la Clase de Ruta.
+    /// Obtiene el índice del límite de velocidad.
     /// </summary>
-    public ClaseDeRuta ClaseDeRuta
+    public int Indice
     {
       get
       {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
+        return miIndice;
       }
     }
     #endregion
@@ -115,28 +117,34 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
+    /// <param name="elIndice">El índice del límite de velocidad.</param>
+    public LímiteDeVelocidad(int elIndice)
     {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
+      if (elIndice != int.MinValue)
       {
-        if (campo is CampoParámetrosDeRuta)
+        int índiceMáximo = misTextos.Length - 1;
+        if (elIndice > índiceMáximo)
         {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
+          throw new ArgumentOutOfRangeException("El índice de la clase de ruta debe ser menor o igual a " + índiceMáximo);
         }
       }
+
+      miIndice = elIndice;
+    }
+
+
+    /// <summary>
+    /// Devuelve un texto representando el límite de velocidad.
+    /// </summary>
+    public override string ToString()
+    {
+      // Caso para límite de velocidad nulo.
+      if (miIndice == int.MinValue)
+      {
+        return string.Empty;
+      }
+
+      return misTextos[miIndice];      
     }
     #endregion
   }

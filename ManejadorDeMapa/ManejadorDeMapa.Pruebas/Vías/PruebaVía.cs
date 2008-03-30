@@ -74,70 +74,57 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUnit.Framework;
+using GpsYv.ManejadorDeMapa.Vías;
+using NUnit.Framework.SyntaxHelpers;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
 {
-  /// <summary>
-  /// Representa una Vía.
-  /// </summary>
-  public class Vía : Polilínea
+  [TestFixture]
+  public class PruebaVía
   {
-    #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
-
-    #region Propiedades
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Prueba la clase Vía.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
+    [Test]
+    public void PruebaConstructor()
     {
-      get
-      {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
-      }
-    }
+      // Preparación.
+      int número = 12;
+      ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
+      string clase = "clase";
+      string nombre = "Nombre";
+      string tipo = "0xc";
+      string descripción = "Roundabout";
+      int índiceLímiteDeVelocidad = 2;
+      int índiceDeClaseDeRuta = 3;
+      string parámetrosDeRuta = "2,3,0";
+      string identificador = "ID";
+      List<Campo> campos = new List<Campo> { 
+        new CampoNombre (nombre),
+        new CampoComentario ("Comentario"),
+        new CampoTipo (tipo),
+        new CampoParámetrosDeRuta(
+          identificador,
+          parámetrosDeRuta)
+      };
 
+      // Llama al constructor.
+      Vía objectoEnPrueba = new Vía(manejadorDeMapa, número, clase, campos);
 
-    /// <summary>
-    /// Obtiene la Clase de Ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
-      }
+      // Prueba Propiedades.
+      Assert.That(campos, Is.EqualTo(objectoEnPrueba.Campos), "Campos");
+      Assert.That(clase, Is.EqualTo(objectoEnPrueba.Clase), "Clase");
+      Assert.That(descripción, Is.EqualTo(objectoEnPrueba.Descripción), "Descripción");
+      Assert.That(objectoEnPrueba.FuéEliminado, Is.False, "FuéEliminado");
+      Assert.That( objectoEnPrueba.FuéModificado, Is.False, "FuéModificado");
+      Assert.That(nombre, Is.EqualTo(objectoEnPrueba.Nombre), "Nombre");
+      Assert.That(número, Is.EqualTo(objectoEnPrueba.Número), "Número");
+      Assert.That(objectoEnPrueba.Original, Is.Null, "Original");
+      Assert.That(string.Empty, Is.EqualTo(objectoEnPrueba.RazónParaEliminación), "RazónParaEliminación");
+      Assert.That(new Tipo(tipo), Is.EqualTo(objectoEnPrueba.Tipo), "Tipo");
+      Assert.AreEqual(índiceDeClaseDeRuta, objectoEnPrueba.ClaseDeRuta.Indice, "ClaseDeRuta.Indice");
+      Assert.AreEqual(índiceLímiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad.Indice, "LímiteDeVelocidad.Indice");
     }
-    #endregion
-
-    #region Métodos Públicos
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
-    {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
-      {
-        if (campo is CampoParámetrosDeRuta)
-        {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
-        }
-      }
-    }
-    #endregion
   }
 }

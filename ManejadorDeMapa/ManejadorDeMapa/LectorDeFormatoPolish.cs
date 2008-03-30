@@ -225,7 +225,6 @@ namespace GpsYv.ManejadorDeMapa
     {
       IList<Campo> campos = LeeCampos();
 
-
       // Busca el tipo de polilínea.
       Tipo tipo = Tipo.TipoNulo;
       foreach (Campo campo in campos)

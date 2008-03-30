@@ -95,7 +95,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
     [Test]
     public void PruebaShowDialog()
     {
-      #region Inicialización general.
+      #region Preparación general.
       // Crea un PDI para las pruebas.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
@@ -116,7 +116,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar None,
         // Y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -146,7 +146,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar Cancel,
         // Y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -176,7 +176,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar OK,
         // y la propiedad TipoNuevo debería ser el tipo nuevo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -217,7 +217,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo desconocido.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -258,7 +258,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -309,7 +309,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -346,7 +346,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar Cancel,
         // y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = pdis;
@@ -380,7 +380,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Interfase.PDIs
         // En este caso el método Show() debería retornar None,
         // y la propiedad TipoNuevo debería ser el tipo nulo.
 
-        #region Inicialización.
+        #region Preparación.
         // Inicializa objecto de prueba.
         VentanaCambiarTipoDePDI objectoDePrueba = new VentanaCambiarTipoDePDI();
         objectoDePrueba.PDIs = null;

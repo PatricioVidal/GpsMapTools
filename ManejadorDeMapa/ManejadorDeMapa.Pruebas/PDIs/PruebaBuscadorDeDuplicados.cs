@@ -85,7 +85,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
     [Test]
     public void PruebaConstructor()
     {
-      // Inicialización.
+      // Preparación.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
       ManejadorDePDIs manejadorDePDIs = new ManejadorDePDIs(manejadorDeMapa, new List<PDI>(), escuchadorDeEstatus);
@@ -132,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
     [Test]
     public void PruebaProcesa()
     {
-      #region Inicialización.
+      #region Preparación.
       // Crea el objeto a probar.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);

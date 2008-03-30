@@ -69,75 +69,106 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Pruebas
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Pruebas para la clase LímiteDeVelocidad.
   /// </summary>
-  public class Vía : Polilínea
+  [TestFixture]
+  public class PruebaCampoParámetrosDeRuta
   {
-    #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
-
-    #region Propiedades
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Prueba el constructor.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
+    [Test]
+    public void PruebaConstructor()
     {
-      get
+      #region Caso 1: Indice en rango válido.
       {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
+        // Preparación.
+        int índiceLímiteDeVelocidad = 2;
+        int índiceDeClaseDeRuta = 3;
+        string parámetrosDeRuta = "2,3,0";
+        string identificador = "ID";
+
+        // Llama al constructor en prueba.
+        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(identificador, parámetrosDeRuta);
+
+        // Prueba Propiedades.
+        Assert.AreEqual(identificador, objectoEnPrueba.Identificador, "Identificador");
+        Assert.AreEqual(índiceDeClaseDeRuta, objectoEnPrueba.ClaseDeRuta.Indice, "ClaseDeRuta.Indice");
+        Assert.AreEqual(índiceLímiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad.Indice, "LímiteDeVelocidad.Indice");
       }
-    }
+      #endregion
 
-
-    /// <summary>
-    /// Obtiene la Clase de Ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
+      #region Caso 2: Parametros de ruta inválidos.
       {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
-      }
-    }
-    #endregion
+        // Preparación.
+        string parametrosDeRutaInválidos = "2";
+        bool lanzóExcepción = false;
+        ArgumentException excepciónEsperada = new ArgumentException(
+          "Los parámetros de rutas deben tener al menos 2 elementos separados por coma, pero es: 2");
 
-    #region Métodos Públicos
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
-    {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
-      {
-        if (campo is CampoParámetrosDeRuta)
+        // Llama al constructor en prueba.
+        try
         {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
+          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta("ID", parametrosDeRutaInválidos);
         }
+        catch (Exception e)
+        {
+          // Prueba las propiedades de la excepción.
+          Assert.That(e.GetType(), Is.EqualTo(excepciónEsperada.GetType()), "Tipo de Excepción");
+          Assert.That(e.Message, Is.EqualTo(excepciónEsperada.Message), "Excepción.Message");
+
+          lanzóExcepción = true;
+        }
+
+        Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
       }
+      #endregion
     }
-    #endregion
+
+
+    /// <summary>
+    /// Prueba el método ToString().
+    /// </summary>
+    [Test]
+    public void PruebaToString()
+    {
+      #region Caso 1: Indice en rango válido.
+      {
+        // Preparación.
+        int índice = 3;
+        LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índice);
+        string resultadoEsperado = "(3) 35mph / 60kph";
+
+        // Llama al constructor en prueba.
+        string resultado = objectoEnPrueba.ToString();
+
+        // Prueba resultado.
+        Assert.That(resultado, Is.EqualTo(resultadoEsperado), "Resultado");
+      }
+      #endregion
+
+      #region Caso 2: Límite de Velocidad nulo.
+      {
+        // Preparación.
+        CampoParámetrosDeRuta objectoEnPrueba = CampoParámetrosDeRuta.Nulo;
+
+        // Llama al método en prueba.
+        string resultado = objectoEnPrueba.ToString();
+
+        // Prueba resultado.
+        Assert.That(resultado, Is.EqualTo(string.Empty), "Resultado");
+      }
+      #endregion
+    }
   }
 }

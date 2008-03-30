@@ -75,18 +75,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Representa un Campo de Parámetros de Ruta.
   /// </summary>
-  public class Vía : Polilínea
+  public class CampoParámetrosDeRuta : Campo
   {
     #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
+    private readonly ClaseDeRuta miClaseDeRuta;
+    private readonly LímiteDeVelocidad miLímiteDeVelocidad;
+    private readonly string miTexto;
+    #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Identificador.
+    /// </summary>
+    public const string IdentificadorDeParámetrosDeRuta = "RouteParam";
+
+
+    /// <summary>
+    /// Campo de Parámetros de Rutas nulo.
+    /// </summary>
+    static readonly public CampoParámetrosDeRuta Nulo = new CampoParámetrosDeRuta(IdentificadorDeParámetrosDeRuta, string.Empty);
+
+
+    /// <summary>
+    /// Obtiene la clase de ruta.
+    /// </summary>
+    public ClaseDeRuta ClaseDeRuta
+    {
+      get
+      {
+        return miClaseDeRuta;
+      }
+    }
+
+
     /// <summary>
     /// Obtiene el Límite de Velocidad.
     /// </summary>
@@ -94,19 +120,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       get
       {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene la Clase de Ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
+        return miLímiteDeVelocidad;
       }
     }
     #endregion
@@ -115,28 +129,45 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
+    /// <param name="elIdentificador">El Identificador.</param>
+    /// <param name="losParámetrosDeRuta">Los parámetros de ruta.</param>
+    public CampoParámetrosDeRuta(
+      string elIdentificador,
+      string losParámetrosDeRuta)
+      : base(elIdentificador)
     {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
+      miTexto = losParámetrosDeRuta;
+
+      if (losParámetrosDeRuta == string.Empty)
       {
-        if (campo is CampoParámetrosDeRuta)
-        {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
-        }
+        miClaseDeRuta = ClaseDeRuta.Nula;
+        miLímiteDeVelocidad = LímiteDeVelocidad.Nulo;
       }
+      else
+      {
+        string[] partes = losParámetrosDeRuta.Split(',');
+
+        // Verifica el número de partes.
+        const int mínimoNúmeroDePartes = 2;
+        if (partes.Length < mínimoNúmeroDePartes)
+        {
+          throw new ArgumentException("Los parámetros de rutas deben tener al menos " +
+            mínimoNúmeroDePartes + " elementos separados por coma, pero es: " + losParámetrosDeRuta);
+        }
+
+        // Lée los parametros.
+        miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
+        miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
+      }
+    }
+
+
+    /// <summary>
+    /// Devuelve un texto representando el campo.
+    /// </summary>
+    public override string ToString()
+    {
+      return miTexto;
     }
     #endregion
   }

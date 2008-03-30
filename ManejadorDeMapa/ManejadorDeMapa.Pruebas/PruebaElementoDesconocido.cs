@@ -84,7 +84,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     [Test]
     public void PruebaConstructor()
     {
-      // Inicialización.
+      // Preparación.
       int número = 12;
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
       string clase = "clase";
@@ -116,7 +116,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     [Test]
     public void PruebaElimina()
     {
-      // Inicialización.
+      // Preparación.
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
       int número = 12;
       string clase = "clase";
@@ -148,7 +148,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     [Test]
     public void PruebaCambiaNombre()
     {
-      // Inicialización.
+      // Preparación.
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
       int número = 12;
       string clase = "clase";

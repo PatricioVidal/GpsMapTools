@@ -166,22 +166,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       // Añade los menús.
       AñadeMenúGuardarArchivoPDIs();
-      AñadeMenúCambiarCoordenadasANivel0();
     }
     #endregion
 
     #region Métodos Privados
-    private void AñadeMenúCambiarCoordenadasANivel0()
-    {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Cambiar coordenadas a Nivel 0";
-      menú.AutoSize = true;
-      Items.Add(menú);
-
-      menú.Click += EnMenúCambiarCoordenadasANivel0;
-    }
-
-
     private void AñadeMenúGuardarArchivoPDIs()
     {
       ToolStripMenuItem menú = new ToolStripMenuItem();
@@ -190,65 +178,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Items.Add(menú);
 
       menú.Click += EnMenúGuardarArchivoPDIs;
-    }
-
-
-    private void EnMenúCambiarCoordenadasANivel0(object elObjecto, EventArgs losArgumentos)
-    {
-      // Retornamos si no hay Vías seleccionadas.
-      if (miLista.SelectedIndices.Count == 0)
-      {
-        return;
-      }
-
-      // Muestra la ventana de confirmación.
-      DialogResult resultado = MessageBox.Show(
-        "Esta seguro de que quiere cambiar las coordenadas a nivel 0?",
-        "Cambiar Vía(s)",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-      if (resultado == DialogResult.Yes)
-      {
-        // Cambia las coordenadas evitando que se generen eventos con
-        // cada cambio.
-        ManejadorDeVías.SuspendeEventos();
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
-        foreach (Vía vía in vías)
-        {
-          int númeroDeCampos = vía.Campos.Count;
-          for (int i = 0; i < númeroDeCampos; ++i)
-          {
-            Campo campo = vía.Campos[i];
-            if (campo is CampoCoordenadas)
-            {
-              CampoCoordenadas campoACambiar = (CampoCoordenadas)campo;
-
-              // Cambia el campo si no está a nivel cero.
-              int nivel = 0;
-              if (campoACambiar.Nivel != nivel)
-              {
-                // Genera el nuevo campo.
-                CampoCoordenadas campoNuevo = new CampoCoordenadas(
-                  "Data0",
-                  nivel,
-                  campoACambiar.Coordenadas);
-
-                // Cambia el campo.
-                vía.CambiaCampo(campoNuevo, campoACambiar, "Cambio a nivel 0");
-              }
-            }
-          }
-        }
-
-        // Envía el evento indicando que se editaron PDIs.
-        if (EditóVías != null)
-        {
-          EditóVías(this, new EventArgs());
-        }
-
-        // Restablece los eventos.
-        ManejadorDeVías.RestableceEventos();
-      }
     }
 
 
@@ -334,8 +263,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           elementos,
           ManejadorDeVías.EscuchadorDeEstatus);
       }
-
-
     }
     #endregion
   }

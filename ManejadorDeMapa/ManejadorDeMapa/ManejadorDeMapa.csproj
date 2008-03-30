@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CampoParámetrosDeRuta.cs" />
+    <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="Interfase\ControladorDePestañas.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -93,6 +95,12 @@
     </Compile>
     <Compile Include="Interfase\OrdenadorDeColumnaDeLista.Designer.cs">
       <DependentUpon>OrdenadorDeColumnaDeLista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfase\PDIs\InterfaseListaDePDIs.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Interfase\PDIs\InterfaseListaDePDIs.Designer.cs">
+      <DependentUpon>InterfaseListaDePDIs.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.cs">
       <SubType>UserControl</SubType>
@@ -142,6 +150,7 @@
     <Compile Include="Interfase\Vias\MenúEditorDeVías.Designer.cs">
       <DependentUpon>MenúEditorDeVías.cs</DependentUpon>
     </Compile>
+    <Compile Include="LímiteDeVelocidad.cs" />
     <Compile Include="ManejadorBase.cs" />
     <Compile Include="PDIs\ArregladorDeLetras.cs" />
     <Compile Include="PDIs\ArregladorDePalabrasPorTipo.cs" />

@@ -117,7 +117,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     [Test]
     public void PruebaProcesamientoDePDIs()
     {
-      #region Inicialización.
+      #region Preparación.
       // Comienza applicación.
       InterfaseManejadorDeMapa interfaseManejadorDeMapa = new InterfaseManejadorDeMapa();
       interfaseManejadorDeMapa.Show();

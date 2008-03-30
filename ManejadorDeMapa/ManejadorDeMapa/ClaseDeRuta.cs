@@ -69,44 +69,43 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Representa una clase de ruta.
   /// </summary>
-  public class Vía : Polilínea
+  public class ClaseDeRuta
   {
     #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
+    private readonly string[] misTextos = new string[] {
+      "(0) Calle Residencial/Callejón/Calle de Tierra/Camino",
+      "(1) Calle con Curvas",
+      "(2) Calle Arterial / Otras Autopistas",
+      "(3) Autopista Principal",
+      "(4) Autopista Mayor/Rampa"};
+    private readonly int miIndice;
+    #endregion
 
     #region Propiedades
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Clase de Ruta nula.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
-      }
-    }
+    public static readonly ClaseDeRuta Nula = new ClaseDeRuta(int.MinValue);
 
-
+    
     /// <summary>
-    /// Obtiene la Clase de Ruta.
+    /// Obtiene el índice de la clase de ruta.
     /// </summary>
-    public ClaseDeRuta ClaseDeRuta
+    public int Indice
     {
       get
       {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
+        return miIndice;
       }
     }
     #endregion
@@ -115,28 +114,34 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
+    /// <param name="elIndice">El índice de la clase de ruta.</param>
+    public ClaseDeRuta(int elIndice)
     {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
+      if (elIndice != int.MinValue)
       {
-        if (campo is CampoParámetrosDeRuta)
+        int índiceMáximo = misTextos.Length - 1;
+        if (elIndice > índiceMáximo)
         {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
+          throw new ArgumentOutOfRangeException("El índice de la clase de ruta debe ser menor o igual a " + índiceMáximo);
         }
       }
+
+      miIndice = elIndice;
+    }
+
+
+    /// <summary>
+    /// Devuelve un texto representando la clase de ruta.
+    /// </summary>
+    public override string ToString()
+    {
+      // Caso para clase de ruta nula.
+      if (miIndice == int.MinValue)
+      {
+        return string.Empty;
+      }
+
+      return misTextos[miIndice];
     }
     #endregion
   }

@@ -69,75 +69,101 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Pruebas
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Pruebas para la clase LímiteDeVelocidad.
   /// </summary>
-  public class Vía : Polilínea
+  [TestFixture]
+  public class PruebasLímiteDeVelocidad
   {
-    #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
-
-    #region Propiedades
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Prueba el constructor.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
+    [Test]
+    public void PruebaConstructor()
     {
-      get
+      #region Caso 1: Indice en rango válido.
       {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
+        // Preparación.
+        int índice = 3;
+
+        // Llama al constructor en prueba.
+        LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índice);
+
+        // Prueba Propiedades.
+        Assert.AreEqual(índice, objectoEnPrueba.Indice, "Indice");
       }
-    }
+      #endregion
 
-
-    /// <summary>
-    /// Obtiene la Clase de Ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
+      #region Caso 2: Indice fuera de rango.
       {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
-      }
-    }
-    #endregion
+        // Preparación.
+        int índiceFueraDeRango = 40;
+        bool lanzóExcepción = false;
+        ArgumentOutOfRangeException excepciónEsperada = new ArgumentOutOfRangeException(
+          "El índice de la clase de ruta debe ser menor o igual a 7");
 
-    #region Métodos Públicos
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
-    {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
-      {
-        if (campo is CampoParámetrosDeRuta)
+        // Llama al constructor en prueba.
+        try
         {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
+          LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índiceFueraDeRango);
         }
+        catch (Exception e)
+        {
+          // Prueba las propiedades de la excepción.
+          Assert.That(e.GetType(), Is.EqualTo(excepciónEsperada.GetType()), "Tipo de Excepción");
+          Assert.That(e.Message, Is.EqualTo(excepciónEsperada.Message), "Excepción.Message");
+
+          lanzóExcepción = true;
+        }
+
+        Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
       }
+      #endregion
     }
-    #endregion
+
+
+    /// <summary>
+    /// Prueba el método ToString().
+    /// </summary>
+    [Test]
+    public void PruebaToString()
+    {
+      #region Caso 1: Indice en rango válido.
+      {
+        // Preparación.
+        int índice = 3;
+        LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índice);
+        string resultadoEsperado = "(3) 35mph / 60kph";
+
+        // Llama al método en prueba.
+        string resultado = objectoEnPrueba.ToString();
+
+        // Prueba resultado.
+        Assert.That(resultado, Is.EqualTo(resultadoEsperado), "Resultado");
+      }
+      #endregion
+
+      #region Caso 2: Límite de Velocidad nulo.
+      {
+        // Preparación.
+        LímiteDeVelocidad objectoEnPrueba = LímiteDeVelocidad.Nulo;
+
+        // Llama al método en prueba.
+        string resultado = objectoEnPrueba.ToString();
+
+        // Prueba resultado.
+        Assert.That(resultado, Is.EqualTo(string.Empty), "Resultado");
+      }
+      #endregion
+    }
   }
 }
