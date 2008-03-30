@@ -76,7 +76,6 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using System.Globalization;
 using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
@@ -88,8 +87,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   {
     #region Campos
     private readonly InterfaseBase[] misInterfases;
-    private const string FormatoDeCoordenada = "0.00000";
-    private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     #endregion
 
@@ -142,9 +139,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     public InterfaseManejadorDePDIs()
     {
       InitializeComponent();
-
-      // Usar el punto para separar decimales.
-      miFormatoNumérico.NumberDecimalSeparator = ".";
 
       // Crea el vector de interfases.
       misInterfases = new InterfaseBase[] {
@@ -277,9 +271,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       foreach (PDI pdi in pdis)
       {
         laLista.AñadeItem(
-          pdi,
-          pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
-          pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico));
+          pdi);
       }
     }
     #endregion

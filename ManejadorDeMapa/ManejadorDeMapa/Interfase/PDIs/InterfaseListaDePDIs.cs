@@ -78,152 +78,62 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.PDIs;
+using System.Globalization;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
   /// <summary>
-  /// Interfase de Errores de PDIs.
+  /// Interfase de Lista de elementos.
   /// </summary>
-  public partial class InterfaseDePDIsConErroress : InterfaseBase
+  public partial class InterfaseListaDePDIs : InterfaseListaDeElementos
   {
     #region Campos
-    private List<ListViewItem> misItems = new List<ListViewItem>();
-    private ManejadorDePDIs miManejadorDePDIs;
+    private const string FormatoDeCoordenada = "0.00000";
+    private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
     #endregion
 
-    #region Eventos
-    /// <summary>
-    /// Evento cuando hay PDIs con errores.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> PDIsConErrores;
-    #endregion
-
-    #region Propiedades
-    /// <summary>
-    /// Obtiene o pone el manejador de mapa.
-    /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
-    {
-      set
-      {
-        // Deja de manejar los eventos.
-        if (miManejadorDePDIs != null)
-        {
-          miManejadorDePDIs.EncontraronErrores -= EnEncontraronErrores;
-        }
-
-        // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-
-        // Maneja eventos.
-        if (value != null)
-        {
-          miManejadorDePDIs = value.ManejadorDePDIs;
-
-          if (miManejadorDePDIs != null)
-          {
-            miManejadorDePDIs.EncontraronErrores += EnEncontraronErrores;
-          }
-
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapa.ManejadorDeMapa = value;
-
-          // Pone el manejador de PDIs en la interfase de edición de PDIs.
-          miMenúEditorDePDI.ManejadorDePDIs = value.ManejadorDePDIs;
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
-    /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      set
-      {
-        base.EscuchadorDeEstatus = value;
-        miMapa.EscuchadorDeEstatus = value;
-      }
-    }
-    #endregion
-
-    #region Métodos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsConErroress()
+    public InterfaseListaDePDIs()
     {
       InitializeComponent();
 
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
+      // Usar el punto para separar decimales.
+      miFormatoNumérico.NumberDecimalSeparator = ".";
 
-      // Escucha el evento de edición de PDIs.
-      miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        // Borra los puntos adicionales que estén en el mapa.
-        miMapa.PuntosAddicionales.Clear();
-
-        // Busca errores otra vez.
-        miManejadorDePDIs.BuscaErrores();
-      };
-    }
-
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnEncontraronErrores(elEnviador, losArgumentos);
+      // Añade las columnas de coordenadas.
+      ColumnHeader columnaLatitud = new ColumnHeader();
+      columnaLatitud.Text = "Latitud";
+      ColumnHeader columnaLongitud = new ColumnHeader();
+      columnaLongitud.Text = "Longitud";
+      this.Columns.AddRange(new ColumnHeader[] {
+        columnaLatitud,
+        columnaLongitud});
     }
 
 
     /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public override void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
     {
-      // No es necesario hacer nada aqui.
+      // Verifica que el elemento es un PDI.
+      if (!(elElemento is PDI))
+      {
+        throw new ArgumentException("El elemento debe ser tipo PDI. pero es " + elElemento.GetType());
+      }
+
+      // Añade el PDI a la lista.
+      PDI pdi = (PDI)elElemento;
+      List<string> subItems = new List<string> {
+          pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
+          pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)};
+      subItems.AddRange(losSubItemsAdicionales);
+
+      base.AñadeItem(pdi, subItems.ToArray());
     }
-
-    
-    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (PDIsConErrores != null)
-      {
-        PDIsConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
-      }
-    }
-
-    private void LlenaItems(InterfaseListaDeElementos laLista)
-    {
-      // Añade los PDIs.
-      IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
-      foreach (KeyValuePair<PDI, string> error in errores)
-      {
-        PDI pdi = error.Key;
-        string razón = error.Value;
-        laLista.AñadeItem(pdi, razón);
-      }
-
-      // Activa el menú de Edición si hay elementos en la lista.
-      if (errores.Count > 0)
-      {
-        miMenúEditorDePDI.Enabled = true;
-      }
-      else
-      {
-        miMenúEditorDePDI.Enabled = false;
-      }
-    }
-    #endregion
   }
 }

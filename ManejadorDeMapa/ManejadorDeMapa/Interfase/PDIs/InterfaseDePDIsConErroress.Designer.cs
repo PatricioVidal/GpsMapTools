@@ -28,24 +28,18 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.ColumnHeader columnaCoordenadas;
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsConErroress));
       System.Windows.Forms.ColumnHeader columnaRazón;
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsConErroress));
       System.Windows.Forms.SplitContainer division;
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
-      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados();
+      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs();
       this.miMenúEditorDePDI = new GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI();
-      columnaCoordenadas = new System.Windows.Forms.ColumnHeader();
+      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados();
       columnaRazón = new System.Windows.Forms.ColumnHeader();
       division = new System.Windows.Forms.SplitContainer();
       division.Panel1.SuspendLayout();
       division.Panel2.SuspendLayout();
       division.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // columnaCoordenadas
-      // 
-      resources.ApplyResources(columnaCoordenadas, "columnaCoordenadas");
       // 
       // columnaRazón
       // 
@@ -67,7 +61,6 @@
       // miLista
       // 
       this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            columnaCoordenadas,
             columnaRazón});
       this.miLista.ContextMenuStrip = this.miMenúEditorDePDI;
       resources.ApplyResources(this.miLista, "miLista");
@@ -77,6 +70,14 @@
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       this.miLista.VirtualMode = true;
+      // 
+      // miMenúEditorDePDI
+      // 
+      resources.ApplyResources(this.miMenúEditorDePDI, "miMenúEditorDePDI");
+      this.miMenúEditorDePDI.Lista = this.miLista;
+      this.miMenúEditorDePDI.ManejadorDePDIs = null;
+      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
+      this.miMenúEditorDePDI.ShowImageMargin = false;
       // 
       // miMapa
       // 
@@ -93,20 +94,12 @@
       this.miMapa.Name = "miMapa";
       this.miMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapa.RectánguloVisibleEnCoordenadas")));
       // 
-      // miMenúEditorDePDI
-      // 
-      resources.ApplyResources(this.miMenúEditorDePDI, "miMenúEditorDePDI");
-      this.miMenúEditorDePDI.Lista = this.miLista;
-      this.miMenúEditorDePDI.ManejadorDePDIs = null;
-      this.miMenúEditorDePDI.Name = "miMenuDeContexto";
-      this.miMenúEditorDePDI.ShowImageMargin = false;
-      // 
-      // InterfaseDeErroresEnPDIs
+      // InterfaseDePDIsConErroress
       // 
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(division);
-      this.Name = "InterfaseDeErroresEnPDIs";
+      this.Name = "InterfaseDePDIsConErroress";
       division.Panel1.ResumeLayout(false);
       division.Panel2.ResumeLayout(false);
       division.ResumeLayout(false);
@@ -116,7 +109,7 @@
 
     #endregion
 
-    private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
+    private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs miLista;
     private MenuEditorDePDI miMenúEditorDePDI;
     private InterfaseMapaDePDIsSeleccionados miMapa;
   }

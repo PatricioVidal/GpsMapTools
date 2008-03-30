@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="columnaCoordenadas.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="columnaCoordenadas.Text" xml:space="preserve">
-    <value>Coordenadas</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="columnaCoordenadas.Width" type="System.Int32, mscorlib">
-    <value>169</value>
-  </data>
   <metadata name="columnaRazón.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
   <data name="columnaRazón.Text" xml:space="preserve">
     <value>Razón</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="columnaRazón.Width" type="System.Int32, mscorlib">
     <value>284</value>
   </data>
@@ -157,7 +148,7 @@
     <value>False</value>
   </data>
   <data name="miMenúEditorDePDI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 48</value>
+    <value>122, 26</value>
   </data>
   <data name="miMenúEditorDePDI.Text" xml:space="preserve">
     <value>MenúEditorDePDI</value>
@@ -166,7 +157,7 @@
     <value>miMenúEditorDePDI</value>
   </data>
   <data name="&gt;&gt;miMenúEditorDePDI.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI, GpsYv.ManejadorDeMapa, Version=1.10.3011.5385, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -184,7 +175,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs, GpsYv.ManejadorDeMapa, Version=1.10.3011.5385, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>division.Panel1</value>
@@ -228,7 +219,7 @@
     <value>miMapa</value>
   </data>
   <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados, GpsYv.ManejadorDeMapa, Version=1.10.3011.5385, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
     <value>division.Panel2</value>
@@ -278,12 +269,6 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>837, 501</value>
   </data>
-  <data name="&gt;&gt;columnaCoordenadas.Name" xml:space="preserve">
-    <value>columnaCoordenadas</value>
-  </data>
-  <data name="&gt;&gt;columnaCoordenadas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;columnaRazón.Name" xml:space="preserve">
     <value>columnaRazón</value>
   </data>
@@ -291,9 +276,9 @@
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>InterfaseDeErroresEnPDIs</value>
+    <value>InterfaseDePDIsConErroress</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.8.3005.40836, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.10.3011.5385, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

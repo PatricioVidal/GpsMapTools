@@ -117,22 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="columnaLatitud.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="columnaLatitud.Text" xml:space="preserve">
-    <value>Latitud</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="columnaLatitud.Width" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <metadata name="columnaLongitud.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="columnaLongitud.Text" xml:space="preserve">
-    <value>Longitud</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -152,6 +136,7 @@
   <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
     <value>583, 404</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -159,7 +144,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -207,7 +192,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miPáginaDeTodos</value>
@@ -258,7 +243,7 @@
     <value>miInterfasePDIsModificados</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsModificados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsModificados.Parent" xml:space="preserve">
     <value>miPáginaModificados</value>
@@ -309,7 +294,7 @@
     <value>miInterfasePDIsDuplicados</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsDuplicados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsDuplicados.Parent" xml:space="preserve">
     <value>miPáginaPosiblesDuplicados</value>
@@ -357,7 +342,7 @@
     <value>miInterfasePDIsEliminados</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsEliminados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsEliminados.Parent" xml:space="preserve">
     <value>miPáginaEliminados</value>
@@ -405,7 +390,7 @@
     <value>miInterfasePDIsErrores</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsErrores.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsErrores.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
@@ -456,7 +441,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>$this</value>
@@ -473,22 +458,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>591, 431</value>
   </data>
-  <data name="&gt;&gt;columnaLatitud.Name" xml:space="preserve">
-    <value>columnaLatitud</value>
-  </data>
-  <data name="&gt;&gt;columnaLatitud.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnaLongitud.Name" xml:space="preserve">
-    <value>columnaLongitud</value>
-  </data>
-  <data name="&gt;&gt;columnaLongitud.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>InterfaseManejadorDePDIs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.9.3007.42641, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.10.3011.5219, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

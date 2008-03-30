@@ -30,7 +30,7 @@
     {
       System.Windows.Forms.ColumnHeader columnaModificaciones;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsModificados));
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
+      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs();
       columnaModificaciones = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
@@ -62,6 +62,6 @@
 
     #endregion
 
-    private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
+    private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs miLista;
   }
 }

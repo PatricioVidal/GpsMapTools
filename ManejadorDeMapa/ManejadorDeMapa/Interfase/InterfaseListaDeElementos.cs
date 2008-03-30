@@ -136,7 +136,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Pone el método Llenador de Items.
     /// </summary>
     /// <param name="elLlenadorDeItems">El método Llenador de Items.</param>
-    public void PoneLlenadorDeItems(LlenadorDeItems elLlenadorDeItems)
+    public virtual void PoneLlenadorDeItems(LlenadorDeItems elLlenadorDeItems)
     {
       miLlenadorDeItems = elLlenadorDeItems;
     }
@@ -145,7 +145,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <summary>
     /// Regenera la lista de elementos.
     /// </summary>
-    public void RegeneraLista()
+    public virtual void RegeneraLista()
     {
       // Lanza una excepción si no hay un llenador de lista.
       if (miLlenadorDeItems == null)
@@ -171,7 +171,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// </summary>
     /// <param name="elElemento">El elemento dado.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    public virtual void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
     {
       List<string> subItems = new List<string> {
                 elElemento.Número.ToString().PadLeft(6),

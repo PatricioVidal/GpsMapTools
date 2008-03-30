@@ -31,7 +31,7 @@
       System.Windows.Forms.ColumnHeader columnaModificaciones;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeVíasModificadas));
       this.miDivision = new System.Windows.Forms.SplitContainer();
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
+      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs();
       this.miMenuEditorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías();
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
       columnaModificaciones = new System.Windows.Forms.ColumnHeader();
@@ -121,7 +121,7 @@
     #endregion
 
     private System.Windows.Forms.SplitContainer miDivision;
-    private InterfaseListaDeElementos miLista;
+    private PDIs.InterfaseListaDePDIs miLista;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías miMenuEditorDeVías;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
   }

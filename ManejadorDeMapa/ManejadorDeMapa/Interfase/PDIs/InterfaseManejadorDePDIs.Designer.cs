@@ -29,14 +29,12 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.ColumnHeader columnaLatitud;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDePDIs));
-      System.Windows.Forms.ColumnHeader columnaLongitud;
       this.miControladorDePestañas = new GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas();
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
       this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos();
+      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs();
       this.miPáginaModificados = new System.Windows.Forms.TabPage();
       this.miInterfasePDIsModificados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados();
       this.miPáginaPosiblesDuplicados = new System.Windows.Forms.TabPage();
@@ -45,8 +43,6 @@
       this.miInterfasePDIsEliminados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress();
-      columnaLatitud = new System.Windows.Forms.ColumnHeader();
-      columnaLongitud = new System.Windows.Forms.ColumnHeader();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -55,14 +51,6 @@
       this.miPáginaEliminados.SuspendLayout();
       this.miPáginaErrores.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // columnaLatitud
-      // 
-      resources.ApplyResources(columnaLatitud, "columnaLatitud");
-      // 
-      // columnaLongitud
-      // 
-      resources.ApplyResources(columnaLongitud, "columnaLongitud");
       // 
       // miControladorDePestañas
       // 
@@ -107,9 +95,6 @@
       // miLista
       // 
       this.miLista.Activation = System.Windows.Forms.ItemActivation.OneClick;
-      this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            columnaLatitud,
-            columnaLongitud});
       resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
@@ -196,7 +181,7 @@
 
     private GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas miControladorDePestañas;
     private System.Windows.Forms.TabPage miPáginaDeTodos;
-    private GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos miLista;
+    private GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs miLista;
     private System.Windows.Forms.TabPage miPáginaModificados;
     private InterfaseDePDIsModificados miInterfasePDIsModificados;
     private System.Windows.Forms.TabPage miPáginaPosiblesDuplicados;
