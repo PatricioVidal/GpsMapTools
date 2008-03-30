@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   {
     #region Campos
     private readonly static Coordenadas misCoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
-    private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Vacio;
+    private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
     #endregion
 
     #region Propiedades

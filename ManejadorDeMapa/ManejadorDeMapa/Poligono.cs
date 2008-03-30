@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa
   public class Polígono : ElementoDelMapa
   {
     #region Campos
-    private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Vacio;
+    private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
     #endregion
 
     #region Propiedades

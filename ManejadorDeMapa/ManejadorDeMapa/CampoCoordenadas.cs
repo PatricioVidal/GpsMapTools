@@ -95,9 +95,9 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Coordenadas vacia.
+    /// Coordenadas nula.
     /// </summary>
-    static readonly public CampoCoordenadas Vacio = new CampoCoordenadas(IdentificadorDeCoordenadas, 0, new Coordenadas[0]);
+    static readonly public CampoCoordenadas Nulas = new CampoCoordenadas(IdentificadorDeCoordenadas, 0, new Coordenadas[0]);
 
 
     /// <summary>
