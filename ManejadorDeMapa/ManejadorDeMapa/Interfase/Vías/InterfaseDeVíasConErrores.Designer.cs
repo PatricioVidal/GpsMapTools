@@ -29,9 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeViasConErrores));
-      System.Windows.Forms.ColumnHeader columnaRazón;
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
-      columnaRazón = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
       // miInterfaseListaConMapaDeVías
@@ -40,10 +38,6 @@
       this.miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = null;
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
-      // 
-      // columnaRazón
-      // 
-      resources.ApplyResources(columnaRazón, "columnaRazón");
       // 
       // InterfaseDeViasConErrores
       // 

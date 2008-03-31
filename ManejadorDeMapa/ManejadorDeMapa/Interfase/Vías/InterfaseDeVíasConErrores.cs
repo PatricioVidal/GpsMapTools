@@ -151,6 +151,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
+      // Añade columnas.
+      ColumnHeader columnaRazón = new System.Windows.Forms.ColumnHeader();
+      columnaRazón.Text = "Razón";
+      columnaRazón.Width = 300;
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.Add(columnaRazón);
+
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
@@ -171,7 +177,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnCambiaronErrores(elEnviador, losArgumentos);
+      EnCambiaronErrores(elEnviador, new NúmeroDeElementosEventArgs(0));
     }
 
 
@@ -186,14 +192,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnCambiaronErrores(object elEnviador, EventArgs losArgumentos)
+    private void EnCambiaronErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
 
       // Genera el evento.
       if (CambiaronErrores != null)
       {
-        CambiaronErrores(this, new NúmeroDeElementosEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
+        CambiaronErrores(this, losArgumentos);
       }
     }
 

@@ -89,7 +89,7 @@
     <Compile Include="Interfase\InterfaseMapaDeElementosSeleccionados.Designer.cs">
       <DependentUpon>InterfaseMapaDeElementosSeleccionados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\NúmeroDeElementosEventArgs.cs" />
+    <Compile Include="NúmeroDeElementosEventArgs.cs" />
     <Compile Include="Interfase\OrdenadorDeColumnaDeLista.cs">
       <SubType>Component</SubType>
     </Compile>

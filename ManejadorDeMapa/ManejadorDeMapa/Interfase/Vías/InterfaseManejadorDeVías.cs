@@ -155,10 +155,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha los eventos para actualizar las pestañas.
-      miInterfaseDeVíasModificadas.VíasModificadas += EnVíasModificadas;
-      miInterfaseDeErroresEnVías.CambiaronErrores += EnVíasConErrores;
-      miInterfaseDeVíasConIncongruencias.SeEncontraronIncongruencias += EnVíasConIncongruencias;
-
+      miInterfaseDeVíasModificadas.VíasModificadas += EnCambiaronVíasModificadas;
+      miInterfaseDeErroresEnVías.CambiaronErrores += EnCambiaronVíasConErrores;
+      miInterfaseDeVíasConIncongruencias.CambiaronIncongruencias += EnCambiaronVíasConIncongruencias;
+  
       // Crea el diccionario de índices de pestañas.
       TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
       for (int i = 0; i < pestañas.Count; ++i)
@@ -215,7 +215,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnVíasModificadas(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnCambiaronVíasModificadas(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
     {
       int númeroDeVíasModificadas = losArgumentos.NúmeroDeElementos;
 
@@ -239,7 +239,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnVíasConErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnCambiaronVíasConErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
     {
       int númeroDeVíasConErrores = losArgumentos.NúmeroDeElementos;
 
@@ -263,7 +263,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnVíasConIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnCambiaronVíasConIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
     {
       int númeroDeVíasConIncongruencias = losArgumentos.NúmeroDeElementos;
 

@@ -144,18 +144,15 @@
   <data name="&gt;&gt;miInterfaseListaConMapaDeVías.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="columnaRazón.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="columnaRazón.GenerateMember" type="System.Boolean, mscorlib">
     <value>False</value>
-  </metadata>
-  <data name="columnaRazón.Text" xml:space="preserve">
-    <value>Razón</value>
   </data>
   <data name="columnaRazón.Width" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>

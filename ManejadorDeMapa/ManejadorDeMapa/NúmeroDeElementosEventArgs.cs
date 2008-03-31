@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.Interfase
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
   /// Argumento de evento de número de elementos.

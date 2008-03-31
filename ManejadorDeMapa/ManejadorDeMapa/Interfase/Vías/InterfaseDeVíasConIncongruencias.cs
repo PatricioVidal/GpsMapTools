@@ -21,9 +21,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     #region Eventos
     /// <summary>
-    /// Evento cuando hay Vías con incongruencias.
+    /// Evento cuando cambian las Vías con incongruencias.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> SeEncontraronIncongruencias;
+    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronIncongruencias;
     #endregion
 
     #region Propiedades
@@ -79,6 +79,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
+      // Añade columnas.
+      ColumnHeader columnaDetalle = new System.Windows.Forms.ColumnHeader();
+      columnaDetalle.Text = "Detalle";
+      columnaDetalle.Width = 300;
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.Add(columnaDetalle);
+
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
@@ -88,6 +94,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Busca errores otra vez.
         miManejadorDeVías.BuscaErrores();
       };
+
+      // Hacemos la lista no virtual para poder usar grupos.
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = false;
     }
     #endregion
 
@@ -99,7 +108,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnCambiaronIncongruencias(elEnviador, losArgumentos);
+      EnCambiaronIncongruencias(elEnviador, new NúmeroDeElementosEventArgs(0));
     }
 
 
@@ -114,27 +123,44 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnCambiaronIncongruencias(object elEnviador, EventArgs losArgumentos)
+    private void EnCambiaronIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
 
       // Genera el evento.
-      if (SeEncontraronIncongruencias != null)
+      if (CambiaronIncongruencias != null)
       {
-        SeEncontraronIncongruencias(this, new NúmeroDeElementosEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
+        CambiaronIncongruencias(this, losArgumentos);
       }
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
-      // Añade las Vías.
-      IList<IList<Vía>> incongruencias = miManejadorDeVías.Incongruencias;
-      foreach (IList<Vía> vías in incongruencias)
+      // Añade los elementos.
+      IList<IList<ManejadorDeVías.ElementoDeIncongruencia>> incongruencias = miManejadorDeVías.Incongruencias;
+      foreach (IList<ManejadorDeVías.ElementoDeIncongruencia> elementosDeIncongruencia in incongruencias)
       {
-        foreach (Vía vía in vías)
+        bool esElPrimerElemento = true;
+        ListViewGroup grupo = null;
+        foreach (ManejadorDeVías.ElementoDeIncongruencia elementoDeIncongruencia in elementosDeIncongruencia)
         {
-          laLista.AñadeItem(vía);
+          if (esElPrimerElemento)
+          {
+            grupo = new ListViewGroup(elementoDeIncongruencia.Vía.Nombre);
+            laLista.Groups.Add(grupo);
+            esElPrimerElemento = false;
+          }
+
+          // Si el elemento es un posible error entonces le ponemos un fondo amarillo.
+          if (elementoDeIncongruencia.EsPosibleError)
+          {
+            laLista.AñadeItem(elementoDeIncongruencia.Vía, Color.Yellow, grupo, elementoDeIncongruencia.Detalle);
+          }
+          else
+          {
+            laLista.AñadeItem(elementoDeIncongruencia.Vía, grupo, elementoDeIncongruencia.Detalle);
+          }
         }
       }
     }

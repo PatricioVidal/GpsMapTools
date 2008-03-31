@@ -86,7 +86,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   public partial class InterfaseListaDeElementos : ListView
   {
     #region Campos
-    private List<ListViewItem> misItems = new List<ListViewItem>();
+    private List<ListViewItem> misItemsVirtuales = new List<ListViewItem>();
     private LlenadorDeItems miLlenadorDeItems = null;
     #endregion
 
@@ -98,7 +98,20 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       get
       {
-        return misItems.Count;
+        int númeroDeElementos;
+
+        // Si la lista esta en modo virtual entonces el número de elementos
+        // está dado por los items virtuales.
+        if (VirtualMode)
+        {
+          númeroDeElementos = misItemsVirtuales.Count;
+        }
+        else
+        {
+          númeroDeElementos = Items.Count;
+        }
+
+        return númeroDeElementos;
       }
     }
     #endregion
@@ -111,7 +124,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       InitializeComponent();
 
-      miOrdenadorDeColumnaDeLista.ItemsDeLaListaVirtual = misItems;
+      miOrdenadorDeColumnaDeLista.ItemsDeLaListaVirtual = misItemsVirtuales;
     }
 
 
@@ -153,15 +166,32 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         throw new InvalidOperationException("No hay un Llenador de Items.  Llame ConectaLlenadorDeItems() antes de llamar LlenaLista().");
       }
 
-      // Desabilita la lista e inicializa la lista de items.
+      // Desabilita la listas.
       Enabled = false;
-      misItems.Clear();
 
-      // Llama al llenador de la lista.
-      miLlenadorDeItems(this);
+      // Llena los items dependiendo del modo Virtual de la lista.
+      if (VirtualMode)
+      {
+        // Inicializa los items.
+        misItemsVirtuales.Clear();
 
-      // Pone el número de elementos virtuales y habilita la lista.
-      VirtualListSize = misItems.Count;
+        // Llama al llenador de la lista.
+        miLlenadorDeItems(this);
+
+        // Pone el número de elementos virtuales y habilita la lista.
+        VirtualListSize = misItemsVirtuales.Count;
+      }
+      else
+      {
+        // Inicializa los items y grupos.
+        Items.Clear();
+        Groups.Clear();
+        
+        // Llama al llenador de la lista.
+        miLlenadorDeItems(this);
+      }
+
+      // Habilita la lista.
       Enabled = true; ;
     }
 
@@ -171,7 +201,44 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// </summary>
     /// <param name="elElemento">El elemento dado.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public virtual void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    public void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    {
+      AñadeItem(elElemento, BackColor, null, losSubItemsAdicionales);
+    }
+
+
+    /// <summary>
+    /// Añade un item a la lista.
+    /// </summary>
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elGrupo">El grupo.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public void AñadeItem(ElementoDelMapa elElemento, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
+    {
+      AñadeItem(elElemento, BackColor, elGrupo, losSubItemsAdicionales);
+    }
+
+
+    /// <summary>
+    /// Añade un item a la lista.
+    /// </summary>
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elColorDeFondo">El color de fondo.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, params string[] losSubItemsAdicionales)
+    {
+      AñadeItem(elElemento, elColorDeFondo, null, losSubItemsAdicionales);
+    }
+
+
+    /// <summary>
+    /// Añade un item a la lista.
+    /// </summary>
+    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elColorDeFondo">El color de fondo.</param>
+    /// <param name="elGrupo">El grupo.</param>
+    /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
+    public virtual void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       List<string> subItems = new List<string> {
                 elElemento.Número.ToString().PadLeft(6),
@@ -181,15 +248,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       subItems.AddRange(losSubItemsAdicionales);
 
       ListViewItem item = new ListViewItem(subItems.ToArray());
+      item.BackColor = elColorDeFondo;
+      item.Group = elGrupo;
       item.Tag = elElemento;
-      misItems.Add(item);
+
+      if (VirtualMode)
+      {
+        if (elGrupo != null)
+        {
+          throw new ArgumentException("No se pueden añadir grupos a lista virtuales. Ponga VirtualMode = false");
+        }
+
+        misItemsVirtuales.Add(item);
+      }
+      else
+      {
+        Items.Add(item);
+      }
     }
     #endregion
 
     #region Métodos Privados
     private void ObtieneItemDeLista(object elEnviador, RetrieveVirtualItemEventArgs elArgumento)
     {
-      elArgumento.Item = misItems[elArgumento.ItemIndex];
+      elArgumento.Item = misItemsVirtuales[elArgumento.ItemIndex];
     }
     #endregion
   }

@@ -117,8 +117,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// Añade un item a la lista.
     /// </summary>
     /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elColorDeFondo">El color de fondo.</param>
+    /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public override void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    public override void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       // Verifica que el elemento es un PDI.
       if (!(elElemento is PDI))
@@ -133,7 +135,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)};
       subItems.AddRange(losSubItemsAdicionales);
 
-      base.AñadeItem(pdi, subItems.ToArray());
+      base.AñadeItem(pdi, elColorDeFondo, elGrupo, subItems.ToArray());
     }
   }
 }

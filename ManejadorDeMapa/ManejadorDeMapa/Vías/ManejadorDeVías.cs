@@ -87,19 +87,55 @@ namespace GpsYv.ManejadorDeMapa.Vías
     private readonly BuscadorDeErrores miBuscadorDeErrores;
     private IDictionary<Vía, string> misErrores = new Dictionary<Vía, string>();
     private readonly BuscadorDeIncongruencias miBuscadorDeIncongruencias;
-    private readonly IList<IList<Vía>> misIncongruencias = new List<IList<Vía>>();
+    private readonly IList<IList<ElementoDeIncongruencia>> misIncongruencias = new List<IList<ElementoDeIncongruencia>>();
+    #endregion
+
+    #region Clases
+    /// <summary>
+    /// Representa un elemento de la lista de incongruencias.
+    /// </summary>
+    public struct ElementoDeIncongruencia
+    {
+      /// <summary>
+      /// Obtiene la Vía asociada.
+      /// </summary>
+      public readonly Vía Vía;
+
+      /// <summary>
+      /// Obtiene el detalle.
+      /// </summary>
+      public readonly string Detalle;
+
+      /// <summary>
+      /// Obtiene una variable lógica que indica si el elemento es un posible error.
+      /// </summary>
+      public bool EsPosibleError;
+
+      /// <summary>
+      /// Constructor.
+      /// </summary>
+      /// <param name="laVía">La vía.</param>
+      /// <param name="elDetalle">El detalle.</param>
+      /// <param name="elEsPosibleError">Variable lógica que indica si el elemento es un posible error.</param>
+      public ElementoDeIncongruencia(Vía laVía, string elDetalle, bool elEsPosibleError)
+      {
+        Vía = laVía;
+        Detalle = elDetalle;
+        EsPosibleError = elEsPosibleError;
+      }
+    }
     #endregion
 
     #region Eventos
     /// <summary>
     /// Evento cuando cambian los errores.
     /// </summary>
-    public event EventHandler CambiaronErrores;
+    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
 
     /// <summary>
     /// Evento cuando cambian las incongruencias.
     /// </summary>
-    public event EventHandler CambiaronIncongruencias;
+    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronIncongruencias;
     #endregion
 
     #region Propiedades
@@ -125,7 +161,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Devuelve las incongruencias de Vías.
     /// </summary>
-    public IList<IList<Vía>> Incongruencias
+    public IList<IList<ElementoDeIncongruencia>> Incongruencias
     {
       get
       {
@@ -164,7 +200,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Envía evento.
       if (CambiaronErrores != null)
       {
-        CambiaronErrores(this, new EventArgs());
+        CambiaronErrores(this, new NúmeroDeElementosEventArgs(misErrores.Count));
       }
     }
 
@@ -176,11 +212,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       miBuscadorDeIncongruencias.Procesa();
 
-      // Envía evento.
-      if (CambiaronIncongruencias != null)
-      {
-        CambiaronIncongruencias(this, new EventArgs());
-      }
+      EnviaCambiaronIncongruencias();
     }
 
 
@@ -214,6 +246,16 @@ namespace GpsYv.ManejadorDeMapa.Vías
       misErrores.Clear();
       misIncongruencias.Clear();
     }
+
+
+    private void EnviaCambiaronIncongruencias()
+    {
+      if (CambiaronIncongruencias != null)
+      {
+        CambiaronIncongruencias(this, new NúmeroDeElementosEventArgs(misIncongruencias.Count));
+      }
+    }
+
     #endregion
   }
 }

@@ -116,8 +116,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// Añade un item a la lista.
     /// </summary>
     /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elColorDeFondo">El color de fondo.</param>
+    /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public override void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    public override void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       // Verifica que el elemento es una Vía.
       if (!(elElemento is Vía))
@@ -132,7 +134,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           vía.ClaseDeRuta.ToString()};
       subItems.AddRange(losSubItemsAdicionales);
 
-      base.AñadeItem(vía, subItems.ToArray());
+      base.AñadeItem(vía, elColorDeFondo, elGrupo, subItems.ToArray());
     }
   }
 }
