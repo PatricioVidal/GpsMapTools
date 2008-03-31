@@ -6,6 +6,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.11
+
+
 Versión 1.10
 - Se comenzó la implementación de la busqueda de vías con incongruencias (diferencia del "límite de velocidad" o "clase de ruta" > 2).
 
