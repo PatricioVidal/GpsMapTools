@@ -95,9 +95,9 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     
     #region Eventos
     /// <summary>
-    /// Evento cuando se encuentran errores.
+    /// Evento cuando cambian los PDIs con errores.
     /// </summary>
-    public event EventHandler EncontraronErrores;
+    public event EventHandler CambiaronErrores;
     #endregion
 
     #region Propiedades
@@ -196,9 +196,9 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       miBuscadorDeErrores.Procesa();
 
       // Envia evento.
-      if (EncontraronErrores != null)
+      if (CambiaronErrores != null)
       {
-        EncontraronErrores(this, new EventArgs());
+        CambiaronErrores(this, new EventArgs());
       }
     }
 

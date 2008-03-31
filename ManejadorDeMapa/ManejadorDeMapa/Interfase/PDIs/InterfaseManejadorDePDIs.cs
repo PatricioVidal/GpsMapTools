@@ -152,7 +152,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miInterfasePDIsDuplicados.PDIsDuplicados += EnPDIsDuplicados;
       miInterfasePDIsEliminados.PDIsEliminados += EnPDIsEliminados;
       miInterfasePDIsModificados.PDIsModificados += EnPDIsModificados;
-      miInterfasePDIsErrores.PDIsConErrores += EnPDIsConErrores;
+      miInterfasePDIsErrores.CambiaronErrores += EnPDIsConErrores;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);

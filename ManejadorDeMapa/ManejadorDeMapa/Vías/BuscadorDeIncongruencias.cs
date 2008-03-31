@@ -78,19 +78,20 @@ using System.Collections;
 namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Buscador de errores en Vías.
+  /// Buscador de incongruencias en Vías.
   /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDeVías, Vía>
+  public class BuscadorDeIncongruencias : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IDictionary<Vía, string> misErrores;
+    private readonly IList<IList<Vía>> misIncongruencias;
+    private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
     #endregion
 
     #region Métodos Públicos
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca errores en las Vías.";
+    public static readonly string Descripción = "Busca incongruencias en las Vías.";
 
 
     /// <summary>
@@ -98,12 +99,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public BuscadorDeErrores(
+    public BuscadorDeIncongruencias(
       ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      misErrores = elManejadorDeVías.Errores;
+      misIncongruencias = elManejadorDeVías.Incongruencias;
     }
     #endregion
 
@@ -113,7 +114,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     protected override void ComenzóAProcesar()
     {
-      misErrores.Clear();
+      misIncongruencias.Clear();
+      misVíasYaProcesadas.Clear();
+
       base.ComenzóAProcesar();
     }
 
@@ -125,55 +128,114 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
     protected override bool ProcesaElemento(Vía laVía)
     {
-      List<string> errores = new List<string>();
-
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = laVía.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
+      // Retorna si la Vía ya ha sido identificado como incongruencia.
+      if (misVíasYaProcesadas.Contains(laVía))
       {
-        errores.Add("El tipo está vacío.");
+        return false;
       }
-      #endregion
 
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePolilíneas.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
+      // Retorna si la Vía np tiene nombre.
+      if (laVía.Nombre == string.Empty)
       {
-        errores.Add("El tipo (" + laVía.Tipo.ToString() + ") no es conocido");
+        return false;
       }
-      #endregion
 
-      #region Verifica las coordenadas.
-      // El PDI debe tener un campo de coordenadas y además tienen que
-      // tener nivel zero.
-      CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in laVía.Campos)
+      // Busca las Vías que tengan el mismo nombre desde la posición n + 1 y que
+      // no estén eliminadas.
+      List<Vía> víasConElMismoNombre = new List<Vía> ();
+      bool hayIncongruencias = false;
+      for (int i = NúmeroDeElementoProcesándose; i < NúmeroDeElementos; ++i)
       {
-        if (campo is CampoCoordenadas)
+        Vía vía = this[i];
+        if (!vía.FuéEliminado &&
+          (vía.Nombre == laVía.Nombre))
         {
-          campoCoordenadas = (CampoCoordenadas)campo;
-          break;
+          víasConElMismoNombre.Add(vía);
+          misVíasYaProcesadas.Add(vía);
         }
       }
-      if (campoCoordenadas == null)
-      {
-        errores.Add("No tiene coordenadas.");
-      }
-      else if (campoCoordenadas.Nivel != 0)
-      {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
-      }
-      #endregion
 
-      // Chequea si hay errores.
-      if (errores.Count > 0)
+      // Busca incongruencias si tenemos vías con el mismo nombre.
+      if (víasConElMismoNombre.Count > 0)
       {
-        string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(laVía, todosLosErrores);
+        LímiteDeVelocidad límiteDeVelocidadDeReferencia = laVía.LímiteDeVelocidad;
+        ClaseDeRuta claseDeRutaDeReferencia = laVía.ClaseDeRuta;
+
+        foreach (Vía víaConElMismoNombre in víasConElMismoNombre)
+        {
+          #region Procesa Límite de Velocidad.
+          LímiteDeVelocidad límiteDeVelocidad = víaConElMismoNombre.LímiteDeVelocidad;
+          if (límiteDeVelocidadDeReferencia.EsNulo())
+          {
+            if (!límiteDeVelocidad.EsNulo())
+            {
+              hayIncongruencias = true;
+              break;
+            }
+          }
+          else if (límiteDeVelocidad.EsNulo())
+          {
+            hayIncongruencias = true;
+            break;
+          }
+          else
+          {
+            // Calcula la diferencia del índice de Límite de Velocidad.
+            int diferenciaDelIndice = Math.Abs(límiteDeVelocidad.Indice - límiteDeVelocidadDeReferencia.Indice);
+
+            // Si las diferencia es mayor del límite entonces
+            // hay incongruencias.
+            if (diferenciaDelIndice > 2)
+            {
+              hayIncongruencias = true;
+              break;
+            }
+          }
+          #endregion
+
+          #region Procesa Clase de Ruta.
+          ClaseDeRuta claseDeRuta = víaConElMismoNombre.ClaseDeRuta;
+          if (claseDeRutaDeReferencia.EsNula())
+          {
+            if (!claseDeRuta.EsNula())
+            {
+              hayIncongruencias = true;
+              break;
+            }
+          }
+          else if (claseDeRuta.EsNula())
+          {
+            hayIncongruencias = true;
+            break;
+          }
+          else
+          {
+            // Calcula la diferencia del índice de Límite de Velocidad.
+            int diferenciaDeIndice = Math.Abs(claseDeRuta.Indice - claseDeRutaDeReferencia.Indice);
+
+            // Si las diferencia es mayor del límite entonces
+            // hay incongruencias.
+            if (diferenciaDeIndice > 2)
+            {
+              hayIncongruencias = true;
+              break;
+            }
+          }
+          #endregion
+        }
       }
 
-      // Este método nunca modifica elementos.
+      // Si se detectaron incongruencias entonces añadimos todas las
+      // vías a las incongruencias.
+      if (hayIncongruencias)
+      {
+        List<Vía> vías = new List<Vía> { laVía };
+        vías.AddRange(víasConElMismoNombre.ToArray());
+
+        misIncongruencias.Add(vías);
+      }
+
+      // Este método no modifica elementos.
       bool seModificóElemento = false;
       return seModificóElemento;
     }
@@ -187,7 +249,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       base.TerminoDeProcesar();
 
       // Reporta estatus.
-      Estatus = "Vías con Errores: " + misErrores.Count;
+      Estatus = "Vías con Incongruencias: " + misIncongruencias.Count;
     }
     #endregion
   }

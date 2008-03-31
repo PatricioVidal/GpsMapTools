@@ -33,7 +33,7 @@
       this.miDivision = new System.Windows.Forms.SplitContainer();
       this.miLista = new InterfaseListaDeVías();
       this.miMenuEditorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías();
-      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada();
+      this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas();
       columnaModificaciones = new System.Windows.Forms.ColumnHeader();
       this.miDivision.Panel1.SuspendLayout();
       this.miDivision.Panel2.SuspendLayout();
@@ -123,6 +123,6 @@
     private System.Windows.Forms.SplitContainer miDivision;
     private InterfaseListaDeVías miLista;
     private GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías miMenuEditorDeVías;
-    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionada miMapaDeVíaSeleccionada;
+    private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas miMapaDeVíaSeleccionada;
   }
 }

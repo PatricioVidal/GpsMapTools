@@ -83,7 +83,7 @@ using GpsYv.ManejadorDeMapa.Vías;
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase de Errores de PDIs.
+  /// Interfase de Errores de Vías.
   /// </summary>
   public partial class InterfaseDeViasConErrores : InterfaseBase
   {
@@ -93,9 +93,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     #region Eventos
     /// <summary>
-    /// Evento cuando hay Vías con errores.
+    /// Evento cuando cambian las Vías con errores.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> VíasConErrores;
+    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
     #endregion
 
     #region Propiedades
@@ -109,11 +109,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Deja de manejar los eventos.
         if (miManejadorDeVías != null)
         {
-          miManejadorDeVías.EncontraronErrores -= EnEncontraronErrores;
+          miManejadorDeVías.CambiaronErrores -= EnCambiaronErrores;
         }
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
@@ -122,14 +123,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
           if (miManejadorDeVías != null)
           {
-            miManejadorDeVías.EncontraronErrores += EnEncontraronErrores;
+            miManejadorDeVías.CambiaronErrores += EnCambiaronErrores;
           }
-
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
-
-          // Pone el manejador de vías en el menú editor de vías.
-          miMenuEditorDeVías.ManejadorDeVías = miManejadorDeVías;
         }
       }
     }
@@ -143,7 +138,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         base.EscuchadorDeEstatus = value;
-        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
       }
     }
     #endregion
@@ -156,16 +151,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
-
+      // Pone el llenador de items.
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miMenuEditorDeVías.EditóVías += delegate(object elObjecto, EventArgs losArgumentos)
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.EditóVías += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        // Borra llas lineas adicionales que estén en el mapa.
-        miMapaDeVíaSeleccionada.PolilíneasAdicionales.Clear();
-
         // Busca errores otra vez.
         miManejadorDeVías.BuscaErrores();
       };
@@ -180,7 +171,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnEncontraronErrores(elEnviador, losArgumentos);
+      EnCambiaronErrores(elEnviador, losArgumentos);
     }
 
 
@@ -195,14 +186,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
+    private void EnCambiaronErrores(object elEnviador, EventArgs losArgumentos)
     {
-      miLista.RegeneraLista();
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
 
       // Genera el evento.
-      if (VíasConErrores != null)
+      if (CambiaronErrores != null)
       {
-        VíasConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        CambiaronErrores(this, new NúmeroDeElementosEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
       }
     }
 

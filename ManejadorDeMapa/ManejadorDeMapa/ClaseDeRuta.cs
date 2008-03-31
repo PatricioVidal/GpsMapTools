@@ -83,11 +83,11 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private static readonly string[] misTextos = new string[] {
-      "(0) Calle Residencial/Callejón/Calle de Tierra/Camino",
-      "(1) Calle con Curvas",
-      "(2) Calle Arterial / Otras Autopistas",
-      "(3) Autopista Principal",
-      "(4) Autopista Mayor/Rampa"};
+      "(0) Residencial/Caminerias/De tierra, etc.",
+      "(1) Colectora",
+      "(2) Arteria",
+      "(3) Principal",
+      "(4) Autopista/Rampas de Autopistas"};
     private readonly int miIndice;
     #endregion
 
@@ -105,6 +105,11 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
+        if (EsNula())
+        {
+          throw new InvalidOperationException("La Clase de Ruta es Nula");
+        }
+
         return miIndice;
       }
     }
@@ -131,12 +136,24 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Devuelve una variable lógica que indica si la Clase de Ruta
+    /// es nula.
+    /// </summary>
+    public bool EsNula()
+    {
+      bool esNula = (miIndice == int.MinValue);
+
+      return esNula;
+    }
+
+
+    /// <summary>
     /// Devuelve un texto representando la clase de ruta.
     /// </summary>
     public override string ToString()
     {
       // Caso para clase de ruta nula.
-      if (miIndice == int.MinValue)
+      if (EsNula())
       {
         return string.Empty;
       }

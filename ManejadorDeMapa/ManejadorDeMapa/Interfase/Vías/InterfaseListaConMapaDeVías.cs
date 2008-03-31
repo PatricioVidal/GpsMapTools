@@ -78,43 +78,100 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
-using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase de Mapa de Vías seleccionadas.
+  /// Interfase de Lista y Mapa de Vías.
   /// </summary>
-  public partial class InterfaseMapaDeVíasSeleccionada : InterfaseMapaDeElementosSeleccionados
+  public partial class InterfaseListaConMapaDeVías : UserControl
   {
     #region Campos
-    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
+    private ManejadorDeMapa miManejadorDeMapa;
+    private ManejadorDeVías miManejadorDeVías;
     #endregion
 
-    #region Constructor
+    #region Propiedades
     /// <summary>
-    /// Constructor.
+    /// Obtiene la interfase de lista de Vías.
     /// </summary>
-    public InterfaseMapaDeVíasSeleccionada()
+    [Browsable (true)]
+    public InterfaseListaDeVías InterfaseListaDeVías
     {
-      InitializeComponent();
+      get
+      {
+        return miLista;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el menú editor de Vías.
+    /// </summary>
+    [Browsable(true)]
+    public MenuEditorDeVías MenuEditorDeVías
+    {
+      get
+      {
+        return miMenuEditorDeVías;
+      }
+    }
+
+    /// <summary>
+    /// Obtiene o pone el manejador de mapa.
+    /// </summary>
+    [Browsable(true)]
+    public ManejadorDeMapa ManejadorDeMapa
+    {
+      get
+      {
+        return miManejadorDeMapa;
+      }
+
+      set
+      {
+        // Pone el nuevo manejador de mapa.
+        miManejadorDeMapa = value;
+
+        // Pone el manejador de mapa en la interfase de mapa.
+        miMapaDeVíasSeleccionadas.ManejadorDeMapa = value;
+
+        // Pone el manejador de vías.
+        if (miManejadorDeMapa != null)
+        {
+          miManejadorDeVías = miManejadorDeMapa.ManejadorDeVías;
+
+          // Pone el manejador de vías en el menú editor de vías.
+          miMenuEditorDeVías.ManejadorDeVías = miManejadorDeVías;
+        }
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      get
+      {
+        return miMapaDeVíasSeleccionadas.EscuchadorDeEstatus;
+      }
+
+      set
+      {
+        miMapaDeVíasSeleccionadas.EscuchadorDeEstatus = value;
+      }
     }
     #endregion
 
-    #region Métodos Privados
+    #region Métodos Públicos.
     /// <summary>
-    /// Dibuja los objectos adicionales en el mapa. 
+    /// Constructor.
     /// </summary>
-    /// <param name="losElementos">Los elementos seleccionados.</param>
-    protected override void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
+    public InterfaseListaConMapaDeVías()
     {
-      // Dibuja la vías como polilíneas adicional para resaltarla.
-      PolilíneasAdicionales.Clear();
-      foreach (Vía vía in losElementos)
-      {
-        PolilíneasAdicionales.Add(
-          new InterfaseMapa.PolilíneaAdicional(vía.Coordenadas, miLápiz));
-      }
+      InitializeComponent();
     }
     #endregion
   }

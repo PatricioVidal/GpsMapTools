@@ -7,6 +7,7 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.10
+- Se comenzó la implementación de la busqueda de vías con incongruencias (diferencia del "límite de velocidad" o "clase de ruta" > 2).
 
 Versión 1.9
 - Añadido menú de contexto en la página de errores de vías para: 1) cambiar vías a nivel 0, y 2) guardar un archivo con PDIs para localizar las vías.

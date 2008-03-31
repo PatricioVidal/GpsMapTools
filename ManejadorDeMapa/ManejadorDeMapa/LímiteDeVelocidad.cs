@@ -83,13 +83,13 @@ namespace GpsYv.ManejadorDeMapa
   {
     #region Campos
     private static readonly string[] misTextos = new string[] {
-      "(0) 3mph / 5kph",
-      "(1) 15mph / 20kph",
-      "(2) 25mph / 40kph",
-      "(3) 35mph / 60kph",
-      "(4) 50mph / 80kph",
-      "(5) 60mph / 90kph",
-      "(6) 70mph / 110kph",
+      "(0) 5 km/h",
+      "(1) 20 km/h",
+      "(2) 40 km/h",
+      "(3) 60 km/h",
+      "(4) 80 km/h",
+      "(5) 90 km/h",
+      "(6) 110 km/h",
       "(7) Sín Límite"};
     private readonly int miIndice;
     #endregion
@@ -108,6 +108,11 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
+        if (EsNulo())
+        {
+          throw new InvalidOperationException("El Límite de Velocidad es Nulo");
+        }
+
         return miIndice;
       }
     }
@@ -134,12 +139,24 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Devuelve una variable lógica que indica si el Límite de Velocidad
+    /// es nulo.
+    /// </summary>
+    public bool EsNulo()
+    {
+      bool esNulo = (miIndice == int.MinValue);
+
+      return esNulo;
+    }
+
+
+    /// <summary>
     /// Devuelve un texto representando el límite de velocidad.
     /// </summary>
     public override string ToString()
     {
       // Caso para límite de velocidad nulo.
-      if (miIndice == int.MinValue)
+      if (EsNulo())
       {
         return string.Empty;
       }

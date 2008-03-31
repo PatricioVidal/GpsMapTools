@@ -147,18 +147,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         miInterfaseDeMapa,
         miMapaDeVíaSeleccionada,
         miInterfaseDeVíasModificadas,
+        miInterfaseDeVíasConIncongruencias,
         miInterfaseDeErroresEnVías
       };
-
-      // Asignar las propiedades correspondientes.
-      miInterfaseDeErroresEnVías.Tag = miPáginaErrores;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha los eventos para actualizar las pestañas.
       miInterfaseDeVíasModificadas.VíasModificadas += EnVíasModificadas;
-      miInterfaseDeErroresEnVías.VíasConErrores += EnVíasConErrores;
+      miInterfaseDeErroresEnVías.CambiaronErrores += EnVíasConErrores;
+      miInterfaseDeVíasConIncongruencias.SeEncontraronIncongruencias += EnVíasConIncongruencias;
 
       // Crea el diccionario de índices de pestañas.
       TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
@@ -259,6 +258,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         miControladorDePestañas.PoneEstadoDePestaña(
           misIndicesDePestañas[miPáginaErrores],
+          ControladorDePestañas.EstadoDePestaña.Nada);
+      }
+    }
+
+
+    private void EnVíasConIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    {
+      int númeroDeVíasConIncongruencias = losArgumentos.NúmeroDeElementos;
+
+      // Cambia el texto de la pestaña.
+      miPáginaIncongruencias.Text = "Incongruencias (" + númeroDeVíasConIncongruencias + ")";
+
+      // Si hay Vías con incongruencias entonces cambia el estado de la pestaña a Error.
+      // Si no, entonces cambia el estado de la pestaña a Nada.
+      if (númeroDeVíasConIncongruencias > 0)
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaIncongruencias],
+          ControladorDePestañas.EstadoDePestaña.Alerta);
+      }
+      else
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[miPáginaIncongruencias],
           ControladorDePestañas.EstadoDePestaña.Nada);
       }
     }

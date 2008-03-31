@@ -131,8 +131,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     ///  1   -> No encuentra.
     ///  2-4 -> Encuentra parecidos.
     ///  6+  -> Es como mucho, todo es parecido a todo. 
-    /// </remarks>
     /// <see>http://en.wikipedia.org/wiki/Hamming_distance</see>
+    /// </remarks>
     public int DistanciaHamming
     {
       get

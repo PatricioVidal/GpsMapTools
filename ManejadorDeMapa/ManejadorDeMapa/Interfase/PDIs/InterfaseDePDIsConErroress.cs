@@ -93,9 +93,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
     #region Eventos
     /// <summary>
-    /// Evento cuando hay PDIs con errores.
+    /// Evento cuando cambian los PDIs con errores.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> PDIsConErrores;
+    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
     #endregion
 
     #region Propiedades
@@ -109,7 +109,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Deja de manejar los eventos.
         if (miManejadorDePDIs != null)
         {
-          miManejadorDePDIs.EncontraronErrores -= EnEncontraronErrores;
+          miManejadorDePDIs.CambiaronErrores -= EnCambiaronErrores;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -122,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
           if (miManejadorDePDIs != null)
           {
-            miManejadorDePDIs.EncontraronErrores += EnEncontraronErrores;
+            miManejadorDePDIs.CambiaronErrores += EnCambiaronErrores;
           }
 
           // Pone el manejador de mapa en la interfase de mapa.
@@ -177,7 +177,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnEncontraronErrores(elEnviador, losArgumentos);
+      EnCambiaronErrores(elEnviador, losArgumentos);
     }
 
 
@@ -191,15 +191,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       // No es necesario hacer nada aqui.
     }
 
-    
-    private void EnEncontraronErrores(object elEnviador, EventArgs losArgumentos)
+
+    private void EnCambiaronErrores(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
 
       // Genera el evento.
-      if (PDIsConErrores != null)
+      if (CambiaronErrores != null)
       {
-        PDIsConErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        CambiaronErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
       }
     }
 

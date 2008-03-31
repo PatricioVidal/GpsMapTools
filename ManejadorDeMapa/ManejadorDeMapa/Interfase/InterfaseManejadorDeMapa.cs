@@ -465,6 +465,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       miManejadorDeMapa.ProcesarTodo();
     }
+
+
+    private void EnMenúBuscarIncongruenciasEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.BuscaIncongruencias();
+    }
     #endregion
   }
 }

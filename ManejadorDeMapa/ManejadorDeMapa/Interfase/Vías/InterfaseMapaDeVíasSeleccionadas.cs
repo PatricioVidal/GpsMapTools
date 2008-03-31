@@ -69,150 +69,52 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
+using System.Collections;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Manejador de Vías.
+  /// Interfase de Mapa de Vías seleccionadas.
   /// </summary>
-  public class ManejadorDeVías : ManejadorBase<Vía>
+  public partial class InterfaseMapaDeVíasSeleccionadas : InterfaseMapaDeElementosSeleccionados
   {
     #region Campos
-    private readonly BuscadorDeErrores miBuscadorDeErrores;
-    private IDictionary<Vía, string> misErrores = new Dictionary<Vía, string>();
-    private readonly BuscadorDeIncongruencias miBuscadorDeIncongruencias;
-    private readonly IList<IList<Vía>> misIncongruencias = new List<IList<Vía>>();
+    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
     #endregion
 
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian los errores.
-    /// </summary>
-    public event EventHandler CambiaronErrores;
-
-    /// <summary>
-    /// Evento cuando cambian las incongruencias.
-    /// </summary>
-    public event EventHandler CambiaronIncongruencias;
-    #endregion
-
-    #region Propiedades
-    /// <summary>
-    /// Descripción de la acción "Procesar Todo".
-    /// </summary>
-    public static readonly string DescripciónProcesarTodo =
-      "Procesa todo lo relacionado con las Vías. Los pasos se hacen en el orden indicado por el número en el menú.";
-
-
-    /// <summary>
-    /// Devuelve los errores de Vías.
-    /// </summary>
-    public IDictionary<Vía, string> Errores
-    {
-      get
-      {
-        return misErrores;
-      }
-    }
-
-
-    /// <summary>
-    /// Devuelve las incongruencias de Vías.
-    /// </summary>
-    public IList<IList<Vía>> Incongruencias
-    {
-      get
-      {
-        return misIncongruencias;
-      }
-    }
-    
-    #endregion
-
-    #region Métodos Públicos
+    #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
-    /// <param name="lasVías">Las Vías.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ManejadorDeVías(
-      ManejadorDeMapa elManejadorDeMapa,
-      IList<Vía> lasVías,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDeMapa, lasVías, elEscuchadorDeEstatus)
+    public InterfaseMapaDeVíasSeleccionadas()
     {
-      // Crea los procesadores.
-      miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
-      miBuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
-    }
-
-
-    /// <summary>
-    /// Busca Errores.
-    /// </summary>
-    public void BuscaErrores()
-    {
-      miBuscadorDeErrores.Procesa();
-
-      // Envía evento.
-      if (CambiaronErrores != null)
-      {
-        CambiaronErrores(this, new EventArgs());
-      }
-    }
-
-
-    /// <summary>
-    /// Busca Incongruencias.
-    /// </summary>
-    public void BuscaIncongruencias()
-    {
-      miBuscadorDeIncongruencias.Procesa();
-
-      // Envía evento.
-      if (CambiaronIncongruencias != null)
-      {
-        CambiaronIncongruencias(this, new EventArgs());
-      }
-    }
-
-
-    /// <summary>
-    /// Hace todas las correcciones a PDIs.
-    /// </summary>
-    /// <returns>El número de Vías modificadas.</returns>
-    public int ProcesarTodo()
-    {
-      // Hacer todos las operaciones en orden.
-      int númeroDeVíasModificadas = 0;
-      BuscaIncongruencias();
-      BuscaErrores();
-
-      // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDeVíasModificadas + " modificaciones a Vías.";
-
-      return númeroDeVíasModificadas;
+      InitializeComponent();
     }
     #endregion
 
     #region Métodos Privados
     /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
+    /// Dibuja los objectos adicionales en el mapa. 
     /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    /// <param name="losElementos">Los elementos seleccionados.</param>
+    protected override void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
     {
-      // Borra las listas.
-      misErrores.Clear();
-      misIncongruencias.Clear();
+      // Dibuja la vías como polilíneas adicional para resaltarla.
+      PolilíneasAdicionales.Clear();
+      foreach (Vía vía in losElementos)
+      {
+        PolilíneasAdicionales.Add(
+          new InterfaseMapa.PolilíneaAdicional(vía.Coordenadas, miLápiz));
+      }
     }
     #endregion
   }

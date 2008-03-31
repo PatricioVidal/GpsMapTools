@@ -71,6 +71,7 @@
           this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
+          this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
           toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -165,6 +166,7 @@
           this.miMenúVías.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenúProcesarTodoEnVías,
             this.toolStripSeparator5,
+            this.toolStripMenuItem2,
             this.miMenúBuscarErroresEnVías});
           this.miMenúVías.Name = "miMenúVías";
           resources.ApplyResources(this.miMenúVías, "miMenúVías");
@@ -379,6 +381,12 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
+          // toolStripMenuItem2
+          // 
+          this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+          resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+          this.toolStripMenuItem2.Click += new System.EventHandler(this.EnMenúBuscarIncongruenciasEnVías);
+          // 
           // InterfaseManejadorDeMapa
           // 
           resources.ApplyResources(this, "$this");
@@ -446,6 +454,7 @@
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicadosEnPDIs;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 

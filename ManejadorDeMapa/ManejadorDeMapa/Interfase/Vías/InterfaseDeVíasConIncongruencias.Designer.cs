@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  partial class InterfaseDeViasConErrores
+  partial class InterfaseDeVíasConIncongruencias
   {
     /// <summary> 
     /// Required designer variable.
@@ -28,29 +28,26 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeViasConErrores));
-      System.Windows.Forms.ColumnHeader columnaRazón;
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
-      columnaRazón = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
       // miInterfaseListaConMapaDeVías
       // 
-      resources.ApplyResources(this.miInterfaseListaConMapaDeVías, "miInterfaseListaConMapaDeVías");
+      this.miInterfaseListaConMapaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = null;
+      this.miInterfaseListaConMapaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
+      this.miInterfaseListaConMapaDeVías.Size = new System.Drawing.Size(556, 492);
+      this.miInterfaseListaConMapaDeVías.TabIndex = 1;
       // 
-      // columnaRazón
+      // InterfaseDeVíasConIncongruencias
       // 
-      resources.ApplyResources(columnaRazón, "columnaRazón");
-      // 
-      // InterfaseDeViasConErrores
-      // 
-      resources.ApplyResources(this, "$this");
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miInterfaseListaConMapaDeVías);
-      this.Name = "InterfaseDeViasConErrores";
+      this.Name = "InterfaseDeVíasConIncongruencias";
+      this.Size = new System.Drawing.Size(556, 492);
       this.ResumeLayout(false);
 
     }
