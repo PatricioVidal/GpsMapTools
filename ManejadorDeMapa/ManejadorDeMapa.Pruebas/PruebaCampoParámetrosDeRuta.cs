@@ -146,7 +146,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Preparación.
         int índice = 3;
         LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índice);
-        string resultadoEsperado = "(3) 35mph / 60kph";
+        string resultadoEsperado = "(3) 60 km/h";
 
         // Llama al constructor en prueba.
         string resultado = objectoEnPrueba.ToString();

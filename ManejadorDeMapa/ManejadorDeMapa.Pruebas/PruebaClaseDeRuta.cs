@@ -142,7 +142,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Preparación.
         int índice = 3;
         ClaseDeRuta objectoEnPrueba = new ClaseDeRuta(índice);
-        string resultadoEsperado = "(3) Autopista Principal";
+        string resultadoEsperado = "(3) Principal";
 
         // Llama al método en prueba.
         string resultado = objectoEnPrueba.ToString();
