@@ -159,7 +159,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           }
           for (int tipo = primerTipo; tipo <= últimoTipo; ++tipo)
           {
-            Descripciones[new Tipo(tipo)] = descripción;
+            Descripciones.Add(new Tipo(tipo), descripción);
           }
         }
       }

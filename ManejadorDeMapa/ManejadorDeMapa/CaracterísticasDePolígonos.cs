@@ -175,8 +175,8 @@ namespace GpsYv.ManejadorDeMapa
           string descripción = partes[2];
 
           // Llena los diccionarios.
-          misPinceles[tipo] = pincel;
-          Descripciones[tipo] = descripción;
+          misPinceles.Add(tipo, pincel);
+          Descripciones.Add(tipo, descripción);
         }
       }
     }

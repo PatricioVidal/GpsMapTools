@@ -131,6 +131,7 @@ namespace GpsYv.ManejadorDeMapa
       return descripcion;
     }
     #endregion
+
     #region Métodos Privados
     private class LectorDeCaracterísticasDePolilíneas : LectorDeArchivo
     {
@@ -176,8 +177,8 @@ namespace GpsYv.ManejadorDeMapa
 
           // Llena los diccionarios.
           Pen lápiz = new Pen(color, ancho);
-          misLápices[tipo] = lápiz;
-          Descripciones[tipo] = descripción;
+          misLápices.Add(tipo, lápiz);
+          Descripciones.Add(tipo, descripción);
         }
       }
     }

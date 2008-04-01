@@ -7,7 +7,10 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.11
+- Ahora la búsqueda de posibles PDIs duplicados se hace con el Tipo Principal (primer byte) en vez de con el Tipo Completo.
+- Ahora las Vías con incongruencias están agrupadas, y los posibles errores son resaltados. 
 - Arreglada función de Guardar archivo.
+- Interno: Ahora el Tipo es procesado como Tipo-Principal y Sub-Tipo.
 - Interno: Añadida prueba automática para la clase EscritorDeFormatoPolish.
 
 Versión 1.10

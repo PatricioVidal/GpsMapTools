@@ -115,6 +115,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       // Crea un archivo de registro.
       string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyName + ".Error.log";
+      archivoDeRegistro = Path.GetFullPath(archivoDeRegistro);
       using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
         string encabezado = DateTime.Now + ": " + elMensaje;
@@ -133,6 +134,8 @@ namespace GpsYv.ManejadorDeMapa
         mensaje.AppendLine(innerException.Message);
         innerException = innerException.InnerException;
       }
+      mensaje.AppendLine();
+      mensaje.AppendFormat("NOTA: Vea archivo '{0}' para mas detalles.", archivoDeRegistro);
       MessageBox.Show(
         mensaje.ToString(),
         Interfase.VentanaDeAcerca.AssemblyName,

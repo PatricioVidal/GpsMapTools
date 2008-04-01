@@ -208,7 +208,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
             }
             catch (Exception e)
             {
-              Programa.MuestraExcepción("Error leyendo archivo " + archivo, e);
+              Programa.MuestraExcepción("Error abriendo archivo " + archivo, e);
             }
             break;
         }

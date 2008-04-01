@@ -82,7 +82,9 @@ namespace GpsYv.ManejadorDeMapa
   public struct Tipo
   {
     #region Campos
-    private readonly int miValor;
+    private readonly int? miSubTipo;
+    private readonly int miTipoPrincipal;
+    private readonly int miTipoCompleto;
     #endregion
 
     #region Propiedades
@@ -93,13 +95,46 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Obtiene el valor númerico del tipo.
+    /// Obtiene el Tipo Completo.
     /// </summary>
-    public int Valor
+    /// <remarks>El Tipo Completo corresponde al los dos bytes del Tipo.</remarks>
+    public int TipoCompleto
     {
       get
       {
-        return miValor;
+        return miTipoCompleto;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el Tipo Principal.
+    /// </summary>
+    /// <remarks>El Tipo Principal corresponde al primer byte del Tipo.</remarks>
+    public int TipoPrincipal
+    {
+      get
+      {
+        return miTipoPrincipal;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el Sub-Tipo.
+    /// </summary>
+    /// <remarks>El Sub-Tipo corresponde al segundo byte del Tipo.</remarks>
+    public int SubTipo
+    {
+      get
+      {
+        int subTipo = 0;
+        if (miSubTipo.HasValue)
+        {
+          subTipo = (int)miSubTipo;
+        }
+
+        return subTipo;
       }
     }
     #endregion
@@ -111,7 +146,29 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elTipo">El tipo dado.</param>
     public Tipo(int elTipo)
     {
-      miValor = elTipo;
+      bool esUnSoloByte = (elTipo < 256);
+
+      // Contruye los componentes del tipo según el número de bytes.
+      if (esUnSoloByte)
+      {
+        // Por ejempo: 0x0a
+        //   Tipo Principal = 0a
+        //         Sub Tipo = 00
+        //    Tipo Completo = 0a00
+        miTipoPrincipal = elTipo;
+        miSubTipo = null;
+        miTipoCompleto = miTipoPrincipal * 256;
+      }
+      else
+      {
+        // Por ejempo: 0x0a03
+        //   Tipo Principal = 0a
+        //         Sub Tipo = 03
+        //    Tipo Completo = 0a03
+        miTipoPrincipal = elTipo / 256;
+        miSubTipo = (int)Math.IEEERemainder(elTipo, 256);
+        miTipoCompleto = elTipo;
+      }
     }
 
 
@@ -133,9 +190,15 @@ namespace GpsYv.ManejadorDeMapa
       string texto = string.Empty;
 
       // Solo genera el texto para tipos válidos.
-      if (miValor > 0)
+      if (miTipoPrincipal > 0)
       {
-        texto = "0x" + miValor.ToString("x2");
+        texto = "0x" + miTipoPrincipal.ToString("x");
+
+        // Si el Tipo tiene un sub-tipo entonces lo añadimos al texto.
+        if (miSubTipo.HasValue)
+        {
+          texto += ((int)miSubTipo).ToString("x2");
+        }
       }
 
       return texto;
@@ -151,7 +214,7 @@ namespace GpsYv.ManejadorDeMapa
       Tipo elPrimerTipo,
       Tipo elSegundoTipo)
     {
-      bool esIgual = (elPrimerTipo.miValor == elSegundoTipo.miValor);
+      bool esIgual = (elPrimerTipo.miTipoCompleto == elSegundoTipo.miTipoCompleto);
       return esIgual;
     }
 
@@ -201,7 +264,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override int GetHashCode()
     {
-      return miValor;
+      return miTipoCompleto;
     }
     #endregion
   }

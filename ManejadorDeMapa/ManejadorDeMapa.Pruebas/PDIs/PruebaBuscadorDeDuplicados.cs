@@ -142,16 +142,17 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       // Caso de prueba.
       Caso[] casos = new Caso[] {
         //        Tipo,     Nombre         ,  Latitud, Longitud, Indice de Duplicados   , Es Eliminado, Descripción.
-        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.00000, new int[] { 2, 5, 6, 8 }  , false       , "PDI#1"),
-        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.00000, null                   , true        , "Mismo PDI#1 nombre, misma coordenada: es eliminado."),
-        new Caso ("0x2a06", "El PUNTO"     , 10.00001, 20.00000, null                   , false       , "Mismo PDI#1 nombre, cercano: es duplicado."),
-        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.02000, null                   , false       , "Mismo PDI#1 nombre, lejano: no es duplicado."),
-        new Caso ("0x2a05", "El PUNTO"     , 10.00000, 20.00000, null                   , false       , "Diferente tipo, mismo PDI#1 nombre, misma coordenada: no es duplicado."),
-        new Caso ("0x2a06", "EP"           , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1, misma coordenada: es duplicado."),
-        new Caso ("0x2a06", "EP"           , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1, cercano: es duplicado."),
-        new Caso ("0x2a06", " EP "         , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1 con espacios en blanco, cercano: no es duplicado."),
-        new Caso ("0x2a06", "El PUMTO"     , 10.00000, 20.00000, null                   , false       , "Nombre similar a PDI#1, cercano: es duplicado."),
-        new Caso ("0x2a06", "EOP"          , 15.00000, 20.00000, new int[] { 10 }       , false       , "PDI#2"),
+        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.00000, new int[] {2,3,6,7,9}  , false       , "PDI#1"),
+        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.00000, null                   , true        , "Idéntico: Mismos nombre, tipo, y coordenada de PDI#1 : es eliminado."),
+        new Caso ("0x2a05", "El PUNTO"     , 10.00000, 20.00000, null                   , false       , "Mismo tipo principal: Mismo nombre, tipo principal, y coordenada de PDI#1: es duplicado."),
+        new Caso ("0x2a06", "El PUNTO"     , 10.00001, 20.00000, null                   , false       , "Cercano: Mismo nombre y tipo de PDI#1, coordenadas cercanas: es duplicado."),
+        new Caso ("0x2a06", "El PUNTO"     , 10.00000, 20.02000, null                   , false       , "Lejano: Mismo nombre y tipo de PDI#1, coordenadas lejanas: no es duplicado."),
+        new Caso ("0x2b06", "El PUNTO"     , 10.00000, 20.00000, null                   , false       , "Diferente tipo principal: Mismo nombre y coordenada de PDI#1, diferente tipo principal: no es duplicado."),
+        new Caso ("0x2a06", "EP"           , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1, misma coordenada de PDI#1: es duplicado."),
+        new Caso ("0x2a06", "EP"           , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1, coordenadas cercanas: es duplicado."),
+        new Caso ("0x2a06", " EP "         , 10.00000, 20.00000, null                   , false       , "Siglas de PDI#1 con espacios en blanco, coordenadas cercanas: no es duplicado."),
+        new Caso ("0x2a06", "El PUMTO"     , 10.00000, 20.00000, null                   , false       , "Nombre similar a PDI#1, coordenadas cercanas: es duplicado."),
+        new Caso ("0x2a06", "EOP"          , 15.00000, 20.00000, new int[] { 11 }       , false       , "PDI#2"),
         new Caso ("0x2a06", "EL OTRO PUNTO", 15.00000, 20.00000, null                   , false       , "PDI#2 es las siglas, misma coordenadas: es duplicado."),
       };
       int númeroDeElementosEliminados = 1;
@@ -171,7 +172,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
             new Coordenadas (caso.Latitud, caso.Longitud))
         };
 
-        PDI pdi = new PDI(manejadorDeMapa, i + 1, clase, campos);
+        PDI pdi = new PDI(manejadorDeMapa, i, clase, campos);
         elementos.Add(pdi);
       }
 

@@ -210,12 +210,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           else
           {
             // Si el PDI no es idéntico entonces puede ser duplicado si:
-            //  - El tipo es el mismo, y
+            //  - El tipo principal es el mismo, y
             //  - La distancia es cercana, y
             //      - El nombre es igual, o
             //      - Uno es las siglas del otro, o
             //      - El nombre es parecido.
-            if (elPDI.Tipo == posiblePDIDuplicado.Tipo)
+            if (elPDI.Tipo.TipoPrincipal == posiblePDIDuplicado.Tipo.TipoPrincipal)
             {
               double distanciaEnMetros = Coordenadas.Distancia(elPDI.Coordenadas, posiblePDIDuplicado.Coordenadas);
               if (distanciaEnMetros <= miDistanciaMáxima)

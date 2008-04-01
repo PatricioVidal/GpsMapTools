@@ -139,7 +139,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// </summary>
     public override string ToString()
     {
-      string texto = Nombre + Coordenadas.ToString();
+      string texto = "#" + Número  + ", " + Nombre + ", " + Tipo.ToString() + ", " + Coordenadas.ToString();
 
       return texto;
     }

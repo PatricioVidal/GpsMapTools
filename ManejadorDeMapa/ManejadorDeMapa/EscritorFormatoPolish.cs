@@ -231,7 +231,7 @@ namespace GpsYv.ManejadorDeMapa
 
     private void Guarda(CampoTipo elCampoTipo, StreamWriter elEscritor)
     {
-      string tipo = "0x" + elCampoTipo.Tipo.Valor.ToString("x");
+      string tipo = elCampoTipo.Tipo.ToString();
       Guarda(elCampoTipo, tipo, elEscritor);
     }
 
