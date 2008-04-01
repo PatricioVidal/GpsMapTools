@@ -134,7 +134,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="laLista">La lista.</param>
     /// <remarks>
     /// <para>
-    /// Los items se añaden a la lista llamando a <see cref="AñadeItem"/>.
+    /// Los items se añaden a la lista llamando a AñadeItem(...).
     /// llamar a <see cref="RegeneraLista"/>.
     /// </para>
     /// <para>

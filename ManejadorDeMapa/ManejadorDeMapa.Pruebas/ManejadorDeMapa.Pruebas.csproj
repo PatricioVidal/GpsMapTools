@@ -64,6 +64,7 @@
     <Compile Include="PruebaCampoParámetrosDeRuta.cs" />
     <Compile Include="PruebaClaseDeRuta.cs" />
     <Compile Include="PruebaElementoDesconocido.cs" />
+    <Compile Include="PruebaEscritorFormatoPolish.cs" />
     <Compile Include="PruebasDeIntegración.cs" />
     <Compile Include="PruebasLímiteDeVelocidad.cs" />
     <Compile Include="Vías\PruebaVía.cs" />
@@ -73,6 +74,9 @@
       <Project>{F07EE602-114A-4111-AD1C-E079D8C71E11}</Project>
       <Name>ManejadorDeMapa</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\MapaDePrueba.mp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
