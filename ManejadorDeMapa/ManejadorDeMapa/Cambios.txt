@@ -6,6 +6,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.12
+
+
 Versión 1.11
 - Ahora la búsqueda de posibles PDIs duplicados se hace con el Tipo Principal (primer byte) en vez de con el Tipo Completo.
 - Ahora las Vías con incongruencias están agrupadas, y los posibles errores son resaltados. 
