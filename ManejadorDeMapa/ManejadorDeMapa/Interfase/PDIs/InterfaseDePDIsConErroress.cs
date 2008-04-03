@@ -88,14 +88,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   {
     #region Campos
     private List<ListViewItem> misItems = new List<ListViewItem>();
-    private ManejadorDePDIs miManejadorDePDIs;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian los PDIs con errores.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
+    private BuscadorDeErrores miBuscadorDeErrores;
     #endregion
 
     #region Propiedades
@@ -107,9 +100,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       set
       {
         // Deja de manejar los eventos.
-        if (miManejadorDePDIs != null)
+        if (miBuscadorDeErrores != null)
         {
-          miManejadorDePDIs.CambiaronErrores -= EnCambiaronErrores;
+          miBuscadorDeErrores.Invalidado -= EnInvalidado;
+          miBuscadorDeErrores.Procesó -= EnSeBuscaronErrores;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -118,11 +112,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Maneja eventos.
         if (value != null)
         {
-          miManejadorDePDIs = value.ManejadorDePDIs;
+          miBuscadorDeErrores = value.ManejadorDePDIs.BuscadorDeErrores;
 
-          if (miManejadorDePDIs != null)
+          if (miBuscadorDeErrores != null)
           {
-            miManejadorDePDIs.CambiaronErrores += EnCambiaronErrores;
+            miBuscadorDeErrores.Invalidado += EnInvalidado;
+            miBuscadorDeErrores.Procesó += EnSeBuscaronErrores;
           }
 
           // Pone el manejador de mapa en la interfase de mapa.
@@ -160,53 +155,33 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de PDIs.
-      miMenúEditorDePDI.EditóPDIs += delegate(object elObjecto, EventArgs losArgumentos)
+      miMenúEditorDePDI.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
         // Borra los puntos adicionales que estén en el mapa.
         miMapa.PuntosAddicionales.Clear();
 
         // Busca errores otra vez.
-        miManejadorDePDIs.BuscaErrores();
+        miBuscadorDeErrores.Procesa();
       };
     }
 
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnCambiaronErrores(elEnviador, losArgumentos);
-    }
 
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // No es necesario hacer nada aqui.
-    }
-
-
-    private void EnCambiaronErrores(object elEnviador, EventArgs losArgumentos)
+    private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (CambiaronErrores != null)
-      {
-        CambiaronErrores(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
-      }
     }
+
+
+    private void EnSeBuscaronErrores(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      miLista.RegeneraLista();
+    }
+
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los PDIs.
-      IDictionary<PDI, string> errores = ManejadorDeMapa.ManejadorDePDIs.Errores;
+      IDictionary<PDI, string> errores = miBuscadorDeErrores.Errores;
       foreach (KeyValuePair<PDI, string> error in errores)
       {
         PDI pdi = error.Key;

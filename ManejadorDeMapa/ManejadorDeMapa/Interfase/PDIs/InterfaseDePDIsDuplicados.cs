@@ -86,17 +86,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   public partial class InterfaseDePDIsDuplicados : InterfaseBase
   {
     #region Campos
-    private ManejadorDePDIs miManejadorDePDIs;
+    private BuscadorDeDuplicados miBuscadorDeDuplicados;
     private Brush miPincelDePDI = new SolidBrush(Color.Black);
     private Brush miPincelDePDIDuplicado = new SolidBrush(Color.Yellow);
     private Color miColorDeFondoOriginal;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando hay PDIs duplicados.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> PDIsDuplicados;
     #endregion
 
     #region Propiedades
@@ -108,9 +101,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       set
       {
         // Deja de manejar los eventos.
-        if (miManejadorDePDIs != null)
+        if (miBuscadorDeDuplicados != null)
         {
-          miManejadorDePDIs.BuscadorDeDuplicados.EncontraronDuplicados -= EnEncontraronDuplicados;
+          miBuscadorDeDuplicados.Procesó -= EnSeBuscaronDuplicados;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -119,8 +112,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Maneja eventos.
         if (value != null)
         {
-          miManejadorDePDIs = value.ManejadorDePDIs;
-          miManejadorDePDIs.BuscadorDeDuplicados.EncontraronDuplicados += EnEncontraronDuplicados;
+          miBuscadorDeDuplicados = value.ManejadorDePDIs.BuscadorDeDuplicados;
+          miBuscadorDeDuplicados.Procesó += EnSeBuscaronDuplicados;
           InicializaDistanciaMáxima();
           InicializaDistanciaHamming();
         }
@@ -165,7 +158,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      EnEncontraronDuplicados(elEnviador, losArgumentos);
+      miLista.Items.Clear();
+      miLista.Groups.Clear();
     }
 
 
@@ -180,13 +174,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     }
 
 
-    private void EnEncontraronDuplicados(object elEnviador, EventArgs losArgumentos)
+    private void EnSeBuscaronDuplicados(object elEnviador, EventArgs losArgumentos)
     {
       // Añade los PDIs duplicados.
       miLista.SuspendLayout();
       miLista.Items.Clear();
       miLista.Groups.Clear();
-      foreach (KeyValuePair<PDI, IList<PDI>> item in miManejadorDePDIs.GruposDeDuplicados)
+      foreach (KeyValuePair<PDI, IList<PDI>> item in miBuscadorDeDuplicados.GruposDeDuplicados)
       {
         PDI pdiBase = item.Key;
         IList<PDI> duplicados = item.Value;
@@ -207,13 +201,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         }
       }
       miLista.ResumeLayout(false);
-
-      // Genera el evento.
-      if (PDIsDuplicados != null)
-      {
-        int númeroDeDuplicados = miManejadorDePDIs.GruposDeDuplicados.Count;
-        PDIsDuplicados(this, new NúmeroDeElementosEventArgs(númeroDeDuplicados));
-      }
 
       // Actualiza el Número de PDIs a Eliminar.
       ActualizaNúmeroDePDIsAEliminar();
@@ -314,7 +301,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
         // Busca otra vez los PDIs duplicados tomando en cuenta
         // los que se acaban de eliminar.
-        ManejadorDeMapa.ManejadorDePDIs.BuscadorDeDuplicados.Procesa();
+        miBuscadorDeDuplicados.Procesa();
       }
 
       // Restablece notificaciones.
@@ -375,7 +362,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     {
       int distancia = miBarraDeDistancia.Value * 10;
       miTextoDistancia.Text = distancia + " m";
-      miManejadorDePDIs.BuscadorDeDuplicados.DistanciaMáxima = distancia;
+      miBuscadorDeDuplicados.DistanciaMáxima = distancia;
     }
 
 
@@ -409,7 +396,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       }
 
       miTextoParecidoDelNombre.Text = texto;
-      miManejadorDePDIs.BuscadorDeDuplicados.DistanciaHamming = distanciaHamming;
+      miBuscadorDeDuplicados.DistanciaHamming = distanciaHamming;
     }
     #endregion
   }

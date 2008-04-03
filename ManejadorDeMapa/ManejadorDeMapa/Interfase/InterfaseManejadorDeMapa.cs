@@ -378,7 +378,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenuBuscarErroresEnPDIs(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.BuscaErrores();
+      miManejadorDeMapa.ManejadorDePDIs.BuscadorDeErrores.Procesa();
     }
 
 
@@ -457,7 +457,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenúBuscarErroresEnVías(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDeVías.BuscaErrores();
+      miManejadorDeMapa.ManejadorDeVías.BuscadorDeErrores.Procesa();
     }
 
 
@@ -469,7 +469,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenúBuscarIncongruenciasEnVías(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDeVías.BuscaIncongruencias();
+      miManejadorDeMapa.ManejadorDeVías.BuscadorDeIncongruencias.Procesa();
     }
     #endregion
   }

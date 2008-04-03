@@ -83,7 +83,20 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
   {
     #region Campos
-    private readonly IDictionary<PDI, string> misErrores;
+    private readonly IDictionary<PDI, string> misErrores = new Dictionary<PDI, string>();
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Devuelve los PDIs con errores.
+    /// </summary>
+    public IDictionary<PDI, string> Errores
+    {
+      get
+      {
+        return misErrores;
+      }
+    }
     #endregion
 
     #region Métodos Públicos
@@ -103,7 +116,6 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDePDIs, elEscuchadorDeEstatus)
     {
-      misErrores = elManejadorDePDIs.Errores;
     }
     #endregion
 
@@ -122,9 +134,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Procesa un PDI.
     /// </summary>
     /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(PDI elPDI)
     {
+      int númeroDeProblemasDetectados = 0;
       List<string> errores = new List<string>();
 
       #region Verifica que el tipo de PDI no es vacio.
@@ -171,23 +184,36 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       {
         string todosLosErrores = string.Join("|", errores.ToArray());
         misErrores.Add(elPDI, todosLosErrores);
+        ++númeroDeProblemasDetectados;
       }
 
-      // Este método nunca modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
+      return númeroDeProblemasDetectados;
     }
 
 
     /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
+    /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    protected override void TerminoDeProcesar()
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      base.TerminoDeProcesar();
+      misErrores.Clear();
 
-      // Reporta estatus.
-      Estatus = "PDIs con Errores: " + misErrores.Count;
+      // Pone al Procesador en estado inválido.
+      Invalida();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // Pone al Procesador en estado inválido.
+      Invalida();
     }
     #endregion
   }

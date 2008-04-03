@@ -360,7 +360,7 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Avisa que se modificó un elemento.
-      miManejadorDeMapa.SeModificóUnElemento();
+      miManejadorDeMapa.SeModificóElemento(this);
     }
 
     
@@ -407,7 +407,7 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Avisa que se modificó un elemento.
-      miManejadorDeMapa.SeModificóUnElemento();
+      miManejadorDeMapa.SeModificóElemento(this);
     }
 
 
@@ -440,7 +440,7 @@ namespace GpsYv.ManejadorDeMapa
           misCampos[i] = elCampoNuevo;
 
           // Avísale al manejador de mapa que se cambió un elemento.
-          miManejadorDeMapa.SeModificóUnElemento();
+          miManejadorDeMapa.SeModificóElemento(this);
           #endregion
         }
       }
@@ -461,7 +461,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       miRazónParaEliminación = laRazón;
       miFuéEliminado = true;
-      miManejadorDeMapa.SeModificóUnElemento();
+      miManejadorDeMapa.SeModificóElemento(this);
     }
 
 

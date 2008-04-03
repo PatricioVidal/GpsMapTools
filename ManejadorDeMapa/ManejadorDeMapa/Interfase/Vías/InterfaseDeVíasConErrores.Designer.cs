@@ -28,14 +28,36 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.Windows.Forms.ColumnHeader columnaRazón;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeViasConErrores));
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
+      columnaRazón = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
+      // 
+      // columnaRazón
+      // 
+      resources.ApplyResources(columnaRazón, "columnaRazón");
       // 
       // miInterfaseListaConMapaDeVías
       // 
       resources.ApplyResources(this.miInterfaseListaConMapaDeVías, "miInterfaseListaConMapaDeVías");
       this.miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = null;
+      // 
+      // 
+      // 
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            columnaRazón});
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.ContextMenuStrip = this.miInterfaseListaConMapaDeVías.MenuEditorDeVías;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Dock")));
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.FullRowSelect = true;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.GridLines = true;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Location = ((System.Drawing.Point)(resources.GetObject("miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Location")));
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Name = "miLista";
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Size = ((System.Drawing.Size)(resources.GetObject("miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Size")));
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex = ((int)(resources.GetObject("miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex")));
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.UseCompatibleStateImageBehavior = false;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.View = System.Windows.Forms.View.Details;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = true;
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
       // 

@@ -68,7 +68,6 @@
 // with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -83,8 +82,57 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class BuscadorDeIncongruencias : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IList<IList<ManejadorDeVías.ElementoDeIncongruencia>> misIncongruencias;
+    private readonly IList<IList<ElementoDeIncongruencia>> misIncongruencias = new List<IList<ElementoDeIncongruencia>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Devuelve las incongruencias de Vías.
+    /// </summary>
+    public IList<IList<ElementoDeIncongruencia>> Incongruencias
+    {
+      get
+      {
+        return misIncongruencias;
+      }
+    }
+    #endregion
+
+    #region Clases
+    /// <summary>
+    /// Representa un elemento de la lista de incongruencias.
+    /// </summary>
+    public struct ElementoDeIncongruencia
+    {
+      /// <summary>
+      /// Obtiene la Vía asociada.
+      /// </summary>
+      public readonly Vía Vía;
+
+      /// <summary>
+      /// Obtiene el detalle.
+      /// </summary>
+      public readonly string Detalle;
+
+      /// <summary>
+      /// Obtiene una variable lógica que indica si el elemento es un posible error.
+      /// </summary>
+      public bool EsPosibleError;
+
+      /// <summary>
+      /// Constructor.
+      /// </summary>
+      /// <param name="laVía">La vía.</param>
+      /// <param name="elDetalle">El detalle.</param>
+      /// <param name="elEsPosibleError">Variable lógica que indica si el elemento es un posible error.</param>
+      public ElementoDeIncongruencia(Vía laVía, string elDetalle, bool elEsPosibleError)
+      {
+        Vía = laVía;
+        Detalle = elDetalle;
+        EsPosibleError = elEsPosibleError;
+      }
+    }
     #endregion
 
     #region Métodos Públicos
@@ -104,7 +152,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      misIncongruencias = elManejadorDeVías.Incongruencias;
     }
     #endregion
 
@@ -125,19 +172,21 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Procesa na Vía.
     /// </summary>
     /// <param name="laVía">La Vía.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(Vía laVía)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(Vía laVía)
     {
+      int númeroDeItemsDetectados = 0;
+
       // Retorna si la Vía ya ha sido identificado como incongruencia.
       if (misVíasYaProcesadas.Contains(laVía))
       {
-        return false;
+        return númeroDeItemsDetectados;
       }
 
       // Retorna si la Vía no tiene nombre.
       if (laVía.Nombre == string.Empty)
       {
-        return false;
+        return númeroDeItemsDetectados;
       }
 
       #region Busca las Vías que tengan el mismo nombre.
@@ -231,17 +280,17 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       #region Crea la lista de incongruencias.
-      List<ManejadorDeVías.ElementoDeIncongruencia> elementosDeIncongruencia = new List<ManejadorDeVías.ElementoDeIncongruencia>();
+      List<ElementoDeIncongruencia> elementosDeIncongruencia = new List<ElementoDeIncongruencia>();
       foreach(Vía vía in víasConElMismoNombre)
       {
         if (vía.LímiteDeVelocidad.EsNulo())
         {
-          elementosDeIncongruencia.Add(new ManejadorDeVías.ElementoDeIncongruencia(vía, "Límite de Velocidad Nulo", true));
+          elementosDeIncongruencia.Add(new ElementoDeIncongruencia(vía, "Límite de Velocidad Nulo", true));
           hayIncongruencias = true;
         }
         else if(vía.ClaseDeRuta.EsNula())
         {
-          elementosDeIncongruencia.Add(new ManejadorDeVías.ElementoDeIncongruencia(vía, "Clase de Ruta es Nula", true));
+          elementosDeIncongruencia.Add(new ElementoDeIncongruencia(vía, "Clase de Ruta es Nula", true));
           hayIncongruencias = true;
           break;
         }
@@ -264,7 +313,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
           }
 
           // Añade la vía a la lista.
-          elementosDeIncongruencia.Add(new ManejadorDeVías.ElementoDeIncongruencia(vía, detallePorDefecto, posibleError));
+          elementosDeIncongruencia.Add(new ElementoDeIncongruencia(vía, detallePorDefecto, posibleError));
         }
       }
       #endregion
@@ -273,23 +322,37 @@ namespace GpsYv.ManejadorDeMapa.Vías
       if (hayIncongruencias)
       {
         misIncongruencias.Add(elementosDeIncongruencia);
+        ++númeroDeItemsDetectados;
       }
 
-      // Este método no modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
+      return númeroDeItemsDetectados;
     }
 
 
     /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
+    /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    protected override void TerminoDeProcesar()
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      base.TerminoDeProcesar();
+      misIncongruencias.Clear();
+      misVíasYaProcesadas.Clear();
 
-      // Reporta estatus.
-      Estatus = "Vías con Incongruencias: " + misIncongruencias.Count;
+      // Pone al Procesador en estado inválido.
+      Invalida();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // Pone al Procesador en estado inválido.
+      Invalida();
     }
     #endregion
   }

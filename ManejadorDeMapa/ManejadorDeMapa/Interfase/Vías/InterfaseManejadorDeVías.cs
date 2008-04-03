@@ -77,7 +77,6 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
-using GpsYv.ManejadorDeMapa.PDIs;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
@@ -90,6 +89,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #region Campos
     private readonly InterfaseBase[] misInterfases;
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
+    private readonly string miTextoPestañaErrores = "Errores";
+    private readonly string miTextoPestañaIncongruencias = "Incongruencias";
     #endregion
 
     #region Eventos
@@ -112,6 +113,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         foreach (InterfaseBase interfaseBase in misInterfases)
         {
           interfaseBase.ManejadorDeMapa = value;
+        }
+
+        // Maneja Eventos
+        if (value != null)
+        {
+          ManejadorDeVías manejadorDeVías = value.ManejadorDeVías;
+
+          // Buscador de Errores.
+          BuscadorDeErrores buscadorDeErrores = manejadorDeVías.BuscadorDeErrores;
+          buscadorDeErrores.Invalidado += EnInvalidadoVíasConErrores;
+          buscadorDeErrores.Procesó += EnSeBuscaronVíasConErrores;
+
+          // Buscador de Duplicados.
+          BuscadorDeIncongruencias buscadorDeIncongruencias = manejadorDeVías.BuscadorDeIncongruencias;
+          buscadorDeIncongruencias.Invalidado += EnInvalidadoVíasConIncongruencias;
+          buscadorDeIncongruencias.Procesó += EnSeBuscaronVíasConIncongruencias;
         }
       }
     }
@@ -156,8 +173,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       // Escucha los eventos para actualizar las pestañas.
       miInterfaseDeVíasModificadas.VíasModificadas += EnCambiaronVíasModificadas;
-      miInterfaseDeErroresEnVías.CambiaronErrores += EnCambiaronVíasConErrores;
-      miInterfaseDeVíasConIncongruencias.CambiaronIncongruencias += EnCambiaronVíasConIncongruencias;
   
       // Crea el diccionario de índices de pestañas.
       TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
@@ -215,39 +230,36 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnCambiaronVíasModificadas(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnCambiaronVíasModificadas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDeVíasModificadas = losArgumentos.NúmeroDeElementos;
-
       // Cambia el texto de la pestaña.
+      int númeroDeVíasModificadas = losArgumentos.NúmeroDeItems;
       miPáginaModificadas.Text = "Modificadas (" + númeroDeVíasModificadas + ")";
-
-      // Si hay Vías modificadas entonces cambia el estado de la pestaña a Alerta.
-      // Si no, entonces cambia el estado de la pestaña a Nada.
-      if (númeroDeVíasModificadas > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaModificadas],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaModificadas],
-          ControladorDePestañas.EstadoDePestaña.Nada);
-      }
     }
 
 
-    private void EnCambiaronVíasConErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnInvalidadoVíasConErrores(object elEnviador, EventArgs losArgumentos)
     {
-      int númeroDeVíasConErrores = losArgumentos.NúmeroDeElementos;
+      // Pone las pestañas en estado de "No Sé" para indicar que
+      // no se sabe si hay errores.
+      miControladorDePestañas.PoneEstadoDePestaña(
+        misIndicesDePestañas[miPáginaErrores],
+        ControladorDePestañas.EstadoDePestaña.NoSé);
 
       // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = "Errores (" + númeroDeVíasConErrores + ")";
+      miPáginaErrores.Text = miTextoPestañaErrores;
+    }
+
+
+    private void EnSeBuscaronVíasConErrores(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      int númeroDeVíasConErrores = losArgumentos.NúmeroDeItems;
+
+      // Cambia el texto de la pestaña.
+      miPáginaErrores.Text = miTextoPestañaErrores + " (" + númeroDeVíasConErrores + ")";
 
       // Si hay Vías con errores entonces cambia el estado de la pestaña a Error.
-      // Si no, entonces cambia el estado de la pestaña a Nada.
+      // Si no, entonces cambia el estado de la pestaña a Bíen.
       if (númeroDeVíasConErrores > 0)
       {
         miControladorDePestañas.PoneEstadoDePestaña(
@@ -258,17 +270,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         miControladorDePestañas.PoneEstadoDePestaña(
           misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Nada);
+          ControladorDePestañas.EstadoDePestaña.Bién);
       }
     }
 
 
-    private void EnCambiaronVíasConIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnInvalidadoVíasConIncongruencias(object elEnviador, EventArgs losArgumentos)
     {
-      int númeroDeVíasConIncongruencias = losArgumentos.NúmeroDeElementos;
+      // Pone las pestañas en estado de "No Sé" para indicar que
+      // no se sabe si hay incongruencias.
+      miControladorDePestañas.PoneEstadoDePestaña(
+        misIndicesDePestañas[miPáginaIncongruencias],
+        ControladorDePestañas.EstadoDePestaña.NoSé);
 
       // Cambia el texto de la pestaña.
-      miPáginaIncongruencias.Text = "Incongruencias (" + númeroDeVíasConIncongruencias + ")";
+      miPáginaIncongruencias.Text = miTextoPestañaIncongruencias;
+    }
+
+
+    private void EnSeBuscaronVíasConIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      int númeroDeVíasConIncongruencias = losArgumentos.NúmeroDeItems;
+
+      // Cambia el texto de la pestaña.
+      miPáginaIncongruencias.Text = miTextoPestañaIncongruencias + " (" + númeroDeVíasConIncongruencias + ")";
 
       // Si hay Vías con incongruencias entonces cambia el estado de la pestaña a Error.
       // Si no, entonces cambia el estado de la pestaña a Nada.

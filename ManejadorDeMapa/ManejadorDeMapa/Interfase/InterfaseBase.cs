@@ -97,6 +97,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <summary>
     /// Obtiene o pone el manejador de mapa.
     /// </summary>
+    [Browsable(true)]
     public virtual ManejadorDeMapa ManejadorDeMapa
     {
       get
@@ -129,6 +130,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <summary>
     /// Obtiene o pone el escuchador de estatus.
     /// </summary>
+    [Browsable(true)]
     public virtual IEscuchadorDeEstatus EscuchadorDeEstatus
     {
       get
@@ -161,7 +163,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected virtual void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      throw new InvalidOperationException(this.GetType() + " tiene que implementar método EnMapaNuevo(...)");
     }
 
 
@@ -172,7 +173,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected virtual void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      throw new InvalidOperationException(this.GetType() + " tiene que implementar método EnElementosModificados(...)");
     }
     #endregion
   }

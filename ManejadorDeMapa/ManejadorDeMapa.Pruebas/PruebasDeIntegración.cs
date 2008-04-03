@@ -129,8 +129,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       TabControl.TabPageCollection pestañasPDIs = controladorDePestañasDePDIs.Properties.TabPages;
       TabPage pestañaTodos = pestañasPDIs[1];
       TabPage pestañaModificados = pestañasPDIs[2];
-      TabPage pestañaPosiblesDuplicados = pestañasPDIs[3];
-      TabPage pestañaEliminados = pestañasPDIs[4];
+      TabPage pestañaEliminados = pestañasPDIs[3];
+      TabPage pestañaPosiblesDuplicados = pestañasPDIs[4];
       TabPage pestañaErrores = pestañasPDIs[5];
       #endregion
 
@@ -151,9 +151,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         string identificación = "[" + caso.Archivo + "]";
         Assert.AreEqual("Todos (" + caso.Todos + ")", pestañaTodos.Text, identificación + "PDIs.Todos.Text");
         Assert.AreEqual("Modificados (0)", pestañaModificados.Text, identificación + "PDIs.Modificados.Text");
-        Assert.AreEqual("Posibles Duplicados (0)", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
         Assert.AreEqual("Eliminados (0)", pestañaEliminados.Text, identificación + "PDIs.Eliminados.Text");
-        Assert.AreEqual("Errores (0)", pestañaErrores.Text, identificación + "PDIs.Errores.Text");
+        Assert.AreEqual("Posibles Duplicados", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
+        Assert.AreEqual("Errores", pestañaErrores.Text, identificación + "PDIs.Errores.Text");
 
         // Selecciona la pestaña de PDIs.
         controladorDePestañasPrincipal.SelectTab(2);
@@ -165,8 +165,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Verifica el número de PDIs en las pestañas.
         Assert.AreEqual("Todos (" + caso.Todos + ")", pestañaTodos.Text, identificación + "PDIs.Todos.Text");
         Assert.AreEqual("Modificados (" + caso.Modificados + ")", pestañaModificados.Text, identificación + "PDIs.Modificados.Text");
-        Assert.AreEqual("Posibles Duplicados (" + caso.PosiblesDuplicados + ")", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
         Assert.AreEqual("Eliminados (" + caso.Eliminados + ")", pestañaEliminados.Text, identificación + "PDIs.Eliminados.Text");
+        Assert.AreEqual("Posibles Duplicados (" + caso.PosiblesDuplicados + ")", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
         Assert.AreEqual("Errores (" + caso.Errores + ")", pestañaErrores.Text, identificación + "PDIs.Errores.Text");
       }
 

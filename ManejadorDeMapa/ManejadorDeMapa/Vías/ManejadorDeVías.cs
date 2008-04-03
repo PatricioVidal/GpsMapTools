@@ -85,57 +85,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
   {
     #region Campos
     private readonly BuscadorDeErrores miBuscadorDeErrores;
-    private IDictionary<Vía, string> misErrores = new Dictionary<Vía, string>();
     private readonly BuscadorDeIncongruencias miBuscadorDeIncongruencias;
-    private readonly IList<IList<ElementoDeIncongruencia>> misIncongruencias = new List<IList<ElementoDeIncongruencia>>();
-    #endregion
-
-    #region Clases
-    /// <summary>
-    /// Representa un elemento de la lista de incongruencias.
-    /// </summary>
-    public struct ElementoDeIncongruencia
-    {
-      /// <summary>
-      /// Obtiene la Vía asociada.
-      /// </summary>
-      public readonly Vía Vía;
-
-      /// <summary>
-      /// Obtiene el detalle.
-      /// </summary>
-      public readonly string Detalle;
-
-      /// <summary>
-      /// Obtiene una variable lógica que indica si el elemento es un posible error.
-      /// </summary>
-      public bool EsPosibleError;
-
-      /// <summary>
-      /// Constructor.
-      /// </summary>
-      /// <param name="laVía">La vía.</param>
-      /// <param name="elDetalle">El detalle.</param>
-      /// <param name="elEsPosibleError">Variable lógica que indica si el elemento es un posible error.</param>
-      public ElementoDeIncongruencia(Vía laVía, string elDetalle, bool elEsPosibleError)
-      {
-        Vía = laVía;
-        Detalle = elDetalle;
-        EsPosibleError = elEsPosibleError;
-      }
-    }
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian los errores.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
-
-    /// <summary>
-    /// Evento cuando cambian las incongruencias.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronIncongruencias;
     #endregion
 
     #region Propiedades
@@ -147,28 +97,27 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Devuelve los errores de Vías.
+    /// Obtiene el Buscador de Incongruencias.
     /// </summary>
-    public IDictionary<Vía, string> Errores
+    public BuscadorDeIncongruencias BuscadorDeIncongruencias
     {
       get
       {
-        return misErrores;
+        return miBuscadorDeIncongruencias;
       }
     }
 
 
     /// <summary>
-    /// Devuelve las incongruencias de Vías.
+    /// Obtiene el Buscador de Errores.
     /// </summary>
-    public IList<IList<ElementoDeIncongruencia>> Incongruencias
+    public BuscadorDeErrores BuscadorDeErrores
     {
       get
       {
-        return misIncongruencias;
+        return miBuscadorDeErrores;
       }
     }
-    
     #endregion
 
     #region Métodos Públicos
@@ -187,32 +136,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Crea los procesadores.
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
       miBuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
-    }
 
-
-    /// <summary>
-    /// Busca Errores.
-    /// </summary>
-    public void BuscaErrores()
-    {
-      miBuscadorDeErrores.Procesa();
-
-      // Envía evento.
-      if (CambiaronErrores != null)
-      {
-        CambiaronErrores(this, new NúmeroDeElementosEventArgs(misErrores.Count));
-      }
-    }
-
-
-    /// <summary>
-    /// Busca Incongruencias.
-    /// </summary>
-    public void BuscaIncongruencias()
-    {
-      miBuscadorDeIncongruencias.Procesa();
-
-      EnviaCambiaronIncongruencias();
+      // Escucha eventos.
+      elManejadorDeMapa.VíasModificadas += EnElementosModificados;
     }
 
 
@@ -224,38 +150,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       // Hacer todos las operaciones en orden.
       int númeroDeVíasModificadas = 0;
-      BuscaIncongruencias();
-      BuscaErrores();
+      númeroDeVíasModificadas += miBuscadorDeIncongruencias.Procesa();
+      númeroDeVíasModificadas += miBuscadorDeErrores.Procesa();
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDeVíasModificadas + " modificaciones a Vías.";
 
       return númeroDeVíasModificadas;
     }
-    #endregion
-
-    #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      // Borra las listas.
-      misErrores.Clear();
-      misIncongruencias.Clear();
-    }
-
-
-    private void EnviaCambiaronIncongruencias()
-    {
-      if (CambiaronIncongruencias != null)
-      {
-        CambiaronIncongruencias(this, new NúmeroDeElementosEventArgs(misIncongruencias.Count));
-      }
-    }
-
     #endregion
   }
 }

@@ -84,60 +84,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// <summary>
   /// Menú para editar PDIs.
   /// </summary>
-  public partial class MenuEditorDePDI : ContextMenuStrip
+  public partial class MenuEditorDePDI : MenúEditorDeElementos
   {
-    #region Campos
-    private ListView miLista = null;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando se editan PDIs.
-    /// </summary>
-    public event EventHandler EditóPDIs;
-    #endregion
-
     #region Propiedades
-    /// <summary>
-    /// Obtiene o pone la lista con los elementos del mapa.
-    /// </summary>
-    /// <remarks>
-    /// Cada Tag de los items de la lista tiene que ser un PDI.
-    /// </remarks>
-    [Browsable(true)]
-    public ListView Lista
-    {
-      get
-      {
-        return miLista;
-      }
-      set
-      {
-        miLista = value;
-
-        if (miLista != null)
-        {
-          // Desconecta el menú si ya estabamos conectados a una lista.
-          if (miLista != null)
-          {
-            miLista.ContextMenuStrip = null;
-          }
-
-          // Esta clase es muy lenta con listas que no están en modo virtual. 
-          // Entonces solo permitimos listas virtuales.
-          miLista = value;
-          if (!miLista.VirtualMode)
-          {
-            throw new ArgumentException("La InterfaseMapaDeVíasSeleccionadas solo se puede conectar con listas virtuales.");
-          }
-
-          // Conecta el menú a la lista.
-          miLista.ContextMenuStrip = this;
-        }
-      }
-    }
-
-
     /// <summary>
     /// Obtiene o pone el manejador de PDIs.
     /// </summary>
@@ -156,11 +105,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     public MenuEditorDePDI()
     {
       InitializeComponent();
-
-      // Inicialización.
-      Name = "miMenuDeContexto";
-      Size = new System.Drawing.Size(153, 48);
-      AutoSize = true;
 
       // Añade los menús.
       AddMenuParaCambiarTipo();
@@ -181,15 +125,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void EnMenúCambiarTipo(object elObjecto, EventArgs losArgumentos)
     {
       // Retornamos si no hay PDIs.
-      if (miLista.SelectedIndices.Count == 0)
+      if (Lista.SelectedIndices.Count == 0)
       {
         return;
       }
 
       List<PDI> pdis = new List<PDI>();
-      foreach (int indice in miLista.SelectedIndices)
+      foreach (int indice in Lista.SelectedIndices)
       {
-        ListViewItem item = miLista.Items[indice];
+        ListViewItem item = Lista.Items[indice];
 
         // El Tag del item de la lista tiene que ser un PDI.
         PDI pdi = item.Tag as PDI;
@@ -216,14 +160,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           pdi.CambiaTipo(ventanaCambiarTipo.TipoNuevo, "Cambio Manual");
         }
 
-        // Envía el evento indicando que se editaron PDIs.
-        if (EditóPDIs != null)
-        {
-          EditóPDIs(this, new EventArgs());
-        }
-
-        // Restablece los eventos.
+        // Restablece los eventos en el manejador de mapa.
         ManejadorDePDIs.RestableceEventos();
+
+        // Envía el evento indicando que se editaron PDIs.
+        EnvíaEventoEditó();
       }
     }
     #endregion

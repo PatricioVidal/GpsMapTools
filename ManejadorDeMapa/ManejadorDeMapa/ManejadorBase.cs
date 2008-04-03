@@ -88,6 +88,13 @@ namespace GpsYv.ManejadorDeMapa
     private readonly IList<T> misElementos;
     #endregion
 
+    #region Eventos
+    /// <summary>
+    /// Evento cuando algún elemento del manejador es modificado.
+    /// </summary>
+    public event EventHandler ElementosModificados;
+    #endregion
+
     #region Propiedades
     /// <summary>
     /// Devuelve el escuchador de estatus.
@@ -140,9 +147,6 @@ namespace GpsYv.ManejadorDeMapa
       miManejadorDeMapa = elManejadorDeMapa;
       misElementos = losElementos;
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
-
-      // Escucha eventos.
-      miManejadorDeMapa.MapaNuevo += EnMapaNuevo;
     }
 
 
@@ -164,13 +168,19 @@ namespace GpsYv.ManejadorDeMapa
     }
     #endregion
 
-    #region Métodos Privados
+    #region Métodos Protegidos
     /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
+    /// Maneja el evento cuando hay elementos modificados en el manejador.
     /// </summary>
     /// <param name="elEnviador">El objecto que envía el evento.</param>
     /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected abstract void EnMapaNuevo(object elEnviador, EventArgs losArgumentos);
+    protected void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      if (ElementosModificados != null)
+      {
+        ElementosModificados(this, losArgumentos);
+      }
+    }
     #endregion
   }
 }

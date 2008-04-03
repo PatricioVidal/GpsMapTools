@@ -83,7 +83,20 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class BuscadorDeErrores : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IDictionary<Vía, string> misErrores;
+    private readonly IDictionary<Vía, string> misErrores = new Dictionary<Vía, string>();
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Devuelve los errores de Vías.
+    /// </summary>
+    public IDictionary<Vía, string> Errores
+    {
+      get
+      {
+        return misErrores;
+      }
+    }
     #endregion
 
     #region Métodos Públicos
@@ -103,7 +116,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      misErrores = elManejadorDeVías.Errores;
     }
     #endregion
 
@@ -122,9 +134,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Procesa na Vía.
     /// </summary>
     /// <param name="laVía">La Vía.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(Vía laVía)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(Vía laVía)
     {
+      int númeroDeItemsDetectados = 0;
       List<string> errores = new List<string>();
 
       #region Verifica que el tipo de PDI no es vacio.
@@ -171,23 +184,36 @@ namespace GpsYv.ManejadorDeMapa.Vías
       {
         string todosLosErrores = string.Join("|", errores.ToArray());
         misErrores.Add(laVía, todosLosErrores);
+        ++númeroDeItemsDetectados;
       }
 
-      // Este método nunca modifica elementos.
-      bool seModificóElemento = false;
-      return seModificóElemento;
+      return númeroDeItemsDetectados;
     }
 
 
     /// <summary>
-    /// Este método se llama al terminar el procesamiento de los elementos.
+    /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    protected override void TerminoDeProcesar()
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      base.TerminoDeProcesar();
+      misErrores.Clear();
 
-      // Reporta estatus.
-      Estatus = "Vías con Errores: " + misErrores.Count;
+      // Pone al Procesador en estado inválido.
+      Invalida();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // Pone al Procesador en estado inválido.
+      Invalida();
     }
     #endregion
   }

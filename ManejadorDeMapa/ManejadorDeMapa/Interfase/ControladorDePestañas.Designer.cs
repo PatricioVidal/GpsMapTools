@@ -38,9 +38,10 @@
       // 
       listaDeImágenes.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("listaDeImágenes.ImageStream")));
       listaDeImágenes.TransparentColor = System.Drawing.Color.Transparent;
-      listaDeImágenes.Images.SetKeyName(0, "vote_yes.png");
-      listaDeImágenes.Images.SetKeyName(1, "attention.png");
-      listaDeImágenes.Images.SetKeyName(2, "stop.png");
+      listaDeImágenes.Images.SetKeyName(0, "accept.png");
+      listaDeImágenes.Images.SetKeyName(1, "help.png");
+      listaDeImágenes.Images.SetKeyName(2, "attention.png");
+      listaDeImágenes.Images.SetKeyName(3, "stop.png");
       // 
       // ControladorDePestañas
       // 

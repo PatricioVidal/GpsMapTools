@@ -91,8 +91,24 @@ namespace GpsYv.ManejadorDeMapa
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private int miNúmeroDeElementos = 0;
     private int miNúmeroDeElementoProcesándose = 0;
-    private int miNúmeroDeElementosModificados;
+    private int miNúmeroDeProblemasDetectados = 0;
     private int miIntervaloParaReportarEstatus = 1;
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando el estado del procesador puede estar inválido.
+    /// </summary>
+    /// <remarks>
+    /// Esto puede pasar cuando por ejemplo se modifican elementos.
+    /// </remarks>
+    public event EventHandler Invalidado;
+
+    
+    /// <summary>
+    /// Evento cuando se completa el procesamiento.
+    /// </summary>
+    public event EventHandler<NúmeroDeItemsEventArgs> Procesó;
     #endregion
 
     #region Propiedades
@@ -121,13 +137,13 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve el número de elementos modificados.
+    /// Devuelve el número de ítem detectados.
     /// </summary>
-    public int NúmeroDeElementosModificados
+    public int NúmeroDeProblemasDetectados
     {
       get
       {
-        return miNúmeroDeElementosModificados;
+        return miNúmeroDeProblemasDetectados;
       }
     }
 
@@ -171,6 +187,10 @@ namespace GpsYv.ManejadorDeMapa
       miManejador = elManejador;
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
 
+      // Escucha eventos.
+      miManejador.ManejadorDeMapa.MapaNuevo += EnMapaNuevo;
+      miManejador.ElementosModificados += EnElementosModificados;
+
       // Genera el nombre del elemento.
       // El nombre completo es de la forma GpsYv.ManejadorDeMapa.<Nombre>
       // asi que tenemos que extraer la última palabra.
@@ -184,10 +204,10 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Procesa los elementos.
     /// </summary>
-    /// <returns>El número de elementos modificados.</returns>
+    /// <returns>El número de problemas detectados.</returns>
     public int Procesa()
     {
-      miNúmeroDeElementosModificados = 0;
+      miNúmeroDeProblemasDetectados = 0;
       miNúmeroDeElementoProcesándose = 0;
       IList<K> elementos = miManejador.Elementos;
       miNúmeroDeElementos = elementos.Count;
@@ -217,12 +237,7 @@ namespace GpsYv.ManejadorDeMapa
         if (!elemento.FuéEliminado)
         {
           // Procesa el elemento.
-          bool modificóElemento = ProcesaElemento(elemento);
-
-          if (modificóElemento)
-          {
-            ++miNúmeroDeElementosModificados;
-          }
+          miNúmeroDeProblemasDetectados += ProcesaElemento(elemento);
         }
       }
 
@@ -236,7 +251,7 @@ namespace GpsYv.ManejadorDeMapa
       // Indica que se terminó de procesar los elementos.
       TerminoDeProcesar();
 
-      return miNúmeroDeElementosModificados;
+      return miNúmeroDeProblemasDetectados;
     }
     #endregion
 
@@ -254,8 +269,8 @@ namespace GpsYv.ManejadorDeMapa
     /// Procesa un elemento.
     /// </summary>
     /// <param name="elElemento">El Elemento.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected abstract bool ProcesaElemento(K elElemento);
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected abstract int ProcesaElemento(K elElemento);
 
 
     /// <summary>
@@ -264,7 +279,13 @@ namespace GpsYv.ManejadorDeMapa
     protected virtual void TerminoDeProcesar()
     {
       // Reporta estatus.
-      Estatus = "Se hicieron " + NúmeroDeElementosModificados + " modificaciones a " + miNombreDeElemento + "(s)";
+      Estatus = "Se detectaron " + NúmeroDeProblemasDetectados + " problemas en " + miNombreDeElemento + "(s)";
+
+      // Envia evento.
+      if (Procesó != null)
+      {
+        Procesó(this, new NúmeroDeItemsEventArgs(NúmeroDeProblemasDetectados));
+      }
     }
 
 
@@ -283,6 +304,34 @@ namespace GpsYv.ManejadorDeMapa
         miEscuchadorDeEstatus.Estatus = value;
       }
     }
+
+
+    /// <summary>
+    /// Pone al Procesador en estado inválido.
+    /// </summary>
+    protected void Invalida()
+    {
+      if (Invalidado != null)
+      {
+        Invalidado(this, new EventArgs());
+      }
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected abstract void EnMapaNuevo(object elEnviador, EventArgs losArgumentos);
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected abstract void EnElementosModificados(object elEnviador, EventArgs losArgumentos);
     #endregion
   }
 }

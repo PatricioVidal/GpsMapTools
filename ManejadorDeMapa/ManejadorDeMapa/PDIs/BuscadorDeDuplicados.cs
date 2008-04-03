@@ -83,18 +83,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
   public class BuscadorDeDuplicados : ProcesadorBase<ManejadorDePDIs, PDI>
   {
     #region Campos
-    private readonly IDictionary<PDI, IList<PDI>> misGruposDeDuplicados;
+    private IDictionary<PDI, IList<PDI>> misGruposDeDuplicados = new Dictionary<PDI, IList<PDI>>();
     private readonly List<PDI> misPDIsDuplicados = new List<PDI>();
     private int miDistanciaMáxima = 30;
     private int miDistanciaHamming = 3;
     private int miNúmeroDeElementosEliminados = 0;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando se encuentran duplicados.
-    /// </summary>
-    public event EventHandler EncontraronDuplicados;
     #endregion
 
     #region Propiedades
@@ -104,6 +97,18 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     public static readonly string Descripción = 
       "Busca PDIs duplicados basado en distancia y parecido del nombre.\n" + 
       "Duplicados exactos son eliminados.";
+    
+
+    /// <summary>
+    /// Devuelve los grupos de PDIs duplicados.
+    /// </summary>
+    public IDictionary<PDI, IList<PDI>> GruposDeDuplicados
+    {
+      get
+      {
+        return misGruposDeDuplicados;
+      }
+    }
 
     
     /// <summary>
@@ -158,7 +163,6 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDePDIs, elEscuchadorDeEstatus)
     {
-      misGruposDeDuplicados = elManejadorDePDIs.GruposDeDuplicados;
     }
     #endregion
 
@@ -180,16 +184,17 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Procesa un PDI.
     /// </summary>
     /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(PDI elPDI)
     {
+      int númeroDeProblemasDetectados = 0;
+
       // Retorna si el PDI ya ha sido identificado como duplicado.
       if (misPDIsDuplicados.Contains(elPDI))
       {
-        return false;
+        return númeroDeProblemasDetectados;
       }
 
-      bool modificóElemento = false;
       List<PDI> duplicados = new List<PDI>();
 
       // Busca en todos los PDIs desde la posición n + 1 que
@@ -204,7 +209,6 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           {
             posiblePDIDuplicado.Elimina("PDI idéntico al elemento " + elPDI.Número);
             misPDIsDuplicados.Add(posiblePDIDuplicado);
-            modificóElemento = true;
             ++miNúmeroDeElementosEliminados;
           }
           else
@@ -277,9 +281,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (duplicados.Count > 0)
       {
         misGruposDeDuplicados.Add(elPDI, duplicados);
+        ++númeroDeProblemasDetectados;
       }
 
-      return modificóElemento;
+      return númeroDeProblemasDetectados;
     }
 
 
@@ -334,12 +339,32 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
       // Reporta estatus.
       Estatus = "Posibles Duplicados: " + misGruposDeDuplicados.Count + "  Idénticos/Eliminados: " + miNúmeroDeElementosEliminados;
+    }
 
-      // Genera el evento.
-      if (EncontraronDuplicados != null)
-      {
-        EncontraronDuplicados(this, new EventArgs());
-      }
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      misGruposDeDuplicados.Clear();
+      misPDIsDuplicados.Clear();
+
+      // Pone al Procesador en estado inválido.
+      Invalida();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // Pone al Procesador en estado inválido.
+      Invalida();
     }
     #endregion
   }

@@ -144,7 +144,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -192,7 +192,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miPáginaDeTodos</value>
@@ -240,7 +240,7 @@
     <value>miInterfasePDIsModificados</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsModificados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsModificados.Parent" xml:space="preserve">
     <value>miPáginaModificados</value>
@@ -272,54 +272,6 @@
   <data name="&gt;&gt;miPáginaModificados.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="miInterfasePDIsDuplicados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfasePDIsDuplicados.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfasePDIsDuplicados.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 404</value>
-  </data>
-  <data name="miInterfasePDIsDuplicados.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePDIsDuplicados.Name" xml:space="preserve">
-    <value>miInterfasePDIsDuplicados</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePDIsDuplicados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePDIsDuplicados.Parent" xml:space="preserve">
-    <value>miPáginaPosiblesDuplicados</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePDIsDuplicados.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaPosiblesDuplicados.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaPosiblesDuplicados.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 404</value>
-  </data>
-  <data name="miPáginaPosiblesDuplicados.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="miPáginaPosiblesDuplicados.Text" xml:space="preserve">
-    <value>Posible Duplicados</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Name" xml:space="preserve">
-    <value>miPáginaPosiblesDuplicados</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosiblesDuplicados.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="miInterfasePDIsEliminados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -336,7 +288,7 @@
     <value>miInterfasePDIsEliminados</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsEliminados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsEliminados.Parent" xml:space="preserve">
     <value>miPáginaEliminados</value>
@@ -366,6 +318,54 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miPáginaEliminados.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="miInterfasePDIsDuplicados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePDIsDuplicados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePDIsDuplicados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miInterfasePDIsDuplicados.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePDIsDuplicados.Name" xml:space="preserve">
+    <value>miInterfasePDIsDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePDIsDuplicados.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePDIsDuplicados.Parent" xml:space="preserve">
+    <value>miPáginaPosiblesDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePDIsDuplicados.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Text" xml:space="preserve">
+    <value>Posible Duplicados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Name" xml:space="preserve">
+    <value>miPáginaPosiblesDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="miInterfasePDIsErrores.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -384,7 +384,7 @@
     <value>miInterfasePDIsErrores</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsErrores.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePDIsErrores.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
@@ -432,7 +432,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>$this</value>
@@ -453,6 +453,6 @@
     <value>InterfaseManejadorDePDIs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.10.3011.38018, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

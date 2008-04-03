@@ -113,10 +113,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Procesa un PDI.
     /// </summary>
     /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(PDI elPDI)
     {
-      bool modificóElemento = false;
+      int númeroDeItemsDetectados = 0;
 
       #region Elimina los Caracteres Inválidos.
       string nombreACorregir = elPDI.Nombre;
@@ -135,10 +135,32 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       {
         // Actualiza el campo del nombre.
         elPDI.CambiaNombre(nombreCorregido, "Eliminación de Caracteres Inválidos");
-        modificóElemento = true;
+        ++númeroDeItemsDetectados;
       }
 
-      return modificóElemento;
+      return númeroDeItemsDetectados;
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      // No necesitamos hacer nada aquí.
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // No necesitamos hacer nada aquí.
     }
     #endregion
 

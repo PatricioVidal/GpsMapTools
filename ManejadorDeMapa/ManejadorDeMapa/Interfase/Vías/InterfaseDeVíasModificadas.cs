@@ -89,7 +89,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Evento cuando hay Vías modificadas.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> VíasModificadas;
+    public event EventHandler<NúmeroDeItemsEventArgs> VíasModificadas;
 
     /// <summary>
     /// Constructor.
@@ -126,7 +126,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Genera el evento.
       if (VíasModificadas != null)
       {
-        VíasModificadas(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        VíasModificadas(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
       }
     }
 

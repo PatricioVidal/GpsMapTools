@@ -96,7 +96,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       // Prueba propiedades.
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementoProcesándose, "NúmeroDeElementoProcesándose");
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");
-      Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementosModificados, "NúmeroDeElementosModificados");
+      Assert.AreEqual(0, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeElementosModificados");
     }
 
     private struct Caso
@@ -155,7 +155,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
         new Caso ("0x2a06", "EOP"          , 15.00000, 20.00000, new int[] { 11 }       , false       , "PDI#2"),
         new Caso ("0x2a06", "EL OTRO PUNTO", 15.00000, 20.00000, null                   , false       , "PDI#2 es las siglas, misma coordenadas: es duplicado."),
       };
-      int númeroDeElementosEliminados = 1;
+      int númeroDeDuplicadosDetectados = 2;
 
       // Crea los elementos.
       IList<PDI> elementos = manejadorDePDIs.Elementos;
@@ -199,10 +199,10 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       objectoDePrueba.Procesa();
 
       // Prueba propiedades.
-      AseguraDuplicadosSonIguales(duplicados, objectoDePrueba.Manejador.GruposDeDuplicados, "Duplicados");
+      AseguraDuplicadosSonIguales(duplicados, objectoDePrueba.GruposDeDuplicados, "GruposDeDuplicados");
       Assert.AreEqual(elementos.Count, objectoDePrueba.NúmeroDeElementoProcesándose, "NúmeroDeElementoProcesándose");
       Assert.AreEqual(elementos.Count, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");
-      Assert.AreEqual(númeroDeElementosEliminados, objectoDePrueba.NúmeroDeElementosModificados, "NúmeroDeElementosModificados");
+      Assert.AreEqual(númeroDeDuplicadosDetectados, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeProblemasDetectados");
 
       // Prueba que se hayan eliminados los PDIs idénticos.
       for (int i = 0; i < casos.Length; ++i)

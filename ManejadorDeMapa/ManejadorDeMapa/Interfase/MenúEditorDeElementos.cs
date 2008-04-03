@@ -72,80 +72,106 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
+using System.IO;
 using GpsYv.ManejadorDeMapa.PDIs;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
   /// <summary>
-  /// Interfase para PDIs eliminados.
+  /// Menú para editar elementos.
   /// </summary>
-  public partial class InterfaseDePDIsEliminados : InterfaseBase
+  public partial class MenúEditorDeElementos : ContextMenuStrip
   {
-    #region Eventos
-    /// <summary>
-    /// Evento cuando hay PDIs eliminados.
-    /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> PDIsEliminados;
+    #region Campos
+    private ToolStripMenuItem miMenúNúmeroDeElementosSeleccionados = new ToolStripMenuItem();
+    private ListView miLista = null; 
     #endregion
 
-    #region Constructor
+    #region Eventos
+    /// <summary>
+    /// Evento cuando se editan elementos.
+    /// </summary>
+    public event EventHandler Editó;
+    #endregion
+
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone la lista con los elementos del mapa.
+    /// </summary>
+    /// <remarks>
+    /// Cada Tag de los items de la lista tiene que ser un elemento de mapa.
+    /// </remarks>
+    [Browsable(true)]
+    public ListView Lista
+    {
+      get
+      {
+        return miLista;
+      }
+      set
+      {
+        miLista = value;
+
+        if (miLista != null)
+        {
+          // Desconecta el menú si ya estabamos conectados a una lista.
+          if (miLista != null)
+          {
+            miLista.ContextMenuStrip = null;
+          }
+
+          // Conecta el menú a la lista.
+          miLista.ContextMenuStrip = this;
+        }
+      }
+    }
+    #endregion
+
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsEliminados()
+    public MenúEditorDeElementos()
     {
       InitializeComponent();
 
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
+      // Inicialización.
+      Name = "miMenuDeContexto";
+      Size = new System.Drawing.Size(153, 48);
+      AutoSize = true;
+
+      // Añade los menús.
+      Items.Add(miMenúNúmeroDeElementosSeleccionados);
     }
     #endregion
 
     #region Métodos Privados
     /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
+    /// Envía evento Editó.
     /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    protected void EnvíaEventoEditó()
     {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (PDIsEliminados != null)
+      // Envía el evento indicando que se editaron elementos.
+      if (Editó != null)
       {
-        PDIsEliminados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
+        Editó(this, new EventArgs());
       }
     }
 
 
-    private void LlenaItems(InterfaseListaDeElementos laLista)
+    private void EnMenúAbriendo(object sender, CancelEventArgs e)
     {
-      // Añade los elementos.
-      IList<PDI> pdis = ManejadorDeMapa.PDIs;
-      foreach (PDI pdi in pdis)
-      {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
-        {
-          laLista.AñadeItem(pdi, pdi.RazónParaEliminación);
-        }
-      }
+      // Pone el número de elementos seleccionados en el primer menú para informar
+      // al usuario.
+      int númeroDeItemsSeleccionados = miLista.SelectedIndices.Count;
+      miMenúNúmeroDeElementosSeleccionados.Text = "[ Hay " + númeroDeItemsSeleccionados + " elementos seleccionados ]";
+      miMenúNúmeroDeElementosSeleccionados.Enabled = false;
     }
     #endregion
   }

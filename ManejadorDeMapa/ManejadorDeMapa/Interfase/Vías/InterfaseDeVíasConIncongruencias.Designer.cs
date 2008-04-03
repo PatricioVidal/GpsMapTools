@@ -28,18 +28,40 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.Windows.Forms.ColumnHeader columnaDetalle;
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
+      columnaDetalle = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
       // miInterfaseListaConMapaDeVías
       // 
       this.miInterfaseListaConMapaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = null;
+      // 
+      // 
+      // 
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            columnaDetalle});
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.FullRowSelect = true;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.GridLines = true;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Location = new System.Drawing.Point(0, 0);
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Name = "miLista";
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Size = new System.Drawing.Size(556, 292);
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex = 2;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.UseCompatibleStateImageBehavior = false;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.View = System.Windows.Forms.View.Details;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = true;
       this.miInterfaseListaConMapaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
       this.miInterfaseListaConMapaDeVías.Size = new System.Drawing.Size(556, 492);
       this.miInterfaseListaConMapaDeVías.TabIndex = 1;
+      // 
+      // columnaDetalle
+      // 
+      columnaDetalle.Text = "Detalle";
+      columnaDetalle.Width = 300;
       // 
       // InterfaseDeVíasConIncongruencias
       // 

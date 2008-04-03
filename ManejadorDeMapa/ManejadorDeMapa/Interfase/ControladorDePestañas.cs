@@ -54,17 +54,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       /// <summary>
       /// Bién.
       /// </summary>
-      Bién = 0,
+      Bién,
+
+      /// <summary>
+      /// No sé.
+      /// </summary>
+      NoSé,
 
       /// <summary>
       /// Alerta.
       /// </summary>
-      Alerta = 1,
+      Alerta,
 
       /// <summary>
       /// Error.
       /// </summary>
-      Error = 2
+      Error
     }
     #endregion
 

@@ -96,6 +96,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// Obtiene la interfase de lista de Vías.
     /// </summary>
     [Browsable (true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
     public InterfaseListaDeVías InterfaseListaDeVías
     {
       get
@@ -109,6 +110,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// Obtiene el menú editor de Vías.
     /// </summary>
     [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
     public MenuEditorDeVías MenuEditorDeVías
     {
       get

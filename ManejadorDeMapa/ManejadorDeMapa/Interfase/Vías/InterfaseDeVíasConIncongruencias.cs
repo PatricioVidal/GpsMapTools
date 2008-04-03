@@ -16,14 +16,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   public partial class InterfaseDeVíasConIncongruencias : InterfaseBase
   {
     #region Campos
-    private ManejadorDeVías miManejadorDeVías;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian las Vías con incongruencias.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronIncongruencias;
+    private BuscadorDeIncongruencias miBuscadorDeIncongruencias;
     #endregion
 
     #region Propiedades
@@ -35,9 +28,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         // Deja de manejar los eventos.
-        if (miManejadorDeVías != null)
+        if (miBuscadorDeIncongruencias != null)
         {
-          miManejadorDeVías.CambiaronIncongruencias -= EnCambiaronIncongruencias;
+          miBuscadorDeIncongruencias.Invalidado -= EnInvalidado;
+          miBuscadorDeIncongruencias.Procesó -= EnSeBuscaronIncongruencias;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -47,11 +41,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Maneja eventos.
         if (value != null)
         {
-          miManejadorDeVías = value.ManejadorDeVías;
+          miBuscadorDeIncongruencias = value.ManejadorDeVías.BuscadorDeIncongruencias;
 
-          if (miManejadorDeVías != null)
+          if (miBuscadorDeIncongruencias != null)
           {
-            miManejadorDeVías.CambiaronIncongruencias += EnCambiaronIncongruencias;
+            miBuscadorDeIncongruencias.Invalidado += EnInvalidado;
+            miBuscadorDeIncongruencias.Procesó += EnSeBuscaronIncongruencias;
           }
         }
       }
@@ -79,20 +74,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
-      // Añade columnas.
-      ColumnHeader columnaDetalle = new System.Windows.Forms.ColumnHeader();
-      columnaDetalle.Text = "Detalle";
-      columnaDetalle.Width = 300;
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.Add(columnaDetalle);
-
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.EditóVías += delegate(object elObjecto, EventArgs losArgumentos)
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
         // Busca errores otra vez.
-        miManejadorDeVías.BuscaErrores();
+        miBuscadorDeIncongruencias.Procesa();
       };
 
       // Hacemos la lista no virtual para poder usar grupos.
@@ -101,49 +90,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #endregion
 
     #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnCambiaronIncongruencias(elEnviador, new NúmeroDeElementosEventArgs(0));
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // No es necesario hacer nada aqui.
-    }
-
-
-    private void EnCambiaronIncongruencias(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+    }
 
-      // Genera el evento.
-      if (CambiaronIncongruencias != null)
-      {
-        CambiaronIncongruencias(this, losArgumentos);
-      }
+
+    private void EnSeBuscaronIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<IList<ManejadorDeVías.ElementoDeIncongruencia>> incongruencias = miManejadorDeVías.Incongruencias;
-      foreach (IList<ManejadorDeVías.ElementoDeIncongruencia> elementosDeIncongruencia in incongruencias)
+      IList<IList<BuscadorDeIncongruencias.ElementoDeIncongruencia>> incongruencias = miBuscadorDeIncongruencias.Incongruencias;
+      foreach (IList<BuscadorDeIncongruencias.ElementoDeIncongruencia> elementosDeIncongruencia in incongruencias)
       {
         bool esElPrimerElemento = true;
         ListViewGroup grupo = null;
-        foreach (ManejadorDeVías.ElementoDeIncongruencia elementoDeIncongruencia in elementosDeIncongruencia)
+        foreach (BuscadorDeIncongruencias.ElementoDeIncongruencia elementoDeIncongruencia in elementosDeIncongruencia)
         {
           if (esElPrimerElemento)
           {

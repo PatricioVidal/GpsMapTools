@@ -88,7 +88,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Evento cuando hay PDIs modificados.
     /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> PDIsModificados;
+    public event EventHandler<NúmeroDeItemsEventArgs> PDIsModificados;
 
     /// <summary>
     /// Constructor.
@@ -125,7 +125,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       // Genera el evento.
       if (PDIsModificados != null)
       {
-        PDIsModificados(this, new NúmeroDeElementosEventArgs(miLista.NúmeroDeElementos));
+        PDIsModificados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
       }
     }
 

@@ -77,7 +77,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
@@ -88,14 +87,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   public partial class InterfaseDeViasConErrores : InterfaseBase
   {
     #region Campos
-    private ManejadorDeVías miManejadorDeVías;
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian las Vías con errores.
-    /// </summary>
-    public event EventHandler<NúmeroDeElementosEventArgs> CambiaronErrores;
+    private BuscadorDeErrores miBuscadorDeErrores;
     #endregion
 
     #region Propiedades
@@ -107,9 +99,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         // Deja de manejar los eventos.
-        if (miManejadorDeVías != null)
+        if (miBuscadorDeErrores != null)
         {
-          miManejadorDeVías.CambiaronErrores -= EnCambiaronErrores;
+          miBuscadorDeErrores.Invalidado -= EnInvalidado;
+          miBuscadorDeErrores.Procesó -= EnSeBuscaronErrores;
         }
 
         // Pone el nuevo manejador de mapa.
@@ -119,11 +112,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Maneja eventos.
         if (value != null)
         {
-          miManejadorDeVías = value.ManejadorDeVías;
+          miBuscadorDeErrores = value.ManejadorDeVías.BuscadorDeErrores;
 
-          if (miManejadorDeVías != null)
+          if (miBuscadorDeErrores != null)
           {
-            miManejadorDeVías.CambiaronErrores += EnCambiaronErrores;
+            miBuscadorDeErrores.Invalidado += EnInvalidado;
+            miBuscadorDeErrores.Procesó += EnSeBuscaronErrores;
           }
         }
       }
@@ -151,63 +145,35 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
-      // Añade columnas.
-      ColumnHeader columnaRazón = new System.Windows.Forms.ColumnHeader();
-      columnaRazón.Text = "Razón";
-      columnaRazón.Width = 300;
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.Add(columnaRazón);
-
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.EditóVías += delegate(object elObjecto, EventArgs losArgumentos)
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
         // Busca errores otra vez.
-        miManejadorDeVías.BuscaErrores();
+        miBuscadorDeErrores.Procesa();
       };
     }
     #endregion
 
     #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnCambiaronErrores(elEnviador, new NúmeroDeElementosEventArgs(0));
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // No es necesario hacer nada aqui.
-    }
-
-
-    private void EnCambiaronErrores(object elEnviador, NúmeroDeElementosEventArgs losArgumentos)
+    private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+    }
 
-      // Genera el evento.
-      if (CambiaronErrores != null)
-      {
-        CambiaronErrores(this, losArgumentos);
-      }
+
+    private void EnSeBuscaronErrores(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade las Vías.
-      IDictionary<Vía, string> errores = ManejadorDeMapa.ManejadorDeVías.Errores;
+      IDictionary<Vía, string> errores = miBuscadorDeErrores.Errores;
       foreach (KeyValuePair<Vía, string> error in errores)
       {
         Vía vía = error.Key;

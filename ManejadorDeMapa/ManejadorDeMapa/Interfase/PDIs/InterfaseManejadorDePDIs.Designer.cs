@@ -57,8 +57,8 @@
       this.miControladorDePestañas.Controls.Add(this.miPáginaMapa);
       this.miControladorDePestañas.Controls.Add(this.miPáginaDeTodos);
       this.miControladorDePestañas.Controls.Add(this.miPáginaModificados);
-      this.miControladorDePestañas.Controls.Add(this.miPáginaPosiblesDuplicados);
       this.miControladorDePestañas.Controls.Add(this.miPáginaEliminados);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaPosiblesDuplicados);
       this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
       resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
       this.miControladorDePestañas.Name = "miControladorDePestañas";

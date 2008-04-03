@@ -116,10 +116,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Procesa un PDI.
     /// </summary>
     /// <param name="elPDI">El PDI.</param>
-    /// <returns>Una variable lógica que indica si se proceso el elemento.</returns>
-    protected override bool ProcesaElemento(PDI elPDI)
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(PDI elPDI)
     {
-      bool modificóElemento = false;
+      int númeroDeProblemasDetectados = 0;
 
       #region Arregla el nombre del PDI.
       Tipo tipo = elPDI.Tipo;
@@ -134,7 +134,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (nombreCorregido != nombreACorregir)
       {
         elPDI.CambiaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
-        modificóElemento = true;
+        ++númeroDeProblemasDetectados;
         nombreACorregir = nombreCorregido;
       }
 
@@ -159,7 +159,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
             {
               // Remueve los espacios en blanco que se pudo haber añadido.
               elPDI.CambiaNombre(nombreCorregido.Trim(), "Cambio de palabra");
-              modificóElemento = true;
+              ++númeroDeProblemasDetectados;
               nombreACorregir = nombreCorregido;
             }
           }
@@ -167,7 +167,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       }
       #endregion
 
-      return modificóElemento;
+      return númeroDeProblemasDetectados;
     }
     #endregion
 
@@ -204,6 +204,29 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         PosiblesPalabras = lasPosiblesPalabras;
         PalabraFinal = laPalabraFinal;
       }
+    }
+
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      // No necesitamos hacer nada aquí.
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // No necesitamos hacer nada aquí.
     }
 
 

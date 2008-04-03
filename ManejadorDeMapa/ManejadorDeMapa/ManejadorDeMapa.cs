@@ -96,6 +96,8 @@ namespace GpsYv.ManejadorDeMapa
     private string miArchivo = null;
     private int miNúmeroDeSuspenciónDeEventos = 0;
     private bool miHayEventosDeModificaciónDeElementoPendientes = false;
+    private bool miHayEventosDeModificaciónDePDIsPendientes = false;
+    private bool miHayEventosDeModificaciónDeVíasPendientes = false;
     private readonly ManejadorDePDIs miManejadorDePDIs;
     private readonly ManejadorDeVías miManejadorDeVías;
     #endregion
@@ -110,6 +112,16 @@ namespace GpsYv.ManejadorDeMapa
     /// Evento cuando algún elemento del mapa es modificado.
     /// </summary>
     public event EventHandler ElementosModificados;
+
+    /// <summary>
+    /// Evento cuando algún PDI es modificado.
+    /// </summary>
+    public event EventHandler PDIsModificados;
+
+    /// <summary>
+    /// Evento cuando alguna Vía es modificada.
+    /// </summary>
+    public event EventHandler VíasModificadas;
     #endregion
 
     #region Propiedades
@@ -321,12 +333,12 @@ namespace GpsYv.ManejadorDeMapa
       #endregion
 
       #region Añade los errores de los distinto manejadores.
-      foreach (PDI pdi in miManejadorDePDIs.Errores.Keys)
+      foreach (PDI pdi in miManejadorDePDIs.BuscadorDeErrores.Errores.Keys)
       {
         elementosConErrores.Add(pdi);
       }
 
-      foreach (Vía vía in miManejadorDeVías.Errores.Keys)
+      foreach (Vía vía in miManejadorDeVías.BuscadorDeErrores.Errores.Keys)
       {
         elementosConErrores.Add(vía);
       }
@@ -431,8 +443,18 @@ namespace GpsYv.ManejadorDeMapa
         // Genera los eventos pendientes.
         if (miHayEventosDeModificaciónDeElementoPendientes)
         {
-          SeModificóElemento();
+          EnvíaEventoElementosModificados();
           miHayEventosDeModificaciónDeElementoPendientes = false;
+        }
+        if (miHayEventosDeModificaciónDePDIsPendientes)
+        {
+          EnvíaEventoPDIsModificados();
+          miHayEventosDeModificaciónDePDIsPendientes = false;
+        }
+        if (miHayEventosDeModificaciónDeVíasPendientes)
+        {
+          EnvíaEventoVíasModificadas();
+          miHayEventosDeModificaciónDeVíasPendientes = false;
         }
       }
       else if (miNúmeroDeSuspenciónDeEventos < 0)
@@ -445,18 +467,40 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Indica que se modificó un elemento del mapa.
     /// </summary>
-    internal void SeModificóUnElemento()
+    internal void SeModificóElemento(ElementoDelMapa elElemento)
     {
       // Si los eventos están suspendidos entonces se indica
       // que hay notificaciones pendientes.
       // Si no, entonces se genera el evento.
+      bool esPDI = (elElemento is PDI);
+      bool esVía = (elElemento is Vía);
       if (miNúmeroDeSuspenciónDeEventos > 0)
       {
         miHayEventosDeModificaciónDeElementoPendientes = true;
+
+        // Procesa PDIs y Vías.
+        if (esPDI)
+        {
+          miHayEventosDeModificaciónDePDIsPendientes = true;
+        }
+        else if (esVía)
+        {
+          miHayEventosDeModificaciónDeVíasPendientes = true;
+        }
       }
       else
       {
-        SeModificóElemento();
+        EnvíaEventoElementosModificados();
+
+        // Procesa PDIs y Vías.
+        if (esPDI)
+        {
+          EnvíaEventoPDIsModificados();
+        }
+        else if (esVía)
+        {
+          EnvíaEventoVíasModificadas();
+        }
       }
     }
 
@@ -533,14 +577,39 @@ namespace GpsYv.ManejadorDeMapa
       }
     }
 
+
     /// <summary>
     /// Genera el evento indicando que se modificaron elementos.
     /// </summary>
-    private void SeModificóElemento()
+    private void EnvíaEventoElementosModificados()
     {
       if (ElementosModificados != null)
       {
         ElementosModificados(this, new EventArgs ());
+      }
+    }
+
+
+    /// <summary>
+    /// Genera el evento indicando que se modificaron PDIs.
+    /// </summary>
+    private void EnvíaEventoPDIsModificados()
+    {
+      if (PDIsModificados != null)
+      {
+        PDIsModificados(this, new EventArgs());
+      }
+    }
+
+
+    /// <summary>
+    /// Genera el evento indicando que se modificaron Vías.
+    /// </summary>
+    private void EnvíaEventoVíasModificadas()
+    {
+      if (VíasModificadas != null)
+      {
+        VíasModificadas(this, new EventArgs());
       }
     }
     #endregion

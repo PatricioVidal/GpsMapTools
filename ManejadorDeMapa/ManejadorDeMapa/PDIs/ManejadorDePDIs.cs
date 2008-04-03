@@ -87,19 +87,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     private readonly EliminadorDeCaracteres miEliminadorDeCaracteres;
     private readonly ArregladorDeLetras miArregladorDeLetras;
     private readonly ArregladorDePalabrasPorTipo miArregladorDePrefijos;
-    private readonly BuscadorDeDuplicados miBuscadorDePDIsDuplicados;
+    private readonly BuscadorDeDuplicados miBuscadorDeDuplicados;
     private readonly BuscadorDeErrores miBuscadorDeErrores;
-    private IDictionary<PDI, IList<PDI>> misGruposDeDuplicados = new Dictionary<PDI, IList<PDI>>();
-    private IDictionary<PDI, string> misErrores = new Dictionary<PDI, string>();
     #endregion
     
-    #region Eventos
-    /// <summary>
-    /// Evento cuando cambian los PDIs con errores.
-    /// </summary>
-    public event EventHandler CambiaronErrores;
-    #endregion
-
     #region Propiedades
     /// <summary>
     /// Descripción de la acción "Procesar Todo".
@@ -115,31 +106,19 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     {
       get
       {
-        return miBuscadorDePDIsDuplicados;
+        return miBuscadorDeDuplicados;
       }
     }
 
 
     /// <summary>
-    /// Devuelve los grupos de PDIs duplicados.
+    /// Obtiene el Buscador de Errores.
     /// </summary>
-    public IDictionary<PDI, IList<PDI>> GruposDeDuplicados
+    public BuscadorDeErrores BuscadorDeErrores
     {
       get
       {
-        return misGruposDeDuplicados;
-      }
-    }
-
-
-    /// <summary>
-    /// Devuelve los PDIs con errores.
-    /// </summary>
-    public IDictionary<PDI, string> Errores
-    {
-      get
-      {
-        return misErrores;
+        return miBuscadorDeErrores;
       }
     }
     #endregion
@@ -161,8 +140,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       miEliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
       miArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
       miArregladorDePrefijos = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
-      miBuscadorDePDIsDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
+      miBuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
+
+      // Escucha eventos.
+      elManejadorDeMapa.PDIsModificados += EnElementosModificados;
     }
 
 
@@ -189,21 +171,6 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
 
     /// <summary>
-    /// Busca Errores.
-    /// </summary>
-    public void BuscaErrores()
-    {
-      miBuscadorDeErrores.Procesa();
-
-      // Envia evento.
-      if (CambiaronErrores != null)
-      {
-        CambiaronErrores(this, new EventArgs());
-      }
-    }
-
-
-    /// <summary>
     /// Arreglar las palabras en los PDIs.
     /// </summary>
     /// <returns>El número de PDIs modificados.</returns>
@@ -225,26 +192,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       númeroDePDIsModificados += ArreglarLetras();
       númeroDePDIsModificados += ArreglarPalabras();
       númeroDePDIsModificados += BuscadorDeDuplicados.Procesa();
-      BuscaErrores();
+      númeroDePDIsModificados += BuscadorDeErrores.Procesa();
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDePDIsModificados + " modificaciones a PDI(s).";
 
       return númeroDePDIsModificados;
-    }
-    #endregion
-
-    #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      // Borra las listas.
-      misGruposDeDuplicados.Clear();
-      misErrores.Clear();
     }
     #endregion
   }
