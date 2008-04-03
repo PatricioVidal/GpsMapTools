@@ -414,6 +414,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
+    <None Include="Diagramas de Clases\Campos.cd" />
+    <None Include="Diagramas de Clases\InterfaseManejadorDeMapa.cd" />
+    <None Include="Diagramas de Clases\ManejadorDeMapa.cd" />
+    <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
     <None Include="Interfase\GPS_YV.png" />
     <None Include="Interfase\GPS_YV.ico" />
     <Content Include="Vías\TiposDeVías.csv">
