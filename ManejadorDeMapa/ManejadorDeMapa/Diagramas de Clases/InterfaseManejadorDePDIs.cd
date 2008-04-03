@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="2.25" />
+    <AssociationLine Name="miMenúEditorDePDI" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.125" Y="6.441" />
+        <Point X="7.125" Y="8.096" />
+        <Point X="9.5" Y="8.096" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="miMapa" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="6.441" />
+        <Point X="7.375" Y="7.375" />
+        <Point X="9.5" Y="7.375" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="miBuscadorDeErrores" Type="GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="6.441" />
+        <Point X="7" Y="8.846" />
+        <Point X="9.5" Y="8.846" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAAACSAAAAAAAACAACACAKAACAQAAAAgAAAAIAA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseDePDIsConErroress.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="miMenúEditorDePDI" />
+      <Field Name="miMapa" />
+      <Field Name="miLista" />
+      <Field Name="miBuscadorDeErrores" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.VentanaCambiarTipoDePDI" Collapsed="true">
+    <Position X="11.25" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>FAIAQiAAACIgACAEAACAgAICAAUAAAgAACEAgAAwAAA=</HashCode>
+      <FileName>Interfase\PDIs\VentanaCambiarTipoDePDI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados" Collapsed="true">
+    <Position X="5.5" Y="5" Width="2.25" />
+    <AssociationLine Name="miBuscadorDeDuplicados" Type="GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.022" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AKAAAiCABaIAAEAAAACAQKSCApgACABAACAgiSAIMIQ=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseDePDIsDuplicados.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="miBuscadorDeDuplicados" />
+      <Field Name="miLista" />
+      <Field Name="miMapa" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="2.25" />
+    <AssociationLine Name="miLista" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="4.596" />
+        <Point X="8.188" Y="4.596" />
+        <Point X="8.188" Y="2.188" />
+        <Point X="7.25" Y="2.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAAAAAAAACAACQCAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseDePDIsEliminados.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="miLista" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="2.25" />
+    <AssociationLine Name="miLista" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="3.5" />
+        <Point X="7.5" Y="2.375" />
+        <Point X="7.25" Y="2.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAACAACQCAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseDePDIsModificados.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="miLista" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAABCAAAADAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseListaDePDIs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs">
+    <Position X="0.5" Y="1" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="miInterfasePDIsDuplicados" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsDuplicados" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.812" Y="5.059" />
+        <Point X="2.812" Y="5.392" />
+        <Point X="5.042" Y="5.392" Type="JumpStart" />
+        <Point X="5.208" Y="5.392" Type="JumpEnd" />
+        <Point X="5.5" Y="5.392" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="miInterfasePDIsErrores" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.625" Y="5.059" />
+        <Point X="2.625" Y="6.125" />
+        <Point X="5.5" Y="6.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="miInterfasePDIsModificados" Type="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsModificados" ManuallyRouted="true">
+      <Path>
+        <Point X="3" Y="3.846" />
+        <Point X="5.042" Y="3.846" Type="JumpStart" />
+        <Point X="5.208" Y="3.846" Type="JumpEnd" />
+        <Point X="5.5" Y="3.846" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIQAAAgISEkAAAIAACAASQCAYAEAAEKIBEAAAABIIA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseManejadorDePDIs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="miControladorDePestañas" />
+      <Field Name="miInterfaseDeMapa" />
+      <Field Name="miInterfasePDIsDuplicados" />
+      <Field Name="miInterfasePDIsEliminados" />
+      <Field Name="miInterfasePDIsErrores" />
+      <Field Name="miLista" />
+      <Field Name="miInterfasePDIsModificados" />
+      <Property Name="EscuchadorDeEstatus" />
+      <Property Name="ManejadorDeMapa" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseMapaDePDIsSeleccionados" Collapsed="true">
+    <Position X="9.5" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAQAACAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI" Collapsed="true">
+    <Position X="9.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAACAAAACCAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfase\PDIs\MenuEditorDePDI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas" Collapsed="true">
+    <Position X="3.25" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAgACAAEAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfase\ControladorDePestañas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa" Collapsed="true">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACEERMEGCBKUIEKACqUMCQKgeFACAASEMiBAAEhTAg=</HashCode>
+      <FileName>Interfase\InterfaseMapa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.ManejadorDeMapa" Collapsed="true">
+    <Position X="3.25" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CABAIABIgCGRUGEEEAEBAxCCEEEEEAAQBAAAAgIgCCg=</HashCode>
+      <FileName>ManejadorDeMapa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAHAAAAAAAAAABACIAAQAAIABQAAgAIAgAAgABQA=</HashCode>
+      <FileName>PDIs\BuscadorDeDuplicados.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.ListView" Collapsed="true">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores" Collapsed="true">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAgAAAAAAAABAAAAAQAAIAAAAAAAAAgAAAABAA=</HashCode>
+      <FileName>PDIs\BuscadorDeErrores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GpsYv.ManejadorDeMapa.IEscuchadorDeEstatus" Collapsed="true">
+    <Position X="3.25" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAABAAAAAAAAAAAAAAAAAAAAAIEAAAAACAAAAAAAAA=</HashCode>
+      <FileName>IEscuchadorDeEstatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

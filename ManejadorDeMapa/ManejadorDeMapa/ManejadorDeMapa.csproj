@@ -416,8 +416,12 @@
     <None Include="app.config" />
     <None Include="Diagramas de Clases\Campos.cd" />
     <None Include="Diagramas de Clases\InterfaseManejadorDeMapa.cd" />
+    <None Include="Diagramas de Clases\InterfaseManejadorDePDIs.cd" />
+    <None Include="Diagramas de Clases\InterfaseManejadorDeVías.cd" />
     <None Include="Diagramas de Clases\ManejadorDeMapa.cd" />
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
+    <None Include="Diagramas de Clases\ManejadorDePDIs.cd" />
+    <None Include="Diagramas de Clases\ManejadorDeVías.cd" />
     <None Include="Interfase\GPS_YV.png" />
     <None Include="Interfase\GPS_YV.ico" />
     <Content Include="Vías\TiposDeVías.csv">
