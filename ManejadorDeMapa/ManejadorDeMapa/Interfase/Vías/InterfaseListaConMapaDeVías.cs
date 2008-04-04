@@ -84,11 +84,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   /// <summary>
   /// Interfase de Lista y Mapa de Vías.
   /// </summary>
+  [DesignerAttribute(typeof(DiseñadorInterfaseListaConMapaDeVías))]
   public partial class InterfaseListaConMapaDeVías : UserControl
   {
     #region Campos
     private ManejadorDeMapa miManejadorDeMapa;
     private ManejadorDeVías miManejadorDeVías;
+    #endregion
+
+    #region Clases
+    internal class DiseñadorInterfaseListaConMapaDeVías : DiseñadorDeControlCompuesto<InterfaseListaConMapaDeVías>
+    {
+      protected override Control[] ObtieneControlesAManejar(InterfaseListaConMapaDeVías elControlCompuesto)
+      {
+        Control[] controles = new Control[] {
+          elControlCompuesto.miLista,
+          elControlCompuesto.miMapaDeVíasSeleccionadas };
+
+        return controles;
+      }
+    }
+
     #endregion
 
     #region Propiedades

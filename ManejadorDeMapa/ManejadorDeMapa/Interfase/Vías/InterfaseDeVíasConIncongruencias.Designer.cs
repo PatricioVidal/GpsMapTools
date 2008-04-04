@@ -33,6 +33,11 @@
       columnaDetalle = new System.Windows.Forms.ColumnHeader();
       this.SuspendLayout();
       // 
+      // columnaDetalle
+      // 
+      columnaDetalle.Text = "Detalle";
+      columnaDetalle.Width = 300;
+      // 
       // miInterfaseListaConMapaDeVías
       // 
       this.miInterfaseListaConMapaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -42,6 +47,7 @@
       // 
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnaDetalle});
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.ContextMenuStrip = this.miInterfaseListaConMapaDeVías.MenuEditorDeVías;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.FullRowSelect = true;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.GridLines = true;
@@ -51,17 +57,11 @@
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex = 2;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.UseCompatibleStateImageBehavior = false;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.View = System.Windows.Forms.View.Details;
-      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = true;
       this.miInterfaseListaConMapaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
       this.miInterfaseListaConMapaDeVías.Size = new System.Drawing.Size(556, 492);
       this.miInterfaseListaConMapaDeVías.TabIndex = 1;
-      // 
-      // columnaDetalle
-      // 
-      columnaDetalle.Text = "Detalle";
-      columnaDetalle.Width = 300;
       // 
       // InterfaseDeVíasConIncongruencias
       // 

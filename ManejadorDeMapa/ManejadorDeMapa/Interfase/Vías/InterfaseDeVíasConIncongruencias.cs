@@ -83,9 +83,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Busca errores otra vez.
         miBuscadorDeIncongruencias.Procesa();
       };
-
-      // Hacemos la lista no virtual para poder usar grupos.
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = false;
     }
     #endregion
 

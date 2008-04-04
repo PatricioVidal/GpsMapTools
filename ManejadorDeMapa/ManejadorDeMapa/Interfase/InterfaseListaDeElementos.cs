@@ -92,6 +92,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     #region Propiedades
     /// <summary>
+    /// Variable lógica que indica si la lista está en modo virtual.
+    /// </summary>
+    [DefaultValue(true)]
+    public bool VirtualMode
+    {
+      get
+      {
+        return base.VirtualMode;
+      }
+
+      set
+      {
+        base.VirtualMode = value;
+      }
+    }
+
+
+    /// <summary>
     /// Obtiene el número de elementos en la lista.
     /// </summary>
     public int NúmeroDeElementos
