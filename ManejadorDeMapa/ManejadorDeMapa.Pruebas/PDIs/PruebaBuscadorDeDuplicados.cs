@@ -91,23 +91,23 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       ManejadorDePDIs manejadorDePDIs = new ManejadorDePDIs(manejadorDeMapa, new List<PDI>(), escuchadorDeEstatus);
 
       // Llama al contructor bajo prueba.
-      BuscadorDeDuplicados objectoDePrueba = new BuscadorDeDuplicados(manejadorDePDIs, escuchadorDeEstatus); 
+      ArregladorDePalabrasPorTipo objectoDePrueba = new ArregladorDePalabrasPorTipo(manejadorDePDIs, escuchadorDeEstatus); 
 
       // Prueba propiedades.
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementoProcesándose, "NúmeroDeElementoProcesándose");
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");
-      Assert.AreEqual(0, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeElementosModificados");
+      Assert.AreEqual(0, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeProblemasDetectados");
     }
 
     private struct Caso
     {
-      public string Tipo;
-      public string Nombre;
-      public double Latitud;
-      public double Longitud;
-      public int[] IndicesDeLosDuplicados;
-      public bool EsEliminado;
-      string Descripción;
+      public readonly string Tipo;
+      public readonly string Nombre;
+      public readonly double Latitud;
+      public readonly double Longitud;
+      public readonly int[] IndicesDeLosDuplicados;
+      public readonly bool EsEliminado;
+      public readonly string Descripción;
 
       public Caso(
         string elTipo,
