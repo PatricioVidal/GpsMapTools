@@ -6,6 +6,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.13
+
+
 Versión 1.12
 - Añadida regla de restricción del Límite de Velocidad y Clase de Ruta en incongruencias de Vías.
 - Extendida la lista de palabras a corregir en los nombres de PDIs.
