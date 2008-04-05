@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class BuscadorDeIncongruencias : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IList<IList<ElementoDeIncongruencia>> misIncongruencias = new List<IList<ElementoDeIncongruencia>>();
+    private readonly IDictionary<Vía, IList<ElementoDeIncongruencia>> misIncongruencias = new Dictionary<Vía, IList<ElementoDeIncongruencia>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
     #endregion
 
@@ -90,7 +90,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Devuelve las incongruencias de Vías.
     /// </summary>
-    public IList<IList<ElementoDeIncongruencia>> Incongruencias
+    public IDictionary<Vía, IList<ElementoDeIncongruencia>> Incongruencias
     {
       get
       {
@@ -164,6 +164,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
       misIncongruencias.Clear();
       misVíasYaProcesadas.Clear();
 
+      misIncongruencias.Add(Vía.Nula, new List<ElementoDeIncongruencia>());
+
       base.ComenzóAProcesar();
     }
 
@@ -183,10 +185,79 @@ namespace GpsYv.ManejadorDeMapa.Vías
         return númeroDeItemsDetectados;
       }
 
+      númeroDeItemsDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
+      númeroDeItemsDetectados += BuscaGruposDeVíasConDiferenciasGrandesEnLosParámetrosDeRuta(laVía);
+
+      return númeroDeItemsDetectados;
+    }
+
+
+    private int BuscaVíasConParámetrosDeRutaInválidos(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      #region Valida el límite de velocidad.
+      if (laVía.LímiteDeVelocidad.EsNulo())
+      {
+        misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(laVía, "Límite de Velocidad es nulo", true));
+        ++númeroDeProblemasDetectados;
+      }
+      else
+      {
+        // El límite de velocidad debe ser el esperado +-1.
+        LímiteDeVelocidad límiteDeVelocidad = laVía.LímiteDeVelocidad;
+        LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
+        int tolerancia = 1;
+        if (Math.Abs(límiteDeVelocidad.Indice - límiteDeVelocidadEsperado.Indice) > tolerancia)
+        {
+          misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(
+            laVía,
+            string.Format("Límite de Velocidad debería ser {0} ± ({1}), pero es {2}", límiteDeVelocidad, tolerancia, límiteDeVelocidadEsperado), 
+            true));
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      #endregion
+
+      #region Valida la clase de ruta.
+      if (laVía.ClaseDeRuta.EsNula())
+      {
+        // Solo reporta este error si el límite de velocidad no es nulo.
+        if (!laVía.LímiteDeVelocidad.EsNulo())
+        {
+          misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(laVía, "Clase de Ruta es nula", true));
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      else
+      {
+        // La clase de ruta debe ser la esperado.
+        ClaseDeRuta claseDeRuta = laVía.ClaseDeRuta;
+        ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
+        int tolerancia = 1;
+        if (Math.Abs(claseDeRuta.Indice - claseDeRutaEsperada.Indice) > tolerancia)
+        {
+          misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(
+            laVía,
+            string.Format("Clase de Ruta debería ser {0} ± ({1}), pero es {2}", claseDeRuta, tolerancia, claseDeRutaEsperada),
+            true));
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      #endregion
+
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int BuscaGruposDeVíasConDiferenciasGrandesEnLosParámetrosDeRuta(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
       // Retorna si la Vía no tiene nombre.
       if (laVía.Nombre == string.Empty)
       {
-        return númeroDeItemsDetectados;
+        return númeroDeProblemasDetectados;
       }
 
       #region Busca las Vías que tengan el mismo nombre.
@@ -207,7 +278,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       #region Busca los extremos del Límite de Velocidad.
-      List<int> índicesDeLímitesDeVelocidad = new List<int> ();
+      List<int> índicesDeLímitesDeVelocidad = new List<int>();
       int índiceMínimoDelLímiteDeVelocidad = int.MaxValue;
       int índiceMáximoDelLímiteDeVelocidad = int.MinValue;
       int sumaDelIndiceDelLímiteDeVelocidad = 0;
@@ -226,7 +297,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       #region Busca los extremos de la Clase de Ruta.
-      List<int> índicesDeLaClaseDeRuta = new List<int> ();
+      List<int> índicesDeLaClaseDeRuta = new List<int>();
       int índiceMínimoDeLaClaseDeRuta = int.MaxValue;
       int índiceMáximoDeLaClaseDeRuta = int.MinValue;
       int sumaDelIndiceDeLaClaseDeRuta = 0;
@@ -246,7 +317,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       #region Verifica si la diferencia entre los extremos de los indices es muy grande.
       string detallePorDefecto = string.Empty;
-      if (índicesDeLímitesDeVelocidad.Count > 0) 
+      if (índicesDeLímitesDeVelocidad.Count > 0)
       {
         // Calcula la diferencia del índice de Límite de Velocidad.
         int diferenciaDelIndice = índiceMáximoDelLímiteDeVelocidad - índiceMínimoDelLímiteDeVelocidad;
@@ -257,12 +328,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
         if (diferenciaDelIndice > MáximaDifferenciaDelIndiceDeLímiteDeVelocidad)
         {
           detallePorDefecto = "Differencia de los Indices de Límite de Velocidad es " +
-            diferenciaDelIndice + ", y la máxima diferencia permitida es " +  MáximaDifferenciaDelIndiceDeLímiteDeVelocidad;
+            diferenciaDelIndice + ", y la máxima diferencia permitida es " + MáximaDifferenciaDelIndiceDeLímiteDeVelocidad;
           hayIncongruencias = true;
         }
       }
 
-      if (índicesDeLaClaseDeRuta.Count > 0) 
+      if (índicesDeLaClaseDeRuta.Count > 0)
       {
         // Calcula la diferencia del índice de Límite de Velocidad.
         int diferenciaDelIndice = índiceMáximoDeLaClaseDeRuta - índiceMínimoDeLaClaseDeRuta;
@@ -281,14 +352,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       #region Crea la lista de incongruencias.
       List<ElementoDeIncongruencia> elementosDeIncongruencia = new List<ElementoDeIncongruencia>();
-      foreach(Vía vía in víasConElMismoNombre)
+      foreach (Vía vía in víasConElMismoNombre)
       {
         if (vía.LímiteDeVelocidad.EsNulo())
         {
           elementosDeIncongruencia.Add(new ElementoDeIncongruencia(vía, "Límite de Velocidad Nulo", true));
           hayIncongruencias = true;
         }
-        else if(vía.ClaseDeRuta.EsNula())
+        else if (vía.ClaseDeRuta.EsNula())
         {
           elementosDeIncongruencia.Add(new ElementoDeIncongruencia(vía, "Clase de Ruta es Nula", true));
           hayIncongruencias = true;
@@ -321,11 +392,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Si se detectaron incongruencias entonces las añadimos a la lista.
       if (hayIncongruencias)
       {
-        misIncongruencias.Add(elementosDeIncongruencia);
-        ++númeroDeItemsDetectados;
+        misIncongruencias.Add(laVía, elementosDeIncongruencia);
+        ++númeroDeProblemasDetectados;
       }
 
-      return númeroDeItemsDetectados;
+      return númeroDeProblemasDetectados;
     }
 
 

@@ -348,13 +348,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenuArreglarPalabrasEnPDIs(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.ArreglarPalabras();
+      miManejadorDeMapa.ManejadorDePDIs.ArregladorDePalabrasPorTipo.Procesa();
     }
 
 
     private void EnMenuArreglarLetrasEnPDIs(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.ArreglarLetras();
+      miManejadorDeMapa.ManejadorDePDIs.ArregladorDeLetras.Procesa();
     }
 
 
@@ -366,7 +366,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenúEliminarCaracteresEnPDIs(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.EliminaCaracteresInválidos();
+      miManejadorDeMapa.ManejadorDePDIs.EliminadorDeCaracteres.Procesa();
     }
 
     

@@ -95,7 +95,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Variable lógica que indica si la lista está en modo virtual.
     /// </summary>
     [DefaultValue(true)]
-    public bool VirtualMode
+    public new bool VirtualMode
     {
       get
       {

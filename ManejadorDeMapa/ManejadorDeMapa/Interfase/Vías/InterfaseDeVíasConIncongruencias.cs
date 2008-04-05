@@ -102,24 +102,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<IList<BuscadorDeIncongruencias.ElementoDeIncongruencia>> incongruencias = miBuscadorDeIncongruencias.Incongruencias;
-      foreach (IList<BuscadorDeIncongruencias.ElementoDeIncongruencia> elementosDeIncongruencia in incongruencias)
+      IDictionary<Vía, IList<BuscadorDeIncongruencias.ElementoDeIncongruencia>> incongruencias = miBuscadorDeIncongruencias.Incongruencias;
+      foreach (KeyValuePair<Vía, IList<BuscadorDeIncongruencias.ElementoDeIncongruencia>> ítem in incongruencias)
       {
-        bool esElPrimerElemento = true;
-        ListViewGroup grupo = null;
+        // Crea el grupo.
+        Vía vía = ítem.Key;
+        ListViewGroup grupo = new ListViewGroup(vía.Nombre);
+        laLista.Groups.Add(grupo);
+
+        // Añade los elementos de las incongruencia a la lista.
+        IList<BuscadorDeIncongruencias.ElementoDeIncongruencia> elementosDeIncongruencia = ítem.Value;
         foreach (BuscadorDeIncongruencias.ElementoDeIncongruencia elementoDeIncongruencia in elementosDeIncongruencia)
         {
-          if (esElPrimerElemento)
-          {
-            grupo = new ListViewGroup(elementoDeIncongruencia.Vía.Nombre);
-            laLista.Groups.Add(grupo);
-            esElPrimerElemento = false;
-          }
-
           // Si el elemento es un posible error entonces le ponemos un fondo amarillo.
           if (elementoDeIncongruencia.EsPosibleError)
           {
-            laLista.AñadeItem(elementoDeIncongruencia.Vía, Color.Yellow, grupo, elementoDeIncongruencia.Detalle);
+            laLista.AñadeItem(elementoDeIncongruencia.Vía, Color.PaleGoldenrod, grupo, elementoDeIncongruencia.Detalle);
           }
           else
           {

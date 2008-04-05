@@ -86,7 +86,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     #region Campos
     private readonly EliminadorDeCaracteres miEliminadorDeCaracteres;
     private readonly ArregladorDeLetras miArregladorDeLetras;
-    private readonly ArregladorDePalabrasPorTipo miArregladorDePrefijos;
+    private readonly ArregladorDePalabrasPorTipo miArregladorDePalabrasPorTipo;
     private readonly BuscadorDeDuplicados miBuscadorDeDuplicados;
     private readonly BuscadorDeErrores miBuscadorDeErrores;
     #endregion
@@ -97,6 +97,42 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// </summary>
     public static readonly string DescripciónProcesarTodo =
       "Procesa todo lo relacionado con de PDIs. Los pasos se hacen en el orden indicado por el número en el menú.";
+
+
+    /// <summary>
+    /// Obtiene el Eliminador de Caracteres.
+    /// </summary>
+    public EliminadorDeCaracteres EliminadorDeCaracteres
+    {
+      get
+      {
+        return miEliminadorDeCaracteres;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el Arreglador de Letras.
+    /// </summary>
+    public ArregladorDeLetras ArregladorDeLetras
+    {
+      get
+      {
+        return miArregladorDeLetras;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el Arreglador de Palabras por Tipo.
+    /// </summary>
+    public ArregladorDePalabrasPorTipo ArregladorDePalabrasPorTipo
+    {
+      get
+      {
+        return miArregladorDePalabrasPorTipo;
+      }
+    }
 
 
     /// <summary>
@@ -139,45 +175,12 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       // Crea los procesadores.
       miEliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
       miArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
-      miArregladorDePrefijos = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
+      miArregladorDePalabrasPorTipo = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
       miBuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
 
       // Escucha eventos.
       elManejadorDeMapa.PDIsModificados += EnElementosModificados;
-    }
-
-
-    /// <summary>
-    /// Elimina Caracteres Inválidos en los nombres de PDIs.
-    /// </summary>
-    /// <returns>El número de PDIs modificados.</returns>
-    public int EliminaCaracteresInválidos()
-    {
-      int númeroDePDIsModificados =  miEliminadorDeCaracteres.Procesa();
-      return númeroDePDIsModificados;
-    }
-
-
-    /// <summary>
-    /// Arreglar las letras en los PDIs.
-    /// </summary>
-    /// <returns>El número de PDIs modificados.</returns>
-    public int ArreglarLetras()
-    {
-      int númeroDePDIsModificados = miArregladorDeLetras.Procesa();
-      return númeroDePDIsModificados;
-    }
-
-
-    /// <summary>
-    /// Arreglar las palabras en los PDIs.
-    /// </summary>
-    /// <returns>El número de PDIs modificados.</returns>
-    public int ArreglarPalabras()
-    {
-      int númeroDePDIsModificados = miArregladorDePrefijos.Procesa();
-      return númeroDePDIsModificados;
     }
 
 
@@ -188,16 +191,17 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     public int ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
-      int númeroDePDIsModificados = EliminaCaracteresInválidos();
-      númeroDePDIsModificados += ArreglarLetras();
-      númeroDePDIsModificados += ArreglarPalabras();
-      númeroDePDIsModificados += BuscadorDeDuplicados.Procesa();
-      númeroDePDIsModificados += BuscadorDeErrores.Procesa();
+      int númeroDeProblemasEnPDIs = 0;
+      númeroDeProblemasEnPDIs += miEliminadorDeCaracteres.Procesa();
+      númeroDeProblemasEnPDIs += miArregladorDeLetras.Procesa();
+      númeroDeProblemasEnPDIs += miArregladorDePalabrasPorTipo.Procesa();
+      númeroDeProblemasEnPDIs += miBuscadorDeDuplicados.Procesa();
+      númeroDeProblemasEnPDIs += miBuscadorDeErrores.Procesa();
 
       // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDePDIsModificados + " modificaciones a PDI(s).";
+      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnPDIs + " problemas en PDIs.";
 
-      return númeroDePDIsModificados;
+      return númeroDeProblemasEnPDIs;
     }
     #endregion
   }

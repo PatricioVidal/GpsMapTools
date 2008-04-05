@@ -69,7 +69,6 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,71 +77,93 @@ using System.Text;
 namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Representa una Vía.
+  /// Contiene las Restricciones de Parámetros de Ruta de las vías.
   /// </summary>
-  public class Vía : Polilínea
+  class RestriccionesDeParámetrosDeRuta
   {
     #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
-    #endregion 
+    private static readonly string miArchivoDeRestriccionesDeParámetrosDeRuta = @"Vías\RestriccionesDeParámetrosDeRuta.csv";
+    #endregion
 
     #region Propiedades
     /// <summary>
-    /// Clase de Ruta nula.
+    /// Diccionario con los límites de velocidad de vías.
     /// </summary>
-    public static readonly Vía Nula = new Vía(null, 0, string.Empty, new List<Campo> ());
+    public readonly static IDictionary<Tipo, LímiteDeVelocidad> LímitesDeVelocidad = new Dictionary<Tipo, LímiteDeVelocidad>();
 
 
     /// <summary>
-    /// Obtiene el Límite de Velocidad.
+    /// Diccionario con las clases de ruta de vías.
     /// </summary>
-    public LímiteDeVelocidad LímiteDeVelocidad
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.LímiteDeVelocidad;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene la Clase de Ruta.
-    /// </summary>
-    public ClaseDeRuta ClaseDeRuta
-    {
-      get
-      {
-        return miCampoParámetrosDeRuta.ClaseDeRuta;
-      }
-    }
+    public readonly static IDictionary<Tipo, ClaseDeRuta> ClasesDeRuta = new Dictionary<Tipo, ClaseDeRuta>();
     #endregion
 
-    #region Métodos Públicos
+    #region Métodos Privados
+    private class LectorRestriccionesDeParámetrosDeRuta : LectorDeArchivo
+    {
+      private readonly IDictionary<Tipo, LímiteDeVelocidad> misLímitesDeVelocidad;
+      private readonly IDictionary<Tipo, ClaseDeRuta> misClasesDeRuta;
+
+      public LectorRestriccionesDeParámetrosDeRuta(
+        string elArchivo,
+        IDictionary<Tipo, LímiteDeVelocidad> losLímitesDeVelocidad,
+        IDictionary<Tipo, ClaseDeRuta> lasClasesDeRuta)
+      {
+        misLímitesDeVelocidad = losLímitesDeVelocidad;
+        misClasesDeRuta = lasClasesDeRuta;
+
+        Lee(elArchivo);
+      }
+
+
+      protected override void ProcesaLínea(string laLínea)
+      {
+        // Elimina espacios en blanco.
+        string línea = laLínea.Trim();
+
+        // Saltarse lineas en blanco y comentarios.
+        bool laLíneaEstaEnBlanco = (línea == string.Empty);
+        bool laLíneaEsComentario = línea.StartsWith("//");
+        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
+        {
+          // Separa las letras.
+          string[] partes = línea.Split(',');
+
+          // Verifica que tenemos a menos 3 partes.
+          if (partes.Length < 3)
+          {
+            throw new ArgumentException("No se encontraron 3 partes separadas por coma en la linea: " + línea);
+          }
+
+          // Lee las tres partes.
+          Tipo tipo = new Tipo(partes[0]);
+          LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[1]));
+          ClaseDeRuta claseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[2]));
+
+          // Asegura que el tipo es válido.
+          if (!TiposDeVías.Tipos.Contains(tipo))
+          {
+            throw new ArgumentException("El tipo de vía no es válido: " + tipo.ToString());
+          }
+
+          // Llena los diccionarios.
+          misLímitesDeVelocidad.Add(tipo, límiteDeVelocidad);
+          misClasesDeRuta.Add(tipo, claseDeRuta);
+        }
+      }
+    }
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
-    public Vía(
-      ManejadorDeMapa elManejadorDeMapa,
-      int elNúmero,
-      string laClase,
-      IList<Campo> losCampos)
-      : base(elManejadorDeMapa,
-             elNúmero,
-             laClase,
-             losCampos)
+    static RestriccionesDeParámetrosDeRuta()
     {
-      // Busca los campos específicos de las vías.
-      foreach (Campo campo in losCampos)
-      {
-        if (campo is CampoParámetrosDeRuta)
-        {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
-        }
-      }
+      // Lee las características de polígonos.
+      LectorRestriccionesDeParámetrosDeRuta lector = new LectorRestriccionesDeParámetrosDeRuta(
+        miArchivoDeRestriccionesDeParámetrosDeRuta,
+        LímitesDeVelocidad,
+        ClasesDeRuta);
     }
     #endregion
   }

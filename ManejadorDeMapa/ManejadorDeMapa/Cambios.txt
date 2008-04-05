@@ -7,7 +7,11 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.12
-
+- Añadida regla de restricción del Límite de Velocidad y Clase de Ruta en incongruencias de Vías.
+- Extendida la lista de palabras a corregir en los nombres de PDIs.
+- Interno: Re-structurado para incrementar re-uso, evitar interfases planas, etc. 
+- Interno: Creados diagramas de clases. 
+- Interno: Creado un diseñador para los controles compuestos. 
 
 Versión 1.11
 - Ahora la búsqueda de posibles PDIs duplicados se hace con el Tipo Principal (primer byte) en vez de con el Tipo Completo.
