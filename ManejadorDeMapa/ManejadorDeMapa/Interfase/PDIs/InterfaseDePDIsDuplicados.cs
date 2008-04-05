@@ -299,13 +299,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
           pdi.Elimina("Manualmente eliminado en la pestaña de 'Posibles Duplicados'");
         }
 
+        // Restablece notificaciones.
+        ManejadorDeMapa.RestableceEventos();
+
         // Busca otra vez los PDIs duplicados tomando en cuenta
         // los que se acaban de eliminar.
         miBuscadorDeDuplicados.Procesa();
       }
-
-      // Restablece notificaciones.
-      ManejadorDeMapa.RestableceEventos();
+      else
+      {
+        // Restablece notificaciones.
+        ManejadorDeMapa.RestableceEventos();
+      }
     }
 
 
