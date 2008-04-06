@@ -5,6 +5,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Version 1.14
+
+
 Versión 1.13
 - Extendido el menú de editar Vías para poder cambiar el Límite de Velocidad y la Clase de Ruta a los valores estándares.
 - Cambiada la lógica de la ventana de confirmación de duplicados a borrar para evitar el problema gráfico en los casos de muchos duplicados.
