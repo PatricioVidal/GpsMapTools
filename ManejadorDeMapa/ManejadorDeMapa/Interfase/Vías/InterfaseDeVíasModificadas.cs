@@ -92,6 +92,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     public event EventHandler<NúmeroDeItemsEventArgs> VíasModificadas;
 
     /// <summary>
+    /// Obtiene o pone el manejador de mapa.
+    /// </summary>
+    [Browsable(true)]
+    public override ManejadorDeMapa ManejadorDeMapa
+    {
+      set
+      {
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+
+        // Pone el manejador de vías.
+        if (value != null)
+        {
+          // Pone el manejador de vías en el menú editor de vías.
+          miMenuEditorDeVías.ManejadorDeVías = value.ManejadorDeVías;
+        }
+      }
+    }
+
+
+    /// <summary>
     /// Constructor.
     /// </summary>
     public InterfaseDeVíasModificadas()

@@ -36,7 +36,7 @@
       // columnaDetalle
       // 
       columnaDetalle.Text = "Detalle";
-      columnaDetalle.Width = 400;
+      columnaDetalle.Width = 500;
       // 
       // miInterfaseListaConMapaDeVías
       // 

@@ -31,7 +31,7 @@
       System.Windows.Forms.ColumnHeader columnaModificaciones;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeVíasModificadas));
       this.miDivision = new System.Windows.Forms.SplitContainer();
-      this.miLista = new InterfaseListaDeVías();
+      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías();
       this.miMenuEditorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías();
       this.miMapaDeVíaSeleccionada = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas();
       columnaModificaciones = new System.Windows.Forms.ColumnHeader();
@@ -39,6 +39,11 @@
       this.miDivision.Panel2.SuspendLayout();
       this.miDivision.SuspendLayout();
       this.SuspendLayout();
+      // 
+      // columnaModificaciones
+      // 
+      columnaModificaciones.Text = "Modificaciones";
+      columnaModificaciones.Width = 500;
       // 
       // miDivision
       // 
@@ -72,19 +77,13 @@
       this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
-      // 
-      // columnaModificaciones
-      // 
-      columnaModificaciones.Text = "Modificaciones";
-      columnaModificaciones.Width = 284;
       // 
       // miMenuEditorDeVías
       // 
       this.miMenuEditorDeVías.Lista = this.miLista;
       this.miMenuEditorDeVías.ManejadorDeVías = null;
       this.miMenuEditorDeVías.Name = "miMenuDeContexto";
-      this.miMenuEditorDeVías.Size = new System.Drawing.Size(326, 48);
+      this.miMenuEditorDeVías.Size = new System.Drawing.Size(336, 92);
       // 
       // miMapaDeVíaSeleccionada
       // 

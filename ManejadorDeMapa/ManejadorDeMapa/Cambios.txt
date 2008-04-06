@@ -1,5 +1,4 @@
 Lo próximo para hacer:
-- Mejorar la ventana de confirmación de duplicados a borrar para los casos de muchos duplicados a borrar.
 - Verificar que todos los elementos del mapa son conocidos.
 - Verificar que los polígonos tienen tipos válidos.
 - Implementar el diccionario.
@@ -7,7 +6,9 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.13
-
+- Extendido el menú de editar Vías para poder cambiar el Límite de Velocidad y la Clase de Ruta a los valores estándares.
+- Cambiada la lógica de la ventana de confirmación de duplicados a borrar para evitar el problema gráfico en los casos de muchos duplicados.
+- Interno: Mejorado el tiempo de respuesta al seleccionar múltiple Vías en la Interfase de Vías con Incongruencias.
 
 Versión 1.12
 - Añadida regla de restricción del Límite de Velocidad y Clase de Ruta en incongruencias de Vías.

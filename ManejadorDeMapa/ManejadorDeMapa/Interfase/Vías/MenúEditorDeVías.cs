@@ -110,6 +110,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       // Añade los menús.
       AñadeMenúGuardarArchivoPDIs();
+      AñadeMenúEstandarizarLímiteDeVelocidad();
+      AñadeMenúEstandarizarClaseDeRuta();
+      AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta();
     }
     #endregion
 
@@ -122,6 +125,39 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Items.Add(menú);
 
       menú.Click += EnMenúGuardarArchivoPDIs;
+    }
+
+
+    private void AñadeMenúEstandarizarLímiteDeVelocidad()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Estandarizar Límite de Velocidad";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúEstandarizarLímiteDeVelocidad;
+    }
+
+
+    private void AñadeMenúEstandarizarClaseDeRuta()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Estandarizar Clase de Ruta";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúEstandarizarClaseDeRuta;
+    }
+
+
+    private void AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Estandarizar Límite de Velocidad y Clase de Ruta";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúEstandarizarLímiteDeVelocidadYClaseDeRuta;
     }
 
 
@@ -206,6 +242,114 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           ventanaDeGuardar.FileName,
           elementos,
           ManejadorDeVías.EscuchadorDeEstatus);
+      }
+    }
+
+
+    private void EnMenúEstandarizarLímiteDeVelocidad(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = Lista.SelectedIndices.Count;
+      if (númeroDeVíasSeleccionadas == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format("Está seguro que quiere Estandarizar el Límite de Velocidad en las {0} Vías seleccionadas?", númeroDeVíasSeleccionadas), 
+        "Estandarizar Límite de Velocidad", 
+        MessageBoxButtons.YesNo, 
+        MessageBoxIcon.Warning);
+
+      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta == DialogResult.Yes)
+      {
+        // Cambia las vías.
+        ManejadorDeVías.SuspendeEventos();
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          LímiteDeVelocidad límiteDeVelocidadEstandar = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo];
+          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estandar");
+        }
+        ManejadorDeVías.RestableceEventos();
+
+        // Notifica la edición.
+        EnvíaEventoEditó();
+      }
+    }
+
+
+    private void EnMenúEstandarizarClaseDeRuta(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = Lista.SelectedIndices.Count;
+      if (Lista.SelectedIndices.Count == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Estandarizar la Clase de Ruta
+      DialogResult respuesta = MessageBox.Show(
+        string.Format("Está seguro que quiere Estandarizar la Clase de Ruta en las {0} Vías seleccionadas?", númeroDeVíasSeleccionadas),
+        "Estandarizar Clase de Ruta",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta == DialogResult.Yes)
+      {
+        // Cambia las vías.
+        ManejadorDeVías.SuspendeEventos();
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          ClaseDeRuta claseDeRutaEstandar = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo];
+          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Límite de Velocidad Estandar");
+        }
+        ManejadorDeVías.RestableceEventos();
+
+        // Notifica la edición.
+        EnvíaEventoEditó();
+      }
+    }
+
+
+    private void EnMenúEstandarizarLímiteDeVelocidadYClaseDeRuta(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = Lista.SelectedIndices.Count;
+      if (númeroDeVíasSeleccionadas == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Estandarizar el Límite de Velocidad y la Clase de Ruta.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format("Está seguro que quiere Estandarizar el Límite de Velocidad y la Clase de Ruta en las {0} Vías seleccionadas?", númeroDeVíasSeleccionadas),
+        "Estandarizar Límite de Velocidad y Clase de Ruta",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta == DialogResult.Yes)
+      {
+        // Cambia las vías.
+        ManejadorDeVías.SuspendeEventos();
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          LímiteDeVelocidad límiteDeVelocidadEstandar = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo];
+          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estandar");
+
+          ClaseDeRuta claseDeRutaEstandar = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo];
+          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Límite de Velocidad Estandar");
+        }
+        ManejadorDeVías.RestableceEventos();
+
+        // Notifica la edición.
+        EnvíaEventoEditó();
       }
     }
     #endregion

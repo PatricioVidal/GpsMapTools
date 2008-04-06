@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class Vía : Polilínea
   {
     #region Campos
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
+    private CampoParámetrosDeRuta miCampoParámetrosDeRuta = CampoParámetrosDeRuta.Nulo;
     #endregion 
 
     #region Propiedades
@@ -143,6 +143,67 @@ namespace GpsYv.ManejadorDeMapa.Vías
           miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
         }
       }
+    }
+
+
+    /// <summary>
+    /// Cambia el Límite de Velocidad.
+    /// </summary>
+    /// <param name="elLímiteDeVelocidadNuevo">El Límite de Velocidad nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void CambiaLímiteDeVelocidad(LímiteDeVelocidad elLímiteDeVelocidadNuevo, string laRazón)
+    {
+      // Si el Límite de Velocidad es nulo entonces la Clase de Ruta
+      // también debe ser nula.  En este case ponemos la Clase de Ruta estandar.
+      CampoParámetrosDeRuta campoNuevo;
+      if (miCampoParámetrosDeRuta.LímiteDeVelocidad.EsNulo())
+      {
+        ClaseDeRuta claseDeRutaEstandard = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[Tipo];
+        campoNuevo = new CampoParámetrosDeRuta(
+          elLímiteDeVelocidadNuevo,
+          claseDeRutaEstandard);
+      }
+      else
+      {
+        campoNuevo = new CampoParámetrosDeRuta(
+          elLímiteDeVelocidadNuevo,
+          miCampoParámetrosDeRuta.ClaseDeRuta);
+      }
+
+      // Cambia el campo.
+      base.CambiaCampo(campoNuevo, miCampoParámetrosDeRuta, laRazón);
+      miCampoParámetrosDeRuta = campoNuevo;
+    }
+
+
+    /// <summary>
+    /// Cambia la Clase de Ruta
+    /// </summary>
+    /// <param name="laClaseDeRutaNueva">La Clase de Ruta nueva.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void CambiaClaseDeRuta(ClaseDeRuta laClaseDeRutaNueva, string laRazón)
+    {
+      // Si la Clase de Ruta es nula entonces el Límite de Velocidad
+      // también debe ser nulo.  En este case ponemos el Límite de 
+      // Velocidad estandar.
+      CampoParámetrosDeRuta campoNuevo;
+      if (miCampoParámetrosDeRuta.ClaseDeRuta.EsNula())
+      {
+        LímiteDeVelocidad límiteDeVelocidadEstandard = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[Tipo];
+        campoNuevo = new CampoParámetrosDeRuta(
+          límiteDeVelocidadEstandard,
+          laClaseDeRutaNueva);
+      }
+      else
+      {
+        campoNuevo = new CampoParámetrosDeRuta(
+          miCampoParámetrosDeRuta.LímiteDeVelocidad,
+          laClaseDeRutaNueva);
+      }
+
+      // Cambia el campo.
+      base.CambiaCampo(campoNuevo, miCampoParámetrosDeRuta, laRazón);
+      miCampoParámetrosDeRuta = campoNuevo;
     }
     #endregion
   }

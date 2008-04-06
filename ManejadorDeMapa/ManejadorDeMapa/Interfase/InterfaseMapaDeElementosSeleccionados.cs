@@ -79,6 +79,7 @@ using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
 using System.Collections;
+using System.Diagnostics;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -90,6 +91,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #region Campos
     private ListView miLista;
     private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
+    private bool miEstaProcesandoCambioDeItemsSeleccionados = false;
+    private bool miHayUnaLlamadaPendienteACambioDeItemsSeleccionados = false;
     #endregion
 
     #region Propiedades
@@ -141,15 +144,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #endregion
 
     #region Métodos Privados
-    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentosDelRatón)
+    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentos)
     {
-      DibujaElementos();
+      // Comienza el timer.
+      // Este manejador de eventos está implementado con un timer porque a veces
+      // se generan muchos eventos consecutivos y no es necesario
+      // mostrar el mapa para todos ellos.
+      miTimerCambioDeItemsSeleccionados.Stop();
+      miTimerCambioDeItemsSeleccionados.Start();
     }
 
 
     private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
     {
+      EnCambioDeItemsSeleccionados(laLista, (EventArgs)losArgumentos);
+    }
+
+
+    private void EnTimerCambioDeItemsSeleccionadosTick(object sender, EventArgs e)
+    {
       DibujaElementos();
+
+      // Detiene el timer para no seguir dibujando el mapa repetidamente.
+      miTimerCambioDeItemsSeleccionados.Stop();
     }
 
 

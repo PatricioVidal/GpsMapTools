@@ -412,48 +412,6 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Cambia el nombre del elemento.
-    /// </summary>
-    /// <param name="elCampoNuevo">El campo nuevo.</param>
-    /// <param name="elCampoACambiar">El campo a cambiar.</param>
-    /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaCampo(Campo elCampoNuevo, Campo elCampoACambiar, string laRazón)
-    {
-      // Busca y actualiza el campo del nombre.
-      bool encontróCampo = false;
-      for (int i = 0; i < misCampos.Count; ++i)
-      {
-        if (object.ReferenceEquals(misCampos[i], elCampoACambiar))
-        {
-          encontróCampo = true;
-
-          #region Remplaza el campo.
-          SeVaAModificarElemento();
-
-          // Añade la razón del cambio.
-          this.misOtrasModificaciones.Add(
-            "[Coordenadas: " + 
-            SeparadorDeModificaciones + laRazón +
-            "]");
-
-          // Asigna el nuevo campo.
-          misCampos[i] = elCampoNuevo;
-
-          // Avísale al manejador de mapa que se cambió un elemento.
-          miManejadorDeMapa.SeModificóElemento(this);
-          #endregion
-        }
-      }
-
-      // Añade el campo tipo si no se encontró.
-      if (!encontróCampo)
-      {
-        throw new ArgumentException("El elemento no tiene el campo: " + elCampoACambiar);
-      }
-    }
-
-
-    /// <summary>
     /// Marca el elemento para ser eliminado.
     /// </summary>
     /// <param name="laRazón"></param>
@@ -545,6 +503,67 @@ namespace GpsYv.ManejadorDeMapa
       {
         miOriginal = (ElementoDelMapa)Clone();
       }
+    }
+
+
+    /// <summary>
+    /// Cambia un campo dado.
+    /// </summary>
+    /// <param name="elCampoNuevo">El campo nuevo.</param>
+    /// <param name="elCampoACambiar">El campo a cambiar.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    protected void CambiaCampo(Campo elCampoNuevo, Campo elCampoACambiar, string laRazón)
+    {
+      // Busca y actualiza el campo.
+      bool encontróCampo = false;
+      for (int i = 0; i < misCampos.Count; ++i)
+      {
+        if (object.ReferenceEquals(misCampos[i], elCampoACambiar))
+        {
+          encontróCampo = true;
+
+          #region Remplaza el campo.
+          SeVaAModificarElemento();
+
+          // Añade la razón del cambio.
+          this.misOtrasModificaciones.Add(string.Format(
+            "[{0} {1} {2}]", elCampoNuevo.Identificador, SeparadorDeModificaciones, laRazón));
+
+          // Asigna el nuevo campo.
+          misCampos[i] = elCampoNuevo;
+
+          // Avísale al manejador de mapa que se cambió un elemento.
+          miManejadorDeMapa.SeModificóElemento(this);
+          #endregion
+        }
+      }
+
+      if (!encontróCampo)
+      {
+        throw new ArgumentException("El elemento no tiene el campo: " + elCampoACambiar);
+      }
+    }
+
+
+    /// <summary>
+    /// Añade un campo.
+    /// </summary>
+    /// <param name="elCampoNuevo">El campo nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    protected void AñadeCampo(Campo elCampoNuevo, string laRazón)
+    {
+      // Avísale al manejador de mapa que se va a cambiar un elemento.
+      SeVaAModificarElemento();
+
+      // Añade la razón del cambio.
+      this.misOtrasModificaciones.Add(string.Format(
+        "[{0} {1} {2}]", elCampoNuevo.Identificador, SeparadorDeModificaciones, laRazón));
+
+      // Añade el nuevo campo.
+      misCampos.Add(elCampoNuevo);
+
+      // Avísale al manejador de mapa que se cambió un elemento.
+      miManejadorDeMapa.SeModificóElemento(this);
     }
     #endregion
   }

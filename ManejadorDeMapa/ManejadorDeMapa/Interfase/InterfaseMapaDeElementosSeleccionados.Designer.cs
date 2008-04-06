@@ -28,10 +28,26 @@
     /// </summary>
     private void InitializeComponent()
     {
-      components = new System.ComponentModel.Container();
+      this.components = new System.ComponentModel.Container();
+      this.miTimerCambioDeItemsSeleccionados = new System.Windows.Forms.Timer(this.components);
+      this.SuspendLayout();
+      // 
+      // miTimer
+      // 
+      this.miTimerCambioDeItemsSeleccionados.Interval = 10;
+      this.miTimerCambioDeItemsSeleccionados.Tick += new System.EventHandler(this.EnTimerCambioDeItemsSeleccionadosTick);
+      // 
+      // InterfaseMapaDeElementosSeleccionados
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Name = "InterfaseMapaDeElementosSeleccionados";
+      this.ResumeLayout(false);
+
     }
 
     #endregion
+
+    private System.Windows.Forms.Timer miTimerCambioDeItemsSeleccionados;
   }
 }

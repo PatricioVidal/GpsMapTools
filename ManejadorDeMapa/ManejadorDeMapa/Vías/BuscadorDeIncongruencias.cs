@@ -177,18 +177,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
     protected override int ProcesaElemento(Vía laVía)
     {
-      int númeroDeItemsDetectados = 0;
+      int númeroDeProblemasDetectados = 0;
 
-      // Retorna si la Vía ya ha sido identificado como incongruencia.
-      if (misVíasYaProcesadas.Contains(laVía))
-      {
-        return númeroDeItemsDetectados;
-      }
+      númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
 
-      númeroDeItemsDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
-      númeroDeItemsDetectados += BuscaGruposDeVíasConDiferenciasGrandesEnLosParámetrosDeRuta(laVía);
+      // TODO: Esto está deshabilitado mientras se busca una lógica mejor.
+      // númeroDeProblemasDetectados += BuscaGruposDeVíasConDiferenciasGrandesEnLosParámetrosDeRuta(laVía);
 
-      return númeroDeItemsDetectados;
+      return númeroDeProblemasDetectados;
     }
 
 
@@ -212,7 +208,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
         {
           misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(
             laVía,
-            string.Format("Límite de Velocidad debería ser {0} ± ({1}), pero es {2}", límiteDeVelocidad, tolerancia, límiteDeVelocidadEsperado), 
+            string.Format("Límite de Velocidad debería ser {0} ± ({1}), pero es {2}", límiteDeVelocidadEsperado, tolerancia, límiteDeVelocidad), 
             true));
           ++númeroDeProblemasDetectados;
         }
@@ -239,7 +235,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
         {
           misIncongruencias[Vía.Nula].Add(new ElementoDeIncongruencia(
             laVía,
-            string.Format("Clase de Ruta debería ser {0} ± ({1}), pero es {2}", claseDeRuta, tolerancia, claseDeRutaEsperada),
+            string.Format("Clase de Ruta debería ser {0} ± ({1}), pero es {2}", claseDeRutaEsperada, tolerancia, claseDeRuta),
             true));
           ++númeroDeProblemasDetectados;
         }
@@ -254,6 +250,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       int númeroDeProblemasDetectados = 0;
 
+      // Retorna si la Vía ya ha sido identificado como incongruencia.
+      if (misVíasYaProcesadas.Contains(laVía))
+      {
+        return númeroDeProblemasDetectados;
+      }
+      
       // Retorna si la Vía no tiene nombre.
       if (laVía.Nombre == string.Empty)
       {
@@ -274,6 +276,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
           víasConElMismoNombre.Add(vía);
           misVíasYaProcesadas.Add(vía);
         }
+      }
+
+      // Retorna si solo tenemos una vía.
+      if (víasConElMismoNombre.Count < 2)
+      {
+        return númeroDeProblemasDetectados;
       }
       #endregion
 

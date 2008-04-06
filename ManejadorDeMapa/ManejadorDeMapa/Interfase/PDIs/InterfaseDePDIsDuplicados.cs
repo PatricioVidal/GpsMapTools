@@ -279,14 +279,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       }
 
       // Pregunta si se quiere eliminar los PDIs.
-      StringBuilder texto = new StringBuilder();
-      texto.AppendLine("Esta seguro que quiere borrar estos PDIs?");
-      foreach (PDI pdi in pdisAEliminar)
-      {
-        texto.AppendLine("  #" + pdi.Número + ", " + pdi.Nombre);
-      }
+      string texto = string.Format("Está seguro que quiere borrar los {0} PDIs seleccionados?", pdisAEliminar.Count);
       DialogResult respuesta = MessageBox.Show(
-        texto.ToString(), 
+        texto, 
         "Eliminar PDIs", 
         MessageBoxButtons.YesNo, 
         MessageBoxIcon.Warning);

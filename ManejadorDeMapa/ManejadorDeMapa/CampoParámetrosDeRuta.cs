@@ -146,17 +146,30 @@ namespace GpsYv.ManejadorDeMapa
         string[] partes = losParámetrosDeRuta.Split(',');
 
         // Verifica el número de partes.
-        const int mínimoNúmeroDePartes = 2;
-        if (partes.Length < mínimoNúmeroDePartes)
+        const int númeroDePartes = 12;
+        if (partes.Length < númeroDePartes)
         {
-          throw new ArgumentException("Los parámetros de rutas deben tener al menos " +
-            mínimoNúmeroDePartes + " elementos separados por coma, pero es: " + losParámetrosDeRuta);
+          throw new ArgumentException(string.Format("Los parámetros de rutas deben tener  " +
+            "{0} elementos separados por coma, pero es: {1}", númeroDePartes, losParámetrosDeRuta));
         }
 
         // Lée los parametros.
         miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
         miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
       }
+    }
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elLímiteDeVelocidad">El Límite de Velocidad</param>
+    /// <param name="laClaseDeRuta">La Clase de Ruta</param>
+    public CampoParámetrosDeRuta(
+      LímiteDeVelocidad elLímiteDeVelocidad,
+      ClaseDeRuta laClaseDeRuta)
+      : this (string.Format("{0},{1},0,0,0,0,0,0,0,0,0,0", elLímiteDeVelocidad.Indice, laClaseDeRuta.Indice))
+    {
     }
 
 
