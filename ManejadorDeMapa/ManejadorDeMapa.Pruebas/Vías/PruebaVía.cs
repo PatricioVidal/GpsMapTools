@@ -96,14 +96,13 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       string nombre = "Nombre";
       string tipo = "0xc";
       string descripción = "Roundabout";
-      int índiceLímiteDeVelocidad = 2;
-      int índiceDeClaseDeRuta = 3;
-      string parámetrosDeRuta = "2,3,0";
+      LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
+      ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
         new CampoComentario ("Comentario"),
         new CampoTipo (tipo),
-        new CampoParámetrosDeRuta(parámetrosDeRuta)
+        new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta)
       };
 
       // Llama al constructor.
@@ -120,8 +119,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       Assert.That(objectoEnPrueba.Original, Is.Null, "Original");
       Assert.That(string.Empty, Is.EqualTo(objectoEnPrueba.RazónParaEliminación), "RazónParaEliminación");
       Assert.That(new Tipo(tipo), Is.EqualTo(objectoEnPrueba.Tipo), "Tipo");
-      Assert.AreEqual(índiceDeClaseDeRuta, objectoEnPrueba.ClaseDeRuta.Indice, "ClaseDeRuta.Indice");
-      Assert.AreEqual(índiceLímiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad.Indice, "LímiteDeVelocidad.Indice");
+      Assert.That(objectoEnPrueba.ClaseDeRuta.Indice, Is.EqualTo(claseDeRuta.Indice), "ClaseDeRuta.Indice");
+      Assert.That(objectoEnPrueba.LímiteDeVelocidad.Indice, Is.EqualTo(límiteDeVelocidad.Indice), "LímiteDeVelocidad.Indice");
     }
   }
 }

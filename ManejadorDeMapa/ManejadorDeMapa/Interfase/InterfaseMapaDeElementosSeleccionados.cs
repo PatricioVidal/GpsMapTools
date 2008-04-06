@@ -91,8 +91,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #region Campos
     private ListView miLista;
     private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
-    private bool miEstaProcesandoCambioDeItemsSeleccionados = false;
-    private bool miHayUnaLlamadaPendienteACambioDeItemsSeleccionados = false;
     #endregion
 
     #region Propiedades

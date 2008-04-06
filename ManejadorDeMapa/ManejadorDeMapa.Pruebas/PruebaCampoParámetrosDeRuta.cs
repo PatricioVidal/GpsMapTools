@@ -85,17 +85,17 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
   public class PruebaCampoParámetrosDeRuta
   {
     /// <summary>
-    /// Prueba el constructor.
+    /// Prueba el constructor con string.
     /// </summary>
     [Test]
-    public void PruebaConstructor()
+    public void PruebaConstructorConString()
     {
       #region Caso 1: Indice en rango válido.
       {
         // Preparación.
         int índiceLímiteDeVelocidad = 2;
         int índiceDeClaseDeRuta = 3;
-        string parámetrosDeRuta = "2,3,0";
+        string parámetrosDeRuta = "2,3,0,0,0,0,0,0,0,0,0,0";
 
         // Llama al constructor en prueba.
         CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(parámetrosDeRuta);
@@ -113,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         string parametrosDeRutaInválidos = "2";
         bool lanzóExcepción = false;
         ArgumentException excepciónEsperada = new ArgumentException(
-          "Los parámetros de rutas deben tener al menos 2 elementos separados por coma, pero es: 2");
+          "Los parámetros de rutas deben tener 12 elementos separados por coma, pero es: 2");
 
         // Llama al constructor en prueba.
         try
@@ -130,6 +130,30 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         }
 
         Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
+      }
+      #endregion
+    }
+
+
+    /// <summary>
+    /// Prueba el constructor con LímiteDeVelocidad y ClaseDeRuta.
+    /// </summary>
+    [Test]
+    public void PruebaConstructorConLímiteDeVelocidadYClaseDeRuta()
+    {
+      #region Caso 1: Caso normal.
+      {
+        // Preparación.
+        LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
+        ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+
+        // Llama al constructor en prueba.
+        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta);
+
+        // Prueba Propiedades.
+        Assert.That(objectoEnPrueba.Identificador, Is.EqualTo(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta), "Identificador");
+        Assert.That(objectoEnPrueba.ClaseDeRuta.Indice, Is.EqualTo(claseDeRuta.Indice), "ClaseDeRuta.Indice");
+        Assert.That(objectoEnPrueba.LímiteDeVelocidad.Indice, Is.EqualTo(límiteDeVelocidad.Indice), "LímiteDeVelocidad.Indice");
       }
       #endregion
     }

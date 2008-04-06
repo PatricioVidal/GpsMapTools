@@ -149,7 +149,7 @@ namespace GpsYv.ManejadorDeMapa
         const int númeroDePartes = 12;
         if (partes.Length < númeroDePartes)
         {
-          throw new ArgumentException(string.Format("Los parámetros de rutas deben tener  " +
+          throw new ArgumentException(string.Format("Los parámetros de rutas deben tener " +
             "{0} elementos separados por coma, pero es: {1}", númeroDePartes, losParámetrosDeRuta));
         }
 
