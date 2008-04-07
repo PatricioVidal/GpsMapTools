@@ -93,23 +93,12 @@ namespace GpsYv.ManejadorDeMapa
 
     #region Propiedades
     /// <summary>
-    /// Clase de Ruta nula.
-    /// </summary>
-    public static readonly ClaseDeRuta Nula = new ClaseDeRuta(int.MinValue);
-
-    
-    /// <summary>
     /// Obtiene el índice de la clase de ruta.
     /// </summary>
     public int Indice
     {
       get
       {
-        if (EsNula())
-        {
-          throw new InvalidOperationException("La Clase de Ruta es Nula");
-        }
-
         return miIndice;
       }
     }
@@ -122,28 +111,14 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elIndice">El índice de la clase de ruta.</param>
     public ClaseDeRuta(int elIndice)
     {
-      if (elIndice != int.MinValue)
+      int índiceMáximo = misTextos.Length - 1;
+      if ((elIndice < 0)||(elIndice > índiceMáximo))
       {
-        int índiceMáximo = misTextos.Length - 1;
-        if (elIndice > índiceMáximo)
-        {
-          throw new ArgumentOutOfRangeException("El índice de la clase de ruta debe ser menor o igual a " + índiceMáximo);
-        }
+        throw new ArgumentOutOfRangeException(
+          string.Format("El índice de la clase de ruta debe estar entre 0 y menor o igual a {0}, pero es: {1}", índiceMáximo, elIndice));
       }
 
       miIndice = elIndice;
-    }
-
-
-    /// <summary>
-    /// Devuelve una variable lógica que indica si la Clase de Ruta
-    /// es nula.
-    /// </summary>
-    public bool EsNula()
-    {
-      bool esNula = (miIndice == int.MinValue);
-
-      return esNula;
     }
 
 
@@ -152,12 +127,6 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      // Caso para clase de ruta nula.
-      if (EsNula())
-      {
-        return string.Empty;
-      }
-
       return misTextos[miIndice];
     }
 

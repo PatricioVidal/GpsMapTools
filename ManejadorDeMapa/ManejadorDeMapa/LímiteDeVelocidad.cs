@@ -96,23 +96,12 @@ namespace GpsYv.ManejadorDeMapa
 
     #region Propiedades
     /// <summary>
-    /// Límite de velocidad nulo.
-    /// </summary>
-    static readonly public LímiteDeVelocidad Nulo = new LímiteDeVelocidad(int.MinValue);
-
-
-    /// <summary>
     /// Obtiene el índice del límite de velocidad.
     /// </summary>
     public int Indice
     {
       get
       {
-        if (EsNulo())
-        {
-          throw new InvalidOperationException("El Límite de Velocidad es Nulo");
-        }
-
         return miIndice;
       }
     }
@@ -125,28 +114,14 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elIndice">El índice del límite de velocidad.</param>
     public LímiteDeVelocidad(int elIndice)
     {
-      if (elIndice != int.MinValue)
+      int índiceMáximo = misTextos.Length - 1;
+      if ((elIndice < 0)||(elIndice > índiceMáximo))
       {
-        int índiceMáximo = misTextos.Length - 1;
-        if (elIndice > índiceMáximo)
-        {
-          throw new ArgumentOutOfRangeException("El índice de la clase de ruta debe ser menor o igual a " + índiceMáximo);
-        }
+        throw new ArgumentOutOfRangeException(
+          string.Format("El índice del límite de velocidad debe estar entre 0 y menor o igual a {0}, pero es: {1}", índiceMáximo, elIndice));
       }
 
       miIndice = elIndice;
-    }
-
-
-    /// <summary>
-    /// Devuelve una variable lógica que indica si el Límite de Velocidad
-    /// es nulo.
-    /// </summary>
-    public bool EsNulo()
-    {
-      bool esNulo = (miIndice == int.MinValue);
-
-      return esNulo;
     }
 
 
@@ -155,12 +130,6 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      // Caso para límite de velocidad nulo.
-      if (EsNulo())
-      {
-        return string.Empty;
-      }
-
       return misTextos[miIndice];      
     }
 

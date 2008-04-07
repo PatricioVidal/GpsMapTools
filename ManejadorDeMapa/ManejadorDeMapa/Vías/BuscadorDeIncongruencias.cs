@@ -152,37 +152,23 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int númeroDeProblemasDetectados = 0;
 
       #region Valida el límite de velocidad.
+      // El límite de velocidad debe ser el esperado.
       IList<string> incongruencias = new List<string> ();
-      if (laVía.LímiteDeVelocidad.EsNulo())
+      LímiteDeVelocidad límiteDeVelocidad = laVía.CampoParámetrosDeRuta.LímiteDeVelocidad;
+      LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
+      if (límiteDeVelocidad != límiteDeVelocidadEsperado)
       {
-        incongruencias.Add("Límite de Velocidad es nulo");
-      }
-      else
-      {
-        // El límite de velocidad debe ser el esperado.
-        LímiteDeVelocidad límiteDeVelocidad = laVía.LímiteDeVelocidad;
-        LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
-        if (límiteDeVelocidad != límiteDeVelocidadEsperado)
-        {
-          incongruencias.Add(string.Format("Límite de Velocidad debería ser {0}, pero es {1}", límiteDeVelocidadEsperado, límiteDeVelocidad));
-        }
+        incongruencias.Add(string.Format("Límite de Velocidad debería ser {0}, pero es {1}", límiteDeVelocidadEsperado, límiteDeVelocidad));
       }
       #endregion
 
       #region Valida la clase de ruta.
-      if (laVía.ClaseDeRuta.EsNula())
+      // La clase de ruta debe ser la esperado.
+      ClaseDeRuta claseDeRuta = laVía.CampoParámetrosDeRuta.ClaseDeRuta;
+      ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
+      if (claseDeRuta != claseDeRutaEsperada)
       {
-        incongruencias.Add("Clase de Ruta es nula");
-      }
-      else
-      {
-        // La clase de ruta debe ser la esperado.
-        ClaseDeRuta claseDeRuta = laVía.ClaseDeRuta;
-        ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
-        if (claseDeRuta != claseDeRutaEsperada)
-        {
-          incongruencias.Add(string.Format("Clase de Ruta debería ser {0}, pero es {1}", claseDeRutaEsperada, claseDeRuta));
-        }
+        incongruencias.Add(string.Format("Clase de Ruta debería ser {0}, pero es {1}", claseDeRutaEsperada, claseDeRuta));
       }
       #endregion
 

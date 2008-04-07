@@ -80,12 +80,12 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
 {
+  /// <summary>
+  /// Prueba la clase Vía.
+  /// </summary>
   [TestFixture]
   public class PruebaVía
   {
-    /// <summary>
-    /// Prueba la clase Vía.
-    /// </summary>
     [Test]
     public void PruebaConstructor()
     {
@@ -96,13 +96,14 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       string nombre = "Nombre";
       string tipo = "0xc";
       string descripción = "Roundabout";
-      LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
-      ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+      CampoParámetrosDeRuta parámetrosDeRuta = new CampoParámetrosDeRuta(
+        new LímiteDeVelocidad(2),
+        new ClaseDeRuta(3));
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
         new CampoComentario ("Comentario"),
         new CampoTipo (tipo),
-        new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta)
+        parámetrosDeRuta
       };
 
       // Llama al constructor.
@@ -119,8 +120,57 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       Assert.That(objectoEnPrueba.Original, Is.Null, "Original");
       Assert.That(string.Empty, Is.EqualTo(objectoEnPrueba.RazónParaEliminación), "RazónParaEliminación");
       Assert.That(new Tipo(tipo), Is.EqualTo(objectoEnPrueba.Tipo), "Tipo");
-      Assert.That(objectoEnPrueba.ClaseDeRuta, Is.EqualTo(claseDeRuta), "ClaseDeRuta");
-      Assert.That(objectoEnPrueba.LímiteDeVelocidad, Is.EqualTo(límiteDeVelocidad), "LímiteDeVelocidad");
+      Assert.That(objectoEnPrueba.CampoParámetrosDeRuta.ToString(), Is.EqualTo(parámetrosDeRuta.ToString()), "CampoParámetrosDeRuta");
+    }
+
+    [Test]
+    public void PruebaCambiaLímiteDeVelocidad()
+    {
+      #region Caso 1: Normal.
+      {
+        #region Preparación.
+        int número = 12;
+        ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(new EscuchadorDeEstatusPorOmisión());
+        string clase = "clase";
+        string nombre = "Nombre";
+        string tipo = "0xc";
+        string descripción = "Roundabout";
+        LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
+        ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+        string textoParámetrosDeRuta = "2,3,1,0,1,1,0,0,1,0,0,1";
+        List<Campo> campos = new List<Campo> { 
+          new CampoNombre (nombre),
+          new CampoComentario ("Comentario"),
+          new CampoTipo (tipo),
+          new CampoParámetrosDeRuta(textoParámetrosDeRuta)
+        };
+
+        // Crea el objeto en prueba.
+        Vía objectoEnPrueba = new Vía(manejadorDeMapa, número, clase, campos);
+        ElementoDelMapa víaOriginal = (ElementoDelMapa)objectoEnPrueba.Clone();
+
+        // Nuevos valores.
+        LímiteDeVelocidad nuevoLímiteDeVelocidad = new LímiteDeVelocidad(5);
+        string textoParámetrosDeRutaEsperado = "5,3,1,0,1,1,0,0,1,0,0,1";
+        #endregion
+
+        // Llama al método a probar.
+        objectoEnPrueba.CambiaLímiteDeVelocidad(nuevoLímiteDeVelocidad, "Razón");
+
+        // Prueba Propiedades.
+        Assert.That(campos, Is.EqualTo(objectoEnPrueba.Campos), "Campos");
+        Assert.That(clase, Is.EqualTo(objectoEnPrueba.Clase), "Clase");
+        Assert.That(descripción, Is.EqualTo(objectoEnPrueba.Descripción), "Descripción");
+        Assert.That(objectoEnPrueba.FuéEliminado, Is.False, "FuéEliminado");
+        Assert.That(objectoEnPrueba.FuéModificado, Is.True, "FuéModificado");
+        Assert.That(nombre, Is.EqualTo(objectoEnPrueba.Nombre), "Nombre");
+        Assert.That(número, Is.EqualTo(objectoEnPrueba.Número), "Número");
+        PruebaElementoDesconocido.AseguraElementoEsEquivalente(víaOriginal, objectoEnPrueba.Original, "Original");
+        Assert.That(string.Empty, Is.EqualTo(objectoEnPrueba.RazónParaEliminación), "RazónParaEliminación");
+        Assert.That(new Tipo(tipo), Is.EqualTo(objectoEnPrueba.Tipo), "Tipo");
+        Assert.That(objectoEnPrueba.CampoParámetrosDeRuta.ToString(), Is.EqualTo(textoParámetrosDeRutaEsperado), "CampoParámetrosDeRuta");
+      }
+      #endregion
     }
   }
 }

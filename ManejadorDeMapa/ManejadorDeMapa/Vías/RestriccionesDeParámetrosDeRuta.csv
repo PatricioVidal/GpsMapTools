@@ -7,14 +7,14 @@
 // Formato: Tipo,Límite de Velocidad,Clase de Ruta
 0x1,6,4,Major highway 110kh/Clase 4
 0x2,5,3,Principal highway 90kh/Clase 3
-0x3,5,2,Other highway road 60kh/Clase 2
+0x3,5,2,Other highway road 90kh/Clase 2
 0x4,4,2,Arterial road 80kh/Clase 2
 0x5,3,1,Collector road 60kh/Clas 1
-0x6,1,0,Residential street 60kh/Clase 0
-0x7,2,0,Alleyway/private driveway 40kh/Clase 0
+0x6,3,0,Residential street 60kh/Clase 0
+0x7,1,0,Alleyway/private driveway 20kh/Clase 0
 0x8,2,4,Highway ramp, low-speed 40kh/Clase 4
 0x9,4,4,Highway ramp, high-speed 80kh/Clase 4
 0xa,2,0,Unpaved road 40kh/Clase 0
-0xb,5,4,Major highway connector 60kh/Clase 4
+0xb,5,4,Major highway connector 90kh/Clase 4
 0xc,3,1,Roundabout 60kh/Clase 1
 0x16,0,0,Walkway/trail 5kh/Clase 0

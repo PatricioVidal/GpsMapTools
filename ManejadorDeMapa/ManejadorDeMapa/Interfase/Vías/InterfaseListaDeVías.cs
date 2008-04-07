@@ -130,8 +130,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Añade la Vía a la lista.
       Vía vía = (Vía)elElemento;
       List<string> subItems = new List<string> {
-          vía.LímiteDeVelocidad.ToString(),
-          vía.ClaseDeRuta.ToString()};
+          vía.CampoParámetrosDeRuta.LímiteDeVelocidad.ToString(),
+          vía.CampoParámetrosDeRuta.ClaseDeRuta.ToString()};
       subItems.AddRange(losSubItemsAdicionales);
 
       base.AñadeItem(vía, elColorDeFondo, elGrupo, subItems.ToArray());

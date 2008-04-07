@@ -164,8 +164,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
       misIncongruencias.Clear();
       misVíasYaProcesadas.Clear();
 
-      misIncongruencias.Add(Vía.Nula, new List<ElementoDePosibleErrorDeRuteo>());
-
       base.ComenzóAProcesar();
     }
 
@@ -231,14 +229,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int sumaDelIndiceDelLímiteDeVelocidad = 0;
       foreach (Vía vía in víasConElMismoNombre)
       {
-        if (!vía.LímiteDeVelocidad.EsNulo())
-        {
-          int índice = vía.LímiteDeVelocidad.Indice;
-          índicesDeLímitesDeVelocidad.Add(índice);
-          índiceMínimoDelLímiteDeVelocidad = Math.Min(índiceMínimoDelLímiteDeVelocidad, índice);
-          índiceMáximoDelLímiteDeVelocidad = Math.Max(índiceMáximoDelLímiteDeVelocidad, índice);
-          sumaDelIndiceDelLímiteDeVelocidad += índice;
-        }
+        int índice = vía.CampoParámetrosDeRuta.LímiteDeVelocidad.Indice;
+        índicesDeLímitesDeVelocidad.Add(índice);
+        índiceMínimoDelLímiteDeVelocidad = Math.Min(índiceMínimoDelLímiteDeVelocidad, índice);
+        índiceMáximoDelLímiteDeVelocidad = Math.Max(índiceMáximoDelLímiteDeVelocidad, índice);
+        sumaDelIndiceDelLímiteDeVelocidad += índice;
       }
       double promedioDelIndiceDelLímiteDeVelocidad = (double)sumaDelIndiceDelLímiteDeVelocidad / índicesDeLímitesDeVelocidad.Count;
       #endregion
@@ -250,14 +245,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int sumaDelIndiceDeLaClaseDeRuta = 0;
       foreach (Vía vía in víasConElMismoNombre)
       {
-        if (!vía.ClaseDeRuta.EsNula())
-        {
-          int índice = vía.ClaseDeRuta.Indice;
-          índicesDeLaClaseDeRuta.Add(índice);
-          índiceMínimoDeLaClaseDeRuta = Math.Min(índiceMínimoDeLaClaseDeRuta, índice);
-          índiceMáximoDeLaClaseDeRuta = Math.Max(índiceMáximoDeLaClaseDeRuta, índice);
-          sumaDelIndiceDeLaClaseDeRuta += índice;
-        }
+        int índice = vía.CampoParámetrosDeRuta.ClaseDeRuta.Indice;
+        índicesDeLaClaseDeRuta.Add(índice);
+        índiceMínimoDeLaClaseDeRuta = Math.Min(índiceMínimoDeLaClaseDeRuta, índice);
+        índiceMáximoDeLaClaseDeRuta = Math.Max(índiceMáximoDeLaClaseDeRuta, índice);
+        sumaDelIndiceDeLaClaseDeRuta += índice;
       }
       double promedioDelIndiceDeLaClaseDeRuta = (double)sumaDelIndiceDeLaClaseDeRuta / índicesDeLaClaseDeRuta.Count;
       #endregion
@@ -301,38 +293,24 @@ namespace GpsYv.ManejadorDeMapa.Vías
       List<ElementoDePosibleErrorDeRuteo> elementosDeIncongruencia = new List<ElementoDePosibleErrorDeRuteo>();
       foreach (Vía vía in víasConElMismoNombre)
       {
-        if (vía.LímiteDeVelocidad.EsNulo())
-        {
-          elementosDeIncongruencia.Add(new ElementoDePosibleErrorDeRuteo(vía, "Límite de Velocidad Nulo", true));
-          hayIncongruencias = true;
-        }
-        else if (vía.ClaseDeRuta.EsNula())
-        {
-          elementosDeIncongruencia.Add(new ElementoDePosibleErrorDeRuteo(vía, "Clase de Ruta es Nula", true));
-          hayIncongruencias = true;
-          break;
-        }
-        else
-        {
-          bool posibleError = false;
+        bool posibleError = false;
 
-          // Si el Límite de Velocidad está muy lejos del promedio entonces puede ser un error.
-          double diferenciaDelIndiceDeLímiteDeVelocidad = Math.Abs(vía.LímiteDeVelocidad.Indice - promedioDelIndiceDelLímiteDeVelocidad);
-          if (diferenciaDelIndiceDeLímiteDeVelocidad > 1.5)
-          {
-            posibleError = true;
-          }
-
-          // Si la Clase de Ruta está muy lejos del promedio entonces puede ser un error.
-          double diferenciaDelIndiceDeLaClaseDeRuta = Math.Abs(vía.ClaseDeRuta.Indice - promedioDelIndiceDeLaClaseDeRuta);
-          if (diferenciaDelIndiceDeLaClaseDeRuta > 1.5)
-          {
-            posibleError = true;
-          }
-
-          // Añade la vía a la lista.
-          elementosDeIncongruencia.Add(new ElementoDePosibleErrorDeRuteo(vía, detallePorDefecto, posibleError));
+        // Si el Límite de Velocidad está muy lejos del promedio entonces puede ser un error.
+        double diferenciaDelIndiceDeLímiteDeVelocidad = Math.Abs(vía.CampoParámetrosDeRuta.LímiteDeVelocidad.Indice - promedioDelIndiceDelLímiteDeVelocidad);
+        if (diferenciaDelIndiceDeLímiteDeVelocidad > 1.5)
+        {
+          posibleError = true;
         }
+
+        // Si la Clase de Ruta está muy lejos del promedio entonces puede ser un error.
+        double diferenciaDelIndiceDeLaClaseDeRuta = Math.Abs(vía.CampoParámetrosDeRuta.ClaseDeRuta.Indice - promedioDelIndiceDeLaClaseDeRuta);
+        if (diferenciaDelIndiceDeLaClaseDeRuta > 1.5)
+        {
+          posibleError = true;
+        }
+
+        // Añade la vía a la lista.
+        elementosDeIncongruencia.Add(new ElementoDePosibleErrorDeRuteo(vía, detallePorDefecto, posibleError));
       }
       #endregion
 

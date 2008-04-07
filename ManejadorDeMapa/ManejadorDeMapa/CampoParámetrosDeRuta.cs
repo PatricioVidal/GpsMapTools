@@ -85,6 +85,7 @@ namespace GpsYv.ManejadorDeMapa
     #region Campos
     private readonly ClaseDeRuta miClaseDeRuta;
     private readonly LímiteDeVelocidad miLímiteDeVelocidad;
+    private readonly bool[] misOtrosParámetros = new bool[10];
     private readonly string miTexto;
     #endregion
 
@@ -115,6 +116,18 @@ namespace GpsYv.ManejadorDeMapa
       get
       {
         return miLímiteDeVelocidad;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene los otros parámetros.
+    /// </summary>
+    public bool[] OtrosParámetros
+    {
+      get
+      {
+        return misOtrosParámetros;
       }
     }
     #endregion

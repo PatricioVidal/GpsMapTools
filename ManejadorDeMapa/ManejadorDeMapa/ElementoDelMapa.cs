@@ -540,7 +540,7 @@ namespace GpsYv.ManejadorDeMapa
 
       if (!encontróCampo)
       {
-        throw new ArgumentException("El elemento no tiene el campo: " + elCampoACambiar);
+        throw new ArgumentException(string.Format("El elemento no tiene el campo: {0)=", elCampoACambiar.Identificador, elCampoACambiar));
       }
     }
 

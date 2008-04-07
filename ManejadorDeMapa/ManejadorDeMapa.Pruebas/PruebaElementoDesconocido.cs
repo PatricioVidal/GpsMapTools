@@ -179,7 +179,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     }
 
 
-    private void AseguraElementoEsEquivalente(ElementoDelMapa elEsperado, ElementoDelMapa elReal, string elPrefijo)
+    public static void AseguraElementoEsEquivalente(ElementoDelMapa elEsperado, ElementoDelMapa elReal, string elPrefijo)
     {
       Assert.AreEqual(elEsperado.Campos, elReal.Campos, elPrefijo + ".Campos");
       Assert.AreEqual(elEsperado.Clase, elReal.Clase, elPrefijo + ".Clase");

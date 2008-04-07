@@ -109,7 +109,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         int índiceFueraDeRango = 40;
         bool lanzóExcepción = false;
         ArgumentOutOfRangeException excepciónEsperada = new ArgumentOutOfRangeException(
-          "El índice de la clase de ruta debe ser menor o igual a 7");
+          "El índice del límite de velocidad debe estar entre 0 y menor o igual a 7, pero es: 40");
 
         // Llama al constructor en prueba.
         try
@@ -149,19 +149,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
         // Prueba resultado.
         Assert.That(resultado, Is.EqualTo(resultadoEsperado), "Resultado");
-      }
-      #endregion
-
-      #region Caso 2: Límite de Velocidad nulo.
-      {
-        // Preparación.
-        LímiteDeVelocidad objectoEnPrueba = LímiteDeVelocidad.Nulo;
-
-        // Llama al método en prueba.
-        string resultado = objectoEnPrueba.ToString();
-
-        // Prueba resultado.
-        Assert.That(resultado, Is.EqualTo(string.Empty), "Resultado");
       }
       #endregion
     }
