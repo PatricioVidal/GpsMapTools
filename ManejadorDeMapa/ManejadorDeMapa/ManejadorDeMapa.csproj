@@ -78,7 +78,6 @@
     <Compile Include="Interfase\ControladorDePestañas.Designer.cs">
       <DependentUpon>ControladorDePestañas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\DiseñadorDeControlCompuesto.cs" />
     <Compile Include="Interfase\InterfaseListaDeElementos.cs">
       <SubType>Component</SubType>
     </Compile>

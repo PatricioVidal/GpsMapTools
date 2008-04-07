@@ -78,6 +78,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
+using System.Windows.Forms.Design;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
@@ -93,15 +94,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #endregion
 
     #region Clases
-    internal class DiseñadorInterfaseListaConMapaDeVías : DiseñadorDeControlCompuesto<InterfaseListaConMapaDeVías>
+    internal class DiseñadorInterfaseListaConMapaDeVías : ControlDesigner
     {
-      protected override Control[] ObtieneControlesAManejar(InterfaseListaConMapaDeVías elControlCompuesto)
+      public override void Initialize(System.ComponentModel.IComponent elComponente)
       {
-        Control[] controles = new Control[] {
-          elControlCompuesto.miLista,
-          elControlCompuesto.miMapaDeVíasSeleccionadas };
-
-        return controles;
+        base.Initialize(elComponente);
+        InterfaseListaConMapaDeVías control = elComponente as InterfaseListaConMapaDeVías;
+        EnableDesignMode(control.InterfaseListaDeVías, "InterfaseListaDeVías");
+        EnableDesignMode(control.InterfaseMapaDeVíasSeleccionadas, "InterfaseMapaDeVíasSeleccionadas");
+        EnableDesignMode(control.MenuEditorDeVías, "MenuEditorDeVías");
+        EnableDesignMode(control.División, "División");
       }
     }
 
@@ -109,9 +111,21 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     #region Propiedades
     /// <summary>
+    /// Obtiene la división.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public SplitContainer División
+    {
+      get
+      {
+        return miDivision;
+      }
+    }
+
+    
+    /// <summary>
     /// Obtiene la interfase de lista de Vías.
     /// </summary>
-    [Browsable (true)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
     public InterfaseListaDeVías InterfaseListaDeVías
     {
@@ -123,9 +137,21 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
 
     /// <summary>
+    /// Obtiene la interfase de Mapa de Vías seleccionadas.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public InterfaseMapaDeVíasSeleccionadas InterfaseMapaDeVíasSeleccionadas
+    {
+      get
+      {
+        return miMapaDeVíasSeleccionadas;
+      }
+    }
+
+
+    /// <summary>
     /// Obtiene el menú editor de Vías.
     /// </summary>
-    [Browsable(true)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
     public MenuEditorDeVías MenuEditorDeVías
     {

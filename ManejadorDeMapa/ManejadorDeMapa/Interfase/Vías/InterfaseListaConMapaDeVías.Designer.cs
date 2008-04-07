@@ -28,34 +28,33 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.SplitContainer division;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseListaConMapaDeVías));
+      this.miDivision = new System.Windows.Forms.SplitContainer();
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías();
-      this.miMapaDeVíasSeleccionadas = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas();
       this.miMenuEditorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.MenuEditorDeVías();
-      division = new System.Windows.Forms.SplitContainer();
-      division.Panel1.SuspendLayout();
-      division.Panel2.SuspendLayout();
-      division.SuspendLayout();
+      this.miMapaDeVíasSeleccionadas = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas();
+      this.miDivision.Panel1.SuspendLayout();
+      this.miDivision.Panel2.SuspendLayout();
+      this.miDivision.SuspendLayout();
       this.SuspendLayout();
       // 
-      // division
+      // miDivision
       // 
-      division.Dock = System.Windows.Forms.DockStyle.Fill;
-      division.Location = new System.Drawing.Point(0, 0);
-      division.Name = "division";
-      division.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.miDivision.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.miDivision.Location = new System.Drawing.Point(0, 0);
+      this.miDivision.Name = "miDivision";
+      this.miDivision.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
-      // division.Panel1
+      // miDivision.Panel1
       // 
-      division.Panel1.Controls.Add(this.miLista);
+      this.miDivision.Panel1.Controls.Add(this.miLista);
       // 
-      // division.Panel2
+      // miDivision.Panel2
       // 
-      division.Panel2.Controls.Add(this.miMapaDeVíasSeleccionadas);
-      division.Size = new System.Drawing.Size(602, 485);
-      division.SplitterDistance = 288;
-      division.TabIndex = 5;
+      this.miDivision.Panel2.Controls.Add(this.miMapaDeVíasSeleccionadas);
+      this.miDivision.Size = new System.Drawing.Size(602, 485);
+      this.miDivision.SplitterDistance = 288;
+      this.miDivision.TabIndex = 5;
       // 
       // miLista
       // 
@@ -69,7 +68,13 @@
       this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
+      // 
+      // miMenuEditorDeVías
+      // 
+      this.miMenuEditorDeVías.Lista = this.miLista;
+      this.miMenuEditorDeVías.ManejadorDeVías = null;
+      this.miMenuEditorDeVías.Name = "miMenuDeContexto";
+      this.miMenuEditorDeVías.Size = new System.Drawing.Size(325, 114);
       // 
       // miMapaDeVíasSeleccionadas
       // 
@@ -89,23 +94,16 @@
       this.miMapaDeVíasSeleccionadas.Size = new System.Drawing.Size(602, 193);
       this.miMapaDeVíasSeleccionadas.TabIndex = 0;
       // 
-      // miMenuEditorDeVías
-      // 
-      this.miMenuEditorDeVías.Lista = this.miLista;
-      this.miMenuEditorDeVías.ManejadorDeVías = null;
-      this.miMenuEditorDeVías.Name = "miMenuDeContexto";
-      this.miMenuEditorDeVías.Size = new System.Drawing.Size(336, 48);
-      // 
       // InterfaseListaConMapaDeVías
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(division);
+      this.Controls.Add(this.miDivision);
       this.Name = "InterfaseListaConMapaDeVías";
       this.Size = new System.Drawing.Size(602, 485);
-      division.Panel1.ResumeLayout(false);
-      division.Panel2.ResumeLayout(false);
-      division.ResumeLayout(false);
+      this.miDivision.Panel1.ResumeLayout(false);
+      this.miDivision.Panel2.ResumeLayout(false);
+      this.miDivision.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -115,5 +113,6 @@
     private InterfaseListaDeVías miLista;
     private InterfaseMapaDeVíasSeleccionadas miMapaDeVíasSeleccionadas;
     private MenuEditorDeVías miMenuEditorDeVías;
+    private System.Windows.Forms.SplitContainer miDivision;
   }
 }
