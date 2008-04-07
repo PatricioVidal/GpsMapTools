@@ -5,6 +5,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.15
+
+
 Versión 1.14
 - Arreglado el error cuando hay líneas en blanco dentro de un elemento en el archivo .mp.
 - Arreglada la lógica de búsqueda de Vías con incongruencias.
