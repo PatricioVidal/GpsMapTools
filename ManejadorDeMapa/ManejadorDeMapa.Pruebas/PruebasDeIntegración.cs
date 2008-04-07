@@ -86,7 +86,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
   [TestFixture]
   public class PruebasDeIntegración
   {
-    private string miDirectorioDeData = @"..\..\..\Data\";
+    private string miDirectorioDeData = @"..\..\Data\";
 
     private struct CasoDeProcesamientoDePDIs
     {
