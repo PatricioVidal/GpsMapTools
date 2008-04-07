@@ -184,15 +184,15 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Operador de igualdad.
     /// </summary>
-    /// <param name="laPrimeraCoordenada">La primera coordenada.</param>
-    /// <param name="laSegundaCoordenada">La segunda coordenada.</param>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
     public static bool operator ==(
-      Coordenadas laPrimeraCoordenada,
-      Coordenadas laSegundaCoordenada)
+      Coordenadas elPrimerElemento,
+      Coordenadas elSegundoElemento)
     {
       bool esIgual = (
-        (laPrimeraCoordenada.Latitud == laSegundaCoordenada.Latitud) &&
-        (laPrimeraCoordenada.Longitud == laSegundaCoordenada.Longitud));
+        (elPrimerElemento.Latitud == elSegundoElemento.Latitud) &&
+        (elPrimerElemento.Longitud == elSegundoElemento.Longitud));
 
       return esIgual;
     }
@@ -201,13 +201,13 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Operador de desigualdad.
     /// </summary>
-    /// <param name="laPrimeraCoordenada">La primera coordenada.</param>
-    /// <param name="laSegundaCoordenada">La segunda coordenada.</param>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
     public static bool operator !=(
-      Coordenadas laPrimeraCoordenada,
-      Coordenadas laSegundaCoordenada)
+      Coordenadas elPrimerElemento,
+      Coordenadas elSegundoElemento)
     {
-      return !(laPrimeraCoordenada == laSegundaCoordenada);
+      return !(elPrimerElemento == elSegundoElemento);
     }
 
 

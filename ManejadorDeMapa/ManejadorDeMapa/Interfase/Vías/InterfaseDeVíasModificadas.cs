@@ -94,13 +94,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Obtiene o pone el manejador de mapa.
     /// </summary>
-    [Browsable(true)]
     public override ManejadorDeMapa ManejadorDeMapa
     {
       set
       {
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
+        miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
 
         // Pone el manejador de vías.
         if (value != null)
@@ -108,6 +108,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           // Pone el manejador de vías en el menú editor de vías.
           miMenuEditorDeVías.ManejadorDeVías = value.ManejadorDeVías;
         }
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
       }
     }
 

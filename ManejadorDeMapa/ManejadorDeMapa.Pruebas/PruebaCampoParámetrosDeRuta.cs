@@ -93,8 +93,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       #region Caso 1: Indice en rango válido.
       {
         // Preparación.
-        int índiceLímiteDeVelocidad = 2;
-        int índiceDeClaseDeRuta = 3;
+        LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad (2);
+        ClaseDeRuta claseDeRuta = new ClaseDeRuta (3);
         string parámetrosDeRuta = "2,3,0,0,0,0,0,0,0,0,0,0";
 
         // Llama al constructor en prueba.
@@ -102,8 +102,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
         // Prueba Propiedades.
         Assert.AreEqual(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta, objectoEnPrueba.Identificador, "Identificador");
-        Assert.AreEqual(índiceDeClaseDeRuta, objectoEnPrueba.ClaseDeRuta.Indice, "ClaseDeRuta.Indice");
-        Assert.AreEqual(índiceLímiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad.Indice, "LímiteDeVelocidad.Indice");
+        Assert.AreEqual(claseDeRuta, objectoEnPrueba.ClaseDeRuta, "ClaseDeRuta");
+        Assert.AreEqual(límiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad, "LímiteDeVelocidad");
       }
       #endregion
 
@@ -152,8 +152,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
         // Prueba Propiedades.
         Assert.That(objectoEnPrueba.Identificador, Is.EqualTo(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta), "Identificador");
-        Assert.That(objectoEnPrueba.ClaseDeRuta.Indice, Is.EqualTo(claseDeRuta.Indice), "ClaseDeRuta.Indice");
-        Assert.That(objectoEnPrueba.LímiteDeVelocidad.Indice, Is.EqualTo(límiteDeVelocidad.Indice), "LímiteDeVelocidad.Indice");
+        Assert.That(objectoEnPrueba.ClaseDeRuta, Is.EqualTo(claseDeRuta), "ClaseDeRuta");
+        Assert.That(objectoEnPrueba.LímiteDeVelocidad, Is.EqualTo(límiteDeVelocidad), "LímiteDeVelocidad");
       }
       #endregion
     }
@@ -165,31 +165,19 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     [Test]
     public void PruebaToString()
     {
-      #region Caso 1: Indice en rango válido.
+      #region Caso 1: Indices en rango válido.
       {
         // Preparación.
-        int índice = 3;
-        LímiteDeVelocidad objectoEnPrueba = new LímiteDeVelocidad(índice);
-        string resultadoEsperado = "(3) 60 km/h";
+        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(
+          new LímiteDeVelocidad (3),
+          new ClaseDeRuta (1));
+        string resultadoEsperado = "3,1,0,0,0,0,0,0,0,0,0,0";
 
         // Llama al constructor en prueba.
         string resultado = objectoEnPrueba.ToString();
 
         // Prueba resultado.
         Assert.That(resultado, Is.EqualTo(resultadoEsperado), "Resultado");
-      }
-      #endregion
-
-      #region Caso 2: Límite de Velocidad nulo.
-      {
-        // Preparación.
-        CampoParámetrosDeRuta objectoEnPrueba = CampoParámetrosDeRuta.Nulo;
-
-        // Llama al método en prueba.
-        string resultado = objectoEnPrueba.ToString();
-
-        // Prueba resultado.
-        Assert.That(resultado, Is.EqualTo(string.Empty), "Resultado");
       }
       #endregion
     }

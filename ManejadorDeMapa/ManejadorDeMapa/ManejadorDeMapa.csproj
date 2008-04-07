@@ -97,6 +97,12 @@
     <Compile Include="Interfase\MenúEditorDeElementos.Designer.cs">
       <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.Designer.cs">
+      <DependentUpon>InterfasePosiblesErroresDeRuteoEnVías.cs</DependentUpon>
+    </Compile>
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
     <Compile Include="Interfase\OrdenadorDeColumnaDeLista.cs">
       <SubType>Component</SubType>
@@ -393,6 +399,7 @@
     <Compile Include="Tipo.cs" />
     <Compile Include="Vías\BuscadorDeErrores.cs" />
     <Compile Include="Vías\BuscadorDeIncongruencias.cs" />
+    <Compile Include="Vías\BuscadorDePosiblesErroresDeRuteo.cs" />
     <Compile Include="Vías\ManejadorDeVías.cs" />
     <Compile Include="Vías\RestriccionesDeParámetrosDeRuta.cs" />
     <Compile Include="Vías\TiposDeVías.cs" />

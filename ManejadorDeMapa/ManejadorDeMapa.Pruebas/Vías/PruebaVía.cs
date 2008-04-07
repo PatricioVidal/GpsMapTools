@@ -119,8 +119,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       Assert.That(objectoEnPrueba.Original, Is.Null, "Original");
       Assert.That(string.Empty, Is.EqualTo(objectoEnPrueba.RazónParaEliminación), "RazónParaEliminación");
       Assert.That(new Tipo(tipo), Is.EqualTo(objectoEnPrueba.Tipo), "Tipo");
-      Assert.That(objectoEnPrueba.ClaseDeRuta.Indice, Is.EqualTo(claseDeRuta.Indice), "ClaseDeRuta.Indice");
-      Assert.That(objectoEnPrueba.LímiteDeVelocidad.Indice, Is.EqualTo(límiteDeVelocidad.Indice), "LímiteDeVelocidad.Indice");
+      Assert.That(objectoEnPrueba.ClaseDeRuta, Is.EqualTo(claseDeRuta), "ClaseDeRuta");
+      Assert.That(objectoEnPrueba.LímiteDeVelocidad, Is.EqualTo(límiteDeVelocidad), "LímiteDeVelocidad");
     }
   }
 }

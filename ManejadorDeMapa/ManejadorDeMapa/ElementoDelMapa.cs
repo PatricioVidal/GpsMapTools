@@ -527,7 +527,7 @@ namespace GpsYv.ManejadorDeMapa
 
           // Añade la razón del cambio.
           this.misOtrasModificaciones.Add(string.Format(
-            "[{0} {1} {2}]", elCampoNuevo.Identificador, SeparadorDeModificaciones, laRazón));
+            "[{0}: {1} {2} {3}]", elCampoNuevo.Identificador, elCampoACambiar, SeparadorDeModificaciones, laRazón));
 
           // Asigna el nuevo campo.
           misCampos[i] = elCampoNuevo;
@@ -557,7 +557,7 @@ namespace GpsYv.ManejadorDeMapa
 
       // Añade la razón del cambio.
       this.misOtrasModificaciones.Add(string.Format(
-        "[{0} {1} {2}]", elCampoNuevo.Identificador, SeparadorDeModificaciones, laRazón));
+        "[Nuevo {0}: {1}]", elCampoNuevo.Identificador, laRazón));
 
       // Añade el nuevo campo.
       misCampos.Add(elCampoNuevo);

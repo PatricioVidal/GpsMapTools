@@ -96,12 +96,6 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Campo de Parámetros de Rutas nulo.
-    /// </summary>
-    static readonly public CampoParámetrosDeRuta Nulo = new CampoParámetrosDeRuta(string.Empty);
-
-
-    /// <summary>
     /// Obtiene la clase de ruta.
     /// </summary>
     public ClaseDeRuta ClaseDeRuta
@@ -136,27 +130,19 @@ namespace GpsYv.ManejadorDeMapa
     {
       miTexto = losParámetrosDeRuta;
 
-      if (losParámetrosDeRuta == string.Empty)
-      {
-        miClaseDeRuta = ClaseDeRuta.Nula;
-        miLímiteDeVelocidad = LímiteDeVelocidad.Nulo;
-      }
-      else
-      {
-        string[] partes = losParámetrosDeRuta.Split(',');
+      string[] partes = losParámetrosDeRuta.Split(',');
 
-        // Verifica el número de partes.
-        const int númeroDePartes = 12;
-        if (partes.Length < númeroDePartes)
-        {
-          throw new ArgumentException(string.Format("Los parámetros de rutas deben tener " +
-            "{0} elementos separados por coma, pero es: {1}", númeroDePartes, losParámetrosDeRuta));
-        }
-
-        // Lée los parametros.
-        miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
-        miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
+      // Verifica el número de partes.
+      const int númeroDePartes = 12;
+      if (partes.Length < númeroDePartes)
+      {
+        throw new ArgumentException(string.Format("Los parámetros de rutas deben tener " +
+          "{0} elementos separados por coma, pero es: {1}", númeroDePartes, losParámetrosDeRuta));
       }
+
+      // Lée los parametros.
+      miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
+      miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
     }
 
 

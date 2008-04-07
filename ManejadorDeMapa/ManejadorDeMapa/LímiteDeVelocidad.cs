@@ -163,6 +163,70 @@ namespace GpsYv.ManejadorDeMapa
 
       return misTextos[miIndice];      
     }
+
+
+    /// <summary>
+    /// Operador de igualdad.
+    /// </summary>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
+    public static bool operator ==(
+      LímiteDeVelocidad elPrimerElemento,
+      LímiteDeVelocidad elSegundoElemento)
+    {
+      bool esIgual = (elPrimerElemento.miIndice == elSegundoElemento.miIndice);
+
+      return esIgual;
+    }
+
+
+    /// <summary>
+    /// Operador de desigualdad.
+    /// </summary>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
+    public static bool operator !=(
+      LímiteDeVelocidad elPrimerElemento,
+      LímiteDeVelocidad elSegundoElemento)
+    {
+      return !(elPrimerElemento == elSegundoElemento);
+    }
+
+
+    /// <summary>
+    /// Devuelve una variable lógica que indica si un objeto
+    /// dado es igual.
+    /// </summary>
+    /// <param name="elObjecto">El objecto dado.</param>
+    public override bool Equals(object elObjecto)
+    {
+      // Si el objeto es nulo entonces no puede ser igual.
+      if (elObjecto == null)
+      {
+        return false;
+      }
+
+      // Si el objecto no es del mismo tipo entonces no puede ser igual.
+      if (!(elObjecto is LímiteDeVelocidad))
+      {
+        return false;
+      }
+
+      // Compara latitud y longitud.
+      LímiteDeVelocidad comparador = (LímiteDeVelocidad)elObjecto;
+      bool esIgual = (this == comparador);
+
+      return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
+    }
     #endregion
   }
 }

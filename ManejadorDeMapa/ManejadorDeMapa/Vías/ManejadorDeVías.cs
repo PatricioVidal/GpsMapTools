@@ -86,6 +86,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #region Campos
     private readonly BuscadorDeErrores miBuscadorDeErrores;
     private readonly BuscadorDeIncongruencias miBuscadorDeIncongruencias;
+    private readonly BuscadorDePosiblesErroresDeRuteo miBuscadorDePosiblesErroresDeRuteo;
     #endregion
 
     #region Propiedades
@@ -104,6 +105,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
       get
       {
         return miBuscadorDeIncongruencias;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el Buscador de Posibles Errores de Ruteo.
+    /// </summary>
+    public BuscadorDePosiblesErroresDeRuteo BuscadorDePosiblesErroresDeRuteo
+    {
+      get
+      {
+        return miBuscadorDePosiblesErroresDeRuteo;
       }
     }
 
@@ -136,6 +149,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Crea los procesadores.
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
       miBuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
+      miBuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
 
       // Escucha eventos.
       elManejadorDeMapa.VíasModificadas += EnElementosModificados;

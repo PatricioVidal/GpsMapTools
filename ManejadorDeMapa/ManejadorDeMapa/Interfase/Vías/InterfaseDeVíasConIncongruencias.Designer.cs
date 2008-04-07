@@ -36,7 +36,7 @@
       // columnaDetalle
       // 
       columnaDetalle.Text = "Detalle";
-      columnaDetalle.Width = 500;
+      columnaDetalle.Width = 600;
       // 
       // miInterfaseListaConMapaDeVías
       // 
@@ -57,7 +57,6 @@
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex = 2;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.UseCompatibleStateImageBehavior = false;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.View = System.Windows.Forms.View.Details;
-      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.VirtualMode = false;
       this.miInterfaseListaConMapaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";

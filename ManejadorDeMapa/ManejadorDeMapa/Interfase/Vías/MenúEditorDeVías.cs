@@ -341,10 +341,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         foreach (Vía vía in vías)
         {
           LímiteDeVelocidad límiteDeVelocidadEstandar = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo];
-          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estandar");
+          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estándar");
 
           ClaseDeRuta claseDeRutaEstandar = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo];
-          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Límite de Velocidad Estandar");
+          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Clase de Ruta Estándar");
         }
         ManejadorDeVías.RestableceEventos();
 

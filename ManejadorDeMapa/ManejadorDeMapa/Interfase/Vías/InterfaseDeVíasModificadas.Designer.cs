@@ -43,7 +43,7 @@
       // columnaModificaciones
       // 
       columnaModificaciones.Text = "Modificaciones";
-      columnaModificaciones.Width = 500;
+      columnaModificaciones.Width = 600;
       // 
       // miDivision
       // 
