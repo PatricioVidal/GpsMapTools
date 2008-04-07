@@ -70,5 +70,17 @@ namespace GpsYv.ManejadorDeMapa.Properties {
                 this["TamañoDeLaFormaPrincipal"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RequireActualizarOpcionesDelUsuario {
+            get {
+                return ((bool)(this["RequireActualizarOpcionesDelUsuario"]));
+            }
+            set {
+                this["RequireActualizarOpcionesDelUsuario"] = value;
+            }
+        }
     }
 }

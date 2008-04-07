@@ -75,6 +75,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Text;
+using GpsYv.ManejadorDeMapa.Properties;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -87,12 +88,27 @@ namespace GpsYv.ManejadorDeMapa
     [STAThread]
     static void Main()
     {
+      // Actualiza las opciones del usuario si es necesario.
+      if (Settings.Default.RequireActualizarOpcionesDelUsuario)
+      {
+        // Actualiza las opciones del usuario.
+        Settings.Default.Upgrade();
+
+        // Previene que se actualizen las opciones del usuario de nuevo.
+        Settings.Default.RequireActualizarOpcionesDelUsuario = false;
+      }
+
+      // Crea un rastro (Trace)
       TextWriterTraceListener escritorDeRastro = new TextWriterTraceListener("Rastro.log");
       Trace.AutoFlush = true;
       Trace.WriteLine("Comenzando Aplicación");
       Trace.Indent();
+
+      // Pone opciones.
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
+
+      // Corre la applicación.
       try
       {
         Application.Run(new Interfase.InterfaseManejadorDeMapa());
@@ -101,6 +117,8 @@ namespace GpsYv.ManejadorDeMapa
       {
         MuestraExcepción("Error irrecuperable. La aplicación va a cerrar.", e);
       }
+
+      // Finaliza el rastro.
       Trace.Unindent();
       Trace.Flush();
     }
