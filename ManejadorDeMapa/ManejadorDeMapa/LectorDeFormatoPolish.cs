@@ -271,8 +271,14 @@ namespace GpsYv.ManejadorDeMapa
       string línea = LeeLaPróximaLínea();
       while (!línea.StartsWith("[END"))
       {
-        // La línea debería ser un comentario or un campo.
-        if (línea.StartsWith(";"))
+        // La línea debería ser una línea en blanco, un comentario,
+        // o un campo.
+        bool esLíneaEnBlanco = (línea.Trim() == string.Empty);
+        if (esLíneaEnBlanco)
+        {
+          // Nos saltamos líneas en blanco.
+        }
+        else if (línea.StartsWith(";"))
         {
           // Es un comentario.
           campos.Add(new CampoComentario(línea));
@@ -283,6 +289,7 @@ namespace GpsYv.ManejadorDeMapa
           int separador = línea.IndexOf('=');
           if (separador > 1)
           {
+            #region Lee el identificador y el nivel
             // Obtiene el identificador con nivel (Data0, Data1, etc)
             // y texto del campo.
             string identificadorConNivel = línea.Substring(0, separador);
@@ -302,8 +309,9 @@ namespace GpsYv.ManejadorDeMapa
                 identificador = identificadorConNivel.Substring(0, indiceDelNúmero);
               }
             }
-            
-            // Construye el campo basado en el identificador.
+            #endregion
+
+            #region Construye el campo basado en el identificador.
             switch (identificador)
             {
               case CampoNombre.IdentificadorDeEtiqueta:
@@ -325,6 +333,7 @@ namespace GpsYv.ManejadorDeMapa
                 campos.Add(new CampoGenérico(identificadorConNivel, texto));
                 break;
             }
+            #endregion
           }
           else
           {
@@ -335,7 +344,8 @@ namespace GpsYv.ManejadorDeMapa
         // Lee la próxima linea.
         línea = LeeLaPróximaLínea();
 
-        // Si llegamos al final del archivo entonces hay un error.
+        // Si llegamos al final del archivo entonces hay un error
+        // porque todavía no hemos encontrado el final del elemento.
         if (línea == null)
         {
           throw new ArgumentException("Se encontró el final del archivo estando dentro de un elemento.");

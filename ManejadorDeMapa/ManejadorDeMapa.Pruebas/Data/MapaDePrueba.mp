@@ -98,6 +98,8 @@ Level4Rgn80=11100000000000000001110000000000000000010000000001000000000111100000
 [POLYLINE]
 Type=0x5
 EndLevel=3
+; La próxima línea está en blanco para probar que nos las saltamos correctamente.
+
 CityIdx=1
 RoadID=569
 RouteParam=2,1,0,0,0,0,0,0,0,0,0,0
