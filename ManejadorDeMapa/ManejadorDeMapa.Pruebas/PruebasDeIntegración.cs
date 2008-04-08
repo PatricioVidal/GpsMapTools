@@ -115,7 +115,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     }
 
     [Test]
-    public void PruebaProcesamientoDePDIs()
+    public void PruebaProcesamientoDeTodo()
     {
       #region Preparación.
       // Comienza applicación.
@@ -158,9 +158,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Selecciona la pestaña de PDIs.
         controladorDePestañasPrincipal.SelectTab(2);
 
-        // Manda a procesar todos los PDIs.
-        ToolStripMenuItemTester menuProcesarTodoEnPDIs = new ToolStripMenuItemTester("miMenuProcesarTodoEnPDIs");
-        menuProcesarTodoEnPDIs.Click();
+        // Manda a procesar todo.
+        ToolStripMenuItemTester menuProcesarTodo = new ToolStripMenuItemTester("miMenúProcesarTodo");
+        menuProcesarTodo.Click();
 
         // Verifica el número de PDIs en las pestañas.
         Assert.AreEqual("Todos (" + caso.Todos + ")", pestañaTodos.Text, identificación + "PDIs.Todos.Text");

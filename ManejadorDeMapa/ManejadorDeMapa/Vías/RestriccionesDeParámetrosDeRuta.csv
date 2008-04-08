@@ -1,8 +1,5 @@
 ﻿//
-// Esta lista contiene las descripciones de los PDIs según su Tipo.
-//
-// La data se creó de la información en "http://cricri-blog.blogspot.com/2006/06/code-objets-garmin-poi.html"
-// y fue manualmente editada y ampliada por JoséH (www.gpsyv.net).
+// Esta lista fué creada por JoséH (www.gpsyv.net).
 //
 // Formato: Tipo,Límite de Velocidad,Clase de Ruta
 0x1,6,4,Major highway 110kh/Clase 4

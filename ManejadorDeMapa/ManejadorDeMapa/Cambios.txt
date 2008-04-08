@@ -7,6 +7,10 @@ Lo próximo para hacer:
 
 Versión 1.15
 - Ahora se maneja correctamente las vías sin Campo de Parámetros de Ruta definido.
+- Arreglado problema de no mantener los otros parámetros de ruta al poner las Vías con Parámetros de Ruta estandar.
+- Añadida actualización automática de los Parámetros de Ruta para las Vías tipo Caminería (0x16).
+- Actualizada la tabla de Parámetros de Ruta.
+- Ahora la búsqueda de Vías con incongruencias se hace de forma exacta, es decir, sin permitir una diferencia de +-1 en el Límite de Velocidad o la Clase de Ruta.
 - Interno: Extendida las Pruebas de la clase Vía para duplicar el problema en el que los Parámetros de Ruta no mantienen los elementos despues del tercer elemento cuando se cambia el Límite de Velocidad o la Clase de Ruta.
 
 Versión 1.14

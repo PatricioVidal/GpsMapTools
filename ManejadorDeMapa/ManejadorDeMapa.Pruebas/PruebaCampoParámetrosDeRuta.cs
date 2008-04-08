@@ -95,19 +95,21 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Preparación.
         LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad (2);
         ClaseDeRuta claseDeRuta = new ClaseDeRuta (3);
-        string parámetrosDeRuta = "2,3,0,0,0,0,0,0,0,0,0,0";
+        string parámetrosDeRuta = "2,3,0,1,0,0,0,0,0,0,0,1";
+        bool[] otrosParámetrosEsperados = new bool[] { false, true, false, false, false, false, false, false, false, true };
 
         // Llama al constructor en prueba.
         CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(parámetrosDeRuta);
 
         // Prueba Propiedades.
-        Assert.AreEqual(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta, objectoEnPrueba.Identificador, "Identificador");
-        Assert.AreEqual(claseDeRuta, objectoEnPrueba.ClaseDeRuta, "ClaseDeRuta");
-        Assert.AreEqual(límiteDeVelocidad, objectoEnPrueba.LímiteDeVelocidad, "LímiteDeVelocidad");
+        Assert.That(objectoEnPrueba.Identificador, Is.EqualTo(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta), "Identificador");
+        Assert.That(objectoEnPrueba.ClaseDeRuta, Is.EqualTo(claseDeRuta), "ClaseDeRuta");
+        Assert.That(objectoEnPrueba.LímiteDeVelocidad, Is.EqualTo(límiteDeVelocidad), "LímiteDeVelocidad");
+        Assert.That(objectoEnPrueba.OtrosParámetros, Is.EqualTo(otrosParámetrosEsperados), "OtrosParámetros");
       }
       #endregion
 
-      #region Caso 2: Parametros de ruta inválidos.
+      #region Caso 2: Parametros de Tuta con muy pocos elementos.
       {
         // Preparación.
         string parametrosDeRutaInválidos = "2";
@@ -132,28 +134,113 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
       }
       #endregion
+
+      #region Caso 3: Otros Parámetros con valores diferente de 0 ó 1.
+      {
+        // Preparación.
+        string parametrosDeRutaInválidos = "2,3,0,5,0,0,0,0,0,0,0,1";
+        bool lanzóExcepción = false;
+        ArgumentException excepciónEsperada = new ArgumentException(
+          "El números de los parámetros de ruta para el tercer elemento en adelante tiene que ser 0 ó 1:" + 
+          " 2,3,0,5,0,0,0,0,0,0,0,1\r\nParameter name: elTextoDeParámetrosDeRuta");
+
+        // Llama al constructor en prueba.
+        try
+        {
+          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(parametrosDeRutaInválidos);
+        }
+        catch (Exception e)
+        {
+          // Prueba las propiedades de la excepción.
+          Assert.That(e.GetType(), Is.EqualTo(excepciónEsperada.GetType()), "Tipo de Excepción");
+          Assert.That(e.Message, Is.EqualTo(excepciónEsperada.Message), "Excepción.Message");
+
+          lanzóExcepción = true;
+        }
+
+        Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
+      }
+      #endregion    
     }
 
 
     /// <summary>
-    /// Prueba el constructor con LímiteDeVelocidad y ClaseDeRuta.
+    /// Prueba el constructor con LímiteDeVelocidad, ClaseDeRuta, y bool[].
     /// </summary>
     [Test]
-    public void PruebaConstructorConLímiteDeVelocidadYClaseDeRuta()
+    public void PruebaConstructorConLímiteDeVelocidadClaseDeRutaBoolArray()
     {
       #region Caso 1: Caso normal.
       {
         // Preparación.
         LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
         ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+        bool[] otrosParámetros = new bool[] { true, false, true, false, false, false, true, true, false, true };
 
         // Llama al constructor en prueba.
-        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta);
+        CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta, otrosParámetros);
 
         // Prueba Propiedades.
         Assert.That(objectoEnPrueba.Identificador, Is.EqualTo(CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta), "Identificador");
         Assert.That(objectoEnPrueba.ClaseDeRuta, Is.EqualTo(claseDeRuta), "ClaseDeRuta");
         Assert.That(objectoEnPrueba.LímiteDeVelocidad, Is.EqualTo(límiteDeVelocidad), "LímiteDeVelocidad");
+        Assert.That(objectoEnPrueba.OtrosParámetros, Is.EqualTo(otrosParámetros), "OtrosParámetros");
+      }
+      #endregion
+
+      #region Caso 2: Muy pocos elementos en Otros Parámetros.
+      {
+        // Preparación.
+        LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
+        ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+        bool[] otrosParámetros = new bool[] { true, true, false, false, false, true, true, false, true };
+        bool lanzóExcepción = false;
+        ArgumentException excepciónEsperada = new ArgumentException(
+          "El números de Otrós Parámetros debe ser 10 pero es 9\r\nParameter name: losOtrosParámetros");
+
+        // Llama al constructor en prueba.
+        try
+        {
+          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta, otrosParámetros);
+        }
+        catch (Exception e)
+        {
+          // Prueba las propiedades de la excepción.
+          Assert.That(e.GetType(), Is.EqualTo(excepciónEsperada.GetType()), "Tipo de Excepción");
+          Assert.That(e.Message, Is.EqualTo(excepciónEsperada.Message), "Excepción.Message");
+
+          lanzóExcepción = true;
+        }
+
+        Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
+      }
+      #endregion
+
+      #region Caso 3: Muchos elementos en Otros Parámetros.
+      {
+        // Preparación.
+        LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(2);
+        ClaseDeRuta claseDeRuta = new ClaseDeRuta(3);
+        bool[] otrosParámetros = new bool[] { true, true, false, true, false, false, false, true, true, false, true };
+        bool lanzóExcepción = false;
+        ArgumentException excepciónEsperada = new ArgumentException(
+          "El números de Otrós Parámetros debe ser 10 pero es 11\r\nParameter name: losOtrosParámetros");
+
+        // Llama al constructor en prueba.
+        try
+        {
+          CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(límiteDeVelocidad, claseDeRuta, otrosParámetros);
+        }
+        catch (Exception e)
+        {
+          // Prueba las propiedades de la excepción.
+          Assert.That(e.GetType(), Is.EqualTo(excepciónEsperada.GetType()), "Tipo de Excepción");
+          Assert.That(e.Message, Is.EqualTo(excepciónEsperada.Message), "Excepción.Message");
+
+          lanzóExcepción = true;
+        }
+
+        Assert.That(lanzóExcepción, Is.True, "No se lanzó la excepción.");
       }
       #endregion
     }
@@ -170,8 +257,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Preparación.
         CampoParámetrosDeRuta objectoEnPrueba = new CampoParámetrosDeRuta(
           new LímiteDeVelocidad (3),
-          new ClaseDeRuta (1));
-        string resultadoEsperado = "3,1,0,0,0,0,0,0,0,0,0,0";
+          new ClaseDeRuta (1),
+          new bool[] { true, false, false, true, false, false, true, false, false, true });
+        string resultadoEsperado = "3,1,1,0,0,1,0,0,1,0,0,1";
 
         // Llama al constructor en prueba.
         string resultado = objectoEnPrueba.ToString();

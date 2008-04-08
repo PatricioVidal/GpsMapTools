@@ -270,8 +270,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneVíasSeleccionadas();
         foreach (Vía vía in vías)
         {
-          LímiteDeVelocidad límiteDeVelocidadEstandar = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo];
-          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estandar");
+          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+            RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo],
+            vía.CampoParámetrosDeRuta.ClaseDeRuta,
+            vía.CampoParámetrosDeRuta.OtrosParámetros);
+          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad Estandar");
         }
         ManejadorDeVías.RestableceEventos();
 
@@ -305,8 +308,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneVíasSeleccionadas();
         foreach (Vía vía in vías)
         {
-          ClaseDeRuta claseDeRutaEstandar = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo];
-          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Límite de Velocidad Estandar");
+          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+            vía.CampoParámetrosDeRuta.LímiteDeVelocidad,
+            RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo],
+            vía.CampoParámetrosDeRuta.OtrosParámetros);
+          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Clase de Ruta Estandar");
         }
         ManejadorDeVías.RestableceEventos();
 
@@ -340,11 +346,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneVíasSeleccionadas();
         foreach (Vía vía in vías)
         {
-          LímiteDeVelocidad límiteDeVelocidadEstandar = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo];
-          vía.CambiaLímiteDeVelocidad(límiteDeVelocidadEstandar, "Cambiado a Límite de Velocidad Estándar");
-
-          ClaseDeRuta claseDeRutaEstandar = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo];
-          vía.CambiaClaseDeRuta(claseDeRutaEstandar, "Cambiado a Clase de Ruta Estándar");
+          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+            RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo],
+            RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo],
+            vía.CampoParámetrosDeRuta.OtrosParámetros);
+          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad y Clase de Ruta Estándar");
         }
         ManejadorDeVías.RestableceEventos();
 

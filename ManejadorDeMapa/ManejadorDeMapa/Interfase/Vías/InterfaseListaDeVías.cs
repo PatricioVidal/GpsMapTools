@@ -87,7 +87,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   /// </summary>
   public partial class InterfaseListaDeVías : InterfaseListaDeElementos
   {
-    private const int AnchoDeColumnaPorDefecto = 110;
+    private const int AnchoDeColumnaPorDefecto = 120;
 
     /// <summary>
     /// Constructor.
@@ -105,9 +105,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       columnaClaseDeRuta.Text = "Clase de Ruta";
       columnaClaseDeRuta.Width = AnchoDeColumnaPorDefecto;
 
+      ColumnHeader columnaParámetros = new ColumnHeader();
+      columnaParámetros.Text = "Parámetros";
+      columnaParámetros.Width = AnchoDeColumnaPorDefecto;
+
       this.Columns.AddRange(new ColumnHeader[] {
         columnaLímiteDeVelocidad,
-        columnaClaseDeRuta});
+        columnaClaseDeRuta,
+        columnaParámetros});
       #endregion
     }
 
@@ -131,7 +136,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Vía vía = (Vía)elElemento;
       List<string> subItems = new List<string> {
           vía.CampoParámetrosDeRuta.LímiteDeVelocidad.ToString(),
-          vía.CampoParámetrosDeRuta.ClaseDeRuta.ToString()};
+          vía.CampoParámetrosDeRuta.ClaseDeRuta.ToString(),
+          vía.CampoParámetrosDeRuta.ToString()};
       subItems.AddRange(losSubItemsAdicionales);
 
       base.AñadeItem(vía, elColorDeFondo, elGrupo, subItems.ToArray());

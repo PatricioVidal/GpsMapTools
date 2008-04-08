@@ -85,7 +85,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #region Campos
     private static readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaPorDefecto = new CampoParámetrosDeRuta(
       new LímiteDeVelocidad (0),
-      new ClaseDeRuta (0));
+      new ClaseDeRuta (0),
+      new bool[10]);
     private CampoParámetrosDeRuta miCampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
     private bool miTieneCampoParámetrosDeRutaEnCampos = false;
     #endregion 
@@ -134,83 +135,33 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Cambia el Límite de Velocidad.
+    /// Cambia el Campo de Parámetros de Ruta.
     /// </summary>
-    /// <param name="elLímiteDeVelocidadNuevo">El Límite de Velocidad nuevo.</param>
+    /// <param name="elCampoParámetrosDeRutaNuevo">El Campo de Parámetros de Ruta nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaLímiteDeVelocidad(LímiteDeVelocidad elLímiteDeVelocidadNuevo, string laRazón)
+    public void CambiaCampoParámetrosDeRuta(CampoParámetrosDeRuta elCampoParámetrosDeRutaNuevo, string laRazón)
     {
       // Solo cambia el Límite de Velocidad si es diferente.
-      if (elLímiteDeVelocidadNuevo == miCampoParámetrosDeRuta.LímiteDeVelocidad)
+      if (elCampoParámetrosDeRutaNuevo.Equals(miCampoParámetrosDeRuta))
       {
         return;
       }
 
       // Si no tiene Campo de Parámetros de Ruta entonces añadimos 
       // un Campo de Parámetros de Ruta con el nuevo Límite de Velocidad y  
-      // una Clase de Ruta estandar.
+      // una Clase de Ruta estándar.
       if (!miTieneCampoParámetrosDeRutaEnCampos)
       {
-        CampoParámetrosDeRuta campoNuevo = new CampoParámetrosDeRuta(
-          elLímiteDeVelocidadNuevo,
-          miCampoParámetrosDeRuta.ClaseDeRuta);
-
         // Añade el campo.
-        base.AñadeCampo(campoNuevo, laRazón);
-        miCampoParámetrosDeRuta = campoNuevo;
+        base.AñadeCampo(elCampoParámetrosDeRutaNuevo, laRazón);
+        miCampoParámetrosDeRuta = elCampoParámetrosDeRutaNuevo;
         miTieneCampoParámetrosDeRutaEnCampos = true;
       }
       else
       {
-        {
-          CampoParámetrosDeRuta campoNuevo = new CampoParámetrosDeRuta(
-            elLímiteDeVelocidadNuevo,
-            miCampoParámetrosDeRuta.ClaseDeRuta);
-
-          // Cambia el campo.
-          base.CambiaCampo(campoNuevo, miCampoParámetrosDeRuta, laRazón);
-          miCampoParámetrosDeRuta = campoNuevo;
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Cambia la Clase de Ruta
-    /// </summary>
-    /// <param name="laClaseDeRutaNueva">La Clase de Ruta nueva.</param>
-    /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaClaseDeRuta(ClaseDeRuta laClaseDeRutaNueva, string laRazón)
-    {
-      // Solo cambia la Clase de Ruta si es diferente.
-      if (laClaseDeRutaNueva == miCampoParámetrosDeRuta.ClaseDeRuta)
-      {
-        return;
-      }
-
-      // Si no tiene Campo de Parámetros de Ruta entonces añadimos 
-      // un Campo de Parámetros de Ruta con la nueva Clase de Ruta  y  
-      // y mantenemos el Límite de Velocidad.
-      if (!miTieneCampoParámetrosDeRutaEnCampos)
-      {
-        CampoParámetrosDeRuta campoNuevo = new CampoParámetrosDeRuta(
-          miCampoParámetrosDeRuta.LímiteDeVelocidad,
-          laClaseDeRutaNueva);
-
-        // Añade el campo.
-        base.AñadeCampo(campoNuevo, laRazón);
-        miCampoParámetrosDeRuta = campoNuevo;
-        miTieneCampoParámetrosDeRutaEnCampos = true;
-      }
-      else
-      {
-        CampoParámetrosDeRuta campoNuevo = new CampoParámetrosDeRuta(
-          miCampoParámetrosDeRuta.LímiteDeVelocidad,
-          laClaseDeRutaNueva);
-
         // Cambia el campo.
-        base.CambiaCampo(campoNuevo, miCampoParámetrosDeRuta, laRazón);
-        miCampoParámetrosDeRuta = campoNuevo;
+        base.CambiaCampo(elCampoParámetrosDeRutaNuevo, miCampoParámetrosDeRuta, laRazón);
+        miCampoParámetrosDeRuta = elCampoParámetrosDeRutaNuevo;
       }
     }
     #endregion

@@ -85,8 +85,8 @@ namespace GpsYv.ManejadorDeMapa
     #region Campos
     private readonly ClaseDeRuta miClaseDeRuta;
     private readonly LímiteDeVelocidad miLímiteDeVelocidad;
-    private readonly bool[] misOtrosParámetros = new bool[10];
-    private readonly string miTexto;
+    private const int NúmeroDeOtrosParámetros = 10;
+    private readonly bool[] misOtrosParámetros;
     #endregion
 
     #region Propiedades
@@ -136,26 +136,43 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="losParámetrosDeRuta">Los parámetros de ruta.</param>
+    /// <param name="elTextoDeParámetrosDeRuta">El texto de los parámetros de ruta.</param>
     public CampoParámetrosDeRuta(
-      string losParámetrosDeRuta)
+      string elTextoDeParámetrosDeRuta)
       : base(IdentificadorDeParámetrosDeRuta)
     {
-      miTexto = losParámetrosDeRuta;
-
-      string[] partes = losParámetrosDeRuta.Split(',');
+      string[] partes = elTextoDeParámetrosDeRuta.Split(',');
 
       // Verifica el número de partes.
       const int númeroDePartes = 12;
       if (partes.Length < númeroDePartes)
       {
         throw new ArgumentException(string.Format("Los parámetros de rutas deben tener " +
-          "{0} elementos separados por coma, pero es: {1}", númeroDePartes, losParámetrosDeRuta));
+          "{0} elementos separados por coma, pero es: {1}", númeroDePartes, elTextoDeParámetrosDeRuta));
       }
 
       // Lée los parametros.
       miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
       miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
+      misOtrosParámetros = new bool[NúmeroDeOtrosParámetros];
+      int otrosParámetrosIndiceOffset = 2;
+      for (int i = 0; i < NúmeroDeOtrosParámetros; ++i)
+      {
+        int valor = Convert.ToInt32(partes[i + otrosParámetrosIndiceOffset]);
+        switch (valor)
+        {
+          case 0:
+            misOtrosParámetros[i] = false;
+            break;
+          case 1:
+            misOtrosParámetros[i] = true;
+            break;
+          default:
+            throw new ArgumentException(
+              string.Format("El números de los parámetros de ruta para el tercer elemento en adelante tiene que ser 0 ó 1: {0}", elTextoDeParámetrosDeRuta),
+              "elTextoDeParámetrosDeRuta");
+        }
+      }
     }
 
 
@@ -166,9 +183,20 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="laClaseDeRuta">La Clase de Ruta</param>
     public CampoParámetrosDeRuta(
       LímiteDeVelocidad elLímiteDeVelocidad,
-      ClaseDeRuta laClaseDeRuta)
-      : this (string.Format("{0},{1},0,0,0,0,0,0,0,0,0,0", elLímiteDeVelocidad.Indice, laClaseDeRuta.Indice))
+      ClaseDeRuta laClaseDeRuta,
+      bool[] losOtrosParámetros)
+      : base (IdentificadorDeParámetrosDeRuta)
     {
+      if (losOtrosParámetros.Length != NúmeroDeOtrosParámetros)
+      {
+        throw new ArgumentException(
+          string.Format("El números de Otrós Parámetros debe ser {0} pero es {1}", NúmeroDeOtrosParámetros, losOtrosParámetros.Length),
+          "losOtrosParámetros");
+      }
+
+      misOtrosParámetros = losOtrosParámetros;
+      miLímiteDeVelocidad = elLímiteDeVelocidad;
+      miClaseDeRuta = laClaseDeRuta;
     }
 
 
@@ -177,8 +205,62 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      return miTexto;
+      char separador = ',';
+      StringBuilder texto = new StringBuilder();
+      texto.Append(miLímiteDeVelocidad.Indice);
+      texto.Append(separador);
+      texto.Append(miClaseDeRuta.Indice);
+      foreach (bool valor in misOtrosParámetros)
+      {
+        texto.Append(separador);
+        if (valor)
+        {
+          texto.Append(1);
+        }
+        else
+        {
+          texto.Append(0);
+        }
+      }
+
+      return texto.ToString();
     }
+
+
+    /// <summary>
+    /// Devuelve una variable lógica que indica si un objeto
+    /// dado es igual.
+    /// </summary>
+    /// <param name="elObjecto">El objecto dado.</param>
+    public override bool Equals(object elObjecto)
+    {
+      // Si el objeto es nulo entonces no puede ser igual.
+      if (elObjecto == null)
+      {
+        return false;
+      }
+
+      // Si el objecto no es del mismo tipo entonces no puede ser igual.
+      if (!(elObjecto is CampoParámetrosDeRuta))
+      {
+        return false;
+      }
+
+      // Compara latitud y longitud.
+      CampoParámetrosDeRuta comparador = (CampoParámetrosDeRuta)elObjecto;
+      bool esIgual = (this.ToString() == comparador.ToString());
+
+      return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
+    }    
     #endregion
   }
 }

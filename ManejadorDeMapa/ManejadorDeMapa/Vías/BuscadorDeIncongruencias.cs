@@ -84,6 +84,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #region Campos
     private readonly IDictionary<Vía, IList<string>> misIncongruencias = new Dictionary<Vía, IList<string>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
+    private readonly Tipo miTipoCaminería = new Tipo("0x16");
+    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaDeCaminería = new CampoParámetrosDeRuta(
+      new LímiteDeVelocidad(0),
+      new ClaseDeRuta(0),
+      new bool[] { false, false, true, true, true, true, true, false, false, true });
     #endregion
 
     #region Propiedades
@@ -141,7 +146,26 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       int númeroDeProblemasDetectados = 0;
 
+      númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
       númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
+
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int ArreglaCaminerías(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      // Solo procesa caminerías.
+      if (laVía.Tipo != miTipoCaminería)
+      {
+        return númeroDeProblemasDetectados;
+      }
+
+      laVía.CambiaCampoParámetrosDeRuta(
+        miCampoParámetrosDeRutaDeCaminería,
+        "Cambiado a Parámetros de Caminería estándar");
 
       return númeroDeProblemasDetectados;
     }
