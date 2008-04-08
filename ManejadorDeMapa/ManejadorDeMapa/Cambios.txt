@@ -5,6 +5,9 @@ Lo próximo para hacer:
 - Dibuja carreteras basado en RouteParams?
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
+Versión 1.16
+
+
 Versión 1.15
 - Ahora se maneja correctamente las vías sin Campo de Parámetros de Ruta definido.
 - Arreglado problema de no mantener los otros parámetros de ruta al poner las Vías con Parámetros de Ruta estandar.
