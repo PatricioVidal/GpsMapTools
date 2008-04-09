@@ -6,7 +6,12 @@ Lo próximo para hacer:
 - Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
 
 Versión 1.16
-
+- Arreglado el error al dibujar en el Mapa Vías con una sola coordenada.
+- Arreglado el error que dejaba dibujadas en el Mapa las Vías seleccionas del mapa anterior.
+- Extendida la lógica de búsqueda de errores en Vías para detectar Vías con un solo par de coordenadas.
+- Añadido menú para eliminar Vías manualmente.
+- Añadida interfase de Vías Eliminadas.
+- Añadida la opción para buscar posibles errores de ruteo en Vías.  La lógica tiene que actualizarse porque por ahora detecta muchs errores falsos.
 
 Versión 1.15
 - Ahora se maneja correctamente las vías sin Campo de Parámetros de Ruta definido.

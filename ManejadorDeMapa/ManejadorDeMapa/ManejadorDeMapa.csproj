@@ -96,6 +96,12 @@
     <Compile Include="Interfase\MenúEditorDeElementos.Designer.cs">
       <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfase\Vías\InterfaseDeVíasEliminadas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfase\Vías\InterfaseDeVíasEliminadas.Designer.cs">
+      <DependentUpon>InterfaseDeVíasEliminadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,11 +239,11 @@
     <Compile Include="Interfase\PDIs\InterfaseDePDIsEliminados.Designer.cs">
       <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErroress.cs">
+    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErrores.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErroress.Designer.cs">
-      <DependentUpon>InterfaseDePDIsConErroress.cs</DependentUpon>
+    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErrores.Designer.cs">
+      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfase\PDIs\InterfaseDePDIsModificados.cs">
       <SubType>UserControl</SubType>
@@ -301,8 +307,8 @@
       <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsConErroress.resx">
-      <DependentUpon>InterfaseDePDIsConErroress.cs</DependentUpon>
+    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsConErrores.resx">
+      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsModificados.resx">
@@ -325,6 +331,10 @@
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasEliminadas.resx">
+      <DependentUpon>InterfaseDeVíasEliminadas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasModificadas.resx">
       <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -343,6 +353,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionadas.resx">
       <DependentUpon>InterfaseMapaDeVíasSeleccionadas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.resx">
+      <DependentUpon>InterfasePosiblesErroresDeRuteoEnVías.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfase\Vías\MenúEditorDeVías.resx">

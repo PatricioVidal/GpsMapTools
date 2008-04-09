@@ -165,6 +165,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Hacer todos las operaciones en orden.
       int númeroDeVíasModificadas = 0;
       númeroDeVíasModificadas += miBuscadorDeIncongruencias.Procesa();
+      númeroDeVíasModificadas += miBuscadorDePosiblesErroresDeRuteo.Procesa();
       númeroDeVíasModificadas += miBuscadorDeErrores.Procesa();
 
       // Reporta estatus.

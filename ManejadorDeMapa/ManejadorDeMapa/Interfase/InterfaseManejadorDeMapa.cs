@@ -471,6 +471,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       miManejadorDeMapa.ManejadorDeVías.BuscadorDeIncongruencias.Procesa();
     }
+
+
+    private void EnMenúBuscarPosiblesErroresDeRuteoEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.BuscadorDePosiblesErroresDeRuteo.Procesa();
+    }
     #endregion
   }
 }

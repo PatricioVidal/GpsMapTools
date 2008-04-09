@@ -33,6 +33,7 @@
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeMapa));
           System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
           System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+          System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
           this.miMenúProcesarTodo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPDIs = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuProcesarTodoEnPDIs = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,10 +72,11 @@
           this.miInterfaseManejadorDePDIs = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
-          this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+          this.menúBuscarPosiblesErroresDeRuteoEnVías = new System.Windows.Forms.ToolStripMenuItem();
           toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+          toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -166,7 +168,8 @@
           this.miMenúVías.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenúProcesarTodoEnVías,
             this.toolStripSeparator5,
-            this.toolStripMenuItem2,
+            toolStripMenuItem2,
+            this.menúBuscarPosiblesErroresDeRuteoEnVías,
             this.miMenúBuscarErroresEnVías});
           this.miMenúVías.Name = "miMenúVías";
           resources.ApplyResources(this.miMenúVías, "miMenúVías");
@@ -181,6 +184,12 @@
           // 
           this.toolStripSeparator5.Name = "toolStripSeparator5";
           resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
+          // 
+          // toolStripMenuItem2
+          // 
+          toolStripMenuItem2.Name = "toolStripMenuItem2";
+          resources.ApplyResources(toolStripMenuItem2, "toolStripMenuItem2");
+          toolStripMenuItem2.Click += new System.EventHandler(this.EnMenúBuscarIncongruenciasEnVías);
           // 
           // miMenúBuscarErroresEnVías
           // 
@@ -347,7 +356,6 @@
           this.miLista.Name = "miLista";
           this.miLista.UseCompatibleStateImageBehavior = false;
           this.miLista.View = System.Windows.Forms.View.Details;
-          this.miLista.VirtualMode = true;
           // 
           // miColumnaClase
           // 
@@ -381,11 +389,11 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
-          // toolStripMenuItem2
+          // menúBuscarPosiblesErroresDeRuteoEnVías
           // 
-          this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-          resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
-          this.toolStripMenuItem2.Click += new System.EventHandler(this.EnMenúBuscarIncongruenciasEnVías);
+          this.menúBuscarPosiblesErroresDeRuteoEnVías.Name = "menúBuscarPosiblesErroresDeRuteoEnVías";
+          resources.ApplyResources(this.menúBuscarPosiblesErroresDeRuteoEnVías, "menúBuscarPosiblesErroresDeRuteoEnVías");
+          this.menúBuscarPosiblesErroresDeRuteoEnVías.Click += new System.EventHandler(this.EnMenúBuscarPosiblesErroresDeRuteoEnVías);
           // 
           // InterfaseManejadorDeMapa
           // 
@@ -454,7 +462,7 @@
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicadosEnPDIs;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem menúBuscarPosiblesErroresDeRuteoEnVías;
     }
 }
 

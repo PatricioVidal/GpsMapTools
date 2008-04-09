@@ -181,6 +181,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elLímiteDeVelocidad">El Límite de Velocidad</param>
     /// <param name="laClaseDeRuta">La Clase de Ruta</param>
+    /// <param name="losOtrosParámetros">Los otros parámetros de ruta.</param>
     public CampoParámetrosDeRuta(
       LímiteDeVelocidad elLímiteDeVelocidad,
       ClaseDeRuta laClaseDeRuta,

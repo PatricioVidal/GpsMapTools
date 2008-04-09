@@ -31,12 +31,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         if (miBuscadorDePosiblesErroresDeRuteo != null)
         {
           miBuscadorDePosiblesErroresDeRuteo.Invalidado -= EnInvalidado;
-          miBuscadorDePosiblesErroresDeRuteo.Procesó -= EnSeBuscaronIncongruencias;
+          miBuscadorDePosiblesErroresDeRuteo.Procesó -= EnSeBuscaronPosiblesErroresDeRuteo;
         }
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
-        //miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
@@ -46,7 +46,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           if (miBuscadorDePosiblesErroresDeRuteo != null)
           {
             miBuscadorDePosiblesErroresDeRuteo.Invalidado += EnInvalidado;
-            miBuscadorDePosiblesErroresDeRuteo.Procesó += EnSeBuscaronIncongruencias;
+            miBuscadorDePosiblesErroresDeRuteo.Procesó += EnSeBuscaronPosiblesErroresDeRuteo;
           }
         }
       }
@@ -61,7 +61,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         base.EscuchadorDeEstatus = value;
-        //miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
       }
     }
     #endregion
@@ -75,27 +75,33 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       InitializeComponent();
 
       // Pone el llenador de items.
-      //miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      //miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
-      //{
-      //  // Busca errores otra vez.
-      //  miBuscadorDePosiblesErroresDeRuteo.Procesa();
-      //};
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
+      {
+        // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+        miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
+
+        // Busca errores otra vez.
+        miBuscadorDePosiblesErroresDeRuteo.Procesa();
+      };
     }
     #endregion
 
     #region Métodos Privados
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
-      //miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+
+      // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
     }
 
 
-    private void EnSeBuscaronIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    private void EnSeBuscaronPosiblesErroresDeRuteo(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      //miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
     }
 
 

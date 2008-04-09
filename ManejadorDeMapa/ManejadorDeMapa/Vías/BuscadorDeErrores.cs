@@ -158,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       #region Verifica las coordenadas.
-      // El PDI debe tener un campo de coordenadas y además tienen que
+      // La Vía debe tener un campo de coordenadas y además tienen que
       // tener nivel zero.
       CampoCoordenadas campoCoordenadas = null;
       foreach (Campo campo in laVía.Campos)
@@ -173,9 +173,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
       {
         errores.Add("No tiene coordenadas.");
       }
-      else if (campoCoordenadas.Nivel != 0)
+      else
       {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
+        // Si la Vía tiene coordenadas entonces:
+        //  - Deben ser a nivel zero.
+        //  - Tienen que ser más de un par.
+        if (campoCoordenadas.Nivel != 0)
+        {
+          errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
+        }
+        if (!(campoCoordenadas.Coordenadas.Length > 1))
+        {
+          errores.Add(string.Format("Debe tener más de un par de coordenadas, pero tiene {0}", campoCoordenadas.Coordenadas.Length));
+        }
       }
       #endregion
 

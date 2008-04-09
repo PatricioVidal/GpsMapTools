@@ -88,7 +88,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     #region Campos
     private BuscadorDeDuplicados miBuscadorDeDuplicados;
     private Brush miPincelDePDI = new SolidBrush(Color.Black);
-    private Brush miPincelDePDIDuplicado = new SolidBrush(Color.Yellow);
+    private Brush miPincelDePDIDuplicado = new SolidBrush(Color.Orange);
     private Color miColorDeFondoOriginal;
     #endregion
 
@@ -103,6 +103,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Deja de manejar los eventos.
         if (miBuscadorDeDuplicados != null)
         {
+          miBuscadorDeDuplicados.Invalidado -= EnInvalidado;
           miBuscadorDeDuplicados.Procesó -= EnSeBuscaronDuplicados;
         }
 
@@ -113,6 +114,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         if (value != null)
         {
           miBuscadorDeDuplicados = value.ManejadorDePDIs.BuscadorDeDuplicados;
+          miBuscadorDeDuplicados.Invalidado += EnInvalidado;
           miBuscadorDeDuplicados.Procesó += EnSeBuscaronDuplicados;
           InicializaDistanciaMáxima();
           InicializaDistanciaHamming();
@@ -151,26 +153,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     #endregion
 
     #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miLista.Items.Clear();
       miLista.Groups.Clear();
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      // No es necesario hacer nada aqui.
+      miMapa.PuntosAddicionales.Clear();
     }
 
 

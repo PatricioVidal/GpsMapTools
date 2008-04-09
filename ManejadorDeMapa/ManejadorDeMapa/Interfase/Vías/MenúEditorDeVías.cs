@@ -113,6 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       AñadeMenúEstandarizarLímiteDeVelocidad();
       AñadeMenúEstandarizarClaseDeRuta();
       AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta();
+      AñadeMenúEliminarVías();
     }
     #endregion
 
@@ -158,6 +159,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Items.Add(menú);
 
       menú.Click += EnMenúEstandarizarLímiteDeVelocidadYClaseDeRuta;
+    }
+
+
+    private void AñadeMenúEliminarVías()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem();
+      menú.Text = "Eliminar Vías";
+      menú.AutoSize = true;
+      Items.Add(menú);
+
+      menú.Click += EnMenúEliminarVías;
     }
 
 
@@ -300,7 +312,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Warning);
 
-      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      // Estandarizar la Clase de Ruta si el usuario dice que si.
       if (respuesta == DialogResult.Yes)
       {
         // Cambia las vías.
@@ -338,7 +350,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Warning);
 
-      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      // Estandarizar el Límite de Velocidad y la Clase de Ruta si el usuario dice que si.
       if (respuesta == DialogResult.Yes)
       {
         // Cambia las vías.
@@ -351,6 +363,40 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
             RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo],
             vía.CampoParámetrosDeRuta.OtrosParámetros);
           vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad y Clase de Ruta Estándar");
+        }
+        ManejadorDeVías.RestableceEventos();
+
+        // Notifica la edición.
+        EnvíaEventoEditó();
+      }
+    }
+
+
+    private void EnMenúEliminarVías(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = Lista.SelectedIndices.Count;
+      if (númeroDeVíasSeleccionadas == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Estandarizar el Límite de Velocidad y la Clase de Ruta.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format("Está seguro que quiere Eliminar las {0} Vías seleccionadas?", númeroDeVíasSeleccionadas),
+        "Eliminar Vías",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      // Eliminar las Vías si el usuario dice que si.
+      if (respuesta == DialogResult.Yes)
+      {
+        // Elimina las vías.
+        ManejadorDeVías.SuspendeEventos();
+        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          vía.Elimina("Eliminada Manualmente.");
         }
         ManejadorDeVías.RestableceEventos();
 

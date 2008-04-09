@@ -161,6 +161,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+
+      // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
     }
 
 

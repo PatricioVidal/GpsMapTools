@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
-  partial class InterfaseDePDIsConErroress
+  partial class InterfaseDePDIsConErrores
   {
     /// <summary> 
     /// Required designer variable.
@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       System.Windows.Forms.ColumnHeader columnaRazón;
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsConErroress));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePDIsConErrores));
       System.Windows.Forms.SplitContainer division;
       this.miLista = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseListaDePDIs();
       this.miMenúEditorDePDI = new GpsYv.ManejadorDeMapa.Interfase.PDIs.MenuEditorDePDI();

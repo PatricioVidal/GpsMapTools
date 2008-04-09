@@ -42,7 +42,7 @@
       this.miPáginaEliminados = new System.Windows.Forms.TabPage();
       this.miInterfasePDIsEliminados = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsEliminados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
-      this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErroress();
+      this.miInterfasePDIsErrores = new GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseDePDIsConErrores();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -191,6 +191,6 @@
     private System.Windows.Forms.TabPage miPáginaMapa;
     private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.TabPage miPáginaErrores;
-    private InterfaseDePDIsConErroress miInterfasePDIsErrores;
+    private InterfaseDePDIsConErrores miInterfasePDIsErrores;
   }
 }

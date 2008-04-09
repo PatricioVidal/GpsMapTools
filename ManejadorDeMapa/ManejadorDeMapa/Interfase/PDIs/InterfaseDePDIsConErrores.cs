@@ -84,7 +84,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
   /// <summary>
   /// Interfase de Errores de PDIs.
   /// </summary>
-  public partial class InterfaseDePDIsConErroress : InterfaseBase
+  public partial class InterfaseDePDIsConErrores : InterfaseBase
   {
     #region Campos
     private List<ListViewItem> misItems = new List<ListViewItem>();
@@ -147,7 +147,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsConErroress()
+    public InterfaseDePDIsConErrores()
     {
       InitializeComponent();
 
@@ -169,6 +169,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
+
+      // Borra los puntos que pudieran estar dibujadas en el mapa.
+      miMapa.PuntosAddicionales.Clear();
     }
 
 

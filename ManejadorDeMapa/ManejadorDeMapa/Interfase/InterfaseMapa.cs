@@ -96,6 +96,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private readonly Brush miPincelParaTiempo = Brushes.Gray;
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
     private readonly Brush miPincelParaPDI = Brushes.Black;
+    private readonly Brush miPincelParaVíaConUnaCoordenada = Brushes.Red;
     private readonly Brush miPincelParaPDIModificado = Brushes.Yellow;
     private readonly Brush miPincelParaPDIEliminado = Brushes.Red;
     private Pen miLápizParaBorde = Pens.LightGray;
@@ -694,8 +695,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         return;
       }
 
-      // Dibuja la polilínea.
-      miGráficador.DrawLines(elLapiz, puntos);
+      // Nos salimos si no tenemos suficientes coordenadas.
+      int númeroDeCoordenadas = puntos.Length;
+      if (númeroDeCoordenadas < 1)
+      {
+        return;
+      }
+      else if (númeroDeCoordenadas == 1)
+      {
+        // Dibuja un punto.
+        DibujaPunto(laPolilínea[0], miPincelParaVíaConUnaCoordenada, 11);
+      }
+      else
+      {
+        // Dibuja la polilínea.
+        miGráficador.DrawLines(elLapiz, puntos);
+      }
     }
 
 

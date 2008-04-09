@@ -78,139 +78,107 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
-using System.Collections;
-using System.Diagnostics;
 
-namespace GpsYv.ManejadorDeMapa.Interfase
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase de Mapa de Vías seleccionadas.
+  /// Interfase de Vías Eliminadas.
   /// </summary>
-  public partial class InterfaseMapaDeElementosSeleccionados : InterfaseMapa
+  public partial class InterfaseDeVíasEliminadas : InterfaseBase
   {
-    #region Campos
-    private ListView miLista;
-    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
-    #endregion
-
     #region Propiedades
     /// <summary>
-    /// Obtiene o pone la lista con los elementos del mapa.
+    /// Obtiene o pone el manejador de mapa.
     /// </summary>
-    /// <remarks>
-    /// Cada Tag de los items de la lista tiene que ser una Vía.
-    /// </remarks>
-    [Browsable(true)]
-    public ListView Lista
+    public override ManejadorDeMapa ManejadorDeMapa
     {
-      get
-      {
-        return miLista;
-      }
       set
       {
-        // Desconectar el evento si ya estabamos conectados a una lista.
-        if (miLista != null)
-        {
-          miLista.SelectedIndexChanged -= EnCambioDeItemsSeleccionados;
-          miLista.VirtualItemsSelectionRangeChanged -= EnCambioDeItemsSeleccionados;
-        }
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
+      }
+    }
 
-        // Conectar el evento a la lista.
-        miLista = value;
-        miLista.SelectedIndexChanged += EnCambioDeItemsSeleccionados;
-        miLista.VirtualItemsSelectionRangeChanged += EnCambioDeItemsSeleccionados;
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
       }
     }
     #endregion
 
-    #region Constructor
+    #region Eventos
+    /// <summary>
+    /// Evento cuando hay Vías eliminadas.
+    /// </summary>
+    public event EventHandler<NúmeroDeItemsEventArgs> VíasEliminadas;
+    #endregion
+
+    #region Constructor.
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseMapaDeElementosSeleccionados()
+    public InterfaseDeVíasEliminadas()
     {
       InitializeComponent();
+
+      // Pone el método llenador de items.
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
     }
     #endregion
 
+
     #region Métodos Privados
-    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentos)
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      // Comienza el timer.
-      // Este manejador de eventos está implementado con un timer porque a veces
-      // se generan muchos eventos consecutivos y no es necesario
-      // mostrar el mapa para todos ellos.
-      miTimerCambioDeItemsSeleccionados.Stop();
-      miTimerCambioDeItemsSeleccionados.Start();
-    }
+      EnElementosModificados(elEnviador, losArgumentos);
 
-
-    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
-    {
-      EnCambioDeItemsSeleccionados(laLista, (EventArgs)losArgumentos);
-    }
-
-
-    private void EnTimerCambioDeItemsSeleccionadosTick(object sender, EventArgs e)
-    {
-      DibujaElementos();
-
-      // Detiene el timer para no seguir dibujando el mapa repetidamente.
-      miTimerCambioDeItemsSeleccionados.Stop();
-    }
-
-
-    private void DibujaElementos()
-    {
-      // Nos salimos si no hay elementos seleccionados.
-      if (miLista.SelectedIndices.Count == 0)
-      {
-        return;
-      }
-
-      List<ElementoDelMapa> elementos = new List<ElementoDelMapa>();
-      foreach (int indice in miLista.SelectedIndices)
-      {
-        ListViewItem item = miLista.Items[indice];
-
-        // El Tag del item de la lista tiene que ser una vía.
-        ElementoDelMapa elemento = item.Tag as ElementoDelMapa;
-        if (elemento == null)
-        {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Elemento de Mapa, pero es: " + elemento);
-        }
-
-        // Añade la vía a la lista.
-        elementos.Add(elemento);
-      }
-
-      // Busca el rango visible para la vía.
-      float margen = 0.0005f;
-      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(elementos);
-      RectangleF rectánguloVisible = new RectangleF(
-        rectánguloQueEncierra.X - margen,
-        rectánguloQueEncierra.Y - margen,
-        rectánguloQueEncierra.Width + (2 * margen),
-        rectánguloQueEncierra.Height + (2 * margen));
-
-      DibujaObjectosAdicionales(elementos);
-
-      // Muestra el mapa en la region deseada.
-      Enabled = true;
-      RectánguloVisibleEnCoordenadas = rectánguloVisible;
-      MuestraTodoElMapa = false;
-      Refresh();
+      // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
     }
 
 
     /// <summary>
-    /// Dibuja los objectos adicionales en el mapa. 
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
     /// </summary>
-    /// <param name="losElementos">Los elementos seleccionados.</param>
-    protected virtual void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      throw new NotImplementedException("La clase derivada debe implementar el método DibujaObjectossAdicionales(IList<ElementoDelMapa> losElementos)");
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+
+      // Genera el evento.
+      if (VíasEliminadas != null)
+      {
+        VíasEliminadas(this, new NúmeroDeItemsEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
+      }
+    }
+
+
+    private void LlenaItems(InterfaseListaDeElementos laLista)
+    {
+      // Añade las Vías.
+      IList<Vía> vías = ManejadorDeMapa.Vías;
+      foreach (Vía vía in vías)
+      {
+        // Si la vía fué eliminada entonces añadela a la lista.
+        if (vía.FuéEliminado)
+        {
+          laLista.AñadeItem(vía, vía.RazónParaEliminación);
+        }
+      }
     }
     #endregion
   }
