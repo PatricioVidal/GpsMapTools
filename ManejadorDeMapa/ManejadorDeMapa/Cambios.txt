@@ -1,9 +1,5 @@
-Lo próximo para hacer:
-- Verificar que todos los elementos del mapa son conocidos.
-- Verificar que los polígonos tienen tipos válidos.
-- Implementar el diccionario.
-- Dibuja carreteras basado en RouteParams?
-- Prevenir que en la pestaña de duplicados el usuario pueda borrar todos los PDI en un grupo.
+Versión 1.17
+
 
 Versión 1.16
 - Arreglado el error al dibujar en el Mapa Vías con una sola coordenada.
