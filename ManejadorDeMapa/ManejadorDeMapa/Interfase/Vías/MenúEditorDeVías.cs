@@ -115,6 +115,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta();
       AñadeMenúEliminarVías();
     }
+
+    
+    /// <summary>
+    /// Retorna las vías seleccionadas.
+    /// </summary>
+    public IList<Vía> ObtieneVíasSeleccionadas()
+    {
+      List<Vía> vías = new List<Vía>();
+      foreach (int indice in Lista.SelectedIndices)
+      {
+        ListViewItem item = Lista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser una vía.
+        Vía vía = item.Tag as Vía;
+        if (vía == null)
+        {
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es nulo");
+        }
+
+        // Añade la vía a la lista.
+        vías.Add(vía);
+      }
+      return vías;
+    }
     #endregion
 
     #region Métodos Privados
@@ -170,27 +194,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       Items.Add(menú);
 
       menú.Click += EnMenúEliminarVías;
-    }
-
-
-    private IList<Vía> ObtieneVíasSeleccionadas()
-    {
-      List<Vía> vías = new List<Vía>();
-      foreach (int indice in Lista.SelectedIndices)
-      {
-        ListViewItem item = Lista.Items[indice];
-
-        // El Tag del item de la lista tiene que ser una vía.
-        Vía vía = item.Tag as Vía;
-        if (vía == null)
-        {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es nulo");
-        }
-
-        // Añade la vía a la lista.
-        vías.Add(vía);
-      }
-      return vías;
     }
 
 

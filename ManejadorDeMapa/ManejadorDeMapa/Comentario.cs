@@ -117,7 +117,7 @@ namespace GpsYv.ManejadorDeMapa
              misDescripciones,
              GeneraCampos(elComentario))
     {
-      miTexto = ((CampoComentario)Campos[0]).Texto;
+      miTexto = ((CampoComentario)Campos[0]).Comentario;
     }
 
 

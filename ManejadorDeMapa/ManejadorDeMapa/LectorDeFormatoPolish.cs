@@ -329,6 +329,9 @@ namespace GpsYv.ManejadorDeMapa
                 CampoParámetrosDeRuta parámetrosDeRuta = new CampoParámetrosDeRuta(texto);
                 campos.Add(parámetrosDeRuta);
                 break;
+              case CampoAtributo.IdentificadorDeEtiqueta:
+                campos.Add(new CampoAtributo(texto));
+                break;
               default:
                 campos.Add(new CampoGenérico(identificadorConNivel, texto));
                 break;

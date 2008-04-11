@@ -1,5 +1,6 @@
 Versión 1.17
-
+- Añadida la funcionalidad de excluir Vías de la búsqueda de Parámetros de Ruta Estándar.
+- Añadida columna de detalles en la página de Vías modificadas.
 
 Versión 1.16
 - Arreglado el error al dibujar en el Mapa Vías con una sola coordenada.

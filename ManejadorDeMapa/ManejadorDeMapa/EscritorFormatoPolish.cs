@@ -218,6 +218,10 @@ namespace GpsYv.ManejadorDeMapa
         {
           Guarda((CampoParámetrosDeRuta)campo, elEscritor);
         }
+        else if (campo is CampoAtributo)
+        {
+          Guarda((CampoAtributo)campo, elEscritor);
+        }
         else
         {
           throw new ArgumentException("Campo desconocido: " + campo.GetType());
@@ -282,13 +286,19 @@ namespace GpsYv.ManejadorDeMapa
 
     private void Guarda(CampoComentario elCampoComentario, StreamWriter elEscritor)
     {
-      elEscritor.WriteLine(";" + elCampoComentario.Texto);
+      elEscritor.WriteLine(";" + elCampoComentario.Comentario);
     }
 
 
     private void Guarda(CampoParámetrosDeRuta elCampoParámetrosDeRuta, StreamWriter elEscritor)
     {
       Guarda(elCampoParámetrosDeRuta, elCampoParámetrosDeRuta.ToString(), elEscritor);
+    }
+
+
+    private void Guarda(CampoAtributo elCampoAtributo, StreamWriter elEscritor)
+    {
+      Guarda(elCampoAtributo, elCampoAtributo.Atributo, elEscritor);
     }
     #endregion
   }

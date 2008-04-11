@@ -77,23 +77,29 @@ using System.Text;
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa un campo de comentario.
+  /// Representa un campo de atributo.
   /// </summary>
-  public class CampoComentario : Campo
+  public class CampoAtributo : Campo
   {
     #region Campos
-    private readonly string miComentario = string.Empty;
+    private readonly string miAtributo = string.Empty;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Devuelve el texto del comentario.
+    /// Identificador.
     /// </summary>
-    public string Comentario
+    public const string IdentificadorDeEtiqueta = "Atributo";
+
+    
+    /// <summary>
+    /// Devuelve el atributo.
+    /// </summary>
+    public string Atributo
     {
       get
       {
-        return miComentario;
+        return miAtributo;
       }
     }
     #endregion
@@ -102,17 +108,11 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="laLínea">La línea.</param>
-    public CampoComentario(string laLínea)
-      : base(";")
+    /// <param name="elAtributo">El Atributo.</param>
+    public CampoAtributo(string elAtributo)
+      : base(IdentificadorDeEtiqueta)
     {
-      // El comentario es lo que está despues del ';'.
-      if (!laLínea.StartsWith(";"))
-      {
-        throw new ArgumentException(string.Format("La línea tiene que comenzar con ';', pero es {0}", laLínea));
-      }
-
-      miComentario = laLínea.Substring(1);
+      miAtributo = elAtributo;
     }
 
 
@@ -121,7 +121,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      return miComentario;
+      return miAtributo;
     }
 
 
@@ -139,14 +139,14 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoComentario))
+      if (!(elObjecto is CampoAtributo))
       {
         return false;
       }
 
       // Compara latitud y longitud.
-      CampoComentario comparador = (CampoComentario)elObjecto;
-      bool esIgual = (Comentario == comparador.Comentario);
+      CampoAtributo comparador = (CampoAtributo)elObjecto;
+      bool esIgual = (Atributo == comparador.Atributo);
 
       return esIgual;
     }

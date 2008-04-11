@@ -102,6 +102,16 @@ namespace GpsYv.ManejadorDeMapa.Vías
         return misIncongruencias;
       }
     }
+
+
+    /// <summary>
+    /// Atributo "NoParametrosDeRutaStandard".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica que la vía debe excluirse de la regla de 
+    /// Parámetros de Ruta estándar.
+    /// </remarks>
+    public static readonly string AtributoNoParámetrosDeRutaEstándar = "NoParámetrosDeRutaEstándar";
     #endregion
 
     #region Métodos Públicos
@@ -145,6 +155,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     protected override int ProcesaElemento(Vía laVía)
     {
       int númeroDeProblemasDetectados = 0;
+
+      // Excluye la vía si tiene el Atributo "NoParámetrosDeRutaEstándar".
+      if (laVía.TieneAtributo(AtributoNoParámetrosDeRutaEstándar))
+      {
+        return númeroDeProblemasDetectados;
+      }
 
       númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
       númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);

@@ -151,9 +151,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Escucha el evento de edición de Vías.
       miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        // Busca errores otra vez.
+        // Busca inconguencias otra vez.
         miBuscadorDeIncongruencias.Procesa();
       };
+
+      // Añade el menú para 
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(new ToolStripSeparator());
+      ToolStripMenuItem menú = new ToolStripMenuItem("Excluir de búsqueda de Parámetros de Ruta Estándar");
+      menú.Click += EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar;
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(menú);
     }
     #endregion
 
@@ -187,6 +193,42 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<string> detallesDeIncongruencia = ítem.Value;
         string detalle = string.Join(" | ", detallesDeIncongruencia.ToArray<string>());
         laLista.AñadeItem(vía, detalle);
+      }
+    }
+
+
+    private void EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar(object elEnviador, EventArgs losArgumentos)
+    {
+      ListView lista = miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
+
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = lista.SelectedIndices.Count;
+      if (númeroDeVíasSeleccionadas == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format("Está seguro que quiere Excluir las {0} Vías seleccionadas de próximas búsquedas de Parámetros de Ruta Estándar?", númeroDeVíasSeleccionadas),
+        "Excluir de Búsqueda de Parámetros de Ruta Estándar",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      // Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta == DialogResult.Yes)
+      {
+        // Cambia las vías.
+        ManejadorDeMapa.SuspendeEventos();
+        IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneVíasSeleccionadas();
+        foreach (Vía vía in vías)
+        {
+          vía.AñadeAtributo(BuscadorDeIncongruencias.AtributoNoParámetrosDeRutaEstándar);
+        }
+        ManejadorDeMapa.RestableceEventos();
+
+        // Busca inconguencias otra vez.
+        miBuscadorDeIncongruencias.Procesa();
       }
     }
     #endregion

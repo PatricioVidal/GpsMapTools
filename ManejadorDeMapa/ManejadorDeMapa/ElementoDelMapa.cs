@@ -73,6 +73,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -463,6 +464,48 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve una copia de este objeto.
     /// </summary>
     public abstract object Clone();
+
+
+    /// <summary>
+    /// Retorna una variable lógica indicando si el elemento tiene el atributo dado.
+    /// </summary>
+    /// <param name="elAtributo">El atributo dado.</param>
+    public bool TieneAtributo(string elAtributo)
+    {
+      bool tieneAtributo = false;
+
+      foreach (Campo campo in misCampos)
+      {
+        CampoAtributo campoAtributo = campo as CampoAtributo;
+        if (campoAtributo != null)
+        {
+          if (campoAtributo.Atributo == elAtributo)
+          {
+            tieneAtributo = true;
+            break;
+          }
+        }
+      }
+
+      return tieneAtributo;
+    }
+
+
+
+
+    /// <summary>
+    /// Añade el atributo dado al elemento.
+    /// </summary>
+    /// <param name="elAtributo">El atributo dado.</param>
+    public void AñadeAtributo(string elAtributo)
+    {
+      if (!TieneAtributo(elAtributo))
+      {
+        // Crea y añade el campo nuevo.
+        CampoAtributo campoAtributo = new CampoAtributo(elAtributo);
+        AñadeCampo(campoAtributo, elAtributo);
+      }
+    }
     #endregion
 
     #region Métodos Protegidos y Privados
