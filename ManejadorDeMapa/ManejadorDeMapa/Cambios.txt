@@ -1,3 +1,6 @@
+Versión 1.18
+
+
 Versión 1.17
 - Añadida la funcionalidad de excluir Vías de la búsqueda de Parámetros de Ruta Estándar.
 - Añadida columna de detalles en la página de Vías modificadas.

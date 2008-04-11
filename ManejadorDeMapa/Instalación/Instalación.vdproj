@@ -15,26 +15,26 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
-        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3C10C772320340E795531628B9017C52"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
         "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_335E84CCF81D35543B13BF0363C191ED"
+        "OwnerKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -142,14 +142,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_335E84CCF81D35543B13BF0363C191ED"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_335E84CCF81D35543B13BF0363C191ED"
+                    "_7A73E23E97D8D974CFE6C5B02E1C4FAB"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -240,14 +240,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{6F373A0E-23E7-48F7-AD1E-9C4FBA8F8292}"
-        "PackageCode" = "8:{29A50912-ECC5-403D-B6B9-F7DA377CC3EB}"
+        "ProductCode" = "8:{F68333C6-ED06-4E6F-A117-D2F90D7EB78C}"
+        "PackageCode" = "8:{11CA05EC-DF45-46F0-B640-4DAAB200490D}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.17.0"
+        "ProductVersion" = "8:1.18.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"
@@ -775,7 +775,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3C10C772320340E795531628B9017C52"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Debug\\GpsYv.ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Release\\GpsYv.ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
