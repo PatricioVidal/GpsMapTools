@@ -19,9 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Informació
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalación", "Instalación\Instalación.vdproj", "{B551FA61-71A2-419B-A611-F33523779D47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Interfase", "ManejadorDeMapa.Interfase\ManejadorDeMapa.Interfase.csproj", "{767BBFF4-F948-4614-901B-A3066CE41FDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemplazadorDeLetrasEspeciales", "RemplazadorDeLetrasEspeciales\RemplazadorDeLetrasEspeciales.csproj", "{31CFD029-1FEF-44BE-9ACD-5C75C6FAB04F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemplazadorDeNombres", "RemplazadorDeNombres\RemplazadorDeNombres.csproj", "{C68EFAB2-B5EC-4D55-BDB5-6BF51EB770DE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs07.codeplex.com/
 		SccLocalPath0 = .
@@ -34,6 +40,15 @@ Global
 		SccProjectUniqueName3 = Instalación\\Instalación.vdproj
 		SccProjectName3 = Instalación
 		SccLocalPath3 = Instalación
+		SccProjectUniqueName4 = ManejadorDeMapa.Interfase\\ManejadorDeMapa.Interfase.csproj
+		SccProjectName4 = ManejadorDeMapa.Interfase
+		SccLocalPath4 = ManejadorDeMapa.Interfase
+		SccProjectUniqueName5 = RemplazadorDeLetrasEspeciales\\RemplazadorDeLetrasEspeciales.csproj
+		SccProjectName5 = RemplazadorDeLetrasEspeciales
+		SccLocalPath5 = RemplazadorDeLetrasEspeciales
+		SccProjectUniqueName6 = RemplazadorDeNombres\\RemplazadorDeNombres.csproj
+		SccProjectName6 = RemplazadorDeNombres
+		SccLocalPath6 = RemplazadorDeNombres
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +65,18 @@ Global
 		{F07EE602-114A-4111-AD1C-E079D8C71E11}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B551FA61-71A2-419B-A611-F33523779D47}.Debug|Any CPU.ActiveCfg = Debug
 		{B551FA61-71A2-419B-A611-F33523779D47}.Release|Any CPU.ActiveCfg = Release
+		{767BBFF4-F948-4614-901B-A3066CE41FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767BBFF4-F948-4614-901B-A3066CE41FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767BBFF4-F948-4614-901B-A3066CE41FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767BBFF4-F948-4614-901B-A3066CE41FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CFD029-1FEF-44BE-9ACD-5C75C6FAB04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CFD029-1FEF-44BE-9ACD-5C75C6FAB04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CFD029-1FEF-44BE-9ACD-5C75C6FAB04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CFD029-1FEF-44BE-9ACD-5C75C6FAB04F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C68EFAB2-B5EC-4D55-BDB5-6BF51EB770DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68EFAB2-B5EC-4D55-BDB5-6BF51EB770DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68EFAB2-B5EC-4D55-BDB5-6BF51EB770DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68EFAB2-B5EC-4D55-BDB5-6BF51EB770DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
