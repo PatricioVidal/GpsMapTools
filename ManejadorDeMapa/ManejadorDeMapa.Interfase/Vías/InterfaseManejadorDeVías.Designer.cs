@@ -45,8 +45,10 @@
       this.miInterfaseDeVíasConIncongruencias = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias();
       this.miPáginaPosibleErroresDeRuteo = new System.Windows.Forms.TabPage();
       this.miInterfasePosiblesErroresDeRuteoEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías();
+      this.miPáginaPosiblesNodosDesconectados = new System.Windows.Forms.TabPage();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores();
+      this.interfacePosiblesNodosDesconectados1 = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfacePosiblesNodosDesconectados();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -57,6 +59,7 @@
       this.miPáginaEliminadas.SuspendLayout();
       this.miPáginaIncongruencias.SuspendLayout();
       this.miPáginaPosibleErroresDeRuteo.SuspendLayout();
+      this.miPáginaPosiblesNodosDesconectados.SuspendLayout();
       this.miPáginaErrores.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -68,6 +71,7 @@
       this.miControladorDePestañas.Controls.Add(this.miPáginaEliminadas);
       this.miControladorDePestañas.Controls.Add(this.miPáginaIncongruencias);
       this.miControladorDePestañas.Controls.Add(this.miPáginaPosibleErroresDeRuteo);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaPosiblesNodosDesconectados);
       this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
       resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
       this.miControladorDePestañas.Name = "miControladorDePestañas";
@@ -195,6 +199,13 @@
       this.miInterfasePosiblesErroresDeRuteoEnVías.ManejadorDeMapa = null;
       this.miInterfasePosiblesErroresDeRuteoEnVías.Name = "miInterfasePosiblesErroresDeRuteoEnVías";
       // 
+      // miPáginaPosiblesNodosDesconectados
+      // 
+      this.miPáginaPosiblesNodosDesconectados.Controls.Add(this.interfacePosiblesNodosDesconectados1);
+      resources.ApplyResources(this.miPáginaPosiblesNodosDesconectados, "miPáginaPosiblesNodosDesconectados");
+      this.miPáginaPosiblesNodosDesconectados.Name = "miPáginaPosiblesNodosDesconectados";
+      this.miPáginaPosiblesNodosDesconectados.UseVisualStyleBackColor = true;
+      // 
       // miPáginaErrores
       // 
       this.miPáginaErrores.Controls.Add(this.miInterfaseDeErroresEnVías);
@@ -208,6 +219,11 @@
       this.miInterfaseDeErroresEnVías.EscuchadorDeEstatus = null;
       this.miInterfaseDeErroresEnVías.ManejadorDeMapa = null;
       this.miInterfaseDeErroresEnVías.Name = "miInterfaseDeErroresEnVías";
+      // 
+      // interfacePosiblesNodosDesconectados1
+      // 
+      resources.ApplyResources(this.interfacePosiblesNodosDesconectados1, "interfacePosiblesNodosDesconectados1");
+      this.interfacePosiblesNodosDesconectados1.Name = "interfacePosiblesNodosDesconectados1";
       // 
       // InterfaseManejadorDeVías
       // 
@@ -225,6 +241,7 @@
       this.miPáginaEliminadas.ResumeLayout(false);
       this.miPáginaIncongruencias.ResumeLayout(false);
       this.miPáginaPosibleErroresDeRuteo.ResumeLayout(false);
+      this.miPáginaPosiblesNodosDesconectados.ResumeLayout(false);
       this.miPáginaErrores.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -249,5 +266,7 @@
     private InterfaseDeVíasEliminadas miInterfaseDeVíasEliminadas;
     private System.Windows.Forms.TabPage miPáginaPosibleErroresDeRuteo;
     private InterfasePosiblesErroresDeRuteoEnVías miInterfasePosiblesErroresDeRuteoEnVías;
+    private System.Windows.Forms.TabPage miPáginaPosiblesNodosDesconectados;
+    private InterfacePosiblesNodosDesconectados interfacePosiblesNodosDesconectados1;
   }
 }

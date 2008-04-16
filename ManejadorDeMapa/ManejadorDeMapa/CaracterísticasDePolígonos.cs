@@ -80,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa
   /// <summary>
   /// Clase que contiene las características de los polígonos.
   /// </summary>
-  static class CaracterísticasDePolígonos
+  static public class CaracterísticasDePolígonos
   {
     #region Campos
     private static readonly string miArchivoDeCaracterísticasDePolígonos = "CaracterísticasDePolígonos.csv";

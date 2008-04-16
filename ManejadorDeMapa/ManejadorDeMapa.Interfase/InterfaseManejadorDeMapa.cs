@@ -78,7 +78,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
-using GpsYv.ManejadorDeMapa.Properties;
+using GpsYv.ManejadorDeMapa.Interfase.Properties;
 using System.Reflection;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
@@ -250,7 +250,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<ElementoDelMapa> elementosDelMapa = miManejadorDeMapa.Elementos;
+      IList<ElementoDelMapa> elementosDelMapa = miManejadorDeMapa.ManejadorDeElementos.Elementos;
       foreach (ElementoDelMapa elementoDelMapa in elementosDelMapa)
       {
         laLista.AñadeItem(elementoDelMapa, elementoDelMapa.Clase);
@@ -258,8 +258,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Actualiza las Pestañas.
       miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
-      miPaginaDePDIs.Text = "PDIs (" + miManejadorDeMapa.PDIs.Count + ")";
-      miPáginaDeVías.Text = "Vías (" + miManejadorDeMapa.Vías.Count + ")";
+      miPaginaDePDIs.Text = "PDIs (" + miManejadorDeMapa.ManejadorDePDIs.Elementos.Count + ")";
+      miPáginaDeVías.Text = "Vías (" + miManejadorDeMapa.ManejadorDeVías.Elementos.Count + ")";
     }
 
 

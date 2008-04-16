@@ -76,7 +76,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
   /// <summary>
   /// Escuchador de Estatus.

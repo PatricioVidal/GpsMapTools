@@ -6,13 +6,14 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F07EE602-114A-4111-AD1C-E079D8C71E11}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GpsYv.ManejadorDeMapa</RootNamespace>
     <AssemblyName>GpsYv.ManejadorDeMapa</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>GpsYv.ManejadorDeMapa.Programa</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,7 +33,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <ApplicationIcon>Interfase\GPS_YV.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,9 +62,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Tst, Version=1.0.1487.21665, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -73,121 +73,8 @@
     <Compile Include="CampoAtributo.cs" />
     <Compile Include="CampoParámetrosDeRuta.cs" />
     <Compile Include="ClaseDeRuta.cs" />
-    <Compile Include="Interfase\ControladorDePestañas.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\ControladorDePestañas.Designer.cs">
-      <DependentUpon>ControladorDePestañas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\InterfaseListaDeElementos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\InterfaseListaDeElementos.Designer.cs">
-      <DependentUpon>InterfaseListaDeElementos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\InterfaseMapaDeElementosSeleccionados.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\InterfaseMapaDeElementosSeleccionados.Designer.cs">
-      <DependentUpon>InterfaseMapaDeElementosSeleccionados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\MenúEditorDeElementos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\MenúEditorDeElementos.Designer.cs">
-      <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasEliminadas.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasEliminadas.Designer.cs">
-      <DependentUpon>InterfaseDeVíasEliminadas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.Designer.cs">
-      <DependentUpon>InterfasePosiblesErroresDeRuteoEnVías.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ManejadorDeElementos.cs" />
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
-    <Compile Include="Interfase\OrdenadorDeColumnaDeLista.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\OrdenadorDeColumnaDeLista.Designer.cs">
-      <DependentUpon>OrdenadorDeColumnaDeLista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseListaDePDIs.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseListaDePDIs.Designer.cs">
-      <DependentUpon>InterfaseListaDePDIs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.Designer.cs">
-      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\MenuEditorDePDI.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\MenuEditorDePDI.Designer.cs">
-      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\VentanaCambiarTipoDePDI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\VentanaCambiarTipoDePDI.Designer.cs">
-      <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasConErrores.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasConErrores.Designer.cs">
-      <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasModificadas.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasModificadas.Designer.cs">
-      <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasConIncongruencias.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseDeVíasConIncongruencias.Designer.cs">
-      <DependentUpon>InterfaseDeVíasConIncongruencias.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseListaConMapaDeVías.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseListaConMapaDeVías.Designer.cs">
-      <DependentUpon>InterfaseListaConMapaDeVías.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseListaDeVías.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseListaDeVías.Designer.cs">
-      <DependentUpon>InterfaseListaDeVías.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseManejadorDeVías.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseManejadorDeVías.Designer.cs">
-      <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionadas.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionadas.Designer.cs">
-      <DependentUpon>InterfaseMapaDeVíasSeleccionadas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\Vías\MenúEditorDeVías.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Interfase\Vías\MenúEditorDeVías.Designer.cs">
-      <DependentUpon>MenúEditorDeVías.cs</DependentUpon>
-    </Compile>
     <Compile Include="LímiteDeVelocidad.cs" />
     <Compile Include="ManejadorBase.cs" />
     <Compile Include="PDIs\ArregladorDeLetras.cs" />
@@ -207,177 +94,17 @@
     <Compile Include="ElementoDelMapa.cs" />
     <Compile Include="ElementoDesconocido.cs" />
     <Compile Include="EscritorFormatoPolish.cs" />
-    <Compile Include="EscuchadorDeEstatus.cs" />
     <Compile Include="EscuchadorDeEstatusPorOmisión.cs" />
-    <Compile Include="Interfase\InterfaseBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\InterfaseBase.Designer.cs">
-      <DependentUpon>InterfaseBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\InterfaseManejadorDeMapa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interfase\InterfaseManejadorDeMapa.Designer.cs">
-      <DependentUpon>InterfaseManejadorDeMapa.cs</DependentUpon>
-    </Compile>
     <Compile Include="IEscuchadorDeEstatus.cs" />
-    <Compile Include="Interfase\InterfaseMapa.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\InterfaseMapa.Designer.cs">
-      <DependentUpon>InterfaseMapa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsDuplicados.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsDuplicados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsDuplicados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsEliminados.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsEliminados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErrores.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsConErrores.Designer.cs">
-      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsModificados.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseDePDIsModificados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
-    </Compile>
     <Compile Include="LectorDeArchivo.cs" />
     <Compile Include="LectorDeFormatoPolish.cs" />
     <Compile Include="ManejadorDeMapa.cs" />
-    <Compile Include="Interfase\PDIs\InterfaseManejadorDePDIs.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Interfase\PDIs\InterfaseManejadorDePDIs.Designer.cs">
-      <DependentUpon>InterfaseManejadorDePDIs.cs</DependentUpon>
-    </Compile>
     <Compile Include="PDIs\EliminadorDeCaracteres.cs" />
     <Compile Include="PDIs\ManejadorDePDIs.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
     <Compile Include="ProcesadorBase.cs" />
-    <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Interfase\ControladorDePestañas.resx">
-      <DependentUpon>ControladorDePestañas.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\InterfaseBase.resx">
-      <DependentUpon>InterfaseBase.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\InterfaseListaDeElementos.resx">
-      <DependentUpon>InterfaseListaDeElementos.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\InterfaseManejadorDeMapa.resx">
-      <DependentUpon>InterfaseManejadorDeMapa.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\InterfaseMapaDeElementosSeleccionados.resx">
-      <DependentUpon>InterfaseMapaDeElementosSeleccionados.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\MenúEditorDeElementos.resx">
-      <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseManejadorDePDIs.resx">
-      <DependentUpon>InterfaseManejadorDePDIs.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\InterfaseMapa.resx">
-      <DependentUpon>InterfaseMapa.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsDuplicados.resx">
-      <DependentUpon>InterfaseDePDIsDuplicados.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsEliminados.resx">
-      <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsConErrores.resx">
-      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseDePDIsModificados.resx">
-      <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\InterfaseMapaDePDIsSeleccionados.resx">
-      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\MenuEditorDePDI.resx">
-      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\PDIs\VentanaCambiarTipoDePDI.resx">
-      <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasConErrores.resx">
-      <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasEliminadas.resx">
-      <DependentUpon>InterfaseDeVíasEliminadas.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasModificadas.resx">
-      <DependentUpon>InterfaseDeVíasModificadas.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseDeVíasConIncongruencias.resx">
-      <DependentUpon>InterfaseDeVíasConIncongruencias.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseListaConMapaDeVías.resx">
-      <DependentUpon>InterfaseListaConMapaDeVías.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseManejadorDeVías.resx">
-      <DependentUpon>InterfaseManejadorDeVías.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfaseMapaDeVíasSeleccionadas.resx">
-      <DependentUpon>InterfaseMapaDeVíasSeleccionadas.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\InterfasePosiblesErroresDeRuteoEnVías.resx">
-      <DependentUpon>InterfasePosiblesErroresDeRuteoEnVías.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\Vías\MenúEditorDeVías.resx">
-      <DependentUpon>MenúEditorDeVías.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interfase\VentanaDeAcerca.resx">
-      <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Content Include="PDIs\CaracterísticasDePDIs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -393,22 +120,7 @@
     <Content Include="CaracterísticasDePolígonos.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="PDIs\PDI.cs" />
-    <Compile Include="Interfase\VentanaDeAcerca.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interfase\VentanaDeAcerca.Designer.cs">
-      <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
-    </Compile>
     <Compile Include="CaracterísticasDePolígonos.cs" />
     <Compile Include="Tipo.cs" />
     <Compile Include="Vías\BuscadorDeErrores.cs" />
@@ -442,15 +154,11 @@
     </Content>
     <None Include="app.config" />
     <None Include="Diagramas de Clases\Campos.cd" />
-    <None Include="Diagramas de Clases\InterfaseManejadorDeMapa.cd" />
-    <None Include="Diagramas de Clases\InterfaseManejadorDePDIs.cd" />
-    <None Include="Diagramas de Clases\InterfaseManejadorDeVías.cd" />
     <None Include="Diagramas de Clases\ManejadorDeMapa.cd" />
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
     <None Include="Diagramas de Clases\ManejadorDePDIs.cd" />
     <None Include="Diagramas de Clases\ManejadorDeVías.cd" />
-    <None Include="Interfase\GPS_YV.png" />
-    <None Include="Interfase\GPS_YV.ico" />
+    <Content Include="GPS_YV.ico" />
     <Content Include="Vías\RestriccionesDeParámetrosDeRuta.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

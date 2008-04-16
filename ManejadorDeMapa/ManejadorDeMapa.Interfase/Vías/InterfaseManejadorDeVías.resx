@@ -117,11 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="miInterfaseDeMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseDeMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
+        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABlTeXN0ZW0uRHJh
+        d2luZy5SZWN0YW5nbGVGBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAsLCwsCAAAAAAAAAAAAAAAAAIA/
+        AACAPws=
+</value>
+  </data>
+  <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -129,14 +152,12 @@
   <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="miPáginaMapa.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
   </data>
   <data name="miPáginaMapa.Size" type="System.Drawing.Size, System.Drawing">
     <value>586, 430</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miPáginaMapa.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -153,291 +174,6 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miPáginaMapa.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miDivisión.Name" xml:space="preserve">
-    <value>miDivisión</value>
-  </data>
-  <data name="&gt;&gt;miDivisión.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miDivisión.Parent" xml:space="preserve">
-    <value>miPáginaDeTodos</value>
-  </data>
-  <data name="&gt;&gt;miDivisión.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaDeTodos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaDeTodos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaDeTodos.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="miPáginaDeTodos.Text" xml:space="preserve">
-    <value>Todos</value>
-  </data>
-  <data name="&gt;&gt;miPáginaDeTodos.Name" xml:space="preserve">
-    <value>miPáginaDeTodos</value>
-  </data>
-  <data name="&gt;&gt;miPáginaDeTodos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaDeTodos.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaDeTodos.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Name" xml:space="preserve">
-    <value>miInterfaseDeVíasModificadas</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasModificadas.Parent" xml:space="preserve">
-    <value>miPáginaModificadas</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasModificadas.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaModificadas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaModificadas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaModificadas.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="miPáginaModificadas.Text" xml:space="preserve">
-    <value>Modificadas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaModificadas.Name" xml:space="preserve">
-    <value>miPáginaModificadas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaModificadas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaModificadas.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaModificadas.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Name" xml:space="preserve">
-    <value>miInterfaseDeVíasEliminadas</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Parent" xml:space="preserve">
-    <value>miPáginaEliminadas</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasEliminadas.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaEliminadas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaEliminadas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaEliminadas.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="miPáginaEliminadas.Text" xml:space="preserve">
-    <value>Eliminadas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaEliminadas.Name" xml:space="preserve">
-    <value>miPáginaEliminadas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaEliminadas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaEliminadas.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaEliminadas.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Name" xml:space="preserve">
-    <value>miInterfaseDeVíasConIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Parent" xml:space="preserve">
-    <value>miPáginaIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaIncongruencias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaIncongruencias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaIncongruencias.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="miPáginaIncongruencias.Text" xml:space="preserve">
-    <value>Incongruencias</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Name" xml:space="preserve">
-    <value>miPáginaIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miInterfasePosiblesErroresDeRuteoEnVías.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Name" xml:space="preserve">
-    <value>miInterfasePosiblesErroresDeRuteoEnVías</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Parent" xml:space="preserve">
-    <value>miPáginaPosibleErroresDeRuteo</value>
-  </data>
-  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaPosibleErroresDeRuteo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaPosibleErroresDeRuteo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaPosibleErroresDeRuteo.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="miPáginaPosibleErroresDeRuteo.Text" xml:space="preserve">
-    <value>Posibles Errores de Ruteo</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Name" xml:space="preserve">
-    <value>miPáginaPosibleErroresDeRuteo</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeErroresEnVías.Name" xml:space="preserve">
-    <value>miInterfaseDeErroresEnVías</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeErroresEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeErroresEnVías.Parent" xml:space="preserve">
-    <value>miPáginaErrores</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeErroresEnVías.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaErrores.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaErrores.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaErrores.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="miPáginaErrores.Text" xml:space="preserve">
-    <value>Errores</value>
-  </data>
-  <data name="&gt;&gt;miPáginaErrores.Name" xml:space="preserve">
-    <value>miPáginaErrores</value>
-  </data>
-  <data name="&gt;&gt;miPáginaErrores.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaErrores.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaErrores.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miControladorDePestañas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miControladorDePestañas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 457</value>
-  </data>
-  <data name="miControladorDePestañas.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;miControladorDePestañas.Name" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;miControladorDePestañas.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfaseDeMapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseDeMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABlTeXN0ZW0uRHJh
-        d2luZy5SZWN0YW5nbGVGBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAsLCwsCAAAAAAAAAAAAAAAAAIA/
-        AACAPws=
-</value>
-  </data>
-  <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
-    <value>miInterfaseDeMapa</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
-    <value>miPáginaMapa</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="miDivisión.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -465,7 +201,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivisión.Panel1</value>
@@ -509,7 +245,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivisión.Panel2</value>
@@ -550,6 +286,30 @@
   <data name="&gt;&gt;miDivisión.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="miPáginaDeTodos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaDeTodos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaDeTodos.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="miPáginaDeTodos.Text" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Name" xml:space="preserve">
+    <value>miPáginaDeTodos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="miInterfaseDeVíasModificadas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -566,13 +326,37 @@
     <value>miInterfaseDeVíasModificadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasModificadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasModificadas.Parent" xml:space="preserve">
     <value>miPáginaModificadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasModificadas.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miPáginaModificadas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaModificadas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaModificadas.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="miPáginaModificadas.Text" xml:space="preserve">
+    <value>Modificadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Name" xml:space="preserve">
+    <value>miPáginaModificadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificadas.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="miInterfaseDeVíasEliminadas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -590,13 +374,37 @@
     <value>miInterfaseDeVíasEliminadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Parent" xml:space="preserve">
     <value>miPáginaEliminadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasEliminadas.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miPáginaEliminadas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaEliminadas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaEliminadas.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="miPáginaEliminadas.Text" xml:space="preserve">
+    <value>Eliminadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminadas.Name" xml:space="preserve">
+    <value>miPáginaEliminadas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminadas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminadas.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminadas.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="miInterfaseDeVíasConIncongruencias.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -614,13 +422,133 @@
     <value>miInterfaseDeVíasConIncongruencias</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Parent" xml:space="preserve">
     <value>miPáginaIncongruencias</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miPáginaIncongruencias.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaIncongruencias.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaIncongruencias.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="miPáginaIncongruencias.Text" xml:space="preserve">
+    <value>Incongruencias</value>
+  </data>
+  <data name="&gt;&gt;miPáginaIncongruencias.Name" xml:space="preserve">
+    <value>miPáginaIncongruencias</value>
+  </data>
+  <data name="&gt;&gt;miPáginaIncongruencias.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaIncongruencias.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaIncongruencias.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miInterfasePosiblesErroresDeRuteoEnVías.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Name" xml:space="preserve">
+    <value>miInterfasePosiblesErroresDeRuteoEnVías</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Parent" xml:space="preserve">
+    <value>miPáginaPosibleErroresDeRuteo</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaPosibleErroresDeRuteo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaPosibleErroresDeRuteo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaPosibleErroresDeRuteo.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="miPáginaPosibleErroresDeRuteo.Text" xml:space="preserve">
+    <value>Posibles Errores de Ruteo</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Name" xml:space="preserve">
+    <value>miPáginaPosibleErroresDeRuteo</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="interfacePosiblesNodosDesconectados1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="interfacePosiblesNodosDesconectados1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="interfacePosiblesNodosDesconectados1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="interfacePosiblesNodosDesconectados1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;interfacePosiblesNodosDesconectados1.Name" xml:space="preserve">
+    <value>interfacePosiblesNodosDesconectados1</value>
+  </data>
+  <data name="&gt;&gt;interfacePosiblesNodosDesconectados1.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfacePosiblesNodosDesconectados, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;interfacePosiblesNodosDesconectados1.Parent" xml:space="preserve">
+    <value>miPáginaPosiblesNodosDesconectados</value>
+  </data>
+  <data name="&gt;&gt;interfacePosiblesNodosDesconectados1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaPosiblesNodosDesconectados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaPosiblesNodosDesconectados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaPosiblesNodosDesconectados.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="miPáginaPosiblesNodosDesconectados.Text" xml:space="preserve">
+    <value>Posibles Nodos Desconectados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesNodosDesconectados.Name" xml:space="preserve">
+    <value>miPáginaPosiblesNodosDesconectados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesNodosDesconectados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesNodosDesconectados.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesNodosDesconectados.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="miInterfaseDeErroresEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -638,12 +566,60 @@
     <value>miInterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaErrores.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaErrores.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaErrores.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="miPáginaErrores.Text" xml:space="preserve">
+    <value>Errores</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Name" xml:space="preserve">
+    <value>miPáginaErrores</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miControladorDePestañas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miControladorDePestañas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 457</value>
+  </data>
+  <data name="miControladorDePestañas.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Name" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -659,6 +635,6 @@
     <value>InterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.16.3020.38482, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.18.3025.40452, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

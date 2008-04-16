@@ -69,114 +69,34 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
+
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vías
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Interfase de Vías modificadas.
+  /// Manejador de Elementos.
   /// </summary>
-  public partial class InterfaseDeVíasModificadas : InterfaseBase
+  public class ManejadorDeElementos : ManejadorBase<ElementoDelMapa>
   {
-    /// <summary>
-    /// Evento cuando hay Vías modificadas.
-    /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> VíasModificadas;
-
-    /// <summary>
-    /// Obtiene o pone el manejador de mapa.
-    /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
-    {
-      set
-      {
-        // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-        miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
-
-        // Pone el manejador de vías.
-        if (value != null)
-        {
-          // Pone el manejador de vías en el menú editor de vías.
-          miMenuEditorDeVías.ManejadorDeVías = value.ManejadorDeVías;
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
-    /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      set
-      {
-        base.EscuchadorDeEstatus = value;
-        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
-      }
-    }
-
-
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeVíasModificadas()
+    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
+    /// <param name="losElementos">Los Elementos.</param>
+    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
+    public ManejadorDeElementos(
+      ManejadorDeMapa elManejadorDeMapa,
+      IList<ElementoDelMapa> losElementos,
+      IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      : base(elManejadorDeMapa, losElementos, elEscuchadorDeEstatus)
     {
-      InitializeComponent();
-
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
     }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (VíasModificadas != null)
-      {
-        VíasModificadas(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
-      }
-    }
-
-
-    private void LlenaItems(InterfaseListaDeElementos laLista)
-    {
-      // Añade las Vías.
-      IList<Vía> vías = ManejadorDeMapa.Vías;
-      foreach (Vía vía in vías)
-      {
-        // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
-        if (vía.FuéModificado && !vía.FuéEliminado)
-        {
-          laLista.AñadeItem(vía, vía.Modificaciones);
-        }
-      }
-    }
+    #endregion
   }
 }

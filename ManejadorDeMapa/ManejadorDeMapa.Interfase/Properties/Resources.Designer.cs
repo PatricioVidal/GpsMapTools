@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GpsYv.ManejadorDeMapa.Properties {
+namespace GpsYv.ManejadorDeMapa.Interfase.Properties {
     using System;
     
     

@@ -72,6 +72,10 @@
     <Compile Include="Vías\PruebaVía.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManejadorDeMapa.Interfase\ManejadorDeMapa.Interfase.csproj">
+      <Project>{767BBFF4-F948-4614-901B-A3066CE41FDD}</Project>
+      <Name>ManejadorDeMapa.Interfase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ManejadorDeMapa\ManejadorDeMapa.csproj">
       <Project>{F07EE602-114A-4111-AD1C-E079D8C71E11}</Project>
       <Name>ManejadorDeMapa</Name>

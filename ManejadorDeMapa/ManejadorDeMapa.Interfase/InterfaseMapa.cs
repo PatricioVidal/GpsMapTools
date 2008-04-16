@@ -78,6 +78,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Diagnostics;
+using GpsYv.ManejadorDeMapa;
 using GpsYv.ManejadorDeMapa.PDIs;
 using GpsYv.ManejadorDeMapa.Vías;
 
@@ -441,7 +442,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       misPuntosAdicionales.Clear();
 
       // Calcula el rectángulo en coordenadas que encierra al mapa.
-      miRectánguloDeDataEnCoordenadas = RectanguloQueEncierra(ManejadorDeMapa.Elementos);
+      miRectánguloDeDataEnCoordenadas = RectanguloQueEncierra(ManejadorDeMapa.ManejadorDeElementos.Elementos);
 
       // Con un mapa nuevo hay que forzar el mostrar todo el 
       // mapa porque la region visible puede ser inválida
@@ -463,7 +464,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      miRectánguloDeDataEnCoordenadas = RectanguloQueEncierra(ManejadorDeMapa.Elementos);
+      miRectánguloDeDataEnCoordenadas = RectanguloQueEncierra(ManejadorDeMapa.ManejadorDeElementos.Elementos);
 
       // Si los elementos del mapa se modificaron entonces hay que
       // forzar un refrescamiento del mapa.
@@ -581,8 +582,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void DibujaPDIs()
     {
+      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
+
       // Primero dibuja los PDIs sin modificar ni eliminados.
-      foreach (PDI pdi in ManejadorDeMapa.PDIs)
+      foreach (PDI pdi in pdis)
       {
         if (!pdi.FuéModificado && !pdi.FuéEliminado)
         {
@@ -592,7 +595,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Después dibuja los PDIs modificados para que estén
       // sobre los PDI sin modificar.
-      foreach (PDI pdi in ManejadorDeMapa.PDIs)
+      foreach (PDI pdi in pdis)
       {
         if (pdi.FuéModificado)
         {
@@ -601,7 +604,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
 
       // Finalmente dibuja los PDIs eliminados.
-      foreach (PDI pdi in ManejadorDeMapa.PDIs)
+      foreach (PDI pdi in pdis)
       {
         if (pdi.FuéEliminado)
         {
@@ -675,7 +678,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void DibujaVías()
     {
       // Dibuja las Vías.
-      foreach (Vía vía in ManejadorDeMapa.Vías)
+      foreach (Vía vía in ManejadorDeMapa.ManejadorDeVías.Elementos)
       {
         Tipo tipo = vía.Tipo;
         DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));

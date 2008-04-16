@@ -231,7 +231,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<Vía> vías = ManejadorDeMapa.Vías;
+      IList<Vía> vías = ManejadorDeMapa.ManejadorDeVías.Elementos;
       foreach (Vía vía in vías)
       {
         laLista.AñadeItem(vía);
@@ -296,9 +296,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       // Pone las pestañas en estado de "No Sé" para indicar que
       // no se sabe si hay errores.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaPosibleErroresDeRuteo],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
+      // TODO: Habilitar este código cunado se mejore la lógica.
+      //miControladorDePestañas.PoneEstadoDePestaña(
+      //  misIndicesDePestañas[miPáginaPosibleErroresDeRuteo],
+      //  ControladorDePestañas.EstadoDePestaña.NoSé);
 
       // Cambia el texto de la pestaña.
       miPáginaPosibleErroresDeRuteo.Text = miTextoPestañaPosibleErroresDeRuteo;
@@ -318,15 +319,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Si no, entonces cambia el estado de la pestaña a Bíen.
       if (númeroDeVíasConErrores > 0)
       {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
+        // TODO: Habilitar este código cunado se mejore la lógica.
+        //miControladorDePestañas.PoneEstadoDePestaña(
+        //  misIndicesDePestañas[página],
+        //  ControladorDePestañas.EstadoDePestaña.Alerta);
       }
       else
       {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Bién);
+        // TODO: Habilitar este código cunado se mejore la lógica.
+        //miControladorDePestañas.PoneEstadoDePestaña(
+        //  misIndicesDePestañas[página],
+        //  ControladorDePestañas.EstadoDePestaña.Bién);
       }
     }
 

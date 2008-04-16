@@ -92,7 +92,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       string tipo = "0xc";
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
-        new CampoComentario ("Comentario"),
+        new CampoComentario (";Comentario"),
         new CampoTipo (tipo)
       };
       
@@ -123,7 +123,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       string nombre = "Nombre";
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
-        new CampoComentario ("Comentario") 
+        new CampoComentario (";Comentario") 
       };
       ElementoDesconocido objectoDePrueba = new ElementoDesconocido(manejadorDeMapa, número, clase, campos);
       string razón = "Razón";
@@ -155,7 +155,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       string nombre = "Nombre";
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
-        new CampoComentario ("Comentario") 
+        new CampoComentario (";Comentario") 
       };
       ElementoDesconocido objectoDePrueba = new ElementoDesconocido(manejadorDeMapa, número, clase, campos);
       string nuevoNombre = "NuevoNombre";

@@ -71,99 +71,114 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Contiene las Restricciones de Parámetros de Ruta de las vías.
+  /// Interfase de Vías Eliminadas.
   /// </summary>
-  public class RestriccionesDeParámetrosDeRuta
+  public partial class InterfaseDeVíasEliminadas : InterfaseBase
   {
-    #region Campos
-    private static readonly string miArchivoDeRestriccionesDeParámetrosDeRuta = @"Vías\RestriccionesDeParámetrosDeRuta.csv";
-    #endregion
-
     #region Propiedades
     /// <summary>
-    /// Diccionario con los límites de velocidad de vías.
+    /// Obtiene o pone el manejador de mapa.
     /// </summary>
-    public readonly static IDictionary<Tipo, LímiteDeVelocidad> LímitesDeVelocidad = new Dictionary<Tipo, LímiteDeVelocidad>();
-
-
-    /// <summary>
-    /// Diccionario con las clases de ruta de vías.
-    /// </summary>
-    public readonly static IDictionary<Tipo, ClaseDeRuta> ClasesDeRuta = new Dictionary<Tipo, ClaseDeRuta>();
-    #endregion
-
-    #region Métodos Privados
-    private class LectorRestriccionesDeParámetrosDeRuta : LectorDeArchivo
+    public override ManejadorDeMapa ManejadorDeMapa
     {
-      private readonly IDictionary<Tipo, LímiteDeVelocidad> misLímitesDeVelocidad;
-      private readonly IDictionary<Tipo, ClaseDeRuta> misClasesDeRuta;
-
-      public LectorRestriccionesDeParámetrosDeRuta(
-        string elArchivo,
-        IDictionary<Tipo, LímiteDeVelocidad> losLímitesDeVelocidad,
-        IDictionary<Tipo, ClaseDeRuta> lasClasesDeRuta)
+      set
       {
-        misLímitesDeVelocidad = losLímitesDeVelocidad;
-        misClasesDeRuta = lasClasesDeRuta;
-
-        Lee(elArchivo);
-      }
-
-
-      protected override void ProcesaLínea(string laLínea)
-      {
-        // Elimina espacios en blanco.
-        string línea = laLínea.Trim();
-
-        // Saltarse lineas en blanco y comentarios.
-        bool laLíneaEstaEnBlanco = (línea == string.Empty);
-        bool laLíneaEsComentario = línea.StartsWith("//");
-        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
-        {
-          // Separa las letras.
-          string[] partes = línea.Split(',');
-
-          // Verifica que tenemos a menos 3 partes.
-          if (partes.Length < 3)
-          {
-            throw new ArgumentException("No se encontraron 3 partes separadas por coma en la linea: " + línea);
-          }
-
-          // Lee las tres partes.
-          Tipo tipo = new Tipo(partes[0]);
-          LímiteDeVelocidad límiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[1]));
-          ClaseDeRuta claseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[2]));
-
-          // Asegura que el tipo es válido.
-          if (!TiposDeVías.Tipos.Contains(tipo))
-          {
-            throw new ArgumentException("El tipo de vía no es válido: " + tipo.ToString());
-          }
-
-          // Llena los diccionarios.
-          misLímitesDeVelocidad.Add(tipo, límiteDeVelocidad);
-          misClasesDeRuta.Add(tipo, claseDeRuta);
-        }
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
       }
     }
 
 
     /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
+      }
+    }
+    #endregion
+
+    #region Eventos
+    /// <summary>
+    /// Evento cuando hay Vías eliminadas.
+    /// </summary>
+    public event EventHandler<NúmeroDeItemsEventArgs> VíasEliminadas;
+    #endregion
+
+    #region Constructor.
+    /// <summary>
     /// Constructor.
     /// </summary>
-    static RestriccionesDeParámetrosDeRuta()
+    public InterfaseDeVíasEliminadas()
     {
-      // Lee las características de polígonos.
-      LectorRestriccionesDeParámetrosDeRuta lector = new LectorRestriccionesDeParámetrosDeRuta(
-        miArchivoDeRestriccionesDeParámetrosDeRuta,
-        LímitesDeVelocidad,
-        ClasesDeRuta);
+      InitializeComponent();
+
+      // Pone el método llenador de items.
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
+    }
+    #endregion
+
+
+    #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      EnElementosModificados(elEnviador, losArgumentos);
+
+      // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+
+      // Genera el evento.
+      if (VíasEliminadas != null)
+      {
+        VíasEliminadas(this, new NúmeroDeItemsEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
+      }
+    }
+
+
+    private void LlenaItems(InterfaseListaDeElementos laLista)
+    {
+      // Añade las Vías.
+      IList<Vía> vías = ManejadorDeMapa.ManejadorDeVías.Elementos;
+      foreach (Vía vía in vías)
+      {
+        // Si la vía fué eliminada entonces añadela a la lista.
+        if (vía.FuéEliminado)
+        {
+          laLista.AñadeItem(vía, vía.RazónParaEliminación);
+        }
+      }
     }
     #endregion
   }

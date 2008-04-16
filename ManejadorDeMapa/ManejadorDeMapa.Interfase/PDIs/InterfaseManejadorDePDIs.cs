@@ -310,7 +310,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<PDI> pdis = ManejadorDeMapa.PDIs;
+      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
       foreach (PDI pdi in pdis)
       {
         laLista.AñadeItem(

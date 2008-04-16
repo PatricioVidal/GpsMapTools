@@ -69,98 +69,38 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
-using System.Text;
-using GpsYv.ManejadorDeMapa.Properties;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-namespace GpsYv.ManejadorDeMapa
-{
-  static class Programa
-  {
-    #region Métodos Públicos
-    /// <summary>
-    /// Punto de entrada de la applicación.
-    /// </summary>
-    [STAThread]
-    static void Main()
-    {
-      // Actualiza las opciones del usuario si es necesario.
-      if (Settings.Default.RequireActualizarOpcionesDelUsuario)
-      {
-        // Actualiza las opciones del usuario.
-        Settings.Default.Upgrade();
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("Manejador de Mapa")]
+[assembly: AssemblyDescription("Manejador de Mapa (http://www.gpsyv.net)")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("GPS_YV")]
+[assembly: AssemblyProduct("Manejador de Mapa")]
+[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
-        // Previene que se actualizen las opciones del usuario de nuevo.
-        Settings.Default.RequireActualizarOpcionesDelUsuario = false;
-      }
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
+[assembly: ComVisible(false)]
 
-      // Crea un rastro (Trace)
-      TextWriterTraceListener escritorDeRastro = new TextWriterTraceListener("Rastro.log");
-      Trace.AutoFlush = true;
-      Trace.WriteLine("Comenzando Aplicación");
-      Trace.Indent();
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("177488fd-0a95-4491-8d25-c9ae1f10afb3")]
 
-      // Pone opciones.
-      Application.EnableVisualStyles();
-      Application.SetCompatibleTextRenderingDefault(false);
-
-      // Corre la applicación.
-      try
-      {
-        Application.Run(new Interfase.InterfaseManejadorDeMapa());
-      }
-      catch (Exception e)
-      {
-        MuestraExcepción("Error irrecuperable. La aplicación va a cerrar.", e);
-      }
-
-      // Finaliza el rastro.
-      Trace.Unindent();
-      Trace.Flush();
-    }
-
-
-    /// <summary>
-    /// Muestra información sobre una excepción dada.
-    /// </summary>
-    /// <param name="elMensaje">El mensaje.</param>
-    /// <param name="laExcepción">La excepción dada.</param>
-    public static void MuestraExcepción(string elMensaje, Exception laExcepción)
-    {
-      // Crea un archivo de registro.
-      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyName + ".Error.log";
-      archivoDeRegistro = Path.GetFullPath(archivoDeRegistro);
-      using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
-      {
-        string encabezado = DateTime.Now + ": " + elMensaje;
-        registro.WriteLine(encabezado);
-        registro.WriteLine(laExcepción);
-        registro.WriteLine();
-      }
-
-      // Muestra la excepción al usuario.
-      StringBuilder mensaje = new StringBuilder();
-      mensaje.AppendLine(elMensaje);
-      mensaje.AppendLine(laExcepción.Message);
-      Exception innerException = laExcepción.InnerException;
-      while (innerException != null)
-      {
-        mensaje.AppendLine(innerException.Message);
-        innerException = innerException.InnerException;
-      }
-      mensaje.AppendLine();
-      mensaje.AppendFormat("NOTA: Vea archivo '{0}' para mas detalles.", archivoDeRegistro);
-      MessageBox.Show(
-        mensaje.ToString(),
-        Interfase.VentanaDeAcerca.AssemblyName,
-        MessageBoxButtons.OK,
-        MessageBoxIcon.Error);
-    }
-
-    #endregion
-  }
-}
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.18.*")]

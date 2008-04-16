@@ -74,38 +74,69 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Vías;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase para PDIs eliminados.
+  /// Interfase de Vías modificadas.
   /// </summary>
-  public partial class InterfaseDePDIsEliminados : InterfaseBase
+  public partial class InterfaseDeVíasModificadas : InterfaseBase
   {
-    #region Eventos
     /// <summary>
-    /// Evento cuando hay PDIs eliminados.
+    /// Evento cuando hay Vías modificadas.
     /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> PDIsEliminados;
-    #endregion
+    public event EventHandler<NúmeroDeItemsEventArgs> VíasModificadas;
 
-    #region Constructor
+    /// <summary>
+    /// Obtiene o pone el manejador de mapa.
+    /// </summary>
+    public override ManejadorDeMapa ManejadorDeMapa
+    {
+      set
+      {
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+        miMapaDeVíaSeleccionada.ManejadorDeMapa = value;
+
+        // Pone el manejador de vías.
+        if (value != null)
+        {
+          // Pone el manejador de vías en el menú editor de vías.
+          miMenuEditorDeVías.ManejadorDeVías = value.ManejadorDeVías;
+        }
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miMapaDeVíaSeleccionada.EscuchadorDeEstatus = value;
+      }
+    }
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsEliminados()
+    public InterfaseDeVíasModificadas()
     {
       InitializeComponent();
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
     }
-    #endregion
 
-    #region Métodos Privados
+
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -127,26 +158,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.RegeneraLista();
 
       // Genera el evento.
-      if (PDIsEliminados != null)
+      if (VíasModificadas != null)
       {
-        PDIsEliminados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
+        VíasModificadas(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
       }
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
-      // Añade los elementos.
-      IList<PDI> pdis = ManejadorDeMapa.PDIs;
-      foreach (PDI pdi in pdis)
+      // Añade las Vías.
+      IList<Vía> vías = ManejadorDeMapa.ManejadorDeVías.Elementos;
+      foreach (Vía vía in vías)
       {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
+        // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
+        if (vía.FuéModificado && !vía.FuéEliminado)
         {
-          laLista.AñadeItem(pdi, pdi.RazónParaEliminación);
+          laLista.AñadeItem(vía, vía.Modificaciones);
         }
       }
     }
-    #endregion
   }
 }

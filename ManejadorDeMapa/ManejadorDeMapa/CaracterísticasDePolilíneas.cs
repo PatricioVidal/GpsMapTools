@@ -80,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa
   /// <summary>
   /// Clase que contiene las características de los PDIs.
   /// </summary>
-  static class CaracterísticasDePolilíneas
+  static public class CaracterísticasDePolilíneas
   {
     #region Campos
     private static readonly string miArchivoDeCaracterísticasDePolilíneas = "CaracterísticasDePolilíneas.csv";

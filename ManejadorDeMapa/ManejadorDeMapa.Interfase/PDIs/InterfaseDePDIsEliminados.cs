@@ -81,27 +81,31 @@ using GpsYv.ManejadorDeMapa.PDIs;
 namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 {
   /// <summary>
-  /// Interfase de PDIs modificados.
+  /// Interfase para PDIs eliminados.
   /// </summary>
-  public partial class InterfaseDePDIsModificados : InterfaseBase
+  public partial class InterfaseDePDIsEliminados : InterfaseBase
   {
+    #region Eventos
     /// <summary>
-    /// Evento cuando hay PDIs modificados.
+    /// Evento cuando hay PDIs eliminados.
     /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> PDIsModificados;
+    public event EventHandler<NúmeroDeItemsEventArgs> PDIsEliminados;
+    #endregion
 
+    #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsModificados()
+    public InterfaseDePDIsEliminados()
     {
       InitializeComponent();
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
     }
+    #endregion
 
-
+    #region Métodos Privados
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -123,25 +127,26 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.RegeneraLista();
 
       // Genera el evento.
-      if (PDIsModificados != null)
+      if (PDIsEliminados != null)
       {
-        PDIsModificados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
+        PDIsEliminados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
       }
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
-      // Añade los PDIs.
-      IList<PDI> pdis = ManejadorDeMapa.PDIs;
+      // Añade los elementos.
+      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
       foreach (PDI pdi in pdis)
       {
-        // Si el PDI fué cambiado y no eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéModificado && !pdi.FuéEliminado)
+        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
+        if (pdi.FuéEliminado)
         {
-          laLista.AñadeItem(pdi, pdi.Modificaciones);
+          laLista.AñadeItem(pdi, pdi.RazónParaEliminación);
         }
       }
     }
+    #endregion
   }
 }

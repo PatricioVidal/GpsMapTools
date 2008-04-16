@@ -102,7 +102,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
         new bool[10]);
       List<Campo> campos = new List<Campo> { 
         new CampoNombre (nombre),
-        new CampoComentario ("Comentario"),
+        new CampoComentario (";Comentario"),
         new CampoTipo (tipo),
         parámetrosDeRuta
       };
@@ -144,7 +144,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
         
         List<Campo> campos = new List<Campo> { 
           new CampoNombre (nombre),
-          new CampoComentario ("Comentario"),
+          new CampoComentario (";Comentario"),
           new CampoTipo (tipo),
           campoParámetrosDeRuta
         };
@@ -190,7 +190,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
         string descripción = "Roundabout";
         List<Campo> campos = new List<Campo> { 
           new CampoNombre (nombre),
-          new CampoComentario ("Comentario"),
+          new CampoComentario (";Comentario"),
           new CampoTipo (tipo)
         };
 
@@ -240,7 +240,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
 
         List<Campo> campos = new List<Campo> { 
           new CampoNombre (nombre),
-          new CampoComentario ("Comentario"),
+          new CampoComentario (";Comentario"),
           new CampoTipo (tipo),
           campoParámetrosDeRuta
         };

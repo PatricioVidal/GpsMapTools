@@ -71,115 +71,96 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Vías;
+using System.IO;
+using System.Diagnostics;
+using System.Text;
+using GpsYv.ManejadorDeMapa.Interfase.Properties;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
-  /// <summary>
-  /// Interfase de Vías Eliminadas.
-  /// </summary>
-  public partial class InterfaseDeVíasEliminadas : InterfaseBase
+  static class Programa
   {
-    #region Propiedades
+    #region Métodos Públicos
     /// <summary>
-    /// Obtiene o pone el manejador de mapa.
+    /// Punto de entrada de la applicación.
     /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
+    [STAThread]
+    static void Main()
     {
-      set
+      // Actualiza las opciones del usuario si es necesario.
+      if (Settings.Default.RequireActualizarOpcionesDelUsuario)
       {
-        // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
+        // Actualiza las opciones del usuario.
+        Settings.Default.Upgrade();
+
+        // Previene que se actualizen las opciones del usuario de nuevo.
+        Settings.Default.RequireActualizarOpcionesDelUsuario = false;
       }
-    }
 
+      // Crea un rastro (Trace)
+      TextWriterTraceListener escritorDeRastro = new TextWriterTraceListener("Rastro.log");
+      Trace.AutoFlush = true;
+      Trace.WriteLine("Comenzando Aplicación");
+      Trace.Indent();
 
-    /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
-    /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      set
+      // Pone opciones.
+      Application.EnableVisualStyles();
+      Application.SetCompatibleTextRenderingDefault(false);
+
+      // Corre la applicación.
+      try
       {
-        base.EscuchadorDeEstatus = value;
-        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
+        Application.Run(new Interfase.InterfaseManejadorDeMapa());
       }
-    }
-    #endregion
-
-    #region Eventos
-    /// <summary>
-    /// Evento cuando hay Vías eliminadas.
-    /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> VíasEliminadas;
-    #endregion
-
-    #region Constructor.
-    /// <summary>
-    /// Constructor.
-    /// </summary>
-    public InterfaseDeVíasEliminadas()
-    {
-      InitializeComponent();
-
-      // Pone el método llenador de items.
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
-    }
-    #endregion
-
-
-    #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnElementosModificados(elEnviador, losArgumentos);
-
-      // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
-      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
-
-      // Genera el evento.
-      if (VíasEliminadas != null)
+      catch (Exception e)
       {
-        VíasEliminadas(this, new NúmeroDeItemsEventArgs(miInterfaseListaConMapaDeVías.InterfaseListaDeVías.NúmeroDeElementos));
+        MuestraExcepción("Error irrecuperable. La aplicación va a cerrar.", e);
       }
+
+      // Finaliza el rastro.
+      Trace.Unindent();
+      Trace.Flush();
     }
 
 
-    private void LlenaItems(InterfaseListaDeElementos laLista)
+    /// <summary>
+    /// Muestra información sobre una excepción dada.
+    /// </summary>
+    /// <param name="elMensaje">El mensaje.</param>
+    /// <param name="laExcepción">La excepción dada.</param>
+    public static void MuestraExcepción(string elMensaje, Exception laExcepción)
     {
-      // Añade las Vías.
-      IList<Vía> vías = ManejadorDeMapa.Vías;
-      foreach (Vía vía in vías)
+      // Crea un archivo de registro.
+      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyName + ".Error.log";
+      archivoDeRegistro = Path.GetFullPath(archivoDeRegistro);
+      using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
-        // Si la vía fué eliminada entonces añadela a la lista.
-        if (vía.FuéEliminado)
-        {
-          laLista.AñadeItem(vía, vía.RazónParaEliminación);
-        }
+        string encabezado = DateTime.Now + ": " + elMensaje;
+        registro.WriteLine(encabezado);
+        registro.WriteLine(laExcepción);
+        registro.WriteLine();
       }
+
+      // Muestra la excepción al usuario.
+      StringBuilder mensaje = new StringBuilder();
+      mensaje.AppendLine(elMensaje);
+      mensaje.AppendLine(laExcepción.Message);
+      Exception innerException = laExcepción.InnerException;
+      while (innerException != null)
+      {
+        mensaje.AppendLine(innerException.Message);
+        innerException = innerException.InnerException;
+      }
+      mensaje.AppendLine();
+      mensaje.AppendFormat("NOTA: Vea archivo '{0}' para mas detalles.", archivoDeRegistro);
+      MessageBox.Show(
+        mensaje.ToString(),
+        Interfase.VentanaDeAcerca.AssemblyName,
+        MessageBoxButtons.OK,
+        MessageBoxIcon.Error);
     }
+
     #endregion
   }
 }
