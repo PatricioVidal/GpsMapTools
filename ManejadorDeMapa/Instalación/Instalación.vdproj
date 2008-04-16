@@ -15,26 +15,44 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_3C10C772320340E795531628B9017C52"
+        "MsmKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
-        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
+        "MsmKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
+        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3C10C772320340E795531628B9017C52"
+        "OwnerKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -142,14 +160,45 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8D22E52328E868036DCD514B1AF10C59"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.18.3026.36439, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8D22E52328E868036DCD514B1AF10C59"
+                    {
+                    "Name" = "8:GpsYv.ManejadorDeMapa.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:GpsYv.ManejadorDeMapa.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_963E7D0D9A727E0C0EC572D76BE947C4"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_7A73E23E97D8D974CFE6C5B02E1C4FAB"
+                    "_963E7D0D9A727E0C0EC572D76BE947C4"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -360,6 +409,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0B43574125CA4C64BFC1BE064830A14B"
+            {
+            "Name" = "8:ManejadorDeMapa"
+            "Arguments" = "8:"
+            "Description" = "8:Manejador de Mapas GPS"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+            "Folder" = "8:_57ABDBD26C574A97BCC1705654C960E6"
+            "WorkingFolder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
+            "Icon" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_41ED09A5CB64447999055D07EA25C139"
             {
             "Name" = "8:GpsYv.ManejadorDeMapa"
@@ -368,10 +431,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_3C10C772320340E795531628B9017C52"
+            "Target" = "8:"
             "Folder" = "8:_57ABDBD26C574A97BCC1705654C960E6"
             "WorkingFolder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
-            "Icon" = "8:_3C10C772320340E795531628B9017C52"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
@@ -773,9 +836,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3C10C772320340E795531628B9017C52"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_56556B94D73A488DB3CC41EFBFD7127D"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa\\obj\\Release\\GpsYv.ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Release\\ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
@@ -795,7 +858,7 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{F07EE602-114A-4111-AD1C-E079D8C71E11}"
+            "OutputProjectGuid" = "8:{767BBFF4-F948-4614-901B-A3066CE41FDD}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
