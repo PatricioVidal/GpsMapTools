@@ -109,12 +109,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
 
       // PDIs.
-      miMenuProcesarTodoEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs.DescripciónProcesarTodo;
-      miMenúEliminarCaracteresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.EliminadorDeCaracteres.Descripción;
-      miMenuArreglarLetrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDeLetras.Descripción;
-      miMenuArreglarPalabrasEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.ArregladorDePalabrasPorTipo.Descripción;
-      miMenúBuscaDuplicadosEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeDuplicados.Descripción;
-      miMenúBuscarErroresEnPDIs.ToolTipText = GpsYv.ManejadorDeMapa.PDIs.BuscadorDeErrores.Descripción;
+      miMenuProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
+      miMenúEliminarCaracteresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.EliminadorDeCaracteres.Descripción;
+      miMenuArreglarLetrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras.Descripción;
+      miMenuArreglarPalabrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDePalabrasPorTipo.Descripción;
+      miMenúBuscaDuplicadosEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeDuplicados.Descripción;
+      miMenúBuscarErroresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeErrores.Descripción;
 
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
@@ -142,8 +142,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miInterfaseDeMapa.EscuchadorDeEstatus = miEscuchadorDeEstatus;
 
       // Asigna las propiedades de la interfase de PDIs.
-      miInterfaseManejadorDePDIs.ManejadorDeMapa = miManejadorDeMapa;
-      miInterfaseManejadorDePDIs.EscuchadorDeEstatus = miEscuchadorDeEstatus;
+      miInterfaseManejadorDePdis.ManejadorDeMapa = miManejadorDeMapa;
+      miInterfaseManejadorDePdis.EscuchadorDeEstatus = miEscuchadorDeEstatus;
 
       // Asigna las propiedades de la interfase de Vías.
       miInterfaseManejadorDeVías.ManejadorDeMapa = miManejadorDeMapa;
@@ -157,11 +157,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
 
       // Maneja evento de cambio de Estado Máximo de Pestañas de PDIs.
-      miInterfaseManejadorDePDIs.CambióEstadoMáximoDePestañas +=
+      miInterfaseManejadorDePdis.CambióEstadoMáximoDePestañas +=
         delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
         {
           miControladorDePestañasPrincipal.PoneEstadoDePestaña(
-            misIndicesDePestañas[miPaginaDePDIs], losArgumentos.EstadoMáximoDePestañas);
+            misIndicesDePestañas[miPaginaDePdis], losArgumentos.EstadoMáximoDePestañas);
         };
 
       // Maneja evento de cambio de Estado Máximo de Pestañas de Vías.
@@ -258,7 +258,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Actualiza las Pestañas.
       miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
-      miPaginaDePDIs.Text = "PDIs (" + miManejadorDeMapa.ManejadorDePDIs.Elementos.Count + ")";
+      miPaginaDePdis.Text = "PDIs (" + miManejadorDeMapa.ManejadorDePdis.Elementos.Count + ")";
       miPáginaDeVías.Text = "Vías (" + miManejadorDeMapa.ManejadorDeVías.Elementos.Count + ")";
     }
 
@@ -346,39 +346,39 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuArreglarPalabrasEnPDIs(object sender, EventArgs e)
+    private void EnMenuArreglarPalabrasEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.ArregladorDePalabrasPorTipo.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.ArregladorDePalabrasPorTipo.Procesa();
     }
 
 
-    private void EnMenuArreglarLetrasEnPDIs(object sender, EventArgs e)
+    private void EnMenuArreglarLetrasEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.ArregladorDeLetras.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.ArregladorDeLetras.Procesa();
     }
 
 
-    private void EnMenuProcesarTodoEnPDIs(object sender, EventArgs e)
+    private void EnMenuProcesarTodoEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.ProcesarTodo();
+      miManejadorDeMapa.ManejadorDePdis.ProcesarTodo();
     }
 
 
-    private void EnMenúEliminarCaracteresEnPDIs(object sender, EventArgs e)
+    private void EnMenúEliminarCaracteresEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.EliminadorDeCaracteres.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.EliminadorDeCaracteres.Procesa();
     }
 
     
-    private void EnMenuBuscarDuplicadosEnPDIs(object sender, EventArgs e)
+    private void EnMenuBuscarDuplicadosEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.BuscadorDeDuplicados.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.BuscadorDeDuplicados.Procesa();
     }
 
 
-    private void EnMenuBuscarErroresEnPDIs(object sender, EventArgs e)
+    private void EnMenuBuscarErroresEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePDIs.BuscadorDeErrores.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.BuscadorDeErrores.Procesa();
     }
 
 

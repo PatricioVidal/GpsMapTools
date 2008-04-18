@@ -18,6 +18,7 @@
     <SccProvider>SAK</SccProvider>
     <StartupObject>GpsYv.ManejadorDeMapa.Interfase.Programa</StartupObject>
     <ApplicationIcon>GPS_YV.ico</ApplicationIcon>
+    <CodeAnalysisCulture>es-VE</CodeAnalysisCulture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,36 +90,36 @@
       <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseDePDIsConErrores.resx">
-      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseDePdisConErrores.resx">
+      <DependentUpon>InterfaseDePdisConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseDePDIsDuplicados.resx">
-      <DependentUpon>InterfaseDePDIsDuplicados.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseDePdisDuplicados.resx">
+      <DependentUpon>InterfaseDePdisDuplicados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseDePDIsEliminados.resx">
-      <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseDePdisEliminados.resx">
+      <DependentUpon>InterfaseDePdisEliminados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseDePDIsModificados.resx">
-      <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseDePdisModificados.resx">
+      <DependentUpon>InterfaseDePdisModificados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseManejadorDePDIs.resx">
-      <DependentUpon>InterfaseManejadorDePDIs.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseManejadorDePdis.resx">
+      <DependentUpon>InterfaseManejadorDePdis.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\InterfaseMapaDePDIsSeleccionados.resx">
-      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\InterfaseMapaDePdisSeleccionados.resx">
+      <DependentUpon>InterfaseMapaDePdisSeleccionados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\MenuEditorDePDI.resx">
-      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\MenuEditorDePdi.resx">
+      <DependentUpon>MenuEditorDePdi.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\VentanaCambiarTipoDePDI.resx">
-      <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\VentanaCambiarTipoDePdi.resx">
+      <DependentUpon>VentanaCambiarTipoDePdi.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -179,6 +180,7 @@
       <DependentUpon>ControladorDePestañas.cs</DependentUpon>
     </Compile>
     <Compile Include="EscuchadorDeEstatus.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InterfaseBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,59 +223,59 @@
     <Compile Include="OrdenadorDeColumnaDeLista.Designer.cs">
       <DependentUpon>OrdenadorDeColumnaDeLista.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsConErrores.cs">
+    <Compile Include="PDIs\InterfaseDePdisConErrores.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsConErrores.Designer.cs">
-      <DependentUpon>InterfaseDePDIsConErrores.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseDePdisConErrores.Designer.cs">
+      <DependentUpon>InterfaseDePdisConErrores.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsDuplicados.cs">
+    <Compile Include="PDIs\InterfaseDePdisDuplicados.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsDuplicados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsDuplicados.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseDePdisDuplicados.Designer.cs">
+      <DependentUpon>InterfaseDePdisDuplicados.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsEliminados.cs">
+    <Compile Include="PDIs\InterfaseDePdisEliminados.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsEliminados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsEliminados.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseDePdisEliminados.Designer.cs">
+      <DependentUpon>InterfaseDePdisEliminados.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsModificados.cs">
+    <Compile Include="PDIs\InterfaseDePdisModificados.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseDePDIsModificados.Designer.cs">
-      <DependentUpon>InterfaseDePDIsModificados.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseDePdisModificados.Designer.cs">
+      <DependentUpon>InterfaseDePdisModificados.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseListaDePDIs.cs">
+    <Compile Include="PDIs\InterfaseListaDePdis.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseListaDePDIs.Designer.cs">
-      <DependentUpon>InterfaseListaDePDIs.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseListaDePdis.Designer.cs">
+      <DependentUpon>InterfaseListaDePdis.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseManejadorDePDIs.cs">
+    <Compile Include="PDIs\InterfaseManejadorDePdis.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseManejadorDePDIs.Designer.cs">
-      <DependentUpon>InterfaseManejadorDePDIs.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseManejadorDePdis.Designer.cs">
+      <DependentUpon>InterfaseManejadorDePdis.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\InterfaseMapaDePDIsSeleccionados.cs">
+    <Compile Include="PDIs\InterfaseMapaDePdisSeleccionados.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PDIs\InterfaseMapaDePDIsSeleccionados.Designer.cs">
-      <DependentUpon>InterfaseMapaDePDIsSeleccionados.cs</DependentUpon>
+    <Compile Include="PDIs\InterfaseMapaDePdisSeleccionados.Designer.cs">
+      <DependentUpon>InterfaseMapaDePdisSeleccionados.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\MenuEditorDePDI.cs">
+    <Compile Include="PDIs\MenuEditorDePdi.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PDIs\MenuEditorDePDI.Designer.cs">
-      <DependentUpon>MenuEditorDePDI.cs</DependentUpon>
+    <Compile Include="PDIs\MenuEditorDePdi.Designer.cs">
+      <DependentUpon>MenuEditorDePdi.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\VentanaCambiarTipoDePDI.cs">
+    <Compile Include="PDIs\VentanaCambiarTipoDePdi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PDIs\VentanaCambiarTipoDePDI.Designer.cs">
-      <DependentUpon>VentanaCambiarTipoDePDI.cs</DependentUpon>
+    <Compile Include="PDIs\VentanaCambiarTipoDePdi.Designer.cs">
+      <DependentUpon>VentanaCambiarTipoDePdi.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

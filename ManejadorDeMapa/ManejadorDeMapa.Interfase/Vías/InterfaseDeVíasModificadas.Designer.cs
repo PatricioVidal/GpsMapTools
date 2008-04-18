@@ -92,7 +92,7 @@
       this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
-      this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
+      this.miMapaDeVíaSeleccionada.MuestraPdis = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
       this.miMapaDeVíaSeleccionada.MuestraPolilíneas = false;
       this.miMapaDeVíaSeleccionada.MuestraTodoElMapa = true;

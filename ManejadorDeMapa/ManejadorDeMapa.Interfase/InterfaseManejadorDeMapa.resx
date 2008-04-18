@@ -133,10 +133,10 @@
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
   </data>
-  <data name="miMenuProcesarTodoEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenuProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenuProcesarTodoEnPDIs.Text" xml:space="preserve">
+  <data name="miMenuProcesarTodoEnPdis.Text" xml:space="preserve">
     <value>Procesar Todo</value>
   </data>
   <metadata name="toolStripSeparator6.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -145,43 +145,43 @@
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 6</value>
   </data>
-  <data name="miMenúEliminarCaracteresEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenúEliminarCaracteresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenúEliminarCaracteresEnPDIs.Text" xml:space="preserve">
+  <data name="miMenúEliminarCaracteresEnPdis.Text" xml:space="preserve">
     <value>1. Eliminar Caracteres Inválidos</value>
   </data>
-  <data name="miMenuArreglarLetrasEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenuArreglarLetrasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenuArreglarLetrasEnPDIs.Text" xml:space="preserve">
+  <data name="miMenuArreglarLetrasEnPdis.Text" xml:space="preserve">
     <value>2. Arreglar Letras en Nombres</value>
   </data>
-  <data name="miMenuArreglarPalabrasEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenuArreglarPalabrasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenuArreglarPalabrasEnPDIs.Text" xml:space="preserve">
+  <data name="miMenuArreglarPalabrasEnPdis.Text" xml:space="preserve">
     <value>3. Arreglar Palabras en Nombres</value>
   </data>
-  <data name="miMenúBuscaDuplicadosEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenúBuscaDuplicadosEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenúBuscaDuplicadosEnPDIs.Text" xml:space="preserve">
+  <data name="miMenúBuscaDuplicadosEnPdis.Text" xml:space="preserve">
     <value>4. Buscar Duplicados</value>
   </data>
-  <data name="miMenúBuscarErroresEnPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenúBuscarErroresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenúBuscarErroresEnPDIs.Text" xml:space="preserve">
+  <data name="miMenúBuscarErroresEnPdis.Text" xml:space="preserve">
     <value>5. Buscar Errores</value>
   </data>
-  <data name="miMenuPDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="miMenuPDIs.Text" xml:space="preserve">
-    <value>PDIs</value>
+  <data name="miMenuPdis.Text" xml:space="preserve">
+    <value>Pdis</value>
   </data>
-  <data name="miMenuPDIs.ToolTipText" xml:space="preserve">
+  <data name="miMenuPdis.ToolTipText" xml:space="preserve">
     <value>Menús para PDIs.</value>
   </data>
   <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
@@ -557,52 +557,52 @@
   <data name="&gt;&gt;miPaginaDeElementos.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="miInterfaseManejadorDePDIs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="miInterfaseManejadorDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="miInterfaseManejadorDePDIs.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="miInterfaseManejadorDePdis.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="miInterfaseManejadorDePDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miInterfaseManejadorDePdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>776, 491</value>
   </data>
-  <data name="miInterfaseManejadorDePDIs.TabIndex" type="System.Int32, mscorlib">
+  <data name="miInterfaseManejadorDePdis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;miInterfaseManejadorDePDIs.Name" xml:space="preserve">
-    <value>miInterfaseManejadorDePDIs</value>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Name" xml:space="preserve">
+    <value>miInterfaseManejadorDePdis</value>
   </data>
-  <data name="&gt;&gt;miInterfaseManejadorDePDIs.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.PDIs.InterfaseManejadorDePDIs, GpsYv.ManejadorDeMapa, Version=1.16.3020.38566, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, GpsYv.ManejadorDeMapa, Version=1.16.3020.38566, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;miInterfaseManejadorDePDIs.Parent" xml:space="preserve">
-    <value>miPaginaDePDIs</value>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Parent" xml:space="preserve">
+    <value>miPaginaDePdis</value>
   </data>
-  <data name="&gt;&gt;miInterfaseManejadorDePDIs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="miPaginaDePDIs.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="miPaginaDePdis.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 23</value>
   </data>
-  <data name="miPaginaDePDIs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miPaginaDePdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>776, 491</value>
   </data>
-  <data name="miPaginaDePDIs.TabIndex" type="System.Int32, mscorlib">
+  <data name="miPaginaDePdis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="miPaginaDePDIs.Text" xml:space="preserve">
-    <value>PDIs</value>
+  <data name="miPaginaDePdis.Text" xml:space="preserve">
+    <value>Pdis</value>
   </data>
-  <data name="&gt;&gt;miPaginaDePDIs.Name" xml:space="preserve">
-    <value>miPaginaDePDIs</value>
+  <data name="&gt;&gt;miPaginaDePdis.Name" xml:space="preserve">
+    <value>miPaginaDePdis</value>
   </data>
-  <data name="&gt;&gt;miPaginaDePDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miPaginaDePdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miPaginaDePDIs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;miPaginaDePdis.Parent" xml:space="preserve">
     <value>miControladorDePestañasPrincipal</value>
   </data>
-  <data name="&gt;&gt;miPaginaDePDIs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;miPaginaDePdis.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="miInterfaseManejadorDeVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -6885,16 +6885,16 @@
   <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenuPDIs.Name" xml:space="preserve">
-    <value>miMenuPDIs</value>
+  <data name="&gt;&gt;miMenuPdis.Name" xml:space="preserve">
+    <value>miMenuPdis</value>
   </data>
-  <data name="&gt;&gt;miMenuPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenuPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenuProcesarTodoEnPDIs.Name" xml:space="preserve">
-    <value>miMenuProcesarTodoEnPDIs</value>
+  <data name="&gt;&gt;miMenuProcesarTodoEnPdis.Name" xml:space="preserve">
+    <value>miMenuProcesarTodoEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenuProcesarTodoEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenuProcesarTodoEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
@@ -6903,34 +6903,34 @@
   <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenúEliminarCaracteresEnPDIs.Name" xml:space="preserve">
-    <value>miMenúEliminarCaracteresEnPDIs</value>
+  <data name="&gt;&gt;miMenúEliminarCaracteresEnPdis.Name" xml:space="preserve">
+    <value>miMenúEliminarCaracteresEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenúEliminarCaracteresEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenúEliminarCaracteresEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenuArreglarLetrasEnPDIs.Name" xml:space="preserve">
-    <value>miMenuArreglarLetrasEnPDIs</value>
+  <data name="&gt;&gt;miMenuArreglarLetrasEnPdis.Name" xml:space="preserve">
+    <value>miMenuArreglarLetrasEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenuArreglarLetrasEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenuArreglarLetrasEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenuArreglarPalabrasEnPDIs.Name" xml:space="preserve">
-    <value>miMenuArreglarPalabrasEnPDIs</value>
+  <data name="&gt;&gt;miMenuArreglarPalabrasEnPdis.Name" xml:space="preserve">
+    <value>miMenuArreglarPalabrasEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenuArreglarPalabrasEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenuArreglarPalabrasEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenúBuscaDuplicadosEnPDIs.Name" xml:space="preserve">
-    <value>miMenúBuscaDuplicadosEnPDIs</value>
+  <data name="&gt;&gt;miMenúBuscaDuplicadosEnPdis.Name" xml:space="preserve">
+    <value>miMenúBuscaDuplicadosEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenúBuscaDuplicadosEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenúBuscaDuplicadosEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenúBuscarErroresEnPDIs.Name" xml:space="preserve">
-    <value>miMenúBuscarErroresEnPDIs</value>
+  <data name="&gt;&gt;miMenúBuscarErroresEnPdis.Name" xml:space="preserve">
+    <value>miMenúBuscarErroresEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenúBuscarErroresEnPDIs.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenúBuscarErroresEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miMenúVías.Name" xml:space="preserve">

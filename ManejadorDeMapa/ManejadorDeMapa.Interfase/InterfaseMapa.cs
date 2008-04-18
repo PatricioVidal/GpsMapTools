@@ -73,13 +73,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 using System.Diagnostics;
 using GpsYv.ManejadorDeMapa;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
@@ -90,17 +87,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   public partial class InterfaseMapa : InterfaseBase
   {
     #region Campos
-    private bool miHayUnMapa = false;
+    private bool miHayUnMapa;
 
     // Objetos para dibujar los elementos.
     private readonly Brush miPincelDeFondoParaTiempo = Brushes.White;
     private readonly Brush miPincelParaTiempo = Brushes.Gray;
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
-    private readonly Brush miPincelParaPDI = Brushes.Black;
+    private readonly Brush miPincelParaPdi = Brushes.Black;
     private readonly Brush miPincelParaVíaConUnaCoordenada = Brushes.Red;
-    private readonly Brush miPincelParaPDIModificado = Brushes.Yellow;
-    private readonly Brush miPincelParaPDIEliminado = Brushes.Red;
-    private Pen miLápizParaBorde = Pens.LightGray;
+    private readonly Brush miPincelParaPdiModificado = Brushes.Yellow;
+    private readonly Brush miPincelParaPdiEliminado = Brushes.Red;
+    private readonly Pen miLápizParaBorde = Pens.LightGray;
     private readonly Font miLetraParaNombre = new Font("Arial", 8);
     private readonly Brush miPincelDeFondoParaNombre = Brushes.White;
     private readonly Brush miPincelParaNombre = Brushes.Black;
@@ -117,9 +114,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private RectangleF miRectánguloVisibleActivoEnCoordenadas = new RectangleF(0, 0, 1, 1);
     private bool miMuestraTodoElMapa = true;
 
-    private List<PuntoAdicional> misPuntosAdicionales = new List<PuntoAdicional>();
-    private List<PolilíneaAdicional> misPolilíneasAdicionales = new List<PolilíneaAdicional>();
-    private bool miRatónEstaSobreElMapa = false;
+    private readonly List<PuntoAdicional> misPuntosAdicionales = new List<PuntoAdicional>();
+    private readonly List<PolilíneaAdicional> misPolilíneasAdicionales = new List<PolilíneaAdicional>();
+    private bool miRatónEstaSobreElMapa;
 
     #region Escala.
     private static readonly Point miOffsetDeEscalaEnPixels = new Point(5, 10);
@@ -136,12 +133,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Este valor garantiza que la distancia entre los marcadores de la escala
     /// sea suficiente para dibujar la distancia.
     /// </remarks>
-    private static readonly int miLargoDelSegmentoMínimoEnPixels = 50;
+    private const int miLargoDelSegmentoMínimoEnPixels = 50;
 
     /// <summary>
     ///  Largo mínimo en metros del segmento de la escala.
     /// </summary>
-    private double miLargoDelSegmentoMínimoEnMetros = 0;
+    private double miLargoDelSegmentoMínimoEnMetros;
     #endregion
     #endregion
 
@@ -246,7 +243,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [Browsable(true)]
     [Bindable(true)]
     [Description("Muestra los PDIs")]
-    public bool MuestraPDIs { get; set; }
+    public bool MuestraPdis { get; set; }
 
 
     /// <summary>
@@ -327,7 +324,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Abilita el Double Buffer para dibujar sin
       // parpadeo.
-      this.SetStyle(
+      SetStyle(
         ControlStyles.AllPaintingInWmPaint |
         ControlStyles.UserPaint |
         ControlStyles.OptimizedDoubleBuffer, true);
@@ -351,10 +348,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       double máximaLongitud = double.NegativeInfinity;
       foreach (ElementoDelMapa elemento in losElementos)
       {
-        if (elemento is PDI)
-        {
-          PDI pdi = (PDI)elemento;
+        // Para evitar duplicar la conversión de tipo más de una vez 
+        // usamos el operador 'as' en vez de 'is'.
+        Pdi pdi;
+        Polígono polígono;
+        Polilínea polilínea;
 
+        if ((pdi = elemento as Pdi) != null)
+        {
           Coordenadas coordenadas = pdi.Coordenadas;
           BuscaCoordenadasQueEncierran(
             coordenadas,
@@ -363,9 +364,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
             ref mínimaLongitud,
             ref máximaLongitud);
         }
-        else if (elemento is Polígono)
+        else if ((polígono = elemento as Polígono) != null)
         {
-          Polígono polígono = (Polígono)elemento;
 
           foreach (PointF coordenadas in polígono.Coordenadas)
           {
@@ -377,10 +377,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
               ref máximaLongitud);
           }
         }
-        else if (elemento is Polilínea)
+        else if ((polilínea = elemento as Polilínea) != null)
         {
-          Polilínea polilínea = (Polilínea)elemento;
-
           foreach (PointF coordenadas in polilínea.Coordenadas)
           {
             BuscaCoordenadasQueEncierran(
@@ -539,9 +537,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
         DibujaPuntosAdicionales();
 
-        if (MuestraPDIs | MuestraTodosLosElementos)
+        if (MuestraPdis | MuestraTodosLosElementos)
         {
-          DibujaPDIs();
+          DibujaPdis();
         }
       }
 
@@ -550,7 +548,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Muestra el tiempo que tomo pintar el mapa.
       timer.Stop();
       DibujaTextoConFondo(
-        timer.ElapsedMilliseconds.ToString() + " ms.",
+        timer.ElapsedMilliseconds + " ms.",
         0, 0,
         miLetraParaTiempo,
         miPincelParaTiempo,
@@ -564,7 +562,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       miGráficador = losArgumentosDePintar.Graphics;
 
-      Rectangle rectánguloDelClienteEnPixeles = this.ClientRectangle;
+      Rectangle rectánguloDelClienteEnPixeles = ClientRectangle;
 
       // Calcula la escala del gráfico en el rango del mapa.
       float escalaEnLongitud = rectánguloDelClienteEnPixeles.Width / miRectánguloVisibleActivoEnCoordenadas.Width;
@@ -580,35 +578,35 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void DibujaPDIs()
+    private void DibujaPdis()
     {
-      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
+      IList<Pdi> pdis = ManejadorDeMapa.ManejadorDePdis.Elementos;
 
       // Primero dibuja los PDIs sin modificar ni eliminados.
-      foreach (PDI pdi in pdis)
+      foreach (Pdi pdi in pdis)
       {
         if (!pdi.FuéModificado && !pdi.FuéEliminado)
         {
-          DibujaPDI(pdi, miPincelParaPDI, 3);
+          DibujaPdi(pdi, miPincelParaPdi, 3);
         }
       }
 
       // Después dibuja los PDIs modificados para que estén
       // sobre los PDI sin modificar.
-      foreach (PDI pdi in pdis)
+      foreach (Pdi pdi in pdis)
       {
         if (pdi.FuéModificado)
         {
-          DibujaPDI(pdi, miPincelParaPDIModificado, 5);
+          DibujaPdi(pdi, miPincelParaPdiModificado, 5);
         }
       }
 
       // Finalmente dibuja los PDIs eliminados.
-      foreach (PDI pdi in pdis)
+      foreach (Pdi pdi in pdis)
       {
         if (pdi.FuéEliminado)
         {
-          DibujaPDI(pdi, miPincelParaPDIEliminado, 5);
+          DibujaPdi(pdi, miPincelParaPdiEliminado, 5);
         }
       }
     }
@@ -643,7 +641,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private bool SonPuntosVisibles(Point[] losPuntos)
+    private bool SonPuntosVisibles(IEnumerable<Point> losPuntos)
     {
       int mínimoX = int.MaxValue;
       int máximoX = int.MinValue;
@@ -704,15 +702,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         return;
       }
-      else if (númeroDeCoordenadas == 1)
+
+      // Si solo tenemos una coordenada entonces dibujamos un solo punto.
+      // De lo contrario dibujamos la polilínea.
+      if (númeroDeCoordenadas == 1)
       {
-        // Dibuja un punto.
-        DibujaPunto(laPolilínea[0], miPincelParaVíaConUnaCoordenada, 11);
+          // Dibuja un punto.
+          DibujaPunto(laPolilínea[0], miPincelParaVíaConUnaCoordenada, 11);
       }
       else
       {
-        // Dibuja la polilínea.
-        miGráficador.DrawLines(elLapiz, puntos);
+          // Dibuja la polilínea.
+          miGráficador.DrawLines(elLapiz, puntos);
       }
     }
 
@@ -737,12 +738,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void DibujaPDI(PDI elPDI, Brush elPincel, int elTamaño)
+    private void DibujaPdi(Pdi elPdi, Brush elPincel, int elTamaño)
     {
       // Obtiene las coordenadas gráficas del PDI.
       Point punto = CoordenadasAPixels(new PointF(
-        (float)elPDI.Coordenadas.Longitud,
-        (float)elPDI.Coordenadas.Latitud));
+        (float)elPdi.Coordenadas.Longitud,
+        (float)elPdi.Coordenadas.Latitud));
 
       // Nos salimos si el PDI no es visible.
       if (!miAreaDeDibujo.Contains(punto))
@@ -757,7 +758,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       if (miEscalaDeCoordenadasAPixeles > 100000)
       {
         DibujaTextoConFondo(
-          elPDI.Nombre,
+          elPdi.Nombre,
           punto.X, punto.Y +5,
           miLetraParaNombre, 
           miPincelParaNombre,
@@ -807,7 +808,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     
     private Point CoordenadasAPixels(PointF lasCoordenadas)
     {
-      int abajo = this.ClientRectangle.Bottom;
+      int abajo = ClientRectangle.Bottom;
 
       int x = (int)Math.Round((lasCoordenadas.X - miOrigenEnCoordenadas.X) * miEscalaDeCoordenadasAPixeles) - 1;
       int y = (int)Math.Round((lasCoordenadas.Y - miOrigenEnCoordenadas.Y) * miEscalaDeCoordenadasAPixeles) + 1;
@@ -850,7 +851,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     
     private PointF PixelsACoordenadas(Point losPixeles)
     {
-      int abajo = this.ClientRectangle.Bottom;
+      int abajo = ClientRectangle.Bottom;
       int y = abajo - losPixeles.Y;
       float longitud = (float)(losPixeles.X / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.X;
       float latitud = (float)(y / miEscalaDeCoordenadasAPixeles) + miOrigenEnCoordenadas.Y;
@@ -887,7 +888,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Calcula el largo del segmento de la escala en metros.
       // Para eso calculamos las coordenadas de los extremos del segmento 
       // y con las coordenadas calculamos la distancia en metros.
-      int bordeDeAbajoEnPixels = this.ClientRectangle.Bottom;
+      int bordeDeAbajoEnPixels = ClientRectangle.Bottom;
       Point origenDelSegmentoEnPixels = new Point(miOffsetDeEscalaEnPixels.X, bordeDeAbajoEnPixels - miOffsetDeEscalaEnPixels.Y);
       PointF origenDelSegmentoEnCoordenadas = PixelsACoordenadas(origenDelSegmentoEnPixels);
       Point finalDelSegmentoMínimoEnPixels = new Point(origenDelSegmentoEnPixels.X + miLargoDelSegmentoMínimoEnPixels, origenDelSegmentoEnPixels.Y);
@@ -931,11 +932,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       #region Dibuja la Escala
       // Construye los puntos del segmento y los marcadores.
-      int largoMarcador = 5;
+      const int largoMarcador = 5;
       Point marcadorIzquierdo = new Point(origenDelSegmentoEnPixels.X, origenDelSegmentoEnPixels.Y - largoMarcador);
       Point finalDelSegmento = new Point(origenDelSegmentoEnPixels.X + intervaloEnPixels, origenDelSegmentoEnPixels.Y);
       Point marcadorDerecho = new Point(origenDelSegmentoEnPixels.X + intervaloEnPixels, origenDelSegmentoEnPixels.Y - largoMarcador);
-      Point[] líneas = new Point[] {
+      Point[] líneas = new[] {
         marcadorIzquierdo,
         origenDelSegmentoEnPixels,
         finalDelSegmento,
@@ -969,7 +970,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           // Acerca el mapa si el segmento de la escala es más de 1m.
           if (miLargoDelSegmentoMínimoEnMetros > 1)
           {
-            float zoom = 1.2f;
+            const float zoom = 1.2f;
             ZoomMapa(zoom, losArgumentosDelRatón.Location);
           }
         }
@@ -978,7 +979,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           // Aleja el mapa si el segmento de la escala es menos de 500km.
           if (miLargoDelSegmentoMínimoEnMetros < 500000)
           {
-            float zoom = 0.8f;
+            const float zoom = 0.8f;
             ZoomMapa(zoom, losArgumentosDelRatón.Location);
           }
         }

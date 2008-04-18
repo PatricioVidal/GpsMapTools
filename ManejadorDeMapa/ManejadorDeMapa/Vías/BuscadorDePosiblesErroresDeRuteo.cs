@@ -70,9 +70,6 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Tst;
-using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {

@@ -69,11 +69,6 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
@@ -86,9 +81,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
   [TestFixture]
   public class PruebasDeIntegración
   {
-    private string miDirectorioDeData = @"..\..\Data\";
+    private const string miDirectorioDeData = @"..\..\Data\";
 
-    private struct CasoDeProcesamientoDePDIs
+    private struct CasoDeProcesamientoDePdis
     {
       public readonly string Archivo;
       public readonly int Todos;
@@ -97,7 +92,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       public readonly int Eliminados;
       public readonly int Errores;
 
-      public CasoDeProcesamientoDePDIs(
+      public CasoDeProcesamientoDePdis(
         string elArchivo,
         int losTodos,
         int losModificados,
@@ -125,25 +120,25 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
       // Crea los probadores de los elementos de la interfase.
       TabControlTester controladorDePestañasPrincipal = new TabControlTester("miControladorDePestañasPrincipal");
-      TabControlTester controladorDePestañasDePDIs = new TabControlTester("miInterfaseManejadorDePDIs.miControladorDePestañas");
-      TabControl.TabPageCollection pestañasPDIs = controladorDePestañasDePDIs.Properties.TabPages;
-      TabPage pestañaTodos = pestañasPDIs[1];
-      TabPage pestañaModificados = pestañasPDIs[2];
-      TabPage pestañaEliminados = pestañasPDIs[3];
-      TabPage pestañaPosiblesDuplicados = pestañasPDIs[4];
-      TabPage pestañaErrores = pestañasPDIs[5];
+      TabControlTester controladorDePestañasDePdis = new TabControlTester("miInterfaseManejadorDePdis.miControladorDePestañas");
+      TabControl.TabPageCollection pestañasPdis = controladorDePestañasDePdis.Properties.TabPages;
+      TabPage pestañaTodos = pestañasPdis[1];
+      TabPage pestañaModificados = pestañasPdis[2];
+      TabPage pestañaEliminados = pestañasPdis[3];
+      TabPage pestañaPosiblesDuplicados = pestañasPdis[4];
+      TabPage pestañaErrores = pestañasPdis[5];
       #endregion
 
-      CasoDeProcesamientoDePDIs[] casos = new CasoDeProcesamientoDePDIs[] {
+      CasoDeProcesamientoDePdis[] casos = new[] {
         //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
-        new CasoDeProcesamientoDePDIs( "58090.mp",  1713,         147,         20,          2,      85),
-        new CasoDeProcesamientoDePDIs( "58170.mp",  6837,         369,         13,        189,     239),
-        new CasoDeProcesamientoDePDIs( "58220.mp",  6460,         813,         34,         58,     192),
-        new CasoDeProcesamientoDePDIs( "58370.mp",  1808,          63,         47,          8,     250),
-        new CasoDeProcesamientoDePDIs( "58460.mp",   980,          83,        151,          4,     216),
+        new CasoDeProcesamientoDePdis( "58090.mp",  1713,         126,         20,          2,      85),
+        new CasoDeProcesamientoDePdis( "58170.mp",  6837,         350,         13,        189,     239),
+        new CasoDeProcesamientoDePdis( "58220.mp",  6460,         789,         34,         58,     192),
+        new CasoDeProcesamientoDePdis( "58370.mp",  1808,          62,         47,          8,     250),
+        new CasoDeProcesamientoDePdis( "58460.mp",   980,          83,        151,          4,     216),
       };
 
-      foreach (CasoDeProcesamientoDePDIs caso in casos)
+      foreach (CasoDeProcesamientoDePdis caso in casos)
       {
         AbreArchivo(caso.Archivo);
 
@@ -176,7 +171,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
     }
 
 
-    private void AbreArchivo(string elArchivo)
+    private static void AbreArchivo(string elArchivo)
     {
       // Crea el camino absoluto al archivo.
       string archivoParaAbrir = Path.Combine(miDirectorioDeData, elArchivo);
@@ -185,15 +180,15 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       // Instala un manejador que espere por la ventana de abrir archivo.
       using (ModalFormTester probadorDeForma = new ModalFormTester())
       {
-        probadorDeForma.ExpectModal("Open", delegate()
-        {
-          // Dar tiempo para que aparezca la ventana de abrir el archivo.
-          Thread.Sleep(500);
+        probadorDeForma.ExpectModal("Open", delegate 
+          {
+            // Dar tiempo para que aparezca la ventana de abrir el archivo.
+            Thread.Sleep(500);
 
-          // Manda a abrir el arhivo.
-          OpenFileDialogTester formaAbrirArchivo = new OpenFileDialogTester("Open");
-          formaAbrirArchivo.OpenFile(archivoParaAbrir);
-        }
+            // Manda a abrir el arhivo.
+            OpenFileDialogTester formaAbrirArchivo = new OpenFileDialogTester("Open");
+            formaAbrirArchivo.OpenFile(archivoParaAbrir);
+          }
         );
 
         // Selecciona el menu de abrir archivo.

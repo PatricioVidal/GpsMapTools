@@ -71,8 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
@@ -82,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class RestriccionesDeParámetrosDeRuta
   {
     #region Campos
-    private static readonly string miArchivoDeRestriccionesDeParámetrosDeRuta = @"Vías\RestriccionesDeParámetrosDeRuta.csv";
+    private const string miArchivoDeRestriccionesDeParámetrosDeRuta = @"Vías\RestriccionesDeParámetrosDeRuta.csv";
     #endregion
 
     #region Propiedades
@@ -143,7 +141,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
           // Asegura que el tipo es válido.
           if (!TiposDeVías.Tipos.Contains(tipo))
           {
-            throw new ArgumentException("El tipo de vía no es válido: " + tipo.ToString());
+            throw new ArgumentException("El tipo de vía no es válido: " + tipo);
           }
 
           // Llena los diccionarios.
@@ -160,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     static RestriccionesDeParámetrosDeRuta()
     {
       // Lee las características de polígonos.
-      LectorRestriccionesDeParámetrosDeRuta lector = new LectorRestriccionesDeParámetrosDeRuta(
+      new LectorRestriccionesDeParámetrosDeRuta(
         miArchivoDeRestriccionesDeParámetrosDeRuta,
         LímitesDeVelocidad,
         ClasesDeRuta);

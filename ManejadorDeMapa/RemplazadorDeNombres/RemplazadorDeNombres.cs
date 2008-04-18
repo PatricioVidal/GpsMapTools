@@ -71,10 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
-using System.Text.RegularExpressions;
 using GpsYv.ManejadorDeMapa;
 
 namespace GpsYv.RemplazadorDeNombres
@@ -111,7 +107,7 @@ namespace GpsYv.RemplazadorDeNombres
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
-    /// <param name="elPDI">El PDI.</param>
+    /// <param name="elElemento">El PDI.</param>
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
     protected override int ProcesaElemento(ElementoDelMapa elElemento)
     {

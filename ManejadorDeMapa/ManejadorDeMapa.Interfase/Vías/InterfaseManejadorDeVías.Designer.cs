@@ -89,7 +89,7 @@
       resources.ApplyResources(this.miInterfaseDeMapa, "miInterfaseDeMapa");
       this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
       this.miInterfaseDeMapa.ManejadorDeMapa = null;
-      this.miInterfaseDeMapa.MuestraPDIs = false;
+      this.miInterfaseDeMapa.MuestraPdis = false;
       this.miInterfaseDeMapa.MuestraPolígonos = false;
       this.miInterfaseDeMapa.MuestraPolilíneas = false;
       this.miInterfaseDeMapa.MuestraTodoElMapa = true;
@@ -134,7 +134,7 @@
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
       this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
-      this.miMapaDeVíaSeleccionada.MuestraPDIs = false;
+      this.miMapaDeVíaSeleccionada.MuestraPdis = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
       this.miMapaDeVíaSeleccionada.MuestraPolilíneas = false;
       this.miMapaDeVíaSeleccionada.MuestraTodoElMapa = true;

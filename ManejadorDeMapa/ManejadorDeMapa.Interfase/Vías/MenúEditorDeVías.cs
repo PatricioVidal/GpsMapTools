@@ -72,14 +72,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
 using System.IO;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
@@ -109,7 +105,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       InitializeComponent();
 
       // Añade los menús.
-      AñadeMenúGuardarArchivoPDIs();
+      AñadeMenúGuardarArchivoPdis();
       AñadeMenúEstandarizarLímiteDeVelocidad();
       AñadeMenúEstandarizarClaseDeRuta();
       AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta();
@@ -142,22 +138,21 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #endregion
 
     #region Métodos Privados
-    private void AñadeMenúGuardarArchivoPDIs()
+    private void AñadeMenúGuardarArchivoPdis()
     {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Guarda archivo de PDIs para localización de Vía(s)";
-      menú.AutoSize = true;
+      ToolStripMenuItem menú = new ToolStripMenuItem {
+        Text = "Guarda archivo de PDIs para localización de Vía(s)",
+        AutoSize = true
+      };
       Items.Add(menú);
 
-      menú.Click += EnMenúGuardarArchivoPDIs;
+      menú.Click += EnMenúGuardarArchivoPdis;
     }
 
 
     private void AñadeMenúEstandarizarLímiteDeVelocidad()
     {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Estandarizar Límite de Velocidad";
-      menú.AutoSize = true;
+      ToolStripMenuItem menú = new ToolStripMenuItem {Text = "Estandarizar Límite de Velocidad", AutoSize = true};
       Items.Add(menú);
 
       menú.Click += EnMenúEstandarizarLímiteDeVelocidad;
@@ -166,9 +161,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void AñadeMenúEstandarizarClaseDeRuta()
     {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Estandarizar Clase de Ruta";
-      menú.AutoSize = true;
+      ToolStripMenuItem menú = new ToolStripMenuItem {
+        Text = "Estandarizar Clase de Ruta",
+        AutoSize = true
+      };
       Items.Add(menú);
 
       menú.Click += EnMenúEstandarizarClaseDeRuta;
@@ -177,9 +173,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta()
     {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Estandarizar Límite de Velocidad y Clase de Ruta";
-      menú.AutoSize = true;
+      ToolStripMenuItem menú = new ToolStripMenuItem {
+        Text = "Estandarizar Límite de Velocidad y Clase de Ruta",
+        AutoSize = true
+      };
       Items.Add(menú);
 
       menú.Click += EnMenúEstandarizarLímiteDeVelocidadYClaseDeRuta;
@@ -188,16 +185,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void AñadeMenúEliminarVías()
     {
-      ToolStripMenuItem menú = new ToolStripMenuItem();
-      menú.Text = "Eliminar Vías";
-      menú.AutoSize = true;
+      ToolStripMenuItem menú = new ToolStripMenuItem {
+        Text = "Eliminar Vías",
+        AutoSize = true
+      };
       Items.Add(menú);
 
       menú.Click += EnMenúEliminarVías;
     }
 
 
-    private void EnMenúGuardarArchivoPDIs(object elObjecto, EventArgs losArgumentos)
+    private void EnMenúGuardarArchivoPdis(object elObjecto, EventArgs losArgumentos)
     {
       // Retornamos si no hay Vías seleccionadas.
       if (Lista.SelectedIndices.Count == 0)
@@ -212,16 +210,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       string nombreDeSalida = Path.ChangeExtension(nombre, ".PDIsDeVías.mp");
 
       // Ventana de guardar.
-      SaveFileDialog ventanaDeGuardar = new SaveFileDialog();
-      ventanaDeGuardar.Title = "Guarda archivo de PDIs para localización de Vía(s)";
-      ventanaDeGuardar.AutoUpgradeEnabled = true;
-      ventanaDeGuardar.AddExtension = true;
-      ventanaDeGuardar.CheckPathExists = true;
-      ventanaDeGuardar.Filter = ManejadorDeMapa.FiltrosDeExtensiones;
-      ventanaDeGuardar.InitialDirectory = directorio;
-      ventanaDeGuardar.FileName = nombreDeSalida;
-      ventanaDeGuardar.OverwritePrompt = true;
-      ventanaDeGuardar.ValidateNames = true;
+      SaveFileDialog ventanaDeGuardar = new SaveFileDialog {
+        Title = "Guarda archivo de PDIs para localización de Vía(s)",
+        AutoUpgradeEnabled = true,
+        AddExtension = true,
+        CheckPathExists = true,
+        Filter = ManejadorDeMapa.FiltrosDeExtensiones,
+        InitialDirectory = directorio,
+        FileName = nombreDeSalida,
+        OverwritePrompt = true,
+        ValidateNames = true
+      };
       DialogResult respuesta = ventanaDeGuardar.ShowDialog();
       if (respuesta == DialogResult.OK)
       {
@@ -244,7 +243,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           };
 
           // Crea el PDI y añadelo a la lista.
-          PDI pdi = new PDI(
+          Pdi pdi = new Pdi(
             ManejadorDeVías.ManejadorDeMapa,
             0,
             "POI",

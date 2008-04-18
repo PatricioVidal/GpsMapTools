@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GpsYv.ManejadorDeMapa.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados" Type="System.Int32" Scope="User">
+    <Setting Name="DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="DistanciaHammingBuscarPDIsDuplicados" Type="System.Int32" Scope="User">
+    <Setting Name="DistanciaHammingBuscarPdisDuplicados" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="PosiciónDeLaFormaPrincipal" Type="System.Drawing.Point" Scope="User">

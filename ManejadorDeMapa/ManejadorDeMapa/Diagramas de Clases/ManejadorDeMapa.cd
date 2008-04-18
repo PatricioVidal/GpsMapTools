@@ -11,7 +11,7 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Encabezado" />
-      <Property Name="ManejadorDePDIs" />
+      <Property Name="ManejadorDePdis" />
       <Property Name="ManejadorDeVías" />
     </ShowAsAssociation>
   </Class>
@@ -33,14 +33,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="GpsYv.ManejadorDeMapa.PDIs.ManejadorDePDIs" Collapsed="true">
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis" Collapsed="true">
     <Position X="5.5" Y="1.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>QAAAAAAAEAAgAAAAAACAAAAAEBGAAAQACIAAAAAAAAA=</HashCode>
-      <FileName>PDIs\ManejadorDePDIs.cs</FileName>
+      <FileName>Pdis\ManejadorDePdis.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías" Collapsed="true">

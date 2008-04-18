@@ -35,6 +35,7 @@
     <SccProvider>SAK</SccProvider>
     <ApplicationIcon>
     </ApplicationIcon>
+    <CodeAnalysisCulture>es-VE</CodeAnalysisCulture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,21 +74,22 @@
     <Compile Include="CampoAtributo.cs" />
     <Compile Include="CampoParámetrosDeRuta.cs" />
     <Compile Include="ClaseDeRuta.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
     <Compile Include="LímiteDeVelocidad.cs" />
     <Compile Include="ManejadorBase.cs" />
-    <Compile Include="PDIs\ArregladorDeLetras.cs" />
-    <Compile Include="PDIs\ArregladorDePalabrasPorTipo.cs" />
-    <Compile Include="PDIs\BuscadorDeErrores.cs" />
-    <Compile Include="PDIs\BuscadorDeDuplicados.cs" />
+    <Compile Include="Pdis\ArregladorDeLetras.cs" />
+    <Compile Include="Pdis\ArregladorDePalabrasPorTipo.cs" />
+    <Compile Include="Pdis\BuscadorDeErrores.cs" />
+    <Compile Include="Pdis\BuscadorDeDuplicados.cs" />
     <Compile Include="Campo.cs" />
     <Compile Include="CampoComentario.cs" />
     <Compile Include="CampoCoordenadas.cs" />
     <Compile Include="CampoGenérico.cs" />
     <Compile Include="CampoTipo.cs" />
     <Compile Include="CampoNombre.cs" />
-    <Compile Include="PDIs\CaracterísticaDePDIs.cs" />
+    <Compile Include="Pdis\CaracterísticaDePdis.cs" />
     <Compile Include="CaracterísticasDePolilíneas.cs" />
     <Compile Include="Comentario.cs" />
     <Compile Include="Coordenadas.cs" />
@@ -99,28 +101,28 @@
     <Compile Include="LectorDeArchivo.cs" />
     <Compile Include="LectorDeFormatoPolish.cs" />
     <Compile Include="ManejadorDeMapa.cs" />
-    <Compile Include="PDIs\EliminadorDeCaracteres.cs" />
-    <Compile Include="PDIs\ManejadorDePDIs.cs" />
+    <Compile Include="Pdis\EliminadorDeCaracteres.cs" />
+    <Compile Include="Pdis\ManejadorDePdis.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
     <Compile Include="ProcesadorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="PDIs\CaracterísticasDePDIs.csv">
+    <Content Include="Pdis\CaracterísticasDePDIs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CaracterísticasDePolilíneas.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PDIs\LetrasAReemplazar.csv">
+    <Content Include="Pdis\LetrasAReemplazar.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PDIs\CorrecciónDePalabrasPorTipo.csv">
+    <Content Include="Pdis\CorrecciónDePalabrasPorTipo.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CaracterísticasDePolígonos.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Compile Include="PDIs\PDI.cs" />
+    <Compile Include="Pdis\Pdi.cs" />
     <Compile Include="CaracterísticasDePolígonos.cs" />
     <Compile Include="Tipo.cs" />
     <Compile Include="Vías\BuscadorDeErrores.cs" />
@@ -165,7 +167,7 @@
     <Content Include="Vías\TiposDeVías.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PDIs\CaracteresAEliminar.csv">
+    <Content Include="Pdis\CaracteresAEliminar.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Leeme.txt" />

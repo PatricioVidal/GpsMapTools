@@ -71,8 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace GpsYv.ManejadorDeMapa
@@ -83,7 +81,7 @@ namespace GpsYv.ManejadorDeMapa
   static public class CaracterísticasDePolilíneas
   {
     #region Campos
-    private static readonly string miArchivoDeCaracterísticasDePolilíneas = "CaracterísticasDePolilíneas.csv";
+    private const string miArchivoDeCaracterísticasDePolilíneas = "CaracterísticasDePolilíneas.csv";
 
     /// <summary>
     /// Diccionario de lápices por tipo de polilinea.
@@ -178,7 +176,7 @@ namespace GpsYv.ManejadorDeMapa
           // Llena los diccionarios.
           Pen lápiz = new Pen(color, ancho);
           misLápices.Add(tipo, lápiz);
-          Descripciones.Add(tipo, descripción);
+          misDescripciones.Add(tipo, descripción);
         }
       }
     }
@@ -190,7 +188,7 @@ namespace GpsYv.ManejadorDeMapa
     static CaracterísticasDePolilíneas()
     {
       // Lee las características de polígonos.
-      LectorDeCaracterísticasDePolilíneas lector = new LectorDeCaracterísticasDePolilíneas(
+      new LectorDeCaracterísticasDePolilíneas(
         miArchivoDeCaracterísticasDePolilíneas,
         misLápices,
         Descripciones);

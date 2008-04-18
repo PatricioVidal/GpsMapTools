@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="miInterfaseDeMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseDeMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
+        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABlTeXN0ZW0uRHJh
+        d2luZy5SZWN0YW5nbGVGBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAsLCwsCAAAAAAAAAAAAAAAAAIA/
+        AACAPws=
+</value>
+  </data>
+  <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
+    <value>miInterfaseDeMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
+    <value>miPáginaMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaMapa.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="miPáginaMapa.Text" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Name" xml:space="preserve">
+    <value>miPáginaMapa</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miLista.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;miLista.Name" xml:space="preserve">
+    <value>miLista</value>
+  </data>
+  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
+    <value>miPáginaDeTodos</value>
+  </data>
+  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaDeTodos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaDeTodos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaDeTodos.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="miPáginaDeTodos.Text" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Name" xml:space="preserve">
+    <value>miPáginaDeTodos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaDeTodos.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="miInterfasePdisModificados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePdisModificados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePdisModificados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miInterfasePdisModificados.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisModificados.Name" xml:space="preserve">
+    <value>miInterfasePdisModificados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisModificados.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisModificados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisModificados.Parent" xml:space="preserve">
+    <value>miPáginaModificados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisModificados.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaModificados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaModificados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaModificados.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="miPáginaModificados.Text" xml:space="preserve">
+    <value>Modificados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificados.Name" xml:space="preserve">
+    <value>miPáginaModificados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificados.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaModificados.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="miInterfasePdisEliminados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePdisEliminados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePdisEliminados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miInterfasePdisEliminados.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisEliminados.Name" xml:space="preserve">
+    <value>miInterfasePdisEliminados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisEliminados.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisEliminados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisEliminados.Parent" xml:space="preserve">
+    <value>miPáginaEliminados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisEliminados.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaEliminados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaEliminados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaEliminados.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="miPáginaEliminados.Text" xml:space="preserve">
+    <value>Eliminados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminados.Name" xml:space="preserve">
+    <value>miPáginaEliminados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminados.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaEliminados.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="miInterfasePdisDuplicados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePdisDuplicados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePdisDuplicados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miInterfasePdisDuplicados.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisDuplicados.Name" xml:space="preserve">
+    <value>miInterfasePdisDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisDuplicados.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisDuplicados, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisDuplicados.Parent" xml:space="preserve">
+    <value>miPáginaPosiblesDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisDuplicados.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="miPáginaPosiblesDuplicados.Text" xml:space="preserve">
+    <value>Posible Duplicados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Name" xml:space="preserve">
+    <value>miPáginaPosiblesDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaPosiblesDuplicados.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="miInterfasePdisErrores.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfasePdisErrores.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfasePdisErrores.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miInterfasePdisErrores.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisErrores.Name" xml:space="preserve">
+    <value>miInterfasePdisErrores</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisErrores.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisConErroress, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisErrores.Parent" xml:space="preserve">
+    <value>miPáginaErrores</value>
+  </data>
+  <data name="&gt;&gt;miInterfasePdisErrores.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaErrores.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaErrores.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 404</value>
+  </data>
+  <data name="miPáginaErrores.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="miPáginaErrores.Text" xml:space="preserve">
+    <value>Errores</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Name" xml:space="preserve">
+    <value>miPáginaErrores</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaErrores.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miControladorDePestañas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miControladorDePestañas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 431</value>
+  </data>
+  <data name="miControladorDePestañas.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Name" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 431</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>InterfaseManejadorDePdis</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, GpsYv.ManejadorDeMapa, Version=1.12.3013.41290, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>

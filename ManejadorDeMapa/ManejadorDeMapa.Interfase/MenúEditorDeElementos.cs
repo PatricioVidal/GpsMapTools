@@ -70,16 +70,8 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Vías;
-using System.IO;
-using GpsYv.ManejadorDeMapa.PDIs;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -89,8 +81,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   public partial class MenúEditorDeElementos : ContextMenuStrip
   {
     #region Campos
-    private ToolStripMenuItem miMenúNúmeroDeElementosSeleccionados = new ToolStripMenuItem();
-    private ListView miLista = null; 
+    private readonly ToolStripMenuItem miMenúNúmeroDeElementosSeleccionados = new ToolStripMenuItem();
+    private ListView miLista; 
     #endregion
 
     #region Eventos

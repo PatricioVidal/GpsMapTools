@@ -73,13 +73,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Vías;
-using System.Collections;
-using System.Diagnostics;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -90,7 +84,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   {
     #region Campos
     private ListView miLista;
-    private static readonly Pen miLápiz = new Pen(Color.Yellow, 11);
+
     #endregion
 
     #region Propiedades
@@ -186,8 +180,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
 
       // Busca el rango visible para la vía.
-      float margen = 0.0005f;
-      RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(elementos);
+      const float margen = 0.0005f;
+      RectangleF rectánguloQueEncierra = RectanguloQueEncierra(elementos);
       RectangleF rectánguloVisible = new RectangleF(
         rectánguloQueEncierra.X - margen,
         rectánguloQueEncierra.Y - margen,

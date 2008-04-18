@@ -23,8 +23,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       #region Campos
       private int miColumnaAOrdenar = -1;
-      private ListView miLista = null;
-      private List<ListViewItem> misItemsDeLaListaVirtual = null;
+      private ListView miLista;
+      private List<ListViewItem> misItemsDeLaListaVirtual;
       #endregion
 
       #region Propiedades
@@ -101,9 +101,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         }
 
         // Compara los texto de la columna a ordenar.
-        int comparasión = String.Compare(
+        int comparasión = string.Compare(
           elPrimerItem.SubItems[miColumnaAOrdenar].Text,
-          elSegundoItem.SubItems[miColumnaAOrdenar].Text);
+          elSegundoItem.SubItems[miColumnaAOrdenar].Text,
+          StringComparison.CurrentCultureIgnoreCase);
 
         // El signo del resultado depende de como queremos ordenar la lista.
         int resultado = 0;

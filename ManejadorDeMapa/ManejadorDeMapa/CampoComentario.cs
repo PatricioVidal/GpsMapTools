@@ -107,7 +107,7 @@ namespace GpsYv.ManejadorDeMapa
       : base(";")
     {
       // El comentario es lo que está despues del ';'.
-      if (!laLínea.StartsWith(";"))
+      if (!laLínea.StartsWith(";", StringComparison.CurrentCultureIgnoreCase))
       {
         throw new ArgumentException(string.Format("La línea tiene que comenzar con ';', pero es {0}", laLínea));
       }

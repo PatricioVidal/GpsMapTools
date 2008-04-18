@@ -72,10 +72,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Diagnostics;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
@@ -86,19 +85,19 @@ namespace GpsYv.ManejadorDeMapa
   public class ManejadorDeMapa
   {
     #region Campos
-    private ElementoDelMapa miEncabezado = null;
+    private ElementoDelMapa miEncabezado;
     private readonly IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
-    private readonly IList<PDI> misPDIs = new List<PDI>();
+    private readonly IList<Pdi> misPdis = new List<Pdi>();
     private readonly IList<Vía> misVías = new List<Vía>();
     private readonly IList<Polilínea> misPolilíneas = new List<Polilínea>();
     private readonly IList<Polígono> misPolígonos = new List<Polígono>();
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private string miArchivo = null;
-    private int miNúmeroDeSuspenciónDeEventos = 0;
-    private bool miHayEventosDeModificaciónDeElementoPendientes = false;
-    private bool miHayEventosDeModificaciónDePDIsPendientes = false;
-    private bool miHayEventosDeModificaciónDeVíasPendientes = false;
-    private readonly ManejadorDePDIs miManejadorDePDIs;
+    private string miArchivo;
+    private int miNúmeroDeSuspenciónDeEventos;
+    private bool miHayEventosDeModificaciónDeElementoPendientes;
+    private bool miHayEventosDeModificaciónDePdisPendientes;
+    private bool miHayEventosDeModificaciónDeVíasPendientes;
+    private readonly ManejadorDePdis miManejadorDePdis;
     private readonly ManejadorDeVías miManejadorDeVías;
     private readonly ManejadorDeElementos miManejadorDeElementos;
     #endregion
@@ -117,7 +116,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Evento cuando algún PDI es modificado.
     /// </summary>
-    public event EventHandler PDIsModificados;
+    public event EventHandler PdisModificados;
 
     /// <summary>
     /// Evento cuando alguna Vía es modificada.
@@ -187,11 +186,11 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Devuelve el manejador de PDIs.
     /// </summary>
-    public ManejadorDePDIs ManejadorDePDIs
+    public ManejadorDePdis ManejadorDePdis
     {
       get
       {
-        return miManejadorDePDIs;
+        return miManejadorDePdis;
       }
     }
 
@@ -215,9 +214,9 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        string filtrosDeExtensiones = "Polish format (*.mp)|*.mp|"
-                                      + "Polish format (*.txt)|*.txt|"
-                                      + "Todos los archivos (*.*)|*.*";
+        const string filtrosDeExtensiones = "Polish format (*.mp)|*.mp|"
+                                            + "Polish format (*.txt)|*.txt|"
+                                            + "Todos los archivos (*.*)|*.*";
         return filtrosDeExtensiones;
       }
     }
@@ -245,7 +244,7 @@ namespace GpsYv.ManejadorDeMapa
       Trace.WriteLine("Inicializando ManejadorDeMapa");
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
       miManejadorDeElementos = new ManejadorDeElementos(this, misElementos, elEscuchadorDeEstatus);
-      miManejadorDePDIs = new ManejadorDePDIs(this, misPDIs, elEscuchadorDeEstatus);
+      miManejadorDePdis = new ManejadorDePdis(this, misPdis, elEscuchadorDeEstatus);
       miManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
     }
 
@@ -282,7 +281,7 @@ namespace GpsYv.ManejadorDeMapa
 
       // Las listas especiales necesitan el encabezado para poder ser leídas correctamente
       // por programas como el cGPSmapper, GPSMapEdit, etc.
-      ElementoDelMapa[] elementosComunes = new ElementoDelMapa[] {
+      ElementoDelMapa[] elementosComunes = new[] {
         comentario,
         miEncabezado };
       List<ElementoDelMapa> elementosEliminados = new List<ElementoDelMapa> (elementosComunes);
@@ -315,7 +314,7 @@ namespace GpsYv.ManejadorDeMapa
       #endregion
 
       #region Añade los errores de los distinto manejadores.
-      foreach (PDI pdi in miManejadorDePDIs.BuscadorDeErrores.Errores.Keys)
+      foreach (Pdi pdi in miManejadorDePdis.BuscadorDeErrores.Errores.Keys)
       {
         elementosConErrores.Add(pdi);
       }
@@ -428,10 +427,10 @@ namespace GpsYv.ManejadorDeMapa
           EnvíaEventoElementosModificados();
           miHayEventosDeModificaciónDeElementoPendientes = false;
         }
-        if (miHayEventosDeModificaciónDePDIsPendientes)
+        if (miHayEventosDeModificaciónDePdisPendientes)
         {
-          EnvíaEventoPDIsModificados();
-          miHayEventosDeModificaciónDePDIsPendientes = false;
+          EnvíaEventoPdisModificados();
+          miHayEventosDeModificaciónDePdisPendientes = false;
         }
         if (miHayEventosDeModificaciónDeVíasPendientes)
         {
@@ -454,16 +453,16 @@ namespace GpsYv.ManejadorDeMapa
       // Si los eventos están suspendidos entonces se indica
       // que hay notificaciones pendientes.
       // Si no, entonces se genera el evento.
-      bool esPDI = (elElemento is PDI);
+      bool esPdi = (elElemento is Pdi);
       bool esVía = (elElemento is Vía);
       if (miNúmeroDeSuspenciónDeEventos > 0)
       {
         miHayEventosDeModificaciónDeElementoPendientes = true;
 
         // Procesa PDIs y Vías.
-        if (esPDI)
+        if (esPdi)
         {
-          miHayEventosDeModificaciónDePDIsPendientes = true;
+          miHayEventosDeModificaciónDePdisPendientes = true;
         }
         else if (esVía)
         {
@@ -475,9 +474,9 @@ namespace GpsYv.ManejadorDeMapa
         EnvíaEventoElementosModificados();
 
         // Procesa PDIs y Vías.
-        if (esPDI)
+        if (esPdi)
         {
-          EnvíaEventoPDIsModificados();
+          EnvíaEventoPdisModificados();
         }
         else if (esVía)
         {
@@ -493,7 +492,7 @@ namespace GpsYv.ManejadorDeMapa
     public void ProcesarTodo()
     {
       int númeroDeElementosModificados = 0;
-      númeroDeElementosModificados += miManejadorDePDIs.ProcesarTodo();
+      númeroDeElementosModificados += miManejadorDePdis.ProcesarTodo();
       númeroDeElementosModificados += miManejadorDeVías.ProcesarTodo();
 
       miEscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
@@ -505,12 +504,12 @@ namespace GpsYv.ManejadorDeMapa
     /// Crea un mapa nuevo.
     /// </summary>
     /// <param name="losElementos">Los elementos del mapa nuevo.</param>
-    private void CreaMapaNuevo(IList<ElementoDelMapa> losElementos)
+    private void CreaMapaNuevo(IEnumerable<ElementoDelMapa> losElementos)
     {
       // Busca el encabezado y crea todas las listas especializadas.
       miEncabezado = null;
       misElementos.Clear();
-      misPDIs.Clear();
+      misPdis.Clear();
       misVías.Clear();
       misPolilíneas.Clear();
       misPolígonos.Clear();
@@ -522,9 +521,9 @@ namespace GpsYv.ManejadorDeMapa
         {
           miEncabezado = elemento;
         }
-        else if (elemento is PDI)
+        else if (elemento is Pdi)
         {
-          misPDIs.Add((PDI)elemento);
+          misPdis.Add((Pdi)elemento);
         }
         else if (elemento is Vía)
         {
@@ -575,11 +574,11 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Genera el evento indicando que se modificaron PDIs.
     /// </summary>
-    private void EnvíaEventoPDIsModificados()
+    private void EnvíaEventoPdisModificados()
     {
-      if (PDIsModificados != null)
+      if (PdisModificados != null)
       {
-        PDIsModificados(this, new EventArgs());
+        PdisModificados(this, new EventArgs());
       }
     }
 

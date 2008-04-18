@@ -83,7 +83,7 @@
       this.miMapaDeVíasSeleccionadas.Lista = this.miLista;
       this.miMapaDeVíasSeleccionadas.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíasSeleccionadas.ManejadorDeMapa = null;
-      this.miMapaDeVíasSeleccionadas.MuestraPDIs = false;
+      this.miMapaDeVíasSeleccionadas.MuestraPdis = false;
       this.miMapaDeVíasSeleccionadas.MuestraPolígonos = false;
       this.miMapaDeVíasSeleccionadas.MuestraPolilíneas = false;
       this.miMapaDeVíasSeleccionadas.MuestraTodoElMapa = true;

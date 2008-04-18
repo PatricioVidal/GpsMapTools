@@ -60,9 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfase\PDIs\PruebaVentanaCambiarTipoDePDI.cs" />
-    <Compile Include="PDIs\PruebaArregladorDePalabrasPorTipo.cs" />
-    <Compile Include="PDIs\PruebaBuscadorDeDuplicados.cs" />
-    <Compile Include="PDIs\PruebaManejadorDePDIs.cs" />
+    <Compile Include="Pdis\PruebaArregladorDePalabrasPorTipo.cs" />
+    <Compile Include="Pdis\PruebaBuscadorDeDuplicados.cs" />
+    <Compile Include="Pdis\PruebaManejadorDePdis.cs" />
     <Compile Include="PruebaCampoParámetrosDeRuta.cs" />
     <Compile Include="PruebaClaseDeRuta.cs" />
     <Compile Include="PruebaElementoDesconocido.cs" />

@@ -72,12 +72,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
 using System.Globalization;
-using System.Drawing;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
@@ -162,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa
             case "POI":
             case "RGN10":
             case "RGN20":
-              LeePDI(clase);
+              LeePdi(clase);
               break;
             case "POLYGON":
             case "RGN80":
@@ -203,12 +199,12 @@ namespace GpsYv.ManejadorDeMapa
     }
 
     
-    private void LeePDI(string laClase)
+    private void LeePdi(string laClase)
     {
       IList<Campo> campos = LeeCampos();
 
       // Añade el PDI.
-      misElementosDelMapa.Add(new PDI(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+      misElementosDelMapa.Add(new Pdi(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
     }
 
 
@@ -362,10 +358,9 @@ namespace GpsYv.ManejadorDeMapa
     private CampoCoordenadas ExtraeCoordenadas(string elIdentificador, int elNivel, string elTexto)
     {
       // Extrae los pares de coordenadas.
-      string[] paresDeCoordenadas = elTexto.Split(new string[] {"),("}, StringSplitOptions.RemoveEmptyEntries);
+      string[] paresDeCoordenadas = elTexto.Split(new[] {"),("}, StringSplitOptions.RemoveEmptyEntries);
 
       // Procesa cada par de coordenadas.
-      int númeroDeParesDeCoordenadas = paresDeCoordenadas.Length;
       List<Coordenadas> coordenadas = new List<Coordenadas>();
       foreach (string parDeCoordenadas in paresDeCoordenadas)
       {

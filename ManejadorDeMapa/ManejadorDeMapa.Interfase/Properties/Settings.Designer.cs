@@ -26,24 +26,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados {
+        public int DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados {
             get {
-                return ((int)(this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados"]));
+                return ((int)(this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados"]));
             }
             set {
-                this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPDIsDuplicados"] = value;
+                this["DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int DistanciaHammingBuscarPDIsDuplicados {
+        public int DistanciaHammingBuscarPdisDuplicados {
             get {
-                return ((int)(this["DistanciaHammingBuscarPDIsDuplicados"]));
+                return ((int)(this["DistanciaHammingBuscarPdisDuplicados"]));
             }
             set {
-                this["DistanciaHammingBuscarPDIsDuplicados"] = value;
+                this["DistanciaHammingBuscarPdisDuplicados"] = value;
             }
         }
         

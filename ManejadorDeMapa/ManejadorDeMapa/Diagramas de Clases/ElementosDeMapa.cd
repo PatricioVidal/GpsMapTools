@@ -50,11 +50,11 @@
       <Property Name="LímiteDeVelocidad" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="GpsYv.ManejadorDeMapa.PDIs.PDI">
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.Pdi">
     <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAgAAEAAAAAAAAAAIAAAAAAAAAAAIAABA=</HashCode>
-      <FileName>PDIs\PDI.cs</FileName>
+      <FileName>Pdis\Pdi.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Coordenadas" />

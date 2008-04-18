@@ -71,10 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
-using System.Text.RegularExpressions;
 using GpsYv.ManejadorDeMapa;
 
 namespace GpsYv.RemplazadorDeLetrasEspeciales
@@ -107,7 +103,7 @@ namespace GpsYv.RemplazadorDeLetrasEspeciales
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
-    /// <param name="elPDI">El PDI.</param>
+    /// <param name="elElemento">El Elemento.</param>
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
     protected override int ProcesaElemento(ElementoDelMapa elElemento)
     {
@@ -165,8 +161,8 @@ namespace GpsYv.RemplazadorDeLetrasEspeciales
     private class LectorDeConversiónDeLetras : LectorDeArchivo
     {
       #region Campos
-      private static readonly string miArchivoDeLetrasAReemplazar = @"LetrasEspecialesAReemplazar.csv";
-      private Dictionary<char, char> miDiccionarioDeLetras = new Dictionary<char, char>();
+      private const string miArchivoDeLetrasAReemplazar = @"LetrasEspecialesAReemplazar.csv";
+      private readonly Dictionary<char, char> miDiccionarioDeLetras = new Dictionary<char, char>();
       #endregion
 
       /// <summary>

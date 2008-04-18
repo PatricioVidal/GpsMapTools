@@ -77,6 +77,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -86,8 +87,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   public partial class InterfaseListaDeElementos : ListView
   {
     #region Campos
-    private List<ListViewItem> misItemsVirtuales = new List<ListViewItem>();
-    private LlenadorDeItems miLlenadorDeItems = null;
+    private readonly List<ListViewItem> misItemsVirtuales = new List<ListViewItem>();
+    private LlenadorDeItems miLlenadorDeItems;
     #endregion
 
     #region Propiedades
@@ -259,7 +260,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public virtual void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       List<string> subItems = new List<string> {
-                elElemento.Número.ToString().PadLeft(6),
+                elElemento.Número.ToString(CultureInfo.CurrentCulture).PadLeft(6),
                 elElemento.Tipo.ToString(), 
                 elElemento.Descripción,
                 elElemento.Nombre};

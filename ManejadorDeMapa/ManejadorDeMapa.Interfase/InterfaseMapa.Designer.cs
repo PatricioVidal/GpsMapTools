@@ -17,6 +17,13 @@
       {
         components.Dispose();
       }
+
+      // Libera recursos.
+      if (disposing)
+      {
+        miLápizDeFondoParaEscala.Dispose();
+      }
+
       base.Dispose(disposing);
     }
 

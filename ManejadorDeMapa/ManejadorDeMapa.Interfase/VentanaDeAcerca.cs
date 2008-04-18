@@ -75,6 +75,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -85,7 +86,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       InitializeComponent();
       this.Text = String.Format("Acerca {0}", AssemblyName);
       this.labelProductName.Text = AssemblyProduct;
-      this.labelVersion.Text = String.Format("Version {0}   ({1})", AssemblyVersion, FechaDelAssembly.ToString("MMM. d, yyyy"));
+      this.labelVersion.Text = String.Format("Version {0}   ({1})", AssemblyVersion, FechaDelAssembly.ToString("MMM. d, yyyy", CultureInfo.CurrentCulture));
       this.labelCopyright.Text = AssemblyCopyright;
       this.labelCompanyName.Text = AssemblyCompany;
       this.textBoxDescription.Text = 
@@ -112,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    public DateTime FechaDelAssembly
+    public static DateTime FechaDelAssembly
     {
       get
       {

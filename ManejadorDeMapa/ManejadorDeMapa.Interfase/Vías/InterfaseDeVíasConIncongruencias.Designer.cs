@@ -80,7 +80,7 @@
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Lista = this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.ManejadorDeMapa = null;
-      this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPDIs = false;
+      this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPdis = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPolígonos = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPolilíneas = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraTodoElMapa = true;
