@@ -1,5 +1,9 @@
 Versión 1.18
-
+- Añadido módulo de detección de posibles nodos de Vías desconectados. La lógica y la velocidad de procesamiento necesita mejorarse. 
+- Eliminada la Ñ de las letras a remplazar. 
+- Añadida "RESID" a la tabla de remplazo de palabras. 
+- Interno: Actualizado el código de acuerdo a las reglas estándares de Microsoft y ReSharper. 
+- Interno: Movidas las Interfases a su propio proyecto. 
 
 Versión 1.17
 - Añadida la funcionalidad de excluir Vías de la búsqueda de Parámetros de Ruta Estándar.
