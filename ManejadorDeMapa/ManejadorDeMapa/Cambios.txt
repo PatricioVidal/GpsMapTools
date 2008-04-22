@@ -1,3 +1,6 @@
+Versión 1.19
+
+
 Versión 1.18
 - Añadido módulo de detección de posibles nodos de Vías desconectados. La lógica y la velocidad de procesamiento necesita mejorarse. 
 - Eliminada la Ñ de las letras a remplazar. 
