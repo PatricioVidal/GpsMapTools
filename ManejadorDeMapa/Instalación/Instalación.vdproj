@@ -40,12 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -53,6 +47,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -164,7 +164,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.18.3026.36439, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.18.3034.800, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_8D22E52328E868036DCD514B1AF10C59"
@@ -421,20 +421,6 @@
             "Folder" = "8:_57ABDBD26C574A97BCC1705654C960E6"
             "WorkingFolder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
             "Icon" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_41ED09A5CB64447999055D07EA25C139"
-            {
-            "Name" = "8:GpsYv.ManejadorDeMapa"
-            "Arguments" = "8:"
-            "Description" = "8:Manejador de Mapas GPS"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:32512"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:"
-            "Folder" = "8:_57ABDBD26C574A97BCC1705654C960E6"
-            "WorkingFolder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
-            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
