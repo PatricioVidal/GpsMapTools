@@ -176,7 +176,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Si la vía fué eliminada entonces añadela a la lista.
         if (vía.FuéEliminado)
         {
-          laLista.AñadeItem(vía, vía.RazónParaEliminación);
+          laLista.AñadeItem(new ElementoConEtiqueta(vía), vía.RazónParaEliminación);
         }
       }
     }

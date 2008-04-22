@@ -285,24 +285,24 @@ namespace GpsYv.ManejadorDeMapa
           int separador = línea.IndexOf('=');
           if (separador > 1)
           {
-            #region Lee el identificador y el nivel
-            // Obtiene el identificador con nivel (Data0, Data1, etc)
+            #region Lee el identificador y el número (si existe)
+            // Obtiene el identificador con número (Data0, Data1, etc)
             // y texto del campo.
-            string identificadorConNivel = línea.Substring(0, separador);
+            string identificadorConNúmero = línea.Substring(0, separador);
             string texto = línea.Substring(separador + 1);
-            
-            // Separa el identificador del nivel.
-            int indiceDelNúmero = identificadorConNivel.IndexOfAny("0123456789".ToCharArray());
-            int? nivel = null;
-            string identificador = identificadorConNivel;
+
+            // Separa el identificador del número.
+            int indiceDelNúmero = identificadorConNúmero.IndexOfAny("0123456789".ToCharArray());
+            int? número = null;
+            string identificador = identificadorConNúmero;
             if (indiceDelNúmero >= 0)
             {
-              int número;
-              bool convirtió = int.TryParse(identificadorConNivel.Substring(indiceDelNúmero), out número);
+              int númeroExtraído;
+              bool convirtió = int.TryParse(identificadorConNúmero.Substring(indiceDelNúmero), out númeroExtraído);
               if (convirtió)
               {
-                nivel = número;
-                identificador = identificadorConNivel.Substring(0, indiceDelNúmero);
+                número = númeroExtraído;
+                identificador = identificadorConNúmero.Substring(0, indiceDelNúmero);
               }
             }
             #endregion
@@ -318,8 +318,24 @@ namespace GpsYv.ManejadorDeMapa
                 break;
               case CampoCoordenadas.IdentificadorDeCoordenadas:
               case CampoCoordenadas.IdentificadorDeCoordenadasAlterno:
-                CampoCoordenadas coordenadas = ExtraeCoordenadas(identificadorConNivel, nivel.Value, texto);
-                campos.Add(coordenadas);
+                if (número != null)
+                {
+                  campos.Add(LeeCampoCoordenadas(identificadorConNúmero, número.Value, texto));
+                }
+                else
+                {
+                  campos.Add(new CampoGenérico(identificadorConNúmero, texto));
+                }
+                break;
+              case CampoNodo.IdentificadorDeNodo:
+                if (número != null)
+                {
+                  campos.Add(LeeCampoNodo(identificadorConNúmero, texto));
+                }
+                else
+                {
+                  campos.Add(new CampoGenérico(identificadorConNúmero, texto));
+                }
                 break;
               case CampoParámetrosDeRuta.IdentificadorDeParámetrosDeRuta:
                 CampoParámetrosDeRuta parámetrosDeRuta = new CampoParámetrosDeRuta(texto);
@@ -329,7 +345,7 @@ namespace GpsYv.ManejadorDeMapa
                 campos.Add(new CampoAtributo(texto));
                 break;
               default:
-                campos.Add(new CampoGenérico(identificadorConNivel, texto));
+                campos.Add(new CampoGenérico(identificadorConNúmero, texto));
                 break;
             }
             #endregion
@@ -354,8 +370,40 @@ namespace GpsYv.ManejadorDeMapa
       return campos;
     }
 
+    private static CampoNodo LeeCampoNodo(string elIdentificador, string elTexto)
+    {
+      // Verifica que tenemos 3 partes.
+      string[] partes = elTexto.Split(',');
+      if (partes.Length != 3)
+      {
+        throw new ArgumentException(string.Format("El texto del campo de nodo debe tener tres partes: {0}", elTexto));
+      }
 
-    private CampoCoordenadas ExtraeCoordenadas(string elIdentificador, int elNivel, string elTexto)
+      // Extrae los parámetros del nodo.
+      int indice = Convert.ToInt32(partes[0]);
+      int identificador = Convert.ToInt32(partes[1]);
+      int esExternoComoNúmero = Convert.ToInt32(partes[2]);
+      bool esExterno = false;
+      switch (esExternoComoNúmero)
+      {
+        case 0:
+          esExterno = false;
+          break;
+        case 1:
+          esExterno = true;
+          break;
+        default:
+          throw new ArgumentException(string.Format("El tercer parámetro debe ser 0 ó 1: {0}", elTexto));
+      }
+
+      // Crea el nodo.
+      CampoNodo nodo = new CampoNodo(elIdentificador, indice, identificador, esExterno);
+
+      return nodo;
+    }
+
+
+    private CampoCoordenadas LeeCampoCoordenadas(string elIdentificador, int elNivel, string elTexto)
     {
       // Extrae los pares de coordenadas.
       string[] paresDeCoordenadas = elTexto.Split(new[] {"),("}, StringSplitOptions.RemoveEmptyEntries);

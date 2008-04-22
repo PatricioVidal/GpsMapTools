@@ -110,26 +110,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="elColorDeFondo">El color de fondo.</param>
     /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public override void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, string[] losSubItemsAdicionales)
+    public override void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, Color elColorDeFondo, ListViewGroup elGrupo, string[] losSubItemsAdicionales)
     {
       // Verifica que el elemento es un PDI.
-      if (!(elElemento is Pdi))
+      Pdi pdi = elElementoConEtiqueta.ElementoDelMapa as Pdi;
+      if (pdi == null)
       {
-        throw new ArgumentException("El elemento debe ser tipo PDI. pero es " + elElemento.GetType());
+        throw new ArgumentException("El elemento debe ser tipo Pdi. pero es " + elElementoConEtiqueta.ElementoDelMapa.GetType());
       }
 
       // Añade el PDI a la lista.
-      Pdi pdi = (Pdi)elElemento;
+      
       List<string> subItems = new List<string> {
           pdi.Coordenadas.Latitud.ToString(FormatoDeCoordenada, miFormatoNumérico),
           pdi.Coordenadas.Longitud.ToString(FormatoDeCoordenada, miFormatoNumérico)};
       subItems.AddRange(losSubItemsAdicionales);
 
-      base.AñadeItem(pdi, elColorDeFondo, elGrupo, subItems.ToArray());
+      base.AñadeItem(elElementoConEtiqueta, elColorDeFondo, elGrupo, subItems.ToArray());
     }
   }
 }

@@ -101,7 +101,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     /// <param name="losElementos">Los elementos seleccionados.</param>
     protected override void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
     {
-      // Dibuja la vías como polilíneas adicional para resaltarlas.
+      // Dibuja los PDI seleccionados como puntos adicionales para resaltarlos.
       PuntosAddicionales.Clear();
       foreach (Pdi pdi in losElementos)
       {

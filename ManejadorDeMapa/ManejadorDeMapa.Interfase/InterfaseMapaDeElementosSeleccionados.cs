@@ -87,6 +87,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     #endregion
 
+    #region Eventos
+    /// <summary>
+    /// Evento cuando se dibujaron los elementos en el mapa.
+    /// </summary>
+    public event EventHandler DibujóElementos;
+    #endregion
+
     #region Propiedades
     /// <summary>
     /// Obtiene o pone la lista con los elementos del mapa.
@@ -169,17 +176,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         ListViewItem item = miLista.Items[indice];
 
         // El Tag del item de la lista tiene que ser una vía.
-        ElementoDelMapa elemento = item.Tag as ElementoDelMapa;
-        if (elemento == null)
+        ElementoConEtiqueta elementoConEtiqueta = item.Tag as ElementoConEtiqueta;
+        if (elementoConEtiqueta == null)
         {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Elemento de Mapa, pero es: " + elemento);
+          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una ElementoConEtiqueta, pero es: " + item.Tag.GetType());
         }
 
-        // Añade la vía a la lista.
-        elementos.Add(elemento);
+        // Añade el elemento a la lista.
+        elementos.Add(elementoConEtiqueta.ElementoDelMapa);
       }
 
-      // Busca el rango visible para la vía.
+      // Busca el rango visible para los elementos.
       const float margen = 0.0005f;
       RectangleF rectánguloQueEncierra = RectanguloQueEncierra(elementos);
       RectangleF rectánguloVisible = new RectangleF(
@@ -191,9 +198,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       DibujaObjectosAdicionales(elementos);
 
       // Muestra el mapa en la region deseada.
-      Enabled = true;
       RectánguloVisibleEnCoordenadas = rectánguloVisible;
       MuestraTodoElMapa = false;
+
+      // Envía el evento.
+      if (DibujóElementos != null)
+      {
+        DibujóElementos(this, new EventArgs());
+      }
+      
+      // Dibuja el mapa.
+      Enabled = true;
       Refresh();
     }
 

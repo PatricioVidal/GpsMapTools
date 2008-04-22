@@ -94,6 +94,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private readonly Brush miPincelParaTiempo = Brushes.Gray;
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
     private readonly Brush miPincelParaPdi = Brushes.Black;
+    private readonly Brush miPincelDeNodo = Brushes.Cyan;
     private readonly Brush miPincelParaVíaConUnaCoordenada = Brushes.Red;
     private readonly Brush miPincelParaPdiModificado = Brushes.Yellow;
     private readonly Brush miPincelParaPdiEliminado = Brushes.Red;
@@ -342,10 +343,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="losElementos">Los elementos dados.</param>
     public static RectangleF RectanguloQueEncierra(IList<ElementoDelMapa> losElementos)
     {
-      double mínimaLatitud = double.PositiveInfinity;
-      double máximaLatitud = double.NegativeInfinity;
-      double mínimaLongitud = double.PositiveInfinity;
-      double máximaLongitud = double.NegativeInfinity;
+      RectangleF rectángulo = new RectangleF(
+        float.PositiveInfinity,
+        float.PositiveInfinity,
+        0,
+        0);
       foreach (ElementoDelMapa elemento in losElementos)
       {
         // Para evitar duplicar la conversión de tipo más de una vez 
@@ -357,50 +359,56 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if ((pdi = elemento as Pdi) != null)
         {
           Coordenadas coordenadas = pdi.Coordenadas;
-          BuscaCoordenadasQueEncierran(
+          ActualizaRectánguloQueEncierra(
             coordenadas,
-            ref mínimaLatitud,
-            ref máximaLatitud,
-            ref mínimaLongitud,
-            ref máximaLongitud);
+            ref rectángulo);
         }
         else if ((polígono = elemento as Polígono) != null)
         {
 
           foreach (PointF coordenadas in polígono.Coordenadas)
           {
-            BuscaCoordenadasQueEncierran(
-              coordenadas, 
-              ref mínimaLatitud, 
-              ref máximaLatitud,
-              ref mínimaLongitud,
-              ref máximaLongitud);
+            ActualizaRectánguloQueEncierra(
+              coordenadas,
+              ref rectángulo);
           }
         }
         else if ((polilínea = elemento as Polilínea) != null)
         {
           foreach (PointF coordenadas in polilínea.Coordenadas)
           {
-            BuscaCoordenadasQueEncierran(
+            ActualizaRectánguloQueEncierra(
               coordenadas,
-              ref mínimaLatitud,
-              ref máximaLatitud,
-              ref mínimaLongitud,
-              ref máximaLongitud);
+              ref rectángulo);
           }
         }
       }
-
-      RectangleF rectángulo = new RectangleF(
-        (float)mínimaLongitud,
-        (float)mínimaLatitud,
-        (float)(máximaLongitud - mínimaLongitud),
-        (float)(máximaLatitud - mínimaLatitud));
 
       return rectángulo;
     }
 
 
+    /// <summary>
+    /// Actualiza el rectángulo que encierra.
+    /// </summary>
+    /// <param name="lasCoordenadas"></param>
+    /// <param name="elRectánguloQueEncierra">El Rectángulo que Encierra</param>
+    public static void ActualizaRectánguloQueEncierra(
+      PointF lasCoordenadas,
+      ref RectangleF elRectánguloQueEncierra)
+    {
+      // Solo procesa coordenadas válidas.
+      if (!double.IsNaN(lasCoordenadas.X) &&
+        !double.IsNaN(lasCoordenadas.Y))
+      {
+        elRectánguloQueEncierra.X = Math.Min(elRectánguloQueEncierra.X, lasCoordenadas.X);
+        elRectánguloQueEncierra.Width = Math.Max(elRectánguloQueEncierra.Right, lasCoordenadas.X) - elRectánguloQueEncierra.X;
+        elRectánguloQueEncierra.Y = Math.Min(elRectánguloQueEncierra.Y, lasCoordenadas.Y);
+        elRectánguloQueEncierra.Height = Math.Max(elRectánguloQueEncierra.Bottom, lasCoordenadas.Y) - elRectánguloQueEncierra.Y;
+      }
+    }
+
+    
     /// <summary>
     /// Obtiene la lista de puntos addicionales para pintar.
     /// </summary>
@@ -470,25 +478,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private static void BuscaCoordenadasQueEncierran(
-      PointF lasCoordenadas,
-      ref double laMínimaLatitud,
-      ref double laMáximaLatitud,
-      ref double laMínimaLongitud,
-      ref double laMáximaLongitud)
-    {
-      // Solo procesa coordenadas válidas.
-      if (!double.IsNaN(lasCoordenadas.X) &&
-        !double.IsNaN(lasCoordenadas.Y))
-      {
-        laMínimaLatitud = Math.Min(laMínimaLatitud, lasCoordenadas.Y);
-        laMáximaLatitud = Math.Max(laMáximaLatitud, lasCoordenadas.Y);
-        laMínimaLongitud = Math.Min(laMínimaLongitud, lasCoordenadas.X);
-        laMáximaLongitud = Math.Max(laMáximaLongitud, lasCoordenadas.X);
-      }
-    }
-
-    
     private void EnPintar(object elEnviador, PaintEventArgs losArgumentosDePintar)
     {
       // Nos salimos si no hay un mapa cargado.
@@ -680,6 +669,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         Tipo tipo = vía.Tipo;
         DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
+
+        // Dibuja los nodos.
+        foreach (CampoNodo nodo in vía.CamposNodo)
+        {
+          Coordenadas coordenadas = vía.Coordenadas[nodo.IndiceDeCoordenadas];
+          const int tamaño = 3;
+          DibujaPunto(coordenadas, miPincelDeNodo, tamaño);
+        }
       }
     }
 

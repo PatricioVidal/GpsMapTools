@@ -313,8 +313,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       IList<Pdi> pdis = ManejadorDeMapa.ManejadorDePdis.Elementos;
       foreach (Pdi pdi in pdis)
       {
-        laLista.AñadeItem(
-          pdi);
+        laLista.AñadeItem(new ElementoConEtiqueta(pdi));
       }
     }
     #endregion

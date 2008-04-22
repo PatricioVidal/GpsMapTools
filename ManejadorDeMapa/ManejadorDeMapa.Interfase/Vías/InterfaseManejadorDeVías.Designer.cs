@@ -46,9 +46,9 @@
       this.miPáginaPosibleErroresDeRuteo = new System.Windows.Forms.TabPage();
       this.miInterfasePosiblesErroresDeRuteoEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías();
       this.miPáginaPosiblesNodosDesconectados = new System.Windows.Forms.TabPage();
+      this.miInterfasePosiblesNodosDesconectados = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesNodosDesconectados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfaseDeErroresEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores();
-      this.interfacePosiblesNodosDesconectados1 = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfacePosiblesNodosDesconectados();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
@@ -201,10 +201,17 @@
       // 
       // miPáginaPosiblesNodosDesconectados
       // 
-      this.miPáginaPosiblesNodosDesconectados.Controls.Add(this.interfacePosiblesNodosDesconectados1);
+      this.miPáginaPosiblesNodosDesconectados.Controls.Add(this.miInterfasePosiblesNodosDesconectados);
       resources.ApplyResources(this.miPáginaPosiblesNodosDesconectados, "miPáginaPosiblesNodosDesconectados");
       this.miPáginaPosiblesNodosDesconectados.Name = "miPáginaPosiblesNodosDesconectados";
       this.miPáginaPosiblesNodosDesconectados.UseVisualStyleBackColor = true;
+      // 
+      // miInterfacePosiblesNodosDesconectados
+      // 
+      resources.ApplyResources(this.miInterfasePosiblesNodosDesconectados, "miInterfacePosiblesNodosDesconectados");
+      this.miInterfasePosiblesNodosDesconectados.EscuchadorDeEstatus = null;
+      this.miInterfasePosiblesNodosDesconectados.ManejadorDeMapa = null;
+      this.miInterfasePosiblesNodosDesconectados.Name = "miInterfacePosiblesNodosDesconectados";
       // 
       // miPáginaErrores
       // 
@@ -219,11 +226,6 @@
       this.miInterfaseDeErroresEnVías.EscuchadorDeEstatus = null;
       this.miInterfaseDeErroresEnVías.ManejadorDeMapa = null;
       this.miInterfaseDeErroresEnVías.Name = "miInterfaseDeErroresEnVías";
-      // 
-      // interfacePosiblesNodosDesconectados1
-      // 
-      resources.ApplyResources(this.interfacePosiblesNodosDesconectados1, "interfacePosiblesNodosDesconectados1");
-      this.interfacePosiblesNodosDesconectados1.Name = "interfacePosiblesNodosDesconectados1";
       // 
       // InterfaseManejadorDeVías
       // 
@@ -267,6 +269,6 @@
     private System.Windows.Forms.TabPage miPáginaPosibleErroresDeRuteo;
     private InterfasePosiblesErroresDeRuteoEnVías miInterfasePosiblesErroresDeRuteoEnVías;
     private System.Windows.Forms.TabPage miPáginaPosiblesNodosDesconectados;
-    private InterfacePosiblesNodosDesconectados interfacePosiblesNodosDesconectados1;
+    private InterfasePosiblesNodosDesconectados miInterfasePosiblesNodosDesconectados;
   }
 }

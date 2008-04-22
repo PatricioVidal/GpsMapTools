@@ -82,12 +82,14 @@ using GpsYv.ManejadorDeMapa.Vías;
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
   /// <summary>
-  /// Interfase de Vías con incongruencias.
+  /// Interfase de Posibles Nodos Desconectados.
   /// </summary>
-  public partial class InterfaseDeVíasConIncongruencias : InterfaseBase
+  public partial class InterfasePosiblesNodosDesconectados : InterfaseBase
   {
     #region Campos
-    private BuscadorDeIncongruencias miBuscadorDeIncongruencias;
+    private BuscadorDePosiblesNodosDesconectados miBuscadorDePosiblesNodosDesconectados;
+    private Brush miPincelDeNodo = Brushes.Black;
+    private Brush miPincelDePosibleNodoDesconectado = Brushes.Orange;
     #endregion
 
     #region Propiedades
@@ -99,27 +101,26 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         // Deja de manejar los eventos.
-        if (miBuscadorDeIncongruencias != null)
+        if (miBuscadorDePosiblesNodosDesconectados != null)
         {
-          miBuscadorDeIncongruencias.Invalidado -= EnInvalidado;
-          miBuscadorDeIncongruencias.Procesó -= EnSeBuscaronIncongruencias;
+          miBuscadorDePosiblesNodosDesconectados.Invalidado -= EnInvalidado;
+          miBuscadorDePosiblesNodosDesconectados.Procesó -= EnSeBuscaronPosiblesNodosDesconectados;
         }
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
-        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
         {
-          miBuscadorDeIncongruencias = value.ManejadorDeVías.BuscadorDeIncongruencias;
-
-          if (miBuscadorDeIncongruencias != null)
-          {
-            miBuscadorDeIncongruencias.Invalidado += EnInvalidado;
-            miBuscadorDeIncongruencias.Procesó += EnSeBuscaronIncongruencias;
-          }
+          miBuscadorDePosiblesNodosDesconectados = value.ManejadorDeVías.BuscadorDePosiblesNodosDesconectados;
+          miBuscadorDePosiblesNodosDesconectados.Invalidado += EnInvalidado;
+          miBuscadorDePosiblesNodosDesconectados.Procesó += EnSeBuscaronPosiblesNodosDesconectados;
+          InicializaDistanciaMáxima();
         }
+
+        // Pone el manejador de mapa en los componentes.
+        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
       }
     }
 
@@ -141,32 +142,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeVíasConIncongruencias()
+    public InterfasePosiblesNodosDesconectados()
     {
       InitializeComponent();
 
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
+      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.DibujóElementos += EnDibujóElementos;
+
       // Escucha el evento de edición de Vías.
       miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        // Busca inconguencias otra vez.
-        miBuscadorDeIncongruencias.Procesa();
-      };
+        // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
+        miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
 
-      // Añade el menú para 
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(new ToolStripSeparator());
-      ToolStripMenuItem menú = new ToolStripMenuItem("Excluir de búsqueda de Parámetros de Ruta Estándar");
-      menú.Click += EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar;
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(menú);
+        // Busca posibles nodos desconectados otra vez.
+        miBuscadorDePosiblesNodosDesconectados.Procesa();
+      };
     }
     #endregion
 
     #region Métodos Privados
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
-      // Regenera la lista.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
 
       // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
@@ -174,7 +173,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     }
 
 
-    private void EnSeBuscaronIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    private void EnSeBuscaronPosiblesNodosDesconectados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
     }
@@ -183,53 +182,80 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IDictionary<Vía, IList<string>> incongruencias = miBuscadorDeIncongruencias.Incongruencias;
-      foreach (KeyValuePair<Vía, IList<string>> ítem in incongruencias)
+      IList<PosibleNodoDesconectado> posibleNodosDesconectados = miBuscadorDePosiblesNodosDesconectados.PosibleNodosDesconectados;
+      foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodosDesconectados)
       {
-        // Crea el grupo.
-        Vía vía = ítem.Key;
-
-        // Añade los detalles de la incongruencia a la lista.
-        IList<string> detallesDeIncongruencia = ítem.Value;
-        string detalle = string.Join(" | ", detallesDeIncongruencia.ToArray());
-        laLista.AñadeItem(new ElementoConEtiqueta(vía), detalle);
+        ElementoConEtiqueta elemento = new ElementoConEtiqueta(posibleNodoDesconectado.Vía, posibleNodoDesconectado);
+        laLista.AñadeItem(
+          elemento,
+          posibleNodoDesconectado.Coordenadas.ToString(),
+          posibleNodoDesconectado.Distancia.ToString("0.0"),
+          posibleNodoDesconectado.Detalle);
       }
+    }
+    
+
+    private void EnDibujóElementos(object elEnviador, EventArgs losArgumentos)
+    {
+      InterfaseMapa mapa = miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas;
+      mapa.PuntosAddicionales.Clear();
+      RectangleF rectánguloQueEncierra = new RectangleF(
+        float.PositiveInfinity,
+        float.PositiveInfinity,
+        0,
+        0);
+
+      // Dibuja los nodos como puntos addicionales para resaltarlos.
+      foreach(int i in miInterfaseListaConMapaDeVías.InterfaseListaDeVías.SelectedIndices)
+      {
+        ElementoConEtiqueta elemento = (ElementoConEtiqueta)miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Items[i].Tag;
+        PosibleNodoDesconectado posibleNodoDesconectado = (PosibleNodoDesconectado)elemento.Etiqueta;
+
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.Coordenadas,
+          miPincelDeNodo,
+          13));
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.PosiblesCoordenadasDesconectadas,
+          miPincelDePosibleNodoDesconectado,
+          9));
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.Coordenadas,
+          miPincelDePosibleNodoDesconectado,
+          9));
+
+        InterfaseMapa.ActualizaRectánguloQueEncierra(
+          posibleNodoDesconectado.Coordenadas,
+          ref rectánguloQueEncierra);
+      }
+
+      const float margen = 0.0001f;
+      RectangleF rectánguloVisible = new RectangleF(
+        rectánguloQueEncierra.X - margen,
+        rectánguloQueEncierra.Y - margen,
+        rectánguloQueEncierra.Width + (2 * margen),
+        rectánguloQueEncierra.Height + (2 * margen));
+      mapa.RectánguloVisibleEnCoordenadas = rectánguloVisible;
+    }
+
+    
+    private void EnCambióBarraDeDistancia(object sender, EventArgs e)
+    {
+      InicializaDistanciaMáxima();
     }
 
 
-    private void EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar(object elEnviador, EventArgs losArgumentos)
+    private void InicializaDistanciaMáxima()
     {
-      ListView lista = miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
+      int distancia = miBarraDeDistancia.Value * 5;
+      miTextoDistancia.Text = distancia + " m";
+      miBuscadorDePosiblesNodosDesconectados.DistanciaMáxima = distancia;
+    }
 
-      // Retornamos si no hay Vías seleccionadas.
-      int númeroDeVíasSeleccionadas = lista.SelectedIndices.Count;
-      if (númeroDeVíasSeleccionadas == 0)
-      {
-        return;
-      }
 
-      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
-      DialogResult respuesta = MessageBox.Show(
-        string.Format("Está seguro que quiere Excluir las {0} Vías seleccionadas de próximas búsquedas de Parámetros de Ruta Estándar?", númeroDeVíasSeleccionadas),
-        "Excluir de Búsqueda de Parámetros de Ruta Estándar",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-      // Estandarizar el Límite de Velocidad si el usuario dice que si.
-      if (respuesta == DialogResult.Yes)
-      {
-        // Cambia las vías.
-        ManejadorDeMapa.SuspendeEventos();
-        IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneVíasSeleccionadas();
-        foreach (Vía vía in vías)
-        {
-          vía.AñadeAtributo(BuscadorDeIncongruencias.AtributoNoParámetrosDeRutaEstándar);
-        }
-        ManejadorDeMapa.RestableceEventos();
-
-        // Busca inconguencias otra vez.
-        miBuscadorDeIncongruencias.Procesa();
-      }
+    private void EnBotónBuscaPosiblesNodosDesconectados(object sender, EventArgs e)
+    {
+      miBuscadorDePosiblesNodosDesconectados.Procesa();
     }
     #endregion
   }

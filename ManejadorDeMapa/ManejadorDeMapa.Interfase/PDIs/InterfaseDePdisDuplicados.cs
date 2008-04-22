@@ -87,8 +87,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
   {
     #region Campos
     private BuscadorDeDuplicados miBuscadorDeDuplicados;
-    private Brush miPincelDePdi = new SolidBrush(Color.Black);
-    private Brush miPincelDePdiDuplicado = new SolidBrush(Color.Orange);
+    private Brush miPincelDePdi = Brushes.Black;
+    private Brush miPincelDePdiDuplicado = Brushes.Orange;
     private Color miColorDeFondoOriginal;
     #endregion
 

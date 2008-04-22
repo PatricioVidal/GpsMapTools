@@ -188,7 +188,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       {
         Pdi pdi = error.Key;
         string razón = error.Value;
-        laLista.AñadeItem(pdi, razón);
+        laLista.AñadeItem(new ElementoConEtiqueta(pdi), razón);
       }
 
       // Activa el menú de Edición si hay elementos en la lista.

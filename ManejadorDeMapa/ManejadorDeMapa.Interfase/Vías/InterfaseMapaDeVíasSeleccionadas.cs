@@ -69,16 +69,9 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
-using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
@@ -113,7 +106,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       foreach (Vía vía in losElementos)
       {
         PolilíneasAdicionales.Add(
-          new InterfaseMapa.PolilíneaAdicional(vía.Coordenadas, miLápiz));
+          new PolilíneaAdicional(vía.Coordenadas, miLápiz));
       }
     }
     #endregion

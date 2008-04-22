@@ -174,7 +174,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         // Si la vía fué modificada y no eliminada entonces añadela a la lista de modificaciones.
         if (vía.FuéModificado && !vía.FuéEliminado)
         {
-          laLista.AñadeItem(vía, vía.Modificaciones);
+          laLista.AñadeItem(new ElementoConEtiqueta(vía), vía.Modificaciones);
         }
       }
     }

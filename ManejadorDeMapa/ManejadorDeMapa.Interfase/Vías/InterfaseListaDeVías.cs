@@ -120,27 +120,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="elColorDeFondo">El color de fondo.</param>
     /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public override void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
+    public override void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       // Verifica que el elemento es una Vía.
-      if (!(elElemento is Vía))
+      Vía vía = elElementoConEtiqueta.ElementoDelMapa as Vía;
+      if (vía == null)
       {
-        throw new ArgumentException("El elemento debe ser tipo Vía. pero es " + elElemento.GetType());
+        throw new ArgumentException("El elemento debe ser tipo Vía. pero es " + elElementoConEtiqueta.ElementoDelMapa.GetType());
       }
 
       // Añade la Vía a la lista.
-      Vía vía = (Vía)elElemento;
       List<string> subItems = new List<string> {
           vía.CampoParámetrosDeRuta.LímiteDeVelocidad.ToString(),
           vía.CampoParámetrosDeRuta.ClaseDeRuta.ToString(),
           vía.CampoParámetrosDeRuta.ToString()};
       subItems.AddRange(losSubItemsAdicionales);
 
-      base.AñadeItem(vía, elColorDeFondo, elGrupo, subItems.ToArray());
+      base.AñadeItem(elElementoConEtiqueta, elColorDeFondo, elGrupo, subItems.ToArray());
     }
   }
 }

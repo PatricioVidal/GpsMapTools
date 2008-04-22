@@ -33,7 +33,6 @@
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseManejadorDeMapa));
           System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
           System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-          System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
           this.miMenúProcesarTodo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuProcesarTodoEnPdis = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +44,8 @@
           this.miMenúVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúProcesarTodoEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+          this.miMenúBuscarIncongruenciasenVías = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúBuscarPosiblesErroresDeRuteoEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarErroresEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPrincipal = new System.Windows.Forms.MenuStrip();
           this.miMenúMapa = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,11 +73,10 @@
           this.miInterfaseManejadorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
-          this.menúBuscarPosiblesErroresDeRuteoEnVías = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúBuscarPosiblesNodosDesconectadosEnVías = new System.Windows.Forms.ToolStripMenuItem();
           toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-          toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPrincipal.SuspendLayout();
           this.miEstatus.SuspendLayout();
           this.miControladorDePestañasPrincipal.SuspendLayout();
@@ -168,8 +168,9 @@
           this.miMenúVías.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenúProcesarTodoEnVías,
             this.toolStripSeparator5,
-            toolStripMenuItem2,
-            this.menúBuscarPosiblesErroresDeRuteoEnVías,
+            this.miMenúBuscarIncongruenciasenVías,
+            this.miMenúBuscarPosiblesErroresDeRuteoEnVías,
+            this.miMenúBuscarPosiblesNodosDesconectadosEnVías,
             this.miMenúBuscarErroresEnVías});
           this.miMenúVías.Name = "miMenúVías";
           resources.ApplyResources(this.miMenúVías, "miMenúVías");
@@ -185,11 +186,17 @@
           this.toolStripSeparator5.Name = "toolStripSeparator5";
           resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
           // 
-          // toolStripMenuItem2
+          // miMenúBuscarIncongruenciasenVías
           // 
-          toolStripMenuItem2.Name = "toolStripMenuItem2";
-          resources.ApplyResources(toolStripMenuItem2, "toolStripMenuItem2");
-          toolStripMenuItem2.Click += new System.EventHandler(this.EnMenúBuscarIncongruenciasEnVías);
+          this.miMenúBuscarIncongruenciasenVías.Name = "miMenúBuscarIncongruenciasenVías";
+          resources.ApplyResources(this.miMenúBuscarIncongruenciasenVías, "miMenúBuscarIncongruenciasenVías");
+          this.miMenúBuscarIncongruenciasenVías.Click += new System.EventHandler(this.EnMenúBuscarIncongruenciasEnVías);
+          // 
+          // miMenúBuscarPosiblesErroresDeRuteoEnVías
+          // 
+          this.miMenúBuscarPosiblesErroresDeRuteoEnVías.Name = "miMenúBuscarPosiblesErroresDeRuteoEnVías";
+          resources.ApplyResources(this.miMenúBuscarPosiblesErroresDeRuteoEnVías, "miMenúBuscarPosiblesErroresDeRuteoEnVías");
+          this.miMenúBuscarPosiblesErroresDeRuteoEnVías.Click += new System.EventHandler(this.EnMenúBuscarPosiblesErroresDeRuteoEnVías);
           // 
           // miMenúBuscarErroresEnVías
           // 
@@ -389,11 +396,11 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
-          // menúBuscarPosiblesErroresDeRuteoEnVías
+          // miMenúBuscarPosiblesNodosDesconectadosEnVías
           // 
-          this.menúBuscarPosiblesErroresDeRuteoEnVías.Name = "menúBuscarPosiblesErroresDeRuteoEnVías";
-          resources.ApplyResources(this.menúBuscarPosiblesErroresDeRuteoEnVías, "menúBuscarPosiblesErroresDeRuteoEnVías");
-          this.menúBuscarPosiblesErroresDeRuteoEnVías.Click += new System.EventHandler(this.EnMenúBuscarPosiblesErroresDeRuteoEnVías);
+          this.miMenúBuscarPosiblesNodosDesconectadosEnVías.Name = "miMenúBuscarPosiblesNodosDesconectadosEnVías";
+          resources.ApplyResources(this.miMenúBuscarPosiblesNodosDesconectadosEnVías, "miMenúBuscarPosiblesNodosDesconectadosEnVías");
+          this.miMenúBuscarPosiblesNodosDesconectadosEnVías.Click += new System.EventHandler(this.EnMenúBuscarPosiblesNodosDesconectadosEnVías);
           // 
           // InterfaseManejadorDeMapa
           // 
@@ -462,7 +469,9 @@
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicadosEnPdis;
-        private System.Windows.Forms.ToolStripMenuItem menúBuscarPosiblesErroresDeRuteoEnVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarPosiblesNodosDesconectadosEnVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarPosiblesErroresDeRuteoEnVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúBuscarIncongruenciasenVías;
     }
 }
 

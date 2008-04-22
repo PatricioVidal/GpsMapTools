@@ -69,51 +69,58 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Representa un campo de un elemento de mapa.
+  /// Representa un posible nodo desconectado.
   /// </summary>
-  public abstract class Campo
+  public class PosibleNodoDesconectado
   {
-    #region Campos
-    private readonly string miIdentificador;
-    #endregion
-
-    #region Propiedades
     /// <summary>
-    /// Devuelve el identificador del campo.
+    /// Obtiene la Via.
     /// </summary>
-    public string Identificador
-    {
-      get
-      {
-        return miIdentificador;
-      }
-    }
-    #endregion
+    public Vía Vía { get; private set; }
 
-    #region Métodos Públicos
+    /// <summary>
+    /// Obtiene las coordenadas.
+    /// </summary>
+    public Coordenadas Coordenadas { get; private set; }
+
+    /// <summary>
+    /// Obtiene las coordenadas.
+    /// </summary>
+    public Coordenadas PosiblesCoordenadasDesconectadas { get; private set; }
+
+    /// <summary>
+    /// Obtiene la distancia.
+    /// </summary>
+    public double Distancia { get; private set; }
+
+    /// <summary>
+    /// Obtiene el detalle.
+    /// </summary>
+    public string Detalle { get; private set; }
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elIdentificador">El identificador del campo.</param>
-    public Campo(string elIdentificador)
+    /// <param name="laVía">La Vía.</param>
+    /// <param name="lasCoordenadas">Las coordenadas.</param>
+    /// <param name="lasCoordenadasDestino">Las coordenadas destino.</param>
+    /// <param name="laDistancia">La distancia.</param>
+    /// <param name="elDetalle">El detalle.</param>
+    public PosibleNodoDesconectado(
+      Vía laVía,
+      Coordenadas lasCoordenadas,
+      Coordenadas lasCoordenadasDestino,
+      double laDistancia,
+      string elDetalle)
     {
-      miIdentificador = elIdentificador;
+      Vía = laVía;
+      Coordenadas = lasCoordenadas;
+      PosiblesCoordenadasDesconectadas = lasCoordenadasDestino;
+      Distancia = laDistancia;
+      Detalle = elDetalle;
     }
-
-
-    /// <summary>
-    /// Devuelve un texto representando el campo.
-    /// </summary>
-    public override abstract string ToString();
-
-    #endregion
   }
 }

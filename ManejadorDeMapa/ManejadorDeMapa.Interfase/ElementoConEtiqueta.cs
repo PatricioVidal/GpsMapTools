@@ -69,51 +69,44 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.Interfase
 {
   /// <summary>
-  /// Representa un campo de un elemento de mapa.
+  /// Representa un elemento con etiqueta.
   /// </summary>
-  public abstract class Campo
+  /// <remarks>
+  /// La etiqueta se usa para contener un objecto cualquiera.
+  /// </remarks>
+  public class ElementoConEtiqueta
   {
-    #region Campos
-    private readonly string miIdentificador;
-    #endregion
-
-    #region Propiedades
     /// <summary>
-    /// Devuelve el identificador del campo.
+    /// Obtiene el elemento de mapa.
     /// </summary>
-    public string Identificador
-    {
-      get
-      {
-        return miIdentificador;
-      }
-    }
-    #endregion
+    public ElementoDelMapa ElementoDelMapa { get; private set; }
 
-    #region Métodos Públicos
+    /// <summary>
+    /// Obtiene la etiqueta.
+    /// </summary>
+    public object Etiqueta { get; private set;}
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elIdentificador">El identificador del campo.</param>
-    public Campo(string elIdentificador)
+    /// <param name="elElementoDelMapa">El elemento de mapa.</param>
+    public ElementoConEtiqueta(ElementoDelMapa elElementoDelMapa)
+      : this (elElementoDelMapa, null)
     {
-      miIdentificador = elIdentificador;
     }
 
-
     /// <summary>
-    /// Devuelve un texto representando el campo.
+    /// Constructor.
     /// </summary>
-    public override abstract string ToString();
-
-    #endregion
+    /// <param name="elElementoDelMapa">El elemento de mapa.</param>
+    /// <param name="laEtiqueta">La etiqueta.</param>
+    public ElementoConEtiqueta(ElementoDelMapa elElementoDelMapa, object laEtiqueta)
+    {
+      ElementoDelMapa = elElementoDelMapa;
+      Etiqueta = laEtiqueta;
+    }
   }
 }

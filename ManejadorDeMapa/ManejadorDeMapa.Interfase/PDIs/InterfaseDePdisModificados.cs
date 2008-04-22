@@ -134,7 +134,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         // Si el PDI fué cambiado y no eliminado entonces añadelo a la lista de cambios.
         if (pdi.FuéModificado && !pdi.FuéEliminado)
         {
-          laLista.AñadeItem(pdi, pdi.Modificaciones);
+          laLista.AñadeItem(new ElementoConEtiqueta(pdi), pdi.Modificaciones);
         }
       }
     }

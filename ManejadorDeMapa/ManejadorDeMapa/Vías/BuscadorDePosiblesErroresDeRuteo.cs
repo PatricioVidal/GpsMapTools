@@ -79,19 +79,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class BuscadorDePosiblesErroresDeRuteo : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IDictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>> misIncongruencias = new Dictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>>();
+    private readonly IDictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>> misPosiblesErrorDeRuteo = new Dictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Devuelve las incongruencias de Vías.
+    /// Devuelve los posibles errores de ruteo.
     /// </summary>
-    public IDictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>> Incongruencias
+    public IDictionary<Vía, IList<ElementoDePosibleErrorDeRuteo>> PosiblesErrorDeRuteo
     {
       get
       {
-        return misIncongruencias;
+        return misPosiblesErrorDeRuteo;
       }
     }
     #endregion
@@ -100,22 +100,22 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Representa un elemento de la lista de incongruencias.
     /// </summary>
-    public struct ElementoDePosibleErrorDeRuteo
+    public class ElementoDePosibleErrorDeRuteo
     {
       /// <summary>
       /// Obtiene la Vía asociada.
       /// </summary>
-      public readonly Vía Vía;
+      public Vía Vía {get; private set;}
 
       /// <summary>
       /// Obtiene el detalle.
       /// </summary>
-      public readonly string Detalle;
+      public string Detalle { get; private set; }
 
       /// <summary>
       /// Obtiene una variable lógica que indica si el elemento es un posible error.
       /// </summary>
-      public bool EsPosibleError;
+      public bool EsPosibleError { get; private set; }
 
       /// <summary>
       /// Constructor.
@@ -136,7 +136,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca incongruencias en las Vías.";
+    public static readonly string Descripción = "Busca posibles errores de ruteo en las Vías.";
 
 
     /// <summary>
@@ -158,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     protected override void ComenzóAProcesar()
     {
-      misIncongruencias.Clear();
+      misPosiblesErrorDeRuteo.Clear();
       misVíasYaProcesadas.Clear();
 
       base.ComenzóAProcesar();
@@ -314,7 +314,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Si se detectaron incongruencias entonces las añadimos a la lista.
       if (hayIncongruencias)
       {
-        misIncongruencias.Add(laVía, elementosDeIncongruencia);
+        misPosiblesErrorDeRuteo.Add(laVía, elementosDeIncongruencia);
         ++númeroDeProblemasDetectados;
       }
 
@@ -329,7 +329,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      misIncongruencias.Clear();
+      misPosiblesErrorDeRuteo.Clear();
       misVíasYaProcesadas.Clear();
 
       // Pone al Procesador en estado inválido.

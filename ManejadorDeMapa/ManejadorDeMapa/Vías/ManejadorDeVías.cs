@@ -87,6 +87,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     private readonly BuscadorDeErrores miBuscadorDeErrores;
     private readonly BuscadorDeIncongruencias miBuscadorDeIncongruencias;
     private readonly BuscadorDePosiblesErroresDeRuteo miBuscadorDePosiblesErroresDeRuteo;
+    private readonly BuscadorDePosiblesNodosDesconectados miBuscadorDePosiblesNodosDesconectados;
     #endregion
 
     #region Propiedades
@@ -122,6 +123,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
+    /// Obtiene el Buscador de Posibles Nodos Desconectados.
+    /// </summary>
+    public BuscadorDePosiblesNodosDesconectados BuscadorDePosiblesNodosDesconectados
+    {
+      get
+      {
+        return miBuscadorDePosiblesNodosDesconectados;
+      }
+    }
+
+
+    /// <summary>
     /// Obtiene el Buscador de Errores.
     /// </summary>
     public BuscadorDeErrores BuscadorDeErrores
@@ -150,6 +163,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
       miBuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
       miBuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
+      miBuscadorDePosiblesNodosDesconectados = new BuscadorDePosiblesNodosDesconectados(this, elEscuchadorDeEstatus);
 
       // Escucha eventos.
       elManejadorDeMapa.VíasModificadas += EnElementosModificados;
@@ -157,21 +171,22 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Hace todas las correcciones a PDIs.
+    /// Procesa todo lo relacionado a Vías.
     /// </summary>
-    /// <returns>El número de Vías modificadas.</returns>
+    /// <returns>El número de problemas en Vías.</returns>
     public int ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
-      int númeroDeVíasModificadas = 0;
-      númeroDeVíasModificadas += miBuscadorDeIncongruencias.Procesa();
-      númeroDeVíasModificadas += miBuscadorDePosiblesErroresDeRuteo.Procesa();
-      númeroDeVíasModificadas += miBuscadorDeErrores.Procesa();
+      int númeroDeProblemasEnVías = 0;
+      númeroDeProblemasEnVías += miBuscadorDeIncongruencias.Procesa();
+      númeroDeProblemasEnVías += miBuscadorDePosiblesErroresDeRuteo.Procesa();
+      númeroDeProblemasEnVías += miBuscadorDeErrores.Procesa();
+      númeroDeProblemasEnVías += miBuscadorDePosiblesNodosDesconectados.Procesa();
 
       // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se hicieron " + númeroDeVíasModificadas + " modificaciones a Vías.";
+      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnVías + " problemas en Vías.";
 
-      return númeroDeVíasModificadas;
+      return númeroDeProblemasEnVías;
     }
     #endregion
   }

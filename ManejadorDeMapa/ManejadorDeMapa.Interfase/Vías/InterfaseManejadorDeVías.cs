@@ -91,6 +91,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     private readonly string miTextoPestañaErrores = "Errores";
     private readonly string miTextoPestañaPosibleErroresDeRuteo = "Posibles Errores de Ruteo";
+    private readonly string miTextoPestañaPosiblesNodosDesconectados = "Posibles Nodos Desconectados";
     private readonly string miTextoPestañaIncongruencias = "Incongruencias";
     #endregion
 
@@ -131,7 +132,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           buscadorDePosiblesErroresDeRuteo.Invalidado += EnInvalidadoPosiblesErroresDeRuteo;
           buscadorDePosiblesErroresDeRuteo.Procesó += EnSeBuscaronPosiblesErroresDeRuteo;
 
-          // Buscador de Duplicados.
+          // Buscador de Posibles Bodos Desconectados.
+          BuscadorDePosiblesNodosDesconectados buscadorDePosiblesNodosDesconectados = manejadorDeVías.BuscadorDePosiblesNodosDesconectados;
+          buscadorDePosiblesNodosDesconectados.Invalidado += EnInvalidadoPosiblesNodosDesconectados;
+          buscadorDePosiblesNodosDesconectados.Procesó += EnSeBuscaronPosiblesNodosDesconectados;
+
+          // Buscador de Incongruencias.
           BuscadorDeIncongruencias buscadorDeIncongruencias = manejadorDeVías.BuscadorDeIncongruencias;
           buscadorDeIncongruencias.Invalidado += EnInvalidadoVíasConIncongruencias;
           buscadorDeIncongruencias.Procesó += EnSeBuscaronVíasConIncongruencias;
@@ -173,7 +179,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         miInterfaseDeVíasConIncongruencias,
         miInterfaseDeErroresEnVías,
         miInterfaseDeVíasEliminadas,
-        miInterfasePosiblesErroresDeRuteoEnVías
+        miInterfasePosiblesErroresDeRuteoEnVías,
+        miInterfasePosiblesNodosDesconectados
       };
 
       // Pone el método llenador de items.
@@ -234,7 +241,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       IList<Vía> vías = ManejadorDeMapa.ManejadorDeVías.Elementos;
       foreach (Vía vía in vías)
       {
-        laLista.AñadeItem(vía);
+        laLista.AñadeItem(new ElementoConEtiqueta(vía));
       }
     }
 
@@ -330,6 +337,47 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         //miControladorDePestañas.PoneEstadoDePestaña(
         //  misIndicesDePestañas[página],
         //  ControladorDePestañas.EstadoDePestaña.Bién);
+      }
+    }
+
+
+    private void EnInvalidadoPosiblesNodosDesconectados(object elEnviador, EventArgs losArgumentos)
+    {
+      TabPage página = miPáginaPosiblesNodosDesconectados;
+
+      // Pone las pestañas en estado de "No Sé" para indicar que
+      // no se sabe si hay errores.
+      miControladorDePestañas.PoneEstadoDePestaña(
+        misIndicesDePestañas[página],
+        ControladorDePestañas.EstadoDePestaña.NoSé);
+
+      // Cambia el texto de la pestaña.
+      página.Text = miTextoPestañaPosiblesNodosDesconectados;
+    }
+
+
+    private void EnSeBuscaronPosiblesNodosDesconectados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      int númeroDePosiblesNodosDesconectados = losArgumentos.NúmeroDeItems;
+      TabPage página = miPáginaPosiblesNodosDesconectados;
+
+      // Cambia el texto de la pestaña.
+      página.Text = string.Format("{0} ({1})", miTextoPestañaPosiblesNodosDesconectados, númeroDePosiblesNodosDesconectados);
+
+      // Si hay Vías con posibles errores de ruteo entonces cambia
+      // el estado de la pestaña a Alerta.
+      // Si no, entonces cambia el estado de la pestaña a Bíen.
+      if (númeroDePosiblesNodosDesconectados > 0)
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[página],
+          ControladorDePestañas.EstadoDePestaña.Alerta);
+      }
+      else
+      {
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[página],
+          ControladorDePestañas.EstadoDePestaña.Bién);
       }
     }
 

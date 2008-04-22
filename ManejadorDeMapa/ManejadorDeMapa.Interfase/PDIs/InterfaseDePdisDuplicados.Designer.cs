@@ -165,7 +165,6 @@
       this.miBarraDeDistancia.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::GpsYv.ManejadorDeMapa.Interfase.Properties.Settings.Default, "DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.miBarraDeDistancia.LargeChange = 20;
       this.miBarraDeDistancia.Maximum = 20;
-      this.miBarraDeDistancia.Minimum = 1;
       this.miBarraDeDistancia.Name = "miBarraDeDistancia";
       this.miBarraDeDistancia.Value = global::GpsYv.ManejadorDeMapa.Interfase.Properties.Settings.Default.DistanciaMáximaEnDecenasDeMetrosParaBuscarPdisDuplicados;
       this.miBarraDeDistancia.ValueChanged += new System.EventHandler(this.EnCambióBarraDeDistancia);

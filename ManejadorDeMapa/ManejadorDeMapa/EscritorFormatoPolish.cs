@@ -74,7 +74,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Threading;
 using System.Globalization;
 
 namespace GpsYv.ManejadorDeMapa
@@ -102,7 +101,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elArchivo">El archivo a abrir.</param>
     /// <param name="losElementodDelMapa">Los elementos del mapa.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public EscritorDeFormatoPolish(string elArchivo, IList<ElementoDelMapa> losElementodDelMapa, IEscuchadorDeEstatus elEscuchadorDeEstatus)
+    public EscritorDeFormatoPolish(string elArchivo, ICollection<ElementoDelMapa> losElementodDelMapa, IEscuchadorDeEstatus elEscuchadorDeEstatus)
     {
       // Usar el punto para separar decimales.
       miFormatoNumérico.NumberDecimalSeparator = ".";
@@ -112,7 +111,7 @@ namespace GpsYv.ManejadorDeMapa
         // Hacer una copia si el archivo existe.
         if (File.Exists(elArchivo))
         {
-          bool sobreEscribe = true;
+          const bool sobreEscribe = true;
           File.Copy(elArchivo, elArchivo + ".bak", sobreEscribe);
         }
 
@@ -165,7 +164,7 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Métodos Protegidos y Privados
-    private void Guarda(Comentario elComentario, StreamWriter elEscritor)
+    private static void Guarda(Comentario elComentario, StreamWriter elEscritor)
     {
       elEscritor.WriteLine(";" + elComentario.Texto);
     }
@@ -206,6 +205,10 @@ namespace GpsYv.ManejadorDeMapa
         {
           Guarda((CampoCoordenadas)campo, elEscritor);
         }
+        else if (campo is CampoNodo)
+        {
+          Guarda((CampoNodo)campo, elEscritor);
+        }
         else if (campo is CampoGenérico)
         {
           Guarda((CampoGenérico)campo, elEscritor);
@@ -233,14 +236,31 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private void Guarda(CampoTipo elCampoTipo, StreamWriter elEscritor)
+    private static void Guarda(CampoNodo elCampoNodo, StreamWriter elEscritor)
+    {
+      // Crea el texto.
+      string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IndentificadorGlobal);
+      if (elCampoNodo.EsExterno)
+      {
+        texto += ",1";
+      }
+      else
+      {
+        texto += ",0";
+      }
+
+      Guarda(elCampoNodo, texto, elEscritor);
+    }
+
+
+    private static void Guarda(CampoTipo elCampoTipo, StreamWriter elEscritor)
     {
       string tipo = elCampoTipo.Tipo.ToString();
       Guarda(elCampoTipo, tipo, elEscritor);
     }
 
 
-    private void Guarda(CampoGenérico elCampoGenérico, StreamWriter elEscritor)
+    private static void Guarda(CampoGenérico elCampoGenérico, StreamWriter elEscritor)
     {
       Guarda(elCampoGenérico, elCampoGenérico.Texto, elEscritor);
     }
@@ -272,26 +292,45 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private void Guarda(CampoNombre elCampoNombre, StreamWriter elEscritor)
+    private static void Guarda(CampoNombre elCampoNombre, StreamWriter elEscritor)
     {
       Guarda(elCampoNombre, elCampoNombre.Nombre, elEscritor);
     }
 
 
-    private void Guarda(Campo elCampo, string elTexto, StreamWriter elEscritor)
+    private static void Guarda(Campo elCampo, string elTexto, StreamWriter elEscritor)
     {
       elEscritor.WriteLine(elCampo.Identificador + "=" + elTexto);
     }
 
 
-    private void Guarda(CampoComentario elCampoComentario, StreamWriter elEscritor)
+    private static void Guarda(CampoComentario elCampoComentario, StreamWriter elEscritor)
     {
       elEscritor.WriteLine(";" + elCampoComentario.Comentario);
     }
 
 
-    private void Guarda(CampoParámetrosDeRuta elCampoParámetrosDeRuta, StreamWriter elEscritor)
+    private static void Guarda(CampoParámetrosDeRuta elCampoParámetrosDeRuta, StreamWriter elEscritor)
     {
+      // Crea el texto.
+      const char separador = ',';
+      StringBuilder texto = new StringBuilder();
+      texto.Append(elCampoParámetrosDeRuta.LímiteDeVelocidad.Indice);
+      texto.Append(separador);
+      texto.Append(elCampoParámetrosDeRuta.ClaseDeRuta.Indice);
+      foreach (bool valor in elCampoParámetrosDeRuta.OtrosParámetros)
+      {
+        texto.Append(separador);
+        if (valor)
+        {
+          texto.Append(1);
+        }
+        else
+        {
+          texto.Append(0);
+        }
+      }
+
       Guarda(elCampoParámetrosDeRuta, elCampoParámetrosDeRuta.ToString(), elEscritor);
     }
 

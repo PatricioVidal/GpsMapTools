@@ -131,8 +131,8 @@
       <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vías\InterfacePosiblesNodosDesconectados.resx">
-      <DependentUpon>InterfacePosiblesNodosDesconectados.cs</DependentUpon>
+    <EmbeddedResource Include="Vías\InterfasePosiblesNodosDesconectados.resx">
+      <DependentUpon>InterfasePosiblesNodosDesconectados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Vías\InterfaseDeVíasConErrores.resx">
@@ -179,6 +179,7 @@
     <Compile Include="ControladorDePestañas.Designer.cs">
       <DependentUpon>ControladorDePestañas.cs</DependentUpon>
     </Compile>
+    <Compile Include="ElementoConEtiqueta.cs" />
     <Compile Include="EscuchadorDeEstatus.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InterfaseBase.cs">
@@ -295,11 +296,11 @@
     <Compile Include="VentanaDeAcerca.Designer.cs">
       <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vías\InterfacePosiblesNodosDesconectados.cs">
+    <Compile Include="Vías\InterfasePosiblesNodosDesconectados.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Vías\InterfacePosiblesNodosDesconectados.Designer.cs">
-      <DependentUpon>InterfacePosiblesNodosDesconectados.cs</DependentUpon>
+    <Compile Include="Vías\InterfasePosiblesNodosDesconectados.Designer.cs">
+      <DependentUpon>InterfasePosiblesNodosDesconectados.cs</DependentUpon>
     </Compile>
     <Compile Include="Vías\InterfaseDeVíasConErrores.cs">
       <SubType>UserControl</SubType>
@@ -372,6 +373,7 @@
     <None Include="GPS_YV.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Diagrama de Clases\InterfaseManejadorDeMapa.cd" />
     <None Include="Diagrama de Clases\InterfaseManejadorDePDIs.cd" />
     <None Include="Diagrama de Clases\InterfaseManejadorDeVías.cd" />

@@ -218,58 +218,59 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public void AñadeItem(ElementoDelMapa elElemento, params string[] losSubItemsAdicionales)
+    public void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, params string[] losSubItemsAdicionales)
     {
-      AñadeItem(elElemento, BackColor, null, losSubItemsAdicionales);
+      AñadeItem(elElementoConEtiqueta, BackColor, null, losSubItemsAdicionales);
     }
 
 
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public void AñadeItem(ElementoDelMapa elElemento, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
+    public void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
-      AñadeItem(elElemento, BackColor, elGrupo, losSubItemsAdicionales);
+      AñadeItem(elElementoConEtiqueta, BackColor, elGrupo, losSubItemsAdicionales);
     }
 
 
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="elColorDeFondo">El color de fondo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, params string[] losSubItemsAdicionales)
+    public void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, Color elColorDeFondo, params string[] losSubItemsAdicionales)
     {
-      AñadeItem(elElemento, elColorDeFondo, null, losSubItemsAdicionales);
+      AñadeItem(elElementoConEtiqueta, elColorDeFondo, null, losSubItemsAdicionales);
     }
 
 
     /// <summary>
     /// Añade un item a la lista.
     /// </summary>
-    /// <param name="elElemento">El elemento dado.</param>
+    /// <param name="elElementoConEtiqueta">El elemento dado.</param>
     /// <param name="elColorDeFondo">El color de fondo.</param>
     /// <param name="elGrupo">El grupo.</param>
     /// <param name="losSubItemsAdicionales">Los textos de los subitems adicionales</param>
-    public virtual void AñadeItem(ElementoDelMapa elElemento, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
+    public virtual void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
+      ElementoDelMapa elemento = elElementoConEtiqueta.ElementoDelMapa;
       List<string> subItems = new List<string> {
-                elElemento.Número.ToString(CultureInfo.CurrentCulture).PadLeft(6),
-                elElemento.Tipo.ToString(), 
-                elElemento.Descripción,
-                elElemento.Nombre};
+                elemento.Número.ToString(CultureInfo.CurrentCulture).PadLeft(6),
+                elemento.Tipo.ToString(), 
+                elemento.Descripción,
+                elemento.Nombre};
       subItems.AddRange(losSubItemsAdicionales);
 
       ListViewItem item = new ListViewItem(subItems.ToArray());
       item.BackColor = elColorDeFondo;
       item.Group = elGrupo;
-      item.Tag = elElemento;
+      item.Tag = elElementoConEtiqueta;
 
       if (VirtualMode)
       {

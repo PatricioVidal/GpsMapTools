@@ -181,7 +181,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         Vía vía = error.Key;
         string razón = error.Value;
-        laLista.AñadeItem(vía, razón);
+        laLista.AñadeItem(new ElementoConEtiqueta(vía), razón);
       }
     }
     #endregion

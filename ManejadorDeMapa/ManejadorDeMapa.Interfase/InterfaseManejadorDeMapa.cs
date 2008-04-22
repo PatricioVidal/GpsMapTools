@@ -118,6 +118,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
+      miMenúBuscarIncongruenciasenVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeIncongruencias.Descripción;
+      miMenúBuscarPosiblesErroresDeRuteoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesErroresDeRuteo.Descripción;
+      miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText =
+        GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
       miMenúBuscarErroresEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeErrores.Descripción;
       #endregion
 
@@ -253,7 +257,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       IList<ElementoDelMapa> elementosDelMapa = miManejadorDeMapa.ManejadorDeElementos.Elementos;
       foreach (ElementoDelMapa elementoDelMapa in elementosDelMapa)
       {
-        laLista.AñadeItem(elementoDelMapa, elementoDelMapa.Clase);
+        laLista.AñadeItem(new ElementoConEtiqueta(elementoDelMapa), elementoDelMapa.Clase);
       }
 
       // Actualiza las Pestañas.
@@ -476,6 +480,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúBuscarPosiblesErroresDeRuteoEnVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.BuscadorDePosiblesErroresDeRuteo.Procesa();
+    }
+
+
+    private void EnMenúBuscarPosiblesNodosDesconectadosEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.BuscadorDePosiblesNodosDesconectados.Procesa();
     }
     #endregion
   }

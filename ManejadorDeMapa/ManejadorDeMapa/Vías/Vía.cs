@@ -69,11 +69,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
@@ -88,7 +84,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
       new ClaseDeRuta (0),
       new bool[10]);
     private CampoParámetrosDeRuta miCampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
-    private bool miTieneCampoParámetrosDeRutaEnCampos = false;
+    private bool miTieneCampoParámetrosDeRutaEnCampos;
+    private readonly List<CampoNodo> misCamposNodo = new List<CampoNodo>();
     #endregion 
 
     #region Propiedades
@@ -100,6 +97,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
       get
       {
         return miCampoParámetrosDeRuta;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtienes los campos nodos de la Vía.
+    /// </summary>
+    public IList<CampoNodo> CamposNodo
+    {
+      get
+      {
+        return misCamposNodo;
       }
     }
     #endregion
@@ -125,10 +134,16 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Busca los campos específicos de las vías.
       foreach (Campo campo in losCampos)
       {
-        if (campo is CampoParámetrosDeRuta)
+        CampoParámetrosDeRuta campoParámetrosDeRuta;
+        CampoNodo campoNodo;
+        if ((campoParámetrosDeRuta = (campo as CampoParámetrosDeRuta)) != null)
         {
-          miCampoParámetrosDeRuta = (CampoParámetrosDeRuta)campo;
+          miCampoParámetrosDeRuta = campoParámetrosDeRuta;
           miTieneCampoParámetrosDeRutaEnCampos = true;
+        }
+        else if ((campoNodo = campo as CampoNodo) != null)
+        {
+          misCamposNodo.Add(campoNodo);
         }
       }
     }
@@ -153,14 +168,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
       if (!miTieneCampoParámetrosDeRutaEnCampos)
       {
         // Añade el campo.
-        base.AñadeCampo(elCampoParámetrosDeRutaNuevo, laRazón);
+        AñadeCampo(elCampoParámetrosDeRutaNuevo, laRazón);
         miCampoParámetrosDeRuta = elCampoParámetrosDeRutaNuevo;
         miTieneCampoParámetrosDeRutaEnCampos = true;
       }
       else
       {
         // Cambia el campo.
-        base.CambiaCampo(elCampoParámetrosDeRutaNuevo, miCampoParámetrosDeRuta, laRazón);
+        CambiaCampo(elCampoParámetrosDeRutaNuevo, miCampoParámetrosDeRuta, laRazón);
         miCampoParámetrosDeRuta = elCampoParámetrosDeRutaNuevo;
       }
     }

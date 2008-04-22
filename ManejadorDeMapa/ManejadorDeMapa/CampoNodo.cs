@@ -69,31 +69,59 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa un campo de un elemento de mapa.
+  /// Representa un campo de nodo.
   /// </summary>
-  public abstract class Campo
+  public class CampoNodo : Campo
   {
     #region Campos
-    private readonly string miIdentificador;
+    private readonly int miIndiceDeCoordenadas;
+    private readonly int miIdentificadorGlobal;
+    private readonly bool miEsExterno;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Devuelve el identificador del campo.
+    /// Identificador.
     /// </summary>
-    public string Identificador
+    public const string IdentificadorDeNodo = "Nod";
+
+
+    /// <summary>
+    /// Obtiene el índice del nodo.
+    /// </summary>
+    public int IndiceDeCoordenadas
+    {
+     get
+     {
+       return miIndiceDeCoordenadas;
+     }
+    }
+
+
+    /// <summary>
+    /// Obtiene el identificador global.
+    /// </summary>
+    public int IndentificadorGlobal
+    {
+     get
+     {
+       return miIdentificadorGlobal;
+     }
+    }
+
+    /// <summary>
+    /// Obtiene una variable lógica que indica si el nodo es externo.
+    /// </summary>
+    public bool EsExterno
     {
       get
       {
-        return miIdentificador;
+        return miEsExterno;
       }
     }
     #endregion
@@ -102,18 +130,74 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elIdentificador">El identificador del campo.</param>
-    public Campo(string elIdentificador)
+    /// <param name="elIdentificador">El Identificador.</param>
+    /// <param name="elIndiceDeCoordenadas">El indice de coordenadas.</param>
+    /// <param name="elIdentificadorGlobal">El identificador global.</param>
+    /// <param name="elEsExterno">Variable lógica que indica si el nodo es externo.</param>
+    public CampoNodo(
+      string elIdentificador,
+      int elIndiceDeCoordenadas,
+      int elIdentificadorGlobal,
+      bool elEsExterno)
+      : base(elIdentificador)
     {
-      miIdentificador = elIdentificador;
+      miIndiceDeCoordenadas = elIndiceDeCoordenadas;
+      miIdentificadorGlobal = elIdentificadorGlobal;
+      miEsExterno = elEsExterno;
     }
 
 
     /// <summary>
     /// Devuelve un texto representando el campo.
     /// </summary>
-    public override abstract string ToString();
+    public override string ToString()
+    {
+      string texto = string.Format("Indice={0},Id={1}", miIndiceDeCoordenadas, miIdentificadorGlobal);
+      if (miEsExterno)
+      {
+        texto += ",Externo";
+      }
 
+      return texto;
+    }
+
+
+    /// <summary>
+    /// Devuelve una variable lógica que indica si un objeto
+    /// dado es igual.
+    /// </summary>
+    /// <param name="elObjecto">EL objecto dado.</param>
+    public override bool Equals(object elObjecto)
+    {
+      // Si el objeto es nulo entonces no puede ser igual.
+      if (elObjecto == null)
+      {
+        return false;
+      }
+
+      // Si el objecto no es del mismo tipo entonces no puede ser igual.
+      if (!(elObjecto is CampoNodo))
+      {
+        return false;
+      }
+
+      // Compara los parámetros del nodo.
+      CampoNodo comparador = (CampoNodo)elObjecto;
+      bool esIgual = ((miIdentificadorGlobal == comparador.miIdentificadorGlobal) &&
+        (miIndiceDeCoordenadas == comparador.miIndiceDeCoordenadas) &&
+        (miEsExterno == comparador.miEsExterno));
+      
+      return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
+    }
     #endregion
   }
 }
