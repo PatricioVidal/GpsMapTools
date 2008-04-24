@@ -123,11 +123,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         ListViewItem item = Lista.Items[indice];
 
-        // El Tag del item de la lista tiene que ser una vía.
-        Vía vía = item.Tag as Vía;
+        // El Tag del item de la lista tiene que ser un ElementoConEtiqueta con un PDI.
+        ElementoConEtiqueta elemento = item.Tag as ElementoConEtiqueta;
+        if (elemento == null)
+        {
+          throw new InvalidOperationException(string.Format("El Tag del item de la lista tiene que ser un ElementoConEtiqueta, pero es: {0}", item.Tag.GetType()));
+        }
+        Vía vía = elemento.ElementoDelMapa as Vía;
         if (vía == null)
         {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser una Vía, pero es nulo");
+          throw new InvalidOperationException(string.Format("El elemento del item de la lista tiene que ser una Vía, pero es: {0}", elemento.ElementoDelMapa.GetType()));
         }
 
         // Añade la vía a la lista.

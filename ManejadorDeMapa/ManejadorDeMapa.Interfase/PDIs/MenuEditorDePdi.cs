@@ -130,11 +130,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       {
         ListViewItem item = Lista.Items[indice];
 
-        // El Tag del item de la lista tiene que ser un PDI.
-        Pdi pdi = item.Tag as Pdi;
+        // El Tag del item de la lista tiene que ser un ElementoConEtiqueta con un PDI.
+        ElementoConEtiqueta elemento = item.Tag as ElementoConEtiqueta;
+        if (elemento == null)
+        {
+          throw new InvalidOperationException(string.Format("El Tag del item de la lista tiene que ser un ElementoConEtiqueta, pero es: {0}", item.Tag.GetType()));
+        }
+        Pdi pdi = elemento.ElementoDelMapa as Pdi;
         if (pdi == null)
         {
-          throw new InvalidOperationException("El Tag del item de la lista tiene que ser un PDI, pero es nulo.");
+          throw new InvalidOperationException(string.Format("El elemento del item de la lista tiene que ser un Pdi, pero es: {0}", elemento.ElementoDelMapa.GetType()));
         }
 
         // Añade el PDI a la lista.

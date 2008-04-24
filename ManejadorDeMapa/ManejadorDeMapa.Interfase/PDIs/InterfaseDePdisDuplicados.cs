@@ -207,7 +207,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
               },
               elGrupo);
 
-      item.Tag = elPdi;
+      item.Tag = new ElementoConEtiqueta(elPdi);
       item.Checked = false;
 
       return item;
@@ -261,7 +261,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       {
         if (item.Checked)
         {
-          pdisAEliminar.Add((Pdi)item.Tag);
+          pdisAEliminar.Add((item.Tag as ElementoConEtiqueta).ElementoDelMapa as Pdi);
         }
       }
 
@@ -316,7 +316,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 
       // Dibuja los PDIs como PDIs adicionales para resaltarlos.
       miMapa.PuntosAddicionales.Clear();
-      Pdi pdiSeleccionado = (Pdi)información.Item.Tag;
+      Pdi pdiSeleccionado = (información.Item.Tag as ElementoConEtiqueta).ElementoDelMapa as Pdi;
       miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
         pdiSeleccionado.Coordenadas, miPincelDePdi, 13));
       foreach (Pdi pdi in pdis)
