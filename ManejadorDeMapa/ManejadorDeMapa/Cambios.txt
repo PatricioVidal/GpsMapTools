@@ -1,5 +1,7 @@
 Versión 1.19
-
+- Mejorada la lógica y la velocidad de detección de posibles nodos desconectados. 
+- Arreglado error que causaba que los menús de edición no funcionaran. 
+- Interno: Eliminado Post Build Event que no era necesitado. 
 
 Versión 1.18
 - Añadido módulo de detección de posibles nodos de Vías desconectados. La lógica y la velocidad de procesamiento necesita mejorarse. 
