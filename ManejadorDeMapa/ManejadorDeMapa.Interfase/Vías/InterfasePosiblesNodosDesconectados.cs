@@ -88,8 +88,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   {
     #region Campos
     private BuscadorDePosiblesNodosDesconectados miBuscadorDePosiblesNodosDesconectados;
-    private Brush miPincelDeNodo = Brushes.Black;
-    private Brush miPincelDePosibleNodoDesconectado = Brushes.Orange;
+    private Brush miPincelDeBordeDeNodo = Brushes.Black;
+    private Brush miPincelDeNodo = Brushes.Yellow;
+    private Pen miLápizDeViaConElPosibleNodoDesconectado = new Pen(Color.LightSalmon, 9);
+    private Brush miPincelDePosibleNodoDesconectado = Brushes.LightSalmon;
     #endregion
 
     #region Propiedades
@@ -188,7 +190,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         ElementoConEtiqueta elemento = new ElementoConEtiqueta(posibleNodoDesconectado.Vía, posibleNodoDesconectado);
         laLista.AñadeItem(
           elemento,
-          posibleNodoDesconectado.Coordenadas.ToString(),
+          posibleNodoDesconectado.Nodo.ToString(),
           posibleNodoDesconectado.Distancia.ToString("0.0"),
           posibleNodoDesconectado.Detalle);
       }
@@ -205,27 +207,40 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         0,
         0);
 
+
       // Dibuja los nodos como puntos addicionales para resaltarlos.
       foreach(int i in miInterfaseListaConMapaDeVías.InterfaseListaDeVías.SelectedIndices)
       {
         ElementoConEtiqueta elemento = (ElementoConEtiqueta)miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Items[i].Tag;
         PosibleNodoDesconectado posibleNodoDesconectado = (PosibleNodoDesconectado)elemento.Etiqueta;
 
+        // Dibuja la vía del posible nodo desconectado.
+        mapa.PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
+          posibleNodoDesconectado.VíaConElPosibleNodoDesconectado.Coordenadas,
+          miLápizDeViaConElPosibleNodoDesconectado));
+
+        // Dibuja el posible nodo desconectado.
         mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.Coordenadas,
-          miPincelDeNodo,
+          posibleNodoDesconectado.PosiblesNodoDesconectado,
+          miPincelDeBordeDeNodo,
+          11));
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.PosiblesNodoDesconectado,
+          miPincelDePosibleNodoDesconectado,
+          7));
+
+        // Dibuja el nodo.
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.Nodo,
+          miPincelDeBordeDeNodo,
           13));
         mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.PosiblesCoordenadasDesconectadas,
-          miPincelDePosibleNodoDesconectado,
-          9));
-        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.Coordenadas,
-          miPincelDePosibleNodoDesconectado,
+          posibleNodoDesconectado.Nodo,
+          miPincelDeNodo,
           9));
 
         InterfaseMapa.ActualizaRectánguloQueEncierra(
-          posibleNodoDesconectado.Coordenadas,
+          posibleNodoDesconectado.Nodo,
           ref rectánguloQueEncierra);
       }
 

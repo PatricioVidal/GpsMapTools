@@ -82,14 +82,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
     public Vía Vía { get; private set; }
 
     /// <summary>
-    /// Obtiene las coordenadas.
+    /// Obtiene la Via con el posible nodo desconectado.
     /// </summary>
-    public Coordenadas Coordenadas { get; private set; }
+    public Vía VíaConElPosibleNodoDesconectado { get; private set; }
 
     /// <summary>
-    /// Obtiene las coordenadas.
+    /// Obtiene el nodo.
     /// </summary>
-    public Coordenadas PosiblesCoordenadasDesconectadas { get; private set; }
+    public Coordenadas Nodo { get; private set; }
+
+    /// <summary>
+    /// Obtiene el posible nodo desconectado.
+    /// </summary>
+    public Coordenadas PosiblesNodoDesconectado { get; private set; }
 
     /// <summary>
     /// Obtiene la distancia.
@@ -105,20 +110,23 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Constructor.
     /// </summary>
     /// <param name="laVía">La Vía.</param>
-    /// <param name="lasCoordenadas">Las coordenadas.</param>
-    /// <param name="lasCoordenadasDestino">Las coordenadas destino.</param>
+    /// <param name="elNodo">El nodo.</param>
+    /// <param name="laVíaConElPosibleNodoDesconectado">La Vía con el Posible Nodo Desconectado.</param>
+    /// <param name="elPosibleNodoDesconectado">El Posible Nodo Desconectado.</param>
     /// <param name="laDistancia">La distancia.</param>
     /// <param name="elDetalle">El detalle.</param>
     public PosibleNodoDesconectado(
       Vía laVía,
-      Coordenadas lasCoordenadas,
-      Coordenadas lasCoordenadasDestino,
+      Coordenadas elNodo,
+      Vía laVíaConElPosibleNodoDesconectado,
+      Coordenadas elPosibleNodoDesconectado,
       double laDistancia,
       string elDetalle)
     {
       Vía = laVía;
-      Coordenadas = lasCoordenadas;
-      PosiblesCoordenadasDesconectadas = lasCoordenadasDestino;
+      Nodo = elNodo;
+      VíaConElPosibleNodoDesconectado = laVíaConElPosibleNodoDesconectado;
+      PosiblesNodoDesconectado = elPosibleNodoDesconectado;
       Distancia = laDistancia;
       Detalle = elDetalle;
     }

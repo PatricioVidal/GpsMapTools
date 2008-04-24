@@ -71,6 +71,7 @@
             columnaNombre});
       this.FullRowSelect = true;
       this.GridLines = true;
+      this.HideSelection = false;
       resources.ApplyResources(this, "$this");
       this.View = System.Windows.Forms.View.Details;
       this.VirtualMode = true;

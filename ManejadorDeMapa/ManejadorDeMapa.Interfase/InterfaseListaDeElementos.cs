@@ -73,9 +73,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 
@@ -211,7 +208,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
 
       // Habilita la lista.
-      Enabled = true; ;
+      Enabled = true;
     }
 
 
@@ -267,10 +264,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
                 elemento.Nombre};
       subItems.AddRange(losSubItemsAdicionales);
 
-      ListViewItem item = new ListViewItem(subItems.ToArray());
-      item.BackColor = elColorDeFondo;
-      item.Group = elGrupo;
-      item.Tag = elElementoConEtiqueta;
+      ListViewItem item = new ListViewItem(subItems.ToArray()) {
+          BackColor = elColorDeFondo,
+          Group = elGrupo,
+          Tag = elElementoConEtiqueta
+        };
 
       if (VirtualMode)
       {

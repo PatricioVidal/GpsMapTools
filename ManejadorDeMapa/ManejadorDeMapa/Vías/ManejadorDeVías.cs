@@ -181,7 +181,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
       númeroDeProblemasEnVías += miBuscadorDeIncongruencias.Procesa();
       númeroDeProblemasEnVías += miBuscadorDePosiblesErroresDeRuteo.Procesa();
       númeroDeProblemasEnVías += miBuscadorDeErrores.Procesa();
-      númeroDeProblemasEnVías += miBuscadorDePosiblesNodosDesconectados.Procesa();
+      // NOTE: La siguiente línea está comentada porque tarda mucho el procesamiento.
+      //númeroDeProblemasEnVías += miBuscadorDePosiblesNodosDesconectados.Procesa();
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnVías + " problemas en Vías.";

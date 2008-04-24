@@ -192,7 +192,7 @@
     <value>miOrdenadorDeColumnaDeLista</value>
   </data>
   <data name="&gt;&gt;miOrdenadorDeColumnaDeLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, GpsYv.ManejadorDeMapa, Version=1.8.3005.13630, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.19.3034.32123, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>InterfaseListaDeElementos</value>

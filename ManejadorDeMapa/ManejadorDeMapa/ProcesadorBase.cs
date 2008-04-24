@@ -72,9 +72,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Threading;
+using System.Timers;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -89,10 +87,8 @@ namespace GpsYv.ManejadorDeMapa
     private readonly T miManejador;
     private readonly string miNombreDeElemento;
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private int miNúmeroDeElementos = 0;
-    private int miNúmeroDeElementoProcesándose = 0;
-    private int miNúmeroDeProblemasDetectados = 0;
-    private int miIntervaloParaReportarEstatus = 1;
+    private readonly Timer miTimerParaReportarEstatus = new Timer(25);
+    private bool miReportaEstatus = true;
     #endregion
 
     #region Eventos
@@ -127,37 +123,19 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el número de elemento procesandose.
     /// </summary>
-    public int NúmeroDeElementoProcesándose
-    {
-      get
-      {
-        return miNúmeroDeElementoProcesándose;
-      }
-    }
+    public int NúmeroDeElementoProcesándose { get; private set; }
 
 
     /// <summary>
     /// Devuelve el número de ítem detectados.
     /// </summary>
-    public int NúmeroDeProblemasDetectados
-    {
-      get
-      {
-        return miNúmeroDeProblemasDetectados;
-      }
-    }
+    public int NúmeroDeProblemasDetectados { get; private set; }
 
 
     /// <summary>
     /// Obtiene el número de elementos.
     /// </summary>
-    public int NúmeroDeElementos
-    {
-      get
-      {
-        return miNúmeroDeElementos;
-      }
-    }
+    public int NúmeroDeElementos { get; private set; }
 
 
     /// <summary>
@@ -180,13 +158,16 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elManejador">El manejador.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ProcesadorBase(
+    protected ProcesadorBase(
       T elManejador,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
     {
       miManejador = elManejador;
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
 
+      // Pone el manejador de eventos del timer.
+      miTimerParaReportarEstatus.Elapsed += EnTimerElapsed;
+      
       // Escucha eventos.
       miManejador.ManejadorDeMapa.MapaNuevo += EnMapaNuevo;
       miManejador.ElementosModificados += EnElementosModificados;
@@ -207,13 +188,16 @@ namespace GpsYv.ManejadorDeMapa
     /// <returns>El número de problemas detectados.</returns>
     public int Procesa()
     {
-      miNúmeroDeProblemasDetectados = 0;
-      miNúmeroDeElementoProcesándose = 0;
+      NúmeroDeProblemasDetectados = 0;
+      NúmeroDeElementoProcesándose = 0;
       IList<K> elementos = miManejador.Elementos;
-      miNúmeroDeElementos = elementos.Count;
+      NúmeroDeElementos = elementos.Count;
 
       // Indica que se van a procesar los elementos.
       ComenzóAProcesar();
+
+      // Comienza el timer.
+      miTimerParaReportarEstatus.Start();
 
       // Reporta estatus.
       miEscuchadorDeEstatus.Progreso = 0;
@@ -223,23 +207,31 @@ namespace GpsYv.ManejadorDeMapa
 
       // Procesar todos los elementos.
       miEscuchadorDeEstatus.ProgresoMáximo = elementos.Count;
+      miReportaEstatus = true;
       foreach (K elemento in elementos)
       {
-        // Reportar Progreso
-        ++miNúmeroDeElementoProcesándose;
-        if ((miNúmeroDeElementoProcesándose % miIntervaloParaReportarEstatus) == 0)
+        ++NúmeroDeElementoProcesándose;
+        miEscuchadorDeEstatus.Progreso = NúmeroDeElementoProcesándose;
+        if (miReportaEstatus)
         {
-          Estatus = "Procesando " + miNombreDeElemento + " #" + miNúmeroDeElementoProcesándose;
+          Estatus = string.Format("Procesando {0} # {1}/{2}", 
+            miNombreDeElemento, 
+            NúmeroDeElementoProcesándose,
+            NúmeroDeElementos);
+
+          miReportaEstatus = false;
         }
-        miEscuchadorDeEstatus.Progreso = miNúmeroDeElementoProcesándose;
 
         // Procesa el elemento si no está eliminado.
         if (!elemento.FuéEliminado)
         {
           // Procesa el elemento.
-          miNúmeroDeProblemasDetectados += ProcesaElemento(elemento);
+          NúmeroDeProblemasDetectados += ProcesaElemento(elemento);
         }
       }
+
+      // Para el timer.
+      miTimerParaReportarEstatus.Stop();
 
       // Reporta estatus.
       miEscuchadorDeEstatus.Progreso = 0;
@@ -251,17 +243,22 @@ namespace GpsYv.ManejadorDeMapa
       // Indica que se terminó de procesar los elementos.
       TerminoDeProcesar();
 
-      return miNúmeroDeProblemasDetectados;
+      return NúmeroDeProblemasDetectados;
     }
     #endregion
 
     #region Métodos Protegidos y Privados
+    private void EnTimerElapsed(object elEnviador, ElapsedEventArgs losArgumentos)
+    {
+      miReportaEstatus = true;
+    }
+
+
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
     protected virtual void ComenzóAProcesar()
     {
-      miIntervaloParaReportarEstatus = Math.Max(1, miNúmeroDeElementos / 200);
     }
 
 
