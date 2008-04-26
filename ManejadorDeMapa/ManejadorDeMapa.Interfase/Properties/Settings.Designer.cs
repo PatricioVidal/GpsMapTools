@@ -94,5 +94,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Properties {
                 this["DistanciaMáximaBuscarPosiblesNodosDesconectados"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EstáMaximizada {
+            get {
+                return ((bool)(this["EstáMaximizada"]));
+            }
+            set {
+                this["EstáMaximizada"] = value;
+            }
+        }
     }
 }
