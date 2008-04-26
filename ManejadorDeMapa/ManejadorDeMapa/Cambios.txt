@@ -1,3 +1,6 @@
+Versión 1.20
+
+
 Versión 1.19
 - Mejorada la lógica y la velocidad de detección de posibles nodos desconectados. 
 - Arreglado error que causaba que los menús de edición no funcionaran. 

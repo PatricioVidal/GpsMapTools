@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54B82A62-58F2-4F96-A3FE-95908E23C32E}"
+	ProjectSection(SolutionItems) = preProject
+		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Pruebas", "ManejadorDeMapa.Pruebas\ManejadorDeMapa.Pruebas.csproj", "{7E361239-BD1B-4CD9-974B-CFF0B456A297}"
 EndProject
