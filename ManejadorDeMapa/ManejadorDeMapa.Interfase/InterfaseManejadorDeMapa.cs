@@ -92,6 +92,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private ManejadorDeMapa miManejadorDeMapa;
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
+    private readonly List<ToolStripMenuItem> misMenúsADesabilitar;
+    private readonly Timer miTimerParaMostrarBotónParaDeProcesar = new Timer();
     #endregion
 
     #region Métodos Públicos
@@ -101,6 +103,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public InterfaseManejadorDeMapa()
     {
       InitializeComponent();
+
+      // Crea la lista de menús a desabilitar.
+      misMenúsADesabilitar = new List<ToolStripMenuItem> {
+        miMenúMapa,
+        miMenúProcesar};
 
       // Pone el nombre.
       this.Text = VentanaDeAcerca.AssemblyDescription + " - " + VentanaDeAcerca.AssemblyCompany;
@@ -137,6 +144,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Maneja eventos de modificación de elementos.
       miManejadorDeMapa.MapaNuevo += EnMapaNuevo;
       miManejadorDeMapa.ElementosModificados += EnElementosModificados;
+
+      // Maneja eventos de procesamiento.
+      miManejadorDeMapa.Procesando += EnProcesando;
+      miManejadorDeMapa.Procesó += EnProcesó;
+
+      // Oculta el botón de parar de procesar.
+      miBotónParaDeProcesar.Visible = false;
+      miTimerParaMostrarBotónParaDeProcesar.Interval = 5000;
+      miTimerParaMostrarBotónParaDeProcesar.Tick += EnTimerParaMostrarBotónParaDeProcesar;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
@@ -179,6 +195,41 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     #endregion
       
     #region Métodos Privados
+    private void EnProcesando(object elEnviador, EventArgs losArgumentos)
+    {
+      foreach (ToolStripMenuItem menú in misMenúsADesabilitar)
+      {
+        menú.Enabled = false;
+      }
+      // Comienza el timer para que eventualmente aparezca el botón
+      // de parar de procesar.
+      miTimerParaMostrarBotónParaDeProcesar.Start();
+    }
+
+
+    private void EnProcesó(object elEnviador, EventArgs losArgumentos)
+    {
+      // Para el tiemer y haz el botón invisible.
+      miTimerParaMostrarBotónParaDeProcesar.Stop();
+      miBotónParaDeProcesar.Visible = false;
+
+      // Habilita los menús.
+      foreach (ToolStripMenuItem menú in misMenúsADesabilitar)
+      {
+        menú.Enabled = true;
+      }
+    }
+
+
+    private void EnTimerParaMostrarBotónParaDeProcesar(object elEnviador, EventArgs losArgumentos)
+    {
+      miTimerParaMostrarBotónParaDeProcesar.Stop();
+      miBotónParaDeProcesar.Visible = true;
+      miBotónParaDeProcesar.Focus();
+      miBotónParaDeProcesar.Select();
+    }
+
+
     private void EnMenuSalir(object sender, EventArgs e)
     {
       Application.Exit();
@@ -404,7 +455,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           (Settings.Default.PosiciónDeLaFormaPrincipal.X >= 0) &
           (Settings.Default.PosiciónDeLaFormaPrincipal.Y >= 0))
         {
-          this.Location = Settings.Default.PosiciónDeLaFormaPrincipal;
+          Location = Settings.Default.PosiciónDeLaFormaPrincipal;
         }
       }
       if (Settings.Default.TamañoDeLaFormaPrincipal != null)
@@ -413,8 +464,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           (Settings.Default.TamañoDeLaFormaPrincipal.Width >= MinimumSize.Width) &
           (Settings.Default.TamañoDeLaFormaPrincipal.Height >= MinimumSize.Height))
         {
-          this.Size = Settings.Default.TamañoDeLaFormaPrincipal;
+          Size = Settings.Default.TamañoDeLaFormaPrincipal;
         }
+      }
+      if (Settings.Default.EstáMaximizada)
+      {
+        WindowState = FormWindowState.Maximized;
+      }
+      else
+      {
+        WindowState = FormWindowState.Normal;
       }
     }
 
@@ -430,12 +489,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       switch (this.WindowState)
       {
         case FormWindowState.Normal:
-          Settings.Default.PosiciónDeLaFormaPrincipal = this.Location;
-          Settings.Default.TamañoDeLaFormaPrincipal = this.Size;
+          Settings.Default.PosiciónDeLaFormaPrincipal = Location;
+          Settings.Default.TamañoDeLaFormaPrincipal = Size;
+          Settings.Default.EstáMaximizada = false;
           break;
-        default:
+        case FormWindowState.Maximized:
+          Settings.Default.PosiciónDeLaFormaPrincipal = RestoreBounds.Location;
+          Settings.Default.TamañoDeLaFormaPrincipal = RestoreBounds.Size;
+          Settings.Default.EstáMaximizada = true;
+          break;
+        case FormWindowState.Minimized:
           Settings.Default.PosiciónDeLaFormaPrincipal = this.RestoreBounds.Location;
           Settings.Default.TamañoDeLaFormaPrincipal = this.RestoreBounds.Size;
+          Settings.Default.EstáMaximizada = false;
           break;
       }
 
@@ -486,6 +552,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúBuscarPosiblesNodosDesconectadosEnVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.BuscadorDePosiblesNodosDesconectados.Procesa();
+    }
+
+
+    private void EnBotónParaDeProcesar(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ParaDeProcesar = true;
+      miBotónParaDeProcesar.Visible = false;
     }
     #endregion
   }

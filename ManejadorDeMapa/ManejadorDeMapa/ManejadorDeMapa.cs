@@ -85,21 +85,16 @@ namespace GpsYv.ManejadorDeMapa
   public class ManejadorDeMapa
   {
     #region Campos
-    private ElementoDelMapa miEncabezado;
+
     private readonly IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
     private readonly IList<Pdi> misPdis = new List<Pdi>();
     private readonly IList<Vía> misVías = new List<Vía>();
-    private readonly IList<Polilínea> misPolilíneas = new List<Polilínea>();
-    private readonly IList<Polígono> misPolígonos = new List<Polígono>();
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private string miArchivo;
     private int miNúmeroDeSuspenciónDeEventos;
     private bool miHayEventosDeModificaciónDeElementoPendientes;
     private bool miHayEventosDeModificaciónDePdisPendientes;
     private bool miHayEventosDeModificaciónDeVíasPendientes;
-    private readonly ManejadorDePdis miManejadorDePdis;
-    private readonly ManejadorDeVías miManejadorDeVías;
-    private readonly ManejadorDeElementos miManejadorDeElementos;
+
     #endregion
 
     #region Eventos
@@ -122,6 +117,10 @@ namespace GpsYv.ManejadorDeMapa
     /// Evento cuando alguna Vía es modificada.
     /// </summary>
     public event EventHandler VíasModificadas;
+
+    public event EventHandler Procesando;
+
+    public event EventHandler Procesó;
     #endregion
 
     #region Propiedades
@@ -134,77 +133,40 @@ namespace GpsYv.ManejadorDeMapa
       " - Elementos modificados son re-inicializados borrando el estado de modificados.\n" +
       " - Las listas de errores, duplicados, conflictos, etc. son borradas.";
 
-
     /// <summary>
     /// Obtiene el encabezado del mapa.
     /// </summary>
-    public ElementoDelMapa Encabezado
-    {
-      get
-      {
-        return miEncabezado;
-      }
-    }
+    public ElementoDelMapa Encabezado { get; private set; }
 
 
     /// <summary>
     /// Devuelve las Polilíneas.
     /// </summary>
-    public IList<Polilínea> Polilíneas
-    {
-      get
-      {
-        return misPolilíneas;
-      }
-    }
+    public IList<Polilínea> Polilíneas { get; private set; }
 
 
     /// <summary>
     /// Devuelve los Polígonos.
     /// </summary>
-    public IList<Polígono> Polígonos
-    {
-      get
-      {
-        return misPolígonos;
-      }
-    }
+    public IList<Polígono> Polígonos { get; private set; }
 
 
     /// <summary>
     /// Devuelve el manejador de Elementos.
     /// </summary>
-    public ManejadorDeElementos ManejadorDeElementos
-    {
-      get
-      {
-        return miManejadorDeElementos;
-      }
-    }
+    public ManejadorDeElementos ManejadorDeElementos { get; private set; }
 
 
     /// <summary>
     /// Devuelve el manejador de PDIs.
     /// </summary>
-    public ManejadorDePdis ManejadorDePdis
-    {
-      get
-      {
-        return miManejadorDePdis;
-      }
-    }
+    public ManejadorDePdis ManejadorDePdis { get; private set; }
 
 
     /// <summary>
     /// Devuelve el manejador de Vías.
     /// </summary>
-    public ManejadorDeVías ManejadorDeVías
-    {
-      get
-      {
-        return miManejadorDeVías;
-      }
-    }
+    public ManejadorDeVías ManejadorDeVías { get; private set; }
 
 
     /// <summary>
@@ -225,13 +187,15 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Devuelve el nombre del archivo del mapa.
     /// </summary>
-    public string Archivo
-    {
-      get
-      {
-        return miArchivo;
-      }
-    }
+    public string Archivo { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene o pone una variable lógica que indica que se pare
+    /// de procesar.
+    /// </summary>
+    public bool ParaDeProcesar { get; set; }
+
     #endregion
 
     #region Métodos Públicos
@@ -243,9 +207,11 @@ namespace GpsYv.ManejadorDeMapa
     {
       Trace.WriteLine("Inicializando ManejadorDeMapa");
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
-      miManejadorDeElementos = new ManejadorDeElementos(this, misElementos, elEscuchadorDeEstatus);
-      miManejadorDePdis = new ManejadorDePdis(this, misPdis, elEscuchadorDeEstatus);
-      miManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
+      ManejadorDeElementos = new ManejadorDeElementos(this, misElementos, elEscuchadorDeEstatus);
+      ManejadorDePdis = new ManejadorDePdis(this, misPdis, elEscuchadorDeEstatus);
+      ManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
+      Polígonos = new List<Polígono>();
+      Polilíneas = new List<Polilínea>();
     }
 
 
@@ -255,7 +221,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elArchivo"></param>
     public void Abrir(string elArchivo)
     {
-      miArchivo = elArchivo;
+      Archivo = elArchivo;
       miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
 
       // Por ahora el único formato es el Polish.
@@ -283,7 +249,7 @@ namespace GpsYv.ManejadorDeMapa
       // por programas como el cGPSmapper, GPSMapEdit, etc.
       ElementoDelMapa[] elementosComunes = new[] {
         comentario,
-        miEncabezado };
+        Encabezado };
       List<ElementoDelMapa> elementosEliminados = new List<ElementoDelMapa> (elementosComunes);
       List<ElementoDelMapa> originalDeLosElementosModificados = new List<ElementoDelMapa>(elementosComunes);
       List<ElementoDelMapa> finalDeLosElementosModificados = new List<ElementoDelMapa>(elementosComunes);
@@ -314,12 +280,12 @@ namespace GpsYv.ManejadorDeMapa
       #endregion
 
       #region Añade los errores de los distinto manejadores.
-      foreach (Pdi pdi in miManejadorDePdis.BuscadorDeErrores.Errores.Keys)
+      foreach (Pdi pdi in ManejadorDePdis.BuscadorDeErrores.Errores.Keys)
       {
         elementosConErrores.Add(pdi);
       }
 
-      foreach (Vía vía in miManejadorDeVías.BuscadorDeErrores.Errores.Keys)
+      foreach (Vía vía in ManejadorDeVías.BuscadorDeErrores.Errores.Keys)
       {
         elementosConErrores.Add(vía);
       }
@@ -364,7 +330,7 @@ namespace GpsYv.ManejadorDeMapa
       #endregion
 
       // Actualiza el archivo activo.
-      miArchivo = elArchivo;
+      Archivo = elArchivo;
       miEscuchadorDeEstatus.ArchivoActivo = elArchivo;
     }
 
@@ -492,14 +458,49 @@ namespace GpsYv.ManejadorDeMapa
     public void ProcesarTodo()
     {
       int númeroDeElementosModificados = 0;
-      númeroDeElementosModificados += miManejadorDePdis.ProcesarTodo();
-      númeroDeElementosModificados += miManejadorDeVías.ProcesarTodo();
+      númeroDeElementosModificados += ManejadorDePdis.ProcesarTodo();
+      númeroDeElementosModificados += ManejadorDeVías.ProcesarTodo();
 
       miEscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
     }
+
+
+    /// <summary>
+    /// Indica que el procesamiento debería ser exclusivo.
+    /// </summary>
+    public IDisposable IndicaProcesoExclusivo()
+    {
+      return new ProcesoExclusivo(this);
+    }
     #endregion
 
-    #region Métodos Privados
+    #region
+    #endregion
+
+    #region Métodos y Clases Privadas
+    private class ProcesoExclusivo : IDisposable
+    {
+      private readonly ManejadorDeMapa miManejadorDeMapa;
+
+      public ProcesoExclusivo(ManejadorDeMapa elManejadorDeMapa)
+      {
+        miManejadorDeMapa = elManejadorDeMapa;
+        if (miManejadorDeMapa.Procesando != null)
+        {
+          miManejadorDeMapa.Procesando(this, new EventArgs());
+        }
+      }
+
+      public void Dispose()
+      {
+        if (miManejadorDeMapa.Procesó != null)
+        {
+          miManejadorDeMapa.Procesó(this, new EventArgs());
+        }
+      }
+    }
+
+    
     /// <summary>
     /// Crea un mapa nuevo.
     /// </summary>
@@ -507,19 +508,19 @@ namespace GpsYv.ManejadorDeMapa
     private void CreaMapaNuevo(IEnumerable<ElementoDelMapa> losElementos)
     {
       // Busca el encabezado y crea todas las listas especializadas.
-      miEncabezado = null;
+      Encabezado = null;
       misElementos.Clear();
       misPdis.Clear();
       misVías.Clear();
-      misPolilíneas.Clear();
-      misPolígonos.Clear();
+      Polilíneas.Clear();
+      Polígonos.Clear();
       foreach (ElementoDelMapa elemento in losElementos)
       {
         misElementos.Add(elemento);
 
         if (elemento.Clase == "IMG ID")
         {
-          miEncabezado = elemento;
+          Encabezado = elemento;
         }
         else if (elemento is Pdi)
         {
@@ -531,11 +532,11 @@ namespace GpsYv.ManejadorDeMapa
         }
         else if (elemento is Polilínea)
         {
-          misPolilíneas.Add((Polilínea)elemento);
+          Polilíneas.Add((Polilínea)elemento);
         }
         else if (elemento is Polígono)
         {
-          misPolígonos.Add((Polígono)elemento);
+          Polígonos.Add((Polígono)elemento);
         }
       }
 
