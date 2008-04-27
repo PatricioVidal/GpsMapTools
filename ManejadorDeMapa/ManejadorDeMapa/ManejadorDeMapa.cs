@@ -118,8 +118,14 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public event EventHandler VíasModificadas;
 
+    /// <summary>
+    /// Evento cuando comienza a procesar..
+    /// </summary>
     public event EventHandler Procesando;
 
+    /// <summary>
+    /// Evento cuando terminó de procesar.
+    /// </summary>
     public event EventHandler Procesó;
     #endregion
 
