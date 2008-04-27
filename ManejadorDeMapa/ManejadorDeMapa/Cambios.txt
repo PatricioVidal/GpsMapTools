@@ -1,3 +1,6 @@
+Versión 1.21
+
+
 Versión 1.20
 - Añadido menú de "Guardar archivo de PDIs para localización de Nodos Desconectados". 
 - Añadido un botón que permite parar el procesamiento cuando éste se pone muy largo.
