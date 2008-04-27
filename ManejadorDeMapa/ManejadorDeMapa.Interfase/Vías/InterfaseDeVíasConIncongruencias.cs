@@ -215,21 +215,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Warning);
 
-      // Estandarizar el Límite de Velocidad si el usuario dice que si.
-      if (respuesta == DialogResult.Yes)
+      #region Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta != DialogResult.Yes)
       {
-        // Cambia las vías.
-        ManejadorDeMapa.SuspendeEventos();
-        IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneVíasSeleccionadas();
-        foreach (Vía vía in vías)
-        {
-          vía.AñadeAtributo(BuscadorDeIncongruencias.AtributoNoParámetrosDeRutaEstándar);
-        }
-        ManejadorDeMapa.RestableceEventos();
-
-        // Busca inconguencias otra vez.
-        miBuscadorDeIncongruencias.Procesa();
+        return;
       }
+
+      // Cambia las vías.
+      ManejadorDeMapa.SuspendeEventos();
+      IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneElementosSeleccionados<Vía>();
+      foreach (Vía vía in vías)
+      {
+        vía.AñadeAtributo(BuscadorDeIncongruencias.AtributoNoParámetrosDeRutaEstándar);
+      }
+      ManejadorDeMapa.RestableceEventos();
+
+      // Busca inconguencias otra vez.
+      miBuscadorDeIncongruencias.Procesa();
+      #endregion
     }
     #endregion
   }

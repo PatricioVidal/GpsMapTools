@@ -72,6 +72,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -140,6 +141,78 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Añade los menús.
       Items.Add(miMenúNúmeroDeElementosSeleccionados);
+    }
+
+    
+    /// <summary>
+    /// Retorna los elementos seleccionados.
+    /// </summary>
+    public IList<ElementoConEtiqueta> ObtieneElementosConEtiquetaSeleccionados()
+    {
+      List<ElementoConEtiqueta> elementos = new List<ElementoConEtiqueta>();
+      foreach (int indice in Lista.SelectedIndices)
+      {
+        ListViewItem item = Lista.Items[indice];
+
+        // El Tag del item de la lista tiene que ser un ElementoConEtiqueta con un PDI.
+        ElementoConEtiqueta elemento = item.Tag as ElementoConEtiqueta;
+        if (elemento == null)
+        {
+          throw new InvalidOperationException(string.Format("El Tag del item de la lista tiene que ser un ElementoConEtiqueta, pero es: {0}", item.Tag.GetType()));
+        }
+
+        // Añade el elemento a la lista.
+        elementos.Add(elemento);
+      }
+      return elementos;
+    }
+
+
+    /// <summary>
+    /// Retorna las etiquetas seleccionadas.
+    /// </summary>
+    public IList<T> ObtieneElementosSeleccionados<T>() where T : class
+    {
+      IList<ElementoConEtiqueta> elementosConEtiqueta = ObtieneElementosConEtiquetaSeleccionados();
+      List<T> elementos = new List<T>();
+      foreach (ElementoConEtiqueta elementoConEtiqueta in elementosConEtiqueta)
+      {
+        // La Etiqueta del elemento tiene que ser tipo T.
+        T elemento = elementoConEtiqueta.ElementoDelMapa as T;
+        if (elemento == null)
+        {
+          throw new InvalidOperationException(string.Format("La Etiqueta del elemento tiene que ser tipo {0}, pero es: {1}", typeof(T), elementoConEtiqueta.ElementoDelMapa.GetType()));
+        }
+
+        // Añade el elemento a la lista.
+        elementos.Add(elemento);
+      }
+
+      return elementos;
+    }
+
+
+    /// <summary>
+    /// Retorna las etiquetas seleccionadas.
+    /// </summary>
+    public IList<T> ObtieneEtiquetasSeleccionadas<T>() where T: class 
+    {
+      IList<ElementoConEtiqueta> elementos = ObtieneElementosConEtiquetaSeleccionados();
+      List<T> etiquetas = new List<T>();
+      foreach (ElementoConEtiqueta elemento in elementos)
+      {
+        // La Etiqueta del elemento tiene que ser tipo T.
+        T etiqueta = elemento.Etiqueta as T;
+        if (etiqueta == null)
+        {
+          throw new InvalidOperationException(string.Format("La Etiqueta del elemento tiene que ser tipo {0}, pero es: {1}", typeof(T), elemento.Etiqueta.GetType()));
+        }
+
+        // Añade el elemento a la lista.
+        etiquetas.Add(etiqueta);
+      }
+
+      return etiquetas;
     }
     #endregion
 

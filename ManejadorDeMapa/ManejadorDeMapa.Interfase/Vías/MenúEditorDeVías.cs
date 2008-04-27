@@ -111,42 +111,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       AñadeMenúEstandarizarLímiteDeVelocidadYClaseDeRuta();
       AñadeMenúEliminarVías();
     }
-
-    
-    /// <summary>
-    /// Retorna las vías seleccionadas.
-    /// </summary>
-    public IList<Vía> ObtieneVíasSeleccionadas()
-    {
-      List<Vía> vías = new List<Vía>();
-      foreach (int indice in Lista.SelectedIndices)
-      {
-        ListViewItem item = Lista.Items[indice];
-
-        // El Tag del item de la lista tiene que ser un ElementoConEtiqueta con un PDI.
-        ElementoConEtiqueta elemento = item.Tag as ElementoConEtiqueta;
-        if (elemento == null)
-        {
-          throw new InvalidOperationException(string.Format("El Tag del item de la lista tiene que ser un ElementoConEtiqueta, pero es: {0}", item.Tag.GetType()));
-        }
-        Vía vía = elemento.ElementoDelMapa as Vía;
-        if (vía == null)
-        {
-          throw new InvalidOperationException(string.Format("El elemento del item de la lista tiene que ser una Vía, pero es: {0}", elemento.ElementoDelMapa.GetType()));
-        }
-
-        // Añade la vía a la lista.
-        vías.Add(vía);
-      }
-      return vías;
-    }
     #endregion
 
     #region Métodos Privados
     private void AñadeMenúGuardarArchivoPdis()
     {
       ToolStripMenuItem menú = new ToolStripMenuItem {
-        Text = "Guarda archivo de PDIs para localización de Vía(s)",
+        Text = "Guardar archivo de PDIs para localización de Vía(s)",
         AutoSize = true
       };
       Items.Add(menú);
@@ -233,7 +204,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         List<ElementoDelMapa> elementos = new List<ElementoDelMapa> { ManejadorDeVías.ManejadorDeMapa.Encabezado };
 
         // Genera la lista de PDIs.
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
           // Crea los campos para el PDI.
@@ -286,7 +257,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         // Cambia las vías.
         ManejadorDeVías.SuspendeEventos();
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
           CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
@@ -324,7 +295,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         // Cambia las vías.
         ManejadorDeVías.SuspendeEventos();
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
           CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
@@ -362,7 +333,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         // Cambia las vías.
         ManejadorDeVías.SuspendeEventos();
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
           CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
@@ -400,7 +371,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       {
         // Elimina las vías.
         ManejadorDeVías.SuspendeEventos();
-        IList<Vía> vías = ObtieneVíasSeleccionadas();
+        IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
           vía.Elimina("Eliminada Manualmente.");
