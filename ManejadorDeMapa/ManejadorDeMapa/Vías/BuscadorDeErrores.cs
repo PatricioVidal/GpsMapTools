@@ -71,9 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Tst;
-using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
@@ -140,7 +137,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int númeroDeItemsDetectados = 0;
       List<string> errores = new List<string>();
 
-      #region Verifica que el tipo de PDI no es vacio.
+      #region Verifica que el tipo de Vía no es nulo.
       Tipo tipo = laVía.Tipo;
       bool esVacio = (tipo == Tipo.TipoNulo);
       if (esVacio)
@@ -149,23 +146,22 @@ namespace GpsYv.ManejadorDeMapa.Vías
       }
       #endregion
 
-      #region Verifica que el tipo de PDI es conocido.
+      #region Verifica que el tipo de Vía es conocido.
       bool esConocido = CaracterísticasDePolilíneas.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {
-        errores.Add("El tipo (" + laVía.Tipo.ToString() + ") no es conocido");
+        errores.Add("El tipo (" + laVía.Tipo + ") no es conocido");
       }
       #endregion
 
       #region Verifica las coordenadas.
-      // La Vía debe tener un campo de coordenadas y además tienen que
+      // La Vía debe tener un campo de coordenadas y además tiene que
       // tener nivel zero.
       CampoCoordenadas campoCoordenadas = null;
       foreach (Campo campo in laVía.Campos)
       {
-        if (campo is CampoCoordenadas)
+        if ((campoCoordenadas = campo as CampoCoordenadas) != null)
         {
-          campoCoordenadas = (CampoCoordenadas)campo;
           break;
         }
       }

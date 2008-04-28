@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #region Campos
     private readonly List<PosibleNodoDesconectado> misPosiblesNodosDesconectados = new List<PosibleNodoDesconectado>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
-    private int miDistanciaMáxima = 15;
+    private int miDistanciaMáxima = 5;
     #endregion
 
     #region Propiedades

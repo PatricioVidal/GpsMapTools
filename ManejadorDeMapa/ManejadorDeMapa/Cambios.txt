@@ -1,5 +1,5 @@
 Versión 1.21
-
+- Arreglado error cuando las vías tienen coordenadas a varios niveles.
 
 Versión 1.20
 - Añadido menú de "Guardar archivo de PDIs para localización de Nodos Desconectados". 

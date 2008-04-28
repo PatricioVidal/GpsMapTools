@@ -120,9 +120,22 @@ namespace GpsYv.ManejadorDeMapa
       // Busca los campos especificos de los Polilíneas.
       foreach (Campo campo in losCampos)
       {
-        if (campo is CampoCoordenadas)
+        CampoCoordenadas campoCoordenadas = campo as CampoCoordenadas;
+        if (campoCoordenadas != null)
         {
-          misCoordenadas = (CampoCoordenadas)campo;
+          // Si ya tenemos coordenadas entonces solamente las remplazamos
+          // si el nivel es menor.
+          if (misCoordenadas != CampoCoordenadas.Nulas)
+          {
+            if (campoCoordenadas.Nivel < misCoordenadas.Nivel)
+            {
+              misCoordenadas = campoCoordenadas;
+            }
+          }
+          else
+          {
+            misCoordenadas = campoCoordenadas;
+          }
         }
       }
     }
@@ -140,7 +153,7 @@ namespace GpsYv.ManejadorDeMapa
         coordenadas.Append(Coordenadas[i].ToString());
       }
 
-      string texto = Nombre + coordenadas.ToString();
+      string texto = string.Format("{0} [{1}]", Nombre, coordenadas);
 
       return texto;
     }

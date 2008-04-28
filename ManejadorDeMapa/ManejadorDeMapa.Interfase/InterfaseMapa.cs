@@ -673,9 +673,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         // Dibuja los nodos.
         foreach (CampoNodo nodo in vía.CamposNodo)
         {
-          Coordenadas coordenadas = vía.Coordenadas[nodo.IndiceDeCoordenadas];
-          const int tamaño = 3;
-          DibujaPunto(coordenadas, miPincelDeNodo, tamaño);
+          if (nodo.IndiceDeCoordenadas < vía.Coordenadas.Length)
+          {
+            Coordenadas coordenadas = vía.Coordenadas[nodo.IndiceDeCoordenadas];
+            const int tamaño = 3;
+            DibujaPunto(coordenadas, miPincelDeNodo, tamaño);
+          }
         }
       }
     }
