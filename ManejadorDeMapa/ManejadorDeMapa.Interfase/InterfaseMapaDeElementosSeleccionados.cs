@@ -155,10 +155,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnTimerCambioDeItemsSeleccionadosTick(object sender, EventArgs e)
     {
-      DibujaElementos();
-
       // Detiene el timer para no seguir dibujando el mapa repetidamente.
       miTimerCambioDeItemsSeleccionados.Stop();
+
+      DibujaElementos();
     }
 
 

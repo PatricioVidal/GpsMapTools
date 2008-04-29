@@ -343,11 +343,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// <param name="losElementos">Los elementos dados.</param>
     public static RectangleF RectanguloQueEncierra(IList<ElementoDelMapa> losElementos)
     {
-      RectangleF rectángulo = new RectangleF(
-        float.PositiveInfinity,
-        float.PositiveInfinity,
-        0,
-        0);
+      double mínimaLatitud = double.PositiveInfinity;
+      double máximaLatitud = double.NegativeInfinity;
+      double mínimaLongitud = double.PositiveInfinity;
+      double máximaLongitud = double.NegativeInfinity;
+
       foreach (ElementoDelMapa elemento in losElementos)
       {
         // Para evitar duplicar la conversión de tipo más de una vez 
@@ -361,7 +361,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           Coordenadas coordenadas = pdi.Coordenadas;
           ActualizaRectánguloQueEncierra(
             coordenadas,
-            ref rectángulo);
+            ref mínimaLatitud,
+            ref máximaLatitud,
+            ref mínimaLongitud,
+            ref máximaLongitud);
         }
         else if ((polígono = elemento as Polígono) != null)
         {
@@ -370,7 +373,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           {
             ActualizaRectánguloQueEncierra(
               coordenadas,
-              ref rectángulo);
+              ref mínimaLatitud,
+              ref máximaLatitud,
+              ref mínimaLongitud,
+              ref máximaLongitud);
           }
         }
         else if ((polilínea = elemento as Polilínea) != null)
@@ -379,10 +385,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           {
             ActualizaRectánguloQueEncierra(
               coordenadas,
-              ref rectángulo);
+              ref mínimaLatitud,
+              ref máximaLatitud,
+              ref mínimaLongitud,
+              ref máximaLongitud);
           }
         }
       }
+
+      RectangleF rectángulo = new RectangleF(
+        (float)mínimaLongitud,
+        (float)mínimaLatitud,
+        (float)(máximaLongitud - mínimaLongitud),
+        (float)(máximaLatitud - mínimaLatitud));
 
       return rectángulo;
     }
@@ -392,19 +407,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Actualiza el rectángulo que encierra.
     /// </summary>
     /// <param name="lasCoordenadas"></param>
-    /// <param name="elRectánguloQueEncierra">El Rectángulo que Encierra</param>
+    /// <param name="laMínimaLatitud">La Mínima Latitud</param>
+    /// <param name="laMáximaLatitud">La Máxima Latitud</param>
+    /// <param name="laMínimaLongitud">La Mínima Longitud</param>
+    /// <param name="laMáximaLongitud">La Máxima Longitud</param>
     public static void ActualizaRectánguloQueEncierra(
       PointF lasCoordenadas,
-      ref RectangleF elRectánguloQueEncierra)
+      ref double laMínimaLatitud,
+      ref double laMáximaLatitud,
+      ref double laMínimaLongitud,
+      ref double laMáximaLongitud)
     {
       // Solo procesa coordenadas válidas.
       if (!double.IsNaN(lasCoordenadas.X) &&
         !double.IsNaN(lasCoordenadas.Y))
       {
-        elRectánguloQueEncierra.X = Math.Min(elRectánguloQueEncierra.X, lasCoordenadas.X);
-        elRectánguloQueEncierra.Width = Math.Max(elRectánguloQueEncierra.Right, lasCoordenadas.X) - elRectánguloQueEncierra.X;
-        elRectánguloQueEncierra.Y = Math.Min(elRectánguloQueEncierra.Y, lasCoordenadas.Y);
-        elRectánguloQueEncierra.Height = Math.Max(elRectánguloQueEncierra.Bottom, lasCoordenadas.Y) - elRectánguloQueEncierra.Y;
+        laMínimaLatitud = Math.Min(laMínimaLatitud, lasCoordenadas.Y);
+        laMáximaLatitud = Math.Max(laMáximaLatitud, lasCoordenadas.Y);
+        laMínimaLongitud = Math.Min(laMínimaLongitud, lasCoordenadas.X);
+        laMáximaLongitud = Math.Max(laMáximaLongitud, lasCoordenadas.X);
       }
     }
 

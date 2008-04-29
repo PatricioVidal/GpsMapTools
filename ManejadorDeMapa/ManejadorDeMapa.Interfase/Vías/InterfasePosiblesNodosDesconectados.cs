@@ -225,12 +225,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InterfaseMapa mapa = miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas;
       mapa.PuntosAddicionales.Clear();
-      RectangleF rectánguloQueEncierra = new RectangleF(
-        float.PositiveInfinity,
-        float.PositiveInfinity,
-        0,
-        0);
-
+      double mínimaLatitud = double.PositiveInfinity;
+      double máximaLatitud = double.NegativeInfinity;
+      double mínimaLongitud = double.PositiveInfinity;
+      double máximaLongitud = double.NegativeInfinity;
 
       // Dibuja los nodos como puntos addicionales para resaltarlos.
       foreach(int i in miInterfaseListaConMapaDeVías.InterfaseListaDeVías.SelectedIndices)
@@ -261,15 +259,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
         InterfaseMapa.ActualizaRectánguloQueEncierra(
           posibleNodoDesconectado.NodoDesconectado,
-          ref rectánguloQueEncierra);
+          ref mínimaLatitud,
+          ref máximaLatitud,
+          ref mínimaLongitud,
+          ref máximaLongitud);
       }
 
+      // Muestra los nodos desconectados.
       const float margen = 0.0001f;
       RectangleF rectánguloVisible = new RectangleF(
-        rectánguloQueEncierra.X - margen,
-        rectánguloQueEncierra.Y - margen,
-        rectánguloQueEncierra.Width + (2 * margen),
-        rectánguloQueEncierra.Height + (2 * margen));
+        (float)mínimaLongitud - margen,
+        (float)mínimaLatitud - margen,
+        (float)(máximaLongitud - mínimaLongitud) + (2 * margen),
+        (float)(máximaLatitud - mínimaLatitud) + (2 * margen));
       mapa.RectánguloVisibleEnCoordenadas = rectánguloVisible;
     }
 
