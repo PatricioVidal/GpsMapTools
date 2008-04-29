@@ -84,7 +84,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Obtiene la Via con el posible nodo desconectado.
     /// </summary>
-    public Vía VíaConElPosibleNodoDesconectado { get; private set; }
+    public Vía VíaConNodoDesconectado { get; private set; }
 
     /// <summary>
     /// Obtiene el nodo.
@@ -94,7 +94,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Obtiene el posible nodo desconectado.
     /// </summary>
-    public Coordenadas PosiblesNodoDesconectado { get; private set; }
+    public Coordenadas NodoDesconectado { get; private set; }
 
     /// <summary>
     /// Obtiene la distancia.
@@ -125,8 +125,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       Vía = laVía;
       Nodo = elNodo;
-      VíaConElPosibleNodoDesconectado = laVíaConElPosibleNodoDesconectado;
-      PosiblesNodoDesconectado = elPosibleNodoDesconectado;
+      VíaConNodoDesconectado = laVíaConElPosibleNodoDesconectado;
+      NodoDesconectado = elPosibleNodoDesconectado;
       Distancia = laDistancia;
       Detalle = elDetalle;
     }

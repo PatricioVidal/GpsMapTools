@@ -208,12 +208,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         foreach (Vía vía in vías)
         {
           // Crea los campos para el PDI.
+          int índiceDeLaCoordenadaCentral = vía.Coordenadas.Length / 2;
           List<Campo> campos = new List<Campo> {
             new CampoNombre("Vía #" + vía.Número),
             new CampoCoordenadas(
               "Data0",
               0,
-              vía.Coordenadas[0]),
+              vía.Coordenadas[índiceDeLaCoordenadaCentral]),
             new CampoTipo("0x1604"),
             new CampoGenérico("EndLevel", "3")
           };

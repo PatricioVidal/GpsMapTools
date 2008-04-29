@@ -91,10 +91,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #region Campos
     private BuscadorDePosiblesNodosDesconectados miBuscadorDePosiblesNodosDesconectados;
     private readonly Brush miPincelDeBordeDeNodo = Brushes.Black;
-    private readonly Brush miPincelDeNodo = Brushes.Yellow;
-    private readonly Pen miLápizDeViaConElPosibleNodoDesconectado = new Pen(Color.LightSalmon, 9);
-    private readonly Brush miPincelDePosibleNodoDesconectado = Brushes.LightSalmon;
-    private readonly Color miColorItemEditado = Color.LightGray;
+    private readonly Pen miLápizDeVia = new Pen(Color.LightSalmon, 11);
+    private readonly Brush miPincelDePosibleNodoDesconectado = Brushes.Red;
+    private readonly Color miColorItemEditado = Color.Yellow;
     #endregion
 
     #region Propiedades
@@ -212,10 +211,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       IList<PosibleNodoDesconectado> posibleNodosDesconectados = miBuscadorDePosiblesNodosDesconectados.PosibleNodosDesconectados;
       foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodosDesconectados)
       {
-        ElementoConEtiqueta elemento = new ElementoConEtiqueta(posibleNodoDesconectado.Vía, posibleNodoDesconectado);
+        ElementoConEtiqueta elemento = new ElementoConEtiqueta(posibleNodoDesconectado.VíaConNodoDesconectado, posibleNodoDesconectado);
         laLista.AñadeItem(
           elemento,
-          posibleNodoDesconectado.Nodo.ToString(),
+          posibleNodoDesconectado.NodoDesconectado.ToString(),
           posibleNodoDesconectado.Distancia.ToString("0.0"),
           posibleNodoDesconectado.Detalle);
       }
@@ -239,33 +238,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         ElementoConEtiqueta elemento = (ElementoConEtiqueta)miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Items[i].Tag;
         PosibleNodoDesconectado posibleNodoDesconectado = (PosibleNodoDesconectado)elemento.Etiqueta;
 
-        // Dibuja la vía del posible nodo desconectado.
+        // Dibuja la vía de referencia.
         mapa.PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
-          posibleNodoDesconectado.VíaConElPosibleNodoDesconectado.Coordenadas,
-          miLápizDeViaConElPosibleNodoDesconectado));
-
-        // Dibuja el posible nodo desconectado.
-        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.PosiblesNodoDesconectado,
-          miPincelDeBordeDeNodo,
-          11));
-        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.PosiblesNodoDesconectado,
-          miPincelDePosibleNodoDesconectado,
-          7));
+          posibleNodoDesconectado.Vía.Coordenadas,
+          miLápizDeVia));
 
         // Dibuja el nodo.
         mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
           posibleNodoDesconectado.Nodo,
           miPincelDeBordeDeNodo,
+          11));
+
+        // Dibuja el posible nodo desconectado.
+        mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+          posibleNodoDesconectado.NodoDesconectado,
+          miPincelDeBordeDeNodo,
           13));
         mapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.Nodo,
-          miPincelDeNodo,
+          posibleNodoDesconectado.NodoDesconectado,
+          miPincelDePosibleNodoDesconectado,
           9));
 
         InterfaseMapa.ActualizaRectánguloQueEncierra(
-          posibleNodoDesconectado.PosiblesNodoDesconectado,
+          posibleNodoDesconectado.NodoDesconectado,
           ref rectánguloQueEncierra);
       }
 
@@ -342,11 +337,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           // Crea los campos para el PDI.
           List<Campo> campos = new List<Campo> {
             new CampoNombre(string.Format("Nodo Desconectado de Vía # {0}",
-              posibleNodoDesconectado.VíaConElPosibleNodoDesconectado.Número)),
+              posibleNodoDesconectado.VíaConNodoDesconectado.Número)),
             new CampoCoordenadas(
               "Data0",
               0,
-              posibleNodoDesconectado.PosiblesNodoDesconectado),
+              posibleNodoDesconectado.NodoDesconectado),
             new CampoTipo("0x1604"),
             new CampoGenérico("EndLevel", "3")
           };
