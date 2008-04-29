@@ -1,3 +1,6 @@
+Versión 1.23
+
+
 Versión 1.22
 - Ahora la vía que aparece en la lista de posibles nodos desconectados es la vía que tiene el nodo en cuestión.
 - Ahora los PDIs de localización de vía se colocan en la coordenada central de la vía.
