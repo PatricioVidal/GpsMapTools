@@ -75,8 +75,11 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CampoAtributo.cs" />
+    <Compile Include="CampoEsCiudad.cs" />
+    <Compile Include="CampoIndiceDeCiudad.cs" />
     <Compile Include="CampoNodo.cs" />
     <Compile Include="CampoParámetrosDeRuta.cs" />
+    <Compile Include="Ciudad.cs" />
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="ManejadorBase.cs" />
     <Compile Include="Pdis\ArregladorDeLetras.cs" />
     <Compile Include="Pdis\ArregladorDePalabrasPorTipo.cs" />
+    <Compile Include="Pdis\ArregladorDeIndicesDeCiudad.cs" />
     <Compile Include="Pdis\BuscadorDeErrores.cs" />
     <Compile Include="Pdis\BuscadorDeDuplicados.cs" />
     <Compile Include="Campo.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Pdis\ManejadorDePdis.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
+    <Compile Include="PolygonF.cs" />
     <Compile Include="ProcesadorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Pdis\CaracterísticasDePDIs.csv">
@@ -161,6 +166,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Diagramas de Clases\Campos.cd" />
     <None Include="Diagramas de Clases\ManejadorDeMapa.cd" />
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />

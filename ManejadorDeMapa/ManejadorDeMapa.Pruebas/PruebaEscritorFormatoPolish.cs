@@ -72,8 +72,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using System.IO;
 using NUnit.Framework.SyntaxHelpers;
@@ -90,17 +88,17 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       {
         #region Preparación.
         // Lee un mapa de prueba.
-        string archivoDeEntrada = @"..\..\Data\MapaDePrueba.mp";
-        ManejadorDeMapa manejadorDeMapa = null;
+        const string archivoDeEntrada = @"..\..\Data\MapaDePrueba.mp";
+        const ManejadorDeMapa manejadorDeMapa = null;
         IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
         LectorDeFormatoPolish lector = new LectorDeFormatoPolish(manejadorDeMapa, archivoDeEntrada, escuchadorDeEstatus);
         IList<ElementoDelMapa> elementos = lector.ElementosDelMapa;
 
-        string archivoDeSalida = @"PruebaEscritorFormatoPolish.Caso1.mp";
+        const string archivoDeSalida = @"PruebaEscritorFormatoPolish.Caso1.mp";
         #endregion
 
         // Llama al constructor.
-        EscritorDeFormatoPolish objectoDePrueba = new EscritorDeFormatoPolish(archivoDeSalida, elementos, escuchadorDeEstatus);
+        new EscritorDeFormatoPolish(archivoDeSalida, elementos, escuchadorDeEstatus);
 
         #region Prueba Archivo de Salida.
         // Los archivos se comparan ignorando las líneas en blanco.
@@ -120,7 +118,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
           Assert.That(lineaDeEntrada, Is.Not.Null, "Linea en archivo de entrada.");
           Assert.That(lineaDeSalida, Is.Not.Null, "Linea en archivo de salida.");
           Assert.That(lineaDeSalida, Is.EqualTo(lineaDeEntrada), "Lineas de salida y entrada:");
-        };
+        }
         #endregion
       }
       #endregion
@@ -133,7 +131,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         IList<ElementoDelMapa> elementos = new List<ElementoDelMapa>();
         
         // Archivo inválido.
-        string archivoDeSalidaInválido = @"ABC::\\&AAAA";
+        const string archivoDeSalidaInválido = @"ABC::\\&AAAA";
 
         // Excepción esperada.
         bool lanzóExcepción = false;
@@ -144,7 +142,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Llama al constructor en prueba.
         try
         {
-          EscritorDeFormatoPolish objectoDePrueba = new EscritorDeFormatoPolish(archivoDeSalidaInválido, elementos, escuchadorDeEstatus);
+          new EscritorDeFormatoPolish(archivoDeSalidaInválido, elementos, escuchadorDeEstatus);
         }
         catch (Exception e)
         {
@@ -168,7 +166,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
           new ElementoDesconocido(null, 0, "Clase", new List<Campo> {
             new CampoDesconocido() })};
 
-        string archivoDeSalida = @"PruebaEscritorFormatoPolish.Caso3.mp";
+        const string archivoDeSalida = @"PruebaEscritorFormatoPolish.Caso3.mp";
 
         // Excepción esperada.
         bool lanzóExcepción = false;
@@ -179,7 +177,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         // Llama al constructor en prueba.
         try
         {
-          EscritorDeFormatoPolish objectoDePrueba = new EscritorDeFormatoPolish(archivoDeSalida, elementos, escuchadorDeEstatus);
+          new EscritorDeFormatoPolish(archivoDeSalida, elementos, escuchadorDeEstatus);
         }
         catch (Exception e)
         {
@@ -196,9 +194,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
     }
 
-    private string LéePróximaLineaConInformación(StreamReader elStream)
+    private static string LéePróximaLineaConInformación(TextReader elStream)
     {
-      string linea = null;
+      string linea;
       do
       {
         linea = elStream.ReadLine();

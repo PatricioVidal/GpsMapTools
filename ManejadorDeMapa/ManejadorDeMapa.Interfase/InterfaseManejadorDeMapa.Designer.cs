@@ -75,6 +75,7 @@
           this.miInterfaseManejadorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
+          this.miMenúArreglarIndicesDeCiudadEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
           this.miMenuPrincipal.SuspendLayout();
@@ -122,6 +123,7 @@
             this.miMenúEliminarCaracteresEnPdis,
             this.miMenuArreglarLetrasEnPdis,
             this.miMenuArreglarPalabrasEnPdis,
+            this.miMenúArreglarIndicesDeCiudadEnPdis,
             this.miMenúBuscaDuplicadosEnPdis,
             this.miMenúBuscarErroresEnPdis});
           this.miMenuPdis.Name = "miMenuPdis";
@@ -170,8 +172,8 @@
             this.toolStripSeparator5,
             this.miMenúBuscarIncongruenciasenVías,
             this.miMenúBuscarPosiblesErroresDeRuteoEnVías,
-            this.miMenúBuscarPosiblesNodosDesconectadosEnVías,
-            this.miMenúBuscarErroresEnVías});
+            this.miMenúBuscarErroresEnVías,
+            this.miMenúBuscarPosiblesNodosDesconectadosEnVías});
           this.miMenúVías.Name = "miMenúVías";
           resources.ApplyResources(this.miMenúVías, "miMenúVías");
           // 
@@ -411,6 +413,12 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
+          // miMenúArreglarIndicesDeCiudadEnPdis
+          // 
+          this.miMenúArreglarIndicesDeCiudadEnPdis.Name = "miMenúArreglarIndicesDeCiudadEnPdis";
+          resources.ApplyResources(this.miMenúArreglarIndicesDeCiudadEnPdis, "miMenúArreglarIndicesDeCiudadEnPdis");
+          this.miMenúArreglarIndicesDeCiudadEnPdis.Click += new System.EventHandler(this.EnMenúArreglarIndicesDeCiudadEnPDIs);
+          // 
           // InterfaseManejadorDeMapa
           // 
           resources.ApplyResources(this, "$this");
@@ -484,6 +492,7 @@
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarIncongruenciasenVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesar;
         private System.Windows.Forms.Button miBotónParaDeProcesar;
+        private System.Windows.Forms.ToolStripMenuItem miMenúArreglarIndicesDeCiudadEnPdis;
     }
 }
 

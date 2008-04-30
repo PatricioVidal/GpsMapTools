@@ -71,90 +71,35 @@
 
 
 using System;
-using System.Drawing;
+
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa un par de coordenadas.
+  /// Representa un campo de índice de ciudad.
   /// </summary>
-  public class Coordenadas
+  public class CampoIndiceDeCiudad : Campo
   {
+    #region Propiedades
     /// <summary>
-    /// Latitud.
+    /// Identificador.
     /// </summary>
-    public double Latitud { get; private set; }
-    
-    /// <summary>
-    /// Longitud.
-    /// </summary>
-    public double Longitud { get; private set; }
-
+    public const string IdentificadorDeEtiqueta = "CityIdx";
 
     /// <summary>
-    /// Constructor.
+    /// Devuelve el índice de ciudad.
     /// </summary>
-    /// <param name="laLatitud">La Latitud.</param>
-    /// <param name="laLongitud">La Longitud.</param>
-    public Coordenadas(double laLatitud, double laLongitud)
-    {
-      Latitud = laLatitud;
-      Longitud = laLongitud;
-    }
+    public int Indice { get; private set; }
+    #endregion
 
-
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="lasCoordenadas">Las coordenadas.</param>
-    public Coordenadas(PointF lasCoordenadas)
+    /// <param name="elIndice">El Indice.</param>
+    public CampoIndiceDeCiudad(int elIndice)
+      : base(IdentificadorDeEtiqueta)
     {
-      Latitud = lasCoordenadas.Y;
-      Longitud = lasCoordenadas.X;
-    }
-
-
-    /// <summary>
-    /// Devuelve la distancia en metros entre dos coordenads.
-    /// </summary>
-    /// <param name="laPrimeraCoordenada">La primera coordenada.</param>
-    /// <param name="laSegundaCoordenada">La segunda coordenada.</param>
-    public static double Distancia(
-      Coordenadas laPrimeraCoordenada,
-      Coordenadas laSegundaCoordenada)
-    {
-      // Esta fórmula fue provista por Antonio Cincotti D'Orazio
-      double diferenciaDeLatitud = laPrimeraCoordenada.Latitud - laSegundaCoordenada.Latitud;
-      double diferenciaDeLongitud = laPrimeraCoordenada.Longitud - laSegundaCoordenada.Longitud;
-
-      double diferenciaDeLatitudEnMetros = diferenciaDeLatitud * 60 * 1852;
-      double diferenciaDeLongitudEnMetros = (diferenciaDeLongitud
-        * Math.Cos(laPrimeraCoordenada.Latitud * Math.PI / 180)) * 60 * 1852;
-
-      double distanciaEnMetros = Math.Sqrt(
-        (diferenciaDeLatitudEnMetros * diferenciaDeLatitudEnMetros) +
-        (diferenciaDeLongitudEnMetros * diferenciaDeLongitudEnMetros));
-      
-      return distanciaEnMetros;
-    }
-
-
-    /// <summary>
-    /// Conversion de coordenadas a PointF.
-    /// </summary>
-    /// <param name="lasCoordenadas">Las coordenadas.</param>
-    public static implicit operator PointF(Coordenadas lasCoordenadas)
-    {
-      return new PointF((float)lasCoordenadas.Longitud, (float)lasCoordenadas.Latitud);
-    }
-
-
-    /// <summary>
-    /// Conversion de coordenadas a PointF.
-    /// </summary>
-    /// <param name="lasCoordenadas">Las coordenadas.</param>
-    public static implicit operator Coordenadas(PointF lasCoordenadas)
-    {
-      return new Coordenadas(lasCoordenadas);
+      Indice = elIndice;
     }
 
 
@@ -163,51 +108,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      string textoNorteSur = "S";
-      if (Latitud > 0)
-      {
-        textoNorteSur = "N";
-      }
-      string textoEsteOeste = "W";
-      if (Longitud > 0)
-      {
-        textoEsteOeste = "E";
-      }
-
-      string texto = textoNorteSur + " " + Math.Abs(Latitud).ToString("0.000000")
-        + "  " + textoEsteOeste + " " + Math.Abs(Longitud).ToString("0.000000");
-
-      return texto;
-    }
-
-
-    /// <summary>
-    /// Operador de igualdad.
-    /// </summary>
-    /// <param name="elPrimerElemento">El Primer Elemento.</param>
-    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
-    public static bool operator ==(
-      Coordenadas elPrimerElemento,
-      Coordenadas elSegundoElemento)
-    {
-      bool esIgual = (
-        (elPrimerElemento.Latitud == elSegundoElemento.Latitud) &&
-        (elPrimerElemento.Longitud == elSegundoElemento.Longitud));
-
-      return esIgual;
-    }
-
-
-    /// <summary>
-    /// Operador de desigualdad.
-    /// </summary>
-    /// <param name="elPrimerElemento">El Primer Elemento.</param>
-    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
-    public static bool operator !=(
-      Coordenadas elPrimerElemento,
-      Coordenadas elSegundoElemento)
-    {
-      return !(elPrimerElemento == elSegundoElemento);
+      return Indice.ToString();
     }
 
 
@@ -215,7 +116,7 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve una variable lógica que indica si un objeto
     /// dado es igual.
     /// </summary>
-    /// <param name="elObjecto">El objecto dado.</param>
+    /// <param name="elObjecto">EL objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
       // Si el objeto es nulo entonces no puede ser igual.
@@ -225,14 +126,14 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is Coordenadas))
+      if (!(elObjecto is CampoIndiceDeCiudad))
       {
         return false;
       }
 
       // Compara latitud y longitud.
-      Coordenadas comparador = (Coordenadas)elObjecto;
-      bool esIgual = (this == comparador);
+      CampoIndiceDeCiudad comparador = (CampoIndiceDeCiudad)elObjecto;
+      bool esIgual = (Indice == comparador.Indice);
 
       return esIgual;
     }
@@ -245,5 +146,6 @@ namespace GpsYv.ManejadorDeMapa
     {
       throw new NotImplementedException("Método GetHashCode() no está implementado.");
     }
+    #endregion
   }
 }

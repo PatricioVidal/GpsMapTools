@@ -203,8 +203,35 @@ namespace GpsYv.ManejadorDeMapa
     {
       IList<Campo> campos = LeeCampos();
 
-      // Añade el PDI.
-      misElementosDelMapa.Add(new Pdi(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+      switch (laClase)
+      {
+        case "POI":
+          {
+            // Añade el PDI.
+            // Los campos determinarán si es ciudad o no.
+            misElementosDelMapa.Add(new Pdi(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
+          }
+          break;
+        case "RGN10":
+          {
+            // Añade el PDI que no es ciudad.
+            const bool esCiudad = false;
+            misElementosDelMapa.Add(new Pdi(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos,
+                                            esCiudad));
+          }
+          break;
+        case "RGN20":
+          {
+            // Añade el PDI de ciudad.
+            const bool esCiudad = true;
+            misElementosDelMapa.Add(new Pdi(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos,
+                                            esCiudad));
+          }
+          break;
+        default:
+          throw new ArgumentException(string.Format("Clase de PDI inválida: {0}", laClase));
+      }
+
     }
 
 
@@ -344,6 +371,19 @@ namespace GpsYv.ManejadorDeMapa
               case CampoAtributo.IdentificadorDeEtiqueta:
                 campos.Add(new CampoAtributo(texto));
                 break;
+              case CampoEsCiudad.IdentificadorDeEtiqueta:
+                if (número != null)
+                {
+                  campos.Add(new CampoGenérico(identificadorConNúmero, texto));
+                }
+                else
+                {
+                  campos.Add(LeeCampoEsCiudad(texto));
+                }
+                break;
+              case CampoIndiceDeCiudad.IdentificadorDeEtiqueta:
+                campos.Add(LeeCampoIndiceDeCiudad(texto));
+                break;
               default:
                 campos.Add(new CampoGenérico(identificadorConNúmero, texto));
                 break;
@@ -370,6 +410,37 @@ namespace GpsYv.ManejadorDeMapa
       return campos;
     }
 
+
+    private static Campo LeeCampoIndiceDeCiudad(string elTexto)
+    {
+      int índice = Convert.ToInt32(elTexto);
+      CampoIndiceDeCiudad campoIndiceDeCiudad = new CampoIndiceDeCiudad(índice);
+      return campoIndiceDeCiudad;
+    }
+
+    private static Campo LeeCampoEsCiudad(string elTexto)
+    {
+      bool esCiudad;
+
+      switch (elTexto.ToUpper())
+      {
+        case "1":
+        case "Y":
+          esCiudad = true;
+          break;
+        case "0":
+        case "N":
+          esCiudad = false;
+          break;
+        default:
+          throw new ArgumentException(string.Format("Texto de Campo Ciudad desconocido: {0}", elTexto));
+      }
+
+      CampoEsCiudad campoCiudad = new CampoEsCiudad(esCiudad);
+      return campoCiudad;
+    }
+
+
     private static CampoNodo LeeCampoNodo(string elIdentificador, string elTexto)
     {
       // Verifica que tenemos 3 partes.
@@ -383,7 +454,7 @@ namespace GpsYv.ManejadorDeMapa
       int indice = Convert.ToInt32(partes[0]);
       int identificador = Convert.ToInt32(partes[1]);
       int esExternoComoNúmero = Convert.ToInt32(partes[2]);
-      bool esExterno = false;
+      bool esExterno;
       switch (esExternoComoNúmero)
       {
         case 0:

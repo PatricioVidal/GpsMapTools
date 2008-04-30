@@ -69,110 +69,67 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System.Collections.Generic;
+using System.Drawing;
 
-namespace GpsYv.ManejadorDeMapa.Pdis
+namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Manejados de PDIs.
+  /// Representa una ciudad.
   /// </summary>
-  public class ManejadorDePdis : ManejadorBase<Pdi>
+  public class Ciudad
   {
-    #region Campos
-
-    #endregion
-    
-    #region Propiedades
     /// <summary>
-    /// Descripción de la acción "Procesar Todo".
+    /// Obtiene el nombre de la ciudad.
     /// </summary>
-    public static readonly string DescripciónProcesarTodo =
-      "Procesa todo lo relacionado con de PDIs. Los pasos se hacen en el orden indicado por el número en el menú.";
-
+    public string Nombre { get; private set; }
 
     /// <summary>
-    /// Obtiene el Eliminador de Caracteres.
+    /// Obtiene el índice de la ciudad.
     /// </summary>
-    public EliminadorDeCaracteres EliminadorDeCaracteres { get; private set; }
+    public CampoIndiceDeCiudad Indice { get; private set; }
 
 
     /// <summary>
-    /// Obtiene el Arreglador de Letras.
+    /// Obtienes las coordenadas del borde de la ciudad.
     /// </summary>
-    public ArregladorDeLetras ArregladorDeLetras { get; private set; }
+    public Coordenadas[] Coordenadas { get; private set; }
 
 
     /// <summary>
-    /// Obtiene el Arreglador de Palabras por Tipo.
+    /// Obtienes las coordenadas del borde de la ciudad como puntos.
     /// </summary>
-    public ArregladorDePalabrasPorTipo ArregladorDePalabrasPorTipo { get; private set; }
+    public PointF[] CoordenadasComoPuntos { get; private set; }
 
 
-    /// <summary>
-    /// Obtiene el Arreglador de Indices de Ciudades.
-    /// </summary>
-    public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Duplicados.
-    /// </summary>
-    public BuscadorDeDuplicados BuscadorDeDuplicados { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Errores.
-    /// </summary>
-    public BuscadorDeErrores BuscadorDeErrores { get; private set; }
-
-    #endregion
-
-    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
-    /// <param name="losPuntosDeInteres">Los PDIs.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ManejadorDePdis(
-      ManejadorDeMapa elManejadorDeMapa,
-      IList<Pdi> losPuntosDeInteres,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base (elManejadorDeMapa, losPuntosDeInteres, elEscuchadorDeEstatus)
+    /// <param name="elNombre">El nombre.</param>
+    /// <param name="elIndice">El índice de la ciudad.</param>
+    /// <param name="lasCoordenadas">Las coordenadas.</param>
+    public Ciudad(
+      string elNombre,
+      CampoIndiceDeCiudad elIndice,
+      Coordenadas[] lasCoordenadas)
     {
-      // Crea los procesadores.
-      EliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
-      ArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
-      ArregladorDePalabrasPorTipo = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
-      ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
-      BuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
-      BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
-
-      // Escucha eventos.
-      elManejadorDeMapa.PdisModificados += EnElementosModificados;
+      Nombre = elNombre;
+      Indice = elIndice;
+      Coordenadas = lasCoordenadas;
+      CoordenadasComoPuntos = new PointF[lasCoordenadas.Length];
+      for (int i = 0; i < lasCoordenadas.Length; ++i)
+      {
+        CoordenadasComoPuntos[i] = lasCoordenadas[i];
+      }
     }
 
 
     /// <summary>
-    /// Procesa todas las correcciones a PDIs.
+    /// Devuelve el texto que representa la ciudad.
     /// </summary>
-    /// <returns>El número de PDIs modificados.</returns>
-    public int ProcesarTodo()
+    public override string ToString()
     {
-      // Hacer todos las operaciones en orden.
-      int númeroDeProblemasEnPdis = 0;
-      númeroDeProblemasEnPdis += EliminadorDeCaracteres.Procesa();
-      númeroDeProblemasEnPdis += ArregladorDeLetras.Procesa();
-      númeroDeProblemasEnPdis += ArregladorDePalabrasPorTipo.Procesa();
-      númeroDeProblemasEnPdis += ArregladorDeIndicesDeCiudad.Procesa();
-      númeroDeProblemasEnPdis += BuscadorDeDuplicados.Procesa();
-      númeroDeProblemasEnPdis += BuscadorDeErrores.Procesa();
-
-      // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnPdis + " problemas en PDIs.";
-
-      return númeroDeProblemasEnPdis;
+      string texto = string.Format("{0} (CityIdx={1})", Nombre, Indice);
+      return texto;
     }
-    #endregion
   }
 }

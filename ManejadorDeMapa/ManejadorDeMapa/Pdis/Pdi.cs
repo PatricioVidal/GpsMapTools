@@ -81,6 +81,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     #region Campos
     private readonly static Coordenadas misCoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
     private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
+    private CampoIndiceDeCiudad miCampoIndiceDeCiudad;
     #endregion
 
     #region Propiedades
@@ -99,9 +100,38 @@ namespace GpsYv.ManejadorDeMapa.Pdis
         return misCoordenadas.Coordenadas[0];
       }
     }
+
+
+    /// <summary>
+    /// Obtiene una variable lógica que indica si el PDI es una ciudad.
+    /// </summary>
+    public bool EsCiudad { get; private set; }
     #endregion
 
     #region Métodos Públicos
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
+    /// <param name="elNúmero">El número del PDI.</param>
+    /// <param name="laClase">La clase de PDI.</param>
+    /// <param name="losCampos">Los campos del PDI.</param>
+    /// <param name="elEsCiudad">Variable lógica que indica si el PDI es una ciudad.</param>
+    public Pdi(
+      ManejadorDeMapa elManejadorDeMapa,
+      int elNúmero,
+      string laClase,
+      IList<Campo> losCampos,
+      bool elEsCiudad)
+      : this(elManejadorDeMapa,
+             elNúmero,
+             laClase,
+             losCampos)
+    {
+      EsCiudad = elEsCiudad;
+    }
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -123,11 +153,56 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       // Busca los campos especificos de los PDIs.
       foreach (Campo campo in losCampos)
       {
-        if (campo is CampoCoordenadas)
+        CampoCoordenadas campoCoordenadas;
+        CampoEsCiudad campoCiudad;
+        CampoIndiceDeCiudad campoIndiceDeCiudad;
+        if ((campoCoordenadas  = campo as CampoCoordenadas) != null)
         {
-          misCoordenadas = (CampoCoordenadas)campo;
+          misCoordenadas = campoCoordenadas;
+        }
+        else if ((campoCiudad = campo as CampoEsCiudad) != null)
+        {
+          EsCiudad = campoCiudad.EsCiudad;
+        }
+        else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
+        {
+          miCampoIndiceDeCiudad = campoIndiceDeCiudad;
         }
       }
+    }
+
+
+    /// <summary>
+    /// Cambia el Campo de Indice de Ciudad.
+    /// </summary>
+    /// <param name="elCampoIndiceDeCiudadNuevo">El Campo de Indice de Ciudad nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    /// <returns>Una variable lógica que indica que el PDI se modificó.</returns>
+    public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
+    {
+      bool cambió = false;
+
+      // Si no tiene el Campo de Indice de Ciudad en tonces le 
+      // añadimos uno.
+      // Si no, se lo cambiamos.
+      if (miCampoIndiceDeCiudad == null)
+      {
+        AñadeCampo(elCampoIndiceDeCiudadNuevo, laRazón);
+        miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
+        cambió = true;
+      }
+      else
+      {
+        // Cambia el campo si es diferente.
+        if (elCampoIndiceDeCiudadNuevo != miCampoIndiceDeCiudad)
+        {
+          CambiaCampo(elCampoIndiceDeCiudadNuevo, miCampoIndiceDeCiudad, laRazón);
+          miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
+          cambió = true;
+        }
+      }
+
+      return cambió;
     }
 
 

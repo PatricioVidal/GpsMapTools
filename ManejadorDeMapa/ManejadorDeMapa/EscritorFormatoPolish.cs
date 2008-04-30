@@ -193,37 +193,55 @@ namespace GpsYv.ManejadorDeMapa
       // Guarda los campos del elemento.
       foreach (Campo campo in elElemento.Campos)
       {
-        if (campo is CampoComentario)
+        CampoComentario campoComentario;
+        CampoNombre campoNombre;
+        CampoCoordenadas campoCoordenadas;
+        CampoNodo campoNodo;
+        CampoGenérico campoGenérico;
+        CampoTipo campoTipo;
+        CampoParámetrosDeRuta campoParámetrosDeRuta;
+        CampoAtributo campoAtributo;
+        CampoEsCiudad campoCiudad;
+        CampoIndiceDeCiudad campoIndiceDeCiudad;
+        if ((campoComentario = campo as CampoComentario) != null)
         {
-          Guarda((CampoComentario)campo, elEscritor);
+          Guarda(campoComentario, elEscritor);
         }
-        else if (campo is CampoNombre)
+        else if ((campoNombre = campo as CampoNombre) != null)
         {
-          Guarda((CampoNombre)campo, elEscritor);
+          Guarda(campoNombre, elEscritor);
         }
-        else if (campo is CampoCoordenadas)
+        else if ((campoCoordenadas = campo as CampoCoordenadas) != null)
         {
-          Guarda((CampoCoordenadas)campo, elEscritor);
+          Guarda(campoCoordenadas, elEscritor);
         }
-        else if (campo is CampoNodo)
+        else if ((campoNodo = campo as CampoNodo) != null)
         {
-          Guarda((CampoNodo)campo, elEscritor);
+          Guarda(campoNodo, elEscritor);
         }
-        else if (campo is CampoGenérico)
+        else if ((campoGenérico = campo as CampoGenérico) != null)
         {
-          Guarda((CampoGenérico)campo, elEscritor);
+          Guarda(campoGenérico, elEscritor);
         }
-        else if (campo is CampoTipo)
+        else if ((campoTipo = campo as CampoTipo) != null)
         {
-          Guarda((CampoTipo)campo, elEscritor);
+          Guarda(campoTipo, elEscritor);
         }
-        else if (campo is CampoParámetrosDeRuta)
+        else if ((campoParámetrosDeRuta = campo as CampoParámetrosDeRuta) != null)
         {
-          Guarda((CampoParámetrosDeRuta)campo, elEscritor);
+          Guarda(campoParámetrosDeRuta, elEscritor);
         }
-        else if (campo is CampoAtributo)
+        else if ((campoAtributo = campo as CampoAtributo) != null)
         {
-          Guarda((CampoAtributo)campo, elEscritor);
+          Guarda(campoAtributo, elEscritor);
+        }
+        else if ((campoCiudad = campo as CampoEsCiudad) != null)
+        {
+          Guarda(campoCiudad, elEscritor);
+        }
+        else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
+        {
+          Guarda(campoIndiceDeCiudad, elEscritor);
         }
         else
         {
@@ -233,6 +251,13 @@ namespace GpsYv.ManejadorDeMapa
 
       // Escribe el final del elemento.
       elEscritor.WriteLine(finalDeElemento);
+    }
+
+
+    private static void Guarda(CampoIndiceDeCiudad elCampoIndiceDeCiudad, StreamWriter elEscritor)
+    {
+      string texto = elCampoIndiceDeCiudad.Indice.ToString(CultureInfo.InvariantCulture);
+      Guarda(elCampoIndiceDeCiudad, texto, elEscritor);
     }
 
 
@@ -295,6 +320,22 @@ namespace GpsYv.ManejadorDeMapa
     private static void Guarda(CampoNombre elCampoNombre, StreamWriter elEscritor)
     {
       Guarda(elCampoNombre, elCampoNombre.Nombre, elEscritor);
+    }
+
+
+    private static void Guarda(CampoEsCiudad elCampoCiudad, StreamWriter elEscritor)
+    {
+      string texto;
+      if (elCampoCiudad.EsCiudad)
+      {
+        texto = "Y";
+      }
+      else
+      {
+        texto = "N";
+      }
+
+      Guarda(elCampoCiudad, texto, elEscritor);
     }
 
 

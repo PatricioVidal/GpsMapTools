@@ -1,5 +1,5 @@
 Versión 1.23
-
+- Implementado el menú para el arreglo del índice de ciudad de los PDIs.
 
 Versión 1.22
 - Ahora la vía que aparece en la lista de posibles nodos desconectados es la vía que tiene el nodo en cuestión.

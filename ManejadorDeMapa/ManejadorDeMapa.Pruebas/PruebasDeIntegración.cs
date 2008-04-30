@@ -131,7 +131,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
       CasoDeProcesamientoDePdis[] casos = new[] {
         //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
-        new CasoDeProcesamientoDePdis( "58090.mp",  1713,         131,         20,          2,      85),
+        new CasoDeProcesamientoDePdis( "58090.mp",  1713,         155,         20,          2,      85),
         new CasoDeProcesamientoDePdis( "58170.mp",  6837,         354,         13,        189,     239),
         new CasoDeProcesamientoDePdis( "58220.mp",  6460,         792,         34,         58,     192),
         new CasoDeProcesamientoDePdis( "58370.mp",  1808,          61,         47,          8,     250),

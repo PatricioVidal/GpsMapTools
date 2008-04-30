@@ -560,6 +560,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miManejadorDeMapa.ParaDeProcesar = true;
       miBotónParaDeProcesar.Visible = false;
     }
+
+
+    private void EnMenúArreglarIndicesDeCiudadEnPDIs(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDePdis.ArregladorDeIndicesDeCiudad.Procesa();
+    }
     #endregion
   }
 }

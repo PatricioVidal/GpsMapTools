@@ -85,7 +85,6 @@ namespace GpsYv.ManejadorDeMapa
   public class ManejadorDeMapa
   {
     #region Campos
-
     private readonly IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
     private readonly IList<Pdi> misPdis = new List<Pdi>();
     private readonly IList<Vía> misVías = new List<Vía>();
@@ -94,7 +93,6 @@ namespace GpsYv.ManejadorDeMapa
     private bool miHayEventosDeModificaciónDeElementoPendientes;
     private bool miHayEventosDeModificaciónDePdisPendientes;
     private bool miHayEventosDeModificaciónDeVíasPendientes;
-
     #endregion
 
     #region Eventos
@@ -158,6 +156,12 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Devuelve las Ciudades.
+    /// </summary>
+    public IList<Ciudad> Ciudades { get; private set; }
+
+
+    /// <summary>
     /// Devuelve el manejador de Elementos.
     /// </summary>
     public ManejadorDeElementos ManejadorDeElementos { get; private set; }
@@ -218,6 +222,7 @@ namespace GpsYv.ManejadorDeMapa
       ManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
       Polígonos = new List<Polígono>();
       Polilíneas = new List<Polilínea>();
+      Ciudades = new List<Ciudad>();
     }
 
 
@@ -520,29 +525,54 @@ namespace GpsYv.ManejadorDeMapa
       misVías.Clear();
       Polilíneas.Clear();
       Polígonos.Clear();
+      Ciudades.Clear();
       foreach (ElementoDelMapa elemento in losElementos)
       {
         misElementos.Add(elemento);
 
+        Pdi pdi;
+        Vía vía;
+        Polilínea polilínea;
+        Polígono polígono;
         if (elemento.Clase == "IMG ID")
         {
           Encabezado = elemento;
         }
-        else if (elemento is Pdi)
+        else if ((pdi = elemento as Pdi) != null)
         {
-          misPdis.Add((Pdi)elemento);
+          misPdis.Add(pdi);
         }
-        else if (elemento is Vía)
+        else if ((vía = elemento as Vía) != null)
         {
-          misVías.Add((Vía)elemento);
+          misVías.Add(vía);
         }
-        else if (elemento is Polilínea)
+        else if ((polilínea = elemento as Polilínea) != null)
         {
-          Polilíneas.Add((Polilínea)elemento);
+          Polilíneas.Add(polilínea);
         }
-        else if (elemento is Polígono)
+        else if ((polígono = elemento as Polígono) != null)
         {
-          Polígonos.Add((Polígono)elemento);
+          Polígonos.Add(polígono);
+
+          // Busca los polígonos de ciudades.
+          switch (polígono.Tipo.TipoPrincipal)
+          {
+            case 0x1:
+            case 0x2:
+            case 0x3:
+              foreach (Campo campo in polígono.Campos)
+              {
+                CampoIndiceDeCiudad campoIndiceDeCiudad = campo as CampoIndiceDeCiudad;
+                if (campoIndiceDeCiudad != null)
+                {
+                  Ciudades.Add(new Ciudad(
+                    polígono.Nombre,
+                    campoIndiceDeCiudad,
+                    polígono.Coordenadas));
+                }
+              }
+              break;
+          }
         }
       }
 

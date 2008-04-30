@@ -45,10 +45,10 @@
       resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
+      this.miLista.HideSelection = false;
       this.miLista.Name = "miLista";
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
       // 
       // InterfaseDePdisModificados
       // 
