@@ -1,3 +1,6 @@
+Versión 1.24
+- Implementado el menú para el arreglo del índice de ciudad de las Vías.
+
 Versión 1.23
 - Implementado el menú para el arreglo del índice de ciudad de los PDIs.
 

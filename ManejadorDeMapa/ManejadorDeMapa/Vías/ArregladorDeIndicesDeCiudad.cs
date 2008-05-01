@@ -69,98 +69,103 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System.Collections.Generic;
+using System;
+using SWallTech.Drawing.Shapes;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Manejador de Vías.
+  /// Arregla los Indices de Ciudad de las Vías.
   /// </summary>
-  public class ManejadorDeVías : ManejadorBase<Vía>
+  public class ArregladorDeIndicesDeCiudad : ProcesadorBase<ManejadorDeVías, Vía>
   {
-    #region Propiedades
-    /// <summary>
-    /// Descripción de la acción "Procesar Todo".
-    /// </summary>
-    public static readonly string DescripciónProcesarTodo =
-      "Procesa todo lo relacionado con las Vías. Los pasos se hacen en el orden indicado por el número en el menú.";
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Indices de Ciudad.
-    /// </summary>
-    public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Incongruencias.
-    /// </summary>
-    public BuscadorDeIncongruencias BuscadorDeIncongruencias { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Posibles Errores de Ruteo.
-    /// </summary>
-    public BuscadorDePosiblesErroresDeRuteo BuscadorDePosiblesErroresDeRuteo { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Posibles Nodos Desconectados.
-    /// </summary>
-    public BuscadorDePosiblesNodosDesconectados BuscadorDePosiblesNodosDesconectados { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Errores.
-    /// </summary>
-    public BuscadorDeErrores BuscadorDeErrores { get; private set; }
-
-    #endregion
-
     #region Métodos Públicos
+    /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción =
+      "Arregla el Indice de Ciudad (CityIdx) de las Vías.";
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
-    /// <param name="lasVías">Las Vías.</param>
+    /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ManejadorDeVías(
-      ManejadorDeMapa elManejadorDeMapa,
-      IList<Vía> lasVías,
+    public ArregladorDeIndicesDeCiudad(
+      ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDeMapa, lasVías, elEscuchadorDeEstatus)
+      : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      // Crea los procesadores.
-      ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
-      BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
-      BuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
-      BuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
-      BuscadorDePosiblesNodosDesconectados = new BuscadorDePosiblesNodosDesconectados(this, elEscuchadorDeEstatus);
+    }
+    #endregion
 
-      // Escucha eventos.
-      elManejadorDeMapa.VíasModificadas += EnElementosModificados;
+    #region Métodos Protegidos.
+    /// <summary>
+    /// Procesa una Vía.
+    /// </summary>
+    /// <param name="laVía">La Vía.</param>
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      // Por cada ciudad, si una coordenada de la Vía está adentro de la ciudad entonces
+      // se le actualiza el Indice de Ciudad.
+      foreach (Ciudad ciudad in Manejador.ManejadorDeMapa.Ciudades)
+      {
+        bool laVíaPerteneceALaCiudad = false;
+        PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
+        foreach (Coordenadas coordenadas in laVía.Coordenadas)
+        {
+          if (polígono.Contains(coordenadas))
+          {
+            bool cambió = laVía.ActualizaCampoIndiceDeCiudad(
+              ciudad.Indice,
+              string.Format("La Vía pertenece a la Ciudad {0}", ciudad));
+            if (cambió)
+            {
+              ++númeroDeProblemasDetectados;
+            }
+
+            // La Vía solo puede pertenecer a una sola ciudad.
+            // Así que nos salimos del ciclo.
+            laVíaPerteneceALaCiudad = true;
+            break;
+          }
+        }
+
+        // La Vía solo puede pertenecer a una sola ciudad.
+        // Así que nos salimos del ciclo.
+        if (laVíaPerteneceALaCiudad)
+        {
+          break;
+        }
+      }
+
+      return númeroDeProblemasDetectados;
     }
 
 
     /// <summary>
-    /// Procesa todo lo relacionado a Vías.
+    /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    /// <returns>El número de problemas en Vías.</returns>
-    public int ProcesarTodo()
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      // Hacer todos las operaciones en orden.
-      int númeroDeProblemasEnVías = 0;
-      númeroDeProblemasEnVías += ArregladorDeIndicesDeCiudad.Procesa();
-      númeroDeProblemasEnVías += BuscadorDeIncongruencias.Procesa();
-      númeroDeProblemasEnVías += BuscadorDePosiblesErroresDeRuteo.Procesa();
-      númeroDeProblemasEnVías += BuscadorDeErrores.Procesa();
-      // NOTE: La siguiente línea está comentada porque tarda mucho el procesamiento.
-      //númeroDeProblemasEnVías += miBuscadorDePosiblesNodosDesconectados.Procesa();
+      // No necesitamos hacer nada aquí.
+    }
 
-      // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnVías + " problemas en Vías.";
 
-      return númeroDeProblemasEnVías;
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // No necesitamos hacer nada aquí.
     }
     #endregion
   }

@@ -73,7 +73,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Collections;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -88,17 +87,18 @@ namespace GpsYv.ManejadorDeMapa
     private readonly string miClase = string.Empty;
     private string miNombre = string.Empty;
     private Tipo miTipo = Tipo.TipoNulo;
+    private CampoIndiceDeCiudad miCampoIndiceDeCiudad;
     private string miDescripción = string.Empty;
     private readonly IList<Campo> misCampos;
-    private bool miFuéModificado = false;
-    private List<string> misModificacionesDeNombre = new List<string>();
-    private List<string> misModificacionesDeTipo = new List<string>();
-    private List<string> misOtrasModificaciones = new List<string>();
-    private bool miFuéEliminado = false;
+    private bool miFuéModificado;
+    private readonly List<string> misModificacionesDeNombre = new List<string>();
+    private readonly List<string> misModificacionesDeTipo = new List<string>();
+    private readonly List<string> misOtrasModificaciones = new List<string>();
+    private bool miFuéEliminado;
     private string miRazónParaEliminación = string.Empty;
-    private ElementoDelMapa miOriginal = null;
+    private ElementoDelMapa miOriginal;
     private readonly IDictionary<Tipo, string> misDescripcionesPorTipo;
-    private static readonly string SeparadorDeModificaciones = " -> ";
+    private const string SeparadorDeModificaciones = " -> ";
     #endregion
 
     #region Propiedades
@@ -181,7 +181,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        return (IList<Campo>)misCampos;
+        return misCampos;
       }
     }
 
@@ -290,7 +290,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="laClase">La clase de elemento.</param>
     /// <param name="lasDescripcionesPorTipo">Las descripciones por tipo.</param>
     /// <param name="losCampos">Los campos del elemento.</param>
-    public ElementoDelMapa(
+    protected ElementoDelMapa(
       ManejadorDeMapa elManejadorDeMapa,
       int elNúmero,
       string laClase,
@@ -307,13 +307,20 @@ namespace GpsYv.ManejadorDeMapa
       // Busca los campos conocidos.
       foreach (Campo campo in losCampos)
       {
-        if (campo is CampoTipo)
+        CampoTipo campoTipo;
+        CampoNombre campoNombre;
+        CampoIndiceDeCiudad campoIndiceDeCiudad;
+        if ((campoTipo = campo as CampoTipo) != null)
         {
-          miTipo = ((CampoTipo)campo).Tipo;
+          miTipo = campoTipo.Tipo;
         }
-        else if (campo is CampoNombre)
+        else if ((campoNombre = campo as CampoNombre) != null)
         {
-          miNombre = ((CampoNombre)campo).Nombre;
+          miNombre = campoNombre.Nombre;
+        }
+        else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
+        {
+          miCampoIndiceDeCiudad = campoIndiceDeCiudad;
         }
       }
 
@@ -413,6 +420,40 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Cambia el Campo de Indice de Ciudad.
+    /// </summary>
+    /// <param name="elCampoIndiceDeCiudadNuevo">El Campo de Indice de Ciudad nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    /// <returns>Una variable lógica que indica que el PDI se modificó.</returns>
+    public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
+    {
+      bool cambió = false;
+
+      // Si no tiene el Campo de Indice de Ciudad en tonces le 
+      // añadimos uno.
+      // Si no, se lo cambiamos.
+      if (miCampoIndiceDeCiudad == null)
+      {
+        AñadeCampo(elCampoIndiceDeCiudadNuevo, laRazón);
+        miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
+        cambió = true;
+      }
+      else
+      {
+        // Cambia el campo si es diferente.
+        if (elCampoIndiceDeCiudadNuevo != miCampoIndiceDeCiudad)
+        {
+          CambiaCampo(elCampoIndiceDeCiudadNuevo, miCampoIndiceDeCiudad, laRazón);
+          miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
+          cambió = true;
+        }
+      }
+
+      return cambió;
+    }
+
+
+    /// <summary>
     /// Marca el elemento para ser eliminado.
     /// </summary>
     /// <param name="laRazón"></param>
@@ -447,7 +488,8 @@ namespace GpsYv.ManejadorDeMapa
         // Si el elemento ha sido eliminado se genera un excepción.
         throw new InvalidOperationException("No de puede regenerar un elemento está eliminado: " + ToString());
       }
-      else if (miFuéModificado)
+
+      if (miFuéModificado)
       {
         // Si el elemento ha sido modificado entonces se borra el estado de
         // modificado y la copia original.
@@ -509,34 +551,6 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Métodos Protegidos y Privados
-    private static string BuscaDescripción(
-      IDictionary<Tipo, string> lasDescripcionesPorTipo,
-      IList<Campo> losCampos)
-    {
-      Tipo? tipo = null;
-      foreach (Campo campo in losCampos)
-      {
-        if (campo is CampoTipo)
-        {
-          tipo = ((CampoTipo)campo).Tipo;
-        }
-      }
-
-      // Busca la descripción.
-      string descripción = string.Empty;
-      if (tipo != null)
-      {
-        bool existe = lasDescripcionesPorTipo.TryGetValue(tipo.Value, out descripción);
-        if (!existe)
-        {
-          descripción = string.Empty;
-        }
-      }
-
-      return descripción;
-    }
-
-
     private void SeVaAModificarElemento()
     {
       miFuéModificado = true;
@@ -561,7 +575,7 @@ namespace GpsYv.ManejadorDeMapa
       bool encontróCampo = false;
       for (int i = 0; i < misCampos.Count; ++i)
       {
-        if (object.ReferenceEquals(misCampos[i], elCampoACambiar))
+        if (ReferenceEquals(misCampos[i], elCampoACambiar))
         {
           encontróCampo = true;
 
@@ -569,7 +583,7 @@ namespace GpsYv.ManejadorDeMapa
           SeVaAModificarElemento();
 
           // Añade la razón del cambio.
-          this.misOtrasModificaciones.Add(string.Format(
+          misOtrasModificaciones.Add(string.Format(
             "[{0}: {1} {2} {3}]", elCampoNuevo.Identificador, elCampoACambiar, SeparadorDeModificaciones, laRazón));
 
           // Asigna el nuevo campo.
@@ -583,7 +597,7 @@ namespace GpsYv.ManejadorDeMapa
 
       if (!encontróCampo)
       {
-        throw new ArgumentException(string.Format("El elemento no tiene el campo: {0)=", elCampoACambiar.Identificador, elCampoACambiar));
+        throw new ArgumentException(string.Format("El elemento no tiene el campo: {0}", elCampoACambiar.Identificador));
       }
     }
 
@@ -599,7 +613,7 @@ namespace GpsYv.ManejadorDeMapa
       SeVaAModificarElemento();
 
       // Añade la razón del cambio.
-      this.misOtrasModificaciones.Add(string.Format(
+      misOtrasModificaciones.Add(string.Format(
         "[Nuevo {0}: {1}]", elCampoNuevo.Identificador, laRazón));
 
       // Añade el nuevo campo.

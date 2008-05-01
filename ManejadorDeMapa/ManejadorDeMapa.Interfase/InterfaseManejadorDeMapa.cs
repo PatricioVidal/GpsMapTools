@@ -117,6 +117,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // PDIs.
       miMenuProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
+      miMenúArreglarIndicesDeCiudadEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeIndicesDeCiudad.Descripción;
       miMenúEliminarCaracteresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras.Descripción;
       miMenuArreglarPalabrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDePalabrasPorTipo.Descripción;
@@ -125,10 +126,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
+      miMenúArreglarIndicesDeCiudadEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeIndicesDeCiudad.Descripción;
       miMenúBuscarIncongruenciasenVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeIncongruencias.Descripción;
       miMenúBuscarPosiblesErroresDeRuteoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesErroresDeRuteo.Descripción;
-      miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText =
-        GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
+      miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
       miMenúBuscarErroresEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeErrores.Descripción;
       #endregion
 
@@ -565,6 +566,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúArreglarIndicesDeCiudadEnPDIs(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.ArregladorDeIndicesDeCiudad.Procesa();
+    }
+
+
+    private void EnMenúArreglarIndicesDeCiudadEnVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.ArregladorDeIndicesDeCiudad.Procesa();
     }
     #endregion
   }

@@ -134,6 +134,7 @@
     <Compile Include="Pdis\Pdi.cs" />
     <Compile Include="CaracterísticasDePolígonos.cs" />
     <Compile Include="Tipo.cs" />
+    <Compile Include="Vías\ArregladorDeIndicesDeCiudad.cs" />
     <Compile Include="Vías\BuscadorDeErrores.cs" />
     <Compile Include="Vías\BuscadorDeIncongruencias.cs" />
     <Compile Include="Vías\BuscadorDePosiblesErroresDeRuteo.cs" />

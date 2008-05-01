@@ -81,7 +81,6 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     #region Campos
     private readonly static Coordenadas misCoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
     private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
-    private CampoIndiceDeCiudad miCampoIndiceDeCiudad;
     #endregion
 
     #region Propiedades
@@ -155,7 +154,6 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       {
         CampoCoordenadas campoCoordenadas;
         CampoEsCiudad campoCiudad;
-        CampoIndiceDeCiudad campoIndiceDeCiudad;
         if ((campoCoordenadas  = campo as CampoCoordenadas) != null)
         {
           misCoordenadas = campoCoordenadas;
@@ -164,45 +162,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
         {
           EsCiudad = campoCiudad.EsCiudad;
         }
-        else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
-        {
-          miCampoIndiceDeCiudad = campoIndiceDeCiudad;
-        }
       }
-    }
-
-
-    /// <summary>
-    /// Cambia el Campo de Indice de Ciudad.
-    /// </summary>
-    /// <param name="elCampoIndiceDeCiudadNuevo">El Campo de Indice de Ciudad nuevo.</param>
-    /// <param name="laRazón">La razón del cambio.</param>
-    /// <returns>Una variable lógica que indica que el PDI se modificó.</returns>
-    public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
-    {
-      bool cambió = false;
-
-      // Si no tiene el Campo de Indice de Ciudad en tonces le 
-      // añadimos uno.
-      // Si no, se lo cambiamos.
-      if (miCampoIndiceDeCiudad == null)
-      {
-        AñadeCampo(elCampoIndiceDeCiudadNuevo, laRazón);
-        miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
-        cambió = true;
-      }
-      else
-      {
-        // Cambia el campo si es diferente.
-        if (elCampoIndiceDeCiudadNuevo != miCampoIndiceDeCiudad)
-        {
-          CambiaCampo(elCampoIndiceDeCiudadNuevo, miCampoIndiceDeCiudad, laRazón);
-          miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
-          cambió = true;
-        }
-      }
-
-      return cambió;
     }
 
 
