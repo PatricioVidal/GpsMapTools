@@ -1,3 +1,6 @@
+Versión 1.25
+
+
 Versión 1.24
 - Implementado el menú para el arreglo del índice de ciudad de las Vías.
 
