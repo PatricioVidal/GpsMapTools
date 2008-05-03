@@ -34,22 +34,26 @@
       this.miPáginaMapa = new System.Windows.Forms.TabPage();
       this.miInterfaseDeMapa = new GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa();
       this.miPáginaDeTodos = new System.Windows.Forms.TabPage();
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis();
       this.miPáginaModificados = new System.Windows.Forms.TabPage();
       this.miInterfasePdisModificados = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisModificados();
-      this.miPáginaPosiblesDuplicados = new System.Windows.Forms.TabPage();
-      this.miInterfasePdisDuplicados = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisDuplicados();
       this.miPáginaEliminados = new System.Windows.Forms.TabPage();
       this.miInterfasePdisEliminados = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisEliminados();
+      this.miPáginaPosiblesDuplicados = new System.Windows.Forms.TabPage();
+      this.miInterfasePdisDuplicados = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisDuplicados();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfasePdisErrores = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisConErrores();
+      this.miInterfaseListaConMapaDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaConMapaDePdis();
       this.miControladorDePestañas.SuspendLayout();
       this.miPáginaMapa.SuspendLayout();
       this.miPáginaDeTodos.SuspendLayout();
       this.miPáginaModificados.SuspendLayout();
-      this.miPáginaPosiblesDuplicados.SuspendLayout();
       this.miPáginaEliminados.SuspendLayout();
+      this.miPáginaPosiblesDuplicados.SuspendLayout();
       this.miPáginaErrores.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.Panel1.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.Panel2.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.SuspendLayout();
       this.SuspendLayout();
       // 
       // miControladorDePestañas
@@ -76,6 +80,7 @@
       resources.ApplyResources(this.miInterfaseDeMapa, "miInterfaseDeMapa");
       this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
       this.miInterfaseDeMapa.ManejadorDeMapa = null;
+      this.miInterfaseDeMapa.MuestraCiudades = false;
       this.miInterfaseDeMapa.MuestraPdis = true;
       this.miInterfaseDeMapa.MuestraPolígonos = false;
       this.miInterfaseDeMapa.MuestraPolilíneas = false;
@@ -87,21 +92,10 @@
       // 
       // miPáginaDeTodos
       // 
-      this.miPáginaDeTodos.Controls.Add(this.miLista);
+      this.miPáginaDeTodos.Controls.Add(this.miInterfaseListaConMapaDePdis);
       resources.ApplyResources(this.miPáginaDeTodos, "miPáginaDeTodos");
       this.miPáginaDeTodos.Name = "miPáginaDeTodos";
       this.miPáginaDeTodos.UseVisualStyleBackColor = true;
-      // 
-      // miLista
-      // 
-      this.miLista.Activation = System.Windows.Forms.ItemActivation.OneClick;
-      resources.ApplyResources(this.miLista, "miLista");
-      this.miLista.FullRowSelect = true;
-      this.miLista.GridLines = true;
-      this.miLista.Name = "miLista";
-      this.miLista.UseCompatibleStateImageBehavior = false;
-      this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
       // 
       // miPáginaModificados
       // 
@@ -116,6 +110,20 @@
       this.miInterfasePdisModificados.EscuchadorDeEstatus = null;
       this.miInterfasePdisModificados.ManejadorDeMapa = null;
       this.miInterfasePdisModificados.Name = "miInterfasePdisModificados";
+      // 
+      // miPáginaEliminados
+      // 
+      this.miPáginaEliminados.Controls.Add(this.miInterfasePdisEliminados);
+      resources.ApplyResources(this.miPáginaEliminados, "miPáginaEliminados");
+      this.miPáginaEliminados.Name = "miPáginaEliminados";
+      this.miPáginaEliminados.UseVisualStyleBackColor = true;
+      // 
+      // miInterfasePdisEliminados
+      // 
+      resources.ApplyResources(this.miInterfasePdisEliminados, "miInterfasePdisEliminados");
+      this.miInterfasePdisEliminados.EscuchadorDeEstatus = null;
+      this.miInterfasePdisEliminados.ManejadorDeMapa = null;
+      this.miInterfasePdisEliminados.Name = "miInterfasePdisEliminados";
       // 
       // miPáginaPosiblesDuplicados
       // 
@@ -132,20 +140,6 @@
       this.miInterfasePdisDuplicados.ManejadorDeMapa = null;
       this.miInterfasePdisDuplicados.Name = "miInterfasePdisDuplicados";
       // 
-      // miPáginaEliminados
-      // 
-      this.miPáginaEliminados.Controls.Add(this.miInterfasePdisEliminados);
-      resources.ApplyResources(this.miPáginaEliminados, "miPáginaEliminados");
-      this.miPáginaEliminados.Name = "miPáginaEliminados";
-      this.miPáginaEliminados.UseVisualStyleBackColor = true;
-      // 
-      // miInterfasePdisEliminados
-      // 
-      resources.ApplyResources(this.miInterfasePdisEliminados, "miInterfasePdisEliminados");
-      this.miInterfasePdisEliminados.EscuchadorDeEstatus = null;
-      this.miInterfasePdisEliminados.ManejadorDeMapa = null;
-      this.miInterfasePdisEliminados.Name = "miInterfasePdisEliminados";
-      // 
       // miPáginaErrores
       // 
       this.miPáginaErrores.Controls.Add(this.miInterfasePdisErrores);
@@ -160,6 +154,53 @@
       this.miInterfasePdisErrores.ManejadorDeMapa = null;
       this.miInterfasePdisErrores.Name = "miInterfasePdisErrores";
       // 
+      // miInterfaseListaConMapaDePdis
+      // 
+      // 
+      // miInterfaseListaConMapaDePdis.División
+      // 
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.División, "miInterfaseListaConMapaDePdis.División");
+      this.miInterfaseListaConMapaDePdis.División.Name = "División";
+      this.miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = null;
+      // 
+      // miInterfaseListaConMapaDePdis.InterfaseListaDePdis
+      // 
+      // 
+      // miInterfaseListaConMapaDePdis.MenuEditorDePdis
+      // 
+      this.miInterfaseListaConMapaDePdis.MenuEditorDePdis.Lista = this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      this.miInterfaseListaConMapaDePdis.MenuEditorDePdis.ManejadorDePdis = null;
+      this.miInterfaseListaConMapaDePdis.MenuEditorDePdis.Name = "miMenuDeContexto";
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.MenuEditorDePdis, "miInterfaseListaConMapaDePdis.MenuEditorDePdis");
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.ContextMenuStrip = this.miInterfaseListaConMapaDePdis.MenuEditorDePdis;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis, "miInterfaseListaConMapaDePdis.InterfaseListaDePdis");
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.FullRowSelect = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.GridLines = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.HideSelection = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Name = "InterfaseListaDePdis";
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.UseCompatibleStateImageBehavior = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.View = System.Windows.Forms.View.Details;
+      // 
+      // miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas
+      // 
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados, "miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas");
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.EscuchadorDeEstatus = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Lista = this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraCiudades = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPdis = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolígonos = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolilíneas = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraTodoElMapa = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraTodosLosElementos = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraVías = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Name = "InterfaseMapaDePdisSeleccionadas";
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.RectánguloVisibleEn" +
+              "Coordenadas")));
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis, "miInterfaseListaConMapaDePdis");
+      this.miInterfaseListaConMapaDePdis.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDePdis.Name = "miInterfaseListaConMapaDePdis";
+      // 
       // InterfaseManejadorDePdis
       // 
       resources.ApplyResources(this, "$this");
@@ -170,9 +211,13 @@
       this.miPáginaMapa.ResumeLayout(false);
       this.miPáginaDeTodos.ResumeLayout(false);
       this.miPáginaModificados.ResumeLayout(false);
-      this.miPáginaPosiblesDuplicados.ResumeLayout(false);
       this.miPáginaEliminados.ResumeLayout(false);
+      this.miPáginaPosiblesDuplicados.ResumeLayout(false);
       this.miPáginaErrores.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.División.Panel1.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.División.Panel2.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.División.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -181,7 +226,6 @@
 
     private GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas miControladorDePestañas;
     private System.Windows.Forms.TabPage miPáginaDeTodos;
-    private GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis miLista;
     private System.Windows.Forms.TabPage miPáginaModificados;
     private InterfaseDePdisModificados miInterfasePdisModificados;
     private System.Windows.Forms.TabPage miPáginaPosiblesDuplicados;
@@ -192,5 +236,6 @@
     private InterfaseMapa miInterfaseDeMapa;
     private System.Windows.Forms.TabPage miPáginaErrores;
     private InterfaseDePdisConErrores miInterfasePdisErrores;
+    private InterfaseListaConMapaDePdis miInterfaseListaConMapaDePdis;
   }
 }

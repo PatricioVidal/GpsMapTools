@@ -152,6 +152,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Obtiene el menú editor de Vías.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public MenuEditorDeVías MenuEditorDeVías
     {
       get
@@ -159,6 +160,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         return miMenuEditorDeVías;
       }
     }
+
 
     /// <summary>
     /// Obtiene o pone el manejador de mapa.

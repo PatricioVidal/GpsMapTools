@@ -28,89 +28,79 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.ColumnHeader columnaRazón;
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDePdisConErrores));
-      System.Windows.Forms.SplitContainer division;
-      this.miLista = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis();
-      this.miMenúEditorDePdi = new GpsYv.ManejadorDeMapa.Interfase.Pdis.MenuEditorDePdi();
-      this.miMapa = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseMapaDePdisSeleccionados();
+      System.Windows.Forms.ColumnHeader columnaRazón;
+      this.miInterfaseListaConMapaDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaConMapaDePdis();
       columnaRazón = new System.Windows.Forms.ColumnHeader();
-      division = new System.Windows.Forms.SplitContainer();
-      division.Panel1.SuspendLayout();
-      division.Panel2.SuspendLayout();
-      division.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.Panel1.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.Panel2.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.División.SuspendLayout();
+      this.miInterfaseListaConMapaDePdis.SuspendLayout();
       this.SuspendLayout();
+      // 
+      // miInterfaseListaConMapaDePdis
+      // 
+      // 
+      // miInterfaseListaConMapaDePdis.División
+      // 
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.División, "miInterfaseListaConMapaDePdis.División");
+      this.miInterfaseListaConMapaDePdis.División.Name = "División";
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis, "miInterfaseListaConMapaDePdis");
+      this.miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = null;
+      // 
+      // miInterfaseListaConMapaDePdis.InterfaseListaDePdis
+      // 
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            columnaRazón});
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.ContextMenuStrip = this.miInterfaseListaConMapaDePdis.MenuEditorDePdis;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis, "miInterfaseListaConMapaDePdis.InterfaseListaDePdis");
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.FullRowSelect = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.GridLines = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.HideSelection = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Name = "InterfaseListaDePdis";
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.UseCompatibleStateImageBehavior = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.View = System.Windows.Forms.View.Details;
+      // 
+      // miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas
+      // 
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados, "miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas");
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.EscuchadorDeEstatus = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Lista = this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraCiudades = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPdis = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolígonos = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolilíneas = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraTodoElMapa = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraTodosLosElementos = true;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraVías = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Name = "InterfaseMapaDePdisSeleccionadas";
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.RectánguloVisibleE" +
+              "nCoordenadas")));
+      this.miInterfaseListaConMapaDePdis.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDePdis.Name = "miInterfaseListaConMapaDePdis";
       // 
       // columnaRazón
       // 
       resources.ApplyResources(columnaRazón, "columnaRazón");
       // 
-      // division
-      // 
-      resources.ApplyResources(division, "division");
-      division.Name = "division";
-      // 
-      // division.Panel1
-      // 
-      division.Panel1.Controls.Add(this.miLista);
-      // 
-      // division.Panel2
-      // 
-      division.Panel2.Controls.Add(this.miMapa);
-      // 
-      // miLista
-      // 
-      this.miLista.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            columnaRazón});
-      this.miLista.ContextMenuStrip = this.miMenúEditorDePdi;
-      resources.ApplyResources(this.miLista, "miLista");
-      this.miLista.FullRowSelect = true;
-      this.miLista.GridLines = true;
-      this.miLista.Name = "miLista";
-      this.miLista.UseCompatibleStateImageBehavior = false;
-      this.miLista.View = System.Windows.Forms.View.Details;
-      this.miLista.VirtualMode = true;
-      // 
-      // miMenúEditorDePdi
-      // 
-      resources.ApplyResources(this.miMenúEditorDePdi, "miMenúEditorDePdi");
-      this.miMenúEditorDePdi.Lista = this.miLista;
-      this.miMenúEditorDePdi.ManejadorDePdis = null;
-      this.miMenúEditorDePdi.Name = "miMenuDeContexto";
-      this.miMenúEditorDePdi.ShowImageMargin = false;
-      // 
-      // miMapa
-      // 
-      resources.ApplyResources(this.miMapa, "miMapa");
-      this.miMapa.EscuchadorDeEstatus = null;
-      this.miMapa.Lista = this.miLista;
-      this.miMapa.ManejadorDeMapa = null;
-      this.miMapa.MuestraPdis = false;
-      this.miMapa.MuestraPolígonos = false;
-      this.miMapa.MuestraPolilíneas = false;
-      this.miMapa.MuestraTodoElMapa = true;
-      this.miMapa.MuestraTodosLosElementos = true;
-      this.miMapa.MuestraVías = false;
-      this.miMapa.Name = "miMapa";
-      this.miMapa.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapa.RectánguloVisibleEnCoordenadas")));
-      // 
-      // InterfaseDePdisConErroress
+      // InterfaseDePdisConErrores
       // 
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(division);
-      this.Name = "InterfaseDePdisConErroress";
-      division.Panel1.ResumeLayout(false);
-      division.Panel2.ResumeLayout(false);
-      division.ResumeLayout(false);
+      this.Controls.Add(this.miInterfaseListaConMapaDePdis);
+      this.Name = "InterfaseDePdisConErrores";
+      this.miInterfaseListaConMapaDePdis.División.Panel1.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.División.Panel2.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.División.ResumeLayout(false);
+      this.miInterfaseListaConMapaDePdis.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
 
     #endregion
 
-    private GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis miLista;
-    private MenuEditorDePdi miMenúEditorDePdi;
-    private InterfaseMapaDePdisSeleccionados miMapa;
+    private InterfaseListaConMapaDePdis miInterfaseListaConMapaDePdis;
+
   }
 }

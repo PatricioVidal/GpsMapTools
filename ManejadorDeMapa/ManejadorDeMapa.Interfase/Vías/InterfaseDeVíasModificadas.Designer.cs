@@ -71,6 +71,7 @@
       this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
+      this.miLista.HideSelection = false;
       this.miLista.Location = new System.Drawing.Point(0, 0);
       this.miLista.Name = "miLista";
       this.miLista.Size = new System.Drawing.Size(614, 254);
@@ -83,7 +84,7 @@
       this.miMenuEditorDeVías.Lista = this.miLista;
       this.miMenuEditorDeVías.ManejadorDeVías = null;
       this.miMenuEditorDeVías.Name = "miMenuDeContexto";
-      this.miMenuEditorDeVías.Size = new System.Drawing.Size(336, 92);
+      this.miMenuEditorDeVías.Size = new System.Drawing.Size(340, 136);
       // 
       // miMapaDeVíaSeleccionada
       // 
@@ -92,12 +93,13 @@
       this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
+      this.miMapaDeVíaSeleccionada.MuestraCiudades = true;
       this.miMapaDeVíaSeleccionada.MuestraPdis = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
       this.miMapaDeVíaSeleccionada.MuestraPolilíneas = false;
       this.miMapaDeVíaSeleccionada.MuestraTodoElMapa = true;
-      this.miMapaDeVíaSeleccionada.MuestraTodosLosElementos = true;
-      this.miMapaDeVíaSeleccionada.MuestraVías = false;
+      this.miMapaDeVíaSeleccionada.MuestraTodosLosElementos = false;
+      this.miMapaDeVíaSeleccionada.MuestraVías = true;
       this.miMapaDeVíaSeleccionada.Name = "miMapaDeVíaSeleccionada";
       this.miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas")));
       this.miMapaDeVíaSeleccionada.Size = new System.Drawing.Size(614, 170);

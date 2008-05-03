@@ -80,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
   /// <summary>
   /// Menú para editar PDIs.
   /// </summary>
-  public partial class MenuEditorDePdi : MenúEditorDeElementos
+  public partial class MenuEditorDePdis : MenúEditorDeElementos
   {
     #region Propiedades
     /// <summary>
@@ -98,7 +98,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     /// <summary>
     /// Constructor.
     /// </summary>
-    public MenuEditorDePdi()
+    public MenuEditorDePdis()
     {
       InitializeComponent();
 

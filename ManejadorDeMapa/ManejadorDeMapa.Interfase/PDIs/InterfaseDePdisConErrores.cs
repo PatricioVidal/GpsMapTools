@@ -88,6 +88,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
   {
     #region Campos
     private BuscadorDeErrores miBuscadorDeErrores;
+    private readonly InterfaseListaDePdis miLista;
+    private readonly InterfaseMapaDeElementosSeleccionados miMapa;
+    private readonly MenuEditorDePdis miMenú;
     #endregion
 
     #region Propiedades
@@ -107,6 +110,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
@@ -118,12 +122,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
             miBuscadorDeErrores.Invalidado += EnInvalidado;
             miBuscadorDeErrores.Procesó += EnSeBuscaronErrores;
           }
-
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapa.ManejadorDeMapa = value;
-
-          // Pone el manejador de PDIs en la interfase de edición de PDIs.
-          miMenúEditorDePdi.ManejadorDePdis = value.ManejadorDePdis;
         }
       }
     }
@@ -137,7 +135,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       set
       {
         base.EscuchadorDeEstatus = value;
-        miMapa.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
       }
     }
     #endregion
@@ -150,11 +148,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     {
       InitializeComponent();
 
+      // Asigna los campos.
+      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      miMapa = miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados;
+      miMenú = miInterfaseListaConMapaDePdis.MenuEditorDePdis;
+
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de PDIs.
-      miMenúEditorDePdi.Editó += delegate
+      miMenú.Editó += delegate
       {
         // Borra los puntos adicionales que estén en el mapa.
         miMapa.PuntosAddicionales.Clear();
@@ -194,11 +197,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       // Activa el menú de Edición si hay elementos en la lista.
       if (errores.Count > 0)
       {
-        miMenúEditorDePdi.Enabled = true;
+        miMenú.Enabled = true;
       }
       else
       {
-        miMenúEditorDePdi.Enabled = false;
+        miMenú.Enabled = false;
       }
     }
     #endregion

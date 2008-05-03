@@ -80,11 +80,45 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
   /// </summary>
   public partial class InterfaseDePdisModificados : InterfaseBase
   {
+    #region Campos
+    private readonly InterfaseListaDePdis miLista;
+    #endregion
+
     /// <summary>
     /// Evento cuando hay PDIs modificados.
     /// </summary>
     public event EventHandler<NúmeroDeItemsEventArgs> PdisModificados;
 
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone el manejador de mapa.
+    /// </summary>
+    public override ManejadorDeMapa ManejadorDeMapa
+    {
+      set
+      {
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
+      }
+    }
+    #endregion
+
+
+    #region Constructor.
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -92,9 +126,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     {
       InitializeComponent();
 
+      // Asigna los campos.
+      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
     }
+    #endregion
 
 
     /// <summary>
@@ -120,7 +158,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       // Genera el evento.
       if (PdisModificados != null)
       {
-        PdisModificados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
+        PdisModificados(this, new NúmeroDeItemsEventArgs(
+          miLista.NúmeroDeElementos));
       }
     }
 

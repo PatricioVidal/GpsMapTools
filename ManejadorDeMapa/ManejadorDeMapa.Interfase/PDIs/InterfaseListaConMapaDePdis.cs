@@ -69,40 +69,119 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 using GpsYv.ManejadorDeMapa.Pdis;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
   /// <summary>
-  /// Interfase para PDIs eliminados.
+  /// Interfase de Lista y Mapa de PDIs.
   /// </summary>
-  public partial class InterfaseDePdisEliminados : InterfaseBase
+  [DesignerAttribute(typeof(DiseñadorInterfaseListaConMapaDePdis))]
+  public partial class InterfaseListaConMapaDePdis : UserControl
   {
     #region Campos
-    private readonly InterfaseListaDePdis miLista;
-    private readonly InterfaseMapaDePdisSeleccionados miMapa;
+    private ManejadorDeMapa miManejadorDeMapa;
+    private ManejadorDePdis miManejadorDePdis;
     #endregion
 
-    #region Eventos
-    /// <summary>
-    /// Evento cuando hay PDIs eliminados.
-    /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> PdisEliminados;
+    #region Clases
+    internal class DiseñadorInterfaseListaConMapaDePdis : ControlDesigner
+    {
+      public override void Initialize(System.ComponentModel.IComponent elComponente)
+      {
+        base.Initialize(elComponente);
+        InterfaseListaConMapaDePdis control = elComponente as InterfaseListaConMapaDePdis;
+        EnableDesignMode(control.InterfaseListaDePdis, "InterfaseListaDePdis");
+        EnableDesignMode(control.InterfaseMapaDePdisSeleccionados, "InterfaseMapaDePdisSeleccionadas");
+        EnableDesignMode(control.MenuEditorDePdis, "MenuEditorDePdis");
+        EnableDesignMode(control.División, "División");
+      }
+    }
+
     #endregion
 
     #region Propiedades
     /// <summary>
+    /// Obtiene la división.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public SplitContainer División
+    {
+      get
+      {
+        return miDivision;
+      }
+    }
+
+    
+    /// <summary>
+    /// Obtiene la interfase de lista de PDIs.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public InterfaseListaDePdis InterfaseListaDePdis
+    {
+      get
+      {
+        return miLista;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene la interfase de Mapa de PDIs seleccionados.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public InterfaseMapaDePdisSeleccionados InterfaseMapaDePdisSeleccionados
+    {
+      get
+      {
+        return miMapaDePdisSeleccionados;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene el menú editor de PDIs.
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public MenuEditorDePdis MenuEditorDePdis
+    {
+      get
+      {
+        return miMenuEditorDePdis;
+      }
+    }
+
+    /// <summary>
     /// Obtiene o pone el manejador de mapa.
     /// </summary>
-    public override ManejadorDeMapa ManejadorDeMapa
+    [Browsable(true)]
+    public ManejadorDeMapa ManejadorDeMapa
     {
+      get
+      {
+        return miManejadorDeMapa;
+      }
+
       set
       {
         // Pone el nuevo manejador de mapa.
-        base.ManejadorDeMapa = value;
-        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
+        miManejadorDeMapa = value;
+
+        // Pone el manejador de mapa en la interfase de mapa.
+        miMapaDePdisSeleccionados.ManejadorDeMapa = value;
+
+        // Pone el manejador de PDIs.
+        if (miManejadorDeMapa != null)
+        {
+          miManejadorDePdis = miManejadorDeMapa.ManejadorDePdis;
+
+          // Pone el manejador de PDIs en el menú editor de PDIs.
+          miMenuEditorDePdis.ManejadorDePdis = miManejadorDePdis;
+        }
       }
     }
 
@@ -110,75 +189,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     /// <summary>
     /// Obtiene o pone el escuchador de estatus.
     /// </summary>
-    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    public IEscuchadorDeEstatus EscuchadorDeEstatus
     {
+      get
+      {
+        return miMapaDePdisSeleccionados.EscuchadorDeEstatus;
+      }
+
       set
       {
-        base.EscuchadorDeEstatus = value;
-        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
+        miMapaDePdisSeleccionados.EscuchadorDeEstatus = value;
       }
     }
     #endregion
 
-    #region Constructor
+    #region Métodos Públicos.
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePdisEliminados()
+    public InterfaseListaConMapaDePdis()
     {
       InitializeComponent();
-
-      // Asigna los campos.
-      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
-      miMapa = miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados;
-
-      // Pone el método llenador de items.
-      miLista.PoneLlenadorDeItems(LlenaItems);
-    }
-    #endregion
-
-    #region Métodos Privados
-    /// <summary>
-    /// Maneja el evento cuando hay un mapa nuevo.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
-    {
-      EnElementosModificados(elEnviador, losArgumentos);
-    }
-
-
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el mapa.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      miLista.RegeneraLista();
-
-      // Genera el evento.
-      if (PdisEliminados != null)
-      {
-        PdisEliminados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
-      }
-    }
-
-
-    private void LlenaItems(InterfaseListaDeElementos laLista)
-    {
-      // Añade los elementos.
-      IList<Pdi> pdis = ManejadorDeMapa.ManejadorDePdis.Elementos;
-      foreach (Pdi pdi in pdis)
-      {
-        // Si el PDI fué eliminado entonces añadelo a la lista de cambios.
-        if (pdi.FuéEliminado)
-        {
-          laLista.AñadeItem(new ElementoConEtiqueta(pdi), pdi.RazónParaEliminación);
-        }
-      }
     }
     #endregion
   }
 }
+

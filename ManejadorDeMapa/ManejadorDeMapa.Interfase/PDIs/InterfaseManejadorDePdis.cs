@@ -90,6 +90,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     private readonly string miTextoPestañaErrores = "Errores";
     private readonly string miTextoPestañaDuplicados = "Posibles Duplicados";
+    private readonly InterfaseListaDePdis miLista;
+    private readonly InterfaseMapaDePdisSeleccionados miMapa;
     #endregion
 
     #region Eventos
@@ -108,6 +110,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       set
       {
         base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
 
         foreach (InterfaseBase interfaseBase in misInterfases)
         {
@@ -141,6 +144,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       set
       {
         base.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
 
         foreach (InterfaseBase interfaseBase in misInterfases)
         {
@@ -157,6 +161,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     public InterfaseManejadorDePdis()
     {
       InitializeComponent();
+
+      // Asigna los campos.
+      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      miMapa = miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados;
 
       // Crea el vector de interfases.
       misInterfases = new InterfaseBase[] {

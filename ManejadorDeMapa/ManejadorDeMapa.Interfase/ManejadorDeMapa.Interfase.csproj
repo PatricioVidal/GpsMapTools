@@ -114,8 +114,8 @@
       <DependentUpon>InterfaseMapaDePdisSeleccionados.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PDIs\MenuEditorDePdi.resx">
-      <DependentUpon>MenuEditorDePdi.cs</DependentUpon>
+    <EmbeddedResource Include="PDIs\MenuEditorDePdis.resx">
+      <DependentUpon>MenuEditorDePdis.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PDIs\VentanaCambiarTipoDePdi.resx">
@@ -251,6 +251,12 @@
     <Compile Include="PDIs\InterfaseDePdisModificados.Designer.cs">
       <DependentUpon>InterfaseDePdisModificados.cs</DependentUpon>
     </Compile>
+    <Compile Include="PDIs\InterfaseListaConMapaDePdis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PDIs\InterfaseListaConMapaDePdis.Designer.cs">
+      <DependentUpon>InterfaseListaConMapaDePdis.cs</DependentUpon>
+    </Compile>
     <Compile Include="PDIs\InterfaseListaDePdis.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -269,11 +275,11 @@
     <Compile Include="PDIs\InterfaseMapaDePdisSeleccionados.Designer.cs">
       <DependentUpon>InterfaseMapaDePdisSeleccionados.cs</DependentUpon>
     </Compile>
-    <Compile Include="PDIs\MenuEditorDePdi.cs">
+    <Compile Include="PDIs\MenuEditorDePdis.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PDIs\MenuEditorDePdi.Designer.cs">
-      <DependentUpon>MenuEditorDePdi.cs</DependentUpon>
+    <Compile Include="PDIs\MenuEditorDePdis.Designer.cs">
+      <DependentUpon>MenuEditorDePdis.cs</DependentUpon>
     </Compile>
     <Compile Include="PDIs\VentanaCambiarTipoDePdi.cs">
       <SubType>Form</SubType>

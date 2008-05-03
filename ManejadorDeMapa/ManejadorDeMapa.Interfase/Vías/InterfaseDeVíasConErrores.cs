@@ -149,11 +149,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        // Busca errores otra vez.
-        miBuscadorDeErrores.Procesa();
-      };
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += ((elObjecto, losArgumentos) =>
+         {
+           // Busca errores otra vez.
+           miBuscadorDeErrores.Procesa();
+         });
     }
     #endregion
 

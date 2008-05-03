@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
-  partial class MenuEditorDePdi
+  partial class MenuEditorDePdis
   {
     /// <summary>
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuEditorDePdi));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuEditorDePdis));
       this.SuspendLayout();
       // 
       // MenuEditorDePdi
