@@ -94,14 +94,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private readonly Brush miPincelParaTiempo = Brushes.Gray;
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
     private readonly Brush miPincelParaPdi = Brushes.Black;
+    private readonly Brush miPincelParaCiudades = Brushes.Blue;
     private readonly Brush miPincelDeNodo = Brushes.Cyan;
     private readonly Brush miPincelParaVíaConUnaCoordenada = Brushes.Red;
     private readonly Brush miPincelParaPdiModificado = Brushes.Yellow;
     private readonly Brush miPincelParaPdiEliminado = Brushes.Red;
     private readonly Pen miLápizParaBorde = Pens.LightGray;
     private readonly Font miLetraParaNombre = new Font("Arial", 8);
+    private readonly Font miLetraParaNombreDeCiudad = new Font("Arial", 10);
     private readonly Brush miPincelDeFondoParaNombre = Brushes.White;
     private readonly Brush miPincelParaNombre = Brushes.Black;
+    private readonly Brush miPincelParaNombreDeCiudad = Brushes.DarkBlue;
 
     // Parametros para dibujar los elementos.
     private Graphics miGráficador;
@@ -275,6 +278,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [Bindable(true)]
     [Description("Muestra las Polilíneas")]
     public bool MuestraPolilíneas { get; set; }
+
+
+    /// <summary>
+    /// Obtiene o pone una variable lógica que indica que se
+    /// muestren las Ciudades.
+    /// </summary>
+    [Browsable(true)]
+    [Bindable(true)]
+    [Description("Muestra las Ciudades")]
+    public bool MuestraCiudades { get; set; }
 
 
     /// <summary>
@@ -524,6 +537,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       //  - Vías.
       //  - Puntos adicionales.
       //  - PDIs.
+      //  - Ciudades
 
       // Dibuja los elementos si tenemos un manejador de mapa válido.
       if (ManejadorDeMapa != null)
@@ -550,6 +564,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if (MuestraPdis | MuestraTodosLosElementos)
         {
           DibujaPdis();
+        }
+
+        if (MuestraCiudades | MuestraTodosLosElementos)
+        {
+          DibujaCiudades();
         }
       }
 
@@ -617,6 +636,38 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if (pdi.FuéEliminado)
         {
           DibujaPdi(pdi, miPincelParaPdiEliminado, 5);
+        }
+      }
+    }
+
+
+    private void DibujaCiudades()
+    {
+      foreach (Ciudad ciudad in ManejadorDeMapa.Ciudades)
+      {
+        // Obtiene las coordenadas gráficas del PDI.
+        Point punto = CoordenadasAPixels(ciudad.Centro);
+
+        // Nos saltamos la ciudad si no es visible.
+        if (!miAreaDeDibujo.Contains(punto))
+        {
+          continue;
+        }
+
+        // Dibuja el PDI centrado.
+        DibujaPunto(punto, miPincelParaCiudades, 9);
+
+        bool esCiudadPrincipal = (ciudad.Tipo.TipoPrincipal == 1);
+        if (esCiudadPrincipal ||
+           (miEscalaDeCoordenadasAPixeles > (500 * ciudad.Tipo.TipoPrincipal)))
+        {
+          // Dibuja el nombre.
+          DibujaTextoConFondo(
+            ciudad.Nombre,
+            punto.X, punto.Y + 5,
+            miLetraParaNombreDeCiudad,
+            miPincelParaNombreDeCiudad,
+            miPincelDeFondoParaNombre);
         }
       }
     }
@@ -762,10 +813,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void DibujaPdi(Pdi elPdi, Brush elPincel, int elTamaño)
     {
       // Obtiene las coordenadas gráficas del PDI.
-      Point punto = CoordenadasAPixels(new PointF(
-        (float)elPdi.Coordenadas.Longitud,
-        (float)elPdi.Coordenadas.Latitud));
-
+      Point punto = CoordenadasAPixels(elPdi.Coordenadas);
+      
       // Nos salimos si el PDI no es visible.
       if (!miAreaDeDibujo.Contains(punto))
       {
@@ -780,8 +829,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         DibujaTextoConFondo(
           elPdi.Nombre,
-          punto.X, punto.Y +5,
-          miLetraParaNombre, 
+          punto.X, punto.Y + 5,
+          miLetraParaNombre,
           miPincelParaNombre,
           miPincelDeFondoParaNombre);
       }

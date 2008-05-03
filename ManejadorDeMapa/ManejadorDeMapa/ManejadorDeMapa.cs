@@ -566,9 +566,8 @@ namespace GpsYv.ManejadorDeMapa
                 if (campoIndiceDeCiudad != null)
                 {
                   Ciudades.Add(new Ciudad(
-                    polígono.Nombre,
-                    campoIndiceDeCiudad,
-                    polígono.Coordenadas));
+                    polígono,
+                    campoIndiceDeCiudad));
                 }
               }
               break;

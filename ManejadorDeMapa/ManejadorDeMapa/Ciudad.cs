@@ -70,6 +70,7 @@
 #endregion
 
 using System.Drawing;
+using SWallTech.Drawing.Shapes;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -82,6 +83,16 @@ namespace GpsYv.ManejadorDeMapa
     /// Obtiene el nombre de la ciudad.
     /// </summary>
     public string Nombre { get; private set; }
+
+    /// <summary>
+    /// Obtiene el tipo de la ciudad.
+    /// </summary>
+    public Tipo Tipo { get; private set; }
+
+    /// <summary>
+    /// Obtiene el centro de la ciudad.
+    /// </summary>
+    public PointF Centro { get; private set; }
 
     /// <summary>
     /// Obtiene el índice de la ciudad.
@@ -104,22 +115,25 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elNombre">El nombre.</param>
+    /// <param name="elPolígono">El polígono.</param>
     /// <param name="elIndice">El índice de la ciudad.</param>
-    /// <param name="lasCoordenadas">Las coordenadas.</param>
     public Ciudad(
-      string elNombre,
-      CampoIndiceDeCiudad elIndice,
-      Coordenadas[] lasCoordenadas)
+      Polígono elPolígono,
+      CampoIndiceDeCiudad elIndice)
     {
-      Nombre = elNombre;
+      Nombre = elPolígono.Nombre;
+      Tipo = elPolígono.Tipo;
       Indice = elIndice;
-      Coordenadas = lasCoordenadas;
-      CoordenadasComoPuntos = new PointF[lasCoordenadas.Length];
-      for (int i = 0; i < lasCoordenadas.Length; ++i)
+      Coordenadas = elPolígono.Coordenadas;
+      CoordenadasComoPuntos = new PointF[Coordenadas.Length];
+      for (int i = 0; i < Coordenadas.Length; ++i)
       {
-        CoordenadasComoPuntos[i] = lasCoordenadas[i];
+        CoordenadasComoPuntos[i] = Coordenadas[i];
       }
+
+      // Calcula el centro de la ciudad.
+      PolygonF poligonoDeLaCiudad = new PolygonF(CoordenadasComoPuntos);
+      Centro = poligonoDeLaCiudad.CenterPointOfBounds;
     }
 
 
