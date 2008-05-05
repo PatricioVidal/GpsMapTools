@@ -71,6 +71,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
@@ -113,6 +114,15 @@ namespace GpsYv.ManejadorDeMapa.Vías
         return misPosiblesNodosDesconectados;
       }
     }
+
+
+    /// <summary>
+    /// Atributo "NodoDesconectado".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica que el nodo está desconectado.
+    /// </remarks>
+    public static readonly string AtributoNodoDesconectado = "NodoDesconectado";
     #endregion
 
     #region Métodos Públicos
@@ -160,6 +170,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
       Coordenadas[] nodos = laVía.Coordenadas;
       int númeroDeNodos = nodos.Length;
 
+      // Crea mapa de nodos desconectados por adelantado para hacerlo
+      // afuera del loop.
+      bool[] mapaNodoDesconectado = new bool[númeroDeNodos];
+      for (int i = 0; i < númeroDeNodos; ++i)
+      {
+        string atributoNodoDesconectado = AtributoNodoDesconectado
+          + ',' + i;
+        if (laVía.TieneAtributo(atributoNodoDesconectado))
+        {
+          mapaNodoDesconectado[i] = true;
+        }
+      }
+
       // Busca en todos los nodos de todas las vías (comenzando desde la siguiente
       // para no repetir búsquedas.)
       for (int i = NúmeroDeElementoProcesándose; i < NúmeroDeElementos; ++i)
@@ -171,6 +194,15 @@ namespace GpsYv.ManejadorDeMapa.Vías
         #region Busca todos los nodos con las mismas coordenadas.
         for (int índiceDeNodo = 0; índiceDeNodo < númeroDeNodos; ++índiceDeNodo)
         {
+          bool esNodoDeRuta = laVía.FiltroDeNodosDeRuta[índiceDeNodo];
+
+          // Nos saltamos el nodo si éste tiene el atributo de índice desconectado.
+          if (mapaNodoDesconectado[índiceDeNodo])
+          {
+            continue;
+          }
+
+          // Buscamos en todos los nodos destino.
           Coordenadas nodo = laVía.Coordenadas[índiceDeNodo];
           for (int índiceNodoDestino = 0; índiceNodoDestino < númeroDeNodosDestino; ++índiceNodoDestino)
           {
@@ -181,8 +213,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
             {
               string error = null;
               const double distancia = 0;
-              bool esNodoDeRuta = EsNodoDeRuta(laVía, índiceDeNodo);
-              bool esNodoDestinoDeRuta = EsNodoDeRuta(víaDestino, índiceNodoDestino);
+              bool esNodoDestinoDeRuta = víaDestino.FiltroDeNodosDeRuta[índiceNodoDestino];
               if (esNodoDeRuta & esNodoDestinoDeRuta)
               {
                 // Esto indica que los nodos están conectados.
@@ -200,9 +231,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
               {
                 PosibleNodoDesconectado posibleNodoDesconectado = new PosibleNodoDesconectado(
                   laVía,
-                  nodo,
+                  índiceDeNodo,
                   víaDestino,
-                  nodoDestino,
+                  índiceNodoDestino,
                   distancia,
                   error);
 
@@ -237,21 +268,36 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int númeroDeNodos = losNodos.Length;
       if (númeroDeNodos >= 2)
       {
-        // Crea los nodos extremos.
+        #region Crea los nodos extremos.
         int índiceUltimoNodo = númeroDeNodos - 1;
-        Coordenadas[] nodosExtremos = new[] {
-              losNodos[0],
-              losNodos[índiceUltimoNodo]             
-              };
+        List<int> índicesNodosExtremos = new List<int>();
+
+        // Nos saltamos el nodo si éste tiene el atributo de índice desconectado.
+        string atributoNodoDesconectado = AtributoNodoDesconectado
+          + ",0";
+        if (!laVía.TieneAtributo(atributoNodoDesconectado))
+        {
+          índicesNodosExtremos.Add(0);
+        }
+        atributoNodoDesconectado = AtributoNodoDesconectado
+          + ','+ índiceUltimoNodo.ToString(CultureInfo.InvariantCulture);
+        if (!laVía.TieneAtributo(atributoNodoDesconectado))
+        {
+          índicesNodosExtremos.Add(índiceUltimoNodo);
+        }
+        #endregion
 
         // Busca la distancia mínima a los nodos de la vía.
-        Coordenadas[] nodosDestino = laVíaDestino.Coordenadas;
-        foreach (Coordenadas nodo in nodosExtremos)
+        foreach (int índiceNodo in índicesNodosExtremos)
         {
+          Coordenadas nodo = laVía.Coordenadas[índiceNodo];
           double distancíaNodoMasCercano = double.MaxValue;
-          Coordenadas nodoMasCercano = null;
-          foreach (Coordenadas nodoDestino in nodosDestino)
+          int índiceNodoMasCercano = 0;
+          int númeroDeNodosDestino = laVíaDestino.Coordenadas.Length;
+          for (int índiceNodoDestino = 0; índiceNodoDestino < númeroDeNodosDestino; ++índiceNodoDestino)
           {
+            Coordenadas nodoDestino = laVíaDestino.Coordenadas[índiceNodoDestino];
+
             // Nos saltamos este nodo si tiene las mismas coordenadas.
             bool tienenLasMismasCoordenadas = (nodo == nodoDestino);
             if (tienenLasMismasCoordenadas)
@@ -266,7 +312,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
             if (distancia < distancíaNodoMasCercano)
             {
               distancíaNodoMasCercano = distancia;
-              nodoMasCercano = nodoDestino;
+              índiceNodoMasCercano = índiceNodoDestino;
             }
           }
 
@@ -284,9 +330,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
                                          distancíaNodoMasCercano);
             PosibleNodoDesconectado posibleNodoDesconectado = new PosibleNodoDesconectado(
               laVía,
-              nodo,
+              índiceNodo,
               laVíaDestino,
-              nodoMasCercano,
+              índiceNodoMasCercano,
               distancíaNodoMasCercano,
               error);
 
@@ -297,23 +343,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
       }
 
       return númeroDeProblemasDetectados;
-    }
-
-
-    private static bool EsNodoDeRuta(Vía laVía, int elIndiceDeNodo)
-    {
-      bool esNodoDeRuta = false;
-
-      foreach(CampoNodo campoNodo in laVía.CamposNodo)
-      {
-        if (campoNodo.IndiceDeCoordenadas == elIndiceDeNodo)
-        {
-          esNodoDeRuta = true;
-          break;
-        }
-      }
-
-      return esNodoDeRuta;
     }
 
 

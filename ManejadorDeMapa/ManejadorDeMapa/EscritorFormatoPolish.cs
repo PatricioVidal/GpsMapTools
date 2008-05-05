@@ -196,7 +196,7 @@ namespace GpsYv.ManejadorDeMapa
         CampoComentario campoComentario;
         CampoNombre campoNombre;
         CampoCoordenadas campoCoordenadas;
-        CampoNodo campoNodo;
+        CampoNodoDeRuta campoNodo;
         CampoGenérico campoGenérico;
         CampoTipo campoTipo;
         CampoParámetrosDeRuta campoParámetrosDeRuta;
@@ -215,7 +215,7 @@ namespace GpsYv.ManejadorDeMapa
         {
           Guarda(campoCoordenadas, elEscritor);
         }
-        else if ((campoNodo = campo as CampoNodo) != null)
+        else if ((campoNodo = campo as CampoNodoDeRuta) != null)
         {
           Guarda(campoNodo, elEscritor);
         }
@@ -261,7 +261,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static void Guarda(CampoNodo elCampoNodo, StreamWriter elEscritor)
+    private static void Guarda(CampoNodoDeRuta elCampoNodo, StreamWriter elEscritor)
     {
       // Crea el texto.
       string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IndentificadorGlobal);
@@ -274,7 +274,7 @@ namespace GpsYv.ManejadorDeMapa
         texto += ",0";
       }
 
-      Guarda(elCampoNodo, texto, elEscritor);
+      Guarda(elCampoNodo, elCampoNodo.Número, texto, elEscritor);
     }
 
 
@@ -313,7 +313,11 @@ namespace GpsYv.ManejadorDeMapa
         + ")");
       }
 
-      Guarda(elCampoCoordenadas, texto.ToString(), elEscritor);
+      Guarda(
+        elCampoCoordenadas,
+        elCampoCoordenadas.Nivel,
+        texto.ToString(),
+        elEscritor);
     }
 
 
@@ -342,6 +346,14 @@ namespace GpsYv.ManejadorDeMapa
     private static void Guarda(Campo elCampo, string elTexto, StreamWriter elEscritor)
     {
       elEscritor.WriteLine(elCampo.Identificador + "=" + elTexto);
+    }
+
+
+    private static void Guarda(Campo elCampo, int elNúmero, string elTexto, StreamWriter elEscritor)
+    {
+      elEscritor.WriteLine(
+        elCampo.Identificador + elNúmero.ToString(CultureInfo.InvariantCulture)
+        + "=" + elTexto);
     }
 
 
@@ -376,7 +388,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private void Guarda(CampoAtributo elCampoAtributo, StreamWriter elEscritor)
+    private static void Guarda(CampoAtributo elCampoAtributo, StreamWriter elEscritor)
     {
       Guarda(elCampoAtributo, elCampoAtributo.Atributo, elEscritor);
     }

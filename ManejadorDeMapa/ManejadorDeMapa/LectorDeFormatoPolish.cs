@@ -347,17 +347,17 @@ namespace GpsYv.ManejadorDeMapa
               case CampoCoordenadas.IdentificadorDeCoordenadasAlterno:
                 if (número != null)
                 {
-                  campos.Add(LeeCampoCoordenadas(identificadorConNúmero, número.Value, texto));
+                  campos.Add(LeeCampoCoordenadas(identificador, número.Value, texto));
                 }
                 else
                 {
                   campos.Add(new CampoGenérico(identificadorConNúmero, texto));
                 }
                 break;
-              case CampoNodo.IdentificadorDeNodo:
+              case CampoNodoDeRuta.IdentificadorDeNodo:
                 if (número != null)
                 {
-                  campos.Add(LeeCampoNodo(identificadorConNúmero, texto));
+                  campos.Add(LeeCampoNodo(identificador, número.Value, texto));
                 }
                 else
                 {
@@ -441,7 +441,10 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static CampoNodo LeeCampoNodo(string elIdentificador, string elTexto)
+    private static CampoNodoDeRuta LeeCampoNodo(
+      string elIdentificador,
+      int elNúmero,
+      string elTexto)
     {
       // Verifica que tenemos 3 partes.
       string[] partes = elTexto.Split(',');
@@ -468,7 +471,12 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Crea el nodo.
-      CampoNodo nodo = new CampoNodo(elIdentificador, indice, identificador, esExterno);
+      CampoNodoDeRuta nodo = new CampoNodoDeRuta(
+        elIdentificador,
+        elNúmero,
+        indice,
+        identificador,
+        esExterno);
 
       return nodo;
     }

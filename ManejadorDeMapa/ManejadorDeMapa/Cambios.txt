@@ -1,5 +1,7 @@
 Versión 1.25
-
+- Creada la lógica de los menús de "Conectar Nodos Desconectados" y "Marcar Nodos como Desconectados" en la página de Posibles Nodos Desconectados.  El menú de "Conectar Nodos Desconectados" no se debe usar cuando la vía ya tiene un nodo conectado al nodo destino porque entonces la vía tendría dos nodos sobrepuestos.
+- Añadidos mapas a las páginas de PDIs. 
+- Añadido al mapa el nombre de los polígonos de ciudades. 
 
 Versión 1.24
 - Implementado el menú para el arreglo del índice de ciudad de las Vías.

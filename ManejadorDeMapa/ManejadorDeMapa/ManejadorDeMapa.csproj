@@ -77,7 +77,7 @@
     <Compile Include="CampoAtributo.cs" />
     <Compile Include="CampoEsCiudad.cs" />
     <Compile Include="CampoIndiceDeCiudad.cs" />
-    <Compile Include="CampoNodo.cs" />
+    <Compile Include="CampoNodoDeRuta.cs" />
     <Compile Include="CampoParámetrosDeRuta.cs" />
     <Compile Include="Ciudad.cs" />
     <Compile Include="ClaseDeRuta.cs" />

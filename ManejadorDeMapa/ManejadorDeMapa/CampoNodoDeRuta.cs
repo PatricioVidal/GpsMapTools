@@ -1,35 +1,35 @@
-Ôªø#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
+#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
 // (For English, see further down.)
 //
-// GpsYv.ManejadorDeMapa es una aplicaci√≥n para manejar Mapas de GPS en el
+// GpsYv.ManejadorDeMapa es una aplicaciÛn para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
 //
-// Esta programa naci√≥ por la necesidad del Grupo GPS de Venezuela, 
+// Esta programa naciÛ por la necesidad del Grupo GPS de Venezuela, 
 // GPS_YV (http://www.gpsyv.net), de analizar y corregir los mapas que el
 // grupo genera para la comunidad.  GpsYv.ManejadorDeMapa se distribuye bajo 
-// la licencia GPL con la finalidad de que sea √∫til para otros grupos o
-// individuos que hacen mapas, y tambi√©n para promover la colaboraci√≥n 
+// la licencia GPL con la finalidad de que sea ˙til para otros grupos o
+// individuos que hacen mapas, y tambiÈn para promover la colaboraciÛn 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para m√°s informaci√≥n.
+// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para m·s informaciÛn.
 //
-// La l√≥gica de este programa se ha desarrollado con las ideas de los miembros
+// La lÛgica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
 // Programador: Patricio Vidal (PatricioV2@hotmail.com)
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
-// bajo los t√©rminos de la Licencia P√∫blica General de GNU seg√∫n es publicada
-// por la Free Software Foundation, bien de la versi√≥n 2 de dicha Licencia o 
-// bien (seg√∫n su elecci√≥n) de cualquier versi√≥n posterior. 
+// bajo los tÈrminos de la Licencia P˙blica General de GNU seg˙n es publicada
+// por la Free Software Foundation, bien de la versiÛn 2 de dicha Licencia o 
+// bien (seg˙n su elecciÛn) de cualquier versiÛn posterior. 
 //
-// Este programa se distribuye con la esperanza de que sea √∫til, 
-// pero SIN NINGUNA GARANT√çA, incluso sin la garant√≠a MERCANTIL
-// impl√≠cita o sin garantizar la CONVENIENCIA PARA UN PROP√ìSITO PARTICULAR.
-// V√©ase la Licencia P√∫blica General de GNU para m√°s detalles. 
+// Este programa se distribuye con la esperanza de que sea ˙til, 
+// pero SIN NINGUNA GARANTÕA, incluso sin la garantÌa MERCANTIL
+// implÌcita o sin garantizar la CONVENIENCIA PARA UN PROP”SITO PARTICULAR.
+// VÈase la Licencia P˙blica General de GNU para m·s detalles. 
 //
-// Deber√≠a haber recibido una copia de la Licencia P√∫blica General 
-// junto con este programa. Si no ha sido as√≠, escriba a la 
+// DeberÌa haber recibido una copia de la Licencia P˙blica General 
+// junto con este programa. Si no ha sido asÌ, escriba a la 
 // Free Software Foundation, Inc., en 675 Mass Ave, 
 // Cambridge, MA 02139, EEUU.
 //
@@ -74,14 +74,12 @@ using System;
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa un campo de nodo.
+  /// Representa un campo de nodo de ruta.
   /// </summary>
-  public class CampoNodo : Campo
+  public class CampoNodoDeRuta : Campo
   {
     #region Campos
-    private readonly int miIndiceDeCoordenadas;
-    private readonly int miIdentificadorGlobal;
-    private readonly bool miEsExterno;
+
     #endregion
 
     #region Propiedades
@@ -92,58 +90,50 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Obtiene el √≠ndice del nodo.
+    /// Obtiene el n˙mero del nodo de ruta.
     /// </summary>
-    public int IndiceDeCoordenadas
-    {
-     get
-     {
-       return miIndiceDeCoordenadas;
-     }
-    }
+    public int N˙mero { get; private set; }
+
+    /// <summary>
+    /// Obtiene el Ìndice de coordenadas del nodo.
+    /// </summary>
+    public int IndiceDeCoordenadas { get; private set; }
 
 
     /// <summary>
     /// Obtiene el identificador global.
     /// </summary>
-    public int IndentificadorGlobal
-    {
-     get
-     {
-       return miIdentificadorGlobal;
-     }
-    }
+    public int IndentificadorGlobal { get; private set; }
+
 
     /// <summary>
-    /// Obtiene una variable l√≥gica que indica si el nodo es externo.
+    /// Obtiene una variable lÛgica que indica si el nodo es externo.
     /// </summary>
-    public bool EsExterno
-    {
-      get
-      {
-        return miEsExterno;
-      }
-    }
+    public bool EsExterno { get; private set; }
+
     #endregion
 
-    #region M√©todos P√∫blicos
+    #region MÈtodos P˙blicos
     /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="elIdentificador">El Identificador.</param>
+    /// <param name="elN˙mero">El n˙mero.</param>
     /// <param name="elIndiceDeCoordenadas">El indice de coordenadas.</param>
     /// <param name="elIdentificadorGlobal">El identificador global.</param>
-    /// <param name="elEsExterno">Variable l√≥gica que indica si el nodo es externo.</param>
-    public CampoNodo(
+    /// <param name="elEsExterno">Variable lÛgica que indica si el nodo es externo.</param>
+    public CampoNodoDeRuta(
       string elIdentificador,
+      int elN˙mero,
       int elIndiceDeCoordenadas,
       int elIdentificadorGlobal,
       bool elEsExterno)
       : base(elIdentificador)
     {
-      miIndiceDeCoordenadas = elIndiceDeCoordenadas;
-      miIdentificadorGlobal = elIdentificadorGlobal;
-      miEsExterno = elEsExterno;
+      N˙mero = elN˙mero;
+      IndiceDeCoordenadas = elIndiceDeCoordenadas;
+      IndentificadorGlobal = elIdentificadorGlobal;
+      EsExterno = elEsExterno;
     }
 
 
@@ -152,8 +142,8 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      string texto = string.Format("Indice={0},Id={1}", miIndiceDeCoordenadas, miIdentificadorGlobal);
-      if (miEsExterno)
+      string texto = string.Format("Indice={0},Id={1}", IndiceDeCoordenadas, IndentificadorGlobal);
+      if (EsExterno)
       {
         texto += ",Externo";
       }
@@ -163,7 +153,7 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve una variable l√≥gica que indica si un objeto
+    /// Devuelve una variable lÛgica que indica si un objeto
     /// dado es igual.
     /// </summary>
     /// <param name="elObjecto">EL objecto dado.</param>
@@ -176,27 +166,27 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoNodo))
+      if (!(elObjecto is CampoNodoDeRuta))
       {
         return false;
       }
 
-      // Compara los par√°metros del nodo.
-      CampoNodo comparador = (CampoNodo)elObjecto;
-      bool esIgual = ((miIdentificadorGlobal == comparador.miIdentificadorGlobal) &&
-        (miIndiceDeCoordenadas == comparador.miIndiceDeCoordenadas) &&
-        (miEsExterno == comparador.miEsExterno));
+      // Compara los par·metros del nodo.
+      CampoNodoDeRuta comparador = (CampoNodoDeRuta)elObjecto;
+      bool esIgual = ((IndentificadorGlobal == comparador.IndentificadorGlobal) &&
+        (IndiceDeCoordenadas == comparador.IndiceDeCoordenadas) &&
+        (EsExterno == comparador.EsExterno));
       
       return esIgual;
     }
 
 
     /// <summary>
-    /// Obtiene una clave √∫nica para este objecto.
+    /// Obtiene una clave ˙nica para este objecto.
     /// </summary>
     public override int GetHashCode()
     {
-      throw new NotImplementedException("M√©todo GetHashCode() no est√° implementado.");
+      throw new NotImplementedException("MÈtodo GetHashCode() no est· implementado.");
     }
     #endregion
   }

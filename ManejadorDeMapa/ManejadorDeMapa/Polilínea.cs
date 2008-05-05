@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa
   public class Polilínea : ElementoDelMapa
   {
     #region Campos
-    private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
+    private CampoCoordenadas miCampoCoordenadas = CampoCoordenadas.Nulas;
     #endregion
 
     #region Propiedades
@@ -93,7 +93,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        return misCoordenadas.Coordenadas;
+        return miCampoCoordenadas.Coordenadas;
       }
     }
     #endregion
@@ -125,20 +125,45 @@ namespace GpsYv.ManejadorDeMapa
         {
           // Si ya tenemos coordenadas entonces solamente las remplazamos
           // si el nivel es menor.
-          if (misCoordenadas != CampoCoordenadas.Nulas)
+          if (miCampoCoordenadas != CampoCoordenadas.Nulas)
           {
-            if (campoCoordenadas.Nivel < misCoordenadas.Nivel)
+            if (campoCoordenadas.Nivel < miCampoCoordenadas.Nivel)
             {
-              misCoordenadas = campoCoordenadas;
+              miCampoCoordenadas = campoCoordenadas;
             }
           }
           else
           {
-            misCoordenadas = campoCoordenadas;
+            miCampoCoordenadas = campoCoordenadas;
           }
         }
       }
     }
+
+
+    /// <summary>
+    /// Cambia las coordenadas.
+    /// </summary>
+    /// <param name="lasCoordenadaNuevas">Las coordenadas nuevas.</param>
+    /// <param name="elIndice">El índice de la coordenada a cambiar.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public virtual void CambiaCoordenadas(Coordenadas lasCoordenadaNuevas, int elIndice,  string laRazón)
+    {
+      // Si no tiene Campo de Coordenadas entonces es un error.
+      if (miCampoCoordenadas == CampoCoordenadas.Nulas)
+      {
+        throw new ArgumentException("Las coordenadas son nulas.");
+      }
+
+      // Cambia el campo.
+      CampoCoordenadas nuevoCampoCoordenadas = new CampoCoordenadas(
+        miCampoCoordenadas.Identificador,
+        miCampoCoordenadas.Nivel,
+        miCampoCoordenadas.Coordenadas);
+      nuevoCampoCoordenadas.Coordenadas[elIndice] = lasCoordenadaNuevas;
+      CambiaCampo(nuevoCampoCoordenadas, miCampoCoordenadas, laRazón);
+      miCampoCoordenadas = nuevoCampoCoordenadas;
+    }    
 
 
     /// <summary>

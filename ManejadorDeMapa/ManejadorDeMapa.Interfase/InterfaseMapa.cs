@@ -743,7 +743,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
 
         // Dibuja los nodos.
-        foreach (CampoNodo nodo in vía.CamposNodo)
+        foreach (CampoNodoDeRuta nodo in vía.CamposNodosDeRuta)
         {
           if (nodo.IndiceDeCoordenadas < vía.Coordenadas.Length)
           {
