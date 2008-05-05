@@ -21,8 +21,38 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_AEC09EAE97A7E8D1AFF484DC09DBBC18"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CF0D6F15495B384B481E9CA66C3FC82E"
+        "OwnerKey" = "8:_AEC09EAE97A7E8D1AFF484DC09DBBC18"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CF0D6F15495B384B481E9CA66C3FC82E"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AEC09EAE97A7E8D1AFF484DC09DBBC18"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CF0D6F15495B384B481E9CA66C3FC82E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -130,6 +160,68 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AEC09EAE97A7E8D1AFF484DC09DBBC18"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.25.3047.24713, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AEC09EAE97A7E8D1AFF484DC09DBBC18"
+                    {
+                    "Name" = "8:GpsYv.ManejadorDeMapa.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:GpsYv.ManejadorDeMapa.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CF0D6F15495B384B481E9CA66C3FC82E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_CF0D6F15495B384B481E9CA66C3FC82E"
+                    {
+                    "Name" = "8:Tst.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Tst.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -197,14 +289,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{5DF320D3-3E24-4662-AA1A-AA72888B41EF}"
-        "PackageCode" = "8:{FB7D4721-F63B-43E5-AC72-056EB25B17C8}"
+        "ProductCode" = "8:{EBC68B99-9B4A-423D-9924-DB323A194524}"
+        "PackageCode" = "8:{1AD2995B-A89C-4872-BB48-C816F2A616BD}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.25.0"
+        "ProductVersion" = "8:1.26.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"

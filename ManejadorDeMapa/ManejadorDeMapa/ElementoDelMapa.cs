@@ -429,7 +429,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       bool cambió = false;
 
-      // Si no tiene el Campo de Indice de Ciudad en tonces le 
+      // Si no tiene el Campo de Indice de Ciudad entonces le 
       // añadimos uno.
       // Si no, se lo cambiamos.
       if (miCampoIndiceDeCiudad == null)
@@ -450,6 +450,20 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       return cambió;
+    }
+
+
+    /// <summary>
+    /// Remueve el campo de índice de ciudad.
+    /// </summary>
+    /// <param name="laRazón">La razón.</param>
+    public void RemueveCampoIndiceDeCiudad(string laRazón)
+    {
+      if (miCampoIndiceDeCiudad != null)
+      {
+        RemueveCampo(miCampoIndiceDeCiudad, laRazón);
+        miCampoIndiceDeCiudad = null;
+      }
     }
 
 
@@ -486,7 +500,7 @@ namespace GpsYv.ManejadorDeMapa
       if (miFuéEliminado)
       {
         // Si el elemento ha sido eliminado se genera un excepción.
-        throw new InvalidOperationException("No de puede regenerar un elemento está eliminado: " + ToString());
+        throw new InvalidOperationException("No de puede regenerar un elemento que está eliminado: " + ToString());
       }
 
       if (miFuéModificado)
@@ -618,6 +632,29 @@ namespace GpsYv.ManejadorDeMapa
 
       // Añade el nuevo campo.
       misCampos.Add(elCampoNuevo);
+
+      // Avísale al manejador de mapa que se cambió un elemento.
+      miManejadorDeMapa.SeModificóElemento(this);
+    }
+
+
+    /// <summary>
+    /// Remueve un campo dado.
+    /// </summary>
+    /// <param name="elCampoARemover">El campo a remover.</param>
+    /// <param name="laRazón">La razón.</param>
+    protected void RemueveCampo(Campo elCampoARemover, string laRazón)
+    {
+      // Avísale al manejador de mapa que se va a cambiar un elemento.
+      SeVaAModificarElemento();
+
+      // Añade la razón del cambio.
+      misOtrasModificaciones.Add(string.Format(
+        "[Removido {0}: {1}]", elCampoARemover.Identificador, laRazón));
+
+      // Remueve el campo.
+      misCampos.Remove(elCampoARemover);
+      miCampoIndiceDeCiudad = null;
 
       // Avísale al manejador de mapa que se cambió un elemento.
       miManejadorDeMapa.SeModificóElemento(this);

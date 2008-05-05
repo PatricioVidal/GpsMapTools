@@ -214,9 +214,14 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       {
       }
 
+      public override bool Equals(object elObjecto)
+      {
+        throw new NotImplementedException();
+      }
+
       public override string ToString()
       {
-        return string.Empty;
+        throw new NotImplementedException();
       }
     }
     #endregion

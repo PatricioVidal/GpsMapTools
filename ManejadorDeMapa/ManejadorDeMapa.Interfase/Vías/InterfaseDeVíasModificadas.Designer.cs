@@ -84,7 +84,7 @@
       this.miMenuEditorDeVías.Lista = this.miLista;
       this.miMenuEditorDeVías.ManejadorDeVías = null;
       this.miMenuEditorDeVías.Name = "miMenuDeContexto";
-      this.miMenuEditorDeVías.Size = new System.Drawing.Size(340, 136);
+      this.miMenuEditorDeVías.Size = new System.Drawing.Size(329, 136);
       // 
       // miMapaDeVíaSeleccionada
       // 
@@ -98,7 +98,7 @@
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
       this.miMapaDeVíaSeleccionada.MuestraPolilíneas = false;
       this.miMapaDeVíaSeleccionada.MuestraTodoElMapa = true;
-      this.miMapaDeVíaSeleccionada.MuestraTodosLosElementos = false;
+      this.miMapaDeVíaSeleccionada.MuestraTodosLosElementos = true;
       this.miMapaDeVíaSeleccionada.MuestraVías = true;
       this.miMapaDeVíaSeleccionada.Name = "miMapaDeVíaSeleccionada";
       this.miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDeVíaSeleccionada.RectánguloVisibleEnCoordenadas")));

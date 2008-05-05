@@ -126,6 +126,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
              losCampos)
     {
       CamposNodosDeRuta = new List<CampoNodoDeRuta>();
+      CampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
       FiltroDeNodosDeRuta = new bool[Coordenadas.Length];
 
       // Busca los campos específicos de las vías.
@@ -144,7 +145,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
           FiltroDeNodosDeRuta[campoNodo.IndiceDeCoordenadas] = true;
         }
       }
-      CampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
     }
 
 

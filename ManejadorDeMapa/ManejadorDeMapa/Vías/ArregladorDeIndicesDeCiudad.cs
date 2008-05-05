@@ -112,9 +112,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       // Por cada ciudad, si una coordenada de la Vía está adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
+      bool seEncontróUnaCiudad = false;
       foreach (Ciudad ciudad in Manejador.ManejadorDeMapa.Ciudades)
       {
-        bool laVíaPerteneceALaCiudad = false;
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
         foreach (Coordenadas coordenadas in laVía.Coordenadas)
         {
@@ -130,17 +130,23 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
             // La Vía solo puede pertenecer a una sola ciudad.
             // Así que nos salimos del ciclo.
-            laVíaPerteneceALaCiudad = true;
+            seEncontróUnaCiudad = true;
             break;
           }
         }
 
         // La Vía solo puede pertenecer a una sola ciudad.
         // Así que nos salimos del ciclo.
-        if (laVíaPerteneceALaCiudad)
+        if (seEncontróUnaCiudad)
         {
           break;
         }
+      }
+
+      // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
+      if (!seEncontróUnaCiudad)
+      {
+        laVía.RemueveCampoIndiceDeCiudad("La vía no pertenece a ninguna ciudad.");
       }
 
       return númeroDeProblemasDetectados;

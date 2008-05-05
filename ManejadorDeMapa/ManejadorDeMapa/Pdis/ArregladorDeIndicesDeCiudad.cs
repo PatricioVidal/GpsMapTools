@@ -112,6 +112,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
 
       // Por cada ciudad, si el PDI está adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
+      bool seEncontróUnaCiudad = false;
       foreach(Ciudad ciudad in Manejador.ManejadorDeMapa.Ciudades)
       {
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
@@ -126,8 +127,15 @@ namespace GpsYv.ManejadorDeMapa.Pdis
           }
 
           // El PDI solo puede pertenecer a una sola ciudad.
+          seEncontróUnaCiudad = true;
           break;
         }
+      }
+
+      // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
+      if (!seEncontróUnaCiudad)
+      {
+        elPdi.RemueveCampoIndiceDeCiudad("El PDI no pertenece a ninguna ciudad.");
       }
 
       return númeroDeProblemasDetectados;

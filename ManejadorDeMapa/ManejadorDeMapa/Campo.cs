@@ -110,6 +110,51 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Operador de igualdad.
+    /// </summary>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
+    public static bool operator ==(
+      Campo elPrimerElemento,
+      Campo elSegundoElemento)
+    {
+      bool esIgual = object.Equals(elPrimerElemento, elSegundoElemento);
+
+      return esIgual;
+    }
+
+
+    /// <summary>
+    /// Operador de desigualdad.
+    /// </summary>
+    /// <param name="elPrimerElemento">El Primer Elemento.</param>
+    /// <param name="elSegundoElemento">El Segundo Elemento.</param>
+    public static bool operator !=(
+      Campo elPrimerElemento,
+      Campo elSegundoElemento)
+    {
+      return !(elPrimerElemento == elSegundoElemento);
+    }
+
+
+    /// <summary>
+    /// Devuelve una variable lógica que indica si un objeto
+    /// dado es igual.
+    /// </summary>
+    /// <param name="elObjecto">EL objecto dado.</param>
+    public override abstract bool Equals(object elObjecto);
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
+    }
+
+    
+    /// <summary>
     /// Devuelve un texto representando el campo.
     /// </summary>
     public override abstract string ToString();

@@ -1,3 +1,7 @@
+Versión 1.26
+- Ahora los Indices de Ciudad de PDIs y Vías que están fuera de ciudades son eliminados.
+- Arreglado error que borraba la información de Parámetros de Ruta de las Vías.
+
 Versión 1.25
 - Creada la lógica de los menús de "Conectar Nodos Desconectados" y "Marcar Nodos como Desconectados" en la página de Posibles Nodos Desconectados.  El menú de "Conectar Nodos Desconectados" no se debe usar cuando la vía ya tiene un nodo conectado al nodo destino porque entonces la vía tendría dos nodos sobrepuestos.
 - Añadidos mapas a las páginas de PDIs. 

@@ -138,15 +138,6 @@ namespace GpsYv.ManejadorDeMapa
 
       return esIgual;
     }
-
-
-    /// <summary>
-    /// Obtiene una clave única para este objecto.
-    /// </summary>
-    public override int GetHashCode()
-    {
-      throw new NotImplementedException("Método GetHashCode() no está implementado.");
-    }
     #endregion
   }
 }
