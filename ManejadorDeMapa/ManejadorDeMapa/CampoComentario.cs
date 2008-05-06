@@ -104,7 +104,6 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       Comentario = laLínea.Substring(1);
-      Comentario = string.Empty;
     }
 
 

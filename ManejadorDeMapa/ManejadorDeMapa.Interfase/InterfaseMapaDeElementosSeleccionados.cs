@@ -84,7 +84,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   {
     #region Campos
     private ListView miLista;
-
     #endregion
 
     #region Eventos
@@ -140,8 +139,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     {
       // Comienza el timer.
       // Este manejador de eventos está implementado con un timer porque a veces
-      // se generan muchos eventos consecutivos y no es necesario
-      // mostrar el mapa para todos ellos.
+      // se generan muchos eventos consecutivos y no es necesario mostrar
+      // el mapa para todos ellos.
       miTimerCambioDeItemsSeleccionados.Stop();
       miTimerCambioDeItemsSeleccionados.Start();
     }
@@ -167,8 +166,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Nos salimos si no hay elementos seleccionados.
       if (miLista.SelectedIndices.Count == 0)
       {
+        MuestraTodoElMapa = true;
         return;
       }
+
+      // Desabilita el mapa.
+      Enabled = false;
 
       List<ElementoDelMapa> elementos = new List<ElementoDelMapa>();
       foreach (int indice in miLista.SelectedIndices)

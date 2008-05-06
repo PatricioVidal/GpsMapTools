@@ -96,7 +96,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private readonly Brush miPincelDeBordeDeNodo = Brushes.Black;
     private readonly Pen miLápizDeViaDestino = new Pen(Color.LightSalmon, 11);
     private readonly Brush miPincelDePosibleNodoDesconectado = Brushes.Red;
-    private readonly Color miColorItemEditado = Color.Yellow;
+    private readonly Color miColorItemEditado = Color.LightGreen;
     #endregion
 
     #region Propiedades
@@ -173,7 +173,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         }
       };
 
-
       // Añade menú "Guardar archivo de PDIs para localización de Nodos Desconectados". 
       miMenú.Items.Add(new ToolStripSeparator());
       ToolStripMenuItem menú = new ToolStripMenuItem("Guardar archivo de PDIs para localización de Nodos Desconectados");
@@ -195,8 +194,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #region Métodos Privados
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
-      miLista.RegeneraLista();
-
       // Borra las polilíneas y puntos adicionales que pudieran estar dibujadas en el mapa.
       miMapa.PolilíneasAdicionales.Clear();
       miMapa.PuntosAddicionales.Clear();
@@ -403,44 +400,72 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         int índice = posibleNodoDesconectado.Indice;
         Vía víaDestino = posibleNodoDesconectado.VíaDestino;
         int índiceNodoDestino = posibleNodoDesconectado.IndiceNodoDestino;
+        bool laVíaTieneOtroNodoConLasMismasCoordenadas = false;
 
-        // Conecta el nodo si está desconectado.
+        #region Cambia las coordenadas del nodo desconectado si no son iguales.
         Coordenadas coordenadasNodo = posibleNodoDesconectado.Coordenadas;
         Coordenadas coordenadasNodoDestino = posibleNodoDesconectado.CoordenadasNodoDestino;
         if (coordenadasNodo != coordenadasNodoDestino)
         {
-          vía.CambiaCoordenadas(
-            coordenadasNodoDestino,
-            índice,
-            razón);
+          // Antes the cambiar las coordenadas tenemos que asegurarnos que la vía no tiene
+          // otro nodo con esas coordenadas.
+          foreach (Coordenadas coordenadasNodoDeLaVía in vía.Coordenadas)
+          {
+            if (coordenadasNodoDeLaVía == coordenadasNodoDestino)
+            {
+              laVíaTieneOtroNodoConLasMismasCoordenadas = true;
+              break;
+            }
+          }
+
+          // Si la vía no tiene otro nodo con las mismas coordenadas
+          // entonces lo conectamos.
+          if (!laVíaTieneOtroNodoConLasMismasCoordenadas)
+          {
+            vía.CambiaCoordenadas(
+              coordenadasNodoDestino,
+              índice,
+              razón);
+          }
+        }
+        #endregion
+
+        // Si la vía tiene otro nodo con las mismas coordenadas
+        // entonces avisamos al usuario y no lo conectamos.
+        if (laVíaTieneOtroNodoConLasMismasCoordenadas)
+        {
+          MessageBox.Show(
+            string.Format("La Vía # {0} tiene otro nodo con las mismas coordenadas ({1}).\nEl nodo no se vá a conectar.", vía.Número, coordenadasNodo),
+            "Conecta Nodos Desconectados",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning);
+          continue;
         }
 
         #region Asegurarse que ambos nodos son ruteables.
-        // Si el posible nodo desconectado es ruteable entonces usamos
-        // su identificador global para el nodo destino.
-        if (vía.FiltroDeNodosDeRuta[índice])
-        {
-          // Busca el identificador global.
-          int identificadorGlobal = BuscaIdentificadorGlobal(vía, índice);
+        CampoNodoDeRuta campoNodoDeRuta = vía.CamposNodosDeRuta[índice];
+        CampoNodoDeRuta campoNodoDeRutaDestino = víaDestino.CamposNodosDeRuta[índiceNodoDestino];
 
+        // Si el posible nodo desconectado es de ruta y el nodo destino
+        // no es de ruta entonces usamos el identificador global del
+        // posible nodo desconectado para el nodo destino.
+        if ((campoNodoDeRuta != null) && (campoNodoDeRutaDestino == null))
+        {
           // Añade el nodo de ruta en la vía destino.
           víaDestino.AñadeNodoDeRuta(
-          índiceNodoDestino,
-          identificadorGlobal,
-          razón);
+            índiceNodoDestino,
+            campoNodoDeRuta.IndentificadorGlobal,
+            razón);
         }
-        // Si el nodo destino es ruteable entonces usamos
-        // su identificador global para el nodo desconectado.
-        else if (víaDestino.FiltroDeNodosDeRuta[índiceNodoDestino])
+        // Si el nodo destino es de ruta entonces usamos el identificador
+        // global del nodo destino para el nodo desconectado.
+        else if (campoNodoDeRutaDestino != null)
         {
-          // Busca el identificador global.
-          int identificadorGlobal = BuscaIdentificadorGlobal(víaDestino, índiceNodoDestino);
-
-          // Añade el nodo de ruta en la vía destino.
+          // Añade el nodo de ruta en la vía.
           vía.AñadeNodoDeRuta(
-          índice,
-          identificadorGlobal,
-          razón);
+            índice,
+            campoNodoDeRutaDestino.IndentificadorGlobal,
+            razón);
         }
         // Si ninguno de los nodos es de ruta entonces generamos un nuevo
         // índentificador global.
@@ -452,49 +477,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           {
             foreach (CampoNodoDeRuta campo in víaDelMapa.CamposNodosDeRuta)
             {
-              máximoIndentificadorGlobal = Math.Max(máximoIndentificadorGlobal, campo.IndentificadorGlobal);
+              if (campo != null)
+              {
+                máximoIndentificadorGlobal = Math.Max(máximoIndentificadorGlobal, campo.IndentificadorGlobal);
+              }
             }
           }
           int nuevoIndentificadorGlobal = máximoIndentificadorGlobal + 1;
 
           // Añade el nodo de ruta a ambas vías.
           vía.AñadeNodoDeRuta(
-          índice,
-          nuevoIndentificadorGlobal,
-          razón);
+            índice,
+            nuevoIndentificadorGlobal,
+            razón);
           víaDestino.AñadeNodoDeRuta(
-          índiceNodoDestino,
-          nuevoIndentificadorGlobal,
-          razón);
+            índiceNodoDestino,
+            nuevoIndentificadorGlobal,
+            razón);
         }
         #endregion
       }
       ManejadorDeMapa.RestableceEventos();
+
+      // Notifica la edición.
+      miMenú.EnvíaEventoEditó();
       #endregion
-    }
-
-
-    private static int BuscaIdentificadorGlobal(Vía laVía, int elIndice)
-    {
-      // Buscamos el campo de nodo de ruta para el índice.
-      CampoNodoDeRuta campoNodoDeRuta = null;
-      foreach (CampoNodoDeRuta campo in laVía.CamposNodosDeRuta)
-      {
-        if (campo.IndiceDeCoordenadas == elIndice)
-        {
-          campoNodoDeRuta = campo;
-          break;
-        }
-      }
-
-      // Lanzamos un error si no encontramos el campo de nodo de ruta.
-      if (campoNodoDeRuta == null)
-      {
-        throw new ArgumentException(string.Format("No se encontró campo de nodo de ruta con índice {0}", elIndice));
-      }
-
-      int identificadorGlobal = campoNodoDeRuta.IndentificadorGlobal;
-      return identificadorGlobal;
     }
 
 

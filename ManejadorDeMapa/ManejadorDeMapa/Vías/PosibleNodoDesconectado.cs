@@ -89,7 +89,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Obtiene las coordenadas del posible nodo desconectado.
     /// </summary>
-    public Coordenadas Coordenadas { get; private set; }
+    public Coordenadas Coordenadas
+    {
+       get
+       {
+         return Vía.Coordenadas[Indice];
+       }
+    }
 
     /// <summary>
     /// Obtiene la Via destino.
@@ -104,7 +110,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Obtiene la coordenadas del nodo destino.
     /// </summary>
-    public Coordenadas CoordenadasNodoDestino { get; private set; }
+    public Coordenadas CoordenadasNodoDestino
+    {
+      get
+      {
+        return VíaDestino.Coordenadas[IndiceNodoDestino];
+      }
+    }
 
     /// <summary>
     /// Obtiene la distancia.
@@ -135,10 +147,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       Vía = laVía;
       Indice = elIndice;
-      Coordenadas = laVía.Coordenadas[elIndice];
       VíaDestino = laVíaDestino;
       IndiceNodoDestino = elIndiceDelNodoDestino;
-      CoordenadasNodoDestino = laVíaDestino.Coordenadas[elIndiceDelNodoDestino];
       Distancia = laDistancia;
       Detalle = elDetalle;
     }

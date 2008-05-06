@@ -214,13 +214,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       return etiquetas;
     }
-    #endregion
 
-    #region Métodos Privados
+    
     /// <summary>
     /// Envía evento Editó.
     /// </summary>
-    protected void EnvíaEventoEditó()
+    public void EnvíaEventoEditó()
     {
       // Envía el evento indicando que se editaron elementos.
       if (Editó != null)
@@ -228,8 +227,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         Editó(this, new EventArgs());
       }
     }
+    #endregion
 
-
+    #region Métodos Privados
     private void EnMenúAbriendo(object sender, CancelEventArgs e)
     {
       // Pone el número de elementos seleccionados en el primer menú para informar

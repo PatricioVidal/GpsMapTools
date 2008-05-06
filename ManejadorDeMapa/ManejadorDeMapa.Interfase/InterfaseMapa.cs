@@ -745,7 +745,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         // Dibuja los nodos.
         foreach (CampoNodoDeRuta nodo in vía.CamposNodosDeRuta)
         {
-          if (nodo.IndiceDeCoordenadas < vía.Coordenadas.Length)
+          if ((nodo != null) && (nodo.IndiceDeCoordenadas < vía.Coordenadas.Length))
           {
             Coordenadas coordenadas = vía.Coordenadas[nodo.IndiceDeCoordenadas];
             const int tamaño = 3;
@@ -947,7 +947,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       {
         if (rectánguloOriginal != miRectánguloVisibleActivoEnCoordenadas)
         {
-          Refresh();
+          if (Enabled)
+          {
+            Refresh();
+          }
         }
       }
     }

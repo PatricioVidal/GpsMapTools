@@ -95,16 +95,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Obtiene los campos nodos de ruta de la Vía.
+    /// Obtiene los campos de nodos de ruta indexados por indice de coordenada.
     /// </summary>
-    public List<CampoNodoDeRuta> CamposNodosDeRuta { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene unvector de variables lógicas que indican cual nodo
-    /// es de ruta.
-    /// </summary>
-    public bool[] FiltroDeNodosDeRuta { get; private set; }
+    public CampoNodoDeRuta[] CamposNodosDeRuta { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -125,26 +118,20 @@ namespace GpsYv.ManejadorDeMapa.Vías
              laClase,
              losCampos)
     {
-      CamposNodosDeRuta = new List<CampoNodoDeRuta>();
       CampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
-      FiltroDeNodosDeRuta = new bool[Coordenadas.Length];
 
       // Busca los campos específicos de las vías.
       foreach (Campo campo in losCampos)
       {
-        CampoParámetrosDeRuta campoParámetrosDeRuta;
-        CampoNodoDeRuta campoNodo;
-        if ((campoParámetrosDeRuta = (campo as CampoParámetrosDeRuta)) != null)
+        CampoParámetrosDeRuta campoParámetrosDeRuta = campo as CampoParámetrosDeRuta;
+        if (campoParámetrosDeRuta != null)
         {
           CampoParámetrosDeRuta = campoParámetrosDeRuta;
           miTieneCampoParámetrosDeRutaEnCampos = true;
         }
-        else if ((campoNodo = campo as CampoNodoDeRuta) != null)
-        {
-          CamposNodosDeRuta.Add(campoNodo);
-          FiltroDeNodosDeRuta[campoNodo.IndiceDeCoordenadas] = true;
-        }
       }
+
+      CreaCamposNodosDeRuta();
     }
 
 
@@ -188,92 +175,124 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="laRazón">La razón.</param>
     public void AñadeNodoDeRuta(int elIndice, int elIdentificadorGlobal, string laRazón)
     {
-      // Si ya tiene un nodo de ruta en el índice entonces nos salimos.
-      if (FiltroDeNodosDeRuta[elIndice])
+      // Si ya tiene un nodo de ruta en el índice, pero con un identificador
+      // global distinto entonces actualizamos el campo.
+      // Si el identificador global es igual entonces no hacemos nada.
+      CampoNodoDeRuta campoNodoDeRutaActual = CamposNodosDeRuta[elIndice];
+      if (campoNodoDeRutaActual != null)
       {
-        return;
-      }
-
-      #region Añade el nodo de ruta en la posición correcta.
-      #region Ve si es necesario insertar el nodo de ruta.
-      // El nuevo nodo de ruta hay que insertarlo si tiene un
-      // índice de coordenadas menor que alguno de los nodos
-      // de ruta que ya existen.
-      int númeroDeNodosDeRuta = CamposNodosDeRuta.Count;
-      int últimoIndice = númeroDeNodosDeRuta - 1;
-      bool yaInsertóNodoDeRuta = false;
-      for (int i = 0; i < númeroDeNodosDeRuta; ++i)
-      {
-        CampoNodoDeRuta campo = CamposNodosDeRuta[i];
-        if (elIndice < campo.IndiceDeCoordenadas)
+        if (campoNodoDeRutaActual.IndentificadorGlobal != elIdentificadorGlobal)
         {
-          // Inserta en nuevo nodo de ruta solo si todavía
-          // no se ha insertado.
-          if (!yaInsertóNodoDeRuta)
+          // Actualiza el campo.
+          CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
+            campoNodoDeRutaActual.Identificador,
+            campoNodoDeRutaActual.Número,
+            elIndice,
+            elIdentificadorGlobal,
+            campoNodoDeRutaActual.EsExterno);
+          CambiaCampo(nuevoCampoNodoDeRuta, campoNodoDeRutaActual, laRazón);
+        }
+      }
+      else
+      {
+        #region Añade el nodo de ruta en la posición correcta.
+        #region Ve si es necesario insertar el nodo de ruta.
+        // El nuevo nodo de ruta hay que insertarlo si tiene un
+        // índice de coordenadas menor que alguno de los nodos
+        // de ruta que ya existen.
+        List<CampoNodoDeRuta> camposNodosDeRuta = new List<CampoNodoDeRuta>();
+        foreach (CampoNodoDeRuta campo in CamposNodosDeRuta)
+        {
+          if (campo != null)
           {
-            CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
-              CampoNodoDeRuta.IdentificadorDeNodo,
-              campo.Número,
-              elIndice,
-              elIdentificadorGlobal,
-              false);
-            CambiaCampo(nuevoCampoNodoDeRuta, campo, laRazón);
-            yaInsertóNodoDeRuta = true;
+            camposNodosDeRuta.Add(campo);
           }
+        }
+        int númeroDeNodosDeRuta = camposNodosDeRuta.Count;
+        int últimoIndice = númeroDeNodosDeRuta - 1;
+        bool yaInsertóNodoDeRuta = false;
+        for (int i = 0; i < númeroDeNodosDeRuta; ++i)
+        {
+          CampoNodoDeRuta campo = camposNodosDeRuta[i];
+          if (elIndice < campo.IndiceDeCoordenadas)
+          {
+            // Inserta en nuevo nodo de ruta solo si todavía
+            // no se ha insertado.
+            if (!yaInsertóNodoDeRuta)
+            {
+              CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
+                CampoNodoDeRuta.IdentificadorDeNodo,
+                campo.Número,
+                elIndice,
+                elIdentificadorGlobal,
+                false);
+              CambiaCampo(nuevoCampoNodoDeRuta, campo, laRazón);
+              yaInsertóNodoDeRuta = true;
+            }
 
-          #region Mueve los siguientes nodos.
-          // Una vez que se insertó el nodo de ruta entonces
-          // hay que mover todos los nodos siguientes.
-          int siguienteIndice = i + 1;
-          int siguienteNúmero = campo.Número + 1;
-          CampoNodoDeRuta campoNodoDeRuta = new CampoNodoDeRuta(
+            #region Mueve los siguientes nodos.
+
+            // Una vez que se insertó el nodo de ruta entonces
+            // hay que mover todos los nodos siguientes.
+            int siguienteIndice = i + 1;
+            int siguienteNúmero = campo.Número + 1;
+            CampoNodoDeRuta campoNodoDeRuta = new CampoNodoDeRuta(
               campo.Identificador,
               siguienteNúmero,
               campo.IndiceDeCoordenadas,
               campo.IndentificadorGlobal,
               campo.EsExterno);
 
-          // Si el siguiente índice es válido entonces tenemos que cambiar
-          // el nodo.
-          // Si no, entonces tenemos que añadir el nodo.
-          if (siguienteIndice <= últimoIndice)
-          {
-            CampoNodoDeRuta campoACambiar = CamposNodosDeRuta[siguienteIndice];
-            CambiaCampo(campoNodoDeRuta, campoACambiar, laRazón);
+            // Si el siguiente índice es válido entonces tenemos que cambiar
+            // el nodo.
+            // Si no, entonces tenemos que añadir el nodo.
+            if (siguienteIndice <= últimoIndice)
+            {
+              CampoNodoDeRuta campoACambiar = camposNodosDeRuta[siguienteIndice];
+              CambiaCampo(campoNodoDeRuta, campoACambiar, laRazón);
+            }
+            else
+            {
+              AñadeCampo(campoNodoDeRuta, laRazón);
+            }
+
+            #endregion
           }
-          else
-          {
-            AñadeCampo(campoNodoDeRuta, laRazón);
-          }
-          #endregion
         }
-      }
-      #endregion
 
-      // Si no se insertó el nodo de ruta quiere decir que debemos
-      // añadirlo de último.
-      if (!yaInsertóNodoDeRuta)
-      {
-        int númeroDeNodoDeRuta = númeroDeNodosDeRuta + 1;
-        CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
-          CampoNodoDeRuta.IdentificadorDeNodo,
-          númeroDeNodoDeRuta,
-          elIndice,
-          elIdentificadorGlobal,
-          false);
-        AñadeCampo(nuevoCampoNodoDeRuta, laRazón);
-      }
-      #endregion
+        #endregion
 
-      // Regenera los campos de la clase.
-      CamposNodosDeRuta.Clear();
+        // Si no se insertó el nodo de ruta quiere decir que debemos
+        // añadirlo de último.
+        if (!yaInsertóNodoDeRuta)
+        {
+          int númeroDeNodoDeRuta = númeroDeNodosDeRuta + 1;
+          CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
+            CampoNodoDeRuta.IdentificadorDeNodo,
+            númeroDeNodoDeRuta,
+            elIndice,
+            elIdentificadorGlobal,
+            false);
+          AñadeCampo(nuevoCampoNodoDeRuta, laRazón);
+        }
+
+        #endregion
+      }
+
+      CreaCamposNodosDeRuta();
+    }
+    #endregion
+
+    #region Métodos Privados
+    private void CreaCamposNodosDeRuta()
+    {
+      CamposNodosDeRuta = new CampoNodoDeRuta[Coordenadas.Length];
       foreach (Campo campo in Campos)
       {
         CampoNodoDeRuta campoNodo = campo as CampoNodoDeRuta;
         if (campoNodo != null)
         {
-          CamposNodosDeRuta.Add(campoNodo);
-          FiltroDeNodosDeRuta[campoNodo.IndiceDeCoordenadas] = true;
+          CamposNodosDeRuta[campoNodo.IndiceDeCoordenadas] = campoNodo;
         }
       }
     }

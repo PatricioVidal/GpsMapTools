@@ -1,5 +1,6 @@
 Versión 1.27
-
+- Mejorada la lógica de detección de nodos desconectados.
+- Arreglado error que causaba que se perdieran los comentarios al grabar los mapas.
 
 Versión 1.26
 - Ahora los Indices de Ciudad de PDIs y Vías que están fuera de ciudades son eliminados.
