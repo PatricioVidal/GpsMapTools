@@ -167,7 +167,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Diagramas de Clases\Campos.cd" />
     <None Include="Diagramas de Clases\ManejadorDeMapa.cd" />
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />

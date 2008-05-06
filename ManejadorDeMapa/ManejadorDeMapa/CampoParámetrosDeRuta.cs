@@ -71,8 +71,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
@@ -155,7 +153,7 @@ namespace GpsYv.ManejadorDeMapa
       miLímiteDeVelocidad = new LímiteDeVelocidad(Convert.ToInt32(partes[0]));
       miClaseDeRuta = new ClaseDeRuta(Convert.ToInt32(partes[1]));
       misOtrosParámetros = new bool[NúmeroDeOtrosParámetros];
-      int otrosParámetrosIndiceOffset = 2;
+      const int otrosParámetrosIndiceOffset = 2;
       for (int i = 0; i < NúmeroDeOtrosParámetros; ++i)
       {
         int valor = Convert.ToInt32(partes[i + otrosParámetrosIndiceOffset]);
@@ -206,7 +204,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      char separador = ',';
+      const char separador = ',';
       StringBuilder texto = new StringBuilder();
       texto.Append(miLímiteDeVelocidad.Indice);
       texto.Append(separador);
@@ -235,23 +233,33 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
+      // Si es el mismo objecto entonces es igual.
+      if (ReferenceEquals(elObjecto, this))
+      {
+        return true;
+      }
+
+      CampoParámetrosDeRuta comparador = elObjecto as CampoParámetrosDeRuta;
+
       // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
+      if (comparador == null)
       {
         return false;
       }
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoParámetrosDeRuta))
-      {
-        return false;
-      }
-
-      // Compara latitud y longitud.
-      CampoParámetrosDeRuta comparador = (CampoParámetrosDeRuta)elObjecto;
-      bool esIgual = (this.ToString() == comparador.ToString());
+      // Compara objecto.
+      bool esIgual = (ToString() == comparador.ToString());
 
       return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
     }
     #endregion
   }

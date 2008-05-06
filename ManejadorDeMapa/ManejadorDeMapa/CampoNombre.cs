@@ -71,8 +71,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -131,23 +129,33 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">EL objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
+      // Si es el mismo objecto entonces es igual.
+      if (ReferenceEquals(elObjecto, this))
+      {
+        return true;
+      }
+
+      CampoNombre comparador = elObjecto as CampoNombre;
+
       // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
+      if (comparador == null)
       {
         return false;
       }
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoNombre))
-      {
-        return false;
-      }
-
-      // Compara latitud y longitud.
-      CampoNombre comparador = (CampoNombre)elObjecto;
+      // Compara objecto.
       bool esIgual = (Nombre == comparador.Nombre);
 
       return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
     }
     #endregion
   }

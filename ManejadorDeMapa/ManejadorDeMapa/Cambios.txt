@@ -1,3 +1,6 @@
+Versión 1.27
+
+
 Versión 1.26
 - Ahora los Indices de Ciudad de PDIs y Vías que están fuera de ciudades son eliminados.
 - Arreglado error que borraba la información de Parámetros de Ruta de las Vías.

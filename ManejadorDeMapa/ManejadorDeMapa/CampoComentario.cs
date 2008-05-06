@@ -81,21 +81,12 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public class CampoComentario : Campo
   {
-    #region Campos
-    private readonly string miComentario = string.Empty;
-    #endregion
-
     #region Propiedades
     /// <summary>
     /// Devuelve el texto del comentario.
     /// </summary>
-    public string Comentario
-    {
-      get
-      {
-        return miComentario;
-      }
-    }
+    public string Comentario { get; private set; }
+
     #endregion
 
     #region Métodos Públicos
@@ -112,7 +103,8 @@ namespace GpsYv.ManejadorDeMapa
         throw new ArgumentException(string.Format("La línea tiene que comenzar con ';', pero es {0}", laLínea));
       }
 
-      miComentario = laLínea.Substring(1);
+      Comentario = laLínea.Substring(1);
+      Comentario = string.Empty;
     }
 
 
@@ -121,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      return miComentario;
+      return Comentario;
     }
 
 
@@ -132,24 +124,34 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">EL objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
+      // Si es el mismo objecto entonces es igual.
+      if (ReferenceEquals(elObjecto, this))
+      {
+        return true;
+      }
+
+      CampoComentario comparador = elObjecto as CampoComentario;
+
       // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
+      if (comparador == null)
       {
         return false;
       }
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoComentario))
-      {
-        return false;
-      }
-
-      // Compara latitud y longitud.
-      CampoComentario comparador = (CampoComentario)elObjecto;
+      // Compara objecto.
       bool esIgual = (Comentario == comparador.Comentario);
 
       return esIgual;
     }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
+    }    
     #endregion
   }
 }

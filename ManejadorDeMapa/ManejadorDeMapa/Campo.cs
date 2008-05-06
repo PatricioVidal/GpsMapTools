@@ -71,8 +71,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -81,21 +79,11 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public abstract class Campo
   {
-    #region Campos
-    private readonly string miIdentificador;
-    #endregion
-
     #region Propiedades
     /// <summary>
     /// Devuelve el identificador del campo.
     /// </summary>
-    public string Identificador
-    {
-      get
-      {
-        return miIdentificador;
-      }
-    }
+    public string Identificador { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -103,9 +91,9 @@ namespace GpsYv.ManejadorDeMapa
     /// Constructor.
     /// </summary>
     /// <param name="elIdentificador">El identificador del campo.</param>
-    public Campo(string elIdentificador)
+    protected Campo(string elIdentificador)
     {
-      miIdentificador = elIdentificador;
+      Identificador = elIdentificador;
     }
 
 
@@ -118,7 +106,7 @@ namespace GpsYv.ManejadorDeMapa
       Campo elPrimerElemento,
       Campo elSegundoElemento)
     {
-      bool esIgual = object.Equals(elPrimerElemento, elSegundoElemento);
+      bool esIgual = Equals(elPrimerElemento, elSegundoElemento);
 
       return esIgual;
     }
@@ -133,7 +121,7 @@ namespace GpsYv.ManejadorDeMapa
       Campo elPrimerElemento,
       Campo elSegundoElemento)
     {
-      return !(elPrimerElemento == elSegundoElemento);
+      return !Equals(elPrimerElemento, elSegundoElemento);
     }
 
 
@@ -141,8 +129,8 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve una variable lógica que indica si un objeto
     /// dado es igual.
     /// </summary>
-    /// <param name="elObjecto">EL objecto dado.</param>
-    public override abstract bool Equals(object elObjecto);
+    /// <param name="elObjecto">El objecto dado.</param>
+    public abstract override bool Equals(object elObjecto);
 
 
     /// <summary>

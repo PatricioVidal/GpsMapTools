@@ -219,6 +219,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         throw new NotImplementedException();
       }
 
+      public override int GetHashCode()
+      {
+        throw new NotImplementedException("Método GetHashCode() no está implementado.");
+      }
+
       public override string ToString()
       {
         throw new NotImplementedException();

@@ -71,7 +71,6 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
@@ -153,36 +152,49 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">EL objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
+      // Si es el mismo objecto entonces es igual.
+      if (ReferenceEquals(elObjecto, this))
+      {
+        return true;
+      }
+
+      CampoCoordenadas comparador = elObjecto as CampoCoordenadas;
+
       // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
+      if (comparador == null)
       {
         return false;
       }
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoCoordenadas))
-      {
-        return false;
-      }
-
-      // Compara latitud y longitud.
-      CampoCoordenadas comparador = (CampoCoordenadas)elObjecto;
+      // Compara objecto.
       bool esIgual = false;
 
-      if (comparador.Coordenadas.Length == Coordenadas.Length)
+      if (Nivel == comparador.Nivel)
       {
-        esIgual = true;
-        for (int i = 0; i < Coordenadas.Length; ++i)
+        if (comparador.Coordenadas.Length == Coordenadas.Length)
         {
-          if (comparador.Coordenadas[i] != Coordenadas[i])
+          esIgual = true;
+          for (int i = 0; i < Coordenadas.Length; ++i)
           {
-            esIgual = false;
-            break;
+            if (comparador.Coordenadas[i] != Coordenadas[i])
+            {
+              esIgual = false;
+              break;
+            }
           }
         }
       }
 
       return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
     }
     #endregion
   }

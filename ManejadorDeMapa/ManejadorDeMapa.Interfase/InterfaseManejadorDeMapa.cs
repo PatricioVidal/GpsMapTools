@@ -110,7 +110,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         miMenúProcesar};
 
       // Pone el nombre.
-      this.Text = VentanaDeAcerca.AssemblyDescription + " - " + VentanaDeAcerca.AssemblyCompany;
+      this.Text = VentanaDeAcerca.AssemblyName + " - " + VentanaDeAcerca.AssemblyCompany;
 
       #region Asigna los ToolTips de los menús.
       miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;

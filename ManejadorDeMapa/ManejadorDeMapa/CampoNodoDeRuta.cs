@@ -159,25 +159,35 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">EL objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
+      // Si es el mismo objecto entonces es igual.
+      if (ReferenceEquals(elObjecto, this))
+      {
+        return true;
+      }
+
+      CampoNodoDeRuta comparador = elObjecto as CampoNodoDeRuta;
+
       // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
+      if (comparador == null)
       {
         return false;
       }
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is CampoNodoDeRuta))
-      {
-        return false;
-      }
-
-      // Compara los parámetros del nodo.
-      CampoNodoDeRuta comparador = (CampoNodoDeRuta)elObjecto;
+      // Compara objecto.
       bool esIgual = ((IndentificadorGlobal == comparador.IndentificadorGlobal) &&
         (IndiceDeCoordenadas == comparador.IndiceDeCoordenadas) &&
         (EsExterno == comparador.EsExterno));
-      
+
       return esIgual;
+    }
+
+
+    /// <summary>
+    /// Obtiene una clave única para este objecto.
+    /// </summary>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Método GetHashCode() no está implementado.");
     }
     #endregion
   }
