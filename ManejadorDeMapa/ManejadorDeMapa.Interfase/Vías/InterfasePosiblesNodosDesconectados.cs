@@ -163,15 +163,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       // Escucha eventos.
       miMapa.DibujóElementos += EnDibujóElementos;
-      miMenú.Editó += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        // Marca los Items editados.
-        foreach(int i in miLista.SelectedIndices)
+      miMenú.Editó += delegate
         {
-          ListViewItem item = miLista.Items[i];
-          item.BackColor = miColorItemEditado;         
-        }
-      };
+          // Marca los Items editados.
+          foreach(int i in miLista.SelectedIndices)
+          {
+            ListViewItem item = miLista.Items[i];
+            item.BackColor = miColorItemEditado;         
+          }
+
+          // Regenera el mapa.
+          miMapa.DibujaElementos();
+        };
 
       // Añade menú "Guardar archivo de PDIs para localización de Nodos Desconectados". 
       miMenú.Items.Add(new ToolStripSeparator());
@@ -523,13 +526,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Warning);
 
-      #region Conectar Nodos Desconectados.
+      #region Marca Nodos como Desconectados.
       if (respuesta != DialogResult.Yes)
       {
         return;
       }
 
-      // Cambia las vías.
+      // Añade el attributo a las vías.
       ManejadorDeMapa.SuspendeEventos();
       IList<PosibleNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<PosibleNodoDesconectado>();
       foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
@@ -539,6 +542,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         posibleNodoDesconectado.Vía.AñadeAtributo(atributo);
       }
       ManejadorDeMapa.RestableceEventos();
+
+      // Notifica la edición.
+      miMenú.EnvíaEventoEditó();
       #endregion
     }
     #endregion

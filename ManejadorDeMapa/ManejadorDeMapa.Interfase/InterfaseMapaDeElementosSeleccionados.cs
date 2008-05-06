@@ -134,34 +134,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
     #endregion
 
-    #region Métodos Privados
-    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentos)
-    {
-      // Comienza el timer.
-      // Este manejador de eventos está implementado con un timer porque a veces
-      // se generan muchos eventos consecutivos y no es necesario mostrar
-      // el mapa para todos ellos.
-      miTimerCambioDeItemsSeleccionados.Stop();
-      miTimerCambioDeItemsSeleccionados.Start();
-    }
 
-
-    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
-    {
-      EnCambioDeItemsSeleccionados(laLista, (EventArgs)losArgumentos);
-    }
-
-
-    private void EnTimerCambioDeItemsSeleccionadosTick(object sender, EventArgs e)
-    {
-      // Detiene el timer para no seguir dibujando el mapa repetidamente.
-      miTimerCambioDeItemsSeleccionados.Stop();
-
-      DibujaElementos();
-    }
-
-
-    private void DibujaElementos()
+    #region Métodos Públicos
+    /// <summary>
+    /// Dibuja el mapa resaltando los elementos seleccionados.
+    /// </summary>
+    public void DibujaElementos()
     {
       // Nos salimos si no hay elementos seleccionados.
       if (miLista.SelectedIndices.Count == 0)
@@ -213,6 +191,33 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Dibuja el mapa.
       Enabled = true;
       Refresh();
+    }
+    #endregion
+
+    #region Métodos Privados
+    private void EnCambioDeItemsSeleccionados(object laLista, EventArgs losArgumentos)
+    {
+      // Comienza el timer.
+      // Este manejador de eventos está implementado con un timer porque a veces
+      // se generan muchos eventos consecutivos y no es necesario mostrar
+      // el mapa para todos ellos.
+      miTimerCambioDeItemsSeleccionados.Stop();
+      miTimerCambioDeItemsSeleccionados.Start();
+    }
+
+
+    private void EnCambioDeItemsSeleccionados(object laLista, ListViewVirtualItemsSelectionRangeChangedEventArgs losArgumentos)
+    {
+      EnCambioDeItemsSeleccionados(laLista, (EventArgs)losArgumentos);
+    }
+
+
+    private void EnTimerCambioDeItemsSeleccionadosTick(object sender, EventArgs e)
+    {
+      // Detiene el timer para no seguir dibujando el mapa repetidamente.
+      miTimerCambioDeItemsSeleccionados.Stop();
+
+      DibujaElementos();
     }
 
 

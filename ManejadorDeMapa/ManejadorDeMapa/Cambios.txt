@@ -1,7 +1,15 @@
-Versión 1.27
-- Mejorada la lógica de detección de nodos desconectados.
-- Arreglado error que causaba que se perdieran los comentarios al grabar los mapas.
+Versión 1.28
+- Ahora cuando se edita un Nodo Desconectado en mapa se actualiza correctamente.
+- Ahora cuando de marca un nodo como "Desconectado" también se marca de color verde en la lista pra que el usuario sepa que se editó el nodo.
 
+Versión 1.27
+- Mejorada la lógica de detección de nodos desconectados:
+    - Se mejoró la lógica para que no se detectaran como nodo desconectados aquellos casos cuando hay dos nodos cercanos sin conectar pero las vía si está conectada en el nodo siguiente. 
+    - Cuando se usa el menú de "Conectar Nodos Desconectados" la lógica ahora chequea que no se vaya a poner un nodo sobrepuesto.  En ese caso se muestra un mensaje al usuario y no se hace la conección.
+    - Cuando dos nodos de ruta coinciden ahora se chequea que el Identificador Global de los nodos sea igual.
+    - Se mejoró la visualizacón del mapa de manera que no haya un "brinco" cuando se seleccionan los nodos desconectados en la lista.
+    - Ahora cuando se conectan los nodos se marcan de color verde en la lista para que el usuario sepa cuales a editado.
+ 
 Versión 1.26
 - Ahora los Indices de Ciudad de PDIs y Vías que están fuera de ciudades son eliminados.
 - Arreglado error que borraba la información de Parámetros de Ruta de las Vías.
