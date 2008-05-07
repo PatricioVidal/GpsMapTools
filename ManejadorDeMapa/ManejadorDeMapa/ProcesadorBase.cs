@@ -245,10 +245,11 @@ namespace GpsYv.ManejadorDeMapa
           miEscuchadorDeEstatus.Progreso = NúmeroDeElementoProcesándose;
           if (miReportaEstatus)
           {
-            Estatus = string.Format("Procesando {0} # {1}/{2}",
+            Estatus = string.Format("Procesando {0} # {1}/{2}: [{3}]",
                                     miNombreDeElemento,
                                     NúmeroDeElementoProcesándose,
-                                    NúmeroDeElementos);
+                                    NúmeroDeElementos,
+                                    NúmeroDeProblemasDetectados);
 
             miReportaEstatus = false;
           }

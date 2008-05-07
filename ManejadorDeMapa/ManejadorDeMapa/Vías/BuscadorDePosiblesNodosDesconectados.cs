@@ -82,7 +82,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
   {
     #region Campos
     private readonly List<PosibleNodoDesconectado> misPosiblesNodosDesconectados = new List<PosibleNodoDesconectado>();
-    private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
     private int miDistanciaMáxima = 5;
     #endregion
 
@@ -152,7 +151,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
     protected override void ComenzóAProcesar()
     {
       misPosiblesNodosDesconectados.Clear();
-      misVíasYaProcesadas.Clear();
 
       base.ComenzóAProcesar();
     }
@@ -392,7 +390,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       misPosiblesNodosDesconectados.Clear();
-      misVíasYaProcesadas.Clear();
 
       // Pone al Procesador en estado inválido.
       Invalida();

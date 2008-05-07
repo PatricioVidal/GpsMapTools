@@ -190,11 +190,7 @@ namespace GpsYv.ManejadorDeMapa
       Coordenadas elPrimerElemento,
       Coordenadas elSegundoElemento)
     {
-      bool esIgual = (
-        (elPrimerElemento.Latitud == elSegundoElemento.Latitud) &&
-        (elPrimerElemento.Longitud == elSegundoElemento.Longitud));
-
-      return esIgual;
+      return Equals(elPrimerElemento, elSegundoElemento);
     }
 
 
@@ -207,7 +203,7 @@ namespace GpsYv.ManejadorDeMapa
       Coordenadas elPrimerElemento,
       Coordenadas elSegundoElemento)
     {
-      return !(elPrimerElemento == elSegundoElemento);
+      return !Equals(elPrimerElemento, elSegundoElemento);
     }
 
 
@@ -218,21 +214,18 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
-      // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
-      {
-        return false;
-      }
+      Coordenadas comparador = elObjecto as Coordenadas;
 
-      // Si el objecto no es del mismo tipo entonces no puede ser igual.
-      if (!(elObjecto is Coordenadas))
+      // Si el objeto es nulo entonces no puede ser igual.
+      if (comparador == null)
       {
         return false;
       }
 
       // Compara latitud y longitud.
-      Coordenadas comparador = (Coordenadas)elObjecto;
-      bool esIgual = (this == comparador);
+      bool esIgual = (
+        (Latitud == comparador.Latitud) &&
+        (Longitud == comparador.Longitud));
 
       return esIgual;
     }

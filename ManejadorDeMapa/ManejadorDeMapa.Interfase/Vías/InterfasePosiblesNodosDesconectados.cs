@@ -96,6 +96,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private readonly Brush miPincelDeBordeDeNodo = Brushes.Black;
     private readonly Pen miLápizDeViaDestino = new Pen(Color.LightSalmon, 11);
     private readonly Brush miPincelDePosibleNodoDesconectado = Brushes.Red;
+    private readonly Brush miPincelDeNodoDeRuta = Brushes.Cyan;
+    private readonly Brush miPincelDeNodo = Brushes.White;
     private readonly Color miColorItemEditado = Color.LightGreen;
     #endregion
 
@@ -238,15 +240,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       double máximaLongitud = double.NegativeInfinity;
 
       // Dibuja los nodos como puntos addicionales para resaltarlos.
-      foreach(int i in miLista.SelectedIndices)
+      foreach(int índiceSeleccionado in miLista.SelectedIndices)
       {
-        ElementoConEtiqueta elemento = (ElementoConEtiqueta)miLista.Items[i].Tag;
+        ElementoConEtiqueta elemento = (ElementoConEtiqueta)miLista.Items[índiceSeleccionado].Tag;
         PosibleNodoDesconectado posibleNodoDesconectado = (PosibleNodoDesconectado)elemento.Etiqueta;
 
         // Dibuja la vía destino.
         miMapa.PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
           posibleNodoDesconectado.VíaDestino.Coordenadas,
           miLápizDeViaDestino));
+
+        // Dibuja los nodos y los nodos de ruta
+        DibujaNodos(posibleNodoDesconectado.Vía);
+        DibujaNodos(posibleNodoDesconectado.VíaDestino);
 
         // Dibuja el nodo destino.
         miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
@@ -280,6 +286,28 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         (float)(máximaLongitud - mínimaLongitud) + (2 * margen),
         (float)(máximaLatitud - mínimaLatitud) + (2 * margen));
       miMapa.RectánguloVisibleEnCoordenadas = rectánguloVisible;
+    }
+
+
+    private void DibujaNodos(Vía laVía)
+    {
+      for (int i = 0; i < laVía.Coordenadas.Length; ++i)
+      {
+        if (laVía.CamposNodosDeRuta[i] != null)
+        {
+          miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+            laVía.Coordenadas[i],
+            miPincelDeNodoDeRuta,
+            11));
+        }
+        else
+        {
+          miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
+            laVía.Coordenadas[i],
+            miPincelDeNodo,
+            5));
+        }
+      }
     }
 
     
@@ -475,18 +503,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         else
         {
           // Genera un nuevo identificador global.
-          int máximoIndentificadorGlobal = 0;
-          foreach (Vía víaDelMapa in ManejadorDeMapa.ManejadorDeVías.Elementos)
-          {
-            foreach (CampoNodoDeRuta campo in víaDelMapa.CamposNodosDeRuta)
-            {
-              if (campo != null)
-              {
-                máximoIndentificadorGlobal = Math.Max(máximoIndentificadorGlobal, campo.IndentificadorGlobal);
-              }
-            }
-          }
-          int nuevoIndentificadorGlobal = máximoIndentificadorGlobal + 1;
+          int nuevoIndentificadorGlobal = GeneraNuevoIdentificadorGlobal();
 
           // Añade el nodo de ruta a ambas vías.
           vía.AñadeNodoDeRuta(
@@ -505,6 +522,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Notifica la edición.
       miMenú.EnvíaEventoEditó();
       #endregion
+    }
+
+
+    private int GeneraNuevoIdentificadorGlobal()
+    {
+      int máximoIndentificadorGlobal = 0;
+      foreach (Vía víaDelMapa in ManejadorDeMapa.ManejadorDeVías.Elementos)
+      {
+        foreach (CampoNodoDeRuta campo in víaDelMapa.CamposNodosDeRuta)
+        {
+          if (campo != null)
+          {
+            máximoIndentificadorGlobal = Math.Max(máximoIndentificadorGlobal, campo.IndentificadorGlobal);
+          }
+        }
+      }
+      int nuevoIndentificadorGlobal = máximoIndentificadorGlobal + 1;
+      return nuevoIndentificadorGlobal;
     }
 
 

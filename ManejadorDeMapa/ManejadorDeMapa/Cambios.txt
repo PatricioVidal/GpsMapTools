@@ -1,3 +1,6 @@
+Versión 1.29
+- Ahora se muestran en detalle los nodos de las vías seleccionadas en la página de Posibles Nodos Desconectados.
+
 Versión 1.28
 - Ahora cuando se edita un Nodo Desconectado en mapa se actualiza correctamente.
 - Ahora cuando de marca un nodo como "Desconectado" también se marca de color verde en la lista pra que el usuario sepa que se editó el nodo.
