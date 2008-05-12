@@ -1,5 +1,6 @@
 Versión 1.29
-
+- Añadido botón para actualizar la lista en la página de Posibles Nodos Desconectados. Este botón actualiza la lista de posibles nodos desconectados pero solamente usando las vías que están en la lista. Esto hace el proceso mucho mas rápido.
+- Interno: Creada clase Nodo.
 
 Versión 1.28
 - Ahora se muestran en detalle los nodos de las vías seleccionadas en la página de Posibles Nodos Desconectados.
