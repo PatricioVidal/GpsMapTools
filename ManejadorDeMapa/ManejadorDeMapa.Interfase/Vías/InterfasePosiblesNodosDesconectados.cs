@@ -96,7 +96,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private readonly Brush miPincelDeBordeDeNodo = Brushes.Black;
     private readonly Pen miLápizDeViaDestino = new Pen(Color.LightSalmon, 11);
     private readonly Brush miPincelDePosibleNodoDesconectado = Brushes.Red;
-    private readonly Brush miPincelDeNodoDeRuta = Brushes.Cyan;
+    private readonly Brush miPincelDeNodoRuteable = Brushes.Cyan;
     private readonly Brush miPincelDeNodo = Brushes.White;
     private readonly Color miColorItemEditado = Color.LightGreen;
     #endregion
@@ -126,6 +126,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           miBuscadorDePosiblesNodosDesconectados.Invalidado += EnInvalidado;
           miBuscadorDePosiblesNodosDesconectados.Procesó += EnSeBuscaronPosiblesNodosDesconectados;
           InicializaDistanciaMáxima();
+          ManejadorDeMapa.MapaNuevo += delegate {
+              InicializaListaYMapa();              
+            };
         }
 
         // Pone el manejador de mapa en los componentes.
@@ -165,18 +168,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       // Escucha eventos.
       miMapa.DibujóElementos += EnDibujóElementos;
-      miMenú.Editó += delegate
-        {
-          // Marca los Items editados.
-          foreach(int i in miLista.SelectedIndices)
-          {
-            ListViewItem item = miLista.Items[i];
-            item.BackColor = miColorItemEditado;         
-          }
-
-          // Regenera el mapa.
-          miMapa.DibujaElementos();
-        };
+      miMenú.Editó += EnMenúEditó;
 
       // Añade menú "Guardar archivo de PDIs para localización de Nodos Desconectados". 
       miMenú.Items.Add(new ToolStripSeparator());
@@ -197,6 +189,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #endregion
 
     #region Métodos Privados
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      base.EnMapaNuevo(elEnviador, losArgumentos);
+      miBotónActualizaLista.Enabled = false;
+    }
+
+
+    private void EnMenúEditó(object elEnviador, EventArgs losArgumentos)
+    {
+      // Marca los Items editados.
+      foreach (int i in miLista.SelectedIndices)
+      {
+        ListViewItem item = miLista.Items[i];
+        item.BackColor = miColorItemEditado;
+      }
+
+      // Regenera el mapa.
+      miMapa.DibujaElementos();
+    }
+
+    
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       // Borra las polilíneas y puntos adicionales que pudieran estar dibujadas en el mapa.
@@ -206,6 +219,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
 
     private void EnSeBuscaronPosiblesNodosDesconectados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      InicializaListaYMapa();
+      miBotónActualizaLista.Enabled = true;
+    }
+
+
+    private void InicializaListaYMapa()
     {
       miLista.RegeneraLista();
 
@@ -218,13 +238,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IList<PosibleNodoDesconectado> posibleNodosDesconectados = miBuscadorDePosiblesNodosDesconectados.PosibleNodosDesconectados;
-      foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodosDesconectados)
+      IList<InformaciónNodoDesconectado> posibleNodosDesconectados = miBuscadorDePosiblesNodosDesconectados.PosibleNodosDesconectados;
+      foreach (InformaciónNodoDesconectado posibleNodoDesconectado in posibleNodosDesconectados)
       {
-        ElementoConEtiqueta elemento = new ElementoConEtiqueta(posibleNodoDesconectado.Vía, posibleNodoDesconectado);
+        ElementoConEtiqueta elemento = new ElementoConEtiqueta(
+          posibleNodoDesconectado.PosibleNodoDesconectado.Vía, 
+          posibleNodoDesconectado);
+
         laLista.AñadeItem(
           elemento,
-          posibleNodoDesconectado.Coordenadas.ToString(),
+          posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas.ToString(),
           posibleNodoDesconectado.Distancia.ToString("0.0"),
           posibleNodoDesconectado.Detalle);
       }
@@ -243,35 +266,35 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       foreach(int índiceSeleccionado in miLista.SelectedIndices)
       {
         ElementoConEtiqueta elemento = (ElementoConEtiqueta)miLista.Items[índiceSeleccionado].Tag;
-        PosibleNodoDesconectado posibleNodoDesconectado = (PosibleNodoDesconectado)elemento.Etiqueta;
+        InformaciónNodoDesconectado posibleNodoDesconectado = (InformaciónNodoDesconectado)elemento.Etiqueta;
 
         // Dibuja la vía destino.
         miMapa.PolilíneasAdicionales.Add(new InterfaseMapa.PolilíneaAdicional(
-          posibleNodoDesconectado.VíaDestino.Coordenadas,
+          posibleNodoDesconectado.NodoDestino.Vía.Coordenadas,
           miLápizDeViaDestino));
 
-        // Dibuja los nodos y los nodos de ruta
-        DibujaNodos(posibleNodoDesconectado.Vía);
-        DibujaNodos(posibleNodoDesconectado.VíaDestino);
+        // Dibuja los nodos y los nodos ruteables
+        DibujaNodos(posibleNodoDesconectado.PosibleNodoDesconectado.Vía);
+        DibujaNodos(posibleNodoDesconectado.NodoDestino.Vía);
 
         // Dibuja el nodo destino.
         miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.CoordenadasNodoDestino,
+          posibleNodoDesconectado.NodoDestino.Coordenadas,
           miPincelDeBordeDeNodo,
           11));
 
         // Dibuja el posible nodo desconectado.
         miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.Coordenadas,
+          posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas,
           miPincelDeBordeDeNodo,
           13));
         miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-          posibleNodoDesconectado.Coordenadas,
+          posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas,
           miPincelDePosibleNodoDesconectado,
           9));
 
         InterfaseMapa.ActualizaRectánguloQueEncierra(
-          posibleNodoDesconectado.Coordenadas,
+          posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas,
           ref mínimaLatitud,
           ref máximaLatitud,
           ref mínimaLongitud,
@@ -293,11 +316,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       for (int i = 0; i < laVía.Coordenadas.Length; ++i)
       {
-        if (laVía.CamposNodosDeRuta[i] != null)
+        if (laVía.CamposNodosRuteables[i] != null)
         {
           miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
             laVía.Coordenadas[i],
-            miPincelDeNodoDeRuta,
+            miPincelDeNodoRuteable,
             11));
         }
         else
@@ -365,18 +388,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         List<ElementoDelMapa> elementos = new List<ElementoDelMapa> { ManejadorDeMapa.Encabezado };
 
         // Genera la lista de PDIs.
-        IList<PosibleNodoDesconectado> posibleNodoDesconectados =
-          miMenú.ObtieneEtiquetasSeleccionadas<PosibleNodoDesconectado>();
-        foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
+        IList<InformaciónNodoDesconectado> posibleNodoDesconectados =
+          miMenú.ObtieneEtiquetasSeleccionadas<InformaciónNodoDesconectado>();
+        foreach (InformaciónNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
         {
           // Crea los campos para el PDI.
           List<Campo> campos = new List<Campo> {
             new CampoNombre(string.Format("Nodo Desconectado de Vía # {0}",
-              posibleNodoDesconectado.Vía.Número)),
+              posibleNodoDesconectado.PosibleNodoDesconectado.Vía.Número)),
             new CampoCoordenadas(
               "Data0",
               0,
-              posibleNodoDesconectado.Coordenadas),
+              posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas),
             new CampoTipo("0x1604"),
             new CampoGenérico("EndLevel", "3")
           };
@@ -408,34 +431,37 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         return;
       }
 
-      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
-      DialogResult respuesta = MessageBox.Show(
-        string.Format("Está seguro que quiere conectar los {0} Nodos seleccionadas de próximas búsquedas de Parámetros de Ruta Estándar?", númeroDeNodosDesconectados),
-        "Conectar Nodos Desconectados",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-      #region Conectar Nodos Desconectados.
-      if (respuesta != DialogResult.Yes)
+      if (númeroDeNodosDesconectados > 1)
       {
-        return;
+        // Pregunta si se quiere Estandarizar el Límite de Velocidad.
+        DialogResult respuesta = MessageBox.Show(
+          string.Format("Está seguro que quiere conectar los {0} Nodos seleccionados?", númeroDeNodosDesconectados),
+          "Conectar Nodos Desconectados",
+          MessageBoxButtons.YesNo,
+          MessageBoxIcon.Warning);
+
+        if (respuesta != DialogResult.Yes)
+        {
+          return;
+        }
       }
 
-      // Conecta los nodos.
+      #region Conectar Nodos Desconectados.
       ManejadorDeMapa.SuspendeEventos();
-      IList<PosibleNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<PosibleNodoDesconectado>();
+      IList<InformaciónNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<InformaciónNodoDesconectado>();
       const string razón = "Nodo conectado manualmente.";
-      foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
+      foreach (InformaciónNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
       {
-        Vía vía = posibleNodoDesconectado.Vía;
-        int índice = posibleNodoDesconectado.Indice;
-        Vía víaDestino = posibleNodoDesconectado.VíaDestino;
-        int índiceNodoDestino = posibleNodoDesconectado.IndiceNodoDestino;
+        // Conecta los nodos.
+        Vía vía = posibleNodoDesconectado.PosibleNodoDesconectado.Vía;
+        int índice = posibleNodoDesconectado.PosibleNodoDesconectado.Indice;
+        Vía víaDestino = posibleNodoDesconectado.NodoDestino.Vía;
+        int índiceNodoDestino = posibleNodoDesconectado.NodoDestino.Indice;
         bool laVíaTieneOtroNodoConLasMismasCoordenadas = false;
 
         #region Cambia las coordenadas del nodo desconectado si no son iguales.
-        Coordenadas coordenadasNodo = posibleNodoDesconectado.Coordenadas;
-        Coordenadas coordenadasNodoDestino = posibleNodoDesconectado.CoordenadasNodoDestino;
+        Coordenadas coordenadasNodo = posibleNodoDesconectado.PosibleNodoDesconectado.Coordenadas;
+        Coordenadas coordenadasNodoDestino = posibleNodoDesconectado.NodoDestino.Coordenadas;
         if (coordenadasNodo != coordenadasNodoDestino)
         {
           // Antes the cambiar las coordenadas tenemos que asegurarnos que la vía no tiene
@@ -474,43 +500,43 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         }
 
         #region Asegurarse que ambos nodos son ruteables.
-        CampoNodoDeRuta campoNodoDeRuta = vía.CamposNodosDeRuta[índice];
-        CampoNodoDeRuta campoNodoDeRutaDestino = víaDestino.CamposNodosDeRuta[índiceNodoDestino];
+        CampoNodoRuteable campoNodoRuteable = vía.CamposNodosRuteables[índice];
+        CampoNodoRuteable campoNodoRuteableDestino = víaDestino.CamposNodosRuteables[índiceNodoDestino];
 
-        // Si el posible nodo desconectado es de ruta y el nodo destino
-        // no es de ruta entonces usamos el identificador global del
+        // Si el posible nodo desconectado es ruteable y el nodo destino
+        // no es ruteable entonces usamos el identificador global del
         // posible nodo desconectado para el nodo destino.
-        if ((campoNodoDeRuta != null) && (campoNodoDeRutaDestino == null))
+        if ((campoNodoRuteable != null) && (campoNodoRuteableDestino == null))
         {
-          // Añade el nodo de ruta en la vía destino.
-          víaDestino.AñadeNodoDeRuta(
+          // Añade el nodo ruteable en la vía destino.
+          víaDestino.AñadeNodoRuteable(
             índiceNodoDestino,
-            campoNodoDeRuta.IndentificadorGlobal,
+            campoNodoRuteable.IndentificadorGlobal,
             razón);
         }
-        // Si el nodo destino es de ruta entonces usamos el identificador
+        // Si el nodo destino es ruteable entonces usamos el identificador
         // global del nodo destino para el nodo desconectado.
-        else if (campoNodoDeRutaDestino != null)
+        else if (campoNodoRuteableDestino != null)
         {
-          // Añade el nodo de ruta en la vía.
-          vía.AñadeNodoDeRuta(
+          // Añade el nodo ruteable en la vía.
+          vía.AñadeNodoRuteable(
             índice,
-            campoNodoDeRutaDestino.IndentificadorGlobal,
+            campoNodoRuteableDestino.IndentificadorGlobal,
             razón);
         }
-        // Si ninguno de los nodos es de ruta entonces generamos un nuevo
+        // Si ninguno de los nodos es ruteable entonces generamos un nuevo
         // índentificador global.
         else
         {
           // Genera un nuevo identificador global.
           int nuevoIndentificadorGlobal = GeneraNuevoIdentificadorGlobal();
 
-          // Añade el nodo de ruta a ambas vías.
-          vía.AñadeNodoDeRuta(
+          // Añade el nodo ruteable a ambas vías.
+          vía.AñadeNodoRuteable(
             índice,
             nuevoIndentificadorGlobal,
             razón);
-          víaDestino.AñadeNodoDeRuta(
+          víaDestino.AñadeNodoRuteable(
             índiceNodoDestino,
             nuevoIndentificadorGlobal,
             razón);
@@ -530,7 +556,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       int máximoIndentificadorGlobal = 0;
       foreach (Vía víaDelMapa in ManejadorDeMapa.ManejadorDeVías.Elementos)
       {
-        foreach (CampoNodoDeRuta campo in víaDelMapa.CamposNodosDeRuta)
+        foreach (CampoNodoRuteable campo in víaDelMapa.CamposNodosRuteables)
         {
           if (campo != null)
           {
@@ -554,27 +580,31 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         return;
       }
 
-      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
-      DialogResult respuesta = MessageBox.Show(
-        string.Format("Está seguro que quiere marcar los {0} Nodos seleccionados como nodos desconectados?", númeroDeNodosDesconectados),
-        "Marcar como Nodos Desconectados",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-      #region Marca Nodos como Desconectados.
-      if (respuesta != DialogResult.Yes)
+      if (númeroDeNodosDesconectados > 1)
       {
-        return;
+        // Pregunta si se quiere conectar los nodos.
+        DialogResult respuesta = MessageBox.Show(
+          string.Format("Está seguro que quiere marcar los {0} Nodos seleccionados como nodos desconectados?",
+                        númeroDeNodosDesconectados),
+          "Marcar como Nodos Desconectados",
+          MessageBoxButtons.YesNo,
+          MessageBoxIcon.Warning);
+
+        if (respuesta != DialogResult.Yes)
+        {
+          return;
+        }
       }
 
+      #region Marca Nodos como Desconectados.
       // Añade el attributo a las vías.
       ManejadorDeMapa.SuspendeEventos();
-      IList<PosibleNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<PosibleNodoDesconectado>();
-      foreach (PosibleNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
+      IList<InformaciónNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<InformaciónNodoDesconectado>();
+      foreach (InformaciónNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
       {
         string atributo = BuscadorDePosiblesNodosDesconectados.AtributoNodoDesconectado
-                          + ',' + posibleNodoDesconectado.Indice;
-        posibleNodoDesconectado.Vía.AñadeAtributo(atributo);
+                          + ',' + posibleNodoDesconectado.PosibleNodoDesconectado.Indice;
+        posibleNodoDesconectado.PosibleNodoDesconectado.Vía.AñadeAtributo(atributo);
       }
       ManejadorDeMapa.RestableceEventos();
 
@@ -582,6 +612,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       miMenú.EnvíaEventoEditó();
       #endregion
     }
+
+
+    private void EnBotónActualizaLista(object sender, EventArgs e)
+    {
+      if (miBuscadorDePosiblesNodosDesconectados.FiltroDeVíasConPosiblesNodosDesconectados != null)
+      {
+        miBuscadorDePosiblesNodosDesconectados.Procesa(
+          miBuscadorDePosiblesNodosDesconectados.FiltroDeVíasConPosiblesNodosDesconectados);
+      }
+    }
     #endregion
+
   }
 }

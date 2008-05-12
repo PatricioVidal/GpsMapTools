@@ -198,7 +198,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
 
       // Busca en todos los PDIs desde la posición n + 1 que
       // no estén eliminados.
-      for (int i = NúmeroDeElementoProcesándose; i < NúmeroDeElementos; ++i)
+      for (int i = IndiceDeElementoProcesándose + 1; i < NúmeroDeElementos; ++i)
       {
         Pdi posiblePdiDuplicado = this[i];
         if (!posiblePdiDuplicado.FuéEliminado)

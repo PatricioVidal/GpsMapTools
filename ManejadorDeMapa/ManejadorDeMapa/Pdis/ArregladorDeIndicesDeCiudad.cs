@@ -113,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       // Por cada ciudad, si el PDI está adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
       bool seEncontróUnaCiudad = false;
-      foreach(Ciudad ciudad in Manejador.ManejadorDeMapa.Ciudades)
+      foreach(Ciudad ciudad in ManejadorDeMapa.Ciudades)
       {
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
         if (polígono.Contains(elPdi.Coordenadas))

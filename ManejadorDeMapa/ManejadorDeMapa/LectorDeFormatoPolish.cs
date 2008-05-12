@@ -354,7 +354,7 @@ namespace GpsYv.ManejadorDeMapa
                   campos.Add(new CampoGenérico(identificadorConNúmero, texto));
                 }
                 break;
-              case CampoNodoDeRuta.IdentificadorDeNodo:
+              case CampoNodoRuteable.IdentificadorDeNodo:
                 if (número != null)
                 {
                   campos.Add(LeeCampoNodo(identificador, número.Value, texto));
@@ -441,7 +441,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static CampoNodoDeRuta LeeCampoNodo(
+    private static CampoNodoRuteable LeeCampoNodo(
       string elIdentificador,
       int elNúmero,
       string elTexto)
@@ -471,7 +471,7 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Crea el nodo.
-      CampoNodoDeRuta nodo = new CampoNodoDeRuta(
+      CampoNodoRuteable nodo = new CampoNodoRuteable(
         elIdentificador,
         elNúmero,
         indice,

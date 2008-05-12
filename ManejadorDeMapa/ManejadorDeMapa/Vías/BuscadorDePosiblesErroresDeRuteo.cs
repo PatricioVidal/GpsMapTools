@@ -201,7 +201,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // no estén eliminadas.
       List<Vía> víasConElMismoNombre = new List<Vía> { laVía };
       bool hayIncongruencias = false;
-      for (int i = NúmeroDeElementoProcesándose; i < NúmeroDeElementos; ++i)
+      for (int i = IndiceDeElementoProcesándose + 1; i < NúmeroDeElementos; ++i)
       {
         Vía vía = this[i];
         if (!vía.FuéEliminado &&

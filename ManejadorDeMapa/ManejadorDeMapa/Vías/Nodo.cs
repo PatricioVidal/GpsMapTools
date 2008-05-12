@@ -72,85 +72,48 @@
 namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Representa un posible nodo desconectado.
+  /// Representa un nodo ruteable.
   /// </summary>
-  public class PosibleNodoDesconectado
+  public class Nodo
   {
+    #region Propiedades
     /// <summary>
-    /// Obtiene la Via con el posible nodo desconectado.
+    /// Obtiene la Via del nodo.
     /// </summary>
     public Vía Vía { get; private set; }
 
     /// <summary>
-    /// Obtiene el índice del posible nodo desconectado.
+    /// Obtiene el índice del nodo el la vía.
     /// </summary>
     public int Indice { get; private set; }
 
     /// <summary>
-    /// Obtiene las coordenadas del posible nodo desconectado.
+    /// Obtiene las coordenadas del nodo.
     /// </summary>
     public Coordenadas Coordenadas
     {
-       get
-       {
-         return Vía.Coordenadas[Indice];
-       }
-    }
-
-    /// <summary>
-    /// Obtiene la Via destino.
-    /// </summary>
-    public Vía VíaDestino { get; private set; }
-
-    /// <summary>
-    /// Obtiene el índice del nodo destino.
-    /// </summary>
-    public int IndiceNodoDestino { get; private set; }
-
-    /// <summary>
-    /// Obtiene la coordenadas del nodo destino.
-    /// </summary>
-    public Coordenadas CoordenadasNodoDestino
-    {
       get
       {
-        return VíaDestino.Coordenadas[IndiceNodoDestino];
+        return Vía.Coordenadas[Indice];
       }
     }
+    #endregion
 
-    /// <summary>
-    /// Obtiene la distancia.
-    /// </summary>
-    public double Distancia { get; private set; }
-
-    /// <summary>
-    /// Obtiene el detalle.
-    /// </summary>
-    public string Detalle { get; private set; }
-
+    #region Constructors
     /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="laVía">La Vía con el posible nodo desconectado.</param>
     /// <param name="elIndice">El índice del posible nodo desconectado.</param>
-    /// <param name="laVíaDestino">La Vía destino.</param>
-    /// <param name="elIndiceDelNodoDestino">Las coordenadas del nodo destino.</param>
-    /// <param name="laDistancia">La distancia.</param>
-    /// <param name="elDetalle">El detalle.</param>
-    public PosibleNodoDesconectado(
+    public Nodo(
       Vía laVía,
-      int elIndice,
-      Vía laVíaDestino,
-      int elIndiceDelNodoDestino,
-      double laDistancia,
-      string elDetalle)
+      int elIndice
+      )
     {
       Vía = laVía;
       Indice = elIndice;
-      VíaDestino = laVíaDestino;
-      IndiceNodoDestino = elIndiceDelNodoDestino;
-      Distancia = laDistancia;
-      Detalle = elDetalle;
     }
+    #endregion
+
   }
 }

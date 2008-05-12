@@ -1,3 +1,6 @@
+Versión 1.29
+
+
 Versión 1.28
 - Ahora se muestran en detalle los nodos de las vías seleccionadas en la página de Posibles Nodos Desconectados.
 - Ahora cuando se edita un Nodo Desconectado en mapa se actualiza correctamente.
@@ -7,7 +10,7 @@ Versión 1.27
 - Mejorada la lógica de detección de nodos desconectados:
     - Se mejoró la lógica para que no se detectaran como nodo desconectados aquellos casos cuando hay dos nodos cercanos sin conectar pero las vía si está conectada en el nodo siguiente. 
     - Cuando se usa el menú de "Conectar Nodos Desconectados" la lógica ahora chequea que no se vaya a poner un nodo sobrepuesto.  En ese caso se muestra un mensaje al usuario y no se hace la conección.
-    - Cuando dos nodos de ruta coinciden ahora se chequea que el Identificador Global de los nodos sea igual.
+    - Cuando dos nodos ruteables coinciden ahora se chequea que el Identificador Global de los nodos sea igual.
     - Se mejoró la visualizacón del mapa de manera que no haya un "brinco" cuando se seleccionan los nodos desconectados en la lista.
     - Ahora cuando se conectan los nodos se marcan de color verde en la lista para que el usuario sepa cuales a editado.
  

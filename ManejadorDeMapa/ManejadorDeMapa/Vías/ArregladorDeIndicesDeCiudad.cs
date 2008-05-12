@@ -113,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Por cada ciudad, si una coordenada de la Vía está adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
       bool seEncontróUnaCiudad = false;
-      foreach (Ciudad ciudad in Manejador.ManejadorDeMapa.Ciudades)
+      foreach (Ciudad ciudad in ManejadorDeMapa.Ciudades)
       {
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
         foreach (Coordenadas coordenadas in laVía.Coordenadas)

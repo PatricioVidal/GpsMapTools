@@ -69,116 +69,50 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
-using System.Collections.Generic;
-
-namespace GpsYv.ManejadorDeMapa
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Representa un manejador base.
+  /// Representa información de un posible nodo desconectado.
   /// </summary>
-  public abstract class ManejadorBase<T> where T: ElementoDelMapa
+  public class InformaciónNodoDesconectado
   {
-    #region Campos
-    private readonly ManejadorDeMapa miManejadorDeMapa;
-    private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private readonly IList<T> misElementos;
-    #endregion
-
-    #region Eventos
     /// <summary>
-    /// Evento cuando algún elemento del manejador es modificado.
+    /// Obtiene el posible nodo desconectado. 
     /// </summary>
-    public event EventHandler ElementosModificados;
-    #endregion
-
-    #region Propiedades
-    /// <summary>
-    /// Devuelve el escuchador de estatus.
-    /// </summary>
-    public IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      get
-      {
-        return miEscuchadorDeEstatus;
-      }
-    }
-
+    public Nodo PosibleNodoDesconectado { get; private set; }
 
     /// <summary>
-    /// Devuelve los elementos del manejador.
+    /// Obtiene el nodo destino.
     /// </summary>
-    public IList<T> Elementos
-    {
-      get
-      {
-        return misElementos;
-      }
-    }
-
+    public Nodo NodoDestino { get; private set; }
 
     /// <summary>
-    /// Obtiene el manejador del mapa.
+    /// Obtiene la distancia.
     /// </summary>
-    public ManejadorDeMapa ManejadorDeMapa
-    {
-      get
-      {
-        return miManejadorDeMapa;
-      }
-    }
-    #endregion
+    public double Distancia { get; private set; }
 
-    #region Métodos Públicos
+    /// <summary>
+    /// Obtiene el detalle.
+    /// </summary>
+    public string Detalle { get; private set; }
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
-    /// <param name="losElementos">Los Elementos.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    protected ManejadorBase(
-      ManejadorDeMapa elManejadorDeMapa,
-      IList<T> losElementos,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
+    /// <param name="elPosibleNodoDesconectado">El posible nodo desconectado.</param>
+    /// <param name="elNodoDestino">El nodo destino.</param>
+    /// <param name="laDistancia">La distancia.</param>
+    /// <param name="elDetalle">El detalle.</param>
+    public InformaciónNodoDesconectado(
+      Nodo elPosibleNodoDesconectado,
+      Nodo elNodoDestino,
+      double laDistancia,
+      string elDetalle)
     {
-      miManejadorDeMapa = elManejadorDeMapa;
-      misElementos = losElementos;
-      miEscuchadorDeEstatus = elEscuchadorDeEstatus;
+      PosibleNodoDesconectado = elPosibleNodoDesconectado;
+      NodoDestino = elNodoDestino;
+      Distancia = laDistancia;
+      Detalle = elDetalle;
     }
-
-
-    /// <summary>
-    /// Suspende la generación de eventos.
-    /// </summary>
-    public void SuspendeEventos()
-    {
-      miManejadorDeMapa.SuspendeEventos();
-    }
-
-
-    /// <summary>
-    /// Restablece la generación de eventos.
-    /// </summary>
-    public void RestableceEventos()
-    {
-      miManejadorDeMapa.RestableceEventos();
-    }
-    #endregion
-
-    #region Métodos Protegidos
-    /// <summary>
-    /// Maneja el evento cuando hay elementos modificados en el manejador.
-    /// </summary>
-    /// <param name="elEnviador">El objecto que envía el evento.</param>
-    /// <param name="losArgumentos">Los argumentos del evento.</param>
-    protected void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
-    {
-      if (ElementosModificados != null)
-      {
-        ElementosModificados(this, losArgumentos);
-      }
-    }
-    #endregion
   }
 }

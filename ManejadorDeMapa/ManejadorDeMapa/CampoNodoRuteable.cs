@@ -74,9 +74,9 @@ using System;
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Representa un campo de nodo de ruta.
+  /// Representa un campo de nodo ruteable.
   /// </summary>
-  public class CampoNodoDeRuta : Campo
+  public class CampoNodoRuteable : Campo
   {
     #region Campos
 
@@ -90,7 +90,7 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Obtiene el número del nodo de ruta.
+    /// Obtiene el número del nodo ruteable.
     /// </summary>
     public int Número { get; private set; }
 
@@ -122,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elIndiceDeCoordenadas">El indice de coordenadas.</param>
     /// <param name="elIdentificadorGlobal">El identificador global.</param>
     /// <param name="elEsExterno">Variable lógica que indica si el nodo es externo.</param>
-    public CampoNodoDeRuta(
+    public CampoNodoRuteable(
       string elIdentificador,
       int elNúmero,
       int elIndiceDeCoordenadas,
@@ -165,7 +165,7 @@ namespace GpsYv.ManejadorDeMapa
         return true;
       }
 
-      CampoNodoDeRuta comparador = elObjecto as CampoNodoDeRuta;
+      CampoNodoRuteable comparador = elObjecto as CampoNodoRuteable;
 
       // Si el objeto es nulo entonces no puede ser igual.
       if (comparador == null)

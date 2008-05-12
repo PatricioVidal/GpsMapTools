@@ -81,38 +81,25 @@ namespace GpsYv.ManejadorDeMapa.Vías
   public class BuscadorDePosiblesNodosDesconectados : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly List<PosibleNodoDesconectado> misPosiblesNodosDesconectados = new List<PosibleNodoDesconectado>();
-    private int miDistanciaMáxima = 5;
+
     #endregion
 
     #region Propiedades
     /// <summary>
+    /// Obtiene un filtro con las vías con posible nodos desconectados.
+    /// </summary>
+    public bool[] FiltroDeVíasConPosiblesNodosDesconectados { get; private set; }
+
+    /// <summary>
     /// Obtiene o pone la distancia máxima de búsqueda.
     /// </summary>
-    public int DistanciaMáxima
-    {
-      get
-      {
-        return miDistanciaMáxima;
-      }
+    public int DistanciaMáxima { get; set; }
 
-      set
-      {
-        miDistanciaMáxima = value;
-      }
-    }
 
-    
     /// <summary>
     /// Devuelve los posibles nodos desconectados
     /// </summary>
-    public IList<PosibleNodoDesconectado> PosibleNodosDesconectados
-    {
-      get
-      {
-        return misPosiblesNodosDesconectados;
-      }
-    }
+    public List<InformaciónNodoDesconectado> PosibleNodosDesconectados { get; private set; }
 
 
     /// <summary>
@@ -122,15 +109,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Este atributo indica que el nodo está desconectado.
     /// </remarks>
     public static readonly string AtributoNodoDesconectado = "NodoDesconectado";
-    #endregion
 
-    #region Métodos Públicos
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
     public static readonly string Descripción = "Busca posibles nodos desconectados en las Vías.";
+    #endregion
 
-
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -141,7 +127,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
+      DistanciaMáxima = 5;
+      PosibleNodosDesconectados = new List<InformaciónNodoDesconectado>();
     }
+
     #endregion
 
     #region Métodos Protegidos.
@@ -150,7 +139,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     protected override void ComenzóAProcesar()
     {
-      misPosiblesNodosDesconectados.Clear();
+      PosibleNodosDesconectados.Clear();
+      FiltroDeVíasConPosiblesNodosDesconectados = new bool[NúmeroDeElementos];
 
       base.ComenzóAProcesar();
     }
@@ -183,17 +173,17 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       // Busca en todos los nodos de todas las vías (comenzando desde la siguiente
       // para no repetir búsquedas.)
-      for (int i = NúmeroDeElementoProcesándose; i < NúmeroDeElementos; ++i)
+      for (int índiceVíaDestino = IndiceDeElementoProcesándose + 1; índiceVíaDestino < NúmeroDeElementos; ++índiceVíaDestino)
       {
-        Vía víaDestino = this[i];
+        Vía víaDestino = this[índiceVíaDestino];
         Coordenadas[] nodosDestino = víaDestino.Coordenadas;
         int númeroDeNodosDestino = nodosDestino.Length;
 
         #region Busca todos los nodos con las mismas coordenadas.
         for (int índiceDeNodo = 0; índiceDeNodo < númeroDeNodos; ++índiceDeNodo)
         {
-          CampoNodoDeRuta nodoDeRuta = laVía.CamposNodosDeRuta[índiceDeNodo];
-          bool esNodoDeRuta = (nodoDeRuta != null);
+          CampoNodoRuteable nodoRuteable = laVía.CamposNodosRuteables[índiceDeNodo];
+          bool esNodoRuteable = (nodoRuteable != null);
 
           // Nos saltamos el nodo si éste tiene el atributo de nodo desconectado.
           if (mapaNodoDesconectado[índiceDeNodo])
@@ -212,20 +202,20 @@ namespace GpsYv.ManejadorDeMapa.Vías
             {
               string error = null;
               const double distancia = 0;
-              CampoNodoDeRuta nodoDeRutaDestino = víaDestino.CamposNodosDeRuta[índiceNodoDestino];
-              bool esNodoDestinoDeRuta = (nodoDeRutaDestino != null);
-              if (esNodoDeRuta && esNodoDestinoDeRuta)
+              CampoNodoRuteable nodoRuteableDestino = víaDestino.CamposNodosRuteables[índiceNodoDestino];
+              bool esNodoDestinoRuteable = (nodoRuteableDestino != null);
+              if (esNodoRuteable && esNodoDestinoRuteable)
               {
                 // Si los identificadores de nodo no son el mismo entonces es un
                 // posible nodo desconectado.
-                if (nodoDeRuta.IndentificadorGlobal != nodoDeRutaDestino.IndentificadorGlobal)
+                if (nodoRuteable.IndentificadorGlobal != nodoRuteableDestino.IndentificadorGlobal)
                 {
                   error = string.Format("Los nodos tienen Identificadores Globales distintos: {0} != {1}",
-                    nodoDeRuta.IndentificadorGlobal,
-                    nodoDeRutaDestino.IndentificadorGlobal);
+                    nodoRuteable.IndentificadorGlobal,
+                    nodoRuteableDestino.IndentificadorGlobal);
                 }
               }
-              else if (!esNodoDeRuta & !esNodoDestinoDeRuta)
+              else if (!esNodoRuteable & !esNodoDestinoRuteable)
               {
                 error = "Ambos nodos tienen la mismas coordenadas pero ninguno es ruteable.";
               }
@@ -236,16 +226,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
               if (error != null)
               {
-                PosibleNodoDesconectado posibleNodoDesconectado = new PosibleNodoDesconectado(
-                  laVía,
-                  índiceDeNodo,
-                  víaDestino,
-                  índiceNodoDestino,
+                InformaciónNodoDesconectado posibleNodoDesconectado = new InformaciónNodoDesconectado(
+                  new Nodo(laVía, índiceDeNodo),
+                  new Nodo(víaDestino, índiceNodoDestino),
                   distancia,
                   error);
 
-                misPosiblesNodosDesconectados.Add(posibleNodoDesconectado);
+                PosibleNodosDesconectados.Add(posibleNodoDesconectado);
                 ++númeroDeProblemasDetectados;
+
+                // Añade las vías involucradas al filtro.
+                FiltroDeVíasConPosiblesNodosDesconectados[IndiceDeElementoProcesándose] = true;
+                FiltroDeVíasConPosiblesNodosDesconectados[índiceVíaDestino] = true;
               }
 
               // Nos salimos del ciclo porque si los nodos tienen las mismas
@@ -257,8 +249,17 @@ namespace GpsYv.ManejadorDeMapa.Vías
         }
         #endregion
 
-        númeroDeProblemasDetectados += BuscaPosibleExtremosDesconectados(laVía, víaDestino);
-        númeroDeProblemasDetectados += BuscaPosibleExtremosDesconectados(víaDestino, laVía);
+        // Busca nodos desconectados extremos.
+        int númeroDeNodosDetectados = BuscaPosibleExtremosDesconectados(laVía, víaDestino);
+        númeroDeNodosDetectados += BuscaPosibleExtremosDesconectados(víaDestino, laVía);
+        if (númeroDeNodosDetectados > 0)
+        {
+          // Añade las vías involucradas al filtro.
+          FiltroDeVíasConPosiblesNodosDesconectados[IndiceDeElementoProcesándose] = true;
+          FiltroDeVíasConPosiblesNodosDesconectados[índiceVíaDestino] = true;
+        }
+
+        númeroDeProblemasDetectados += númeroDeNodosDetectados;
       }
 
       return númeroDeProblemasDetectados;
@@ -333,7 +334,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
           // Los nodos son posibles nodos desconectados si la distancia entre 
           // ellos es menor que la distancia máxima de búsqueda.
-          if (distancíaNodoMasCercano < miDistanciaMáxima)
+          if (distancíaNodoMasCercano < DistanciaMáxima)
           {
             // Si la vía tiene algun otro nodo conectado al nodo destino
             // entonces nos saltamos este nodo.
@@ -349,17 +350,15 @@ namespace GpsYv.ManejadorDeMapa.Vías
             }
             if (!laVíaTieneOtroNodoConectadoAlNodoDestino)
             {
-              string error = string.Format("La distancia es menor que {0:0.0} m: {1:0.0} m", miDistanciaMáxima,
+              string error = string.Format("La distancia es menor que {0:0.0} m: {1:0.0} m", DistanciaMáxima,
                                            distancíaNodoMasCercano);
-              PosibleNodoDesconectado posibleNodoDesconectado = new PosibleNodoDesconectado(
-                laVía,
-                índiceNodo,
-                laVíaDestino,
-                índiceNodoMasCercano,
+              InformaciónNodoDesconectado posibleNodoDesconectado = new InformaciónNodoDesconectado(
+                new Nodo(laVía, índiceNodo),
+                new Nodo(laVíaDestino, índiceNodoMasCercano),
                 distancíaNodoMasCercano,
                 error);
 
-              misPosiblesNodosDesconectados.Add(posibleNodoDesconectado);
+              PosibleNodosDesconectados.Add(posibleNodoDesconectado);
               ++númeroDeProblemasDetectados;
             }
           }
@@ -378,7 +377,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       base.TerminoDeProcesar();
 
       // Reporta estatus.
-      Estatus = string.Format("Posibles Nodos Desconectados: {0}", misPosiblesNodosDesconectados.Count);
+      Estatus = string.Format("Posibles Nodos Desconectados: {0}", PosibleNodosDesconectados.Count);
     }
 
 
@@ -389,7 +388,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      misPosiblesNodosDesconectados.Clear();
+      PosibleNodosDesconectados.Clear();
+      FiltroDeVíasConPosiblesNodosDesconectados = null;
 
       // Pone al Procesador en estado inválido.
       Invalida();

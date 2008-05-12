@@ -39,6 +39,7 @@
       this.miTextoDistancia = new System.Windows.Forms.Label();
       this.miBarraDeDistancia = new System.Windows.Forms.TrackBar();
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
+      this.miBotónActualizaLista = new System.Windows.Forms.Button();
       panelSuperior = new System.Windows.Forms.Panel();
       miBotónBuscaPosiblesNodosDesconectados = new System.Windows.Forms.Button();
       groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,12 +59,13 @@
       // 
       // panelSuperior
       // 
+      panelSuperior.Controls.Add(this.miBotónActualizaLista);
       panelSuperior.Controls.Add(miBotónBuscaPosiblesNodosDesconectados);
       panelSuperior.Controls.Add(groupBox1);
       panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
       panelSuperior.Location = new System.Drawing.Point(0, 0);
       panelSuperior.Name = "panelSuperior";
-      panelSuperior.Size = new System.Drawing.Size(565, 61);
+      panelSuperior.Size = new System.Drawing.Size(836, 61);
       panelSuperior.TabIndex = 0;
       // 
       // miBotónBuscaPosiblesNodosDesconectados
@@ -123,7 +125,7 @@
       panelInferior.Dock = System.Windows.Forms.DockStyle.Fill;
       panelInferior.Location = new System.Drawing.Point(0, 61);
       panelInferior.Name = "panelInferior";
-      panelInferior.Size = new System.Drawing.Size(565, 396);
+      panelInferior.Size = new System.Drawing.Size(836, 396);
       panelInferior.TabIndex = 1;
       // 
       // miInterfaseListaConMapaDeVías
@@ -135,7 +137,7 @@
       this.miInterfaseListaConMapaDeVías.División.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.División.Name = "División";
       this.miInterfaseListaConMapaDeVías.División.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      this.miInterfaseListaConMapaDeVías.División.Size = new System.Drawing.Size(565, 396);
+      this.miInterfaseListaConMapaDeVías.División.Size = new System.Drawing.Size(836, 396);
       this.miInterfaseListaConMapaDeVías.División.SplitterDistance = 233;
       this.miInterfaseListaConMapaDeVías.División.TabIndex = 5;
       this.miInterfaseListaConMapaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -151,9 +153,10 @@
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Dock = System.Windows.Forms.DockStyle.Fill;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.FullRowSelect = true;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.GridLines = true;
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.HideSelection = false;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Name = "InterfaseListaDeVías";
-      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Size = new System.Drawing.Size(565, 233);
+      this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.Size = new System.Drawing.Size(836, 233);
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.TabIndex = 2;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.UseCompatibleStateImageBehavior = false;
       this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías.View = System.Windows.Forms.View.Details;
@@ -165,6 +168,7 @@
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Lista = this.miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraCiudades = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPdis = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPolígonos = false;
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.MuestraPolilíneas = false;
@@ -174,12 +178,12 @@
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Name = "InterfaseMapaDeVíasSeleccionadas";
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.RectánguloVisibleE" +
               "nCoordenadas")));
-      this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Size = new System.Drawing.Size(565, 159);
+      this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.Size = new System.Drawing.Size(836, 159);
       this.miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.TabIndex = 0;
       this.miInterfaseListaConMapaDeVías.Location = new System.Drawing.Point(0, 0);
       this.miInterfaseListaConMapaDeVías.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDeVías.Name = "miInterfaseListaConMapaDeVías";
-      this.miInterfaseListaConMapaDeVías.Size = new System.Drawing.Size(565, 396);
+      this.miInterfaseListaConMapaDeVías.Size = new System.Drawing.Size(836, 396);
       this.miInterfaseListaConMapaDeVías.TabIndex = 0;
       // 
       // columnaCoordenadas
@@ -197,6 +201,19 @@
       columnaDetalle.Text = "Detalle";
       columnaDetalle.Width = 400;
       // 
+      // miBotónActualizaLista
+      // 
+      this.miBotónActualizaLista.AutoSize = true;
+      this.miBotónActualizaLista.Enabled = false;
+      this.miBotónActualizaLista.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+      this.miBotónActualizaLista.Location = new System.Drawing.Point(431, 21);
+      this.miBotónActualizaLista.Name = "miBotónActualizaLista";
+      this.miBotónActualizaLista.Size = new System.Drawing.Size(88, 23);
+      this.miBotónActualizaLista.TabIndex = 11;
+      this.miBotónActualizaLista.Text = "Actualiza Lista";
+      this.miBotónActualizaLista.UseVisualStyleBackColor = true;
+      this.miBotónActualizaLista.Click += new System.EventHandler(this.EnBotónActualizaLista);
+      // 
       // InterfasePosiblesNodosDesconectados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,7 +221,7 @@
       this.Controls.Add(panelInferior);
       this.Controls.Add(panelSuperior);
       this.Name = "InterfasePosiblesNodosDesconectados";
-      this.Size = new System.Drawing.Size(565, 457);
+      this.Size = new System.Drawing.Size(836, 457);
       panelSuperior.ResumeLayout(false);
       panelSuperior.PerformLayout();
       groupBox1.ResumeLayout(false);
@@ -224,5 +241,6 @@
     private InterfaseListaConMapaDeVías miInterfaseListaConMapaDeVías;
     private System.Windows.Forms.Label miTextoDistancia;
     private System.Windows.Forms.TrackBar miBarraDeDistancia;
+    private System.Windows.Forms.Button miBotónActualizaLista;
   }
 }

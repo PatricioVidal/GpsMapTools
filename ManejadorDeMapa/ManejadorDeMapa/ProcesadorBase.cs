@@ -115,22 +115,11 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Propiedades
-    /// <summary>
-    /// Obtiene el manejador.
-    /// </summary>
-    public T Manejador
-    {
-      get
-      {
-        return miManejador;
-      }
-    }
-
 
     /// <summary>
-    /// Obtiene el número de elemento procesandose.
+    /// Obtiene el manejador de mapa.
     /// </summary>
-    public int NúmeroDeElementoProcesándose { get; private set; }
+    public ManejadorDeMapa ManejadorDeMapa { get; private set; }
 
 
     /// <summary>
@@ -143,6 +132,12 @@ namespace GpsYv.ManejadorDeMapa
     /// Obtiene el número de elementos.
     /// </summary>
     public int NúmeroDeElementos { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene el índice del elemento procesándose.
+    /// </summary>
+    public int IndiceDeElementoProcesándose { get; private set; }
 
 
     /// <summary>
@@ -170,13 +165,15 @@ namespace GpsYv.ManejadorDeMapa
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
     {
       miManejador = elManejador;
+      NúmeroDeElementos = miManejador.Elementos.Count;
+      ManejadorDeMapa = elManejador.ManejadorDeMapa;
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
 
       // Pone el manejador de eventos del timer.
       miTimerParaReportarEstatus.Elapsed += EnTimerElapsed;
       
       // Escucha eventos.
-      miManejador.ManejadorDeMapa.MapaNuevo += EnMapaNuevo;
+      ManejadorDeMapa.MapaNuevo += EnMapaNuevo;
       miManejador.ElementosModificados += EnElementosModificados;
 
       // Genera el nombre del elemento.
@@ -190,10 +187,29 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Procesa los elementos.
+    /// Procesa todos los elementos.
     /// </summary>
     /// <returns>El número de problemas detectados.</returns>
     public int Procesa()
+    {
+      // Crea un filtro que muestre todos los elementos.
+      int númeroDeElementos = miManejador.Elementos.Count; 
+      bool[] filtro = new bool[númeroDeElementos];
+      for (int i = 0; i < númeroDeElementos; ++i)
+      {
+        filtro[i] = true;
+      }
+
+      return Procesa(filtro);
+    }
+
+
+    /// <summary>
+    /// Procesa los elementos seleccionados por un filtro dado..
+    /// </summary>
+    /// <param name="elFiltroEstáSeleccionado">El filtro dado.</param>
+    /// <returns>El número de problemas detectados.</returns>
+    public int Procesa(bool[] elFiltroEstáSeleccionado)
     {
       // Nos salimos si estamos procesando algo.
       if (miEstáProcesando)
@@ -201,7 +217,7 @@ namespace GpsYv.ManejadorDeMapa
         return 0;
       }
 
-      using (miManejador.ManejadorDeMapa.IndicaProcesoExclusivo())
+      using (ManejadorDeMapa.IndicaProcesoExclusivo())
       {
         // Envia evento.
         if (Procesando != null)
@@ -213,9 +229,16 @@ namespace GpsYv.ManejadorDeMapa
         miEstáProcesando = true;
 
         NúmeroDeProblemasDetectados = 0;
-        NúmeroDeElementoProcesándose = 0;
         IList<K> elementos = miManejador.Elementos;
         NúmeroDeElementos = elementos.Count;
+        int númeroDeElementosAProcesar = 0;
+        foreach (bool estáSeleccionado in elFiltroEstáSeleccionado)
+        {
+          if (estáSeleccionado)
+          {
+            ++númeroDeElementosAProcesar;
+          }
+        }
 
         // Indica que se van a procesar los elementos.
         ComenzóAProcesar();
@@ -232,29 +255,40 @@ namespace GpsYv.ManejadorDeMapa
         // Procesar todos los elementos.
         miEscuchadorDeEstatus.ProgresoMáximo = elementos.Count;
         miReportaEstatus = true;
-        foreach (K elemento in elementos)
+        int númeroDelElementoProcesándose = 0;
+        for (IndiceDeElementoProcesándose = 0;
+          IndiceDeElementoProcesándose < elementos.Count;
+          ++IndiceDeElementoProcesándose)
         {
           // Ve si necesitamos parar de procesar.
           if (miManejador.ManejadorDeMapa.ParaDeProcesar)
           {
-            miManejador.ManejadorDeMapa.ParaDeProcesar = false;
+            ManejadorDeMapa.ParaDeProcesar = false;
             break;
           }
 
-          ++NúmeroDeElementoProcesándose;
-          miEscuchadorDeEstatus.Progreso = NúmeroDeElementoProcesándose;
+          // Nos saltamos el elemento si no está seleccionado.
+          if (!elFiltroEstáSeleccionado[IndiceDeElementoProcesándose])
+          {
+            continue;
+          }
+            
+          // Actualiza estatus.
+          ++númeroDelElementoProcesándose;
+          miEscuchadorDeEstatus.Progreso = númeroDelElementoProcesándose;
           if (miReportaEstatus)
           {
             Estatus = string.Format("Procesando {0} # {1}/{2}: [{3}]",
                                     miNombreDeElemento,
-                                    NúmeroDeElementoProcesándose,
-                                    NúmeroDeElementos,
+                                    númeroDelElementoProcesándose,
+                                    númeroDeElementosAProcesar,
                                     NúmeroDeProblemasDetectados);
 
             miReportaEstatus = false;
           }
 
           // Procesa el elemento si no está eliminado.
+          K elemento = elementos[IndiceDeElementoProcesándose];
           if (!elemento.FuéEliminado)
           {
             // Procesa el elemento.

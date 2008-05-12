@@ -83,7 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\MapaDePrueba.mp" />
+    <None Include="Data\PosiblesNodosDesconectados.mp" />
+    <None Include="Data\PruebaEscritorFormatoPolish.mp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

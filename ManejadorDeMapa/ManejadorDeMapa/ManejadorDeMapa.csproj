@@ -77,12 +77,13 @@
     <Compile Include="CampoAtributo.cs" />
     <Compile Include="CampoEsCiudad.cs" />
     <Compile Include="CampoIndiceDeCiudad.cs" />
-    <Compile Include="CampoNodoDeRuta.cs" />
+    <Compile Include="CampoNodoRuteable.cs" />
     <Compile Include="CampoParámetrosDeRuta.cs" />
     <Compile Include="Ciudad.cs" />
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
+    <Compile Include="Vías\Nodo.cs" />
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
     <Compile Include="LímiteDeVelocidad.cs" />
     <Compile Include="ManejadorBase.cs" />
@@ -140,7 +141,7 @@
     <Compile Include="Vías\BuscadorDePosiblesErroresDeRuteo.cs" />
     <Compile Include="Vías\BuscadorDePosiblesNodosDesconectados.cs" />
     <Compile Include="Vías\ManejadorDeVías.cs" />
-    <Compile Include="Vías\PosibleNodoDesconectado.cs" />
+    <Compile Include="Vías\InformaciónNodoDesconectado.cs" />
     <Compile Include="Vías\RestriccionesDeParámetrosDeRuta.cs" />
     <Compile Include="Vías\TiposDeVías.cs" />
     <Compile Include="Vías\Vía.cs" />

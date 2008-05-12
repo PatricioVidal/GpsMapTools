@@ -196,7 +196,7 @@ namespace GpsYv.ManejadorDeMapa
         CampoComentario campoComentario;
         CampoNombre campoNombre;
         CampoCoordenadas campoCoordenadas;
-        CampoNodoDeRuta campoNodo;
+        CampoNodoRuteable campoNodo;
         CampoGenérico campoGenérico;
         CampoTipo campoTipo;
         CampoParámetrosDeRuta campoParámetrosDeRuta;
@@ -215,7 +215,7 @@ namespace GpsYv.ManejadorDeMapa
         {
           Guarda(campoCoordenadas, elEscritor);
         }
-        else if ((campoNodo = campo as CampoNodoDeRuta) != null)
+        else if ((campoNodo = campo as CampoNodoRuteable) != null)
         {
           Guarda(campoNodo, elEscritor);
         }
@@ -261,7 +261,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static void Guarda(CampoNodoDeRuta elCampoNodo, StreamWriter elEscritor)
+    private static void Guarda(CampoNodoRuteable elCampoNodo, StreamWriter elEscritor)
     {
       // Crea el texto.
       string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IndentificadorGlobal);

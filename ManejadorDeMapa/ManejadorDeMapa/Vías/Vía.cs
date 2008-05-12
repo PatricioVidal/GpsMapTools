@@ -95,9 +95,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Obtiene los campos de nodos de ruta indexados por indice de coordenada.
+    /// Obtiene los campos de nodos ruteables indexados por indice de coordenada.
     /// </summary>
-    public CampoNodoDeRuta[] CamposNodosDeRuta { get; private set; }
+    public CampoNodoRuteable[] CamposNodosRuteables { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -131,7 +131,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
         }
       }
 
-      CreaCamposNodosDeRuta();
+      CreaCamposNodosRuteables();
     }
 
 
@@ -168,75 +168,75 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Añade un nodo de ruta.
+    /// Añade un nodo ruteable.
     /// </summary>
-    /// <param name="elIndice">El índice del nodo de ruta.</param>
+    /// <param name="elIndice">El índice del nodo ruteable.</param>
     /// <param name="elIdentificadorGlobal">El identificador global.</param>
     /// <param name="laRazón">La razón.</param>
-    public void AñadeNodoDeRuta(int elIndice, int elIdentificadorGlobal, string laRazón)
+    public void AñadeNodoRuteable(int elIndice, int elIdentificadorGlobal, string laRazón)
     {
-      // Si ya tiene un nodo de ruta en el índice, pero con un identificador
+      // Si ya tiene un nodo ruteable en el índice, pero con un identificador
       // global distinto entonces actualizamos el campo.
       // Si el identificador global es igual entonces no hacemos nada.
-      CampoNodoDeRuta campoNodoDeRutaActual = CamposNodosDeRuta[elIndice];
-      if (campoNodoDeRutaActual != null)
+      CampoNodoRuteable campoNodoRuteableActual = CamposNodosRuteables[elIndice];
+      if (campoNodoRuteableActual != null)
       {
-        if (campoNodoDeRutaActual.IndentificadorGlobal != elIdentificadorGlobal)
+        if (campoNodoRuteableActual.IndentificadorGlobal != elIdentificadorGlobal)
         {
           // Actualiza el campo.
-          CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
-            campoNodoDeRutaActual.Identificador,
-            campoNodoDeRutaActual.Número,
+          CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
+            campoNodoRuteableActual.Identificador,
+            campoNodoRuteableActual.Número,
             elIndice,
             elIdentificadorGlobal,
-            campoNodoDeRutaActual.EsExterno);
-          CambiaCampo(nuevoCampoNodoDeRuta, campoNodoDeRutaActual, laRazón);
+            campoNodoRuteableActual.EsExterno);
+          CambiaCampo(nuevoCampoNodoRuteable, campoNodoRuteableActual, laRazón);
         }
       }
       else
       {
-        #region Añade el nodo de ruta en la posición correcta.
-        #region Ve si es necesario insertar el nodo de ruta.
-        // El nuevo nodo de ruta hay que insertarlo si tiene un
+        #region Añade el nodo ruteable en la posición correcta.
+        #region Ve si es necesario insertar el nodo ruteable.
+        // El nuevo nodo ruteable hay que insertarlo si tiene un
         // índice de coordenadas menor que alguno de los nodos
-        // de ruta que ya existen.
-        List<CampoNodoDeRuta> camposNodosDeRuta = new List<CampoNodoDeRuta>();
-        foreach (CampoNodoDeRuta campo in CamposNodosDeRuta)
+        // ruteables que ya existen.
+        List<CampoNodoRuteable> camposNodosRuteables = new List<CampoNodoRuteable>();
+        foreach (CampoNodoRuteable campo in CamposNodosRuteables)
         {
           if (campo != null)
           {
-            camposNodosDeRuta.Add(campo);
+            camposNodosRuteables.Add(campo);
           }
         }
-        int númeroDeNodosDeRuta = camposNodosDeRuta.Count;
-        int últimoIndice = númeroDeNodosDeRuta - 1;
-        bool yaInsertóNodoDeRuta = false;
-        for (int i = 0; i < númeroDeNodosDeRuta; ++i)
+        int númeroDeNodosRuteables = camposNodosRuteables.Count;
+        int últimoIndice = númeroDeNodosRuteables - 1;
+        bool yaInsertóNodoRuteable = false;
+        for (int i = 0; i < númeroDeNodosRuteables; ++i)
         {
-          CampoNodoDeRuta campo = camposNodosDeRuta[i];
+          CampoNodoRuteable campo = camposNodosRuteables[i];
           if (elIndice < campo.IndiceDeCoordenadas)
           {
-            // Inserta en nuevo nodo de ruta solo si todavía
+            // Inserta en nuevo nodo ruteable solo si todavía
             // no se ha insertado.
-            if (!yaInsertóNodoDeRuta)
+            if (!yaInsertóNodoRuteable)
             {
-              CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
-                CampoNodoDeRuta.IdentificadorDeNodo,
+              CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
+                CampoNodoRuteable.IdentificadorDeNodo,
                 campo.Número,
                 elIndice,
                 elIdentificadorGlobal,
                 false);
-              CambiaCampo(nuevoCampoNodoDeRuta, campo, laRazón);
-              yaInsertóNodoDeRuta = true;
+              CambiaCampo(nuevoCampoNodoRuteable, campo, laRazón);
+              yaInsertóNodoRuteable = true;
             }
 
             #region Mueve los siguientes nodos.
 
-            // Una vez que se insertó el nodo de ruta entonces
+            // Una vez que se insertó el nodo ruteable entonces
             // hay que mover todos los nodos siguientes.
             int siguienteIndice = i + 1;
             int siguienteNúmero = campo.Número + 1;
-            CampoNodoDeRuta campoNodoDeRuta = new CampoNodoDeRuta(
+            CampoNodoRuteable campoNodoRuteable = new CampoNodoRuteable(
               campo.Identificador,
               siguienteNúmero,
               campo.IndiceDeCoordenadas,
@@ -248,12 +248,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
             // Si no, entonces tenemos que añadir el nodo.
             if (siguienteIndice <= últimoIndice)
             {
-              CampoNodoDeRuta campoACambiar = camposNodosDeRuta[siguienteIndice];
-              CambiaCampo(campoNodoDeRuta, campoACambiar, laRazón);
+              CampoNodoRuteable campoACambiar = camposNodosRuteables[siguienteIndice];
+              CambiaCampo(campoNodoRuteable, campoACambiar, laRazón);
             }
             else
             {
-              AñadeCampo(campoNodoDeRuta, laRazón);
+              AñadeCampo(campoNodoRuteable, laRazón);
             }
 
             #endregion
@@ -262,37 +262,37 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
         #endregion
 
-        // Si no se insertó el nodo de ruta quiere decir que debemos
+        // Si no se insertó el nodo ruteable quiere decir que debemos
         // añadirlo de último.
-        if (!yaInsertóNodoDeRuta)
+        if (!yaInsertóNodoRuteable)
         {
-          int númeroDeNodoDeRuta = númeroDeNodosDeRuta + 1;
-          CampoNodoDeRuta nuevoCampoNodoDeRuta = new CampoNodoDeRuta(
-            CampoNodoDeRuta.IdentificadorDeNodo,
-            númeroDeNodoDeRuta,
+          int númeroDeNodoRuteable = númeroDeNodosRuteables + 1;
+          CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
+            CampoNodoRuteable.IdentificadorDeNodo,
+            númeroDeNodoRuteable,
             elIndice,
             elIdentificadorGlobal,
             false);
-          AñadeCampo(nuevoCampoNodoDeRuta, laRazón);
+          AñadeCampo(nuevoCampoNodoRuteable, laRazón);
         }
 
         #endregion
       }
 
-      CreaCamposNodosDeRuta();
+      CreaCamposNodosRuteables();
     }
     #endregion
 
     #region Métodos Privados
-    private void CreaCamposNodosDeRuta()
+    private void CreaCamposNodosRuteables()
     {
-      CamposNodosDeRuta = new CampoNodoDeRuta[Coordenadas.Length];
+      CamposNodosRuteables = new CampoNodoRuteable[Coordenadas.Length];
       foreach (Campo campo in Campos)
       {
-        CampoNodoDeRuta campoNodo = campo as CampoNodoDeRuta;
+        CampoNodoRuteable campoNodo = campo as CampoNodoRuteable;
         if (campoNodo != null)
         {
-          CamposNodosDeRuta[campoNodo.IndiceDeCoordenadas] = campoNodo;
+          CamposNodosRuteables[campoNodo.IndiceDeCoordenadas] = campoNodo;
         }
       }
     }
