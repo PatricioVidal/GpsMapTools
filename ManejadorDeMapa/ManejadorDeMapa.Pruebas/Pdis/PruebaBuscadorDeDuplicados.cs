@@ -90,7 +90,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       ArregladorDePalabrasPorTipo objectoDePrueba = new ArregladorDePalabrasPorTipo(manejadorDePdis, escuchadorDeEstatus); 
 
       // Prueba propiedades.
-      Assert.AreEqual(0, objectoDePrueba.NúmeroDelElementoProcesándose, "NúmeroDeElementoProcesándose");
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeProblemasDetectados");
     }
@@ -196,7 +195,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 
       // Prueba propiedades.
       AseguraDuplicadosSonIguales(duplicados, objectoDePrueba.GruposDeDuplicados, "GruposDeDuplicados");
-      Assert.AreEqual(elementos.Count, objectoDePrueba.NúmeroDelElementoProcesándose, "NúmeroDeElementoProcesándose");
       Assert.AreEqual(elementos.Count, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");
       Assert.AreEqual(númeroDeDuplicadosDetectados, objectoDePrueba.NúmeroDeProblemasDetectados, "NúmeroDeProblemasDetectados");
 

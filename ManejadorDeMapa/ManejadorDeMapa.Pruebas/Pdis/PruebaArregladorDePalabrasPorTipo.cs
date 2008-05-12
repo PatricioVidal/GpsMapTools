@@ -91,7 +91,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       BuscadorDeDuplicados objectoDePrueba = new BuscadorDeDuplicados(manejadorDePdis, escuchadorDeEstatus); 
 
       // Prueba propiedades.
-      Assert.That(objectoDePrueba.NúmeroDelElementoProcesándose, Is.EqualTo(0), "NúmeroDeElementoProcesándose");
       Assert.That(objectoDePrueba.NúmeroDeElementos, Is.EqualTo(0), "NúmeroDeElementos");
       Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(0), "NúmeroDeElementosModificados");
     }
@@ -154,7 +153,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       objectoDePrueba.Procesa();
 
       // Prueba propiedades.
-      Assert.That(objectoDePrueba.NúmeroDelElementoProcesándose, Is.EqualTo(pdis.Count), "NúmeroDeElementoProcesándose");
       Assert.That(objectoDePrueba.NúmeroDeElementos, Is.EqualTo(pdis.Count), "NúmeroDeElementos");
       Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(númeroDeProblemasDetectados), "NúmeroDeProblemasDetectados");
 
