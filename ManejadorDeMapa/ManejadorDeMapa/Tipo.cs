@@ -239,12 +239,6 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
-      // Si el objeto es nulo entonces no puede ser igual.
-      if (elObjecto == null)
-      {
-        return false;
-      }
-
       // Si el objecto no es del mismo tipo entonces no puede ser igual.
       if (!(elObjecto is Tipo))
       {
@@ -253,7 +247,7 @@ namespace GpsYv.ManejadorDeMapa
 
       // Compara el objecto.
       Tipo tipo = (Tipo)elObjecto;
-      bool esIgual = (this == tipo);
+      bool esIgual = (tipo == this);
 
       return esIgual;
     }

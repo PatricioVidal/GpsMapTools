@@ -233,21 +233,14 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
-      // Si es el mismo objecto entonces es igual.
-      if (ReferenceEquals(elObjecto, this))
-      {
-        return true;
-      }
-
-      CampoParámetrosDeRuta comparador = elObjecto as CampoParámetrosDeRuta;
-
-      // Si el objeto es nulo entonces no puede ser igual.
-      if (comparador == null)
+      // Verifica objectos nulos y compara el tipo.
+      if (elObjecto == null || (GetType() != elObjecto.GetType()))
       {
         return false;
       }
 
       // Compara objecto.
+      CampoParámetrosDeRuta comparador = (CampoParámetrosDeRuta)elObjecto;
       bool esIgual = (ToString() == comparador.ToString());
 
       return esIgual;

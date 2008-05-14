@@ -79,15 +79,30 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public class Coordenadas
   {
+    private readonly double miLatitud;
+    private readonly double miLongitud;
+
     /// <summary>
     /// Latitud.
     /// </summary>
-    public double Latitud { get; private set; }
+    public double Latitud
+    {
+       get
+       {
+         return miLatitud;
+       }
+    }
     
     /// <summary>
     /// Longitud.
     /// </summary>
-    public double Longitud { get; private set; }
+    public double Longitud
+    {
+       get
+       {
+         return miLongitud;
+       }
+    }
 
 
     /// <summary>
@@ -97,8 +112,8 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="laLongitud">La Longitud.</param>
     public Coordenadas(double laLatitud, double laLongitud)
     {
-      Latitud = laLatitud;
-      Longitud = laLongitud;
+      miLatitud = laLatitud;
+      miLongitud = laLongitud;
     }
 
 
@@ -107,9 +122,8 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="lasCoordenadas">Las coordenadas.</param>
     public Coordenadas(PointF lasCoordenadas)
+      : this (lasCoordenadas.Y, lasCoordenadas.X)
     {
-      Latitud = lasCoordenadas.Y;
-      Longitud = lasCoordenadas.X;
     }
 
 
@@ -190,7 +204,9 @@ namespace GpsYv.ManejadorDeMapa
       Coordenadas elPrimerElemento,
       Coordenadas elSegundoElemento)
     {
-      return Equals(elPrimerElemento, elSegundoElemento);
+      bool esIgual = ((elPrimerElemento.miLatitud == elSegundoElemento.miLatitud) &&
+        (elPrimerElemento.miLongitud == elSegundoElemento.miLongitud));
+      return esIgual;
     }
 
 
@@ -203,7 +219,7 @@ namespace GpsYv.ManejadorDeMapa
       Coordenadas elPrimerElemento,
       Coordenadas elSegundoElemento)
     {
-      return !Equals(elPrimerElemento, elSegundoElemento);
+      return !(elPrimerElemento == elSegundoElemento);
     }
 
 
@@ -214,18 +230,15 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="elObjecto">El objecto dado.</param>
     public override bool Equals(object elObjecto)
     {
-      Coordenadas comparador = elObjecto as Coordenadas;
-
-      // Si el objeto es nulo entonces no puede ser igual.
-      if (comparador == null)
+      // Verifica objectos nulos y compara el tipo.
+      if (elObjecto == null || (GetType() != elObjecto.GetType()))
       {
         return false;
       }
 
-      // Compara latitud y longitud.
-      bool esIgual = (
-        (Latitud == comparador.Latitud) &&
-        (Longitud == comparador.Longitud));
+      // Compara objecto.
+      Coordenadas comparador = (Coordenadas)elObjecto;
+      bool esIgual = (comparador == this);
 
       return esIgual;
     }
