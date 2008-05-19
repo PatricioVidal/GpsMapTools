@@ -27,8 +27,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
         "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,8 +51,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -164,7 +188,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.28.3050.35037, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.30.3060.37926, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_8D22E52328E868036DCD514B1AF10C59"
@@ -824,7 +848,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_56556B94D73A488DB3CC41EFBFD7127D"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Debug\\ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Release\\ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
@@ -873,6 +897,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{F07EE602-114A-4111-AD1C-E079D8C71E11}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+            {
+            "SourcePath" = "8:..\\ManejadorDeMapa.Consola\\obj\\Release\\ManejadorDeMapa.Consola.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{7B9D4062-BA10-406F-A78B-ECD0DDF0176B}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

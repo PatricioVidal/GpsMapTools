@@ -424,7 +424,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elCampoIndiceDeCiudadNuevo">El Campo de Indice de Ciudad nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    /// <returns>Una variable lógica que indica que el PDI se modificó.</returns>
+    /// <returns>Una variable lógica que indica si el elemento se modificó.</returns>
     public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
     {
       bool cambió = false;
@@ -457,13 +457,18 @@ namespace GpsYv.ManejadorDeMapa
     /// Remueve el campo de índice de ciudad.
     /// </summary>
     /// <param name="laRazón">La razón.</param>
-    public void RemueveCampoIndiceDeCiudad(string laRazón)
+    /// <returns>Una variable lógica que indica si el elemento se modificó.</returns>
+    public bool RemueveCampoIndiceDeCiudad(string laRazón)
     {
+      bool cambió = false;
       if (miCampoIndiceDeCiudad != null)
       {
         RemueveCampo(miCampoIndiceDeCiudad, laRazón);
         miCampoIndiceDeCiudad = null;
+        cambió = true;
       }
+
+      return cambió;
     }
 
 

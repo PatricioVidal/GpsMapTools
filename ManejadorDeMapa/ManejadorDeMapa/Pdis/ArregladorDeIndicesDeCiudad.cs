@@ -135,7 +135,11 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
       if (!seEncontróUnaCiudad)
       {
-        elPdi.RemueveCampoIndiceDeCiudad("El PDI no pertenece a ninguna ciudad.");
+        bool cambió = elPdi.RemueveCampoIndiceDeCiudad("El PDI no pertenece a ninguna ciudad.");
+        if (cambió)
+        {
+          ++númeroDeProblemasDetectados;
+        }
       }
 
       return númeroDeProblemasDetectados;

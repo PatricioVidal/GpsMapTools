@@ -1,3 +1,18 @@
+Versión 1.30
+- Creada versión de consola (ManejadorDeMapa.Consola.exe):
+    Usage: ManejadorDeMapa.Consola.exe [@argfile] [/de:<directorio>]
+           [/ds:<directorio>] [/p:<procesamiento>] [/help|?|h] [/version|v]
+    @argfile            Read arguments from a file.
+    /de <directorio>    Directorio de Entrada.
+    /ds <directorio>    Directorio de Salida.
+    /p <procesamiento>  Procesamientos: 'ArreglaIndices'.
+    /help               Show usage.
+    /version            Show version.
+  Por ahora el único procesamiento que está implementado es 'ArreglaIndices'.
+  Ejemplo: ManejadorDeMapa.Consola.exe /de:"U:\Data\" /ds:"U:\Data\Procesados" /p:ArreglaIndices
+- Actualizado "MAC DONALD'S" en la tabla de corrección de palabras en nombres de PDIs.
+- Interno: Optimizada la clase Coordenadas para mejorar velocidad de búsqueda de nodos desconectados. Optimizados todas las implementaciones del método Equals().
+
 Versión 1.29
 - Añadido botón para actualizar la lista en la página de Posibles Nodos Desconectados. Este botón actualiza la lista de posibles nodos desconectados pero solamente usando las vías que están en la lista. Esto hace el proceso mucho mas rápido.
 - Interno: Creada clase Nodo.

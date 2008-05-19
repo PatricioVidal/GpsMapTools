@@ -146,7 +146,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
       if (!seEncontróUnaCiudad)
       {
-        laVía.RemueveCampoIndiceDeCiudad("La vía no pertenece a ninguna ciudad.");
+        bool cambió = laVía.RemueveCampoIndiceDeCiudad("La vía no pertenece a ninguna ciudad.");
+        if (cambió)
+        {
+          ++númeroDeProblemasDetectados;
+        }
       }
 
       return númeroDeProblemasDetectados;
