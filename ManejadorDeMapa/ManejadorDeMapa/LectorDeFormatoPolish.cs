@@ -201,7 +201,7 @@ namespace GpsYv.ManejadorDeMapa
     
     private void LeePdi(string laClase)
     {
-      IList<Campo> campos = LeeCampos();
+      IList<Campo> campos = LeeCampos(laClase);
 
       switch (laClase)
       {
@@ -237,7 +237,7 @@ namespace GpsYv.ManejadorDeMapa
 
     private void LeePolígono(string laClase)
     {
-      IList<Campo> campos = LeeCampos();
+      IList<Campo> campos = LeeCampos(laClase);
 
       // Añade el polígono.
       misElementosDelMapa.Add(new Polígono(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
@@ -246,7 +246,7 @@ namespace GpsYv.ManejadorDeMapa
 
     private void LeePolilínea(string laClase)
     {
-      IList<Campo> campos = LeeCampos();
+      IList<Campo> campos = LeeCampos(laClase);
 
       // Busca el tipo de polilínea.
       Tipo tipo = Tipo.TipoNulo;
@@ -275,7 +275,7 @@ namespace GpsYv.ManejadorDeMapa
 
     private void LeeElementoDesconocido(string laClase)
     {
-      IList<Campo> campos = LeeCampos();
+      IList<Campo> campos = LeeCampos(laClase);
 
       // Añade el elemento.
       misElementosDelMapa.Add(new ElementoDesconocido(
@@ -286,7 +286,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private IList<Campo> LeeCampos()
+    private IList<Campo> LeeCampos(string laClase)
     {
       List<Campo> campos = new List<Campo>();
 
@@ -392,7 +392,20 @@ namespace GpsYv.ManejadorDeMapa
           }
           else
           {
-            throw new ArgumentException("Error buscando '=' en: " + línea);
+            string mensaje;           
+            if (línea.StartsWith("["))
+            {
+              mensaje = string.Format("Se encontró un elemento nuevo ({0}) antes de encontrar el final del elemento [{1}].",
+                                      línea,
+                                      laClase);
+            }
+            else
+            {
+              mensaje = string.Format("Error buscando '=' en: {0}\n" +
+                               "La línea debería ser una línea en blanco, un comentario, o un campo.",
+                               línea);
+            }
+            throw new ArgumentException(mensaje);
           }
         }
 
@@ -403,7 +416,7 @@ namespace GpsYv.ManejadorDeMapa
         // porque todavía no hemos encontrado el final del elemento.
         if (línea == null)
         {
-          throw new ArgumentException("Se encontró el final del archivo estando dentro de un elemento.");
+          throw new ArgumentException(string.Format("Se encontró el final del archivo estando dentro del elemento [{0}]", laClase));
         }
       }
 

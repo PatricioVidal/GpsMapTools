@@ -71,10 +71,8 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Threading;
 using System.Reflection;
 
 namespace GpsYv.ManejadorDeMapa
@@ -87,7 +85,8 @@ namespace GpsYv.ManejadorDeMapa
     #region Campos
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private StreamReader miLector;
-    private long miNúmeroDeLínea = 0;
+    private long miNúmeroDeLínea;
+    private string miLínea = string.Empty;
 
     /// <summary>
     /// Esta codificación permite intepretar correctamente los acentos de 
@@ -113,7 +112,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Constructor.
     /// </summary>
-    public LectorDeArchivo()
+    protected LectorDeArchivo()
       : this (new EscuchadorDeEstatusPorOmisión())
     {
     }
@@ -123,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa
     /// Constructor.
     /// </summary>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public LectorDeArchivo(IEscuchadorDeEstatus elEscuchadorDeEstatus)
+    protected LectorDeArchivo(IEscuchadorDeEstatus elEscuchadorDeEstatus)
     {
       miEscuchadorDeEstatus = elEscuchadorDeEstatus;
 
@@ -174,7 +173,7 @@ namespace GpsYv.ManejadorDeMapa
       catch (Exception e)
       {
         string mensaje = "Error leyendo archivo '" + elArchivo + "' en la línea " + miNúmeroDeLínea + ":\n"
-          + línea + "\n";
+          + miLínea + "\n";
 
         throw new ArgumentException(mensaje, e);
       }
@@ -216,10 +215,10 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     protected string LeeLaPróximaLínea()
     {
-      string línea = miLector.ReadLine();
+      miLínea = miLector.ReadLine();
       ++miNúmeroDeLínea;
 
-      return línea;
+      return miLínea;
     }
     #endregion
   }
