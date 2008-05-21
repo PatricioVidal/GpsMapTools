@@ -466,13 +466,16 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Procesa todo lo que se puede procesar.
     /// </summary>
-    public void ProcesarTodo()
+    /// <returns>El número de cambios.</returns>
+    public int ProcesarTodo()
     {
       int númeroDeElementosModificados = 0;
       númeroDeElementosModificados += ManejadorDePdis.ProcesarTodo();
       númeroDeElementosModificados += ManejadorDeVías.ProcesarTodo();
 
       miEscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
+
+      return númeroDeElementosModificados;
     }
 
 

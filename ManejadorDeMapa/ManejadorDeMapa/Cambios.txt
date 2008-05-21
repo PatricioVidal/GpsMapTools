@@ -1,3 +1,7 @@
+Versión 1.31
+- Añadido el procesamiento "ProcesarTodo" a la versión de Consola.
+- Mejorado los mensajes de errores al leer un archivo .mp.
+
 Versión 1.30
 - Creada versión de consola (ManejadorDeMapa.Consola.exe):
     Usage: ManejadorDeMapa.Consola.exe [@argfile] [/de:<directorio>]

@@ -69,36 +69,35 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using Genghis;
-using System.IO;
 using System;
-using GpsYv.ManejadorDeMapa;
 using System.Collections.Generic;
 using System.Reflection;
+using Genghis;
+using System.IO;
+using GpsYv.ManejadorDeMapa;
 
-// NOTE: This would override the assembly's description
-//[clp.ParserUsage("A test of the Genghis command line parser.")]
-class TestCommandLine : CommandLineParser
+class Argumentos : CommandLineParser
 {
   [ValueUsage("Directorio de Entrada.", Name = "de", ValueName = "directorio")]
-  public string DirectorioDeEntrada;
+  public string DirectorioDeEntrada { get; set; }
 
   [ValueUsage("Directorio de Salida.", Name = "ds", ValueName = "directorio")]
-  public string DirectorioDeSalida;
+  public string DirectorioDeSalida { get; set; }
 
-  [ValueUsage("Procesamientos: 'ArreglaIndices'.", Name = "p", ValueName = "procesamiento")]
-  public List<string> Procesamientos = new List<string>();
+  [ValueUsage("Procesamientos: ProcesarTodo, ArreglaIndices", 
+    Name = "p", ValueName = "procesamiento")]
+  public IList<string> Procesamientos = new List<string>();
 }
 
 namespace GpsYv.ManejadorDeMapa.Consola
 {
-  class Program
+  class Programa
   {
-    static void Main(string[] args)
+    static void Main(string[] losArgumentos)
     {
-      // Parse the command line and show help or version or error
-      TestCommandLine argumentos = new TestCommandLine();
-      if (!argumentos.ParseAndContinue(args))
+      // Procesa los argumentos.
+      Argumentos argumentos = new Argumentos();
+      if (!argumentos.ParseAndContinue(losArgumentos))
       {
         return;
       }
@@ -146,6 +145,11 @@ namespace GpsYv.ManejadorDeMapa.Consola
           int número = 0;
           switch (procesamiento)
           {
+            case "ProcesarTodo":
+              {
+                número += manejadorDeMapa.ProcesarTodo();
+              }
+              break;
             case "ArreglaIndices":
               {
                 número += manejadorDeMapa.ManejadorDePdis.ArregladorDeIndicesDeCiudad.Procesa();
