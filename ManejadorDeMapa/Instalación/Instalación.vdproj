@@ -64,13 +64,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -188,7 +188,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.30.3060.38643, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.31.3062.38638, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_8D22E52328E868036DCD514B1AF10C59"
@@ -313,14 +313,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{485A6D14-DA9E-491A-8E0A-C2D185DF99D5}"
-        "PackageCode" = "8:{C9EA06F0-DAEF-42DE-91B9-BAA3D2913178}"
+        "ProductCode" = "8:{C2CB3024-B77A-4ACC-8E8B-7DCF962ED5D2}"
+        "PackageCode" = "8:{F7E27E7D-C8C4-404F-834D-FF217895E5FA}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.31.0"
+        "ProductVersion" = "8:1.32.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"

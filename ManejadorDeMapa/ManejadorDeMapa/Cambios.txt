@@ -1,3 +1,6 @@
+Versión 1.32
+
+
 Versión 1.31
 - Añadido el procesamiento "ProcesarTodo" a la versión de Consola.
 - Mejorado los mensajes de errores al leer un archivo .mp.
