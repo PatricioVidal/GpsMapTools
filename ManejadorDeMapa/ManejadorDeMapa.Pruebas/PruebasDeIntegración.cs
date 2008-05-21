@@ -85,12 +85,12 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
     private struct CasoDeProcesamientoDePdis
     {
-      public readonly string Archivo;
-      public readonly int Todos;
-      public readonly int Modificados;
-      public readonly int PosiblesDuplicados;
-      public readonly int Eliminados;
-      public readonly int Errores;
+      public string Archivo { get; private set; }
+      public int Todos { get; private set; }
+      public int Modificados { get; private set; }
+      public int PosiblesDuplicados { get; private set; }
+      public int Eliminados { get; private set; }
+      public int Errores { get; private set; }
 
       public CasoDeProcesamientoDePdis(
         string elArchivo,
@@ -99,6 +99,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         int losPosiblesDuplicados,
         int losEliminados,
         int losErrores)
+        : this()
       {
         Archivo = elArchivo;
         Todos = losTodos;
@@ -132,8 +133,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       CasoDeProcesamientoDePdis[] casos = new[] {
         //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
         new CasoDeProcesamientoDePdis( "58090.mp",  1713,         160,         20,          2,      85),
-        new CasoDeProcesamientoDePdis( "58170.mp",  6837,         526,         13,        189,     239),
-        new CasoDeProcesamientoDePdis( "58220.mp",  6460,         794,         34,         58,     192),
+        new CasoDeProcesamientoDePdis( "58170.mp",  6837,         528,         13,        189,     239),
+        new CasoDeProcesamientoDePdis( "58220.mp",  6460,         796,         34,         58,     192),
         new CasoDeProcesamientoDePdis( "58370.mp",  1808,          246,         47,          8,     250),
         new CasoDeProcesamientoDePdis( "58460.mp",   980,          83,        151,          4,     216),
       };
@@ -166,8 +167,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       }
 
       // Cerrar la applicación.
-      ToolStripMenuItemTester menuSalir = new ToolStripMenuItemTester("miMenuSalir");
-      menuSalir.Click();
+      ToolStripMenuItemTester menúSalir = new ToolStripMenuItemTester("miMenuSalir");
+      menúSalir.Click();
     }
 
 
