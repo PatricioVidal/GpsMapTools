@@ -253,22 +253,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       #region Verifica si la diferencia entre los extremos de los indices es muy grande.
       string detallePorDefecto = string.Empty;
-      if (índicesDeLímitesDeVelocidad.Count > 0)
-      {
-        // Calcula la diferencia del índice de Límite de Velocidad.
-        int diferenciaDelIndice = índiceMáximoDelLímiteDeVelocidad - índiceMínimoDelLímiteDeVelocidad;
-
-        // Si las diferencia es mayor del límite entonces
-        // hay incongruencias.
-        const int MáximaDifferenciaDelIndiceDeLímiteDeVelocidad = 2;
-        if (diferenciaDelIndice > MáximaDifferenciaDelIndiceDeLímiteDeVelocidad)
-        {
-          detallePorDefecto = "Differencia de los Indices de Límite de Velocidad es " +
-            diferenciaDelIndice + ", y la máxima diferencia permitida es " + MáximaDifferenciaDelIndiceDeLímiteDeVelocidad;
-          hayIncongruencias = true;
-        }
-      }
-
       if (índicesDeLaClaseDeRuta.Count > 0)
       {
         // Calcula la diferencia del índice de Límite de Velocidad.
@@ -276,11 +260,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
         // Si las diferencia es mayor del límite entonces
         // hay incongruencias.
-        const int MáximaDifferenciaDeLaClaseDeRuta = 2;
-        if (diferenciaDelIndice > MáximaDifferenciaDeLaClaseDeRuta)
+        const int máximaDiferenciaDeLaClaseDeRuta = 2;
+        if (diferenciaDelIndice > máximaDiferenciaDeLaClaseDeRuta)
         {
-          detallePorDefecto = "Differencia de los Indices de la Clase de Ruta es " +
-            diferenciaDelIndice + ", y la máxima deferencia permitida es " + MáximaDifferenciaDeLaClaseDeRuta;
+          detallePorDefecto = "Diferencia de los Indices de la Clase de Ruta es " +
+            diferenciaDelIndice + ", y la máxima deferencia permitida es " + máximaDiferenciaDeLaClaseDeRuta;
           hayIncongruencias = true;
         }
       }

@@ -303,10 +303,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       // Pone las pestañas en estado de "No Sé" para indicar que
       // no se sabe si hay errores.
-      // TODO: Habilitar este código cunado se mejore la lógica.
-      //miControladorDePestañas.PoneEstadoDePestaña(
-      //  misIndicesDePestañas[miPáginaPosibleErroresDeRuteo],
-      //  ControladorDePestañas.EstadoDePestaña.NoSé);
+      miControladorDePestañas.PoneEstadoDePestaña(
+        misIndicesDePestañas[miPáginaPosibleErroresDeRuteo],
+        ControladorDePestañas.EstadoDePestaña.NoSé);
 
       // Cambia el texto de la pestaña.
       miPáginaPosibleErroresDeRuteo.Text = miTextoPestañaPosibleErroresDeRuteo;
@@ -326,17 +325,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Si no, entonces cambia el estado de la pestaña a Bíen.
       if (númeroDeVíasConErrores > 0)
       {
-        // TODO: Habilitar este código cunado se mejore la lógica.
-        //miControladorDePestañas.PoneEstadoDePestaña(
-        //  misIndicesDePestañas[página],
-        //  ControladorDePestañas.EstadoDePestaña.Alerta);
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[página],
+          ControladorDePestañas.EstadoDePestaña.Alerta);
       }
       else
       {
-        // TODO: Habilitar este código cunado se mejore la lógica.
-        //miControladorDePestañas.PoneEstadoDePestaña(
-        //  misIndicesDePestañas[página],
-        //  ControladorDePestañas.EstadoDePestaña.Bién);
+        miControladorDePestañas.PoneEstadoDePestaña(
+          misIndicesDePestañas[página],
+          ControladorDePestañas.EstadoDePestaña.Bién);
       }
     }
 
