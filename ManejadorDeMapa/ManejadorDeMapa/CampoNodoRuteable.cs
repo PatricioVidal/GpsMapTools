@@ -92,6 +92,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el número del nodo ruteable.
     /// </summary>
+    // TODO: Remover esta propiedad y generar el número automáticamente.
     public int Número { get; private set; }
 
     /// <summary>
@@ -103,7 +104,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el identificador global.
     /// </summary>
-    public int IndentificadorGlobal { get; private set; }
+    public int IdentificadorGlobal { get; private set; }
 
 
     /// <summary>
@@ -132,7 +133,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       Número = elNúmero;
       IndiceDeCoordenadas = elIndiceDeCoordenadas;
-      IndentificadorGlobal = elIdentificadorGlobal;
+      IdentificadorGlobal = elIdentificadorGlobal;
       EsExterno = elEsExterno;
     }
 
@@ -142,7 +143,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      string texto = string.Format("Indice={0},Id={1}", IndiceDeCoordenadas, IndentificadorGlobal);
+      string texto = string.Format("Indice={0},Id={1}", IndiceDeCoordenadas, IdentificadorGlobal);
       if (EsExterno)
       {
         texto += ",Externo";
@@ -167,7 +168,7 @@ namespace GpsYv.ManejadorDeMapa
 
       // Compara objecto.
       CampoNodoRuteable comparador = (CampoNodoRuteable)elObjecto;
-      bool esIgual = ((IndentificadorGlobal == comparador.IndentificadorGlobal) &&
+      bool esIgual = ((IdentificadorGlobal == comparador.IdentificadorGlobal) &&
         (IndiceDeCoordenadas == comparador.IndiceDeCoordenadas) &&
         (EsExterno == comparador.EsExterno));
 

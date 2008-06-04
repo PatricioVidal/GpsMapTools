@@ -17,7 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Informació
 		Informacion\CaracterísticasDePDIs.JoseH.csv = Informacion\CaracterísticasDePDIs.JoseH.csv
 		Informacion\Garmin City Select North America Elements.txt = Informacion\Garmin City Select North America Elements.txt
 		Informacion\Garmin POIs.txt = Informacion\Garmin POIs.txt
-		Ternary Search Tree Dictionary\Tst_doc.chm = Ternary Search Tree Dictionary\Tst_doc.chm
 	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalación", "Instalación\Instalación.vdproj", "{B551FA61-71A2-419B-A611-F33523779D47}"

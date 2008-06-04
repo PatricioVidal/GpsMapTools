@@ -99,9 +99,9 @@ namespace GpsYv.ManejadorDeMapa
     /// Constructor.
     /// </summary>
     /// <param name="elArchivo">El archivo a abrir.</param>
-    /// <param name="losElementodDelMapa">Los elementos del mapa.</param>
+    /// <param name="losElementosDelMapa">Los elementos del mapa.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public EscritorDeFormatoPolish(string elArchivo, ICollection<ElementoDelMapa> losElementodDelMapa, IEscuchadorDeEstatus elEscuchadorDeEstatus)
+    public EscritorDeFormatoPolish(string elArchivo, ICollection<ElementoDelMapa> losElementosDelMapa, IEscuchadorDeEstatus elEscuchadorDeEstatus)
     {
       // Usar el punto para separar decimales.
       miFormatoNumérico.NumberDecimalSeparator = ".";
@@ -120,14 +120,14 @@ namespace GpsYv.ManejadorDeMapa
         elEscuchadorDeEstatus.Progreso = 0;
 
         // Establece el límite superior de la barra de progreso.
-        int númeroDeElementos = losElementodDelMapa.Count;
+        int númeroDeElementos = losElementosDelMapa.Count;
         elEscuchadorDeEstatus.ProgresoMáximo = númeroDeElementos;
 
         using (StreamWriter escritor = new StreamWriter(elArchivo, false, miCodificaciónPorDefecto))
         {
           // Guarda todos los elementos.
           int contadorDeElementos = 0;
-          foreach (ElementoDelMapa elemento in losElementodDelMapa)
+          foreach (ElementoDelMapa elemento in losElementosDelMapa)
           {
             ++contadorDeElementos;
 
@@ -264,7 +264,7 @@ namespace GpsYv.ManejadorDeMapa
     private static void Guarda(CampoNodoRuteable elCampoNodo, StreamWriter elEscritor)
     {
       // Crea el texto.
-      string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IndentificadorGlobal);
+      string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IdentificadorGlobal);
       if (elCampoNodo.EsExterno)
       {
         texto += ",1";
@@ -349,7 +349,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static void Guarda(Campo elCampo, int elNúmero, string elTexto, StreamWriter elEscritor)
+    private static void Guarda(Campo elCampo, IConvertible elNúmero, string elTexto, StreamWriter elEscritor)
     {
       elEscritor.WriteLine(
         elCampo.Identificador + elNúmero.ToString(CultureInfo.InvariantCulture)

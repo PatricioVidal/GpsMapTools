@@ -167,13 +167,13 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve una version de texto del objecto.
+    /// Devuelve una versión de texto del objecto.
     /// </summary>
     public override string ToString()
     {
       StringBuilder coordenadas = new StringBuilder();
-      int númeroDeCoordenasAMostrar = Math.Min(Coordenadas.Length, 5);
-      for (int i = 0; i < númeroDeCoordenasAMostrar; ++i)
+      int númeroDeCoordenadasAMostrar = Math.Min(Coordenadas.Length, 5);
+      for (int i = 0; i < númeroDeCoordenadasAMostrar; ++i)
       {
         coordenadas.Append(Coordenadas[i].ToString());
       }

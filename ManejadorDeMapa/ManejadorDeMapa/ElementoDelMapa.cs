@@ -73,6 +73,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -187,7 +188,7 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve una variable lógica que indica si el elemento fué modificado.
+    /// Devuelve una variable lógica que indica si el elemento fue modificado.
     /// </summary>
     public bool FuéModificado
     {
@@ -199,7 +200,7 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Devuelve una variable lógica que indica si el elemento fué eliminado.
+    /// Devuelve una variable lógica que indica si el elemento fue eliminado.
     /// </summary>
     public bool FuéEliminado
     {
@@ -349,26 +350,7 @@ namespace GpsYv.ManejadorDeMapa
         SeparadorDeModificaciones + elNombreNuevo);
 
       // Busca y actualiza el campo del nombre.
-      bool encontróCampoNombre = false;
-      for (int i = 0; i < misCampos.Count; ++i)
-      {
-        if (misCampos[i] is CampoNombre)
-        {
-          encontróCampoNombre = true;
-
-          // Remplaza el campo.
-          misCampos[i] = new CampoNombre(miNombre);
-        }
-      }
-      
-      // Añade el campo tipo si no se encontró.
-      if (!encontróCampoNombre)
-      {
-        misCampos.Add(new CampoNombre(miNombre));
-      }
-
-      // Avisa que se modificó un elemento.
-      miManejadorDeMapa.SeModificóElemento(this);
+      BuscaYActualizaCampo(new CampoNombre(elNombreNuevo));
     }
 
     
@@ -389,23 +371,7 @@ namespace GpsYv.ManejadorDeMapa
         SeparadorDeModificaciones + elTipoNuevo);
 
       // Busca y actualiza el campo del tipo.
-      bool encontróCampoTipo = false;
-      for (int i = 0; i < misCampos.Count; ++i)
-      {
-        if (misCampos[i] is CampoTipo)
-        {
-          encontróCampoTipo = true;
-
-          // Remplaza el campo.
-          misCampos[i] = new CampoTipo(miTipo);
-        }
-      }
-
-      // Añade el campo tipo si no se encontró.
-      if (!encontróCampoTipo)
-      {
-        misCampos.Add(new CampoTipo(miTipo));
-      }
+      BuscaYActualizaCampo(new CampoTipo(elTipoNuevo));
 
       // Actualiza la descripción.
       bool existe = misDescripcionesPorTipo.TryGetValue(miTipo, out miDescripción);
@@ -413,9 +379,6 @@ namespace GpsYv.ManejadorDeMapa
       {
         miDescripción = string.Empty;
       }
-
-      // Avisa que se modificó un elemento.
-      miManejadorDeMapa.SeModificóElemento(this);
     }
 
 
@@ -499,8 +462,8 @@ namespace GpsYv.ManejadorDeMapa
     /// Si el elemento ha sido eliminado se genera un excepción.
     /// </para>
     /// </remarks>
-    /// <param name="elNuevoNùmeroDelElemento">El nuevo nùmero del Elemento regenerado.</param>
-    public void Regenera(int elNuevoNùmeroDelElemento)
+    /// <param name="elNuevoNúmeroDelElemento">El nuevo número del Elemento regenerado.</param>
+    public void Regenera(int elNuevoNúmeroDelElemento)
     {
       if (miFuéEliminado)
       {
@@ -516,7 +479,7 @@ namespace GpsYv.ManejadorDeMapa
         misModificacionesDeNombre.Clear();
         misModificacionesDeTipo.Clear();
         miOriginal = null;
-        miNúmero = elNuevoNùmeroDelElemento;
+        miNúmero = elNuevoNúmeroDelElemento;
       }
     }
 
@@ -590,6 +553,15 @@ namespace GpsYv.ManejadorDeMapa
     /// <param name="laRazón">La razón del cambio.</param>
     protected void CambiaCampo(Campo elCampoNuevo, Campo elCampoACambiar, string laRazón)
     {
+      // Asegurarse que los campos son del mismo tipo.
+      if (elCampoACambiar.GetType() != elCampoNuevo.GetType())
+      {
+        throw new ArgumentException(
+          string.Format("Los campos deben ser del mismo tipo, pero son '{0}' y '{1}'", 
+          elCampoACambiar.GetType(),
+          elCampoNuevo.GetType()));
+      }
+
       // Busca y actualiza el campo.
       bool encontróCampo = false;
       for (int i = 0; i < misCampos.Count; ++i)
@@ -663,6 +635,33 @@ namespace GpsYv.ManejadorDeMapa
 
       // Avísale al manejador de mapa que se cambió un elemento.
       miManejadorDeMapa.SeModificóElemento(this);
+    }
+
+
+    private void BuscaYActualizaCampo<T>(T elCampoNuevo) where T: Campo
+    {
+      T campoEncontrado = null;
+      for (int i = 0; i < misCampos.Count; ++i)
+      {
+        campoEncontrado = misCampos[i] as T;
+        if (campoEncontrado != null)
+        {
+          // Remplaza el campo.
+          misCampos[i] = elCampoNuevo;
+
+          // Avisa que se modificó un elemento.
+          miManejadorDeMapa.SeModificóElemento(this);
+        }
+      }
+
+      // Añade el campo tipo si no se encontró.
+      if (campoEncontrado == null)
+      {
+        misCampos.Add(elCampoNuevo);
+
+        // Avisa que se modificó un elemento.
+        miManejadorDeMapa.SeModificóElemento(this);
+      }
     }
     #endregion
   }

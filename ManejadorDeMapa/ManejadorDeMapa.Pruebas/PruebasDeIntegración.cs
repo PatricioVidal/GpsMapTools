@@ -78,6 +78,9 @@ using GpsYv.ManejadorDeMapa.Interfase;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas
 {
+  /// <summary>
+  /// Pruebas de integración.
+  /// </summary>
   [TestFixture]
   public class PruebasDeIntegración
   {
@@ -110,6 +113,10 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       }
     }
 
+
+    /// <summary>
+    /// Prueba el menú "Procesar Todo".
+    /// </summary>
     [Test]
     public void PruebaProcesamientoDeTodo()
     {
@@ -192,7 +199,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
           }
         );
 
-        // Selecciona el menu de abrir archivo.
+        // Selecciona el menú de abrir archivo.
         ToolStripMenuItemTester menuAbrirArchivo = new ToolStripMenuItemTester("miMenuAbrirArchivo");
         menuAbrirArchivo.Click();
       }
