@@ -743,11 +743,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
 
         // Dibuja los nodos.
-        foreach (CampoNodoRuteable nodo in vía.CamposNodosRuteables)
+        foreach (Nodo nodo in vía.Nodos)
         {
-          if ((nodo != null) && (nodo.IndiceDeCoordenadas < vía.Coordenadas.Length))
+          if ((nodo.EsRuteable) && (nodo.Indice < vía.Coordenadas.Length))
           {
-            Coordenadas coordenadas = vía.Coordenadas[nodo.IndiceDeCoordenadas];
+            Coordenadas coordenadas = nodo.Coordenadas;
             const int tamaño = 3;
             DibujaPunto(coordenadas, miPincelDeNodo, tamaño);
           }

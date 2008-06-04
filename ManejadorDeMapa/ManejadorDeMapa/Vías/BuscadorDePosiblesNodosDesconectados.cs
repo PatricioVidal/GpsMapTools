@@ -108,12 +108,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <remarks>
     /// Este atributo indica que el nodo está desconectado.
     /// </remarks>
-    public static readonly string AtributoNodoDesconectado = "NodoDesconectado";
+    public const string AtributoNodoDesconectado = "NodoDesconectado";
 
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca posibles nodos desconectados en las Vías.";
+    public const string Descripción = "Busca posibles nodos desconectados en las Vías.";
     #endregion
 
     #region Métodos Públicos
@@ -176,43 +176,39 @@ namespace GpsYv.ManejadorDeMapa.Vías
       for (int índiceVíaDestino = IndiceDeElementoProcesándose + 1; índiceVíaDestino < NúmeroDeElementos; ++índiceVíaDestino)
       {
         Vía víaDestino = this[índiceVíaDestino];
-        Coordenadas[] nodosDestino = víaDestino.Coordenadas;
-        int númeroDeNodosDestino = nodosDestino.Length;
 
         #region Busca todos los nodos con las mismas coordenadas.
-        for (int índiceDeNodo = 0; índiceDeNodo < númeroDeNodos; ++índiceDeNodo)
+        foreach (Nodo nodo in laVía.Nodos)
         {
-          CampoNodoRuteable nodoRuteable = laVía.CamposNodosRuteables[índiceDeNodo];
-          bool esNodoRuteable = (nodoRuteable != null);
-
           // Nos saltamos el nodo si éste tiene el atributo de nodo desconectado.
-          if (mapaNodoDesconectado[índiceDeNodo])
+          if (mapaNodoDesconectado[nodo.Indice])
           {
             continue;
           }
 
+          bool esNodoRuteable = nodo.EsRuteable;
+
           // Buscamos en todos los nodos destino.
-          Coordenadas nodo = laVía.Coordenadas[índiceDeNodo];
-          for (int índiceNodoDestino = 0; índiceNodoDestino < númeroDeNodosDestino; ++índiceNodoDestino)
+          Coordenadas coordenadasNodo = nodo.Coordenadas;
+          foreach (Nodo nodoDestino in víaDestino.Nodos)
           {
             #region Analizamos los nodos si tiene las mismas coordenadas.
-            Coordenadas nodoDestino = nodosDestino[índiceNodoDestino];
-            bool tienenLasMismasCoordenadas = (nodo == nodoDestino);
+            Coordenadas coordenadasNodoDestino = nodoDestino.Coordenadas;
+            bool tienenLasMismasCoordenadas = (coordenadasNodo == coordenadasNodoDestino);
             if (tienenLasMismasCoordenadas)
             {
               string error = null;
               const double distancia = 0;
-              CampoNodoRuteable nodoRuteableDestino = víaDestino.CamposNodosRuteables[índiceNodoDestino];
-              bool esNodoDestinoRuteable = (nodoRuteableDestino != null);
+              bool esNodoDestinoRuteable = nodoDestino.EsRuteable;
               if (esNodoRuteable && esNodoDestinoRuteable)
               {
                 // Si los identificadores de nodo no son el mismo entonces es un
                 // posible nodo desconectado.
-                if (nodoRuteable.IndentificadorGlobal != nodoRuteableDestino.IndentificadorGlobal)
+                if (nodo.IdentificadorGlobal != nodoDestino.IdentificadorGlobal)
                 {
                   error = string.Format("Los nodos tienen Identificadores Globales distintos: {0} != {1}",
-                    nodoRuteable.IndentificadorGlobal,
-                    nodoRuteableDestino.IndentificadorGlobal);
+                    nodo.IdentificadorGlobal,
+                    nodoDestino.IdentificadorGlobal);
                 }
               }
               else if (!esNodoRuteable & !esNodoDestinoRuteable)
@@ -227,8 +223,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
               if (error != null)
               {
                 InformaciónNodoDesconectado posibleNodoDesconectado = new InformaciónNodoDesconectado(
-                  new Nodo(laVía, índiceDeNodo),
-                  new Nodo(víaDestino, índiceNodoDestino),
+                  nodo,
+                  nodoDestino,
                   distancia,
                   error);
 
@@ -300,7 +296,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
         foreach (int índiceNodo in índicesNodosExtremos)
         {
           Coordenadas nodo = laVía.Coordenadas[índiceNodo];
-          double distancíaNodoMasCercano = double.MaxValue;
+          double distanciaNodoMasCercano = double.MaxValue;
           int índiceNodoMasCercano = 0;
           int númeroDeNodosDestino = laVíaDestino.Coordenadas.Length;
           for (int índiceNodoDestino = 0; índiceNodoDestino < númeroDeNodosDestino; ++índiceNodoDestino)
@@ -311,15 +307,15 @@ namespace GpsYv.ManejadorDeMapa.Vías
             bool tienenLasMismasCoordenadas = (nodo == nodoDestino);
             if (tienenLasMismasCoordenadas)
             {
-              distancíaNodoMasCercano = 0;
+              distanciaNodoMasCercano = 0;
               continue;
             }
 
             // Busca el nodo mas cercano.
             double distancia = Coordenadas.Distancia(nodo, nodoDestino);
-            if (distancia < distancíaNodoMasCercano)
+            if (distancia < distanciaNodoMasCercano)
             {
-              distancíaNodoMasCercano = distancia;
+              distanciaNodoMasCercano = distancia;
               índiceNodoMasCercano = índiceNodoDestino;
             }
           }
@@ -327,14 +323,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
           // Si la distancia al nodo mas cercano es cero quiere decir que tiene las mismas
           // coordenadas.  En este caso nos saltamos este nodo extremo porque
           // nodos con las mismas coordenadas son procesados en otro ciclo. 
-          if (distancíaNodoMasCercano == 0)
+          if (distanciaNodoMasCercano == 0)
           {
             continue;
           }
 
           // Los nodos son posibles nodos desconectados si la distancia entre 
           // ellos es menor que la distancia máxima de búsqueda.
-          if (distancíaNodoMasCercano < DistanciaMáxima)
+          if (distanciaNodoMasCercano < DistanciaMáxima)
           {
             // Si la vía tiene algun otro nodo conectado al nodo destino
             // entonces nos saltamos este nodo.
@@ -351,11 +347,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
             if (!laVíaTieneOtroNodoConectadoAlNodoDestino)
             {
               string error = string.Format("La distancia es menor que {0:0.0} m: {1:0.0} m", DistanciaMáxima,
-                                           distancíaNodoMasCercano);
+                                           distanciaNodoMasCercano);
               InformaciónNodoDesconectado posibleNodoDesconectado = new InformaciónNodoDesconectado(
                 new Nodo(laVía, índiceNodo),
                 new Nodo(laVíaDestino, índiceNodoMasCercano),
-                distancíaNodoMasCercano,
+                distanciaNodoMasCercano,
                 error);
 
               PosibleNodosDesconectados.Add(posibleNodoDesconectado);

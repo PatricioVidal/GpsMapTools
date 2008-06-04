@@ -80,7 +80,7 @@ using GpsYv.ManejadorDeMapa.Vías;
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
-  /// Manejador de los Puntos de Interes (PDI/POI)
+  /// Manejador de Mapa
   /// </summary>
   public class ManejadorDeMapa
   {
@@ -89,7 +89,7 @@ namespace GpsYv.ManejadorDeMapa
     private readonly IList<Pdi> misPdis = new List<Pdi>();
     private readonly IList<Vía> misVías = new List<Vía>();
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
-    private int miNúmeroDeSuspenciónDeEventos;
+    private int miNúmeroDeSuspensiónDeEventos;
     private bool miHayEventosDeModificaciónDeElementoPendientes;
     private bool miHayEventosDeModificaciónDePdisPendientes;
     private bool miHayEventosDeModificaciónDeVíasPendientes;
@@ -131,7 +131,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Descripción del método AceptarModificaciones().
     /// </summary>
-    public readonly static string DescripciónAceptarModificaciones =
+    public const string DescripciónAceptarModificaciones =
       "Acepta las modificaciones a los elementos del mapa. \n" +
       " - Elementos marcados como eliminados son eliminados definitivamente.\n" +
       " - Elementos modificados son re-inicializados borrando el estado de modificados.\n" +
@@ -186,8 +186,7 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        const string filtrosDeExtensiones = "Polish format (*.mp)|*.mp|"
-                                            + "Polish format (*.txt)|*.txt|"
+        const string filtrosDeExtensiones = "Formato Polish (*.mp)|*.mp|"
                                             + "Todos los archivos (*.*)|*.*";
         return filtrosDeExtensiones;
       }
@@ -206,6 +205,11 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public bool ParaDeProcesar { get; set; }
 
+
+    /// <summary>
+    /// Obtiene el diccionario de los nodos ruteables.
+    /// </summary>
+    public IDictionary<int, IList<Nodo>> NodosRuteables { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -223,6 +227,7 @@ namespace GpsYv.ManejadorDeMapa
       Polígonos = new List<Polígono>();
       Polilíneas = new List<Polilínea>();
       Ciudades = new List<Ciudad>();
+      NodosRuteables = new Dictionary<int, IList<Nodo>>();
     }
 
 
@@ -384,7 +389,7 @@ namespace GpsYv.ManejadorDeMapa
     public void SuspendeEventos()
     {
       // Incrementa el contador de suspenciones.
-      ++miNúmeroDeSuspenciónDeEventos;
+      ++miNúmeroDeSuspensiónDeEventos;
     }
 
 
@@ -394,9 +399,9 @@ namespace GpsYv.ManejadorDeMapa
     public void RestableceEventos()
     {
       // Decrementa el contador de suspenciones.
-      --miNúmeroDeSuspenciónDeEventos;
+      --miNúmeroDeSuspensiónDeEventos;
 
-      if (miNúmeroDeSuspenciónDeEventos == 0)
+      if (miNúmeroDeSuspensiónDeEventos == 0)
       {
         // Genera los eventos pendientes.
         if (miHayEventosDeModificaciónDeElementoPendientes)
@@ -415,7 +420,7 @@ namespace GpsYv.ManejadorDeMapa
           miHayEventosDeModificaciónDeVíasPendientes = false;
         }
       }
-      else if (miNúmeroDeSuspenciónDeEventos < 0)
+      else if (miNúmeroDeSuspensiónDeEventos < 0)
       {
         throw new InvalidOperationException("Se han restablecido los eventos más veces de las que se han suspendido.");
       }
@@ -425,14 +430,14 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Indica que se modificó un elemento del mapa.
     /// </summary>
-    internal void SeModificóElemento(ElementoDelMapa elElemento)
+    public void SeModificóElemento(ElementoDelMapa elElemento)
     {
       // Si los eventos están suspendidos entonces se indica
       // que hay notificaciones pendientes.
       // Si no, entonces se genera el evento.
       bool esPdi = (elElemento is Pdi);
       bool esVía = (elElemento is Vía);
-      if (miNúmeroDeSuspenciónDeEventos > 0)
+      if (miNúmeroDeSuspensiónDeEventos > 0)
       {
         miHayEventosDeModificaciónDeElementoPendientes = true;
 
@@ -488,9 +493,6 @@ namespace GpsYv.ManejadorDeMapa
     }
     #endregion
 
-    #region
-    #endregion
-
     #region Métodos y Clases Privadas
     private class ProcesoExclusivo : IDisposable
     {
@@ -529,6 +531,7 @@ namespace GpsYv.ManejadorDeMapa
       Polilíneas.Clear();
       Polígonos.Clear();
       Ciudades.Clear();
+      NodosRuteables.Clear();
       foreach (ElementoDelMapa elemento in losElementos)
       {
         misElementos.Add(elemento);
@@ -548,6 +551,24 @@ namespace GpsYv.ManejadorDeMapa
         else if ((vía = elemento as Vía) != null)
         {
           misVías.Add(vía);
+
+          foreach (var nodo in vía.Nodos)
+          {
+            if (nodo.EsRuteable)
+            {
+              var identificadorGlobal = nodo.IdentificadorGlobal;
+              IList<Nodo> nodosRuteables;
+              if (NodosRuteables.TryGetValue(identificadorGlobal, out nodosRuteables))
+              {
+                nodosRuteables.Add(nodo);
+              }
+              else
+              {
+                List<Nodo> nodos = new List<Nodo>{ nodo };
+                NodosRuteables.Add(identificadorGlobal, nodos);
+              }
+            }
+          }
         }
         else if ((polilínea = elemento as Polilínea) != null)
         {

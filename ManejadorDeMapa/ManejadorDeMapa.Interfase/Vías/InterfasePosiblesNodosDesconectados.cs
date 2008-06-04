@@ -71,11 +71,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
 using System.IO;
@@ -189,6 +185,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     #endregion
 
     #region Métodos Privados
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       base.EnMapaNuevo(elEnviador, losArgumentos);
@@ -314,19 +315,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void DibujaNodos(Vía laVía)
     {
-      for (int i = 0; i < laVía.Coordenadas.Length; ++i)
+      foreach (Nodo nodo in laVía.Nodos)
       {
-        if (laVía.CamposNodosRuteables[i] != null)
+        if (nodo.EsRuteable)
         {
           miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-            laVía.Coordenadas[i],
+            nodo.Coordenadas,
             miPincelDeNodoRuteable,
             11));
         }
         else
         {
           miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
-            laVía.Coordenadas[i],
+            nodo.Coordenadas,
             miPincelDeNodo,
             5));
         }
@@ -492,7 +493,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         if (laVíaTieneOtroNodoConLasMismasCoordenadas)
         {
           MessageBox.Show(
-            string.Format("La Vía # {0} tiene otro nodo con las mismas coordenadas ({1}).\nEl nodo no se vá a conectar.", vía.Número, coordenadasNodo),
+            string.Format("La Vía # {0} tiene otro nodo con las mismas coordenadas ({1}).\nEl nodo no se va a conectar.", vía.Número, coordenadasNodo),
             "Conecta Nodos Desconectados",
             MessageBoxButtons.OK,
             MessageBoxIcon.Warning);
@@ -500,28 +501,28 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         }
 
         #region Asegurarse que ambos nodos son ruteables.
-        CampoNodoRuteable campoNodoRuteable = vía.CamposNodosRuteables[índice];
-        CampoNodoRuteable campoNodoRuteableDestino = víaDestino.CamposNodosRuteables[índiceNodoDestino];
+        Nodo nodo = vía.Nodos[índice];
+        Nodo nodoDestino = víaDestino.Nodos[índiceNodoDestino];
 
         // Si el posible nodo desconectado es ruteable y el nodo destino
         // no es ruteable entonces usamos el identificador global del
         // posible nodo desconectado para el nodo destino.
-        if ((campoNodoRuteable != null) && (campoNodoRuteableDestino == null))
+        if (nodo.EsRuteable && !nodoDestino.EsRuteable)
         {
           // Añade el nodo ruteable en la vía destino.
           víaDestino.AñadeNodoRuteable(
             índiceNodoDestino,
-            campoNodoRuteable.IndentificadorGlobal,
+            nodo.IdentificadorGlobal,
             razón);
         }
         // Si el nodo destino es ruteable entonces usamos el identificador
         // global del nodo destino para el nodo desconectado.
-        else if (campoNodoRuteableDestino != null)
+        else if (nodoDestino.EsRuteable)
         {
           // Añade el nodo ruteable en la vía.
           vía.AñadeNodoRuteable(
             índice,
-            campoNodoRuteableDestino.IndentificadorGlobal,
+            nodoDestino.IdentificadorGlobal,
             razón);
         }
         // Si ninguno de los nodos es ruteable entonces generamos un nuevo
@@ -529,16 +530,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         else
         {
           // Genera un nuevo identificador global.
-          int nuevoIndentificadorGlobal = GeneraNuevoIdentificadorGlobal();
+          int nuevoIdentificadorGlobal = GeneraNuevoIdentificadorGlobal();
 
           // Añade el nodo ruteable a ambas vías.
           vía.AñadeNodoRuteable(
             índice,
-            nuevoIndentificadorGlobal,
+            nuevoIdentificadorGlobal,
             razón);
           víaDestino.AñadeNodoRuteable(
             índiceNodoDestino,
-            nuevoIndentificadorGlobal,
+            nuevoIdentificadorGlobal,
             razón);
         }
         #endregion
@@ -553,19 +554,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private int GeneraNuevoIdentificadorGlobal()
     {
-      int máximoIndentificadorGlobal = 0;
+      int máximoIdentificadorGlobal = 0;
       foreach (Vía víaDelMapa in ManejadorDeMapa.ManejadorDeVías.Elementos)
       {
-        foreach (CampoNodoRuteable campo in víaDelMapa.CamposNodosRuteables)
+        foreach (Nodo nodo in víaDelMapa.Nodos)
         {
-          if (campo != null)
+          if (nodo.EsRuteable)
           {
-            máximoIndentificadorGlobal = Math.Max(máximoIndentificadorGlobal, campo.IndentificadorGlobal);
+            máximoIdentificadorGlobal = Math.Max(máximoIdentificadorGlobal, nodo.IdentificadorGlobal);
           }
         }
       }
-      int nuevoIndentificadorGlobal = máximoIndentificadorGlobal + 1;
-      return nuevoIndentificadorGlobal;
+      int nuevoIdentificadorGlobal = máximoIdentificadorGlobal + 1;
+      return nuevoIdentificadorGlobal;
     }
 
 

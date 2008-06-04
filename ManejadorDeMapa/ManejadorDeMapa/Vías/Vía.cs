@@ -85,6 +85,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       new bool[10]);
 
     private bool miTieneCampoParámetrosDeRutaEnCampos;
+    private CampoNodoRuteable[] misCamposNodosRuteables;
     #endregion 
 
     #region Propiedades
@@ -95,9 +96,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Obtiene los campos de nodos ruteables indexados por indice de coordenada.
+    /// Obtiene los nodos.
     /// </summary>
-    public CampoNodoRuteable[] CamposNodosRuteables { get; private set; }
+    public Nodo[] Nodos { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -105,9 +106,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Constructor.
     /// </summary>
     /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
-    /// <param name="elNúmero">El número de la Polilínea.</param>
-    /// <param name="laClase">La clase de la Polilínea.</param>
-    /// <param name="losCampos">Los campos de la Polilínea.</param>
+    /// <param name="elNúmero">El número de la <see cref="Polilínea"/>.</param>
+    /// <param name="laClase">La clase de la <see cref="Polilínea"/>.</param>
+    /// <param name="losCampos">Los campos de la <see cref="Polilínea"/>.</param>
     public Vía(
       ManejadorDeMapa elManejadorDeMapa,
       int elNúmero,
@@ -175,13 +176,15 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="laRazón">La razón.</param>
     public void AñadeNodoRuteable(int elIndice, int elIdentificadorGlobal, string laRazón)
     {
+      // TODO: Cambiar la lógica para insertar campos en vez de cambiarlos.
+
       // Si ya tiene un nodo ruteable en el índice, pero con un identificador
       // global distinto entonces actualizamos el campo.
       // Si el identificador global es igual entonces no hacemos nada.
-      CampoNodoRuteable campoNodoRuteableActual = CamposNodosRuteables[elIndice];
+      CampoNodoRuteable campoNodoRuteableActual = misCamposNodosRuteables[elIndice];
       if (campoNodoRuteableActual != null)
       {
-        if (campoNodoRuteableActual.IndentificadorGlobal != elIdentificadorGlobal)
+        if (campoNodoRuteableActual.IdentificadorGlobal != elIdentificadorGlobal)
         {
           // Actualiza el campo.
           CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
@@ -191,6 +194,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
             elIdentificadorGlobal,
             campoNodoRuteableActual.EsExterno);
           CambiaCampo(nuevoCampoNodoRuteable, campoNodoRuteableActual, laRazón);
+
+          // TODO: Actualiza tabla global de nodos ruteables.
         }
       }
       else
@@ -201,11 +206,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
         // índice de coordenadas menor que alguno de los nodos
         // ruteables que ya existen.
         List<CampoNodoRuteable> camposNodosRuteables = new List<CampoNodoRuteable>();
-        foreach (CampoNodoRuteable campo in CamposNodosRuteables)
+        foreach (CampoNodoRuteable campo in misCamposNodosRuteables)
         {
           if (campo != null)
           {
             camposNodosRuteables.Add(campo);
+
+            // TODO: Actualiza tabla global de nodos ruteables.
           }
         }
         int númeroDeNodosRuteables = camposNodosRuteables.Count;
@@ -228,6 +235,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
                 false);
               CambiaCampo(nuevoCampoNodoRuteable, campo, laRazón);
               yaInsertóNodoRuteable = true;
+
+              // TODO: Actualiza tabla global de nodos ruteables.
             }
 
             #region Mueve los siguientes nodos.
@@ -240,7 +249,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
               campo.Identificador,
               siguienteNúmero,
               campo.IndiceDeCoordenadas,
-              campo.IndentificadorGlobal,
+              campo.IdentificadorGlobal,
               campo.EsExterno);
 
             // Si el siguiente índice es válido entonces tenemos que cambiar
@@ -278,21 +287,34 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
         #endregion
       }
-
-      CreaCamposNodosRuteables();
     }
     #endregion
 
     #region Métodos Privados
     private void CreaCamposNodosRuteables()
     {
-      CamposNodosRuteables = new CampoNodoRuteable[Coordenadas.Length];
+      misCamposNodosRuteables = new CampoNodoRuteable[Coordenadas.Length];
       foreach (Campo campo in Campos)
       {
         CampoNodoRuteable campoNodo = campo as CampoNodoRuteable;
         if (campoNodo != null)
         {
-          CamposNodosRuteables[campoNodo.IndiceDeCoordenadas] = campoNodo;
+          misCamposNodosRuteables[campoNodo.IndiceDeCoordenadas] = campoNodo;
+        }
+      }
+
+      int númeroDeNodos = Coordenadas.Length;
+      Nodos = new Nodo[númeroDeNodos];
+      for (int i = 0; i < númeroDeNodos; ++i)
+      {
+        Nodos[i] = new Nodo(this, i);
+      }
+      foreach (Campo campo in Campos)
+      {
+        CampoNodoRuteable campoNodoRuteable = campo as CampoNodoRuteable;
+        if (campoNodoRuteable != null)
+        {
+          Nodos[campoNodoRuteable.IndiceDeCoordenadas].HacerRuteable(campoNodoRuteable);
         }
       }
     }
