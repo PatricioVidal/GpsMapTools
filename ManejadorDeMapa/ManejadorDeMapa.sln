@@ -29,9 +29,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemplazadorDeNombres", "Rem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Consola", "ManejadorDeMapa.Consola\ManejadorDeMapa.Consola.csproj", "{7B9D4062-BA10-406F-A78B-ECD0DDF0176B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArregladorDeMapasTopográficos", "ArregladorDeMapasTopográficos\ArregladorDeMapasTopográficos.csproj", "{F988FFAC-B343-4186-AB05-9E483C3472FB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs07.codeplex.com/
 		SccLocalPath0 = .
@@ -56,6 +58,9 @@ Global
 		SccProjectUniqueName7 = ManejadorDeMapa.Consola\\ManejadorDeMapa.Consola.csproj
 		SccProjectName7 = ManejadorDeMapa.Consola
 		SccLocalPath7 = ManejadorDeMapa.Consola
+		SccProjectUniqueName8 = ArregladorDeMapasTopográficos\\ArregladorDeMapasTopográficos.csproj
+		SccProjectName8 = ArregladorDeMapasTopográficos
+		SccLocalPath8 = ArregladorDeMapasTopográficos
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +93,10 @@ Global
 		{7B9D4062-BA10-406F-A78B-ECD0DDF0176B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B9D4062-BA10-406F-A78B-ECD0DDF0176B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B9D4062-BA10-406F-A78B-ECD0DDF0176B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F988FFAC-B343-4186-AB05-9E483C3472FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F988FFAC-B343-4186-AB05-9E483C3472FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F988FFAC-B343-4186-AB05-9E483C3472FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F988FFAC-B343-4186-AB05-9E483C3472FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

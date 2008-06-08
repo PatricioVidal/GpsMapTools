@@ -1,5 +1,13 @@
 Versión 1.32
-
+- Creado programa ArregladorDeMapasTopográficos.
+- Añadido el arreglo de nombres de vías, incluyendo el nombre secundario (Label2).
+- Removida la validación de velocidad de la lógica de Posibles Errores de Ruteo.
+- Interno: Añadido número al Campo Nombre.
+- Interno: Restructurado el código.
+- Interno: Añadido el concepto de "ruteable"a la clase Nodo. La clase Vía ahora tiene un vector de Nodos. Cambiada la lógica de las otras clases para usar los Nodos de la clase Vía.
+- Interno: Cambios menores del diseño.
+- Interno: Corrección de errores ortográficos.
+- Interno: Actualizadas las pruebas de integración.
 
 Versión 1.31
 - Añadido el procesamiento "ProcesarTodo" a la versión de Consola.
