@@ -69,103 +69,68 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Pdis;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Menú para editar PDIs.
+  /// Contiene los calificativos de vías.
   /// </summary>
-  public partial class MenuEditorDePdis : MenúEditorDeElementos
+  class CalificativosDeVías
   {
-    #region Propiedades
-    /// <summary>
-    /// Obtiene o pone el manejador de PDIs.
-    /// </summary>
-    [Browsable (true)]
-    public ManejadorDePdis ManejadorDePdis
-    {
-      get;
-      set;
-    }
+    #region Campos
+    private const string miArchivoDeTiposDeVías = @"Vías\CalificativosDeVías.csv";
     #endregion
 
-    #region Métodos Públicos
+    /// <summary>
+    /// Lista con los calificativos de vías.
+    /// </summary>
+    public static IList<string> Calificativos { get; private set; }
+
+
+    #region Métodos Privados
+    private class LectorCalificativosDeVías : LectorDeArchivo
+    {
+      private readonly IList<string> misCalificativos;
+
+      public LectorCalificativosDeVías(
+        string elArchivo,
+        IList<string> losTipos)
+      {
+        misCalificativos = losTipos;
+
+        Lee(elArchivo);
+      }
+
+
+      protected override void ProcesaLínea(string laLínea)
+      {
+        // Elimina espacios en blanco.
+        string línea = laLínea.Trim();
+
+        // Saltarse lineas en blanco y comentarios.
+        bool laLíneaEstaEnBlanco = (línea == string.Empty);
+        bool laLíneaEsComentario = línea.StartsWith("//");
+        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
+        {
+          // Añade el calificativo.
+          misCalificativos.Add(línea.ToUpper());
+        }
+      }
+    }
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    public MenuEditorDePdis()
+    static CalificativosDeVías()
     {
-      InitializeComponent();
+      Calificativos = new List<string>();
 
-      // Añade los menús.
-      AddMenuParaCambiarTipo();
-    }
-    #endregion
-
-    #region Métodos Privados
-    private void AddMenuParaCambiarTipo()
-    {
-      ToolStripMenuItem menuCambiarTipo = new ToolStripMenuItem {Text = "Cambiar Tipo"};
-      Items.Add(menuCambiarTipo);
-
-      menuCambiarTipo.Click += EnMenúCambiarTipo;
-    }
-
-
-    private void EnMenúCambiarTipo(object elObjecto, EventArgs losArgumentos)
-    {
-      // Retornamos si no hay PDIs.
-      if (Lista.SelectedIndices.Count == 0)
-      {
-        return;
-      }
-
-      List<Pdi> pdis = new List<Pdi>();
-      foreach (int indice in Lista.SelectedIndices)
-      {
-        ListViewItem item = Lista.Items[indice];
-
-        // El Tag del item de la lista tiene que ser un ElementoConEtiqueta con un PDI.
-        ElementoConEtiqueta elemento = item.Tag as ElementoConEtiqueta;
-        if (elemento == null)
-        {
-          throw new InvalidOperationException(string.Format("El Tag del item de la lista tiene que ser un ElementoConEtiqueta, pero es: {0}", item.Tag.GetType()));
-        }
-        Pdi pdi = elemento.ElementoDelMapa as Pdi;
-        if (pdi == null)
-        {
-          throw new InvalidOperationException(string.Format("El elemento del item de la lista tiene que ser un Pdi, pero es: {0}", elemento.ElementoDelMapa.GetType()));
-        }
-
-        // Añade el PDI a la lista.
-        pdis.Add(pdi);
-      }
-
-      // Muestra la ventana para cambiar el Tipo.
-      VentanaCambiarTipoDePdi ventanaCambiarTipo = new VentanaCambiarTipoDePdi {
-        Pdis = pdis };
-      DialogResult resultado = ventanaCambiarTipo.ShowDialog();
-      if (resultado == DialogResult.OK)
-      {
-        // Cambia los tipos evitando que se generen eventos con
-        // cada cambio.
-        ManejadorDePdis.SuspendeEventos();
-        foreach (Pdi pdi in pdis)
-        {
-          pdi.ActualizaTipo(ventanaCambiarTipo.TipoNuevo, "Cambio Manual");
-        }
-
-        // Restablece los eventos en el manejador de mapa.
-        ManejadorDePdis.RestableceEventos();
-
-        // Envía el evento indicando que se editaron PDIs.
-        EnvíaEventoEditó();
-      }
+      // Lee las características de polígonos.
+      new LectorCalificativosDeVías(
+        miArchivoDeTiposDeVías,
+        Calificativos);
     }
     #endregion
   }

@@ -86,6 +86,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
     private bool miTieneCampoParámetrosDeRutaEnCampos;
     private CampoNodoRuteable[] misCamposNodosRuteables;
+    private CampoNombre miCampoNombreSecundario;
     #endregion 
 
     #region Propiedades
@@ -99,6 +100,24 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Obtiene los nodos.
     /// </summary>
     public Nodo[] Nodos { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene el nombre secundario.
+    /// </summary>
+    public string NombreSecundario
+    {
+       get
+       {
+         // Devuelve nulo si no tenemos el campo.
+         if (miCampoNombreSecundario == null)
+         {
+           return null;
+         }
+
+         return miCampoNombreSecundario.Nombre;
+       }
+    }
     #endregion
 
     #region Métodos Públicos
@@ -125,10 +144,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
       foreach (Campo campo in losCampos)
       {
         CampoParámetrosDeRuta campoParámetrosDeRuta = campo as CampoParámetrosDeRuta;
+        CampoNombre campoNombre;
         if (campoParámetrosDeRuta != null)
         {
           CampoParámetrosDeRuta = campoParámetrosDeRuta;
           miTieneCampoParámetrosDeRutaEnCampos = true;
+        }
+        else if ((campoNombre = campo as CampoNombre) != null)
+        {
+          if (campoNombre.Número == 2)
+          {
+            miCampoNombreSecundario = campoNombre;
+          }
         }
       }
 
@@ -143,8 +170,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="laRazón">La razón del cambio.</param>
     public void CambiaCampoParámetrosDeRuta(CampoParámetrosDeRuta elCampoParámetrosDeRutaNuevo, string laRazón)
     {
-      // Solo cambia el Límite de Velocidad si es diferente.
-      if (elCampoParámetrosDeRutaNuevo.Equals(CampoParámetrosDeRuta))
+      // Solo cambia el campo si es diferente.
+      if (elCampoParámetrosDeRutaNuevo == CampoParámetrosDeRuta)
       {
         return;
       }
@@ -168,6 +195,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
     }
 
 
+    /// <summary>
+    /// Actualiza el nombre secundario.
+    /// </summary>
+    /// <param name="elNombreSecundario">El Nombre Secundario</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public void ActualizaNombreSecundario(string elNombreSecundario, string laRazón)
+    {
+      CampoNombre nuevoCampoNombreSecundario = new CampoNombre(elNombreSecundario, 2);
+      ActualizaCampo(nuevoCampoNombreSecundario, ref miCampoNombreSecundario, laRazón);
+    }
+
+    
     /// <summary>
     /// Añade un nodo ruteable.
     /// </summary>

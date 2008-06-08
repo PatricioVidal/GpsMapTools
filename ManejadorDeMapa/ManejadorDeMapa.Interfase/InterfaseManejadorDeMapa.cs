@@ -116,7 +116,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
 
       // PDIs.
-      miMenuProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
+      miMenúProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
       miMenúArreglarIndicesDeCiudadEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeIndicesDeCiudad.Descripción;
       miMenúEliminarCaracteresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.EliminadorDeCaracteres.Descripción;
       miMenuArreglarLetrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras.Descripción;
@@ -127,6 +127,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
       miMenúArreglarIndicesDeCiudadEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeIndicesDeCiudad.Descripción;
+      miMenúArreglarNombresDeVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeNombres.Descripción;
       miMenúBuscarIncongruenciasenVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeIncongruencias.Descripción;
       miMenúBuscarPosiblesErroresDeRuteoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesErroresDeRuteo.Descripción;
       miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
@@ -179,19 +180,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Maneja evento de cambio de Estado Máximo de Pestañas de PDIs.
       miInterfaseManejadorDePdis.CambióEstadoMáximoDePestañas +=
-        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
-        {
+        ((elEnviador, losArgumentos) => 
           miControladorDePestañasPrincipal.PoneEstadoDePestaña(
-            misIndicesDePestañas[miPaginaDePdis], losArgumentos.EstadoMáximoDePestañas);
-        };
+            misIndicesDePestañas[miPaginaDePdis], 
+            losArgumentos.EstadoMáximoDePestañas));
 
       // Maneja evento de cambio de Estado Máximo de Pestañas de Vías.
       miInterfaseManejadorDeVías.CambióEstadoMáximoDePestañas +=
-        delegate(object elEnviador, ControladorDePestañas.CambióEstadoMáximoDePestañasEventArgs losArgumentos)
-        {
+        ((elEnviador, losArgumentos) => 
           miControladorDePestañasPrincipal.PoneEstadoDePestaña(
-            misIndicesDePestañas[miPáginaDeVías], losArgumentos.EstadoMáximoDePestañas);
-        };
+            misIndicesDePestañas[miPáginaDeVías], 
+            losArgumentos.EstadoMáximoDePestañas));
     }
     #endregion
       
@@ -572,6 +571,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúArreglarIndicesDeCiudadEnVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.ArregladorDeIndicesDeCiudad.Procesa();
+    }
+
+
+    private void EnMenúArreglarNombresDeVías(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.ArregladorDeNombres.Procesa();
     }
     #endregion
   }

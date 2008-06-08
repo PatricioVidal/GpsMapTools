@@ -127,7 +127,7 @@ namespace GpsYv.RemplazadorDeLetrasEspeciales
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elElemento.CambiaNombre(nombreCorregido, "Cambio de Letras");
+        elElemento.ActualizaNombre(nombreCorregido, "Cambio de Letras");
         ++númeroDeProblemasDetectados;
       }
 

@@ -142,73 +142,10 @@
   <data name="miMenúProcesarTodo.Text" xml:space="preserve">
     <value>Procesar Todo</value>
   </data>
-  <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="miMenuPdis.Text" xml:space="preserve">
-    <value>Pdis</value>
-  </data>
-  <data name="miMenuPdis.ToolTipText" xml:space="preserve">
-    <value>Menús para PDIs.</value>
-  </data>
-  <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúProcesarTodoEnVías.Text" xml:space="preserve">
-    <value>Procesar Todo</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 6</value>
-  </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnVías.Text" xml:space="preserve">
-    <value>1. Arreglar Indices de Ciudad</value>
-  </data>
-  <data name="miMenúBuscarIncongruenciasenVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúBuscarIncongruenciasenVías.Text" xml:space="preserve">
-    <value>2. Buscar Incongruencias</value>
-  </data>
-  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Text" xml:space="preserve">
-    <value>3. Buscar Posibles Errores de Ruteo</value>
-  </data>
-  <data name="miMenúBuscarErroresEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúBuscarErroresEnVías.Text" xml:space="preserve">
-    <value>4. Buscar Errores</value>
-  </data>
-  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 22</value>
-  </data>
-  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Text" xml:space="preserve">
-    <value>Buscar Posibles Nodos Desconectados</value>
-  </data>
-  <data name="miMenúVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="miMenúVías.Text" xml:space="preserve">
-    <value>Vías</value>
-  </data>
-  <data name="miMenúVías.ToolTipText" xml:space="preserve">
-    <value>Menús para Vías</value>
-  </data>
-  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="miMenúProcesar.Text" xml:space="preserve">
-    <value>Procesar</value>
-  </data>
-  <data name="miMenuProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenúProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
-  <data name="miMenuProcesarTodoEnPdis.Text" xml:space="preserve">
+  <data name="miMenúProcesarTodoEnPdis.Text" xml:space="preserve">
     <value>Procesar Todo</value>
   </data>
   <data name="miMenúEliminarCaracteresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
@@ -246,6 +183,69 @@
   </data>
   <data name="miMenúBuscarErroresEnPdis.Text" xml:space="preserve">
     <value>6. Buscar Errores</value>
+  </data>
+  <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="miMenuPdis.Text" xml:space="preserve">
+    <value>Pdis</value>
+  </data>
+  <data name="miMenuPdis.ToolTipText" xml:space="preserve">
+    <value>Menús para PDIs.</value>
+  </data>
+  <data name="miMenúVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="miMenúVías.Text" xml:space="preserve">
+    <value>Vías</value>
+  </data>
+  <data name="miMenúVías.ToolTipText" xml:space="preserve">
+    <value>Menús para Vías</value>
+  </data>
+  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="miMenúProcesar.Text" xml:space="preserve">
+    <value>Procesar</value>
+  </data>
+  <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúProcesarTodoEnVías.Text" xml:space="preserve">
+    <value>Procesar Todo</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 6</value>
+  </data>
+  <data name="miMenúArreglarIndicesDeCiudadEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúArreglarIndicesDeCiudadEnVías.Text" xml:space="preserve">
+    <value>1. Arreglar Indices de Ciudad</value>
+  </data>
+  <data name="miMenúBuscarIncongruenciasenVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarIncongruenciasenVías.Text" xml:space="preserve">
+    <value>3. Buscar Incongruencias</value>
+  </data>
+  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Text" xml:space="preserve">
+    <value>4. Buscar Posibles Errores de Ruteo</value>
+  </data>
+  <data name="miMenúBuscarErroresEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarErroresEnVías.Text" xml:space="preserve">
+    <value>5. Buscar Errores</value>
+  </data>
+  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Text" xml:space="preserve">
+    <value>Buscar Posibles Nodos Desconectados</value>
   </data>
   <metadata name="miMenuPrincipal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
@@ -472,7 +472,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>miPaginaDeElementos</value>
@@ -511,7 +511,7 @@
     <value>miInterfaseManejadorDePdis</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Parent" xml:space="preserve">
     <value>miPaginaDePdis</value>
@@ -547,7 +547,7 @@
     <value>miInterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Parent" xml:space="preserve">
     <value>miPáginaDeVías</value>
@@ -595,7 +595,7 @@
     <value>miControladorDePestañasPrincipal</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañasPrincipal.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañasPrincipal.Parent" xml:space="preserve">
     <value>$this</value>
@@ -607,7 +607,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -643,7 +643,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miPáginaTodos</value>
@@ -691,7 +691,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>miPaginaDeElementos</value>
@@ -723,7 +723,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -747,7 +747,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miPáginaTodos</value>
@@ -777,7 +777,7 @@
     <value>miInterfaseManejadorDePdis</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Parent" xml:space="preserve">
     <value>miPaginaDePdis</value>
@@ -801,13 +801,19 @@
     <value>miInterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.24.3043.13928, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.32.3077.41363, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Parent" xml:space="preserve">
     <value>miPáginaDeVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="miMenúArreglarNombresDeVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúArreglarNombresDeVías.Text" xml:space="preserve">
+    <value>2. Arreglar Nombres</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -7035,10 +7041,10 @@
   <data name="&gt;&gt;miMenuPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenuProcesarTodoEnPdis.Name" xml:space="preserve">
-    <value>miMenuProcesarTodoEnPdis</value>
+  <data name="&gt;&gt;miMenúProcesarTodoEnPdis.Name" xml:space="preserve">
+    <value>miMenúProcesarTodoEnPdis</value>
   </data>
-  <data name="&gt;&gt;miMenuProcesarTodoEnPdis.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenúProcesarTodoEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miMenúEliminarCaracteresEnPdis.Name" xml:space="preserve">
@@ -7202,6 +7208,12 @@
   </data>
   <data name="&gt;&gt;miColumnaClase.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miMenúArreglarNombresDeVías.Name" xml:space="preserve">
+    <value>miMenúArreglarNombresDeVías</value>
+  </data>
+  <data name="&gt;&gt;miMenúArreglarNombresDeVías.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>InterfaseManejadorDeMapa</value>

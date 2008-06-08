@@ -89,7 +89,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción =
+    public const string Descripción =
       "Arregla Palabras reemplazando palabras inválidas en los nombres de PDIs.";
 
 
@@ -129,7 +129,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       nombreCorregido = string.Join(" ", palabras);
       if (nombreCorregido != nombreACorregir)
       {
-        elPdi.CambiaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
+        elPdi.ActualizaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
         ++númeroDeProblemasDetectados;
         nombreACorregir = nombreCorregido;
       }
@@ -154,7 +154,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
             if (nombreCorregido != nombreACorregir)
             {
               // Remueve los espacios en blanco que se pudo haber añadido.
-              elPdi.CambiaNombre(nombreCorregido.Trim(), "Cambio de palabra");
+              elPdi.ActualizaNombre(nombreCorregido.Trim(), "Cambio de palabra");
               ++númeroDeProblemasDetectados;
               nombreACorregir = nombreCorregido;
             }
@@ -171,22 +171,22 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Representa un par posibles palabras y la palabra final.
     /// </summary>
-    private struct CorrecciónDePalabras
+    private class CorrecciónDePalabras
     {
       /// <summary>
       /// Tipo.
       /// </summary>
-      public readonly Tipo Tipo;
+      public Tipo Tipo { get; private set; }
 
       /// <summary>
       /// Posibles palabras.
       /// </summary>
-      public readonly string[] PosiblesPalabras;
+      public string[] PosiblesPalabras { get; private set; }
 
       /// <summary>
       /// Palabra final.
       /// </summary>
-      public readonly string PalabraFinal;
+      public string PalabraFinal { get; private set; }
 
       /// <summary>
       /// Constructor.
@@ -230,7 +230,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     {
       #region Campos
       private const string miArchivoDeConversionDePalabras = @"PDIs\CorrecciónDePalabrasPorTipo.csv";
-      private List<CorrecciónDePalabras> miListaDeCorrecciónDePalabras = new List<CorrecciónDePalabras>();
+      private readonly List<CorrecciónDePalabras> miListaDeCorrecciónDePalabras = new List<CorrecciónDePalabras>();
       #endregion
 
       /// <summary>

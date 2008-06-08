@@ -76,9 +76,15 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 {
+  ///<summary>
+  /// Prueba de clase <see cref="ArregladorDePalabrasPorTipo"/>.
+  ///</summary>
   [TestFixture]
   public class PruebaArregladorDePalabrasPorTipo
   {
+    /// <summary>
+    /// Prueba el constructor.
+    /// </summary>
     [Test]
     public void PruebaConstructor()
     {
@@ -95,11 +101,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(0), "NúmeroDeElementosModificados");
     }
 
-    private struct Caso
+    private class Caso
     {
-      public readonly string Tipo;
-      public readonly string NombreOriginal;
-      public readonly string NombreCorregido;
+      public string Tipo { get; private set; }
+      public string NombreOriginal { get; private set; }
+      public string NombreCorregido { get; private set; }
 
       public Caso(
         string elTipo,
@@ -113,6 +119,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
     }
   
 
+    /// <summary>
+    /// Prueba el método Procesa().
+    /// </summary>
     [Test]
     public void PruebaProcesa()
     {
@@ -131,11 +140,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
         new Caso ("0x9999", "RES LA COMIDA", "RES LA COMIDA"),  // Este no debería cambiar porque el tipo no está en el rango.
         new Caso ("0x6402", "CONJ RES LAS TORRES", "CONJUNTO RESIDENCIAL LAS TORRES"), // Cambia Nombre.
       };
-      int númeroDeProblemasDetectados = 6;
+      const int númeroDeProblemasDetectados = 6;
 
       // Crea los elementos.
       IList<Pdi> pdis = manejadorDePdis.Elementos;
-      string clase = "POI";
+      const string clase = "POI";
       for (int i = 0; i < casos.Length; ++i)
       {
         Caso caso = casos[i];
@@ -159,7 +168,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       // Prueba los nobres de los PDIs.
       for (int i = 0; i < casos.Length; ++i)
       {
-        Assert.That(casos[i].NombreCorregido, Is.EqualTo(pdis[i].Nombre), "PDI[" + i + "].Nombre");
+        Assert.That(pdis[i].Nombre, Is.EqualTo(casos[i].NombreCorregido), "PDI[" + i + "].Nombre");
       }
     }
   }

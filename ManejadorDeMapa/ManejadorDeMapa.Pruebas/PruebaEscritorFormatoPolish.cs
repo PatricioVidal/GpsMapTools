@@ -101,24 +101,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         new EscritorDeFormatoPolish(archivoDeSalida, elementos, escuchadorDeEstatus);
 
         #region Prueba Archivo de Salida.
-        // Los archivos se comparan ignorando las líneas en blanco.
-        StreamReader entrada = File.OpenText(archivoDeEntrada);
-        StreamReader salida = File.OpenText(archivoDeSalida);
-        while (true)
-        {
-          string lineaDeEntrada = LéePróximaLineaConInformación(entrada);
-          string lineaDeSalida = LéePróximaLineaConInformación(salida);
-
-          // Nos salimos si llegamos al final de los dos archivos.
-          if ((lineaDeEntrada == null) && (lineaDeSalida == null))
-          {
-            break;
-          }
-
-          Assert.That(lineaDeEntrada, Is.Not.Null, "Linea en archivo de entrada.");
-          Assert.That(lineaDeSalida, Is.Not.Null, "Linea en archivo de salida.");
-          Assert.That(lineaDeSalida, Is.EqualTo(lineaDeEntrada), "Lineas de salida y entrada:");
-        }
+        string[] líneasDeEntrada = LéeArchivo(archivoDeEntrada);
+        string[] líneasDeSalida = LéeArchivo(archivoDeSalida);
+        Assert.That(líneasDeSalida, Is.EqualTo(líneasDeEntrada), "Líneas");
         #endregion
       }
       #endregion
@@ -194,16 +179,23 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
 
     }
 
-    private static string LéePróximaLineaConInformación(TextReader elStream)
+    private static string[] LéeArchivo(string elArchivo)
     {
-      string linea;
-      do
+      List<string> líneas = new List<string>();
+      List<string> líneasSinRetornosDeCarro;
+      using (StreamReader stream = File.OpenText(elArchivo))
       {
-        linea = elStream.ReadLine();
-      }
-      while ((linea != null) && (linea == string.Empty));
+        // Lee todo el archivo.
+        string data = stream.ReadToEnd();
 
-      return linea;
+        // Separa las líneas
+        líneas.AddRange(data.Split('\n'));
+
+        // Remueve los \r.
+        líneasSinRetornosDeCarro = líneas.ConvertAll(s => s.Replace("\r", string.Empty));
+      }
+
+      return líneasSinRetornosDeCarro.ToArray();
     }
 
     #region Clases para Pruebas

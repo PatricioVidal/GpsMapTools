@@ -82,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Descripción de la acción "Procesar Todo".
     /// </summary>
-    public static readonly string DescripciónProcesarTodo =
+    public const string DescripciónProcesarTodo =
       "Procesa todo lo relacionado con las Vías. Los pasos se hacen en el orden indicado por el número en el menú.";
 
 
@@ -90,6 +90,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Obtiene el Arreglador de Indices de Ciudad.
     /// </summary>
     public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene el Arreglador de Nombres.
+    /// </summary>
+    public ArregladorDeNombres ArregladorDeNombres { get; private set; }
 
 
     /// <summary>
@@ -132,6 +138,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       // Crea los procesadores.
       ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
+      ArregladorDeNombres = new ArregladorDeNombres(this, elEscuchadorDeEstatus);
       BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
       BuscadorDeIncongruencias = new BuscadorDeIncongruencias(this, elEscuchadorDeEstatus);
       BuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
@@ -151,11 +158,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Hacer todos las operaciones en orden.
       int númeroDeProblemasEnVías = 0;
       númeroDeProblemasEnVías += ArregladorDeIndicesDeCiudad.Procesa();
+      númeroDeProblemasEnVías += ArregladorDeNombres.Procesa();
       númeroDeProblemasEnVías += BuscadorDeIncongruencias.Procesa();
       númeroDeProblemasEnVías += BuscadorDePosiblesErroresDeRuteo.Procesa();
       númeroDeProblemasEnVías += BuscadorDeErrores.Procesa();
-      // NOTE: La siguiente línea está comentada porque tarda mucho el procesamiento.
-      //númeroDeProblemasEnVías += miBuscadorDePosiblesNodosDesconectados.Procesa();
 
       // Reporta estatus.
       EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnVías + " problemas en Vías.";

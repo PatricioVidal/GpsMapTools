@@ -137,7 +137,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elPdi.CambiaNombre(nombreCorregido, "Cambio de Letras");
+        elPdi.ActualizaNombre(nombreCorregido, "Cambio de Letras");
         ++númeroDeProblemasDetectados;
       }
 

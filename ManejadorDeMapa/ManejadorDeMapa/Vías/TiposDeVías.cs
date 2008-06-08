@@ -69,10 +69,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
@@ -88,7 +85,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Lista con los tipos de vías.
     /// </summary>
-    public readonly static IList<Tipo> Tipos = new List<Tipo>();
+    public static IList<Tipo> Tipos { get; private set; }
 
   
     #region Métodos Privados
@@ -128,6 +125,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     static TiposDeVías()
     {
+      Tipos = new List<Tipo>();
+
       // Lee las características de polígonos.
       new LectorTiposDeVías(
         miArchivoDeTiposDeVías,

@@ -163,7 +163,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       ElementoDesconocido original = (ElementoDesconocido)objectoDePrueba.Clone();
 
       // Llama el método a probar.
-      objectoDePrueba.CambiaNombre(nuevoNombre, "Razón");
+      objectoDePrueba.ActualizaNombre(nuevoNombre, "Razón");
 
       // Prueba Propiedades.
       Assert.AreEqual(campos, objectoDePrueba.Campos, "Campos");

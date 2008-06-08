@@ -36,7 +36,7 @@
           this.miMenúProcesar = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúProcesarTodo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPdis = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenuProcesarTodoEnPdis = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúProcesarTodoEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúEliminarCaracteresEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarLetrasEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuArreglarPalabrasEnPdis = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +78,7 @@
           this.miInterfaseManejadorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
+          this.miMenúArreglarNombresDeVías = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -126,7 +127,7 @@
           // miMenuPdis
           // 
           this.miMenuPdis.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miMenuProcesarTodoEnPdis,
+            this.miMenúProcesarTodoEnPdis,
             toolStripSeparator6,
             this.miMenúEliminarCaracteresEnPdis,
             this.miMenuArreglarLetrasEnPdis,
@@ -137,11 +138,11 @@
           this.miMenuPdis.Name = "miMenuPdis";
           resources.ApplyResources(this.miMenuPdis, "miMenuPdis");
           // 
-          // miMenuProcesarTodoEnPdis
+          // miMenúProcesarTodoEnPdis
           // 
-          this.miMenuProcesarTodoEnPdis.Name = "miMenuProcesarTodoEnPdis";
-          resources.ApplyResources(this.miMenuProcesarTodoEnPdis, "miMenuProcesarTodoEnPdis");
-          this.miMenuProcesarTodoEnPdis.Click += new System.EventHandler(this.EnMenuProcesarTodoEnPdis);
+          this.miMenúProcesarTodoEnPdis.Name = "miMenúProcesarTodoEnPdis";
+          resources.ApplyResources(this.miMenúProcesarTodoEnPdis, "miMenúProcesarTodoEnPdis");
+          this.miMenúProcesarTodoEnPdis.Click += new System.EventHandler(this.EnMenuProcesarTodoEnPdis);
           // 
           // miMenúEliminarCaracteresEnPdis
           // 
@@ -185,6 +186,7 @@
             this.miMenúProcesarTodoEnVías,
             this.toolStripSeparator5,
             this.miMenúArreglarIndicesDeCiudadEnVías,
+            this.miMenúArreglarNombresDeVías,
             this.miMenúBuscarIncongruenciasenVías,
             this.miMenúBuscarPosiblesErroresDeRuteoEnVías,
             this.miMenúBuscarErroresEnVías,
@@ -375,6 +377,7 @@
           resources.ApplyResources(this.miInterfaseDeMapa, "miInterfaseDeMapa");
           this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
           this.miInterfaseDeMapa.ManejadorDeMapa = null;
+          this.miInterfaseDeMapa.MuestraCiudades = false;
           this.miInterfaseDeMapa.MuestraPdis = false;
           this.miInterfaseDeMapa.MuestraPolígonos = false;
           this.miInterfaseDeMapa.MuestraPolilíneas = false;
@@ -435,6 +438,12 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
+          // miMenúArreglarNombresDeVías
+          // 
+          this.miMenúArreglarNombresDeVías.Name = "miMenúArreglarNombresDeVías";
+          resources.ApplyResources(this.miMenúArreglarNombresDeVías, "miMenúArreglarNombresDeVías");
+          this.miMenúArreglarNombresDeVías.Click += new System.EventHandler(this.EnMenúArreglarNombresDeVías);
+          // 
           // InterfaseManejadorDeMapa
           // 
           resources.ApplyResources(this, "$this");
@@ -493,7 +502,6 @@
         private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías miInterfaseManejadorDeVías;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodo;
-        private System.Windows.Forms.ToolStripMenuItem miMenuProcesarTodoEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúEliminarCaracteresEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenuArreglarLetrasEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenuArreglarPalabrasEnPdis;
@@ -510,6 +518,8 @@
         private System.Windows.Forms.Button miBotónParaDeProcesar;
         private System.Windows.Forms.ToolStripMenuItem miMenúArreglarIndicesDeCiudadEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúArreglarIndicesDeCiudadEnVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúArreglarNombresDeVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnPdis;
     }
 }
 

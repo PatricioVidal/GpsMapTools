@@ -70,61 +70,124 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using GpsYv.ManejadorDeMapa;
+using SWallTech.Drawing.Shapes;
 
-namespace GpsYv.RemplazadorDeNombres
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Remplazador de nombres de elementos.
+  /// Arregla los nombres de las Vías.
   /// </summary>
-  public class RemplazadorDeNombres : ProcesadorBase<ManejadorDeElementos, ElementoDelMapa>
+  public class ArregladorDeNombres : ProcesadorBase<ManejadorDeVías, Vía>
   {
-    #region Campos
-    private readonly LectorDeDiccionarioDeNombres miLectorDeCorrecciónDeNombres;
-    #endregion
-
     #region Métodos Públicos
+    /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción =
+      "Arregla los nombres de las Vías.";
+
+
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elArchivoConElDiccionario">El Archivo con el Diccionario.</param>
-    /// <param name="elManejadorDeElementos">El manejador de Elementos.</param>
+    /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public RemplazadorDeNombres(
-      string elArchivoConElDiccionario,
-      ManejadorDeElementos elManejadorDeElementos,
+    public ArregladorDeNombres(
+      ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDeElementos, elEscuchadorDeEstatus)
+      : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      miLectorDeCorrecciónDeNombres = new LectorDeDiccionarioDeNombres(
-        elArchivoConElDiccionario,
-        elEscuchadorDeEstatus);
     }
     #endregion
 
     #region Métodos Protegidos.
     /// <summary>
-    /// Procesa un PDI.
+    /// Procesa una Vía.
     /// </summary>
-    /// <param name="elElemento">El PDI.</param>
+    /// <param name="laVía">La Vía.</param>
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
-    protected override int ProcesaElemento(ElementoDelMapa elElemento)
+    protected override int ProcesaElemento(Vía laVía)
     {
       int númeroDeProblemasDetectados = 0;
-      IDictionary<string, string> diccionario = miLectorDeCorrecciónDeNombres.DiccionarioDeNombres;
-      string nombreOriginal = elElemento.Nombre;
-      if (diccionario.ContainsKey(nombreOriginal))
+
+      string nombreACorregir = laVía.Nombre;
+
+      #region Cambia el nombre a mayúsculas
+      string nombreCorregido = nombreACorregir.ToUpper();
+      if (nombreCorregido != nombreACorregir)
       {
+        laVía.ActualizaNombre(nombreCorregido, "Cambiado a mayúsculas");
         ++númeroDeProblemasDetectados;
-        elElemento.ActualizaNombre(diccionario[nombreOriginal], "Cambiado según el diccionario.");
+        nombreACorregir = nombreCorregido;
       }
+      #endregion
+
+      // Remueve los espacios en blanco alrededor.
+      nombreCorregido = nombreACorregir.Trim();
+
+      #region Remueve espacios en blanco extra entre medio de las palabras.
+      string[] palabras = nombreCorregido.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+      nombreCorregido = string.Join(" ", palabras);
+      if (nombreCorregido != nombreACorregir)
+      {
+        laVía.ActualizaNombre(nombreCorregido, "Eliminados espacios en blanco extra");
+        ++númeroDeProblemasDetectados;
+        nombreACorregir = nombreCorregido;
+      }
+      #endregion
+
+      #region Busca si el nombre de la vía comienza por un calificativo conocido.
+      bool nombreComienzaConCalificativo = false;
+      string calificativo = null;
+      foreach (string posibleCalificativo in CalificativosDeVías.Calificativos)
+      {
+        if (nombreACorregir.StartsWith(posibleCalificativo))
+        {
+          nombreComienzaConCalificativo = true;
+          calificativo = posibleCalificativo;
+          break;
+        }
+      }
+      #endregion
+
+      #region Ve si el calificativo está al final y arreglalo
+      bool nombreTerminaConCalificativo = false;
+      if (!nombreComienzaConCalificativo)
+      {
+        foreach (string posibleCalificativo in CalificativosDeVías.Calificativos)
+        {
+          if (nombreACorregir.EndsWith(posibleCalificativo))
+          {
+            nombreTerminaConCalificativo = true;
+            calificativo = posibleCalificativo;
+            break;
+          }
+        }
+
+        if (nombreTerminaConCalificativo)
+        {
+          nombreCorregido = nombreACorregir.Replace(' ' + calificativo, string.Empty);
+          nombreCorregido = calificativo + ' ' + nombreCorregido;
+          laVía.ActualizaNombre(nombreCorregido, "Movido el calificativo al principio");
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      #endregion
+
+      #region Genera el nombre secundario si tenemos un calificativo.
+      if (calificativo != null)
+      {
+        // El calificativo está al principio.
+        string nombreSinCalificativo = nombreCorregido.Replace(calificativo + ' ', string.Empty);
+        string nombreSecundario = nombreSinCalificativo + ' ' + calificativo;
+        laVía.ActualizaNombreSecundario(nombreSecundario, nombreSecundario);
+      }
+      #endregion
 
       return númeroDeProblemasDetectados;
     }
-    #endregion
 
-    #region Clases y Métodos Privadas
+
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
@@ -144,66 +207,6 @@ namespace GpsYv.RemplazadorDeNombres
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       // No necesitamos hacer nada aquí.
-    }
-
-
-    private class LectorDeDiccionarioDeNombres : LectorDeArchivo
-    {
-      private readonly string miArchivo;
-      private readonly Dictionary<string, string> miDiccionarioDeNombres = new Dictionary<string, string>();
-
-      
-      public IDictionary<string, string> DiccionarioDeNombres
-      {
-        get
-        {
-          return miDiccionarioDeNombres;
-        }
-      }
-
-
-      public LectorDeDiccionarioDeNombres(
-        string elArchivo,
-        IEscuchadorDeEstatus elEscuchadorDeEstatus)
-        : base(elEscuchadorDeEstatus)
-      {
-        miArchivo = elArchivo;
-        Lee(miArchivo);
-      }
-
-
-      protected override void ProcesaLínea(string laLínea)
-      {
-        // Elimina espacios en blanco.
-        string línea = laLínea.Trim();
-
-        // Saltarse lineas en blanco y comentarios.
-        bool laLíneaEstaEnBlanco = (línea == string.Empty);
-        bool laLíneaEsComentario = línea.StartsWith("//");
-        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
-        {
-          // Separa las palabras.
-          string[] partes = línea.Split('|');
-
-          // Verifica que tenemos dos partes.
-          if (partes.Length != 2)
-          {
-            throw new ArgumentException(string.Format("No se encontraron 2 partes separadas por | en la linea: {0}", línea));
-          }
-
-          // Lee las dos partes.
-          string nombreOriginal = partes[0];
-          string nombreFinal = partes[1];
-
-          // Llena el diccionario.
-          if (miDiccionarioDeNombres.ContainsKey(nombreOriginal))
-          {
-            throw new ArgumentException(string.Format("El archivo de entrada '{0}' tiene el siguiente nombre repetido: {1}", miArchivo, nombreOriginal));
-          }
-
-          miDiccionarioDeNombres.Add(nombreOriginal, nombreFinal);
-        }
-      }
     }
     #endregion
   }

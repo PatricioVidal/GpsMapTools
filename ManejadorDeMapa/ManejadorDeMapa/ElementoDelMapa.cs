@@ -86,15 +86,13 @@ namespace GpsYv.ManejadorDeMapa
     private readonly ManejadorDeMapa miManejadorDeMapa;
     private int miNúmero;
     private readonly string miClase = string.Empty;
-    private string miNombre = string.Empty;
-    private Tipo miTipo = Tipo.TipoNulo;
+    private CampoNombre miCampoNombre;
+    private CampoTipo miCampoTipo;
     private CampoIndiceDeCiudad miCampoIndiceDeCiudad;
     private string miDescripción = string.Empty;
     private readonly IList<Campo> misCampos;
     private bool miFuéModificado;
-    private readonly List<string> misModificacionesDeNombre = new List<string>();
-    private readonly List<string> misModificacionesDeTipo = new List<string>();
-    private readonly List<string> misOtrasModificaciones = new List<string>();
+    private readonly List<string> misModificaciones = new List<string>();
     private bool miFuéEliminado;
     private string miRazónParaEliminación = string.Empty;
     private ElementoDelMapa miOriginal;
@@ -146,7 +144,12 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        return miNombre;
+        if (miCampoNombre == null)
+        {
+          return string.Empty;
+        }
+
+        return miCampoNombre.Nombre;
       }
     }
 
@@ -158,7 +161,12 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        return miTipo;
+        if (miCampoTipo == null)
+        {
+          return Tipo.TipoNulo;
+        }
+
+        return miCampoTipo.Tipo;
       }
     }
 
@@ -220,32 +228,10 @@ namespace GpsYv.ManejadorDeMapa
       {
         StringBuilder modificaciones = new StringBuilder();
 
-        // Añade las modificaciones de nombre.
-        if (misModificacionesDeNombre.Count > 0)
+        // Añade las modificaciones.
+        if (misModificaciones.Count > 0)
         {
-          modificaciones.Append("[Nombre: " + miOriginal.Nombre);
-          foreach (string modificación in misModificacionesDeNombre)
-          {
-            modificaciones.Append(modificación);
-          }
-          modificaciones.Append("]");
-        }
-
-        // Añade las modificaciones de Tipo.
-        if (misModificacionesDeTipo.Count > 0)
-        {
-          modificaciones.Append("[Tipo: " + miOriginal.Tipo);
-          foreach (string modificación in misModificacionesDeTipo)
-          {
-            modificaciones.Append(modificación);
-          }
-          modificaciones.Append("]");
-        }
-
-        // Añade las otras modificaciones.
-        if (misOtrasModificaciones.Count > 0)
-        {
-          foreach (string modificación in misOtrasModificaciones)
+          foreach (string modificación in misModificaciones)
           {
             modificaciones.Append(modificación);
           }
@@ -313,11 +299,11 @@ namespace GpsYv.ManejadorDeMapa
         CampoIndiceDeCiudad campoIndiceDeCiudad;
         if ((campoTipo = campo as CampoTipo) != null)
         {
-          miTipo = campoTipo.Tipo;
+          miCampoTipo = campoTipo;
         }
         else if ((campoNombre = campo as CampoNombre) != null)
         {
-          miNombre = campoNombre.Nombre;
+          miCampoNombre = campoNombre;
         }
         else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
         {
@@ -325,7 +311,7 @@ namespace GpsYv.ManejadorDeMapa
         }
       }
 
-      bool existe = misDescripcionesPorTipo.TryGetValue(miTipo, out miDescripción);
+      bool existe = misDescripcionesPorTipo.TryGetValue(Tipo, out miDescripción);
       if (!existe)
       {
         miDescripción = string.Empty;
@@ -334,47 +320,29 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Cambia el nombre del elemento.
+    /// Actualiza el nombre del elemento.
     /// </summary>
     /// <param name="elNombreNuevo">El nombre nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaNombre(string elNombreNuevo, string laRazón)
+    public void ActualizaNombre(string elNombreNuevo, string laRazón)
     {
-      // Avisa que de va a modificar un elemento.
-      SeVaAModificarElemento();
-
-      // Actualiza el nombre.
-      miNombre = elNombreNuevo;
-      misModificacionesDeNombre.Add(
-        SeparadorDeModificaciones + laRazón + 
-        SeparadorDeModificaciones + elNombreNuevo);
-
-      // Busca y actualiza el campo del nombre.
-      BuscaYActualizaCampo(new CampoNombre(elNombreNuevo));
+      CampoNombre nuevoCampoNombre = new CampoNombre(elNombreNuevo);
+      ActualizaCampo(nuevoCampoNombre, ref miCampoNombre, laRazón);
     }
 
     
     /// <summary>
-    /// Cambia el tipo del elemento.
+    /// Actualiza el tipo del elemento.
     /// </summary>
     /// <param name="elTipoNuevo">El tipo nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaTipo(Tipo elTipoNuevo, string laRazón)
+    public void ActualizaTipo(Tipo elTipoNuevo, string laRazón)
     {
-      // Avisa que se va a modificar un elemento.
-      SeVaAModificarElemento();
-
-      // Actualiza el tipo.
-      miTipo = elTipoNuevo;
-      misModificacionesDeTipo.Add(
-        SeparadorDeModificaciones + laRazón +
-        SeparadorDeModificaciones + elTipoNuevo);
-
-      // Busca y actualiza el campo del tipo.
-      BuscaYActualizaCampo(new CampoTipo(elTipoNuevo));
+      CampoTipo nuevoCampoTipo = new CampoTipo(elTipoNuevo);
+      ActualizaCampo(nuevoCampoTipo, ref miCampoTipo, laRazón);
 
       // Actualiza la descripción.
-      bool existe = misDescripcionesPorTipo.TryGetValue(miTipo, out miDescripción);
+      bool existe = misDescripcionesPorTipo.TryGetValue(Tipo, out miDescripción);
       if (!existe)
       {
         miDescripción = string.Empty;
@@ -383,34 +351,14 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Cambia el Campo de Indice de Ciudad.
+    /// Actualiza el Campo de Indice de Ciudad.
     /// </summary>
     /// <param name="elCampoIndiceDeCiudadNuevo">El Campo de Indice de Ciudad nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
     /// <returns>Una variable lógica que indica si el elemento se modificó.</returns>
     public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
     {
-      bool cambió = false;
-
-      // Si no tiene el Campo de Indice de Ciudad entonces le 
-      // añadimos uno.
-      // Si no, se lo cambiamos.
-      if (miCampoIndiceDeCiudad == null)
-      {
-        AñadeCampo(elCampoIndiceDeCiudadNuevo, laRazón);
-        miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
-        cambió = true;
-      }
-      else
-      {
-        // Cambia el campo si es diferente.
-        if (elCampoIndiceDeCiudadNuevo != miCampoIndiceDeCiudad)
-        {
-          CambiaCampo(elCampoIndiceDeCiudadNuevo, miCampoIndiceDeCiudad, laRazón);
-          miCampoIndiceDeCiudad = elCampoIndiceDeCiudadNuevo;
-          cambió = true;
-        }
-      }
+      bool cambió = ActualizaCampo(elCampoIndiceDeCiudadNuevo, ref miCampoIndiceDeCiudad, laRazón);
 
       return cambió;
     }
@@ -476,8 +424,7 @@ namespace GpsYv.ManejadorDeMapa
         // Si el elemento ha sido modificado entonces se borra el estado de
         // modificado y la copia original.
         miFuéModificado = false;
-        misModificacionesDeNombre.Clear();
-        misModificacionesDeTipo.Clear();
+        misModificaciones.Clear();
         miOriginal = null;
         miNúmero = elNuevoNúmeroDelElemento;
       }
@@ -574,7 +521,7 @@ namespace GpsYv.ManejadorDeMapa
           SeVaAModificarElemento();
 
           // Añade la razón del cambio.
-          misOtrasModificaciones.Add(string.Format(
+          misModificaciones.Add(string.Format(
             "[{0}: {1} {2} {3}]", elCampoNuevo.Identificador, elCampoACambiar, SeparadorDeModificaciones, laRazón));
 
           // Asigna el nuevo campo.
@@ -604,7 +551,7 @@ namespace GpsYv.ManejadorDeMapa
       SeVaAModificarElemento();
 
       // Añade la razón del cambio.
-      misOtrasModificaciones.Add(string.Format(
+      misModificaciones.Add(string.Format(
         "[Nuevo {0}: {1}]", elCampoNuevo.Identificador, laRazón));
 
       // Añade el nuevo campo.
@@ -626,7 +573,7 @@ namespace GpsYv.ManejadorDeMapa
       SeVaAModificarElemento();
 
       // Añade la razón del cambio.
-      misOtrasModificaciones.Add(string.Format(
+      misModificaciones.Add(string.Format(
         "[Removido {0}: {1}]", elCampoARemover.Identificador, laRazón));
 
       // Remueve el campo.
@@ -638,30 +585,39 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private void BuscaYActualizaCampo<T>(T elCampoNuevo) where T: Campo
+    /// <summary>
+    /// Actualiza un campo dado.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="elCampoNuevo">El campo nuevo.</param>
+    /// <param name="elCampo">El campo dado.</param>
+    /// <param name="laRazón">La razón.</param>
+    /// <returns></returns>
+    protected bool ActualizaCampo<T>(T elCampoNuevo, ref T elCampo, string laRazón)
+      where T : Campo
     {
-      T campoEncontrado = null;
-      for (int i = 0; i < misCampos.Count; ++i)
-      {
-        campoEncontrado = misCampos[i] as T;
-        if (campoEncontrado != null)
-        {
-          // Remplaza el campo.
-          misCampos[i] = elCampoNuevo;
+      bool cambió = false;
 
-          // Avisa que se modificó un elemento.
-          miManejadorDeMapa.SeModificóElemento(this);
+      // Si no tiene el Campo entonces le añadimos uno.
+      // Si no, se lo cambiamos.
+      if (elCampo == null)
+      {
+        AñadeCampo(elCampoNuevo, laRazón);
+        elCampo = elCampoNuevo;
+        cambió = true;
+      }
+      else
+      {
+        // Cambia el campo si es diferente.
+        if (elCampo != elCampoNuevo)
+        {
+          CambiaCampo(elCampoNuevo, elCampo, laRazón);
+          elCampo = elCampoNuevo;
+          cambió = true;
         }
       }
 
-      // Añade el campo tipo si no se encontró.
-      if (campoEncontrado == null)
-      {
-        misCampos.Add(elCampoNuevo);
-
-        // Avisa que se modificó un elemento.
-        miManejadorDeMapa.SeModificóElemento(this);
-      }
+      return cambió;
     }
     #endregion
   }

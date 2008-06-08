@@ -79,10 +79,6 @@ namespace GpsYv.ManejadorDeMapa
   /// </summary>
   public class CampoNombre : Campo
   {
-    #region Campos
-    private readonly string miNombre;
-    #endregion
-
     #region Propiedades
     /// <summary>
     /// Identificador.
@@ -90,15 +86,14 @@ namespace GpsYv.ManejadorDeMapa
     public const string IdentificadorDeEtiqueta = "Label";
 
     /// <summary>
-    /// Devuelve el nombre.
+    /// Obtiene el nombre.
     /// </summary>
-    public string Nombre
-    {
-      get
-      {
-        return miNombre;
-      }
-    }
+    public string Nombre { get; private set; }
+
+    /// <summary>
+    /// Obtiene el número de nombre.
+    /// </summary>
+    public int? Número { get; private set;  }
     #endregion
 
     #region Métodos Públicos
@@ -107,9 +102,21 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elTexto">El nombre.</param>
     public CampoNombre(string elTexto)
+      : this(elTexto, null)
+    {
+    }
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elTexto">El nombre.</param>
+    /// <param name="elNúmero">El número de nombre.</param>
+    public CampoNombre(string elTexto, int? elNúmero)
       : base(IdentificadorDeEtiqueta)
     {
-      miNombre = elTexto;
+      Nombre = elTexto;
+      Número = elNúmero;
     }
 
 
@@ -118,7 +125,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      return miNombre;
+      return Nombre;
     }
 
 

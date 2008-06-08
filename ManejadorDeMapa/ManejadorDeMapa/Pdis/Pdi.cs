@@ -222,7 +222,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
           bool encontróCampoIgual = false;
           foreach (Campo campoAComparar in elPdi.Campos)
           {
-            if (campo.Equals(campoAComparar))
+            if (campo == campoAComparar)
             {
               encontróCampoIgual = true;
               break;

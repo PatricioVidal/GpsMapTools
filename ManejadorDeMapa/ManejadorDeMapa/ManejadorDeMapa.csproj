@@ -83,6 +83,9 @@
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
+    <Compile Include="Vías\ArregladorDeNombres.cs" />
+    <Compile Include="Vías\CalificativosDeVías.cs">
+    </Compile>
     <Compile Include="Vías\Nodo.cs" />
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
     <Compile Include="LímiteDeVelocidad.cs" />
@@ -173,6 +176,9 @@
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
     <None Include="Diagramas de Clases\ManejadorDePDIs.cd" />
     <None Include="Diagramas de Clases\ManejadorDeVías.cd" />
+    <None Include="Vías\CalificativosDeVías.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="GPS_YV.ico" />
     <Content Include="Vías\RestriccionesDeParámetrosDeRuta.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

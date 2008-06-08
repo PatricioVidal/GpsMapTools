@@ -338,7 +338,7 @@ namespace GpsYv.ManejadorDeMapa
             switch (identificador)
             {
               case CampoNombre.IdentificadorDeEtiqueta:
-                campos.Add(new CampoNombre(texto));
+                campos.Add(new CampoNombre(texto, número));
                 break;
               case CampoTipo.IdentificadorDeTipo:
                 campos.Add(new CampoTipo(texto));

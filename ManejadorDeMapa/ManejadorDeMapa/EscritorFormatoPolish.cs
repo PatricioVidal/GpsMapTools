@@ -323,7 +323,14 @@ namespace GpsYv.ManejadorDeMapa
 
     private static void Guarda(CampoNombre elCampoNombre, StreamWriter elEscritor)
     {
-      Guarda(elCampoNombre, elCampoNombre.Nombre, elEscritor);
+      if (elCampoNombre.Número != null)
+      {
+        Guarda(elCampoNombre, (int)elCampoNombre.Número, elCampoNombre.Nombre, elEscritor);
+      }
+      else
+      {
+        Guarda(elCampoNombre, elCampoNombre.Nombre, elEscritor);
+      }
     }
 
 

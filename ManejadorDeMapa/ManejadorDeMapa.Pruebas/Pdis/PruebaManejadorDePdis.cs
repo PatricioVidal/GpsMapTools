@@ -155,7 +155,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
         string nombreEsperado = casos[i].NombreCorregido;
         if (pdiEsperado.Nombre != nombreEsperado)
         {
-          pdiEsperado.CambiaNombre(nombreEsperado, "");
+          pdiEsperado.ActualizaNombre(nombreEsperado, "");
         }
 
         pdisEsperados.Add(pdiEsperado);
