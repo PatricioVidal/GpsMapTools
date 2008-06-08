@@ -1,3 +1,6 @@
+Versión 1.33
+- Arreglado el Instalador para que incluya el archivo csv que faltaba.
+
 Versión 1.32
 - Creado programa ArregladorDeMapasTopográficos.
 - Añadido el arreglo de nombres de vías, incluyendo el nombre secundario (Label2).

@@ -176,9 +176,9 @@
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
     <None Include="Diagramas de Clases\ManejadorDePDIs.cd" />
     <None Include="Diagramas de Clases\ManejadorDeVías.cd" />
-    <None Include="Vías\CalificativosDeVías.csv">
+    <Content Include="Vías\CalificativosDeVías.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="GPS_YV.ico" />
     <Content Include="Vías\RestriccionesDeParámetrosDeRuta.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
