@@ -245,6 +245,47 @@ namespace GpsYv.ArregladorDeMapasTopográficos
       }
       Console.WriteLine("  arregladas polilíneas...");
       #endregion
+
+      #region Elimina los elementos con Data1 y Data2, y los polígonos.
+      IList<ElementoDelMapa> elementos = elManejadorDeMapa.ManejadorDeElementos.Elementos;
+      int últimoIndex = elementos.Count - 1;
+      for (int i = últimoIndex; i >= 0; --i)
+      {
+        ElementoDelMapa elemento = elementos[i];
+
+        // Remueve los polígonos.
+        if (elemento is Polígono)
+        {
+          elementos.RemoveAt(i);
+        }
+        // Si no es polígono entonces vemos si es una polilínea
+        // y la removemos si no tiene data0.
+        else if (elemento is Polilínea)
+        {
+          // Buscamos si tiene data0.
+          bool tieneData0 = false;
+          foreach (var campo in elemento.Campos)
+          {
+            CampoCoordenadas campoCoordenadas = campo as CampoCoordenadas;
+            if (campoCoordenadas != null)
+            {
+              if (campoCoordenadas.Nivel == 0)
+              {
+                tieneData0 = true;
+                break;
+              }
+            }
+          }
+          
+          // Removemos el elemento si no tiene data0.
+          if (!tieneData0)
+          {
+            elementos.RemoveAt(i);
+          }
+        }
+      }
+      Console.WriteLine("  eliminados polilíneas sin data 0, y polígonos...");
+      #endregion
     }
   }
 }
