@@ -73,7 +73,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using GpsYv.ManejadorDeMapa.Vías;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -303,7 +302,10 @@ namespace GpsYv.ManejadorDeMapa
         }
         else if ((campoNombre = campo as CampoNombre) != null)
         {
-          miCampoNombre = campoNombre;
+          if (campoNombre.Número == null)
+          {
+            miCampoNombre = campoNombre;
+          }
         }
         else if ((campoIndiceDeCiudad = campo as CampoIndiceDeCiudad) != null)
         {
