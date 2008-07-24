@@ -228,7 +228,7 @@
     <value>miMapa</value>
   </data>
   <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.18.3030.2211, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
     <value>miRecipienteDividido.Panel2</value>
@@ -564,7 +564,7 @@
     <value>ordenadorDeColumnaDeLista</value>
   </data>
   <data name="&gt;&gt;ordenadorDeColumnaDeLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.18.3030.2211, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miColumnaNúmeroDeElemento.Name" xml:space="preserve">
     <value>miColumnaNúmeroDeElemento</value>
@@ -606,6 +606,6 @@
     <value>InterfaseDePdisDuplicados</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.18.3030.2211, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

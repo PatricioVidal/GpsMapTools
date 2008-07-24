@@ -380,6 +380,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         case 6:
           texto += " - Parecido";
           break;
+        default:
+          texto += " - ???";
+          break;
       }
 
       miTextoParecidoDelNombre.Text = texto;

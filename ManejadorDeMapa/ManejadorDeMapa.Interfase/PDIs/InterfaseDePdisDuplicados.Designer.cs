@@ -129,6 +129,7 @@
       resources.ApplyResources(this.miMapa, "miMapa");
       this.miMapa.EscuchadorDeEstatus = null;
       this.miMapa.ManejadorDeMapa = null;
+      this.miMapa.MuestraCiudades = false;
       this.miMapa.MuestraPdis = true;
       this.miMapa.MuestraPolígonos = false;
       this.miMapa.MuestraPolilíneas = false;
@@ -206,7 +207,7 @@
       this.miBarraDeParecidoDeNombre.BackColor = System.Drawing.SystemColors.Window;
       this.miBarraDeParecidoDeNombre.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::GpsYv.ManejadorDeMapa.Interfase.Properties.Settings.Default, "DistanciaHammingBuscarPdisDuplicados", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.miBarraDeParecidoDeNombre.LargeChange = 2;
-      this.miBarraDeParecidoDeNombre.Maximum = 7;
+      this.miBarraDeParecidoDeNombre.Maximum = 6;
       this.miBarraDeParecidoDeNombre.Name = "miBarraDeParecidoDeNombre";
       this.miBarraDeParecidoDeNombre.Value = global::GpsYv.ManejadorDeMapa.Interfase.Properties.Settings.Default.DistanciaHammingBuscarPdisDuplicados;
       this.miBarraDeParecidoDeNombre.ValueChanged += new System.EventHandler(this.EnCambioBarraDeParecidoDelNombre);
