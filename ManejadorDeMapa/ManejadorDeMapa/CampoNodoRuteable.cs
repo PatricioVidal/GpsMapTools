@@ -90,12 +90,6 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
-    /// Obtiene el número del nodo ruteable.
-    /// </summary>
-    // TODO: Remover esta propiedad y generar el número automáticamente.
-    public int Número { get; private set; }
-
-    /// <summary>
     /// Obtiene el índice de coordenadas del nodo.
     /// </summary>
     public int IndiceDeCoordenadas { get; private set; }
@@ -119,19 +113,16 @@ namespace GpsYv.ManejadorDeMapa
     /// Constructor.
     /// </summary>
     /// <param name="elIdentificador">El Identificador.</param>
-    /// <param name="elNúmero">El número.</param>
     /// <param name="elIndiceDeCoordenadas">El indice de coordenadas.</param>
     /// <param name="elIdentificadorGlobal">El identificador global.</param>
     /// <param name="elEsExterno">Variable lógica que indica si el nodo es externo.</param>
     public CampoNodoRuteable(
       string elIdentificador,
-      int elNúmero,
       int elIndiceDeCoordenadas,
       int elIdentificadorGlobal,
       bool elEsExterno)
       : base(elIdentificador)
     {
-      Número = elNúmero;
       IndiceDeCoordenadas = elIndiceDeCoordenadas;
       IdentificadorGlobal = elIdentificadorGlobal;
       EsExterno = elEsExterno;
@@ -167,8 +158,8 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Compara objecto.
-      CampoNodoRuteable comparador = (CampoNodoRuteable)elObjecto;
-      bool esIgual = ((IdentificadorGlobal == comparador.IdentificadorGlobal) &&
+      var comparador = (CampoNodoRuteable)elObjecto;
+      var esIgual = ((IdentificadorGlobal == comparador.IdentificadorGlobal) &&
         (IndiceDeCoordenadas == comparador.IndiceDeCoordenadas) &&
         (EsExterno == comparador.EsExterno));
 

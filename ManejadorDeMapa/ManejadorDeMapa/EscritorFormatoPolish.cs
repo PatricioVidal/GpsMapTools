@@ -88,7 +88,7 @@ namespace GpsYv.ManejadorDeMapa
     private readonly NumberFormatInfo miFormatoNumérico = new NumberFormatInfo();
 
     /// <summary>
-    /// Esta codificación permite intepretar correctamente los acentos de 
+    /// Esta codificación permite interpretar correctamente los acentos de 
     /// archivos ANSI-8 bytes.
     /// </summary>
     private readonly Encoding miCodificaciónPorDefecto = Encoding.GetEncoding(1252);
@@ -172,6 +172,9 @@ namespace GpsYv.ManejadorDeMapa
 
     private void Guarda(ElementoDelMapa elElemento, StreamWriter elEscritor)
     {
+      // Inicializa indices. 
+      var indiceDeNodoRuteable = 1;
+
       // Escribe la clase.
       string clase = elElemento.Clase;
       elEscritor.WriteLine("[" + clase + "]");
@@ -191,7 +194,7 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Guarda los campos del elemento.
-      foreach (Campo campo in elElemento.Campos)
+      foreach (var campo in elElemento.Campos)
       {
         CampoComentario campoComentario;
         CampoNombre campoNombre;
@@ -217,7 +220,10 @@ namespace GpsYv.ManejadorDeMapa
         }
         else if ((campoNodo = campo as CampoNodoRuteable) != null)
         {
-          Guarda(campoNodo, elEscritor);
+          Guarda(campoNodo, indiceDeNodoRuteable, elEscritor);
+
+          // Incrementa el índice para el próximo nodo.
+          ++indiceDeNodoRuteable;
         }
         else if ((campoGenérico = campo as CampoGenérico) != null)
         {
@@ -261,7 +267,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private static void Guarda(CampoNodoRuteable elCampoNodo, StreamWriter elEscritor)
+    private static void Guarda(CampoNodoRuteable elCampoNodo, int elNúmero, StreamWriter elEscritor)
     {
       // Crea el texto.
       string texto = string.Format("{0},{1}", elCampoNodo.IndiceDeCoordenadas, elCampoNodo.IdentificadorGlobal);
@@ -274,7 +280,7 @@ namespace GpsYv.ManejadorDeMapa
         texto += ",0";
       }
 
-      Guarda(elCampoNodo, elCampoNodo.Número, texto, elEscritor);
+      Guarda(elCampoNodo, elNúmero, texto, elEscritor);
     }
 
 

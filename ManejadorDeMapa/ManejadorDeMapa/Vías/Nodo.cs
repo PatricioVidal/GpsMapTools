@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     public Vía Vía { get; private set; }
 
     /// <summary>
-    /// Obtiene el índice del nodo el la vía.
+    /// Obtiene el índice del nodo en la vía.
     /// </summary>
     public int Indice { get; private set; }
 
@@ -95,7 +95,21 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Obtiene el identificador global.
     /// </summary>
-    public int IdentificadorGlobal { get; private set; }
+    public int IdentificadorGlobal
+    {
+      get
+      {
+        return CampoNodoRuteable.IdentificadorGlobal;
+      }
+    }
+
+    /// <summary>
+    /// Obtiene el Campo de Nodo Ruteable.
+    /// </summary>
+    /// <remarks>
+    /// Esta propiedad el nula si <see cref="EsRuteable"/> es falso.
+    /// </remarks>
+    public CampoNodoRuteable CampoNodoRuteable { get; private set; }
 
     /// <summary>
     /// Obtiene las coordenadas del nodo.
@@ -109,7 +123,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     }
     #endregion
 
-    #region Constructors
+    #region Métodos Públicos
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -123,7 +137,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       Vía = laVía;
       Indice = elIndice;
       EsRuteable = false;
-      IdentificadorGlobal = int.MinValue;
+      CampoNodoRuteable = null;
     }
 
 
@@ -134,7 +148,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     public void HacerRuteable(CampoNodoRuteable elCampoNodoRuteable)
     {
       EsRuteable = true;
-      IdentificadorGlobal = elCampoNodoRuteable.IdentificadorGlobal;
+      CampoNodoRuteable = elCampoNodoRuteable;
     }
     #endregion
   }

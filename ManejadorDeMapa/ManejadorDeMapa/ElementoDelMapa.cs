@@ -495,6 +495,17 @@ namespace GpsYv.ManejadorDeMapa
 
 
     /// <summary>
+    /// Inserta un campo dado.
+    /// </summary>
+    /// <param name="elCampoNuevo">El campo a insertar.</param>
+    /// <param name="elIndice">El índice en donde insertar el campo.</param>
+    protected void InsertaCampo(Campo elCampoNuevo, int elIndice)
+    {
+      misCampos.Insert(elIndice, elCampoNuevo);
+    }
+
+
+    /// <summary>
     /// Cambia un campo dado.
     /// </summary>
     /// <param name="elCampoNuevo">El campo nuevo.</param>

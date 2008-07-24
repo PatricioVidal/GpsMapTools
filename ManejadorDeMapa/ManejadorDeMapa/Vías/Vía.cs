@@ -85,7 +85,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
       new bool[10]);
 
     private bool miTieneCampoParámetrosDeRutaEnCampos;
-    private CampoNodoRuteable[] misCamposNodosRuteables;
     private CampoNombre miCampoNombreSecundario;
     #endregion 
 
@@ -159,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
         }
       }
 
-      CreaCamposNodosRuteables();
+      CreaNodos();
     }
 
 
@@ -215,133 +214,110 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="laRazón">La razón.</param>
     public void AñadeNodoRuteable(int elIndice, int elIdentificadorGlobal, string laRazón)
     {
-      // TODO: Cambiar la lógica para insertar campos en vez de cambiarlos.
+      // Hacer el nodo ruteable sin importar si ya era ruteable en caso
+      // de que el identificador global sea diferente.
+      Nodo nodoAHacerRuteable = Nodos[elIndice];
 
-      // Si ya tiene un nodo ruteable en el índice, pero con un identificador
+      // Si el nodo es ruteable pero con un identificador
       // global distinto entonces actualizamos el campo.
-      // Si el identificador global es igual entonces no hacemos nada.
-      CampoNodoRuteable campoNodoRuteableActual = misCamposNodosRuteables[elIndice];
-      if (campoNodoRuteableActual != null)
+      // Si el identificador global es igual entonces no tenemos que hacer nada.
+      if (nodoAHacerRuteable.EsRuteable)
       {
-        if (campoNodoRuteableActual.IdentificadorGlobal != elIdentificadorGlobal)
+        if (nodoAHacerRuteable.CampoNodoRuteable.IdentificadorGlobal != elIdentificadorGlobal)
         {
-          // Actualiza el campo.
           CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
-            campoNodoRuteableActual.Identificador,
-            campoNodoRuteableActual.Número,
+            CampoNodoRuteable.IdentificadorDeNodo,
             elIndice,
             elIdentificadorGlobal,
-            campoNodoRuteableActual.EsExterno);
-          CambiaCampo(nuevoCampoNodoRuteable, campoNodoRuteableActual, laRazón);
+            false);
+
+          // Actualiza el campo.
+          CambiaCampo(nuevoCampoNodoRuteable, nodoAHacerRuteable.CampoNodoRuteable, laRazón);
+
+          // Actualiza el nodo.
+          nodoAHacerRuteable.HacerRuteable(nuevoCampoNodoRuteable);
 
           // TODO: Actualiza tabla global de nodos ruteables.
         }
       }
+      // El nodo no era ruteable. Tenemos que insertar el campo de nodo
+      // ruteable y hacer el nodo ruteable.
       else
       {
-        #region Añade el nodo ruteable en la posición correcta.
-        #region Ve si es necesario insertar el nodo ruteable.
-        // El nuevo nodo ruteable hay que insertarlo si tiene un
-        // índice de coordenadas menor que alguno de los nodos
+        CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
+          CampoNodoRuteable.IdentificadorDeNodo,
+          elIndice,
+          elIdentificadorGlobal,
+          false);
+
+        // El nuevo campo nodo ruteable hay que insertarlo si tiene
+        // un índice de coordenadas menor que alguno de los nodos
         // ruteables que ya existen.
-        List<CampoNodoRuteable> camposNodosRuteables = new List<CampoNodoRuteable>();
-        foreach (CampoNodoRuteable campo in misCamposNodosRuteables)
+        CampoNodoRuteable campoEnDondeInsertar = null;
+        CampoNodoRuteable últimoCampoNodoRuteable = null;
+        foreach (var nodo in Nodos)
         {
-          if (campo != null)
+          if (nodo.EsRuteable)
           {
-            camposNodosRuteables.Add(campo);
+            últimoCampoNodoRuteable = nodo.CampoNodoRuteable;
 
-            // TODO: Actualiza tabla global de nodos ruteables.
-          }
-        }
-        int númeroDeNodosRuteables = camposNodosRuteables.Count;
-        int últimoIndice = númeroDeNodosRuteables - 1;
-        bool yaInsertóNodoRuteable = false;
-        for (int i = 0; i < númeroDeNodosRuteables; ++i)
-        {
-          CampoNodoRuteable campo = camposNodosRuteables[i];
-          if (elIndice < campo.IndiceDeCoordenadas)
-          {
-            // Inserta en nuevo nodo ruteable solo si todavía
-            // no se ha insertado.
-            if (!yaInsertóNodoRuteable)
+            if (elIndice < nodo.Indice)
             {
-              CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
-                CampoNodoRuteable.IdentificadorDeNodo,
-                campo.Número,
-                elIndice,
-                elIdentificadorGlobal,
-                false);
-              CambiaCampo(nuevoCampoNodoRuteable, campo, laRazón);
-              yaInsertóNodoRuteable = true;
-
-              // TODO: Actualiza tabla global de nodos ruteables.
+              campoEnDondeInsertar = nodo.CampoNodoRuteable;
             }
-
-            #region Mueve los siguientes nodos.
-
-            // Una vez que se insertó el nodo ruteable entonces
-            // hay que mover todos los nodos siguientes.
-            int siguienteIndice = i + 1;
-            int siguienteNúmero = campo.Número + 1;
-            CampoNodoRuteable campoNodoRuteable = new CampoNodoRuteable(
-              campo.Identificador,
-              siguienteNúmero,
-              campo.IndiceDeCoordenadas,
-              campo.IdentificadorGlobal,
-              campo.EsExterno);
-
-            // Si el siguiente índice es válido entonces tenemos que cambiar
-            // el nodo.
-            // Si no, entonces tenemos que añadir el nodo.
-            if (siguienteIndice <= últimoIndice)
-            {
-              CampoNodoRuteable campoACambiar = camposNodosRuteables[siguienteIndice];
-              CambiaCampo(campoNodoRuteable, campoACambiar, laRazón);
-            }
-            else
-            {
-              AñadeCampo(campoNodoRuteable, laRazón);
-            }
-
-            #endregion
           }
         }
 
-        #endregion
-
-        // Si no se insertó el nodo ruteable quiere decir que debemos
-        // añadirlo de último.
-        if (!yaInsertóNodoRuteable)
+        // Si existe el campo en donde insertar entonces procedemos.
+        if (campoEnDondeInsertar != null)
         {
-          int númeroDeNodoRuteable = númeroDeNodosRuteables + 1;
-          CampoNodoRuteable nuevoCampoNodoRuteable = new CampoNodoRuteable(
-            CampoNodoRuteable.IdentificadorDeNodo,
-            númeroDeNodoRuteable,
-            elIndice,
-            elIdentificadorGlobal,
-            false);
-          AñadeCampo(nuevoCampoNodoRuteable, laRazón);
+          int indice = Campos.IndexOf(campoEnDondeInsertar);
+          InsertaCampo(nuevoCampoNodoRuteable, indice);
+        }
+        // Si no existe el campo en donde insertar entonces lo
+        // insertamos depues del último campo de nodo ruteable.
+        // Si no hay nnigún campo de nodo ruteable entonces
+        // insertamos el campo al final de todos los campos.
+        else
+        {
+          if (últimoCampoNodoRuteable != null)
+          {
+            int indice = Campos.IndexOf(últimoCampoNodoRuteable);
+            InsertaCampo(nuevoCampoNodoRuteable, indice);
+          }
+          else
+          {
+            int indice = Campos.Count;
+            InsertaCampo(nuevoCampoNodoRuteable, indice);
+          }
         }
 
-        #endregion
+        // Hacer el nodo ruteable.
+        nodoAHacerRuteable.HacerRuteable(nuevoCampoNodoRuteable);
+
+        // TODO: Actualiza tabla global de nodos ruteables.
       }
+    }
+
+
+    /// <summary>
+    /// Cambia las coordenadas.
+    /// </summary>
+    /// <param name="lasCoordenadaNuevas">Las coordenadas nuevas.</param>
+    /// <param name="elIndice">El índice de la coordenada a cambiar.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    public override void CambiaCoordenadas(Coordenadas lasCoordenadaNuevas, int elIndice, string laRazón)
+    {
+      // TODO: Actualizar las coordenadas de los nodos ruteables.
+
+      base.CambiaCoordenadas(lasCoordenadaNuevas, elIndice, laRazón);
     }
     #endregion
 
     #region Métodos Privados
-    private void CreaCamposNodosRuteables()
+    private void CreaNodos()
     {
-      misCamposNodosRuteables = new CampoNodoRuteable[Coordenadas.Length];
-      foreach (Campo campo in Campos)
-      {
-        CampoNodoRuteable campoNodo = campo as CampoNodoRuteable;
-        if (campoNodo != null)
-        {
-          misCamposNodosRuteables[campoNodo.IndiceDeCoordenadas] = campoNodo;
-        }
-      }
-
+      // Crea los Nodos.
       int númeroDeNodos = Coordenadas.Length;
       Nodos = new Nodo[númeroDeNodos];
       for (int i = 0; i < númeroDeNodos; ++i)

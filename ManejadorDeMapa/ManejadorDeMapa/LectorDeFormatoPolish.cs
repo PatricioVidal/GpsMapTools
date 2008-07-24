@@ -288,7 +288,7 @@ namespace GpsYv.ManejadorDeMapa
 
     private IList<Campo> LeeCampos(string laClase)
     {
-      List<Campo> campos = new List<Campo>();
+      var campos = new List<Campo>();
 
       // Lee linea por linea hasta que se consiga el final del elemento.
       string línea = LeeLaPróximaLínea();
@@ -357,7 +357,7 @@ namespace GpsYv.ManejadorDeMapa
               case CampoNodoRuteable.IdentificadorDeNodo:
                 if (número != null)
                 {
-                  campos.Add(LeeCampoNodo(identificador, número.Value, texto));
+                  campos.Add(LeeCampoNodo(identificador, texto));
                 }
                 else
                 {
@@ -431,6 +431,7 @@ namespace GpsYv.ManejadorDeMapa
       return campoIndiceDeCiudad;
     }
 
+
     private static Campo LeeCampoEsCiudad(string elTexto)
     {
       bool esCiudad;
@@ -456,7 +457,6 @@ namespace GpsYv.ManejadorDeMapa
 
     private static CampoNodoRuteable LeeCampoNodo(
       string elIdentificador,
-      int elNúmero,
       string elTexto)
     {
       // Verifica que tenemos 3 partes.
@@ -484,9 +484,8 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Crea el nodo.
-      CampoNodoRuteable nodo = new CampoNodoRuteable(
+      var nodo = new CampoNodoRuteable(
         elIdentificador,
-        elNúmero,
         indice,
         identificador,
         esExterno);
