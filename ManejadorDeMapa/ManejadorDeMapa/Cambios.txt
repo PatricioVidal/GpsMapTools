@@ -1,3 +1,9 @@
+Versión 1.35
+- Actualizada Lista de Corrección de Palabras por Tipo de PDI.
+- Actualizado para no remover el índice de ciudad de los PDI de ciudades.
+- Arreglado límite superior de la barra de selección del parecido del nombre para la búsqueda de PDIs duplicados.
+- Interno: Restructurado el código para simplificar la lógica de manejo de los campos de nodos ruteables.
+
 Versión 1.34
 - Arreglada lógica para evitar confundir el nombre secundario con el nombre del elemento.
 - ArregladorDeMapasTopográficos: Añadido la eliminación de polilíneas sin data0, y polígonos.
@@ -11,7 +17,7 @@ Versión 1.32
 - Removida la validación de velocidad de la lógica de Posibles Errores de Ruteo.
 - Interno: Añadido número al Campo Nombre.
 - Interno: Restructurado el código.
-- Interno: Añadido el concepto de "ruteable"a la clase Nodo. La clase Vía ahora tiene un vector de Nodos. Cambiada la lógica de las otras clases para usar los Nodos de la clase Vía.
+- Interno: Añadido el concepto de "ruteable" a la clase Nodo. La clase Vía ahora tiene un vector de Nodos. Cambiada la lógica de las otras clases para usar los Nodos de la clase Vía.
 - Interno: Cambios menores del diseño.
 - Interno: Corrección de errores ortográficos.
 - Interno: Actualizadas las pruebas de integración.
