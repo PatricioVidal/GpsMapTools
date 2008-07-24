@@ -76,9 +76,15 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 {
+  /// <summary>
+  /// Pruebas de la clase <see cref="ManejadorDePdis"/>.
+  /// </summary>
   [TestFixture]
   public class PruebaManejadorDePdis
   {
+    /// <summary>
+    /// Prueba el constructor.
+    /// </summary>
     [Test]
     public void PruebaConstructor()
     {
@@ -98,14 +104,15 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 
     private struct Caso
     {
-      public readonly string Tipo;
-      public readonly string NombreOriginal;
-      public readonly string NombreCorregido;
+      public string Tipo { get; private set; }
+      public string NombreOriginal { get; private set; }
+      public string NombreCorregido { get; private set; }
 
       public Caso(
         string elTipo,
         string elNombreOriginal,
         string laNombreCorregido)
+        : this()
       {
         Tipo = elTipo;
         NombreOriginal = elNombreOriginal;
@@ -114,6 +121,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
     }
 
 
+    /// <summary>
+    /// Prueba el método ProcesarTodo()
+    /// </summary>
     [Test]
     public void PruebaProcesarTodo()
     {
