@@ -108,6 +108,12 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
     protected override int ProcesaElemento(Pdi elPdi)
     {
+      // Retorna si el PDI es una ciudad.
+      if (elPdi.EsCiudad)
+      {
+        return 0;  
+      }
+
       int númeroDeProblemasDetectados = 0;
 
       // Por cada ciudad, si el PDI está adentro de la ciudad entonces
