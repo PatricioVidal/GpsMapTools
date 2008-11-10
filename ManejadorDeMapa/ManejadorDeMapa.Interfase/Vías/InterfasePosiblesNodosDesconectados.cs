@@ -177,7 +177,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       menú.Click += EnMenúConectarNodosDesconectados;
       miMenú.Items.Add(menú);
 
-      // Añade menú "Excluir de búsqueda de Nodos Desconectados". 
+      // Añade menú "Marcar como Nodos Desconectados". 
       menú = new ToolStripMenuItem("Marcar como Nodos Desconectados");
       menú.Click += EnMenúMarcarComoNodosDesconectados;
       miMenú.Items.Add(menú);
@@ -572,21 +572,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void EnMenúMarcarComoNodosDesconectados(object elEnviador, EventArgs losArgumentos)
     {
-      ListView lista = miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
-
       // Retornamos si no hay Vías seleccionadas.
-      int númeroDeNodosDesconectados = lista.SelectedIndices.Count;
-      if (númeroDeNodosDesconectados == 0)
+      int númeroDeNodosSeleccionados = miLista.SelectedIndices.Count;
+      if (númeroDeNodosSeleccionados == 0)
       {
         return;
       }
 
-      if (númeroDeNodosDesconectados > 1)
+      if (númeroDeNodosSeleccionados > 1)
       {
-        // Pregunta si se quiere conectar los nodos.
+        // Pregunta si se quiere marcar los nodos como desconectados.
         DialogResult respuesta = MessageBox.Show(
           string.Format("Está seguro que quiere marcar los {0} Nodos seleccionados como nodos desconectados?",
-                        númeroDeNodosDesconectados),
+                        númeroDeNodosSeleccionados),
           "Marcar como Nodos Desconectados",
           MessageBoxButtons.YesNo,
           MessageBoxIcon.Warning);
@@ -598,7 +596,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       }
 
       #region Marca Nodos como Desconectados.
-      // Añade el attributo a las vías.
+      // Añade el attributo a los nodos.
       ManejadorDeMapa.SuspendeEventos();
       IList<InformaciónNodoDesconectado> posibleNodoDesconectados = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneEtiquetasSeleccionadas<InformaciónNodoDesconectado>();
       foreach (InformaciónNodoDesconectado posibleNodoDesconectado in posibleNodoDesconectados)
