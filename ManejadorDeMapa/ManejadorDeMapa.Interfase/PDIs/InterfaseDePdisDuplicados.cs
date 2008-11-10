@@ -71,10 +71,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Pdis;
 
@@ -87,9 +84,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
   {
     #region Campos
     private BuscadorDeDuplicados miBuscadorDeDuplicados;
-    private Brush miPincelDePdi = Brushes.Black;
-    private Brush miPincelDePdiDuplicado = Brushes.Orange;
-    private Color miColorDeFondoOriginal;
+    private readonly Brush miPincelDePdi = Brushes.Black;
+    private readonly Brush miPincelDePdiDuplicado = Brushes.Orange;
+    private readonly Color miColorDeFondoOriginal;
     #endregion
 
     #region Propiedades
@@ -175,8 +172,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         pdis.AddRange(duplicados);
 
         // Crea un grupo para cada conjunto de duplicados.
-        ListViewGroup grupo = new ListViewGroup(pdiBase.Nombre);
-        grupo.Tag = pdis;
+        ListViewGroup grupo = new ListViewGroup(pdiBase.Nombre)
+          {
+            Tag = pdis
+          };
         miLista.Groups.Add(grupo);
 
         // Añade todos los PDIs.
@@ -197,7 +196,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     private static ListViewItem CreaItemDeLista(Pdi elPdi, ListViewGroup elGrupo, double laDistancia)
     {
       ListViewItem item = new ListViewItem(
-              new string[] { 
+              new [] { 
                 elPdi.Número.ToString(),
                 elPdi.Tipo.ToString(), 
                 elPdi.Descripción,
@@ -205,10 +204,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
                 elPdi.Coordenadas.ToString(),
                 laDistancia.ToString("0.0")
               },
-              elGrupo);
-
-      item.Tag = new ElementoConEtiqueta(elPdi);
-      item.Checked = false;
+              elGrupo)
+        {
+          Tag = new ElementoConEtiqueta(elPdi), 
+          Checked = false
+        };
 
       return item;
     }
@@ -261,7 +261,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       {
         if (item.Checked)
         {
-          pdisAEliminar.Add((item.Tag as ElementoConEtiqueta).ElementoDelMapa as Pdi);
+          pdisAEliminar.Add(((ElementoConEtiqueta) item.Tag).ElementoDelMapa as Pdi);
         }
       }
 
@@ -307,16 +307,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       // Busca el rango visible para los PDIs.
       IList<ElementoDelMapa> elementos = new List<ElementoDelMapa>(pdis.ToArray());
       RectangleF rectánguloQueEncierra = InterfaseMapa.RectanguloQueEncierra(elementos);
-      float margen = 0.0001f;
+      const float margen = 0.0001f;
       RectangleF rectánguloVisible = new RectangleF(
-        (float)rectánguloQueEncierra.X - margen,
-        (float)rectánguloQueEncierra.Y - margen,
+        rectánguloQueEncierra.X - margen,
+        rectánguloQueEncierra.Y - margen,
         rectánguloQueEncierra.Width + (2 * margen),
         rectánguloQueEncierra.Height + (2 * margen));
 
       // Dibuja los PDIs como PDIs adicionales para resaltarlos.
       miMapa.PuntosAddicionales.Clear();
-      Pdi pdiSeleccionado = (información.Item.Tag as ElementoConEtiqueta).ElementoDelMapa as Pdi;
+      Pdi pdiSeleccionado = ((ElementoConEtiqueta) información.Item.Tag).ElementoDelMapa as Pdi;
       miMapa.PuntosAddicionales.Add(new InterfaseMapa.PuntoAdicional(
         pdiSeleccionado.Coordenadas, miPincelDePdi, 13));
       foreach (Pdi pdi in pdis)
@@ -386,7 +386,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       }
 
       miTextoParecidoDelNombre.Text = texto;
-      miBuscadorDeDuplicados.DistanciaHamming = distanciaHamming;
+      if (miBuscadorDeDuplicados != null)
+      {
+        miBuscadorDeDuplicados.DistanciaHamming = distanciaHamming;
+      }
     }
     #endregion
   }
