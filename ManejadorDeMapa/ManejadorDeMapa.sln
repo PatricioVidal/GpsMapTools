@@ -12,7 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa", "Manejado
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Información", "{D85C74CE-E6A7-44AE-81D7-A9430E8166F5}"
 	ProjectSection(SolutionItems) = preProject
-		Informacion\CaracterísticasDePDIs.cGPSmapper.csv = Informacion\CaracterísticasDePDIs.cGPSmapper.csv
 		Informacion\CaracterísticasDePDIs.Garmin City Select.csv = Informacion\CaracterísticasDePDIs.Garmin City Select.csv
 		Informacion\CaracterísticasDePDIs.JoseH.csv = Informacion\CaracterísticasDePDIs.JoseH.csv
 		Informacion\Garmin City Select North America Elements.txt = Informacion\Garmin City Select North America Elements.txt
