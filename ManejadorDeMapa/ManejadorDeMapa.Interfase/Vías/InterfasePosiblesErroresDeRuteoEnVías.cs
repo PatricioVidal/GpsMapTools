@@ -84,6 +84,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   {
     #region Campos
     private BuscadorDePosiblesErroresDeRuteo miBuscadorDePosiblesErroresDeRuteo;
+    private readonly InterfaseListaDeElementos miLista;
+    private readonly MenuEditorDeVías miMenú;
     #endregion
 
     #region Propiedades
@@ -141,18 +143,27 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       InitializeComponent();
 
+      // Inicializa campos.
+      miLista = miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
+      miMenú = miInterfaseListaConMapaDeVías.MenuEditorDeVías;
+
       // Pone el llenador de items.
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
-      {
+      miMenú.Editó += delegate {
         // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
         miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
 
         // Busca errores otra vez.
         miBuscadorDePosiblesErroresDeRuteo.Procesa();
       };
+
+      // Añade menú "Ignorar Cambios Bruscos de Clase de Ruta". 
+      miMenú.Items.Add(new ToolStripSeparator());
+      ToolStripMenuItem menú = new ToolStripMenuItem("Ignorar Cambios Bruscos de Clase de Ruta");
+      menú.Click += EnMenúIgnorarCambiosBruscosDeClaseDeRuta;
+      miMenú.Items.Add(menú);
     }
     #endregion
 
@@ -199,6 +210,45 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           }
         }
       }
+    }
+
+
+    private void EnMenúIgnorarCambiosBruscosDeClaseDeRuta(object elEnviador, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay Vías seleccionadas.
+      int númeroDeVíasSeleccionadas = miLista.SelectedIndices.Count;
+      if (númeroDeVíasSeleccionadas == 0)
+      {
+        return;
+      }
+
+      if (númeroDeVíasSeleccionadas > 1)
+      {
+        // Pregunta si se quiere ignorar los cambios bruscos de clase de ruta.
+        DialogResult respuesta = MessageBox.Show(
+          string.Format("Está seguro que quiere ignorar los cambios bruscos de clase de ruta en las {0} Vías seleccionadas?",
+                        númeroDeVíasSeleccionadas),
+          "Ignorar Cambios Bruscos de Clase de Ruta",
+          MessageBoxButtons.YesNo,
+          MessageBoxIcon.Warning);
+
+        if (respuesta != DialogResult.Yes)
+        {
+          return;
+        }
+      }
+
+      // Añade el attributo a las vías.
+      ManejadorDeMapa.SuspendeEventos();
+      IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneElementosSeleccionados<Vía>();
+      foreach (Vía vía in vías)
+      {
+        vía.AñadeAtributo(BuscadorDePosiblesErroresDeRuteo.AtributoIgnorarCambioBruscoDeClaseDeRuta);
+      }
+      ManejadorDeMapa.RestableceEventos();
+
+      // Notifica la edición.
+      miMenú.EnvíaEventoEditó();
     }
     #endregion
   }
