@@ -90,8 +90,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       this.labelCopyright.Text = AssemblyCopyright;
       this.labelCompanyName.Text = AssemblyCompany;
       this.textBoxDescription.Text = 
-        "La búsqueda de palabras similares usa la librería "+
-        "\"Ternary Search Tree Implementation for C#\" de Jonathan de Halleux (http://www.codeproject.com/KB/recipes/tst.aspx)\r\n\r\n";
+        "La búsqueda de palabras similares usa la librería " +
+        "\"Ternary Search Tree Implementation for C#\" de Jonathan de Halleux (http://www.codeproject.com/KB/recipes/tst.aspx)\r\n\r\n" +
+        "Usando la clase PolygonF de Joel: http://www.developingfor.net/free-code/polygonf";
     }
 
     #region Assembly Attribute Accessors
