@@ -77,17 +77,17 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.Vías;
+using GpsYv.ManejadorDeMapa.Pdis;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Vías
+namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
   /// <summary>
-  /// Interfase de Vías con incongruencias.
+  /// Interfase de PDIs con alertas.
   /// </summary>
-  public partial class InterfaseDeVíasConIncongruencias : InterfaseBase
+  public partial class InterfaseDePdisConAlertas : InterfaseBase
   {
     #region Campos
-    private BuscadorDeIncongruencias miBuscadorDeIncongruencias;
+    private BuscadorDeAlertas miBuscadorDeAlertas;
     #endregion
 
     #region Propiedades
@@ -99,25 +99,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         // Deja de manejar los eventos.
-        if (miBuscadorDeIncongruencias != null)
+        if (miBuscadorDeAlertas != null)
         {
-          miBuscadorDeIncongruencias.Invalidado -= EnInvalidado;
-          miBuscadorDeIncongruencias.Procesó -= EnSeBuscaronIncongruencias;
+          miBuscadorDeAlertas.Invalidado -= EnInvalidado;
+          miBuscadorDeAlertas.Procesó -= EnSeBuscaronAlertas;
         }
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
-        miInterfaseListaConMapaDeVías.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
         {
-          miBuscadorDeIncongruencias = value.ManejadorDeVías.BuscadorDeIncongruencias;
+          miBuscadorDeAlertas = value.ManejadorDePdis.BuscadorDeAlertas;
 
-          if (miBuscadorDeIncongruencias != null)
+          if (miBuscadorDeAlertas != null)
           {
-            miBuscadorDeIncongruencias.Invalidado += EnInvalidado;
-            miBuscadorDeIncongruencias.Procesó += EnSeBuscaronIncongruencias;
+            miBuscadorDeAlertas.Invalidado += EnInvalidado;
+            miBuscadorDeAlertas.Procesó += EnSeBuscaronAlertas;
           }
         }
       }
@@ -132,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       set
       {
         base.EscuchadorDeEstatus = value;
-        miInterfaseListaConMapaDeVías.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
       }
     }
     #endregion
@@ -141,25 +141,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDeVíasConIncongruencias()
+    public InterfaseDePdisConAlertas()
     {
       InitializeComponent();
 
       // Pone el llenador de items.
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
+      miInterfaseListaConMapaDePdis.InterfaseListaDePdis.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Editó += delegate(object elObjecto, EventArgs losArgumentos)
       {
-        // Busca inconguencias otra vez.
-        miBuscadorDeIncongruencias.Procesa();
+        // Busca alertas otra vez.
+        miBuscadorDeAlertas.Procesa();
       };
-
-      // Añade el menú para 
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(new ToolStripSeparator());
-      ToolStripMenuItem menú = new ToolStripMenuItem("Excluir de búsqueda de Parámetros de Ruta Estándar");
-      menú.Click += EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar;
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(menú);
     }
     #endregion
 
@@ -167,72 +161,33 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void EnInvalidado(object elEnviador, EventArgs losArgumentos)
     {
       // Regenera la lista.
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+      miInterfaseListaConMapaDePdis.InterfaseListaDePdis.RegeneraLista();
 
       // Borra las polilíneas adicionales que pudieran estar dibujadas en el mapa.
-      miInterfaseListaConMapaDeVías.InterfaseMapaDeVíasSeleccionadas.PolilíneasAdicionales.Clear();
+      miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.PolilíneasAdicionales.Clear();
     }
 
 
-    private void EnSeBuscaronIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    private void EnSeBuscaronAlertas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      miInterfaseListaConMapaDeVías.InterfaseListaDeVías.RegeneraLista();
+      miInterfaseListaConMapaDePdis.InterfaseListaDePdis.RegeneraLista();
     }
 
 
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los elementos.
-      IDictionary<Vía, IList<string>> incongruencias = miBuscadorDeIncongruencias.Incongruencias;
-      foreach (KeyValuePair<Vía, IList<string>> ítem in incongruencias)
+      IDictionary<Pdi, IList<string>> alertas = miBuscadorDeAlertas.Alertas;
+      foreach (KeyValuePair<Pdi, IList<string>> ítem in alertas)
       {
         // Crea el grupo.
-        Vía vía = ítem.Key;
+        Pdi pdi = ítem.Key;
 
-        // Añade los detalles de la incongruencia a la lista.
-        IList<string> detallesDeIncongruencia = ítem.Value;
-        string detalle = string.Join(" | ", detallesDeIncongruencia.ToArray());
-        laLista.AñadeItem(new ElementoConEtiqueta(vía), detalle);
+        // Añade los detalles de la alerta a la lista.
+        IList<string> detallesDeAlerta = ítem.Value;
+        string detalle = string.Join(" | ", detallesDeAlerta.ToArray());
+        laLista.AñadeItem(new ElementoConEtiqueta(pdi), detalle);
       }
-    }
-
-
-    private void EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar(object elEnviador, EventArgs losArgumentos)
-    {
-      ListView lista = miInterfaseListaConMapaDeVías.InterfaseListaDeVías;
-
-      // Retornamos si no hay Vías seleccionadas.
-      int númeroDeVíasSeleccionadas = lista.SelectedIndices.Count;
-      if (númeroDeVíasSeleccionadas == 0)
-      {
-        return;
-      }
-
-      // Pregunta si se quiere Estandarizar el Límite de Velocidad.
-      DialogResult respuesta = MessageBox.Show(
-        string.Format("Está seguro que quiere Excluir las {0} Vías seleccionadas de próximas búsquedas de Parámetros de Ruta Estándar?", númeroDeVíasSeleccionadas),
-        "Excluir de Búsqueda de Parámetros de Ruta Estándar",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-      #region Estandarizar el Límite de Velocidad si el usuario dice que si.
-      if (respuesta != DialogResult.Yes)
-      {
-        return;
-      }
-
-      // Cambia las vías.
-      ManejadorDeMapa.SuspendeEventos();
-      IList<Vía> vías = miInterfaseListaConMapaDeVías.MenuEditorDeVías.ObtieneElementosSeleccionados<Vía>();
-      foreach (Vía vía in vías)
-      {
-        vía.AñadeAtributo(BuscadorDeIncongruencias.AtributoNoParámetrosDeRutaEstándar);
-      }
-      ManejadorDeMapa.RestableceEventos();
-
-      // Busca inconguencias otra vez.
-      miBuscadorDeIncongruencias.Procesa();
-      #endregion
     }
     #endregion
   }

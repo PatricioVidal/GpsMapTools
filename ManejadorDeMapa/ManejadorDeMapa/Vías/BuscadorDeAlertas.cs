@@ -73,33 +73,35 @@ using System.Collections.Generic;
 using System.Text;
 using Tst;
 using System.Collections;
+using SWallTech.Drawing.Shapes;
 
 namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Buscador de incongruencias en Vías.
+  /// Buscador de alertas en Vías.
   /// </summary>
-  public class BuscadorDeIncongruencias : ProcesadorBase<ManejadorDeVías, Vía>
+  public class BuscadorDeAlertas : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly IDictionary<Vía, IList<string>> misIncongruencias = new Dictionary<Vía, IList<string>>();
+    private readonly IDictionary<Vía, IList<string>> misAlertas = new Dictionary<Vía, IList<string>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
     private readonly Tipo miTipoCaminería = new Tipo("0x16");
     private readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaDeCaminería = new CampoParámetrosDeRuta(
       new LímiteDeVelocidad(0),
       new ClaseDeRuta(0),
       new bool[] { false, false, true, true, true, true, true, false, false, true });
+    private PolygonF misLímitesDelMapa = null;
     #endregion
 
     #region Propiedades
     /// <summary>
-    /// Devuelve las incongruencias de Vías.
+    /// Devuelve las alertas de Vías.
     /// </summary>
-    public IDictionary<Vía, IList<string>> Incongruencias
+    public IDictionary<Vía, IList<string>> Alertas
     {
       get
       {
-        return misIncongruencias;
+        return misAlertas;
       }
     }
 
@@ -118,7 +120,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca incongruencias en las Vías.";
+    public static readonly string Descripción = "Busca alertas en las Vías.";
 
 
     /// <summary>
@@ -126,7 +128,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public BuscadorDeIncongruencias(
+    public BuscadorDeAlertas(
       ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base(elManejadorDeVías, elEscuchadorDeEstatus)
@@ -140,9 +142,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     protected override void ComenzóAProcesar()
     {
-      misIncongruencias.Clear();
+      misAlertas.Clear();
       misVíasYaProcesadas.Clear();
 
+      // Obtiene los límites del mapa.
+      if (ManejadorDeMapa.LímitesDelMapa != null)
+      {
+        misLímitesDelMapa = new PolygonF(ManejadorDeMapa.LímitesDelMapa);
+      }
+      else
+      {
+        misLímitesDelMapa = null;
+      }
+      
       base.ComenzóAProcesar();
     }
 
@@ -156,14 +168,34 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       int númeroDeProblemasDetectados = 0;
 
-      // Excluye la vía si tiene el Atributo "NoParámetrosDeRutaEstándar".
-      if (laVía.TieneAtributo(AtributoNoParámetrosDeRutaEstándar))
+      númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
+      númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
+      númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(laVía);
+
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int BuscaVíaFueraDeLímites(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      // Retorna si el mapa no tiene límites.
+      if (misLímitesDelMapa == null)
       {
         return númeroDeProblemasDetectados;
       }
 
-      númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
-      númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
+      // Busca si alguna de las coordenadas de la vía está fuera de los límites del mapa.
+      foreach (Coordenadas coordenadas in laVía.Coordenadas)
+      {
+        if (!misLímitesDelMapa.Contains(coordenadas))
+        {
+          ++númeroDeProblemasDetectados;
+          misAlertas.Add(laVía, new List<string>(){"Vía fuera de límites del mapa."});
+          break;
+        }
+      }
 
       return númeroDeProblemasDetectados;
     }
@@ -191,14 +223,21 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       int númeroDeProblemasDetectados = 0;
 
+      // Excluye la vía si tiene el Atributo "NoParámetrosDeRutaEstándar".
+      if (laVía.TieneAtributo(AtributoNoParámetrosDeRutaEstándar))
+      {
+        return númeroDeProblemasDetectados;
+      }
+
+      IList<string> alertas = new List<string>();
+
       #region Valida el límite de velocidad.
       // El límite de velocidad debe ser el esperado.
-      IList<string> incongruencias = new List<string> ();
       LímiteDeVelocidad límiteDeVelocidad = laVía.CampoParámetrosDeRuta.LímiteDeVelocidad;
       LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
       if (límiteDeVelocidad != límiteDeVelocidadEsperado)
       {
-        incongruencias.Add(string.Format("Límite de Velocidad debería ser {0}, pero es {1}", límiteDeVelocidadEsperado, límiteDeVelocidad));
+        alertas.Add(string.Format("Límite de Velocidad debería ser {0}, pero es {1}", límiteDeVelocidadEsperado, límiteDeVelocidad));
       }
       #endregion
 
@@ -208,14 +247,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
       ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
       if (claseDeRuta != claseDeRutaEsperada)
       {
-        incongruencias.Add(string.Format("Clase de Ruta debería ser {0}, pero es {1}", claseDeRutaEsperada, claseDeRuta));
+        alertas.Add(string.Format("Clase de Ruta debería ser {0}, pero es {1}", claseDeRutaEsperada, claseDeRuta));
       }
       #endregion
 
-      if (incongruencias.Count > 0)
+      if (alertas.Count > 0)
       {
         ++númeroDeProblemasDetectados;
-        misIncongruencias.Add(laVía, incongruencias);
+        misAlertas.Add(laVía, alertas);
       }
 
       return númeroDeProblemasDetectados;
@@ -229,7 +268,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      misIncongruencias.Clear();
+      misAlertas.Clear();
       misVíasYaProcesadas.Clear();
 
       // Pone al Procesador en estado inválido.

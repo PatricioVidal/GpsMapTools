@@ -78,10 +78,6 @@ namespace GpsYv.ManejadorDeMapa.Pdis
   /// </summary>
   public class ManejadorDePdis : ManejadorBase<Pdi>
   {
-    #region Campos
-
-    #endregion
-    
     #region Propiedades
     /// <summary>
     /// Descripción de la acción "Procesar Todo".
@@ -121,6 +117,12 @@ namespace GpsYv.ManejadorDeMapa.Pdis
 
 
     /// <summary>
+    /// Obtiene el Buscador de Alertas.
+    /// </summary>
+    public BuscadorDeAlertas BuscadorDeAlertas { get; private set; }
+
+
+    /// <summary>
     /// Obtiene el Buscador de Errores.
     /// </summary>
     public BuscadorDeErrores BuscadorDeErrores { get; private set; }
@@ -146,6 +148,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       ArregladorDePalabrasPorTipo = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
       ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
       BuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
+      BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
       BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
 
       // Escucha eventos.

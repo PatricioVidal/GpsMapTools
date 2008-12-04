@@ -83,11 +83,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   {
     #region Campos
     private readonly InterfaseBase[] misInterfases;
-    private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     private readonly string miTextoPestañaErrores = "Errores";
     private readonly string miTextoPestañaPosibleErroresDeRuteo = "Posibles Errores de Ruteo";
     private readonly string miTextoPestañaPosiblesNodosDesconectados = "Posibles Nodos Desconectados";
-    private readonly string miTextoPestañaIncongruencias = "Incongruencias";
+    private readonly string miTextoPestañaAlertas = "Alertas";
     #endregion
 
     #region Eventos
@@ -133,9 +132,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
           buscadorDePosiblesNodosDesconectados.Procesó += EnSeBuscaronPosiblesNodosDesconectados;
 
           // Buscador de Incongruencias.
-          BuscadorDeIncongruencias buscadorDeIncongruencias = manejadorDeVías.BuscadorDeIncongruencias;
-          buscadorDeIncongruencias.Invalidado += EnInvalidadoVíasConIncongruencias;
-          buscadorDeIncongruencias.Procesó += EnSeBuscaronVíasConIncongruencias;
+          BuscadorDeAlertas buscadorDeIncongruencias = manejadorDeVías.BuscadorDeAlertas;
+          buscadorDeIncongruencias.Invalidado += EnInvalidadoVíasConAlertas;
+          buscadorDeIncongruencias.Procesó += EnSeBuscaronVíasConAlertas;
         }
       }
     }
@@ -184,13 +183,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       // Escucha los eventos para actualizar las pestañas.
       miInterfaseDeVíasModificadas.VíasModificadas += EnVíasModificadas;
       miInterfaseDeVíasEliminadas.VíasEliminadas += EnVíasEliminadas;
-  
-      // Crea el diccionario de índices de pestañas.
-      TabControl.TabPageCollection pestañas = miControladorDePestañas.TabPages;
-      for (int i = 0; i < pestañas.Count; ++i)
-      {
-        misIndicesDePestañas[pestañas[i]] = i;
-      }
       
       // Maneja evento de cambio de Estado Máximo de Pestañas.
       miControladorDePestañas.CambióEstadoMáximoDePestañas +=
@@ -259,155 +251,67 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void EnInvalidadoVíasConErrores(object elEnviador, EventArgs losArgumentos)
     {
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay errores.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaErrores],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = miTextoPestañaErrores;
+      miControladorDePestañas.InvalidaPestaña(miPáginaErrores, miTextoPestañaErrores);
     }
 
 
     private void EnSeBuscaronVíasConErrores(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDeVíasConErrores = losArgumentos.NúmeroDeItems;
-
-      // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = miTextoPestañaErrores + " (" + númeroDeVíasConErrores + ")";
-
-      // Si hay Vías con errores entonces cambia el estado de la pestaña a Error.
-      // Si no, entonces cambia el estado de la pestaña a Bíen.
-      if (númeroDeVíasConErrores > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Error);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaErrores,
+        miTextoPestañaErrores,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Error);
     }
 
 
     private void EnInvalidadoPosiblesErroresDeRuteo(object elEnviador, EventArgs losArgumentos)
     {
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay errores.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaPosibleErroresDeRuteo],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      miPáginaPosibleErroresDeRuteo.Text = miTextoPestañaPosibleErroresDeRuteo;
+      miControladorDePestañas.InvalidaPestaña(miPáginaPosibleErroresDeRuteo, miTextoPestañaPosibleErroresDeRuteo);
     }
 
 
     private void EnSeBuscaronPosiblesErroresDeRuteo(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDeVíasConErrores = losArgumentos.NúmeroDeItems;
-      TabPage página = miPáginaPosibleErroresDeRuteo;
-
-      // Cambia el texto de la pestaña.
-      página.Text = miTextoPestañaPosibleErroresDeRuteo + " (" + númeroDeVíasConErrores + ")";
-
-      // Si hay Vías con posibles errores de ruteo entonces cambia
-      // el estado de la pestaña a Alerta.
-      // Si no, entonces cambia el estado de la pestaña a Bíen.
-      if (númeroDeVíasConErrores > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaPosibleErroresDeRuteo,
+        miTextoPestañaPosibleErroresDeRuteo,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Alerta);
     }
 
 
     private void EnInvalidadoPosiblesNodosDesconectados(object elEnviador, EventArgs losArgumentos)
     {
-      TabPage página = miPáginaPosiblesNodosDesconectados;
-
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay errores.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[página],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      página.Text = miTextoPestañaPosiblesNodosDesconectados;
+      miControladorDePestañas.InvalidaPestaña(
+        miPáginaPosiblesNodosDesconectados,
+        miTextoPestañaPosiblesNodosDesconectados);
     }
 
 
     private void EnSeBuscaronPosiblesNodosDesconectados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDePosiblesNodosDesconectados = losArgumentos.NúmeroDeItems;
-      TabPage página = miPáginaPosiblesNodosDesconectados;
-
-      // Cambia el texto de la pestaña.
-      página.Text = string.Format("{0} ({1})", miTextoPestañaPosiblesNodosDesconectados, númeroDePosiblesNodosDesconectados);
-
-      // Si hay Vías con posibles errores de ruteo entonces cambia
-      // el estado de la pestaña a Alerta.
-      // Si no, entonces cambia el estado de la pestaña a Bíen.
-      if (númeroDePosiblesNodosDesconectados > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[página],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaPosiblesNodosDesconectados,
+        miTextoPestañaPosiblesNodosDesconectados,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Alerta);
     }
 
 
-    private void EnInvalidadoVíasConIncongruencias(object elEnviador, EventArgs losArgumentos)
+    private void EnInvalidadoVíasConAlertas(object elEnviador, EventArgs losArgumentos)
     {
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay incongruencias.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaIncongruencias],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      miPáginaIncongruencias.Text = miTextoPestañaIncongruencias;
+      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas, miTextoPestañaAlertas);
     }
 
 
-    private void EnSeBuscaronVíasConIncongruencias(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    private void EnSeBuscaronVíasConAlertas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDeVíasConIncongruencias = losArgumentos.NúmeroDeItems;
-
-      // Cambia el texto de la pestaña.
-      miPáginaIncongruencias.Text = miTextoPestañaIncongruencias + " (" + númeroDeVíasConIncongruencias + ")";
-
-      // Si hay Vías con incongruencias entonces cambia el estado de la pestaña a Error.
-      // Si no, entonces cambia el estado de la pestaña a Bién.
-      if (númeroDeVíasConIncongruencias > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaIncongruencias],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaIncongruencias],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaAlertas,
+        miTextoPestañaAlertas,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Alerta);
     }
     #endregion
   }

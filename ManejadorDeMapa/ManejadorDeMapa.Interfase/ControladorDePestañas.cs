@@ -80,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public event EventHandler<CambióEstadoMáximoDePestañasEventArgs> CambióEstadoMáximoDePestañas;
     #endregion
 
-    #region Métodos Públicos
+    #region Métodos
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -91,13 +91,47 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
 
     /// <summary>
-    /// Pone el estado de un pestaña.
+    /// Actualiza la pestaña en una página dada.
     /// </summary>
-    /// <param name="elIndice">El índice de la Pestaña.</param>
-    /// <param name="elEstado">El estado a poner.</param>
-    public void PoneEstadoDePestaña(int elIndice, EstadoDePestaña elEstado)
+    /// <param name="laPágina">La página dada.</param>
+    /// <param name="elTextoPestaña">El texto de la pestaña.</param>
+    /// <param name="elNúmeroDeItems">El número de items.</param>
+    /// <param name="elEstadoPositivo">El estado a poner cuando es positivo.</param>
+    public void ActualizaPestaña(
+      TabPage laPágina,
+      string elTextoPestaña,
+      int elNúmeroDeItems,
+      EstadoDePestaña elEstadoPositivo)
     {
-      TabPages[elIndice].ImageIndex = (int)elEstado;
+      // Cambia el texto de la pestaña.
+      laPágina.Text = string.Format("{0} ({1})", elTextoPestaña, elNúmeroDeItems);
+
+      // Si el número de items es positivo entonces cambia
+      // el estado de la pestaña al estado positivo.
+      // Si no, entonces cambia el estado de la pestaña a estado Bíen.
+      if (elNúmeroDeItems > 0)
+      {
+        PoneEstadoDePestaña(
+          laPágina,
+          elEstadoPositivo);
+      }
+      else
+      {
+        PoneEstadoDePestaña(
+          laPágina,
+          ControladorDePestañas.EstadoDePestaña.Bién);
+      }
+    }
+
+
+    /// <summary>
+    /// Pone el estado de la pestaña en una página dada.
+    /// </summary>
+    /// <param name="laPágina">La página dada.</param>
+    /// <param name="elEstado">El estado a poner.</param>
+    public void PoneEstadoDePestaña(TabPage laPágina, EstadoDePestaña elEstado)
+    {
+      laPágina.ImageIndex = (int)elEstado;
 
       // Calcula el estado máximo de las pestañas.
       int estadoMáximo = (int)EstadoDePestaña.Nada;
@@ -121,6 +155,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           CambióEstadoMáximoDePestañas(this, new CambióEstadoMáximoDePestañasEventArgs(miEstadoMáximoDePestañas));
         }
       }
+    }
+
+
+    /// <summary>
+    /// Invalida la pestaña de una página dada.
+    /// </summary>
+    /// <param name="laPágina">La página dada.</param>
+    /// <param name="elTextoPestaña">El texto de la pestaña.</param>
+    public void InvalidaPestaña(TabPage laPágina, string elTextoPestaña)
+    {
+      // Pone las pestañas en estado de "No Sé" para indicar que
+      // no se sabe si hay errores.
+      PoneEstadoDePestaña(
+        laPágina,
+        ControladorDePestañas.EstadoDePestaña.NoSé);
+
+      // Cambia el texto de la pestaña.
+      laPágina.Text = elTextoPestaña;
     }
     #endregion
   }

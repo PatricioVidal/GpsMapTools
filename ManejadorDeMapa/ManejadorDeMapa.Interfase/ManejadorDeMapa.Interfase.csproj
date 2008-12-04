@@ -90,6 +90,10 @@
       <DependentUpon>MenúEditorDeElementos.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PDIs\InterfaseDePdisConAlertas.resx">
+      <DependentUpon>InterfaseDePdisConAlertas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PDIs\InterfaseDePdisConErrores.resx">
       <DependentUpon>InterfaseDePdisConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -139,8 +143,8 @@
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vías\InterfaseDeVíasConIncongruencias.resx">
-      <DependentUpon>InterfaseDeVíasConIncongruencias.cs</DependentUpon>
+    <EmbeddedResource Include="Vías\InterfaseDeVíasConAlertas.resx">
+      <DependentUpon>InterfaseDeVíasConAlertas.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Vías\InterfaseDeVíasEliminadas.resx">
@@ -226,6 +230,12 @@
     </Compile>
     <Compile Include="OrdenadorDeColumnaDeLista.Designer.cs">
       <DependentUpon>OrdenadorDeColumnaDeLista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PDIs\InterfaseDePdisConAlertas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PDIs\InterfaseDePdisConAlertas.Designer.cs">
+      <DependentUpon>InterfaseDePdisConAlertas.cs</DependentUpon>
     </Compile>
     <Compile Include="PDIs\InterfaseDePdisConErrores.cs">
       <SubType>UserControl</SubType>
@@ -317,11 +327,11 @@
     <Compile Include="Vías\InterfaseDeVíasConErrores.Designer.cs">
       <DependentUpon>InterfaseDeVíasConErrores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vías\InterfaseDeVíasConIncongruencias.cs">
+    <Compile Include="Vías\InterfaseDeVíasConAlertas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Vías\InterfaseDeVíasConIncongruencias.Designer.cs">
-      <DependentUpon>InterfaseDeVíasConIncongruencias.cs</DependentUpon>
+    <Compile Include="Vías\InterfaseDeVíasConAlertas.Designer.cs">
+      <DependentUpon>InterfaseDeVíasConAlertas.cs</DependentUpon>
     </Compile>
     <Compile Include="Vías\InterfaseDeVíasEliminadas.cs">
       <SubType>UserControl</SubType>

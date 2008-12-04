@@ -76,6 +76,7 @@ using System.IO;
 using System.Diagnostics;
 using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
+using System.Drawing;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -93,6 +94,7 @@ namespace GpsYv.ManejadorDeMapa
     private bool miHayEventosDeModificaciónDeElementoPendientes;
     private bool miHayEventosDeModificaciónDePdisPendientes;
     private bool miHayEventosDeModificaciónDeVíasPendientes;
+    private readonly Dictionary<string, Polígono> misLímitesPorMapas = new Dictionary<string, Polígono>();
     #endregion
 
     #region Eventos
@@ -210,6 +212,15 @@ namespace GpsYv.ManejadorDeMapa
     /// Obtiene el diccionario de los nodos ruteables.
     /// </summary>
     public IDictionary<int, IList<Nodo>> NodosRuteables { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene los límites del mapa.
+    /// </summary>
+    /// <remarks>
+    /// Si no hay límites en el mapa entonces el valos es nulo.
+    /// </remarks>
+    public PointF[] LímitesDelMapa { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -249,6 +260,42 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
+    /// <summary>
+    /// Abre el archivo de límites.
+    /// </summary>
+    /// <param name="elArchivo"></param>
+    public void AbrirLímites(string elArchivo)
+    {
+      // Por ahora el único formato es el Polish.
+      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
+
+      // Extrae los polígonos como los límites.
+      IList<ElementoDelMapa> elementos = lector.ElementosDelMapa;
+      misLímitesPorMapas.Clear();
+      foreach (ElementoDelMapa elemento in elementos)
+      {
+        Polígono límite = elemento as Polígono;
+        if (límite != null)
+        {
+          string nombreDelMapa = límite.Nombre;
+          if (misLímitesPorMapas.ContainsKey(nombreDelMapa))
+          {
+            throw new ArgumentException(string.Format(
+              "El archivo de límites tiene el polígono del mapa '{0}' repetido.",
+              nombreDelMapa));
+          }
+          misLímitesPorMapas.Add(nombreDelMapa, límite);
+        }
+      }
+
+      // Reportar los límites encontrados.
+      miEscuchadorDeEstatus.Estatus = string.Format("Leídos {0} límites.", misLímitesPorMapas.Count);
+
+      // Actualizar los límites del mapa.
+      ActualizaLímitesDelMapa();
+    }
+
+    
     /// <summary>
     /// Guarda los cambios.
     /// </summary>
@@ -602,6 +649,9 @@ namespace GpsYv.ManejadorDeMapa
       // Borra el estado de eventos de modificación.
       miHayEventosDeModificaciónDeElementoPendientes = false;
 
+      // Actualiza los límites del mapa.
+      ActualizaLímitesDelMapa();
+
       // Genera el evento de mapa nuevo.
       HayUnMapaNuevo();
     }
@@ -651,6 +701,33 @@ namespace GpsYv.ManejadorDeMapa
       if (VíasModificadas != null)
       {
         VíasModificadas(this, new EventArgs());
+      }
+    }
+
+
+    private void ActualizaLímitesDelMapa()
+    {
+      // Retorna si no tenemos límites por mapas o archivo.
+      if ((misLímitesPorMapas == null) || (Archivo == null))
+      {
+        return;
+      }
+
+      // Si el mapa existe en el diccionario de límites por mapa entonces
+      // actualizamos los límites del mapa. Si no, entonces  lo hacemos nulo. 
+      string nombreDelMapa = Path.GetFileNameWithoutExtension(Archivo);
+      if (misLímitesPorMapas.ContainsKey(nombreDelMapa))
+      {
+        Coordenadas[] coordenadasDeLímitesDelMapa = misLímitesPorMapas[nombreDelMapa].Coordenadas;
+        LímitesDelMapa = new PointF[coordenadasDeLímitesDelMapa.Length];
+        for (int i = 0; i < coordenadasDeLímitesDelMapa.Length; ++i)
+        {
+          LímitesDelMapa[i] = coordenadasDeLímitesDelMapa[i];
+        }
+      }
+      else
+      {
+        LímitesDelMapa = null;
       }
     }
     #endregion

@@ -68,105 +68,142 @@
 // with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
-
+using System;
 using System.Collections.Generic;
+using System.Text;
+using Tst;
+using System.Collections;
+using SWallTech.Drawing.Shapes;
 
-namespace GpsYv.ManejadorDeMapa.Vías
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
-  /// Manejador de Vías.
+  /// Buscador de alertas en PDIs.
   /// </summary>
-  public class ManejadorDeVías : ManejadorBase<Vía>
+  public class BuscadorDeAlertas : ProcesadorBase<ManejadorDePdis, Pdi>
   {
+    #region Campos
+    private readonly IDictionary<Pdi, IList<string>> misAlertas = new Dictionary<Pdi, IList<string>>();
+    private readonly List<Pdi> misPdisYaProcesadas = new List<Pdi>();
+    private PolygonF misLímitesDelMapa = null;
+    #endregion
+
     #region Propiedades
     /// <summary>
-    /// Descripción de la acción "Procesar Todo".
+    /// Devuelve las alertas de PDIs.
     /// </summary>
-    public const string DescripciónProcesarTodo =
-      "Procesa todo lo relacionado con las Vías. Los pasos se hacen en el orden indicado por el número en el menú.";
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Indices de Ciudad.
-    /// </summary>
-    public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Nombres.
-    /// </summary>
-    public ArregladorDeNombres ArregladorDeNombres { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Alertas.
-    /// </summary>
-    public BuscadorDeAlertas BuscadorDeAlertas { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Posibles Errores de Ruteo.
-    /// </summary>
-    public BuscadorDePosiblesErroresDeRuteo BuscadorDePosiblesErroresDeRuteo { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Posibles Nodos Desconectados.
-    /// </summary>
-    public BuscadorDePosiblesNodosDesconectados BuscadorDePosiblesNodosDesconectados { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Buscador de Errores.
-    /// </summary>
-    public BuscadorDeErrores BuscadorDeErrores { get; private set; }
-
+    public IDictionary<Pdi, IList<string>> Alertas
+    {
+      get
+      {
+        return misAlertas;
+      }
+    }
     #endregion
 
     #region Métodos Públicos
     /// <summary>
+    /// Descripción de éste procesador.
+    /// </summary>
+    public static readonly string Descripción = "Busca alertas en los PDIs.";
+
+
+    /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
-    /// <param name="lasVías">Las Vías.</param>
+    /// <param name="elManejadorDePdis">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ManejadorDeVías(
-      ManejadorDeMapa elManejadorDeMapa,
-      IList<Vía> lasVías,
+    public BuscadorDeAlertas(
+      ManejadorDePdis elManejadorDePdis,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDeMapa, lasVías, elEscuchadorDeEstatus)
+      : base(elManejadorDePdis, elEscuchadorDeEstatus)
     {
-      // Crea los procesadores.
-      ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
-      ArregladorDeNombres = new ArregladorDeNombres(this, elEscuchadorDeEstatus);
-      BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
-      BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
-      BuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
-      BuscadorDePosiblesNodosDesconectados = new BuscadorDePosiblesNodosDesconectados(this, elEscuchadorDeEstatus);
+    }
+    #endregion
 
-      // Escucha eventos.
-      elManejadorDeMapa.VíasModificadas += EnElementosModificados;
+    #region Métodos Protegidos.
+    /// <summary>
+    /// Este método se llama antes de comenzar a procesar los elementos.
+    /// </summary>
+    protected override void ComenzóAProcesar()
+    {
+      misAlertas.Clear();
+      misPdisYaProcesadas.Clear();
+
+      // Obtiene los límites del mapa.
+      if (ManejadorDeMapa.LímitesDelMapa != null)
+      {
+        misLímitesDelMapa = new PolygonF(ManejadorDeMapa.LímitesDelMapa);
+      }
+      else
+      {
+        misLímitesDelMapa = null;
+      }
+
+      base.ComenzóAProcesar();
     }
 
 
     /// <summary>
-    /// Procesa todo lo relacionado a Vías.
+    /// Procesa un PDI.
     /// </summary>
-    /// <returns>El número de problemas en Vías.</returns>
-    public int ProcesarTodo()
+    /// <param name="elPdi">El PDI.</param>
+    /// <returns>El número de problemas detectados al procesar el elemento.</returns>
+    protected override int ProcesaElemento(Pdi elPdi)
     {
-      // Hacer todos las operaciones en orden.
-      int númeroDeProblemasEnVías = 0;
-      númeroDeProblemasEnVías += ArregladorDeIndicesDeCiudad.Procesa();
-      númeroDeProblemasEnVías += ArregladorDeNombres.Procesa();
-      númeroDeProblemasEnVías += BuscadorDeAlertas.Procesa();
-      númeroDeProblemasEnVías += BuscadorDePosiblesErroresDeRuteo.Procesa();
-      númeroDeProblemasEnVías += BuscadorDeErrores.Procesa();
+      int númeroDeProblemasDetectados = 0;
 
-      // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnVías + " problemas en Vías.";
+      númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(elPdi);
 
-      return númeroDeProblemasEnVías;
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int BuscaVíaFueraDeLímites(Pdi elPdi)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      // Retorna si el mapa no tiene límites.
+      if (misLímitesDelMapa == null)
+      {
+        return númeroDeProblemasDetectados;
+      }
+
+      // Busca si el PDI está fuera de los límites del mapa.
+      if (!misLímitesDelMapa.Contains(elPdi.Coordenadas))
+      {
+        ++númeroDeProblemasDetectados;
+        misAlertas.Add(elPdi, new List<string>() { "PDI fuera de límites del mapa." });
+      }
+
+      return númeroDeProblemasDetectados;
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay un mapa nuevo.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
+    {
+      misAlertas.Clear();
+      misPdisYaProcesadas.Clear();
+
+      // Pone al Procesador en estado inválido.
+      Invalida();
+    }
+
+
+    /// <summary>
+    /// Maneja el evento cuando hay elementos modificados en el mapa.
+    /// </summary>
+    /// <param name="elEnviador">El objecto que envía el evento.</param>
+    /// <param name="losArgumentos">Los argumentos del evento.</param>
+    protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
+    {
+      // Pone al Procesador en estado inválido.
+      Invalida();
     }
     #endregion
   }

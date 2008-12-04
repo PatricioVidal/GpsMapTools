@@ -1,6 +1,6 @@
 ﻿namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 {
-  partial class InterfaseDeVíasConIncongruencias
+  partial class InterfaseDeVíasConAlertas
   {
     /// <summary> 
     /// Required designer variable.
@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       System.Windows.Forms.ColumnHeader columnaDetalle;
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeVíasConIncongruencias));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseDeVíasConAlertas));
       this.miInterfaseListaConMapaDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaConMapaDeVías();
       columnaDetalle = new System.Windows.Forms.ColumnHeader();
       this.miInterfaseListaConMapaDeVías.División.Panel1.SuspendLayout();

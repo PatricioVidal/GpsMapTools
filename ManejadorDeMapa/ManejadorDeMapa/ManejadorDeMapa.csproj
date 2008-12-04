@@ -83,6 +83,7 @@
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
+    <Compile Include="Pdis\BuscadorDeAlertas.cs" />
     <Compile Include="Vías\ArregladorDeNombres.cs" />
     <Compile Include="Vías\CalificativosDeVías.cs">
     </Compile>
@@ -140,7 +141,7 @@
     <Compile Include="Tipo.cs" />
     <Compile Include="Vías\ArregladorDeIndicesDeCiudad.cs" />
     <Compile Include="Vías\BuscadorDeErrores.cs" />
-    <Compile Include="Vías\BuscadorDeIncongruencias.cs" />
+    <Compile Include="Vías\BuscadorDeAlertas.cs" />
     <Compile Include="Vías\BuscadorDePosiblesErroresDeRuteo.cs" />
     <Compile Include="Vías\BuscadorDePosiblesNodosDesconectados.cs" />
     <Compile Include="Vías\ManejadorDeVías.cs" />

@@ -41,8 +41,8 @@
       this.miInterfaseDeVíasModificadas = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas();
       this.miPáginaEliminadas = new System.Windows.Forms.TabPage();
       this.miInterfaseDeVíasEliminadas = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas();
-      this.miPáginaIncongruencias = new System.Windows.Forms.TabPage();
-      this.miInterfaseDeVíasConIncongruencias = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias();
+      this.miPáginaAlertas = new System.Windows.Forms.TabPage();
+      this.miInterfaseDeVíasConIncongruencias = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConAlertas();
       this.miPáginaPosibleErroresDeRuteo = new System.Windows.Forms.TabPage();
       this.miInterfasePosiblesErroresDeRuteoEnVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías();
       this.miPáginaPosiblesNodosDesconectados = new System.Windows.Forms.TabPage();
@@ -57,7 +57,7 @@
       this.miDivisión.SuspendLayout();
       this.miPáginaModificadas.SuspendLayout();
       this.miPáginaEliminadas.SuspendLayout();
-      this.miPáginaIncongruencias.SuspendLayout();
+      this.miPáginaAlertas.SuspendLayout();
       this.miPáginaPosibleErroresDeRuteo.SuspendLayout();
       this.miPáginaPosiblesNodosDesconectados.SuspendLayout();
       this.miPáginaErrores.SuspendLayout();
@@ -69,9 +69,9 @@
       this.miControladorDePestañas.Controls.Add(this.miPáginaDeTodos);
       this.miControladorDePestañas.Controls.Add(this.miPáginaModificadas);
       this.miControladorDePestañas.Controls.Add(this.miPáginaEliminadas);
-      this.miControladorDePestañas.Controls.Add(this.miPáginaIncongruencias);
       this.miControladorDePestañas.Controls.Add(this.miPáginaPosibleErroresDeRuteo);
       this.miControladorDePestañas.Controls.Add(this.miPáginaPosiblesNodosDesconectados);
+      this.miControladorDePestañas.Controls.Add(this.miPáginaAlertas);
       this.miControladorDePestañas.Controls.Add(this.miPáginaErrores);
       resources.ApplyResources(this.miControladorDePestañas, "miControladorDePestañas");
       this.miControladorDePestañas.Name = "miControladorDePestañas";
@@ -89,6 +89,7 @@
       resources.ApplyResources(this.miInterfaseDeMapa, "miInterfaseDeMapa");
       this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
       this.miInterfaseDeMapa.ManejadorDeMapa = null;
+      this.miInterfaseDeMapa.MuestraCiudades = false;
       this.miInterfaseDeMapa.MuestraPdis = false;
       this.miInterfaseDeMapa.MuestraPolígonos = false;
       this.miInterfaseDeMapa.MuestraPolilíneas = false;
@@ -124,6 +125,7 @@
       resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
+      this.miLista.HideSelection = false;
       this.miLista.Name = "miLista";
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
@@ -134,6 +136,7 @@
       this.miMapaDeVíaSeleccionada.EscuchadorDeEstatus = null;
       this.miMapaDeVíaSeleccionada.Lista = this.miLista;
       this.miMapaDeVíaSeleccionada.ManejadorDeMapa = null;
+      this.miMapaDeVíaSeleccionada.MuestraCiudades = false;
       this.miMapaDeVíaSeleccionada.MuestraPdis = false;
       this.miMapaDeVíaSeleccionada.MuestraPolígonos = false;
       this.miMapaDeVíaSeleccionada.MuestraPolilíneas = false;
@@ -171,12 +174,12 @@
       this.miInterfaseDeVíasEliminadas.ManejadorDeMapa = null;
       this.miInterfaseDeVíasEliminadas.Name = "miInterfaseDeVíasEliminadas";
       // 
-      // miPáginaIncongruencias
+      // miPáginaAlertas
       // 
-      this.miPáginaIncongruencias.Controls.Add(this.miInterfaseDeVíasConIncongruencias);
-      resources.ApplyResources(this.miPáginaIncongruencias, "miPáginaIncongruencias");
-      this.miPáginaIncongruencias.Name = "miPáginaIncongruencias";
-      this.miPáginaIncongruencias.UseVisualStyleBackColor = true;
+      this.miPáginaAlertas.Controls.Add(this.miInterfaseDeVíasConIncongruencias);
+      resources.ApplyResources(this.miPáginaAlertas, "miPáginaAlertas");
+      this.miPáginaAlertas.Name = "miPáginaAlertas";
+      this.miPáginaAlertas.UseVisualStyleBackColor = true;
       // 
       // miInterfaseDeVíasConIncongruencias
       // 
@@ -206,12 +209,12 @@
       this.miPáginaPosiblesNodosDesconectados.Name = "miPáginaPosiblesNodosDesconectados";
       this.miPáginaPosiblesNodosDesconectados.UseVisualStyleBackColor = true;
       // 
-      // miInterfacePosiblesNodosDesconectados
+      // miInterfasePosiblesNodosDesconectados
       // 
-      resources.ApplyResources(this.miInterfasePosiblesNodosDesconectados, "miInterfacePosiblesNodosDesconectados");
+      resources.ApplyResources(this.miInterfasePosiblesNodosDesconectados, "miInterfasePosiblesNodosDesconectados");
       this.miInterfasePosiblesNodosDesconectados.EscuchadorDeEstatus = null;
       this.miInterfasePosiblesNodosDesconectados.ManejadorDeMapa = null;
-      this.miInterfasePosiblesNodosDesconectados.Name = "miInterfacePosiblesNodosDesconectados";
+      this.miInterfasePosiblesNodosDesconectados.Name = "miInterfasePosiblesNodosDesconectados";
       // 
       // miPáginaErrores
       // 
@@ -241,7 +244,7 @@
       this.miDivisión.ResumeLayout(false);
       this.miPáginaModificadas.ResumeLayout(false);
       this.miPáginaEliminadas.ResumeLayout(false);
-      this.miPáginaIncongruencias.ResumeLayout(false);
+      this.miPáginaAlertas.ResumeLayout(false);
       this.miPáginaPosibleErroresDeRuteo.ResumeLayout(false);
       this.miPáginaPosiblesNodosDesconectados.ResumeLayout(false);
       this.miPáginaErrores.ResumeLayout(false);
@@ -262,8 +265,8 @@
     private InterfaseDeViasConErrores miInterfaseDeErroresEnVías;
     private System.Windows.Forms.TabPage miPáginaModificadas;
     private InterfaseDeVíasModificadas miInterfaseDeVíasModificadas;
-    private System.Windows.Forms.TabPage miPáginaIncongruencias;
-    private InterfaseDeVíasConIncongruencias miInterfaseDeVíasConIncongruencias;
+    private System.Windows.Forms.TabPage miPáginaAlertas;
+    private InterfaseDeVíasConAlertas miInterfaseDeVíasConIncongruencias;
     private System.Windows.Forms.TabPage miPáginaEliminadas;
     private InterfaseDeVíasEliminadas miInterfaseDeVíasEliminadas;
     private System.Windows.Forms.TabPage miPáginaPosibleErroresDeRuteo;

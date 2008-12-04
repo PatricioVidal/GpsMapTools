@@ -113,7 +113,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       this.Text = VentanaDeAcerca.AssemblyName + " - " + VentanaDeAcerca.AssemblyCompany;
 
       #region Asigna los ToolTips de los menús.
-      miMenuAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
+      miMenúAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
 
       // PDIs.
       miMenúProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
@@ -122,13 +122,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miMenuArreglarLetrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras.Descripción;
       miMenuArreglarPalabrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDePalabrasPorTipo.Descripción;
       miMenúBuscaDuplicadosEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeDuplicados.Descripción;
+      miMenúBuscarAlertasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeAlertas.Descripción;
       miMenúBuscarErroresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeErrores.Descripción;
 
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
       miMenúArreglarIndicesDeCiudadEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeIndicesDeCiudad.Descripción;
       miMenúArreglarNombresDeVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeNombres.Descripción;
-      miMenúBuscarIncongruenciasenVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeIncongruencias.Descripción;
+      miMenúBuscarAlertasEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeAlertas.Descripción;
       miMenúBuscarPosiblesErroresDeRuteoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesErroresDeRuteo.Descripción;
       miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
       miMenúBuscarErroresEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeErrores.Descripción;
@@ -182,15 +183,29 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       miInterfaseManejadorDePdis.CambióEstadoMáximoDePestañas +=
         ((elEnviador, losArgumentos) => 
           miControladorDePestañasPrincipal.PoneEstadoDePestaña(
-            misIndicesDePestañas[miPaginaDePdis], 
+            miPaginaDePdis, 
             losArgumentos.EstadoMáximoDePestañas));
 
       // Maneja evento de cambio de Estado Máximo de Pestañas de Vías.
       miInterfaseManejadorDeVías.CambióEstadoMáximoDePestañas +=
         ((elEnviador, losArgumentos) => 
           miControladorDePestañasPrincipal.PoneEstadoDePestaña(
-            misIndicesDePestañas[miPáginaDeVías], 
+            miPáginaDeVías, 
             losArgumentos.EstadoMáximoDePestañas));
+
+      // Lee el archivo de límites si existe en los settings.
+      if (!string.IsNullOrEmpty(Settings.Default.ArchivoDeLímites))
+      {
+        // Trata de leer el archivo de límites.
+        try
+        {
+          miManejadorDeMapa.AbrirLímites(Settings.Default.ArchivoDeLímites);
+        }
+        catch
+        {
+          // Ignoramos errores.
+        }
+      }
     }
     #endregion
       
@@ -230,13 +245,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuSalir(object sender, EventArgs e)
+    private void EnMenúSalir(object sender, EventArgs e)
     {
       Application.Exit();
     }
 
 
-    private void EnMenuAbrir(object elRemitente, EventArgs losArgumentos)
+    private void EnMenúAbrir(object elRemitente, EventArgs losArgumentos)
     {
       using (OpenFileDialog ventanaParaAbrirArchivo = new OpenFileDialog())
       {
@@ -279,7 +294,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
       // Deshabilita los menus de Guardar.
-      miMenuAceptarModificaciones.Enabled = false;
+      miMenúAceptarModificaciones.Enabled = false;
 
       // Actualiza la lista de elementos.
       miLista.RegeneraLista();
@@ -298,7 +313,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Habilita los menus de Guardar.
       miMenuGuardar.Enabled = true;
-      miMenuAceptarModificaciones.Enabled = true;
+      miMenúAceptarModificaciones.Enabled = true;
     }
 
 
@@ -425,19 +440,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
     
-    private void EnMenuBuscarDuplicadosEnPdis(object sender, EventArgs e)
+    private void EnMenúBuscarDuplicadosEnPdis(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.BuscadorDeDuplicados.Procesa();
     }
 
 
-    private void EnMenuBuscarErroresEnPdis(object sender, EventArgs e)
+    private void EnMenúBuscarErroresEnPdis(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.BuscadorDeErrores.Procesa();
     }
 
 
-    private void EnMenuPáginaWeb(object elEnviador, EventArgs losArgumentos)
+    private void EnMenúPáginaWeb(object elEnviador, EventArgs losArgumentos)
     {
       System.Diagnostics.Process.Start("IExplore.exe", ((ToolStripItem)elEnviador).Text);
     }
@@ -537,9 +552,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenúBuscarIncongruenciasEnVías(object sender, EventArgs e)
+    private void EnMenúBuscarAlertasEnVías(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDeVías.BuscadorDeIncongruencias.Procesa();
+      miManejadorDeMapa.ManejadorDeVías.BuscadorDeAlertas.Procesa();
     }
 
 
@@ -577,6 +592,43 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúArreglarNombresDeVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.ArregladorDeNombres.Procesa();
+    }
+
+
+    private void EnMenúAbrirLímites(object sender, EventArgs losArgumentos)
+    {
+      using (OpenFileDialog ventanaParaAbrirArchivo = new OpenFileDialog())
+      {
+        ventanaParaAbrirArchivo.Title = "Seleccione archivo de Límites";
+        ventanaParaAbrirArchivo.CheckFileExists = true;
+        ventanaParaAbrirArchivo.AutoUpgradeEnabled = true;
+        ventanaParaAbrirArchivo.DefaultExt = "mp";
+        ventanaParaAbrirArchivo.Filter = ManejadorDeMapa.FiltrosDeExtensiones;
+
+        DialogResult respuesta = ventanaParaAbrirArchivo.ShowDialog();
+
+        switch (respuesta)
+        {
+          case DialogResult.OK:
+            string archivo = ventanaParaAbrirArchivo.FileName;
+            try
+            {
+              miManejadorDeMapa.AbrirLímites(archivo);
+              Settings.Default.ArchivoDeLímites = archivo;
+            }
+            catch (Exception e)
+            {
+              Programa.MuestraExcepción("Error abriendo archivo " + archivo, e);
+            }
+            break;
+        }
+      }
+    }
+
+
+    private void EnMenúBuscarAlertasEnPdis(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDePdis.BuscadorDeAlertas.Procesa();
     }
     #endregion
   }

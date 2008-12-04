@@ -74,6 +74,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Pdis;
+using System.IO;
 
 namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
@@ -103,17 +104,97 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       InitializeComponent();
 
       // Añade los menús.
-      AddMenuParaCambiarTipo();
+      AñadeMenúGuardarArchivoPdis();
+      AñadeMenuParaCambiarTipo();
     }
     #endregion
 
     #region Métodos Privados
-    private void AddMenuParaCambiarTipo()
+    private void AñadeMenúGuardarArchivoPdis()
+    {
+      ToolStripMenuItem menú = new ToolStripMenuItem
+      {
+        Text = "Guardar archivo para localización de PDI(s)",
+        AutoSize = true
+      };
+      Items.Add(menú);
+
+      menú.Click += EnMenúGuardarArchivoPdis;
+    }
+
+
+    private void AñadeMenuParaCambiarTipo()
     {
       ToolStripMenuItem menuCambiarTipo = new ToolStripMenuItem {Text = "Cambiar Tipo"};
       Items.Add(menuCambiarTipo);
 
       menuCambiarTipo.Click += EnMenúCambiarTipo;
+    }
+
+
+    private void EnMenúGuardarArchivoPdis(object elObjecto, EventArgs losArgumentos)
+    {
+      // Retornamos si no hay PDIs seleccionadas.
+      if (Lista.SelectedIndices.Count == 0)
+      {
+        return;
+      }
+
+      // Crea el nombre del archivo de salida.
+      string archivo = Path.GetFullPath(this.ManejadorDePdis.ManejadorDeMapa.Archivo);
+      string directorio = Path.GetDirectoryName(archivo);
+      string nombre = Path.GetFileName(archivo);
+      string nombreDeSalida = Path.ChangeExtension(nombre, ".PDIs.mp");
+
+      // Ventana de guardar.
+      SaveFileDialog ventanaDeGuardar = new SaveFileDialog
+      {
+        Title = "Guarda archivo de localización de PDI(s)",
+        AutoUpgradeEnabled = true,
+        AddExtension = true,
+        CheckPathExists = true,
+        Filter = ManejadorDeMapa.FiltrosDeExtensiones,
+        InitialDirectory = directorio,
+        FileName = nombreDeSalida,
+        OverwritePrompt = true,
+        ValidateNames = true
+      };
+      DialogResult respuesta = ventanaDeGuardar.ShowDialog();
+      if (respuesta == DialogResult.OK)
+      {
+        // El primer elemento de cada lista tiene que ser el encabezado.
+        List<ElementoDelMapa> elementos = new List<ElementoDelMapa> { this.ManejadorDePdis.ManejadorDeMapa.Encabezado };
+
+        // Genera la lista de PDIs.
+        IList<Pdi> pdis = ObtieneElementosSeleccionados<Pdi>();
+        foreach (Pdi pdi in pdis)
+        {
+          // Crea los campos para el PDI.
+          List<Campo> campos = new List<Campo> {
+            new CampoNombre("PDI #" + pdi.Número),
+            new CampoCoordenadas(
+              "Data0",
+              0,
+              pdi.Coordenadas),
+            new CampoTipo("0x1604"),
+            new CampoGenérico("EndLevel", "3")
+          };
+
+          // Crea el PDI y añadelo a la lista.
+          Pdi pdiNuevo = new Pdi(
+            this.ManejadorDePdis.ManejadorDeMapa,
+            0,
+            "POI",
+            campos);
+          elementos.Add(pdiNuevo);
+        }
+
+        // Guarda el archivo.
+        new EscritorDeFormatoPolish(
+          ventanaDeGuardar.FileName,
+          elementos,
+          this.ManejadorDePdis.EscuchadorDeEstatus);
+      }
     }
 
 

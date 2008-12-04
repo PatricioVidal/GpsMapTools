@@ -144,7 +144,7 @@
     <value>miInterfaseDeMapa</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
     <value>miPáginaMapa</value>
@@ -201,7 +201,7 @@
     <value>miLista</value>
   </data>
   <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseListaDeVías, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
     <value>miDivisión.Panel1</value>
@@ -245,7 +245,7 @@
     <value>miMapaDeVíaSeleccionada</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseMapaDeVíasSeleccionadas, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapaDeVíaSeleccionada.Parent" xml:space="preserve">
     <value>miDivisión.Panel2</value>
@@ -326,7 +326,7 @@
     <value>miInterfaseDeVíasModificadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasModificadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasModificadas, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasModificadas.Parent" xml:space="preserve">
     <value>miPáginaModificadas</value>
@@ -374,7 +374,7 @@
     <value>miInterfaseDeVíasEliminadas</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasEliminadas, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeVíasEliminadas.Parent" xml:space="preserve">
     <value>miPáginaEliminadas</value>
@@ -406,54 +406,6 @@
   <data name="&gt;&gt;miPáginaEliminadas.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="miInterfaseDeVíasConIncongruencias.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfaseDeVíasConIncongruencias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseDeVíasConIncongruencias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miInterfaseDeVíasConIncongruencias.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Name" xml:space="preserve">
-    <value>miInterfaseDeVíasConIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConIncongruencias, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Parent" xml:space="preserve">
-    <value>miPáginaIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaIncongruencias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaIncongruencias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>586, 430</value>
-  </data>
-  <data name="miPáginaIncongruencias.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="miPáginaIncongruencias.Text" xml:space="preserve">
-    <value>Incongruencias</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Name" xml:space="preserve">
-    <value>miPáginaIncongruencias</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaIncongruencias.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="miInterfasePosiblesErroresDeRuteoEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -470,7 +422,7 @@
     <value>miInterfasePosiblesErroresDeRuteoEnVías</value>
   </data>
   <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesErroresDeRuteoEnVías, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfasePosiblesErroresDeRuteoEnVías.Parent" xml:space="preserve">
     <value>miPáginaPosibleErroresDeRuteo</value>
@@ -500,30 +452,30 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miPáginaPosibleErroresDeRuteo.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
-  <data name="miInterfacePosiblesNodosDesconectados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="miInterfasePosiblesNodosDesconectados.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="miInterfacePosiblesNodosDesconectados.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="miInterfasePosiblesNodosDesconectados.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="miInterfacePosiblesNodosDesconectados.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miInterfasePosiblesNodosDesconectados.Size" type="System.Drawing.Size, System.Drawing">
     <value>586, 430</value>
   </data>
-  <data name="miInterfacePosiblesNodosDesconectados.TabIndex" type="System.Int32, mscorlib">
+  <data name="miInterfasePosiblesNodosDesconectados.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;miInterfacePosiblesNodosDesconectados.Name" xml:space="preserve">
-    <value>miInterfacePosiblesNodosDesconectados</value>
+  <data name="&gt;&gt;miInterfasePosiblesNodosDesconectados.Name" xml:space="preserve">
+    <value>miInterfasePosiblesNodosDesconectados</value>
   </data>
-  <data name="&gt;&gt;miInterfacePosiblesNodosDesconectados.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesNodosDesconectados, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;miInterfasePosiblesNodosDesconectados.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfasePosiblesNodosDesconectados, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;miInterfacePosiblesNodosDesconectados.Parent" xml:space="preserve">
+  <data name="&gt;&gt;miInterfasePosiblesNodosDesconectados.Parent" xml:space="preserve">
     <value>miPáginaPosiblesNodosDesconectados</value>
   </data>
-  <data name="&gt;&gt;miInterfacePosiblesNodosDesconectados.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;miInterfasePosiblesNodosDesconectados.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="miPáginaPosiblesNodosDesconectados.Location" type="System.Drawing.Point, System.Drawing">
@@ -548,6 +500,54 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miPáginaPosiblesNodosDesconectados.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="miInterfaseDeVíasConIncongruencias.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseDeVíasConIncongruencias.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseDeVíasConIncongruencias.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miInterfaseDeVíasConIncongruencias.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Name" xml:space="preserve">
+    <value>miInterfaseDeVíasConIncongruencias</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeVíasConAlertas, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.Parent" xml:space="preserve">
+    <value>miPáginaAlertas</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeVíasConIncongruencias.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaAlertas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaAlertas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 430</value>
+  </data>
+  <data name="miPáginaAlertas.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="miPáginaAlertas.Text" xml:space="preserve">
+    <value>Alertas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaAlertas.Name" xml:space="preserve">
+    <value>miPáginaAlertas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaAlertas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaAlertas.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaAlertas.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="miInterfaseDeErroresEnVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -566,7 +566,7 @@
     <value>miInterfaseDeErroresEnVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseDeViasConErrores, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseDeErroresEnVías.Parent" xml:space="preserve">
     <value>miPáginaErrores</value>
@@ -614,7 +614,7 @@
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>$this</value>
@@ -635,6 +635,6 @@
     <value>InterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.18.3031.4985, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.36.3259.41433, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

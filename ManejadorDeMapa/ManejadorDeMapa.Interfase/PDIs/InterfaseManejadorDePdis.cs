@@ -88,6 +88,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     #region Campos
     private readonly InterfaseBase[] misInterfases;
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
+    private readonly string miTextoPestañaAlertas = "Alertas";
     private readonly string miTextoPestañaErrores = "Errores";
     private readonly string miTextoPestañaDuplicados = "Posibles Duplicados";
     private readonly InterfaseListaDePdis miLista;
@@ -121,6 +122,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         if (value != null)
         {
           ManejadorDePdis manejadorDePdis = value.ManejadorDePdis;
+
+          // Buscador de Alertas.
+          BuscadorDeAlertas buscadorDeAlertas = manejadorDePdis.BuscadorDeAlertas;
+          buscadorDeAlertas.Invalidado += EnInvalidadoPdisConAlertas;
+          buscadorDeAlertas.Procesó += EnSeBuscaronPdisConAlertas;
 
           // Buscador de Errores.
           BuscadorDeErrores buscadorDeErrores = manejadorDePdis.BuscadorDeErrores;
@@ -171,6 +177,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         miInterfaseDeMapa,
         miInterfasePdisDuplicados,
         miInterfasePdisEliminados,
+        miInterfaseDePdisConAlertas,
         miInterfasePdisErrores,
         miInterfasePdisModificados};
 
@@ -244,74 +251,49 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 
     private void EnInvalidadoPdisDuplicados(object elEnviador, EventArgs losArgumentos)
     {
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay duplicados.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaPosiblesDuplicados],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      miPáginaPosiblesDuplicados.Text = miTextoPestañaDuplicados;
+      miControladorDePestañas.InvalidaPestaña(miPáginaPosiblesDuplicados, miTextoPestañaDuplicados);
     }
 
 
     private void EnSeBuscaronPdisDuplicados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDePdisDuplicados = losArgumentos.NúmeroDeItems;
-      miPáginaPosiblesDuplicados.Text = miTextoPestañaDuplicados + " (" + númeroDePdisDuplicados + ")";
-
-      // Si hay posibles PDIs duplicados no se sabe si son errores o está bien,
-      // así que ponemos el estado de la pestaña en Alerta.
-      // Si no, entonces cambia el estado de la pestaña a Bíen.
-      if (númeroDePdisDuplicados > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaPosiblesDuplicados],
-          ControladorDePestañas.EstadoDePestaña.Alerta);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaPosiblesDuplicados],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaPosiblesDuplicados,
+        miTextoPestañaDuplicados,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Alerta);
     }
 
 
     private void EnInvalidadoPdisConErrores(object elEnviador, EventArgs losArgumentos)
     {
-      // Pone las pestañas en estado de "No Sé" para indicar que
-      // no se sabe si hay errores.
-      miControladorDePestañas.PoneEstadoDePestaña(
-        misIndicesDePestañas[miPáginaErrores],
-        ControladorDePestañas.EstadoDePestaña.NoSé);
-
-      // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = miTextoPestañaErrores;
+      miControladorDePestañas.InvalidaPestaña(miPáginaErrores, miTextoPestañaErrores);
     }
 
 
     private void EnSeBuscaronPdisConErrores(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      int númeroDePdisConErrores = losArgumentos.NúmeroDeItems;
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaErrores,
+        miTextoPestañaErrores,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Error);
+    }
 
-      // Cambia el texto de la pestaña.
-      miPáginaErrores.Text = miTextoPestañaErrores + " (" + númeroDePdisConErrores + ")";
 
-      // Si hay PDIs con errores entonces cambia el estado de la pestaña a Error.
-      // Si no, entonces cambia el estado de la pestaña a Bíen.
-      if (númeroDePdisConErrores > 0)
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Error);
-      }
-      else
-      {
-        miControladorDePestañas.PoneEstadoDePestaña(
-          misIndicesDePestañas[miPáginaErrores],
-          ControladorDePestañas.EstadoDePestaña.Bién);
-      }
+    private void EnInvalidadoPdisConAlertas(object elEnviador, EventArgs losArgumentos)
+    {
+      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas, miTextoPestañaAlertas);
+    }
+
+
+    private void EnSeBuscaronPdisConAlertas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
+    {
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaAlertas,
+        miTextoPestañaAlertas,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Alerta);
     }
 
 
