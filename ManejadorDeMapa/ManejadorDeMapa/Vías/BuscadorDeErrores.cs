@@ -150,7 +150,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       bool esConocido = CaracterísticasDePolilíneas.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {
-        errores.Add("El tipo (" + laVía.Tipo + ") no es conocido");
+        errores.Add(string.Format("E100: El tipo {0} no es conocido.", laVía.Tipo));
       }
       #endregion
 
@@ -167,7 +167,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       }
       if (campoCoordenadas == null)
       {
-        errores.Add("No tiene coordenadas.");
+        errores.Add("E101: No tiene coordenadas.");
       }
       else
       {
@@ -176,11 +176,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
         //  - Tienen que ser más de un par.
         if (campoCoordenadas.Nivel != 0)
         {
-          errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
+          errores.Add(string.Format("E102: No tiene coordenadas a nivel 0, sino a nivel {0}.", campoCoordenadas.Nivel));
         }
         if (!(campoCoordenadas.Coordenadas.Length > 1))
         {
-          errores.Add(string.Format("Debe tener más de un par de coordenadas, pero tiene {0}", campoCoordenadas.Coordenadas.Length));
+          errores.Add(string.Format("E103: Debe tener más de un par de coordenadas, pero tiene {0}.", campoCoordenadas.Coordenadas.Length));
         }
       }
       #endregion

@@ -173,7 +173,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (!misLímitesDelMapa.Contains(elPdi.Coordenadas))
       {
         ++númeroDeProblemasDetectados;
-        misAlertas.Add(elPdi, new List<string>() { "PDI fuera de límites del mapa." });
+        misAlertas.Add(elPdi, new List<string>() { "A000: PDI fuera de límites del mapa." });
       }
 
       return númeroDeProblemasDetectados;

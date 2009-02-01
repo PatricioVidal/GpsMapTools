@@ -122,85 +122,43 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>147, 6</value>
   </data>
   <metadata name="toolStripSeparator6.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 6</value>
+    <value>222, 6</value>
   </data>
   <metadata name="toolStripSeparator1.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+    <value>273, 6</value>
   </data>
   <metadata name="abrirLimitesMenu.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
   <data name="abrirLimitesMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="abrirLimitesMenu.Text" xml:space="preserve">
     <value>Abrir Límites</value>
   </data>
+  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="miMenúProcesar.Text" xml:space="preserve">
+    <value>Procesar</value>
+  </data>
   <data name="miMenúProcesarTodo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="miMenúProcesarTodo.Text" xml:space="preserve">
     <value>Procesar Todo</value>
   </data>
-  <data name="miMenúProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúProcesarTodoEnPdis.Text" xml:space="preserve">
-    <value>Procesar Todo</value>
-  </data>
-  <data name="miMenúEliminarCaracteresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúEliminarCaracteresEnPdis.Text" xml:space="preserve">
-    <value>1. Eliminar Caracteres Inválidos</value>
-  </data>
-  <data name="miMenuArreglarLetrasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenuArreglarLetrasEnPdis.Text" xml:space="preserve">
-    <value>2. Arreglar Letras en Nombres</value>
-  </data>
-  <data name="miMenuArreglarPalabrasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenuArreglarPalabrasEnPdis.Text" xml:space="preserve">
-    <value>3. Arreglar Palabras en Nombres</value>
-  </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnPdis.Text" xml:space="preserve">
-    <value>4. Arreglar Indices de Ciudad</value>
-  </data>
-  <data name="miMenúBuscaDuplicadosEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúBuscaDuplicadosEnPdis.Text" xml:space="preserve">
-    <value>5. Buscar Duplicados</value>
-  </data>
-  <data name="miMenúBuscarAlertasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúBuscarAlertasEnPdis.Text" xml:space="preserve">
-    <value>6. Buscar Alertas</value>
-  </data>
-  <data name="miMenúBuscarErroresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
-  </data>
-  <data name="miMenúBuscarErroresEnPdis.Text" xml:space="preserve">
-    <value>7. Buscar Errores</value>
-  </data>
   <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="miMenuPdis.Text" xml:space="preserve">
     <value>PDIs</value>
@@ -208,53 +166,44 @@
   <data name="miMenuPdis.ToolTipText" xml:space="preserve">
     <value>Menús para PDIs.</value>
   </data>
-  <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+  <data name="miMenúProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúProcesarTodoEnVías.Text" xml:space="preserve">
+  <data name="miMenúProcesarTodoEnPdis.Text" xml:space="preserve">
     <value>Procesar Todo</value>
   </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 6</value>
+  <data name="miMenúArreglarIndicesDeCiudadEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
-  </data>
-  <data name="miMenúArreglarIndicesDeCiudadEnVías.Text" xml:space="preserve">
+  <data name="miMenúArreglarIndicesDeCiudadEnPdis.Text" xml:space="preserve">
     <value>1. Arreglar Indices de Ciudad</value>
   </data>
-  <data name="miMenúArreglarNombresDeVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+  <data name="miMenuArreglarCosasGeneralesEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúArreglarNombresDeVías.Text" xml:space="preserve">
-    <value>2. Arreglar Nombres</value>
+  <data name="miMenuArreglarCosasGeneralesEnPdis.Text" xml:space="preserve">
+    <value>2. Arreglar Cosas Generales</value>
   </data>
-  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+  <data name="miMenúBuscaDuplicadosEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Text" xml:space="preserve">
-    <value>3. Buscar Posibles Errores de Ruteo</value>
+  <data name="miMenúBuscaDuplicadosEnPdis.Text" xml:space="preserve">
+    <value>3. Buscar Duplicados</value>
   </data>
-  <data name="miMenúBuscarAlertasEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+  <data name="miMenúBuscarAlertasEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúBuscarAlertasEnVías.Text" xml:space="preserve">
+  <data name="miMenúBuscarAlertasEnPdis.Text" xml:space="preserve">
     <value>4. Buscar Alertas</value>
   </data>
-  <data name="miMenúBuscarErroresEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+  <data name="miMenúBuscarErroresEnPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
   </data>
-  <data name="miMenúBuscarErroresEnVías.Text" xml:space="preserve">
+  <data name="miMenúBuscarErroresEnPdis.Text" xml:space="preserve">
     <value>5. Buscar Errores</value>
   </data>
-  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
-  </data>
-  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Text" xml:space="preserve">
-    <value>Buscar Posibles Nodos Desconectados</value>
-  </data>
   <data name="miMenúVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="miMenúVías.Text" xml:space="preserve">
     <value>Vías</value>
@@ -262,69 +211,56 @@
   <data name="miMenúVías.ToolTipText" xml:space="preserve">
     <value>Menús para Vías</value>
   </data>
-  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
+  <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
   </data>
-  <data name="miMenúProcesar.Text" xml:space="preserve">
-    <value>Procesar</value>
+  <data name="miMenúProcesarTodoEnVías.Text" xml:space="preserve">
+    <value>Procesar Todo</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 6</value>
+  </data>
+  <data name="miMenúArreglarIndicesDeCiudadEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúArreglarIndicesDeCiudadEnVías.Text" xml:space="preserve">
+    <value>1. Arreglar Indices de Ciudad</value>
+  </data>
+  <data name="miMenúArreglarCosasGeneralesEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúArreglarCosasGeneralesEnVías.Text" xml:space="preserve">
+    <value>2. Arreglar Cosas Generales</value>
+  </data>
+  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarPosiblesErroresDeRuteoEnVías.Text" xml:space="preserve">
+    <value>3. Buscar Posibles Errores de Ruteo</value>
+  </data>
+  <data name="miMenúBuscarAlertasEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarAlertasEnVías.Text" xml:space="preserve">
+    <value>4. Buscar Alertas</value>
+  </data>
+  <data name="miMenúBuscarErroresEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarErroresEnVías.Text" xml:space="preserve">
+    <value>5. Buscar Errores</value>
+  </data>
+  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 22</value>
+  </data>
+  <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Text" xml:space="preserve">
+    <value>Buscar Posibles Nodos Desconectados</value>
   </data>
   <metadata name="miMenuPrincipal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
-  <data name="miMenuAbrirArchivo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="miMenuAbrirArchivo.Text" xml:space="preserve">
-    <value>&amp;Abrir</value>
-  </data>
-  <data name="miMenuAbrirArchivo.ToolTipText" xml:space="preserve">
-    <value>Abre un mapa.</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miMenúAceptarModificaciones.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miMenúAceptarModificaciones.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="miMenúAceptarModificaciones.Text" xml:space="preserve">
-    <value>Aceptar Modificaciones</value>
-  </data>
-  <data name="miMenuGuardar.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miMenuGuardar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="miMenuGuardar.Text" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="miMenuGuardar.ToolTipText" xml:space="preserve">
-    <value>Guarda el mapa con el mismo nombre.</value>
-  </data>
-  <data name="miMenuGuardarComo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miMenuGuardarComo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="miMenuGuardarComo.Text" xml:space="preserve">
-    <value>Guardar Como ...</value>
-  </data>
-  <data name="miMenuGuardarComo.ToolTipText" xml:space="preserve">
-    <value>Guarda el mapa con el un nombre nuevo.</value>
-  </data>
-  <data name="miMenuSalir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="miMenuSalir.Text" xml:space="preserve">
-    <value>&amp;Salir</value>
-  </data>
-  <data name="miMenuSalir.ToolTipText" xml:space="preserve">
-    <value>Cierra la aplicación.</value>
-  </data>
   <data name="miMenúMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 20</value>
+    <value>49, 20</value>
   </data>
   <data name="miMenúMapa.Text" xml:space="preserve">
     <value>Mapa</value>
@@ -347,8 +283,20 @@
   <data name="miMenuAcerca.Text" xml:space="preserve">
     <value>Acerca</value>
   </data>
+  <data name="licenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="licenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Licencia</value>
+  </data>
+  <data name="etiquetasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="etiquetasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
   <data name="miMenúAyuda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>53, 20</value>
   </data>
   <data name="miMenúAyuda.Text" xml:space="preserve">
     <value>Ayuda</value>
@@ -359,6 +307,7 @@
   <data name="miMenuPrincipal.Size" type="System.Drawing.Size, System.Drawing">
     <value>784, 24</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miMenuPrincipal.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -377,9 +326,84 @@
   <data name="&gt;&gt;miMenuPrincipal.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="miMenuAbrirArchivo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 22</value>
+  </data>
+  <data name="miMenuAbrirArchivo.Text" xml:space="preserve">
+    <value>&amp;Abrir</value>
+  </data>
+  <data name="miMenuAbrirArchivo.ToolTipText" xml:space="preserve">
+    <value>Abre un mapa.</value>
+  </data>
+  <data name="miMenúAceptarModificaciones.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miMenúAceptarModificaciones.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 22</value>
+  </data>
+  <data name="miMenúAceptarModificaciones.Text" xml:space="preserve">
+    <value>Aceptar Modificaciones</value>
+  </data>
+  <data name="miMenuGuardar.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miMenuGuardar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 22</value>
+  </data>
+  <data name="miMenuGuardar.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="miMenuGuardar.ToolTipText" xml:space="preserve">
+    <value>Guarda el mapa con el mismo nombre.</value>
+  </data>
+  <data name="miMenuGuardarComo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miMenuGuardarComo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 22</value>
+  </data>
+  <data name="miMenuGuardarComo.Text" xml:space="preserve">
+    <value>Guardar Como ...</value>
+  </data>
+  <data name="miMenuGuardarComo.ToolTipText" xml:space="preserve">
+    <value>Guarda el mapa con el un nombre nuevo.</value>
+  </data>
+  <data name="miMenuSalir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 22</value>
+  </data>
+  <data name="miMenuSalir.Text" xml:space="preserve">
+    <value>&amp;Salir</value>
+  </data>
+  <data name="miMenuSalir.ToolTipText" xml:space="preserve">
+    <value>Cierra la aplicación.</value>
+  </data>
   <metadata name="miEstatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 542</value>
   </metadata>
+  <data name="miEstatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 542</value>
+  </data>
+  <data name="miEstatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>784, 22</value>
+  </data>
+  <data name="miEstatus.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="miEstatus.Text" xml:space="preserve">
+    <value>Estatus</value>
+  </data>
+  <data name="&gt;&gt;miEstatus.Name" xml:space="preserve">
+    <value>miEstatus</value>
+  </data>
+  <data name="&gt;&gt;miEstatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miEstatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;miEstatus.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="miTextoDeEstatus.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -409,30 +433,6 @@
   </data>
   <data name="miBarraDeProgreso.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 16</value>
-  </data>
-  <data name="miEstatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 542</value>
-  </data>
-  <data name="miEstatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>784, 22</value>
-  </data>
-  <data name="miEstatus.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="miEstatus.Text" xml:space="preserve">
-    <value>Estatus</value>
-  </data>
-  <data name="&gt;&gt;miEstatus.Name" xml:space="preserve">
-    <value>miEstatus</value>
-  </data>
-  <data name="&gt;&gt;miEstatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miEstatus.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;miEstatus.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miBotónParaDeProcesar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -489,133 +489,11 @@
   <data name="&gt;&gt;miBotónParaDeProcesar.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfaseDeMapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseDeMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABlTeXN0ZW0uRHJh
-        d2luZy5SZWN0YW5nbGVGBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAsLCwsCAAAAAAAAAAAAAAAAAIA/
-        AACAPws=
-</value>
-  </data>
-  <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 464</value>
-  </data>
-  <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
-    <value>miInterfaseDeMapa</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
-    <value>miPáginaMapa</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaMapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 464</value>
-  </data>
-  <data name="miPáginaMapa.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="miPáginaMapa.Text" xml:space="preserve">
-    <value>Mapa</value>
-  </data>
-  <data name="&gt;&gt;miPáginaMapa.Name" xml:space="preserve">
-    <value>miPáginaMapa</value>
-  </data>
-  <data name="&gt;&gt;miPáginaMapa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaMapa.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaMapa.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miColumnaClase.Text" xml:space="preserve">
-    <value>Clase</value>
-  </data>
-  <data name="miColumnaClase.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
-  <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 464</value>
-  </data>
-  <data name="miLista.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;miLista.Name" xml:space="preserve">
-    <value>miLista</value>
-  </data>
-  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
-    <value>miPáginaTodos</value>
-  </data>
-  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miPáginaTodos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="miPáginaTodos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 464</value>
-  </data>
-  <data name="miPáginaTodos.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="miPáginaTodos.Text" xml:space="preserve">
-    <value>Todos</value>
-  </data>
-  <data name="&gt;&gt;miPáginaTodos.Name" xml:space="preserve">
-    <value>miPáginaTodos</value>
-  </data>
-  <data name="&gt;&gt;miPáginaTodos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miPáginaTodos.Parent" xml:space="preserve">
-    <value>miControladorDePestañas</value>
-  </data>
-  <data name="&gt;&gt;miPáginaTodos.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miControladorDePestañas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miControladorDePestañas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 491</value>
-  </data>
-  <data name="miControladorDePestañas.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;miControladorDePestañas.Name" xml:space="preserve">
     <value>miControladorDePestañas</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
     <value>miPaginaDeElementos</value>
@@ -650,23 +528,11 @@
   <data name="&gt;&gt;miPaginaDeElementos.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="miInterfaseManejadorDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfaseManejadorDePdis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseManejadorDePdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 491</value>
-  </data>
-  <data name="miInterfaseManejadorDePdis.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Name" xml:space="preserve">
     <value>miInterfaseManejadorDePdis</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDePdis.Parent" xml:space="preserve">
     <value>miPaginaDePdis</value>
@@ -698,23 +564,11 @@
   <data name="&gt;&gt;miPaginaDePdis.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="miInterfaseManejadorDeVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="miInterfaseManejadorDeVías.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseManejadorDeVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 491</value>
-  </data>
-  <data name="miInterfaseManejadorDeVías.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Name" xml:space="preserve">
     <value>miInterfaseManejadorDeVías</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miInterfaseManejadorDeVías.Parent" xml:space="preserve">
     <value>miPáginaDeVías</value>
@@ -762,13 +616,219 @@
     <value>miControladorDePestañasPrincipal</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañasPrincipal.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3260.812, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañasPrincipal.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;miControladorDePestañasPrincipal.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
+    <value>miInterfaseDeMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
+    <value>miPáginaMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 464</value>
+  </data>
+  <data name="miPáginaMapa.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="miPáginaMapa.Text" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Name" xml:space="preserve">
+    <value>miPáginaMapa</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miLista.Name" xml:space="preserve">
+    <value>miLista</value>
+  </data>
+  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
+    <value>miPáginaTodos</value>
+  </data>
+  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miPáginaTodos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="miPáginaTodos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 464</value>
+  </data>
+  <data name="miPáginaTodos.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="miPáginaTodos.Text" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaTodos.Name" xml:space="preserve">
+    <value>miPáginaTodos</value>
+  </data>
+  <data name="&gt;&gt;miPáginaTodos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miPáginaTodos.Parent" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miPáginaTodos.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="miControladorDePestañas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miControladorDePestañas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miControladorDePestañas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 491</value>
+  </data>
+  <data name="miControladorDePestañas.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Name" xml:space="preserve">
+    <value>miControladorDePestañas</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.ControladorDePestañas, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.Parent" xml:space="preserve">
+    <value>miPaginaDeElementos</value>
+  </data>
+  <data name="&gt;&gt;miControladorDePestañas.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miInterfaseDeMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseDeMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseDeMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBDdWx0
+        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABlTeXN0ZW0uRHJh
+        d2luZy5SZWN0YW5nbGVGBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAsLCwsCAAAAAAAAAAAAAAAAAIA/
+        AACAPws=
+</value>
+  </data>
+  <data name="miInterfaseDeMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 464</value>
+  </data>
+  <data name="miInterfaseDeMapa.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Name" xml:space="preserve">
+    <value>miInterfaseDeMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.Parent" xml:space="preserve">
+    <value>miPáginaMapa</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseDeMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 464</value>
+  </data>
+  <data name="miLista.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miLista.Name" xml:space="preserve">
+    <value>miLista</value>
+  </data>
+  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseListaDeElementos, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
+    <value>miPáginaTodos</value>
+  </data>
+  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miColumnaClase.Text" xml:space="preserve">
+    <value>Clase</value>
+  </data>
+  <data name="miColumnaClase.Width" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <data name="miInterfaseManejadorDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseManejadorDePdis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseManejadorDePdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 491</value>
+  </data>
+  <data name="miInterfaseManejadorDePdis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Name" xml:space="preserve">
+    <value>miInterfaseManejadorDePdis</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.Parent" xml:space="preserve">
+    <value>miPaginaDePdis</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDePdis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miInterfaseManejadorDeVías.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseManejadorDeVías.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseManejadorDeVías.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 491</value>
+  </data>
+  <data name="miInterfaseManejadorDeVías.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDeVías.Name" xml:space="preserve">
+    <value>miInterfaseManejadorDeVías</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDeVías.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías, ManejadorDeMapa, Version=1.36.3319.1515, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDeVías.Parent" xml:space="preserve">
+    <value>miPáginaDeVías</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseManejadorDeVías.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -7008,28 +7068,16 @@
   <data name="&gt;&gt;miMenúProcesarTodoEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenúEliminarCaracteresEnPdis.Name" xml:space="preserve">
-    <value>miMenúEliminarCaracteresEnPdis</value>
-  </data>
-  <data name="&gt;&gt;miMenúEliminarCaracteresEnPdis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miMenuArreglarLetrasEnPdis.Name" xml:space="preserve">
-    <value>miMenuArreglarLetrasEnPdis</value>
-  </data>
-  <data name="&gt;&gt;miMenuArreglarLetrasEnPdis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miMenuArreglarPalabrasEnPdis.Name" xml:space="preserve">
-    <value>miMenuArreglarPalabrasEnPdis</value>
-  </data>
-  <data name="&gt;&gt;miMenuArreglarPalabrasEnPdis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;miMenúArreglarIndicesDeCiudadEnPdis.Name" xml:space="preserve">
     <value>miMenúArreglarIndicesDeCiudadEnPdis</value>
   </data>
   <data name="&gt;&gt;miMenúArreglarIndicesDeCiudadEnPdis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miMenuArreglarCosasGeneralesEnPdis.Name" xml:space="preserve">
+    <value>miMenuArreglarCosasGeneralesEnPdis</value>
+  </data>
+  <data name="&gt;&gt;miMenuArreglarCosasGeneralesEnPdis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miMenúBuscaDuplicadosEnPdis.Name" xml:space="preserve">
@@ -7074,10 +7122,10 @@
   <data name="&gt;&gt;miMenúArreglarIndicesDeCiudadEnVías.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miMenúArreglarNombresDeVías.Name" xml:space="preserve">
-    <value>miMenúArreglarNombresDeVías</value>
+  <data name="&gt;&gt;miMenúArreglarCosasGeneralesEnVías.Name" xml:space="preserve">
+    <value>miMenúArreglarCosasGeneralesEnVías</value>
   </data>
-  <data name="&gt;&gt;miMenúArreglarNombresDeVías.Type" xml:space="preserve">
+  <data name="&gt;&gt;miMenúArreglarCosasGeneralesEnVías.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miMenúBuscarPosiblesErroresDeRuteoEnVías.Name" xml:space="preserve">
@@ -7181,6 +7229,18 @@
   </data>
   <data name="&gt;&gt;miColumnaClase.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenciaToolStripMenuItem.Name" xml:space="preserve">
+    <value>licenciaToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;licenciaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;etiquetasToolStripMenuItem.Name" xml:space="preserve">
+    <value>etiquetasToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;etiquetasToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>InterfaseManejadorDeMapa</value>

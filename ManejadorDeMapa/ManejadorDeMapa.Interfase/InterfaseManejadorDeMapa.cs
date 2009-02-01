@@ -118,9 +118,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // PDIs.
       miMenúProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
       miMenúArreglarIndicesDeCiudadEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeIndicesDeCiudad.Descripción;
-      miMenúEliminarCaracteresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.EliminadorDeCaracteres.Descripción;
-      miMenuArreglarLetrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras.Descripción;
-      miMenuArreglarPalabrasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorDePalabrasPorTipo.Descripción;
+      miMenuArreglarCosasGeneralesEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ArregladorGeneral.Descripción;
       miMenúBuscaDuplicadosEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeDuplicados.Descripción;
       miMenúBuscarAlertasEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeAlertas.Descripción;
       miMenúBuscarErroresEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.BuscadorDeErrores.Descripción;
@@ -128,7 +126,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Vías.
       miMenúProcesarTodoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ManejadorDeVías.DescripciónProcesarTodo;
       miMenúArreglarIndicesDeCiudadEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeIndicesDeCiudad.Descripción;
-      miMenúArreglarNombresDeVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorDeNombres.Descripción;
+      miMenúArreglarCosasGeneralesEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.ArregladorGeneral.Descripción;
       miMenúBuscarAlertasEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDeAlertas.Descripción;
       miMenúBuscarPosiblesErroresDeRuteoEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesErroresDeRuteo.Descripción;
       miMenúBuscarPosiblesNodosDesconectadosEnVías.ToolTipText = GpsYv.ManejadorDeMapa.Vías.BuscadorDePosiblesNodosDesconectados.Descripción;
@@ -333,14 +331,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuAcerca(object sender, EventArgs e)
+    private void EnMenúAcerca(object sender, EventArgs e)
     {
       Form ventanaDeAcerca = new Interfase.VentanaDeAcerca();
       ventanaDeAcerca.ShowDialog();
     }
 
 
-    private void EnMenuGuardarComo(object sender, EventArgs e)
+    private void EnMenúGuardarComo(object sender, EventArgs e)
     {
       string archivo = miManejadorDeMapa.Archivo;
 
@@ -393,7 +391,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuGuardar(object sender, EventArgs e)
+    private void EnMenúGuardar(object sender, EventArgs e)
     {
       string archivo = miManejadorDeMapa.Archivo;
 
@@ -416,27 +414,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuArreglarPalabrasEnPdis(object sender, EventArgs e)
+    private void EnMenúArreglarCosasGeneralesEnPdis(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDePdis.ArregladorDePalabrasPorTipo.Procesa();
+      miManejadorDeMapa.ManejadorDePdis.ArregladorGeneral.Procesa();
     }
 
 
-    private void EnMenuArreglarLetrasEnPdis(object sender, EventArgs e)
-    {
-      miManejadorDeMapa.ManejadorDePdis.ArregladorDeLetras.Procesa();
-    }
-
-
-    private void EnMenuProcesarTodoEnPdis(object sender, EventArgs e)
+    private void EnMenúProcesarTodoEnPdis(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.ProcesarTodo();
-    }
-
-
-    private void EnMenúEliminarCaracteresEnPdis(object sender, EventArgs e)
-    {
-      miManejadorDeMapa.ManejadorDePdis.EliminadorDeCaracteres.Procesa();
     }
 
     
@@ -454,7 +440,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenúPáginaWeb(object elEnviador, EventArgs losArgumentos)
     {
-      System.Diagnostics.Process.Start("IExplore.exe", ((ToolStripItem)elEnviador).Text);
+      System.Diagnostics.Process.Start(((ToolStripItem)elEnviador).Text);
     }
 
 
@@ -534,7 +520,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenuProcesarTodoEnVías(object sender, EventArgs e)
+    private void EnMenúProcesarTodoEnVías(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDeVías.ProcesarTodo();
     }
@@ -589,9 +575,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
-    private void EnMenúArreglarNombresDeVías(object sender, EventArgs e)
+    private void EnMenúArreglarCosasGeneralesEnVías(object sender, EventArgs e)
     {
-      miManejadorDeMapa.ManejadorDeVías.ArregladorDeNombres.Procesa();
+      miManejadorDeMapa.ManejadorDeVías.ArregladorGeneral.Procesa();
     }
 
 
@@ -629,6 +615,20 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private void EnMenúBuscarAlertasEnPdis(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.BuscadorDeAlertas.Procesa();
+    }
+
+    private void EnMenúLicencia(object sender, EventArgs e)
+    {
+      string directorioDeLaAplicación = Path.GetDirectoryName(Application.ExecutablePath);
+      string archivo = Path.Combine(directorioDeLaAplicación, "Licencia.htm");
+      System.Diagnostics.Process.Start(archivo);
+    }
+
+    private void EnMenúEtiquetas(object sender, EventArgs e)
+    {
+      string directorioDeLaAplicación = Path.GetDirectoryName(Application.ExecutablePath);
+      string archivo = Path.Combine(directorioDeLaAplicación, "MensajesAlertasErrores.txt");
+      System.Diagnostics.Process.Start(archivo);
     }
     #endregion
   }

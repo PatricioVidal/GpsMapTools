@@ -216,7 +216,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Busca las Vías que tengan el mismo nombre desde la posición n + 1, que
       // no estén eliminadas.
       List<Vía> víasConElMismoNombre = new List<Vía> { laVía };
-      bool hayIncongruencias = false;
+      bool hayAlertas = false;
       for (int i = IndiceDeElementoProcesándose + 1; i < NúmeroDeElementos; ++i)
       {
         Vía vía = this[i];
@@ -262,13 +262,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
         int diferenciaDelIndice = índiceMáximoDeLaClaseDeRuta - índiceMínimoDeLaClaseDeRuta;
 
         // Si las diferencia es mayor del límite entonces
-        // hay incongruencias.
+        // hay alertas.
         const int máximaDiferenciaDeLaClaseDeRuta = 2;
         if (diferenciaDelIndice > máximaDiferenciaDeLaClaseDeRuta)
         {
-          detallePorDefecto = "Diferencia de los Indices de la Clase de Ruta es " +
-            diferenciaDelIndice + ", y la máxima deferencia permitida es " + máximaDiferenciaDeLaClaseDeRuta;
-          hayIncongruencias = true;
+          detallePorDefecto = string.Format("A104: Diferencia de los Indices de la Clase de Ruta es {0}, " +
+            "y la máxima deferencia permitida es {1}.", diferenciaDelIndice, máximaDiferenciaDeLaClaseDeRuta);
+          hayAlertas = true;
         }
       }
       #endregion
@@ -292,7 +292,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       // Si se detectaron incongruencias entonces las añadimos a la lista.
-      if (hayIncongruencias)
+      if (hayAlertas)
       {
         misPosiblesErrorDeRuteo.Add(laVía, elementosDeIncongruencia);
         ++númeroDeProblemasDetectados;

@@ -70,17 +70,24 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 
-namespace GpsYv.ManejadorDeMapa.Pdis
+namespace GpsYv.ManejadorDeMapa.Vías
 {
   /// <summary>
-  /// Eliminador de Caracteres en Nombres de Pdis.
+  /// Arregla las cosas  generales de lss Vías que se pueden arreglar automáticamente.
   /// </summary>
-  public class EliminadorDeCaracteres : ProcesadorBase<ManejadorDePdis, Pdi>
+  /// <remarks>
+  /// Las cosas que son arregladas son:
+  ///   - Nombres de las Vías.
+  /// </remarks>
+  public class ArregladorGeneral : ProcesadorBase<ManejadorDeVías, Vía>
   {
     #region Campos
-    private readonly LectorDeCaracteresAEliminar miLectorDeCaracteresAEliminar;
+    private readonly Tipo miTipoCaminería = new Tipo("0x16");
+    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaDeCaminería = new CampoParámetrosDeRuta(
+      new LímiteDeVelocidad(0),
+      new ClaseDeRuta(0),
+      new bool[] { false, false, true, true, true, true, true, false, false, true });
     #endregion
 
     #region Métodos Públicos
@@ -88,54 +95,137 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// Descripción de éste procesador.
     /// </summary>
     public static readonly string Descripción =
-      "Elimina Caracteres inválidos en los nombres de Pdis.";
+      "- Arregla los nombres de las Vías.\n" + 
+      "- Arregla parametros de caminerías.";
 
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDePdis">El manejador de PDIs.</param>
+    /// <param name="elManejadorDeVías">El manejador de Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public EliminadorDeCaracteres(
-      ManejadorDePdis elManejadorDePdis,
+    public ArregladorGeneral(
+      ManejadorDeVías elManejadorDeVías,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePdis, elEscuchadorDeEstatus)
+      : base(elManejadorDeVías, elEscuchadorDeEstatus)
     {
-      miLectorDeCaracteresAEliminar = new LectorDeCaracteresAEliminar(elEscuchadorDeEstatus);
     }
     #endregion
 
     #region Métodos Protegidos.
     /// <summary>
-    /// Procesa un PDI.
+    /// Procesa una Vía.
     /// </summary>
-    /// <param name="elPdi">El PDI.</param>
+    /// <param name="laVía">La Vía.</param>
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
-    protected override int ProcesaElemento(Pdi elPdi)
+    protected override int ProcesaElemento(Vía laVía)
     {
-      int númeroDeItemsDetectados = 0;
+      int númeroDeProblemasDetectados = 0;
 
-      #region Elimina los Caracteres Inválidos.
-      string nombreACorregir = elPdi.Nombre;
-      string nombreCorregido = nombreACorregir;
+      númeroDeProblemasDetectados += ArreglaNombres(laVía);
+      númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
 
-      // Arregla la letras no permitidas.
-      IList<char> caracteresInválidos = miLectorDeCaracteresAEliminar.ListaDeCaracteresInválidos;
-      foreach (char caracterInválido in caracteresInválidos)
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int ArreglaNombres(Vía laVía)
+    {
+       int númeroDeProblemasDetectados = 0;
+
+      string nombreACorregir = laVía.Nombre;
+
+      #region Cambia el nombre a mayúsculas
+      string nombreCorregido = nombreACorregir.ToUpper();
+      if (nombreCorregido != nombreACorregir)
       {
-        nombreCorregido = nombreACorregir.Replace(caracterInválido.ToString(), string.Empty);
+        laVía.ActualizaNombre(nombreCorregido, "M102: Cambiado a mayúsculas.");
+        ++númeroDeProblemasDetectados;
+        nombreACorregir = nombreCorregido;
       }
       #endregion
 
-      // Si el nombre cambió entonces actualizar el PDI y reportar el cambio.
+      // Remueve los espacios en blanco alrededor.
+      nombreCorregido = nombreACorregir.Trim();
+
+      #region Remueve espacios en blanco extra entre medio de las palabras.
+      string[] palabras = nombreCorregido.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+      nombreCorregido = string.Join(" ", palabras);
       if (nombreCorregido != nombreACorregir)
       {
-        // Actualiza el campo del nombre.
-        elPdi.ActualizaNombre(nombreCorregido, "Eliminación de Caracteres Inválidos");
-        ++númeroDeItemsDetectados;
+        laVía.ActualizaNombre(nombreCorregido, "M103: Eliminados espacios en blanco extra.");
+        ++númeroDeProblemasDetectados;
+        nombreACorregir = nombreCorregido;
+      }
+      #endregion
+
+      #region Busca si el nombre de la vía comienza por un calificativo conocido.
+      bool nombreComienzaConCalificativo = false;
+      string calificativo = null;
+      foreach (string posibleCalificativo in CalificativosDeVías.Calificativos)
+      {
+        if (nombreACorregir.StartsWith(posibleCalificativo))
+        {
+          nombreComienzaConCalificativo = true;
+          calificativo = posibleCalificativo;
+          break;
+        }
+      }
+      #endregion
+
+      #region Ve si el calificativo está al final y arreglalo
+      bool nombreTerminaConCalificativo = false;
+      if (!nombreComienzaConCalificativo)
+      {
+        foreach (string posibleCalificativo in CalificativosDeVías.Calificativos)
+        {
+          if (nombreACorregir.EndsWith(posibleCalificativo))
+          {
+            nombreTerminaConCalificativo = true;
+            calificativo = posibleCalificativo;
+            break;
+          }
+        }
+
+        if (nombreTerminaConCalificativo)
+        {
+          nombreCorregido = nombreACorregir.Replace(' ' + calificativo, string.Empty);
+          nombreCorregido = calificativo + ' ' + nombreCorregido;
+          laVía.ActualizaNombre(nombreCorregido, "M104: Movido el calificativo al principio.");
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      #endregion
+
+      #region Genera el nombre secundario si tenemos un calificativo.
+      if (calificativo != null)
+      {
+        // El calificativo está al principio.
+        string nombreSinCalificativo = nombreCorregido.Replace(calificativo + ' ', string.Empty);
+        string nombreSecundario = nombreSinCalificativo + ' ' + calificativo;
+        laVía.ActualizaNombreSecundario(nombreSecundario, nombreSecundario);
+      }
+      #endregion
+
+      return númeroDeProblemasDetectados;
+    }
+    
+
+    private int ArreglaCaminerías(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      // Solo procesa caminerías.
+      if (laVía.Tipo != miTipoCaminería)
+      {
+        return númeroDeProblemasDetectados;
       }
 
-      return númeroDeItemsDetectados;
+      laVía.CambiaCampoParámetrosDeRuta(
+        miCampoParámetrosDeRutaDeCaminería,
+        "M105: Cambiado a Parámetros de Caminería estándar.");
+
+      return númeroDeProblemasDetectados;
     }
 
 
@@ -158,61 +248,6 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       // No necesitamos hacer nada aquí.
-    }
-    #endregion
-
-    #region Clases Privadas
-    private class LectorDeCaracteresAEliminar : LectorDeArchivo
-    {
-      #region Campos
-      private const string miArchivoDeCaracteresAEliminar = @"PDIs\CaracteresAEliminar.csv";
-      private readonly List<char> miListaDeCaracteres = new List<char>();
-      #endregion
-
-      /// <summary>
-      /// Obtiene la Lista de Caracteres Inválidos.
-      /// </summary>
-      public IList<char> ListaDeCaracteresInválidos 
-      {
-        get
-        {
-          return miListaDeCaracteres;
-        }
-      }
-
-      /// <summary>
-      /// Constructor.
-      /// </summary>
-      /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-      public LectorDeCaracteresAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
-        : base(elEscuchadorDeEstatus)
-      {
-        Lee(miArchivoDeCaracteresAEliminar);
-      }
-
-      #region Métodos Protegidos y Privados
-      protected override void ProcesaLínea(string laLínea)
-      {
-        // Elimina espacios en blanco.
-        string línea = laLínea.Trim();
-
-        // Saltarse lineas en blanco y comentarios.
-        bool laLíneaEstaEnBlanco = (línea == string.Empty);
-        bool laLíneaEsComentario = línea.StartsWith("//");
-        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
-        {
-          // Verifica que tenemos una sola letra.
-          if (línea.Length != 1)
-          {
-            throw new ArgumentException("Se encontró más de un caracter en la linea: " + línea);
-          }
-
-          // Añade el aaracter a la lista.
-          char caracter = línea[0];
-          miListaDeCaracteres.Add(caracter);
-        }
-      }
-      #endregion
     }
     #endregion
   }

@@ -142,7 +142,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       bool esVacio = (tipo == Tipo.TipoNulo);
       if (esVacio)
       {
-        errores.Add("El tipo está vacío.");
+        errores.Add("E000: El tipo está vacío.");
       }
       #endregion 
 
@@ -150,7 +150,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       bool esConocido = CaracterísticasDePdis.Descripciones.ContainsKey(tipo);
       if (!esConocido)
       {
-        errores.Add("El tipo (" + elPdi.Tipo + ") no es conocido");
+          errores.Add(string.Format("E001: El tipo ({0}) no es conocido.", elPdi.Tipo));
       }
       #endregion 
 
@@ -168,11 +168,11 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       }
       if (campoCoordenadas == null)
       {
-        errores.Add("No tiene coordenadas.");
+        errores.Add("E002: No tiene coordenadas.");
       }
       else if (campoCoordenadas.Nivel != 0)
       {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
+        errores.Add(string.Format("E003: No tiene coordenadas a nivel 0, sino a nivel {0}.", campoCoordenadas.Nivel));
       }
       #endregion
 

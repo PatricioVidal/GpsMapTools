@@ -87,27 +87,15 @@ namespace GpsYv.ManejadorDeMapa.Pdis
 
 
     /// <summary>
-    /// Obtiene el Eliminador de Caracteres.
-    /// </summary>
-    public EliminadorDeCaracteres EliminadorDeCaracteres { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Letras.
-    /// </summary>
-    public ArregladorDeLetras ArregladorDeLetras { get; private set; }
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Palabras por Tipo.
-    /// </summary>
-    public ArregladorDePalabrasPorTipo ArregladorDePalabrasPorTipo { get; private set; }
-
-
-    /// <summary>
     /// Obtiene el Arreglador de Indices de Ciudades.
     /// </summary>
     public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
+
+    
+    /// <summary>
+    /// Obtiene el Arreglador General de PDIs.
+    /// </summary>
+    public ArregladorGeneral ArregladorGeneral { get; private set; }
 
 
     /// <summary>
@@ -143,10 +131,8 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       : base (elManejadorDeMapa, losPuntosDeInteres, elEscuchadorDeEstatus)
     {
       // Crea los procesadores.
-      EliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
-      ArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
-      ArregladorDePalabrasPorTipo = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
       ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
+      ArregladorGeneral = new ArregladorGeneral(this, elEscuchadorDeEstatus);
       BuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
       BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
       BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
@@ -164,11 +150,10 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     {
       // Hacer todos las operaciones en orden.
       int númeroDeProblemasEnPdis = 0;
-      númeroDeProblemasEnPdis += EliminadorDeCaracteres.Procesa();
-      númeroDeProblemasEnPdis += ArregladorDeLetras.Procesa();
-      númeroDeProblemasEnPdis += ArregladorDePalabrasPorTipo.Procesa();
       númeroDeProblemasEnPdis += ArregladorDeIndicesDeCiudad.Procesa();
+      númeroDeProblemasEnPdis += ArregladorGeneral.Procesa();
       númeroDeProblemasEnPdis += BuscadorDeDuplicados.Procesa();
+      númeroDeProblemasEnPdis += BuscadorDeAlertas.Procesa();
       númeroDeProblemasEnPdis += BuscadorDeErrores.Procesa();
 
       // Reporta estatus.

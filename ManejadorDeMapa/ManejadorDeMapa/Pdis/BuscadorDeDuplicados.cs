@@ -206,7 +206,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
           // Si el PDI es idéntico entonces se puede borrar de una.
           if (posiblePdiDuplicado.TieneLaMismaInformación(elPdi))
           {
-            posiblePdiDuplicado.Elimina("PDI idéntico al elemento " + elPdi.Número);
+            posiblePdiDuplicado.Elimina(string.Format("M006: PDI idéntico al elemento {0}.", elPdi.Número));
             misPdisDuplicados.Add(posiblePdiDuplicado);
             ++miNúmeroDeElementosEliminados;
           }

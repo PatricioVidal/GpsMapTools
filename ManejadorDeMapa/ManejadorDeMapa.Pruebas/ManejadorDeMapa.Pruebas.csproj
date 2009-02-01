@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfase\PDIs\PruebaVentanaCambiarTipoDePDI.cs" />
-    <Compile Include="Pdis\PruebaArregladorDePalabrasPorTipo.cs" />
+    <Compile Include="Pdis\PruebaArregladorGeneral.cs" />
     <Compile Include="Pdis\PruebaBuscadorDeDuplicados.cs" />
     <Compile Include="Pdis\PruebaManejadorDePdis.cs" />
     <Compile Include="PruebaCampoParámetrosDeRuta.cs" />

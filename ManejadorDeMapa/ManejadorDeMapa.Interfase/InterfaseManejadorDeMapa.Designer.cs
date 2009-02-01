@@ -38,10 +38,8 @@
           this.miMenúProcesarTodo = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúProcesarTodoEnPdis = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenúEliminarCaracteresEnPdis = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenuArreglarLetrasEnPdis = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenuArreglarPalabrasEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúArreglarIndicesDeCiudadEnPdis = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenuArreglarCosasGeneralesEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscaDuplicadosEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarAlertasEnPdis = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarErroresEnPdis = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +47,7 @@
           this.miMenúProcesarTodoEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
           this.miMenúArreglarIndicesDeCiudadEnVías = new System.Windows.Forms.ToolStripMenuItem();
-          this.miMenúArreglarNombresDeVías = new System.Windows.Forms.ToolStripMenuItem();
+          this.miMenúArreglarCosasGeneralesEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarPosiblesErroresDeRuteoEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarAlertasEnVías = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenúBuscarErroresEnVías = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +79,8 @@
           this.miInterfaseManejadorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
+          this.licenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.etiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -138,10 +138,8 @@
           this.miMenuPdis.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miMenúProcesarTodoEnPdis,
             toolStripSeparator6,
-            this.miMenúEliminarCaracteresEnPdis,
-            this.miMenuArreglarLetrasEnPdis,
-            this.miMenuArreglarPalabrasEnPdis,
             this.miMenúArreglarIndicesDeCiudadEnPdis,
+            this.miMenuArreglarCosasGeneralesEnPdis,
             this.miMenúBuscaDuplicadosEnPdis,
             this.miMenúBuscarAlertasEnPdis,
             this.miMenúBuscarErroresEnPdis});
@@ -152,31 +150,19 @@
           // 
           this.miMenúProcesarTodoEnPdis.Name = "miMenúProcesarTodoEnPdis";
           resources.ApplyResources(this.miMenúProcesarTodoEnPdis, "miMenúProcesarTodoEnPdis");
-          this.miMenúProcesarTodoEnPdis.Click += new System.EventHandler(this.EnMenuProcesarTodoEnPdis);
-          // 
-          // miMenúEliminarCaracteresEnPdis
-          // 
-          this.miMenúEliminarCaracteresEnPdis.Name = "miMenúEliminarCaracteresEnPdis";
-          resources.ApplyResources(this.miMenúEliminarCaracteresEnPdis, "miMenúEliminarCaracteresEnPdis");
-          this.miMenúEliminarCaracteresEnPdis.Click += new System.EventHandler(this.EnMenúEliminarCaracteresEnPdis);
-          // 
-          // miMenuArreglarLetrasEnPdis
-          // 
-          this.miMenuArreglarLetrasEnPdis.Name = "miMenuArreglarLetrasEnPdis";
-          resources.ApplyResources(this.miMenuArreglarLetrasEnPdis, "miMenuArreglarLetrasEnPdis");
-          this.miMenuArreglarLetrasEnPdis.Click += new System.EventHandler(this.EnMenuArreglarLetrasEnPdis);
-          // 
-          // miMenuArreglarPalabrasEnPdis
-          // 
-          this.miMenuArreglarPalabrasEnPdis.Name = "miMenuArreglarPalabrasEnPdis";
-          resources.ApplyResources(this.miMenuArreglarPalabrasEnPdis, "miMenuArreglarPalabrasEnPdis");
-          this.miMenuArreglarPalabrasEnPdis.Click += new System.EventHandler(this.EnMenuArreglarPalabrasEnPdis);
+          this.miMenúProcesarTodoEnPdis.Click += new System.EventHandler(this.EnMenúProcesarTodoEnPdis);
           // 
           // miMenúArreglarIndicesDeCiudadEnPdis
           // 
           this.miMenúArreglarIndicesDeCiudadEnPdis.Name = "miMenúArreglarIndicesDeCiudadEnPdis";
           resources.ApplyResources(this.miMenúArreglarIndicesDeCiudadEnPdis, "miMenúArreglarIndicesDeCiudadEnPdis");
           this.miMenúArreglarIndicesDeCiudadEnPdis.Click += new System.EventHandler(this.EnMenúArreglarIndicesDeCiudadEnPDIs);
+          // 
+          // miMenuArreglarCosasGeneralesEnPdis
+          // 
+          this.miMenuArreglarCosasGeneralesEnPdis.Name = "miMenuArreglarCosasGeneralesEnPdis";
+          resources.ApplyResources(this.miMenuArreglarCosasGeneralesEnPdis, "miMenuArreglarCosasGeneralesEnPdis");
+          this.miMenuArreglarCosasGeneralesEnPdis.Click += new System.EventHandler(this.EnMenúArreglarCosasGeneralesEnPdis);
           // 
           // miMenúBuscaDuplicadosEnPdis
           // 
@@ -202,7 +188,7 @@
             this.miMenúProcesarTodoEnVías,
             this.toolStripSeparator5,
             this.miMenúArreglarIndicesDeCiudadEnVías,
-            this.miMenúArreglarNombresDeVías,
+            this.miMenúArreglarCosasGeneralesEnVías,
             this.miMenúBuscarPosiblesErroresDeRuteoEnVías,
             this.miMenúBuscarAlertasEnVías,
             this.miMenúBuscarErroresEnVías,
@@ -215,7 +201,7 @@
           // 
           this.miMenúProcesarTodoEnVías.Name = "miMenúProcesarTodoEnVías";
           resources.ApplyResources(this.miMenúProcesarTodoEnVías, "miMenúProcesarTodoEnVías");
-          this.miMenúProcesarTodoEnVías.Click += new System.EventHandler(this.EnMenuProcesarTodoEnVías);
+          this.miMenúProcesarTodoEnVías.Click += new System.EventHandler(this.EnMenúProcesarTodoEnVías);
           // 
           // toolStripSeparator5
           // 
@@ -228,11 +214,11 @@
           resources.ApplyResources(this.miMenúArreglarIndicesDeCiudadEnVías, "miMenúArreglarIndicesDeCiudadEnVías");
           this.miMenúArreglarIndicesDeCiudadEnVías.Click += new System.EventHandler(this.EnMenúArreglarIndicesDeCiudadEnVías);
           // 
-          // miMenúArreglarNombresDeVías
+          // miMenúArreglarCosasGeneralesEnVías
           // 
-          this.miMenúArreglarNombresDeVías.Name = "miMenúArreglarNombresDeVías";
-          resources.ApplyResources(this.miMenúArreglarNombresDeVías, "miMenúArreglarNombresDeVías");
-          this.miMenúArreglarNombresDeVías.Click += new System.EventHandler(this.EnMenúArreglarNombresDeVías);
+          this.miMenúArreglarCosasGeneralesEnVías.Name = "miMenúArreglarCosasGeneralesEnVías";
+          resources.ApplyResources(this.miMenúArreglarCosasGeneralesEnVías, "miMenúArreglarCosasGeneralesEnVías");
+          this.miMenúArreglarCosasGeneralesEnVías.Click += new System.EventHandler(this.EnMenúArreglarCosasGeneralesEnVías);
           // 
           // miMenúBuscarPosiblesErroresDeRuteoEnVías
           // 
@@ -295,13 +281,13 @@
           // 
           resources.ApplyResources(this.miMenuGuardar, "miMenuGuardar");
           this.miMenuGuardar.Name = "miMenuGuardar";
-          this.miMenuGuardar.Click += new System.EventHandler(this.EnMenuGuardar);
+          this.miMenuGuardar.Click += new System.EventHandler(this.EnMenúGuardar);
           // 
           // miMenuGuardarComo
           // 
           resources.ApplyResources(this.miMenuGuardarComo, "miMenuGuardarComo");
           this.miMenuGuardarComo.Name = "miMenuGuardarComo";
-          this.miMenuGuardarComo.Click += new System.EventHandler(this.EnMenuGuardarComo);
+          this.miMenuGuardarComo.Click += new System.EventHandler(this.EnMenúGuardarComo);
           // 
           // miMenuSalir
           // 
@@ -313,7 +299,9 @@
           // 
           this.miMenúAyuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.acercaToolStripMenuItem,
-            this.miMenuAcerca});
+            this.miMenuAcerca,
+            this.licenciaToolStripMenuItem,
+            this.etiquetasToolStripMenuItem});
           this.miMenúAyuda.Name = "miMenúAyuda";
           resources.ApplyResources(this.miMenúAyuda, "miMenúAyuda");
           // 
@@ -328,7 +316,7 @@
           // 
           this.miMenuAcerca.Name = "miMenuAcerca";
           resources.ApplyResources(this.miMenuAcerca, "miMenuAcerca");
-          this.miMenuAcerca.Click += new System.EventHandler(this.EnMenuAcerca);
+          this.miMenuAcerca.Click += new System.EventHandler(this.EnMenúAcerca);
           // 
           // miEstatus
           // 
@@ -461,6 +449,18 @@
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
           // 
+          // licenciaToolStripMenuItem
+          // 
+          this.licenciaToolStripMenuItem.Name = "licenciaToolStripMenuItem";
+          resources.ApplyResources(this.licenciaToolStripMenuItem, "licenciaToolStripMenuItem");
+          this.licenciaToolStripMenuItem.Click += new System.EventHandler(this.EnMenúLicencia);
+          // 
+          // etiquetasToolStripMenuItem
+          // 
+          this.etiquetasToolStripMenuItem.Name = "etiquetasToolStripMenuItem";
+          resources.ApplyResources(this.etiquetasToolStripMenuItem, "etiquetasToolStripMenuItem");
+          this.etiquetasToolStripMenuItem.Click += new System.EventHandler(this.EnMenúEtiquetas);
+          // 
           // InterfaseManejadorDeMapa
           // 
           resources.ApplyResources(this, "$this");
@@ -519,9 +519,7 @@
         private GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías miInterfaseManejadorDeVías;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodo;
-        private System.Windows.Forms.ToolStripMenuItem miMenúEliminarCaracteresEnPdis;
-        private System.Windows.Forms.ToolStripMenuItem miMenuArreglarLetrasEnPdis;
-        private System.Windows.Forms.ToolStripMenuItem miMenuArreglarPalabrasEnPdis;
+        private System.Windows.Forms.ToolStripMenuItem miMenuArreglarCosasGeneralesEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarErroresEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenuPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúVías;
@@ -534,10 +532,12 @@
         private System.Windows.Forms.Button miBotónParaDeProcesar;
         private System.Windows.Forms.ToolStripMenuItem miMenúArreglarIndicesDeCiudadEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúArreglarIndicesDeCiudadEnVías;
-        private System.Windows.Forms.ToolStripMenuItem miMenúArreglarNombresDeVías;
+        private System.Windows.Forms.ToolStripMenuItem miMenúArreglarCosasGeneralesEnVías;
         private System.Windows.Forms.ToolStripMenuItem miMenúProcesarTodoEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscaDuplicadosEnPdis;
         private System.Windows.Forms.ToolStripMenuItem miMenúBuscarAlertasEnPdis;
+        private System.Windows.Forms.ToolStripMenuItem licenciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem etiquetasToolStripMenuItem;
     }
 }
 

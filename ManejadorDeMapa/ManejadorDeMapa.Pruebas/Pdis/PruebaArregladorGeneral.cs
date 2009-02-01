@@ -80,7 +80,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
   /// Prueba de clase <see cref="ArregladorDePalabrasPorTipo"/>.
   ///</summary>
   [TestFixture]
-  public class PruebaArregladorDePalabrasPorTipo
+  public class PruebaArregladorGeneral
   {
     /// <summary>
     /// Prueba el constructor.
@@ -130,7 +130,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
       ManejadorDePdis manejadorDePdis = new ManejadorDePdis(manejadorDeMapa, new List<Pdi>(), escuchadorDeEstatus);
-      ArregladorDePalabrasPorTipo objectoDePrueba = new ArregladorDePalabrasPorTipo(manejadorDePdis, escuchadorDeEstatus);
+      ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDePdis, escuchadorDeEstatus);
      
       // Caso de prueba.
       Caso[] casos = new[] {

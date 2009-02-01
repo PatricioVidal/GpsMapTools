@@ -72,9 +72,9 @@
 using System.Reflection;
 using System.Resources;
 
-[assembly: AssemblyCompany("GPS_YV (http://www.gpsyv.net)")]
+[assembly: AssemblyCompany("[***BETA***] - GPS_YV (http://www.gpsyv.net)")]
 [assembly: AssemblyProduct("Herramientas de Mapas GPS (GPS Maps Tools)")]
-[assembly: AssemblyCopyright("Copyright © 2008, GPS_YV (http://www.gpsyv.net)")]
+[assembly: AssemblyCopyright("Copyright © 2008-2009, GPS_YV (http://www.gpsyv.net)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -87,7 +87,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       ManejadorDePdis manejadorDePdis = new ManejadorDePdis(manejadorDeMapa, new List<Pdi>(), escuchadorDeEstatus);
 
       // Llama al contructor bajo prueba.
-      ArregladorDePalabrasPorTipo objectoDePrueba = new ArregladorDePalabrasPorTipo(manejadorDePdis, escuchadorDeEstatus); 
+      BuscadorDeDuplicados objectoDePrueba = new BuscadorDeDuplicados(manejadorDePdis, escuchadorDeEstatus); 
 
       // Prueba propiedades.
       Assert.AreEqual(0, objectoDePrueba.NúmeroDeElementos, "NúmeroDeElementos");

@@ -93,9 +93,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
 
     /// <summary>
-    /// Obtiene el Arreglador de Nombres.
+    /// Obtiene el Arreglador General.
     /// </summary>
-    public ArregladorDeNombres ArregladorDeNombres { get; private set; }
+    public ArregladorGeneral ArregladorGeneral { get; private set; }
 
 
     /// <summary>
@@ -138,7 +138,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       // Crea los procesadores.
       ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
-      ArregladorDeNombres = new ArregladorDeNombres(this, elEscuchadorDeEstatus);
+      ArregladorGeneral = new ArregladorGeneral(this, elEscuchadorDeEstatus);
       BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
       BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
       BuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
@@ -158,7 +158,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Hacer todos las operaciones en orden.
       int númeroDeProblemasEnVías = 0;
       númeroDeProblemasEnVías += ArregladorDeIndicesDeCiudad.Procesa();
-      númeroDeProblemasEnVías += ArregladorDeNombres.Procesa();
+      númeroDeProblemasEnVías += ArregladorGeneral.Procesa();
       númeroDeProblemasEnVías += BuscadorDeAlertas.Procesa();
       númeroDeProblemasEnVías += BuscadorDePosiblesErroresDeRuteo.Procesa();
       númeroDeProblemasEnVías += BuscadorDeErrores.Procesa();

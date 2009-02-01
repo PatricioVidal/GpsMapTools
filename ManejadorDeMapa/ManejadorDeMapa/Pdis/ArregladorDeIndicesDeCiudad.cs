@@ -1,35 +1,35 @@
-#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
+Ôªø#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
 // (For English, see further down.)
 //
-// GpsYv.ManejadorDeMapa es una aplicaciÛn para manejar Mapas de GPS en el
+// GpsYv.ManejadorDeMapa es una aplicaci√≥n para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
 //
-// Esta programa naciÛ por la necesidad del Grupo GPS de Venezuela, 
+// Esta programa naci√≥ por la necesidad del Grupo GPS de Venezuela, 
 // GPS_YV (http://www.gpsyv.net), de analizar y corregir los mapas que el
 // grupo genera para la comunidad.  GpsYv.ManejadorDeMapa se distribuye bajo 
-// la licencia GPL con la finalidad de que sea ˙til para otros grupos o
-// individuos que hacen mapas, y tambiÈn para promover la colaboraciÛn 
+// la licencia GPL con la finalidad de que sea √∫til para otros grupos o
+// individuos que hacen mapas, y tambi√©n para promover la colaboraci√≥n 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para m·s informaciÛn.
+// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para m√°s informaci√≥n.
 //
-// La lÛgica de este programa se ha desarrollado con las ideas de los miembros
+// La l√≥gica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
 // Programador: Patricio Vidal (PatricioV2@hotmail.com)
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
-// bajo los tÈrminos de la Licencia P˙blica General de GNU seg˙n es publicada
-// por la Free Software Foundation, bien de la versiÛn 2 de dicha Licencia o 
-// bien (seg˙n su elecciÛn) de cualquier versiÛn posterior. 
+// bajo los t√©rminos de la Licencia P√∫blica General de GNU seg√∫n es publicada
+// por la Free Software Foundation, bien de la versi√≥n 2 de dicha Licencia o 
+// bien (seg√∫n su elecci√≥n) de cualquier versi√≥n posterior. 
 //
-// Este programa se distribuye con la esperanza de que sea ˙til, 
-// pero SIN NINGUNA GARANTÕA, incluso sin la garantÌa MERCANTIL
-// implÌcita o sin garantizar la CONVENIENCIA PARA UN PROP”SITO PARTICULAR.
-// VÈase la Licencia P˙blica General de GNU para m·s detalles. 
+// Este programa se distribuye con la esperanza de que sea √∫til, 
+// pero SIN NINGUNA GARANT√çA, incluso sin la garant√≠a MERCANTIL
+// impl√≠cita o sin garantizar la CONVENIENCIA PARA UN PROP√ìSITO PARTICULAR.
+// V√©ase la Licencia P√∫blica General de GNU para m√°s detalles. 
 //
-// DeberÌa haber recibido una copia de la Licencia P˙blica General 
-// junto con este programa. Si no ha sido asÌ, escriba a la 
+// Deber√≠a haber recibido una copia de la Licencia P√∫blica General 
+// junto con este programa. Si no ha sido as√≠, escriba a la 
 // Free Software Foundation, Inc., en 675 Mass Ave, 
 // Cambridge, MA 02139, EEUU.
 //
@@ -79,11 +79,11 @@ namespace GpsYv.ManejadorDeMapa.Pdis
   /// </summary>
   public class ArregladorDeIndicesDeCiudad : ProcesadorBase<ManejadorDePdis, Pdi>
   {
-    #region MÈtodos P˙blicos
+    #region M√©todos P√∫blicos
     /// <summary>
-    /// DescripciÛn de Èste procesador.
+    /// Descripci√≥n de √©ste procesador.
     /// </summary>
-    public static readonly string DescripciÛn =
+    public static readonly string Descripci√≥n =
       "Arregla el Indice de Ciudad (CityIdx) de los PDIs.";
 
 
@@ -100,77 +100,77 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     }
     #endregion
 
-    #region MÈtodos Protegidos.
+    #region M√©todos Protegidos.
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
     /// <param name="elPdi">El PDI.</param>
-    /// <returns>El n˙mero de problemas detectados al procesar el elemento.</returns>
+    /// <returns>El n√∫mero de problemas detectados al procesar el elemento.</returns>
     protected override int ProcesaElemento(Pdi elPdi)
     {
       // Retorna si el PDI es una ciudad.
       if (elPdi.EsCiudad)
       {
-        return 0;  
+        return 0;
       }
 
-      int n˙meroDeProblemasDetectados = 0;
+      int n√∫meroDeProblemasDetectados = 0;
 
-      // Por cada ciudad, si el PDI est· adentro de la ciudad entonces
+      // Por cada ciudad, si el PDI est√° adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
-      bool seEncontrÛUnaCiudad = false;
-      foreach(Ciudad ciudad in ManejadorDeMapa.Ciudades)
+      bool seEncontr√≥UnaCiudad = false;
+      foreach (Ciudad ciudad in ManejadorDeMapa.Ciudades)
       {
-        PolygonF polÌgono = new PolygonF(ciudad.CoordenadasComoPuntos);
-        if (polÌgono.Contains(elPdi.Coordenadas))
+        PolygonF pol√≠gono = new PolygonF(ciudad.CoordenadasComoPuntos);
+        if (pol√≠gono.Contains(elPdi.Coordenadas))
         {
-          bool cambiÛ = elPdi.ActualizaCampoIndiceDeCiudad(
+          bool cambi√≥ = elPdi.ActualizaCampoIndiceDeCiudad(
             ciudad.Indice,
-            string.Format("El PDI pertenece a la Ciudad {0}", ciudad));
-          if (cambiÛ)
+            string.Format("M000: El PDI pertenece a la Ciudad {0}", ciudad));
+          if (cambi√≥)
           {
-            ++n˙meroDeProblemasDetectados;
+            ++n√∫meroDeProblemasDetectados;
           }
 
           // El PDI solo puede pertenecer a una sola ciudad.
-          seEncontrÛUnaCiudad = true;
+          seEncontr√≥UnaCiudad = true;
           break;
         }
       }
 
-      // Si no se encontrÛ una ciudad entonces hay que quitarle el campo si lo tiene.
-      if (!seEncontrÛUnaCiudad)
+      // Si no se encontr√≥ una ciudad entonces hay que quitarle el campo si lo tiene.
+      if (!seEncontr√≥UnaCiudad)
       {
-        bool cambiÛ = elPdi.RemueveCampoIndiceDeCiudad("El PDI no pertenece a ninguna ciudad.");
-        if (cambiÛ)
+        bool cambi√≥ = elPdi.RemueveCampoIndiceDeCiudad("M001: El PDI no pertenece a ninguna ciudad.");
+        if (cambi√≥)
         {
-          ++n˙meroDeProblemasDetectados;
+          ++n√∫meroDeProblemasDetectados;
         }
       }
 
-      return n˙meroDeProblemasDetectados;
+      return n√∫meroDeProblemasDetectados;
     }
 
 
     /// <summary>
     /// Maneja el evento cuando hay un mapa nuevo.
     /// </summary>
-    /// <param name="elEnviador">El objecto que envÌa el evento.</param>
+    /// <param name="elEnviador">El objecto que env√≠a el evento.</param>
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnMapaNuevo(object elEnviador, EventArgs losArgumentos)
     {
-      // No necesitamos hacer nada aquÌ.
+      // No necesitamos hacer nada aqu√≠.
     }
 
 
     /// <summary>
     /// Maneja el evento cuando hay elementos modificados en el mapa.
     /// </summary>
-    /// <param name="elEnviador">El objecto que envÌa el evento.</param>
+    /// <param name="elEnviador">El objecto que env√≠a el evento.</param>
     /// <param name="losArgumentos">Los argumentos del evento.</param>
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
-      // No necesitamos hacer nada aquÌ.
+      // No necesitamos hacer nada aqu√≠.
     }
     #endregion
   }

@@ -1,3 +1,10 @@
+Versión 1.36
+- Actualizada la lista de Calificativos de Vías, Características de Polígonos, y Corrección de Palabras por Tipo.
+- Añadida la opción para "Ignorar Cambios Bruscos en la Clase de Ruta" en la pestaña de "Posibles Errores de Ruteo".
+- Creado los Arregladores Generales de PDIs y Vías para consolidar funciones.
+- Creados etiquetas para los mensajes, alertas y errores (menú Ayuda->Etiquetas).  
+- Añadido menú Ayuda->Licencia.  
+
 Versión 1.35
 - Actualizada Lista de Corrección de Palabras por Tipo de PDI.
 - Actualizado para no remover el índice de ciudad de los PDI de ciudades.

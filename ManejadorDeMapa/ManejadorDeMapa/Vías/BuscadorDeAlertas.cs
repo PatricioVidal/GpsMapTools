@@ -85,11 +85,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
     #region Campos
     private readonly IDictionary<Vía, IList<string>> misAlertas = new Dictionary<Vía, IList<string>>();
     private readonly List<Vía> misVíasYaProcesadas = new List<Vía>();
-    private readonly Tipo miTipoCaminería = new Tipo("0x16");
-    private readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaDeCaminería = new CampoParámetrosDeRuta(
-      new LímiteDeVelocidad(0),
-      new ClaseDeRuta(0),
-      new bool[] { false, false, true, true, true, true, true, false, false, true });
     private PolygonF misLímitesDelMapa = null;
     #endregion
 
@@ -168,7 +163,6 @@ namespace GpsYv.ManejadorDeMapa.Vías
     {
       int númeroDeProblemasDetectados = 0;
 
-      númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
       númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
       númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(laVía);
 
@@ -192,28 +186,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
         if (!misLímitesDelMapa.Contains(coordenadas))
         {
           ++númeroDeProblemasDetectados;
-          misAlertas.Add(laVía, new List<string>(){"Vía fuera de límites del mapa."});
+          misAlertas.Add(laVía, new List<string>(){"A101: Vía fuera de límites del mapa."});
           break;
         }
       }
-
-      return númeroDeProblemasDetectados;
-    }
-
-
-    private int ArreglaCaminerías(Vía laVía)
-    {
-      int númeroDeProblemasDetectados = 0;
-
-      // Solo procesa caminerías.
-      if (laVía.Tipo != miTipoCaminería)
-      {
-        return númeroDeProblemasDetectados;
-      }
-
-      laVía.CambiaCampoParámetrosDeRuta(
-        miCampoParámetrosDeRutaDeCaminería,
-        "Cambiado a Parámetros de Caminería estándar");
 
       return númeroDeProblemasDetectados;
     }
@@ -237,7 +213,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
       if (límiteDeVelocidad != límiteDeVelocidadEsperado)
       {
-        alertas.Add(string.Format("Límite de Velocidad debería ser {0}, pero es {1}", límiteDeVelocidadEsperado, límiteDeVelocidad));
+        alertas.Add(string.Format("A102: Límite de Velocidad debería ser {0}, pero es {1}.", límiteDeVelocidadEsperado, límiteDeVelocidad));
       }
       #endregion
 
@@ -247,7 +223,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
       if (claseDeRuta != claseDeRutaEsperada)
       {
-        alertas.Add(string.Format("Clase de Ruta debería ser {0}, pero es {1}", claseDeRutaEsperada, claseDeRuta));
+        alertas.Add(string.Format("A103: Clase de Ruta debería ser {0}, pero es {1}.", claseDeRutaEsperada, claseDeRuta));
       }
       #endregion
 

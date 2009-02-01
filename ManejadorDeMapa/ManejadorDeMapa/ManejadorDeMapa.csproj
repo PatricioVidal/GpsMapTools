@@ -83,17 +83,16 @@
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
+    <Compile Include="Pdis\ArregladorDeIndicesDeCiudad.cs" />
     <Compile Include="Pdis\BuscadorDeAlertas.cs" />
-    <Compile Include="Vías\ArregladorDeNombres.cs" />
+    <Compile Include="Vías\ArregladorGeneral.cs" />
     <Compile Include="Vías\CalificativosDeVías.cs">
     </Compile>
     <Compile Include="Vías\Nodo.cs" />
     <Compile Include="NúmeroDeItemsEventArgs.cs" />
     <Compile Include="LímiteDeVelocidad.cs" />
     <Compile Include="ManejadorBase.cs" />
-    <Compile Include="Pdis\ArregladorDeLetras.cs" />
-    <Compile Include="Pdis\ArregladorDePalabrasPorTipo.cs" />
-    <Compile Include="Pdis\ArregladorDeIndicesDeCiudad.cs" />
+    <Compile Include="Pdis\ArregladorGeneral.cs" />
     <Compile Include="Pdis\BuscadorDeErrores.cs" />
     <Compile Include="Pdis\BuscadorDeDuplicados.cs" />
     <Compile Include="Campo.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="LectorDeArchivo.cs" />
     <Compile Include="LectorDeFormatoPolish.cs" />
     <Compile Include="ManejadorDeMapa.cs" />
-    <Compile Include="Pdis\EliminadorDeCaracteres.cs" />
     <Compile Include="Pdis\ManejadorDePdis.cs" />
     <Compile Include="Poligono.cs" />
     <Compile Include="Polilínea.cs" />
@@ -168,6 +166,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MensajesAlertasErrores.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cambios.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -191,7 +192,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Leeme.txt" />
-    <Content Include="Licencia.htm" />
+    <Content Include="Licencia.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

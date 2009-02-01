@@ -122,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
           {
             bool cambió = laVía.ActualizaCampoIndiceDeCiudad(
               ciudad.Indice,
-              string.Format("La Vía pertenece a la Ciudad {0}", ciudad));
+              string.Format("M100: La Vía pertenece a la Ciudad {0}.", ciudad));
             if (cambió)
             {
               ++númeroDeProblemasDetectados;
@@ -146,7 +146,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
       if (!seEncontróUnaCiudad)
       {
-        bool cambió = laVía.RemueveCampoIndiceDeCiudad("La vía no pertenece a ninguna ciudad.");
+        bool cambió = laVía.RemueveCampoIndiceDeCiudad("M101: La vía no pertenece a ninguna ciudad.");
         if (cambió)
         {
           ++númeroDeProblemasDetectados;

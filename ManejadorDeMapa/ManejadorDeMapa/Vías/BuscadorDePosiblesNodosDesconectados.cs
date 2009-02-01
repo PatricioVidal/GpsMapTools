@@ -206,18 +206,18 @@ namespace GpsYv.ManejadorDeMapa.Vías
                 // posible nodo desconectado.
                 if (nodo.IdentificadorGlobal != nodoDestino.IdentificadorGlobal)
                 {
-                  error = string.Format("Los nodos tienen Identificadores Globales distintos: {0} != {1}",
+                  error = string.Format("E104: Los nodos tienen Identificadores Globales distintos: {0} != {1}.",
                     nodo.IdentificadorGlobal,
                     nodoDestino.IdentificadorGlobal);
                 }
               }
               else if (!esNodoRuteable & !esNodoDestinoRuteable)
               {
-                error = "Ambos nodos tienen la mismas coordenadas pero ninguno es ruteable.";
+                error = "E105: Ambos nodos tienen las mismas coordenadas pero ninguno es ruteable.";
               }
               else 
               {
-                error = "Ambos nodos tienen la mismas coordenadas pero solo uno es ruteable.";
+                error = "E106: Ambos nodos tienen las mismas coordenadas pero solo uno es ruteable.";
               }
 
               if (error != null)
@@ -346,7 +346,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
             }
             if (!laVíaTieneOtroNodoConectadoAlNodoDestino)
             {
-              string error = string.Format("La distancia es menor que {0:0.0} m: {1:0.0} m", DistanciaMáxima,
+              string error = string.Format("E107: La distancia es menor que {0:0.0} m: {1:0.0} m.", DistanciaMáxima,
                                            distanciaNodoMasCercano);
               InformaciónNodoDesconectado posibleNodoDesconectado = new InformaciónNodoDesconectado(
                 new Nodo(laVía, índiceNodo),
