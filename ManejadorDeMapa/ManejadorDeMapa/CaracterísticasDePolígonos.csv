@@ -34,7 +34,7 @@
 0x0a,Gray,University
 0x0b,Gray,Hospital
 0x0c,Gray,Industrial
-0x0d,Gray,Reservation
+0x0d,LightSalmon,Reservation
 0x0e,Gray,Airport Runway
 0x13,Brown,Man made area
 0x14,LightGreen,National park
@@ -66,7 +66,7 @@
 0x4b,Transparent,Background
 0x4c,Blue,Intermittent River/Lake
 0x4d,White,Glacier
-0x4e,Green,Orchard or plantation
+0x4e,LimeGreen,Orchard or plantation
 0x4f,Green,Scrub
 0x50,Green,Woods
 0x51,Yellow,Wetland
