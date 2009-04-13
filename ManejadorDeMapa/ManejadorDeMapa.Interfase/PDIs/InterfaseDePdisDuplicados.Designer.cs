@@ -51,6 +51,7 @@
       this.miBarraDeParecidoDeNombre = new System.Windows.Forms.TrackBar();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.miTextoDistancia = new System.Windows.Forms.Label();
+      this.miMenuEditorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.MenuEditorDePdis();
       ordenadorDeColumnaDeLista = new GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista(this.components);
       this.miRecipienteDividido.Panel1.SuspendLayout();
       this.miRecipienteDividido.Panel2.SuspendLayout();
@@ -78,6 +79,7 @@
             this.miColumnaNombre,
             this.miColumnaCoordenadas,
             this.miColumnaDistancia});
+      this.miLista.ContextMenuStrip = this.miMenuEditorDePdis;
       resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
@@ -228,6 +230,13 @@
       this.miTextoDistancia.BackColor = System.Drawing.SystemColors.Window;
       this.miTextoDistancia.Name = "miTextoDistancia";
       // 
+      // miMenuEditorDePdis
+      // 
+      this.miMenuEditorDePdis.Lista = this.miLista;
+      this.miMenuEditorDePdis.ManejadorDePdis = null;
+      this.miMenuEditorDePdis.Name = "miMenuDeContexto";
+      resources.ApplyResources(this.miMenuEditorDePdis, "miMenuEditorDePdis");
+      // 
       // InterfaseDePdisDuplicados
       // 
       resources.ApplyResources(this, "$this");
@@ -273,6 +282,7 @@
     private System.Windows.Forms.Button miBotónBuscaDuplicados;
     private System.Windows.Forms.Label miTextoParecidoDelNombre;
     private System.Windows.Forms.Label miTextoDistancia;
+    private MenuEditorDePdis miMenuEditorDePdis;
 
   }
 }

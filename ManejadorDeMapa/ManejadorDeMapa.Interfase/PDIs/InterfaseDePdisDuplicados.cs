@@ -115,6 +115,9 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
           miBuscadorDeDuplicados.Procesó += EnSeBuscaronDuplicados;
           InicializaDistanciaMáxima();
           InicializaDistanciaHamming();
+
+          // Pone el manejador de PDIs en los componentes.
+          miMenuEditorDePdis.ManejadorDePdis = value.ManejadorDePdis;
         }
 
         // Pone el manejador de mapa en los componentes.

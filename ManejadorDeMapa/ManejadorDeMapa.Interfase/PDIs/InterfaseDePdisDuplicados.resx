@@ -157,11 +157,26 @@
   <data name="miColumnaDistancia.Width" type="System.Int32, mscorlib">
     <value>84</value>
   </data>
+  <metadata name="miMenuEditorDePdis.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>229, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="miMenuEditorDePdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 92</value>
+  </data>
+  <data name="miMenuEditorDePdis.Text" xml:space="preserve">
+    <value>InterfaseEditorDePdi</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDePdis.Name" xml:space="preserve">
+    <value>miMenuEditorDePdis</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.MenuEditorDePdis, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -228,7 +243,7 @@
     <value>miMapa</value>
   </data>
   <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
     <value>miRecipienteDividido.Panel2</value>
@@ -267,7 +282,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;miRecipienteDividido.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="miTextoNumeroDePdisSelecionados.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -351,7 +366,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="miBarraDeDistancia.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -549,7 +564,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -564,7 +579,7 @@
     <value>ordenadorDeColumnaDeLista</value>
   </data>
   <data name="&gt;&gt;ordenadorDeColumnaDeLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;miColumnaNúmeroDeElemento.Name" xml:space="preserve">
     <value>miColumnaNúmeroDeElemento</value>
@@ -606,6 +621,6 @@
     <value>InterfaseDePdisDuplicados</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.35.3126.39851, Culture=neutral, PublicKeyToken=null</value>
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
