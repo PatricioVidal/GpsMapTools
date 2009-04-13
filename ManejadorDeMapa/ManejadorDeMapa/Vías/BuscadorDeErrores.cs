@@ -147,7 +147,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       #endregion
 
       #region Verifica que el tipo de Vía es conocido.
-      bool esConocido = CaracterísticasDePolilíneas.Descripciones.ContainsKey(tipo);
+      bool esConocido = TiposDeVías.Tipos.Contains(laVía.Tipo);
       if (!esConocido)
       {
         errores.Add(string.Format("E100: El tipo {0} no es conocido.", laVía.Tipo));
