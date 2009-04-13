@@ -968,6 +968,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       PointF finalDelSegmentoMínimoEnCoordenadas = PixelsACoordenadas(finalDelSegmentoMínimoEnPixels);
       miLargoDelSegmentoMínimoEnMetros = Coordenadas.Distancia(origenDelSegmentoEnCoordenadas, finalDelSegmentoMínimoEnCoordenadas);
 
+      // Si el largo del segmento es zero entonces nos salimos.
+      if (miLargoDelSegmentoMínimoEnMetros <= 0)
+      {
+        return;
+      }
+
       // Descompone el largo del segmento mínimo en exponente y mantisa.
       int exponenteDelSegmentoMínimo = (int)Math.Log10(miLargoDelSegmentoMínimoEnMetros);
       double mantisaDelSegmentoMínimo = miLargoDelSegmentoMínimoEnMetros / Math.Pow(10, exponenteDelSegmentoMínimo);
