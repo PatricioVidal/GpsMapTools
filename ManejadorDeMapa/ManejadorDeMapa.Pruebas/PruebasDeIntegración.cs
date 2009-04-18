@@ -93,6 +93,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       public int Modificados { get; private set; }
       public int PosiblesDuplicados { get; private set; }
       public int Eliminados { get; private set; }
+      public int Alertas { get; private set; }
       public int Errores { get; private set; }
 
       public CasoDeProcesamientoDePdis(
@@ -101,6 +102,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         int losModificados,
         int losPosiblesDuplicados,
         int losEliminados,
+        int lasAlertas,
         int losErrores)
         : this()
       {
@@ -109,6 +111,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         Modificados = losModificados;
         PosiblesDuplicados = losPosiblesDuplicados;
         Eliminados = losEliminados;
+        Alertas = lasAlertas;
         Errores = losErrores;
       }
     }
@@ -134,16 +137,17 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       TabPage pestañaModificados = pestañasPdis[2];
       TabPage pestañaEliminados = pestañasPdis[3];
       TabPage pestañaPosiblesDuplicados = pestañasPdis[4];
-      TabPage pestañaErrores = pestañasPdis[5];
+      TabPage pestañaAlertas = pestañasPdis[5];
+      TabPage pestañaErrores = pestañasPdis[6];
       #endregion
 
       CasoDeProcesamientoDePdis[] casos = new[] {
-        //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
-        new CasoDeProcesamientoDePdis( "58090.mp",  1713,         177,         20,          2,      85),
-        new CasoDeProcesamientoDePdis( "58170.mp",  6837,         544,         13,        189,     239),
-        new CasoDeProcesamientoDePdis( "58220.mp",  6460,         929,         34,         58,     192),
-        new CasoDeProcesamientoDePdis( "58370.mp",  1808,         235,         47,          8,     250),
-        new CasoDeProcesamientoDePdis( "58460.mp",   980,          85,        151,          4,     216),
+        //                                Archivo, Todos, Modificados, Duplicados, Eliminados, Alertas, Errores
+        new CasoDeProcesamientoDePdis( "58090.mp",  1713,         177,         20,          2,       0,      80),
+        new CasoDeProcesamientoDePdis( "58170.mp",  6837,         545,         12,        189,       0,     230),
+        new CasoDeProcesamientoDePdis( "58220.mp",  6460,         932,         34,         58,       0,     191),
+        new CasoDeProcesamientoDePdis( "58370.mp",  1808,         235,         47,          8,       0,     252),
+        new CasoDeProcesamientoDePdis( "58460.mp",   980,          85,        151,          4,       0,     225),
       };
 
       foreach (CasoDeProcesamientoDePdis caso in casos)
@@ -156,6 +160,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         Assert.AreEqual("Modificados (0)", pestañaModificados.Text, identificación + "PDIs.Modificados.Text");
         Assert.AreEqual("Eliminados (0)", pestañaEliminados.Text, identificación + "PDIs.Eliminados.Text");
         Assert.AreEqual("Posibles Duplicados", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
+        Assert.AreEqual("Alertas", pestañaAlertas.Text, identificación + "PDIs.Alertas.Text");
         Assert.AreEqual("Errores", pestañaErrores.Text, identificación + "PDIs.Errores.Text");
 
         // Selecciona la pestaña de PDIs.
@@ -170,6 +175,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         Assert.AreEqual("Modificados (" + caso.Modificados + ")", pestañaModificados.Text, identificación + "PDIs.Modificados.Text");
         Assert.AreEqual("Eliminados (" + caso.Eliminados + ")", pestañaEliminados.Text, identificación + "PDIs.Eliminados.Text");
         Assert.AreEqual("Posibles Duplicados (" + caso.PosiblesDuplicados + ")", pestañaPosiblesDuplicados.Text, identificación + "PDIs.PosiblesDuplicados.Text");
+        Assert.AreEqual("Alertas (" + caso.Alertas + ")", pestañaAlertas.Text, identificación + "PDIs.Alertas.Text");
         Assert.AreEqual("Errores (" + caso.Errores + ")", pestañaErrores.Text, identificación + "PDIs.Errores.Text");
       }
 
@@ -190,12 +196,17 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       {
         probadorDeForma.ExpectModal("Open", delegate 
           {
-            // Dar tiempo para que aparezca la ventana de abrir el archivo.
-            Thread.Sleep(500);
+            OpenFileDialogTester formaAbrirArchivo = new OpenFileDialogTester("Open");
 
             // Manda a abrir el arhivo.
-            OpenFileDialogTester formaAbrirArchivo = new OpenFileDialogTester("Open");
-            formaAbrirArchivo.OpenFile(archivoParaAbrir);
+            // Por alguna razón desconocida, la llamada a OpenFile a veces no 
+            // funciona. Llamamos la misma función 10 veces para 
+            // asegurarnos que funciona.
+            for (int i = 0; i < 10; ++i)
+            {
+              formaAbrirArchivo.OpenFile(archivoParaAbrir);
+              Thread.Sleep(100);
+            }
           }
         );
 

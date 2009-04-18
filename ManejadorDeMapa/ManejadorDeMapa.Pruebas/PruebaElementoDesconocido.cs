@@ -75,6 +75,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace GpsYv.ManejadorDeMapa.Pruebas
 {
@@ -141,7 +142,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       Assert.AreEqual(null, objectoDePrueba.Original, "Original");
       Assert.AreEqual(razón, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.Tipo, "Tipo");
+      Assert.That(objectoDePrueba.Tipo, Is.Null, "Tipo");
     }
 
 
@@ -175,7 +176,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
       Assert.AreEqual(número, objectoDePrueba.Número, "Número");
       AseguraElementoEsEquivalente(original, objectoDePrueba.Original, "Original");
       Assert.AreEqual(string.Empty, objectoDePrueba.RazónParaEliminación, "RazónParaEliminación");
-      Assert.AreEqual(Tipo.TipoNulo, objectoDePrueba.Tipo, "Tipo");
+      Assert.That(objectoDePrueba.Tipo, Is.Null, "Tipo");
     }
 
 
