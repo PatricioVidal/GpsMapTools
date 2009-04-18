@@ -62,6 +62,8 @@
           this.miMenúAyuda = new System.Windows.Forms.ToolStripMenuItem();
           this.acercaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.miMenuAcerca = new System.Windows.Forms.ToolStripMenuItem();
+          this.licenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.etiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.miEstatus = new System.Windows.Forms.StatusStrip();
           this.miTextoDeEstatus = new System.Windows.Forms.ToolStripStatusLabel();
           this.miTextoDeCoordenadas = new System.Windows.Forms.ToolStripStatusLabel();
@@ -79,8 +81,6 @@
           this.miInterfaseManejadorDePdis = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseManejadorDePdis();
           this.miPáginaDeVías = new System.Windows.Forms.TabPage();
           this.miInterfaseManejadorDeVías = new GpsYv.ManejadorDeMapa.Interfase.Vías.InterfaseManejadorDeVías();
-          this.licenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.etiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
           toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -318,6 +318,18 @@
           resources.ApplyResources(this.miMenuAcerca, "miMenuAcerca");
           this.miMenuAcerca.Click += new System.EventHandler(this.EnMenúAcerca);
           // 
+          // licenciaToolStripMenuItem
+          // 
+          this.licenciaToolStripMenuItem.Name = "licenciaToolStripMenuItem";
+          resources.ApplyResources(this.licenciaToolStripMenuItem, "licenciaToolStripMenuItem");
+          this.licenciaToolStripMenuItem.Click += new System.EventHandler(this.EnMenúLicencia);
+          // 
+          // etiquetasToolStripMenuItem
+          // 
+          this.etiquetasToolStripMenuItem.Name = "etiquetasToolStripMenuItem";
+          resources.ApplyResources(this.etiquetasToolStripMenuItem, "etiquetasToolStripMenuItem");
+          this.etiquetasToolStripMenuItem.Click += new System.EventHandler(this.EnMenúEtiquetas);
+          // 
           // miEstatus
           // 
           this.miEstatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -346,7 +358,8 @@
           // miBotónParaDeProcesar
           // 
           resources.ApplyResources(this.miBotónParaDeProcesar, "miBotónParaDeProcesar");
-          this.miBotónParaDeProcesar.BackColor = System.Drawing.SystemColors.Control;
+          this.miBotónParaDeProcesar.BackColor = System.Drawing.Color.Red;
+          this.miBotónParaDeProcesar.ForeColor = System.Drawing.Color.White;
           this.miBotónParaDeProcesar.Name = "miBotónParaDeProcesar";
           this.miBotónParaDeProcesar.UseVisualStyleBackColor = false;
           this.miBotónParaDeProcesar.Click += new System.EventHandler(this.EnBotónParaDeProcesar);
@@ -448,18 +461,6 @@
           this.miInterfaseManejadorDeVías.EscuchadorDeEstatus = null;
           this.miInterfaseManejadorDeVías.ManejadorDeMapa = null;
           this.miInterfaseManejadorDeVías.Name = "miInterfaseManejadorDeVías";
-          // 
-          // licenciaToolStripMenuItem
-          // 
-          this.licenciaToolStripMenuItem.Name = "licenciaToolStripMenuItem";
-          resources.ApplyResources(this.licenciaToolStripMenuItem, "licenciaToolStripMenuItem");
-          this.licenciaToolStripMenuItem.Click += new System.EventHandler(this.EnMenúLicencia);
-          // 
-          // etiquetasToolStripMenuItem
-          // 
-          this.etiquetasToolStripMenuItem.Name = "etiquetasToolStripMenuItem";
-          resources.ApplyResources(this.etiquetasToolStripMenuItem, "etiquetasToolStripMenuItem");
-          this.etiquetasToolStripMenuItem.Click += new System.EventHandler(this.EnMenúEtiquetas);
           // 
           // InterfaseManejadorDeMapa
           // 
