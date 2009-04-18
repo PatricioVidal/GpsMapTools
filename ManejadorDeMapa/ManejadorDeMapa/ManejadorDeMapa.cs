@@ -626,22 +626,26 @@ namespace GpsYv.ManejadorDeMapa
           Polígonos.Add(polígono);
 
           // Busca los polígonos de ciudades.
-          switch (polígono.Tipo.TipoPrincipal)
+          Tipo? tipo = polígono.Tipo;
+          if (tipo != null)
           {
-            case 0x1:
-            case 0x2:
-            case 0x3:
-              foreach (Campo campo in polígono.Campos)
-              {
-                CampoIndiceDeCiudad campoIndiceDeCiudad = campo as CampoIndiceDeCiudad;
-                if (campoIndiceDeCiudad != null)
+            switch (((Tipo)tipo).TipoPrincipal)
+            {
+              case 0x1:
+              case 0x2:
+              case 0x3:
+                foreach (Campo campo in polígono.Campos)
                 {
-                  Ciudades.Add(new Ciudad(
-                    polígono,
-                    campoIndiceDeCiudad));
+                  CampoIndiceDeCiudad campoIndiceDeCiudad = campo as CampoIndiceDeCiudad;
+                  if (campoIndiceDeCiudad != null)
+                  {
+                    Ciudades.Add(new Ciudad(
+                      polígono,
+                      campoIndiceDeCiudad));
+                  }
                 }
-              }
-              break;
+                break;
+            }
           }
         }
       }

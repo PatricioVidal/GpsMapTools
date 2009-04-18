@@ -248,19 +248,9 @@ namespace GpsYv.ManejadorDeMapa
     {
       IList<Campo> campos = LeeCampos(laClase);
 
-      // Busca el tipo de polilínea.
-      Tipo tipo = Tipo.TipoNulo;
-      foreach (Campo campo in campos)
-      {
-        if (campo is CampoTipo)
-        {
-          tipo = ((CampoTipo)campo).Tipo;
-        }
-      }
-
-      // Si el tipo es de Vía entonces crea una Vía.
+      // Si la polilínea es una Vía entonces crea una Vía.
       // Si no, entonces crea una Polilínea.
-      if ((tipo != Tipo.TipoNulo) && (TiposDeVías.Tipos.Contains(tipo)))
+      if (EsVía(campos))
       {
         // Añade la Vía.
         misElementosDelMapa.Add(new Vía(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
@@ -270,6 +260,35 @@ namespace GpsYv.ManejadorDeMapa
         // Añade la polilínea.
         misElementosDelMapa.Add(new Polilínea(miManejadorDeMapa, ObtieneElNúmeroDelPróximoElemento(), laClase, campos));
       }
+    }
+
+
+    private bool EsVía(IList<Campo> losCampos)
+    {
+      Tipo? tipo = null;
+      bool tieneCamposDeVía = false;
+      foreach (Campo campo in losCampos)
+      {
+        // Busca el tipo.
+        if (campo is CampoTipo)
+        {
+          tipo = ((CampoTipo)campo).Tipo;
+        }
+
+        // Si tiene un Campo de Parámetros de Ruta o
+        // un Campo de Nodo Ruteable entonces tiene 
+        // elementos de vía.
+        if ((campo is CampoParámetrosDeRuta) ||
+          (campo is CampoNodoRuteable))
+        {
+          tieneCamposDeVía = true;
+        }
+      }
+
+      // Si es tipo vía o tiene campos de vía entonces es una vía.
+      bool esTipoVía = (tipo != null) && (TiposDeVías.Tipos.Contains((Tipo)tipo));
+      bool esVía = esTipoVía || tieneCamposDeVía;
+      return esVía;
     }
 
 

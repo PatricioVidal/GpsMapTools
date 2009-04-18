@@ -178,7 +178,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       int númeroDeProblemasDetectados = 0;
 
       #region Arregla el nombre del PDI.
-      Tipo tipo = elPdi.Tipo;
+      Tipo? tipo = elPdi.Tipo;
       string nombreACorregir = elPdi.Nombre;
 
       // Remueve los espacios en blanco alrededor.

@@ -198,10 +198,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     
     private static ListViewItem CreaItemDeLista(Pdi elPdi, ListViewGroup elGrupo, double laDistancia)
     {
+      string tipoComoTexto = string.Empty;
+      if (elPdi.Tipo != null)
+      {
+        tipoComoTexto = ((Tipo)elPdi.Tipo).ToString();
+      }
       ListViewItem item = new ListViewItem(
               new [] { 
                 elPdi.Número.ToString(),
-                elPdi.Tipo.ToString(), 
+                tipoComoTexto, 
                 elPdi.Descripción,
                 elPdi.Nombre,
                 elPdi.Coordenadas.ToString(),

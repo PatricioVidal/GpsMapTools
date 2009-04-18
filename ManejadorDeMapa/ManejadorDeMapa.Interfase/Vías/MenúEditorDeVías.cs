@@ -261,11 +261,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
-          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
-            RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo],
-            vía.CampoParámetrosDeRuta.ClaseDeRuta,
-            vía.CampoParámetrosDeRuta.OtrosParámetros);
-          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad Estandar");
+          if (vía.Tipo != null)
+          {
+            CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+              RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[(Tipo)vía.Tipo],
+              vía.CampoParámetrosDeRuta.ClaseDeRuta,
+              vía.CampoParámetrosDeRuta.OtrosParámetros);
+            vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad Estandar");
+          }
         }
         ManejadorDeVías.RestableceEventos();
 
@@ -299,11 +302,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
-          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
-            vía.CampoParámetrosDeRuta.LímiteDeVelocidad,
-            RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo],
-            vía.CampoParámetrosDeRuta.OtrosParámetros);
-          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Clase de Ruta Estandar");
+          if (vía.Tipo != null)
+          {
+            CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+              vía.CampoParámetrosDeRuta.LímiteDeVelocidad,
+              RestriccionesDeParámetrosDeRuta.ClasesDeRuta[(Tipo)vía.Tipo],
+              vía.CampoParámetrosDeRuta.OtrosParámetros);
+            vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Clase de Ruta Estandar");
+          }
         }
         ManejadorDeVías.RestableceEventos();
 
@@ -337,11 +343,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
         IList<Vía> vías = ObtieneElementosSeleccionados<Vía>();
         foreach (Vía vía in vías)
         {
-          CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
-            RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[vía.Tipo],
-            RestriccionesDeParámetrosDeRuta.ClasesDeRuta[vía.Tipo],
-            vía.CampoParámetrosDeRuta.OtrosParámetros);
-          vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad y Clase de Ruta Estándar");
+          Tipo? tipo = vía.Tipo;
+          if (tipo != null)
+          {
+            CampoParámetrosDeRuta campo = new CampoParámetrosDeRuta(
+              RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[(Tipo)tipo],
+              RestriccionesDeParámetrosDeRuta.ClasesDeRuta[(Tipo)tipo],
+              vía.CampoParámetrosDeRuta.OtrosParámetros);
+            vía.CambiaCampoParámetrosDeRuta(campo, "Cambiado a Límite de Velocidad y Clase de Ruta Estándar");
+          }
         }
         ManejadorDeVías.RestableceEventos();
 

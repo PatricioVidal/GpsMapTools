@@ -102,14 +102,14 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve el pincel para un tipo de polígono dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polígono.</param>
-    public static Brush Pincel(Tipo elTipo)
+    public static Brush Pincel(Tipo? elTipo)
     {
-      Brush pincel;
-      bool existe = misPinceles.TryGetValue(elTipo, out pincel);
-      if (!existe)
+      // Pincel por defecto.
+      Brush pincel = misPinceles[Tipo.TipoNulo];
+
+      if (elTipo != null)
       {
-        // Pincel por defecto.
-        pincel = misPinceles[Tipo.TipoNulo];
+        misPinceles.TryGetValue((Tipo)elTipo, out pincel);
       }
       return pincel;
     }

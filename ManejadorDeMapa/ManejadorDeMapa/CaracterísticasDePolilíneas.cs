@@ -100,15 +100,16 @@ namespace GpsYv.ManejadorDeMapa
     /// Devuelve el lápiz para un tipo de polilinea dado.
     /// </summary>
     /// <param name="elTipo">El tipo de polilinea.</param>
-    public static Pen Lápiz(Tipo elTipo)
+    public static Pen Lápiz(Tipo? elTipo)
     {
-      Pen lápiz;
-      bool existe = misLápices.TryGetValue(elTipo, out lápiz);
-      if (!existe)
+      // Lápiz por defecto.
+      Pen lápiz = misLápices[Tipo.TipoNulo];
+
+      if (elTipo != null)
       {
-        // Lápiz por defecto.
-        lápiz = misLápices[Tipo.TipoNulo];
+        misLápices.TryGetValue((Tipo)elTipo, out lápiz);
       }
+
       return lápiz;
     }
 

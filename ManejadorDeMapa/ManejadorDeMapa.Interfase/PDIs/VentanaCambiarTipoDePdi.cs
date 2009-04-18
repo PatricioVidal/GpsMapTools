@@ -118,8 +118,17 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
             Pdi pdi = misPdis[0];
             miTextoNombrePdi.Text = pdi.Nombre;
             miTextoCoordenadasPdi.Text = pdi.Coordenadas.ToString();
-            miTextoTipoOriginal.Text = pdi.Tipo.ToString();
-            miTextoDescripciónOriginal.Text = CaracterísticasDePdis.Descripción(pdi.Tipo);
+            Tipo? tipo = pdi.Tipo;
+            if (tipo != null)
+            {
+              miTextoTipoOriginal.Text = ((Tipo)tipo).ToString();
+              miTextoDescripciónOriginal.Text = CaracterísticasDePdis.Descripción((Tipo)tipo);
+            }
+            else
+            {
+              miTextoTipoOriginal.Text = string.Empty;
+              miTextoDescripciónOriginal.Text = string.Empty;
+            }
           }
           else if (misPdis.Count > 1)
           {
@@ -128,14 +137,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
             miTextoCoordenadasPdi.Text = string.Empty;
 
             // Buscar si tiene un tipo único.
-            Tipo tipoÚnico = misPdis[0].Tipo;
+            Tipo? tipoÚnico = misPdis[0].Tipo;
             bool tieneTipoÚnico = true;
             foreach (Pdi pdi in misPdis)
             {
               if (pdi.Tipo != tipoÚnico)
               {
                 tieneTipoÚnico = false;
-                tipoÚnico = Tipo.TipoNulo;
+                tipoÚnico = null;
                 break;
               }
             }
@@ -144,7 +153,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
             if (tieneTipoÚnico)
             {
               miTextoTipoOriginal.Text = tipoÚnico.ToString();
-              miTextoDescripciónOriginal.Text = CaracterísticasDePdis.Descripción(tipoÚnico);
+              if (tipoÚnico != null)
+              {
+                miTextoDescripciónOriginal.Text = CaracterísticasDePdis.Descripción((Tipo)tipoÚnico);
+              }
+              else
+              {
+                miTextoDescripciónOriginal.Text = string.Empty;
+              }
             }
             else
             {

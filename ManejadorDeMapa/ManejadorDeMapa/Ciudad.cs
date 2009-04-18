@@ -87,7 +87,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el tipo de la ciudad.
     /// </summary>
-    public Tipo Tipo { get; private set; }
+    public Tipo? Tipo { get; private set; }
 
     /// <summary>
     /// Obtiene el centro de la ciudad.

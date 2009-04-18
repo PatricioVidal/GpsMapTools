@@ -257,9 +257,14 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public virtual void AñadeItem(ElementoConEtiqueta elElementoConEtiqueta, Color elColorDeFondo, ListViewGroup elGrupo, params string[] losSubItemsAdicionales)
     {
       ElementoDelMapa elemento = elElementoConEtiqueta.ElementoDelMapa;
+      string tipoComoTexto = string.Empty;
+      if (elemento.Tipo != null)
+      {
+        tipoComoTexto = ((Tipo)elemento.Tipo).ToString();
+      }
       List<string> subItems = new List<string> {
                 elemento.Número.ToString(CultureInfo.CurrentCulture).PadLeft(6),
-                elemento.Tipo.ToString(), 
+                tipoComoTexto,
                 elemento.Descripción,
                 elemento.Nombre};
       subItems.AddRange(losSubItemsAdicionales);

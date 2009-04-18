@@ -209,21 +209,34 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       #region Valida el límite de velocidad.
       // El límite de velocidad debe ser el esperado.
-      LímiteDeVelocidad límiteDeVelocidad = laVía.CampoParámetrosDeRuta.LímiteDeVelocidad;
-      LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[laVía.Tipo];
-      if (límiteDeVelocidad != límiteDeVelocidadEsperado)
+      Tipo? tipo = laVía.Tipo;
+      if (tipo != null)
       {
-        alertas.Add(string.Format("A102: Límite de Velocidad debería ser {0}, pero es {1}.", límiteDeVelocidadEsperado, límiteDeVelocidad));
+        if (RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad.ContainsKey((Tipo)tipo))
+        {
+          LímiteDeVelocidad límiteDeVelocidad = laVía.CampoParámetrosDeRuta.LímiteDeVelocidad;
+          LímiteDeVelocidad límiteDeVelocidadEsperado = RestriccionesDeParámetrosDeRuta.LímitesDeVelocidad[(Tipo)tipo];
+          if (límiteDeVelocidad != límiteDeVelocidadEsperado)
+          {
+            alertas.Add(string.Format("A102: Límite de Velocidad debería ser {0}, pero es {1}.", límiteDeVelocidadEsperado, límiteDeVelocidad));
+          }
+        }
       }
       #endregion
 
       #region Valida la clase de ruta.
       // La clase de ruta debe ser la esperado.
-      ClaseDeRuta claseDeRuta = laVía.CampoParámetrosDeRuta.ClaseDeRuta;
-      ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[laVía.Tipo];
-      if (claseDeRuta != claseDeRutaEsperada)
+      if (tipo != null)
       {
-        alertas.Add(string.Format("A103: Clase de Ruta debería ser {0}, pero es {1}.", claseDeRutaEsperada, claseDeRuta));
+        if (RestriccionesDeParámetrosDeRuta.ClasesDeRuta.ContainsKey((Tipo)tipo))
+        {
+          ClaseDeRuta claseDeRuta = laVía.CampoParámetrosDeRuta.ClaseDeRuta;
+          ClaseDeRuta claseDeRutaEsperada = RestriccionesDeParámetrosDeRuta.ClasesDeRuta[(Tipo)tipo];
+          if (claseDeRuta != claseDeRutaEsperada)
+          {
+            alertas.Add(string.Format("A103: Clase de Ruta debería ser {0}, pero es {1}.", claseDeRutaEsperada, claseDeRuta));
+          }
+        }
       }
       #endregion
 

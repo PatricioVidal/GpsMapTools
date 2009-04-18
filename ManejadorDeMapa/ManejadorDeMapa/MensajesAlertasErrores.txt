@@ -100,6 +100,9 @@ Los nodos fuente y destino de las Vías tienen las mismas coordenadas pero solo 
 E107: La distancia es menor que {0:0.0} m: {1:0.0} m.
 Los nodos fuente y destino de las Vías están muy cerca.
 
+E108: E108: El tipo está vacío.
+La Vía no tiene campo de tipo.
+
 
 
 

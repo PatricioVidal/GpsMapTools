@@ -657,17 +657,22 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         // Dibuja el PDI centrado.
         DibujaPunto(punto, miPincelParaCiudades, 9);
 
-        bool esCiudadPrincipal = (ciudad.Tipo.TipoPrincipal == 1);
-        if (esCiudadPrincipal ||
-           (miEscalaDeCoordenadasAPixeles > (500 * ciudad.Tipo.TipoPrincipal)))
+        Tipo? tipo = ciudad.Tipo;
+        if (tipo != null)
         {
-          // Dibuja el nombre.
-          DibujaTextoConFondo(
-            ciudad.Nombre,
-            punto.X, punto.Y + 5,
-            miLetraParaNombreDeCiudad,
-            miPincelParaNombreDeCiudad,
-            miPincelDeFondoParaNombre);
+          int tipoPrincipal = ((Tipo)tipo).TipoPrincipal;
+          bool esCiudadPrincipal = (tipo != null) && (tipoPrincipal == 1);
+          if (esCiudadPrincipal ||
+             (miEscalaDeCoordenadasAPixeles > (500 * tipoPrincipal)))
+          {
+            // Dibuja el nombre.
+            DibujaTextoConFondo(
+              ciudad.Nombre,
+              punto.X, punto.Y + 5,
+              miLetraParaNombreDeCiudad,
+              miPincelParaNombreDeCiudad,
+              miPincelDeFondoParaNombre);
+          }
         }
       }
     }
@@ -678,8 +683,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Dibuja los Polígonos.
       foreach (Polígono polígono in ManejadorDeMapa.Polígonos)
       {
-        Tipo tipo = polígono.Tipo;
-        DibujaPolígono(polígono, CaracterísticasDePolígonos.Pincel(tipo));
+        DibujaPolígono(polígono, CaracterísticasDePolígonos.Pincel(polígono.Tipo));
       }
     }
 
@@ -728,8 +732,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Dibuja las Polilíneas.
       foreach (Polilínea polilínea in ManejadorDeMapa.Polilíneas)
       {
-        Tipo tipo = polilínea.Tipo;
-        DibujaPolilínea(polilínea.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
+        DibujaPolilínea(polilínea.Coordenadas, CaracterísticasDePolilíneas.Lápiz(polilínea.Tipo));
       }
     }
 
@@ -739,8 +742,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Dibuja las Vías.
       foreach (Vía vía in ManejadorDeMapa.ManejadorDeVías.Elementos)
       {
-        Tipo tipo = vía.Tipo;
-        DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(tipo));
+        DibujaPolilínea(vía.Coordenadas, CaracterísticasDePolilíneas.Lápiz(vía.Tipo));
 
         // Dibuja los nodos.
         foreach (Nodo nodo in vía.Nodos)

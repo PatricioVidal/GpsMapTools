@@ -189,16 +189,12 @@ namespace GpsYv.ManejadorDeMapa
     {
       string texto = string.Empty;
 
-      // Solo genera el texto para tipos válidos.
-      if (miTipoPrincipal > 0)
-      {
-        texto = "0x" + miTipoPrincipal.ToString("x");
+      texto = "0x" + miTipoPrincipal.ToString("x");
 
-        // Si el Tipo tiene un sub-tipo entonces lo añadimos al texto.
-        if (miSubTipo.HasValue)
-        {
-          texto += ((int)miSubTipo).ToString("x2");
-        }
+      // Si el Tipo tiene un sub-tipo entonces lo añadimos al texto.
+      if (miSubTipo.HasValue)
+      {
+        texto += ((int)miSubTipo).ToString("x2");
       }
 
       return texto;

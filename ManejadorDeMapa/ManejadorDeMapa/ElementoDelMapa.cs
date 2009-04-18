@@ -156,13 +156,13 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Devuelve el tipo del elemento.
     /// </summary>
-    public Tipo Tipo
+    public Tipo? Tipo
     {
       get
       {
         if (miCampoTipo == null)
         {
-          return Tipo.TipoNulo;
+          return null;
         }
 
         return miCampoTipo.Tipo;
@@ -313,7 +313,7 @@ namespace GpsYv.ManejadorDeMapa
         }
       }
 
-      bool existe = misDescripcionesPorTipo.TryGetValue(Tipo, out miDescripción);
+      bool existe = (Tipo != null) && (misDescripcionesPorTipo.TryGetValue((Tipo)Tipo, out miDescripción));
       if (!existe)
       {
         miDescripción = string.Empty;
@@ -344,7 +344,7 @@ namespace GpsYv.ManejadorDeMapa
       ActualizaCampo(nuevoCampoTipo, ref miCampoTipo, laRazón);
 
       // Actualiza la descripción.
-      bool existe = misDescripcionesPorTipo.TryGetValue(Tipo, out miDescripción);
+      bool existe = misDescripcionesPorTipo.TryGetValue((Tipo)Tipo, out miDescripción);
       if (!existe)
       {
         miDescripción = string.Empty;

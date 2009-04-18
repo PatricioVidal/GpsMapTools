@@ -218,7 +218,9 @@ namespace GpsYv.ManejadorDeMapa.Pdis
             //      - El nombre es igual, o
             //      - Uno es las siglas del otro, o
             //      - El nombre es parecido.
-            if (elPdi.Tipo.TipoPrincipal == posiblePdiDuplicado.Tipo.TipoPrincipal)
+            if ((elPdi.Tipo != null) && 
+              (posiblePdiDuplicado.Tipo != null) &&
+              (((Tipo)elPdi.Tipo).TipoPrincipal == ((Tipo)posiblePdiDuplicado.Tipo).TipoPrincipal))
             {
               double distanciaEnMetros = Coordenadas.Distancia(elPdi.Coordenadas, posiblePdiDuplicado.Coordenadas);
               if (distanciaEnMetros <= miDistanciaMáxima)

@@ -137,20 +137,19 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int númeroDeItemsDetectados = 0;
       List<string> errores = new List<string>();
 
-      #region Verifica que el tipo de Vía no es nulo.
-      Tipo tipo = laVía.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
+      #region Verifica que el tipo de Vía no está vacio y que es conocido.
+      Tipo? tipo = laVía.Tipo;
+      if (tipo == null)
       {
-        errores.Add("El tipo está vacío.");
+        errores.Add("E108: El tipo está vacío.");
       }
-      #endregion
-
-      #region Verifica que el tipo de Vía es conocido.
-      bool esConocido = TiposDeVías.Tipos.Contains(laVía.Tipo);
-      if (!esConocido)
+      else
       {
-        errores.Add(string.Format("E100: El tipo {0} no es conocido.", laVía.Tipo));
+        bool esConocido = TiposDeVías.Tipos.Contains((Tipo)tipo);
+        if (!esConocido)
+        {
+          errores.Add(string.Format("E100: El tipo {0} no es conocido.", laVía.Tipo));
+        }
       }
       #endregion
 

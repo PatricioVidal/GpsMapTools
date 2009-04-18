@@ -137,20 +137,19 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       int númeroDeProblemasDetectados = 0;
       List<string> errores = new List<string>();
 
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPdi.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
+      #region Verifica que el tipo de PDI no es vacio y que es conocido.
+      Tipo? tipo = elPdi.Tipo;
+      if (tipo == null)
       {
         errores.Add("E000: El tipo está vacío.");
       }
-      #endregion 
-
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePdis.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
+      else
       {
-          errores.Add(string.Format("E001: El tipo ({0}) no es conocido.", elPdi.Tipo));
+        bool esConocido = CaracterísticasDePdis.Descripciones.ContainsKey((Tipo)tipo);
+        if (!esConocido)
+        {
+            errores.Add(string.Format("E001: El tipo ({0}) no es conocido.", elPdi.Tipo));
+        }
       }
       #endregion 
 
