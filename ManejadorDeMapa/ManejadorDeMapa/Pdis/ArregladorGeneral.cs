@@ -127,8 +127,8 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       int númeroDeProblemasDetectados = 0;
 
       númeroDeProblemasDetectados += ArreglaLetras(elPdi);
-      númeroDeProblemasDetectados += ArreglaPalabrasPorTipo(elPdi);
       númeroDeProblemasDetectados += EliminaCaracteres(elPdi);
+      númeroDeProblemasDetectados += ArreglaPalabrasPorTipo(elPdi);
 
       return númeroDeProblemasDetectados;
     }
