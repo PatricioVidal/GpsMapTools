@@ -75,9 +75,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
-using GpsYv.ManejadorDeMapa;
 using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
+using System.Drawing.Drawing2D;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -95,6 +95,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private readonly Font miLetraParaTiempo = new Font("Arial", 8);
     private readonly Brush miPincelParaPdi = Brushes.Black;
     private readonly Brush miPincelParaCiudades = Brushes.Blue;
+    private readonly Pen miLápizParaEstados = new Pen(Color.YellowGreen, 3);
     private readonly Brush miPincelDeNodo = Brushes.Cyan;
     private readonly Brush miPincelParaVíaConUnaCoordenada = Brushes.Red;
     private readonly Brush miPincelParaPdiModificado = Brushes.Yellow;
@@ -102,9 +103,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     private readonly Pen miLápizParaBorde = Pens.LightGray;
     private readonly Font miLetraParaNombre = new Font("Arial", 8);
     private readonly Font miLetraParaNombreDeCiudad = new Font("Arial", 10);
+    private readonly Font miLetraParaNombreDeEstado = new Font("Arial", 14);
     private readonly Brush miPincelDeFondoParaNombre = Brushes.White;
     private readonly Brush miPincelParaNombre = Brushes.Black;
     private readonly Brush miPincelParaNombreDeCiudad = Brushes.DarkBlue;
+    private readonly Brush miPincelParaNombreDeEstado = Brushes.Black;
 
     // Parametros para dibujar los elementos.
     private Graphics miGráficador;
@@ -288,6 +291,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [Bindable(true)]
     [Description("Muestra las Ciudades")]
     public bool MuestraCiudades { get; set; }
+
+
+    /// <summary>
+    /// Obtiene o pone una variable lógica que indica que se
+    /// muestren las Ciudades.
+    /// </summary>
+    [Browsable(true)]
+    [Bindable(true)]
+    [Description("Muestra las Ciudades")]
+    public bool MuestraEstados { get; set; }
 
 
     /// <summary>
@@ -570,6 +583,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         {
           DibujaCiudades();
         }
+
+        if (MuestraEstados | MuestraTodosLosElementos)
+        {
+          DibujaEstados();
+        }
       }
 
       DibujaEscala();
@@ -643,38 +661,85 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void DibujaCiudades()
     {
-      foreach (Ciudad ciudad in ManejadorDeMapa.Ciudades)
+      foreach (Ciudad ciudadOEstado in ManejadorDeMapa.Ciudades)
       {
-        // Obtiene las coordenadas gráficas del PDI.
-        Point punto = CoordenadasAPixels(ciudad.Centro);
+        bool esEstado = (ciudadOEstado.Tipo != null) && (ciudadOEstado.Tipo.Value.TipoPrincipal == 0x4a);
 
-        // Nos saltamos la ciudad si no es visible.
-        if (!miAreaDeDibujo.Contains(punto))
+        if (!esEstado)
         {
-          continue;
-        }
-
-        // Dibuja el PDI centrado.
-        DibujaPunto(punto, miPincelParaCiudades, 9);
-
-        Tipo? tipo = ciudad.Tipo;
-        if (tipo != null)
-        {
-          int tipoPrincipal = ((Tipo)tipo).TipoPrincipal;
-          bool esCiudadPrincipal = (tipo != null) && (tipoPrincipal == 1);
-          if (esCiudadPrincipal ||
-             (miEscalaDeCoordenadasAPixeles > (500 * tipoPrincipal)))
-          {
-            // Dibuja el nombre.
-            DibujaTextoConFondo(
-              ciudad.Nombre,
-              punto.X, punto.Y + 5,
-              miLetraParaNombreDeCiudad,
-              miPincelParaNombreDeCiudad,
-              miPincelDeFondoParaNombre);
-          }
+          DibujaCiudad(ciudadOEstado);
         }
       }
+    }
+
+
+    private void DibujaEstados()
+    {
+      foreach (Ciudad ciudadOEstado in ManejadorDeMapa.Ciudades)
+      {
+        bool esEstado = (ciudadOEstado.Tipo != null) && (ciudadOEstado.Tipo.Value.TipoPrincipal == 0x4a);
+
+        if (esEstado)
+        {
+          DibujaEstado(ciudadOEstado);
+        }
+      }
+    }
+
+
+    private void DibujaCiudad(Ciudad laCiudad)
+    {
+      // Obtiene las coordenadas del centro de la ciudad.
+      Point punto = CoordenadasAPixels(laCiudad.Centro);
+
+      // Dibuja el PDI centrado.
+      DibujaPunto(punto, miPincelParaCiudades, 9);
+
+      Tipo? tipo = laCiudad.Tipo;
+      if (tipo != null)
+      {
+        int tipoPrincipal = ((Tipo)tipo).TipoPrincipal;
+        double escalaMinima = 0;
+        switch (tipoPrincipal)
+        {
+          case 2:
+            escalaMinima = 1000;
+            break;
+          case 3:
+            escalaMinima = 1500;
+            break;
+        }
+        bool esCiudadPrincipal = (tipoPrincipal == 1);
+        if (esCiudadPrincipal ||
+            (miEscalaDeCoordenadasAPixeles > escalaMinima))
+        {
+          // Dibuja el nombre.
+          DibujaTextoConFondo(
+            laCiudad.Nombre,
+            punto.X, punto.Y + 5,
+            miLetraParaNombreDeCiudad,
+            miPincelParaNombreDeCiudad,
+            miPincelDeFondoParaNombre);
+        }
+      }
+    }
+
+
+    private void DibujaEstado(Ciudad elEstado)
+    {
+      // Obtiene las coordenadas del centro del Estado.
+      Point punto = CoordenadasAPixels(elEstado.Centro);
+
+      // Dibuja el nombre.
+      DibujaTextoConFondo(
+        elEstado.Nombre,
+        punto.X, punto.Y + 5,
+        miLetraParaNombreDeEstado,
+        miPincelParaNombreDeEstado,
+        miPincelDeFondoParaNombre);
+
+      // Dibuja el Estado.
+      DibujaPolilínea(elEstado.Coordenadas, miLápizParaEstados);
     }
 
 

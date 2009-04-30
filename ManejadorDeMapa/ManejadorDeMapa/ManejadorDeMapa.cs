@@ -634,6 +634,7 @@ namespace GpsYv.ManejadorDeMapa
               case 0x1:
               case 0x2:
               case 0x3:
+              case 0x4a:
                 foreach (Campo campo in polígono.Campos)
                 {
                   CampoIndiceDeCiudad campoIndiceDeCiudad = campo as CampoIndiceDeCiudad;

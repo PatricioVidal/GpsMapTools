@@ -3,8 +3,8 @@
 M000: El PDI pertenece a la Ciudad {0}
 El índice de ciudad del PDI fué actualizado porque el PDI estaba dentro de un polígono de ciudad.
 
-M001: El PDI no pertenece a ninguna ciudad.
-El índice de ciudad del PDI fué eliminado porque el PDI no estaba dentro de un polígono de ciudad.
+M001: El PDI no pertenece a ninguna ciudad o Estado.
+El índice de ciudad del PDI fué eliminado porque el PDI no estaba dentro de un polígono de ciudad o Estado.
 
 M002: Cambio a mayúsculas.
 Algunas letras del nombre del PDI fueron cambiadas a mayúsculas.
@@ -23,6 +23,9 @@ El PDI fué eliminado porque idéntico al PDI número {0}.
 
 M007: Eliminación de Caracteres Inválidos.
 Algunos caracteres en el nombre del PDI fueron eliminados porque estaban el la lista de caracteres inválidos. 
+
+M008: El PDI pertenece al Estado {0}
+El índice de ciudad del PDI fué actualizado porque el PDI estaba dentro de un polígono de Estado.
 
 M100: La Vía pertenece a la Ciudad {0}.
 El índice de ciudad de la Vía fué actualizado porque la Vía estaba dentro de un polígono de ciudad.

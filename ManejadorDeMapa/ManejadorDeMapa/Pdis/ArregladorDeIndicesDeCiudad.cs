@@ -118,30 +118,48 @@ namespace GpsYv.ManejadorDeMapa.Pdis
 
       // Por cada ciudad, si el PDI está adentro de la ciudad entonces
       // se le actualiza el Indice de Ciudad.
-      bool seEncontróUnaCiudad = false;
+      Ciudad ciudadDelPdi = null;
+      Ciudad estadoDelPdi = null;
       foreach (Ciudad ciudad in ManejadorDeMapa.Ciudades)
       {
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
         if (polígono.Contains(elPdi.Coordenadas))
         {
-          bool cambió = elPdi.ActualizaCampoIndiceDeCiudad(
-            ciudad.Indice,
-            string.Format("M000: El PDI pertenece a la Ciudad {0}", ciudad));
-          if (cambió)
+          if (ciudad.Tipo.Value.TipoPrincipal == 0x4a)
           {
-            ++númeroDeProblemasDetectados;
+            estadoDelPdi = ciudad;
           }
-
-          // El PDI solo puede pertenecer a una sola ciudad.
-          seEncontróUnaCiudad = true;
-          break;
+          else
+          {
+            // El PDI solo puede pertenecer a una sola ciudad.
+            ciudadDelPdi = ciudad;
+            break;
+          }
         }
       }
-
-      // Si no se encontró una ciudad entonces hay que quitarle el campo si lo tiene.
-      if (!seEncontróUnaCiudad)
+      if (ciudadDelPdi != null)
       {
-        bool cambió = elPdi.RemueveCampoIndiceDeCiudad("M001: El PDI no pertenece a ninguna ciudad.");
+        bool cambió = elPdi.ActualizaCampoIndiceDeCiudad(
+          ciudadDelPdi.Indice,
+          string.Format("M000: El PDI pertenece a la Ciudad {0}", ciudadDelPdi));
+        if (cambió)
+        {
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      else if (estadoDelPdi != null)
+      {
+        bool cambió = elPdi.ActualizaCampoIndiceDeCiudad(
+          estadoDelPdi.Indice,
+          string.Format("M008: El PDI pertenece al Estado {0}", estadoDelPdi));
+        if (cambió)
+        {
+          ++númeroDeProblemasDetectados;
+        }
+      }
+      else
+      {
+        bool cambió = elPdi.RemueveCampoIndiceDeCiudad("M001: El PDI no pertenece a ninguna ciudad o Estado.");
         if (cambió)
         {
           ++númeroDeProblemasDetectados;

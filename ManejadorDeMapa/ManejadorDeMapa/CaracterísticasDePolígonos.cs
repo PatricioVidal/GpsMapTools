@@ -109,7 +109,12 @@ namespace GpsYv.ManejadorDeMapa
 
       if (elTipo != null)
       {
-        misPinceles.TryGetValue((Tipo)elTipo, out pincel);
+        Brush pincelDelTipo = null;
+        misPinceles.TryGetValue((Tipo)elTipo, out pincelDelTipo);
+        if (pincelDelTipo != null)
+        {
+          pincel = pincelDelTipo;
+        }
       }
       return pincel;
     }
