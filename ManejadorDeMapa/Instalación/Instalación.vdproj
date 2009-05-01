@@ -15,38 +15,38 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_21F22CDA70B8C733B25E6A6D1FCDC2E1"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_21F22CDA70B8C733B25E6A6D1FCDC2E1"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52F2C9B63C72F3C892E946527C545C4B"
+        "OwnerKey" = "8:_21F22CDA70B8C733B25E6A6D1FCDC2E1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52F2C9B63C72F3C892E946527C545C4B"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52F2C9B63C72F3C892E946527C545C4B"
+        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
-        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
-        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
-        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
-        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
-        "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,19 +58,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_963E7D0D9A727E0C0EC572D76BE947C4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8D22E52328E868036DCD514B1AF10C59"
+        "OwnerKey" = "8:_52F2C9B63C72F3C892E946527C545C4B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_21F22CDA70B8C733B25E6A6D1FCDC2E1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -184,14 +184,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8D22E52328E868036DCD514B1AF10C59"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_21F22CDA70B8C733B25E6A6D1FCDC2E1"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.35.3126.40381, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.36.3407.39157, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_8D22E52328E868036DCD514B1AF10C59"
+                    "_21F22CDA70B8C733B25E6A6D1FCDC2E1"
                     {
                     "Name" = "8:GpsYv.ManejadorDeMapa.dll"
                     "Attributes" = "3:512"
@@ -215,14 +215,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_963E7D0D9A727E0C0EC572D76BE947C4"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_52F2C9B63C72F3C892E946527C545C4B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_963E7D0D9A727E0C0EC572D76BE947C4"
+                    "_52F2C9B63C72F3C892E946527C545C4B"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -313,14 +313,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{529FFEA4-4F98-41A2-B763-724D40F8EDE7}"
-        "PackageCode" = "8:{A65099C8-7CB3-4637-9B69-E916DD83E3DE}"
+        "ProductCode" = "8:{0EE7824F-DDBF-4701-BD6C-8000E8994C30}"
+        "PackageCode" = "8:{6FCA9811-5697-4A9E-BEE9-8B9E435DFAC2}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.36.0"
+        "ProductVersion" = "8:1.36.4"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"
@@ -848,7 +848,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_56556B94D73A488DB3CC41EFBFD7127D"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Release\\ManejadorDeMapa.exe"
+            "SourcePath" = "8:\\\\SERVER\\Users\\Dad\\Projects\\GPS_YV\\ManejadorDeMapa\\ManejadorDeMapa.Interfase\\obj\\Release\\ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
@@ -904,7 +904,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FB1C065BBCCD4F0E9444688B6ECC59E8"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa.Consola\\obj\\Release\\ManejadorDeMapa.Consola.exe"
+            "SourcePath" = "8:\\\\SERVER\\Users\\Dad\\Projects\\GPS_YV\\ManejadorDeMapa\\ManejadorDeMapa.Consola\\obj\\Release\\ManejadorDeMapa.Consola.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
