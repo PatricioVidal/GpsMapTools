@@ -1,4 +1,11 @@
 Versión 1.36
+- Añadido el manejo de Estados.  Polígonos tipo 0x4a son considerados Estados.
+- Actualizada la lista de tipos de vías.
+- Arreglada secuencia del arreglador general de PDIs. Ahora se eliminan los carácteres inválidos antes de arreglar las palabras por tipo.
+- Actualizado para manejar correctamente elementos con tipo 0x0.
+- Arreglada la lógica de búsqueda de errores en vías para que utilice la lista de Tipos de Vías para validación.
+- Añadido el menu de contexto de PDIs a la interfase de PDIs duplicados.
+- Arreglada lógica del dibujo de las escala del mapa para que no falle cuando hay un solo PDI en el mapa.
 - Actualizada la lista de Calificativos de Vías, Características de Polígonos, y Corrección de Palabras por Tipo.
 - Añadida la opción para "Ignorar Cambios Bruscos en la Clase de Ruta" en la pestaña de "Posibles Errores de Ruteo".
 - Creado los Arregladores Generales de PDIs y Vías para consolidar funciones.
