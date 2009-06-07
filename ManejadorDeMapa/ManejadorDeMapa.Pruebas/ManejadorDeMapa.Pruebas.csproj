@@ -84,8 +84,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\58090.mp" />
+    <None Include="Data\58170.mp" />
+    <None Include="Data\58220.mp" />
+    <None Include="Data\58370.mp" />
+    <None Include="Data\58460.mp" />
+    <None Include="Data\Estados.58290.mp" />
     <None Include="Data\PosiblesNodosDesconectados.mp" />
     <None Include="Data\PruebaEscritorFormatoPolish.mp" />
+    <None Include="Data\ViaTipo0x0.mp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
