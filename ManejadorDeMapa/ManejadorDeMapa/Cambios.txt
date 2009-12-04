@@ -1,3 +1,6 @@
+Version 1.37
+- Removido el tipo 0x2e00 (Shopping)/Centro Comercial) de la lista de características the PDIs.
+
 Versión 1.36
 - Añadido el manejo de Estados.  Polígonos tipo 0x4a son considerados Estados.
 - Actualizada la lista de tipos de vías.
