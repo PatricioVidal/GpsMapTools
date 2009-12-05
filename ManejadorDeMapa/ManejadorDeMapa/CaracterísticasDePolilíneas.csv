@@ -43,9 +43,9 @@
 0x20,Gray,1,Land Contour (thin)
 0x21,Gray,1,Land Contour (medium)
 0x22,Gray,1,Land Contour (thick)
-0x23,Gray,1,Depth Contour (thin)
-0x24,Gray,1,Depth Contour (medium)
-0x25,Gray,1,Depth Contour (thick)
+0x23,Cyan,1,Depth Contour (thin)
+0x24,Cyan,1,Depth Contour (medium)
+0x25,Cyan,1,Depth Contour (thick)
 0x26,Blue,1,Intermittent River
 0x27,Gray,5,Airport Runway
 0x28,Black,2,Pipeline

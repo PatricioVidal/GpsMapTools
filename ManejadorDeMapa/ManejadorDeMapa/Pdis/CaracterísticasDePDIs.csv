@@ -66,7 +66,7 @@
 0x2a02,Dining (Asian)/Comida Asiatica
 0x2a03,Dining (barbecue)/Comida Parrilla
 0x2a04,Dining (Chinese)/Comida China
-0x2a05,Dining (Deli/Bakery)/Comida Panaderia/Pasteleria
+0x2a05,Dining (Deli/Bakery)/Comida Panaderia
 0x2a06,Dining (international)/Comida Internacional
 0x2a07,Fast food/Comida Rapida
 0x2a08,Dining (Italian)/Comida Italiana
@@ -74,7 +74,7 @@
 0x2a0a,Dining (pizza)/Comida Pizzas
 0x2a0b,Dining (sea food)/Comida del Mar
 0x2a0c,Dining (steak/grill)/Comida Carne/Parrilla
-0x2a0d,Dining (bagel/donut)/Comida Pasteleria/Panaderia
+0x2a0d,Dining (bagel/donut)/Comida Pasteleria
 0x2a0e,Dining (cafe/diner)/Comida Cafe/Cena
 0x2a0f,Dining (French)/Comida Francesa
 0x2a10,Dining (German)/Comida Alemana
@@ -107,6 +107,11 @@
 0x2d03,Cinema/Cine
 0x2d02,Bar/Nightclub/Bar/Club nocturno
 0x2d00,Entertainment/Entretenimiento
+// LABELS
+0x1400,Nombre del Pais
+0x1e00,Nombre del Estado
+0x1f00,Nombre del Municipio
+0x2800,Nombre
 // LAND
 0x6600,Land feature/Objeto terreste
 0x6601,Arch/Arco
@@ -179,6 +184,7 @@
 0x2f15,Public utilities/Instalaciones publicas
 0x640f,Post office/Correo
 // SHOPPING
+// 0x2e00,Shopping)/Centro Comercial
 0x2e01,Department store/Grandes tiendas
 0x2e02,Grocery store/Tienda de Comestibles
 0x2e03,General merchandiser/Comercio general

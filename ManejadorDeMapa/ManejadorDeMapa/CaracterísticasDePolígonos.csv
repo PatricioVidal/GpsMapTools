@@ -24,7 +24,7 @@
 0x00,LightGray,
 0x01,WhiteSmoke,City
 0x02,WhiteSmoke,City
-0x03,WhiteSmoke,City
+0x03,Transparent,City
 0x04,DarkGreen,Military
 0x05,Gray,Car Park (Parking Lot)
 0x06,Gray,Parking Garage
