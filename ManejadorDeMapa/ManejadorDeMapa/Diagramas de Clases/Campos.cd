@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="GpsYv.ManejadorDeMapa.Campo" Collapsed="true">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="21.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAEAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAgIAAAAAAAAAAAiA=</HashCode>
       <FileName>Campo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoComentario">
-    <Position X="3.5" Y="1.75" Width="1.75" />
+    <Position X="12.75" Y="1.75" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAQAAAIAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAACAAAAA=</HashCode>
       <FileName>CampoComentario.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoCoordenadas">
-    <Position X="5.5" Y="1.75" Width="2.75" />
+    <Position X="14.75" Y="1.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AEAAAAAABAAAAAAEgAAAAgAAAAIEAIAAAAAAAAAAAAA=</HashCode>
       <FileName>CampoCoordenadas.cs</FileName>
@@ -28,23 +28,23 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoGenérico">
-    <Position X="8.5" Y="1.75" Width="1.5" />
+    <Position X="17.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAQAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>CampoGenérico.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoNombre">
-    <Position X="10.25" Y="1.75" Width="2" />
+    <Position X="19.5" Y="1.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEgAAAoAAAAAAAAIAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAoACAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>CampoNombre.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoParámetrosDeRuta">
-    <Position X="12.5" Y="1.75" Width="2.5" />
+    <Position X="21.75" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgEAAIEAEAAgAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAgEAAIEgEAggAAAAAAAAIAACAAAAAAAAAA=</HashCode>
       <FileName>CampoParámetrosDeRuta.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -53,7 +53,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.CampoTipo">
-    <Position X="1" Y="1.75" Width="2.25" />
+    <Position X="10.25" Y="1.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -66,30 +66,58 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.Coordenadas" Collapsed="true">
-    <Position X="6" Y="5.75" Width="1.5" />
+    <Position X="15.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAAAAAEgAAAAAAAAABAAIAAAABBAAAAEiA=</HashCode>
+      <HashCode>AAAAAAAAAEAAAAAEgAAAAQAAAABAAIAAAABBAAQAEiA=</HashCode>
       <FileName>Coordenadas.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.CampoAtributo">
+    <Position X="24.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEoAAAIAAAAAAAAIABAAAAAAAAAAA=</HashCode>
+      <FileName>CampoAtributo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.CampoEsCiudad">
+    <Position X="26.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAIAAAAAAAAIAAAAAgAAAAAAA=</HashCode>
+      <FileName>CampoEsCiudad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.CampoIndiceDeCiudad">
+    <Position X="29" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgCAAIAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>CampoIndiceDeCiudad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.CampoNodoRuteable">
+    <Position X="31.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAEgAAAACAAAAIAAIAAAAAAAEAAAAA=</HashCode>
+      <FileName>CampoNodoRuteable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="GpsYv.ManejadorDeMapa.Tipo" Collapsed="true">
-    <Position X="1.5" Y="6.5" Width="1.5" />
+    <Position X="10.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAEgABAABAAAAAAAIAAAAAIAAAsAiA=</HashCode>
       <FileName>Tipo.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="GpsYv.ManejadorDeMapa.ClaseDeRuta" Collapsed="true">
-    <Position X="14.5" Y="5.5" Width="1.5" />
+    <Position X="21.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAEQCAAAAAAAAQAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEwCAAAAAAAAQAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>ClaseDeRuta.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="GpsYv.ManejadorDeMapa.LímiteDeVelocidad" Collapsed="true">
-    <Position X="12.75" Y="6.5" Width="1.5" />
+    <Position X="23.25" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAEQCAAAAAAAAQAAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEwCAAAAAAAAQAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>LímiteDeVelocidad.cs</FileName>
     </TypeIdentifier>
   </Struct>

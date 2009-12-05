@@ -5,30 +5,16 @@
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
-    <AssociationLine Name="BuscadorDeDuplicados" Type="GpsYv.ManejadorDeMapa.Pdis.BuscadorDeDuplicados" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="2.438" Y="4.261" />
-        <Point X="2.438" Y="4.596" />
-        <Point X="5" Y="4.596" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="BuscadorDeErrores" Type="GpsYv.ManejadorDeMapa.Pdis.BuscadorDeErrores" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="2" Y="4.261" />
-        <Point X="2" Y="5.346" />
-        <Point X="5" Y="5.346" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QAAAAAAAEAAgAAAAAACAAAAAEBGAAAQACIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAgAAAAAAAAAAAAEAEgAAAAAoAAAAAAAAA=</HashCode>
       <FileName>Pdis\ManejadorDePdis.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="miArregladorDeLetras" />
-      <Field Name="miArregladorDePrefijos" />
-      <Field Name="miEliminadorDeCaracteres" />
       <Property Name="BuscadorDeDuplicados" />
       <Property Name="BuscadorDeErrores" />
+      <Property Name="ArregladorDeIndicesDeCiudad" />
+      <Property Name="BuscadorDeAlertas" />
+      <Property Name="ArregladorGeneral" />
     </ShowAsAssociation>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.ManejadorBase&lt;T&gt;" Collapsed="true">
@@ -39,9 +25,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GpsYv.ManejadorDeMapa.Pdis.BuscadorDeDuplicados" Collapsed="true">
-    <Position X="5" Y="4.25" Width="2.5" />
+    <Position X="5" Y="3.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAHAAAAAAAAAABACIAAQAAIABQAAgAIAgAAgABQA=</HashCode>
+      <HashCode>AAAAAHAAAAAAAAAABICIAAQAAIABQAAgAAAgAAgABQA=</HashCode>
       <FileName>Pdis\BuscadorDeDuplicados.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,25 +38,25 @@
       <FileName>Pdis\BuscadorDeErrores.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GpsYv.ManejadorDeMapa.Pdis.ArregladorDeLetras" Collapsed="true">
-    <Position X="5" Y="2.75" Width="2.5" />
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.ArregladorDeIndicesDeCiudad" Collapsed="true">
+    <Position X="5" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAABAAAAAQAAIAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Pdis\ArregladorDeLetras.cs</FileName>
+      <FileName>Pdis\ArregladorDeIndicesDeCiudad.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GpsYv.ManejadorDeMapa.Pdis.ArregladorDePalabrasPorTipo" Collapsed="true">
-    <Position X="5" Y="3.5" Width="2.5" />
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.BuscadorDeAlertas" Collapsed="true">
+    <Position X="5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAQAABAAAAAQAAIAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Pdis\ArregladorDePalabrasPorTipo.cs</FileName>
+      <HashCode>AAAAABAgAAAAAAAABAQAAAQAEIAAAAAAABAIAAAABAA=</HashCode>
+      <FileName>Pdis\BuscadorDeAlertas.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GpsYv.ManejadorDeMapa.Pdis.EliminadorDeCaracteres" Collapsed="true">
-    <Position X="5" Y="2" Width="2.5" />
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.ArregladorGeneral" Collapsed="true">
+    <Position X="5" Y="2.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABgAAAAAAAAABAAAAAQAAIAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Pdis\EliminadorDeCaracteres.cs</FileName>
+      <HashCode>AAAAABggCAAAAQgABAAAAAQAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pdis\ArregladorGeneral.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
