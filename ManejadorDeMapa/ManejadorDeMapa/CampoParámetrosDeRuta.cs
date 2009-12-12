@@ -93,6 +93,13 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public const string IdentificadorDeParámetrosDeRuta = "RouteParam";
 
+    #region Constantes
+    /// <summary>
+    /// Indice del valor UnSoloSentido en los otros parámetros.
+    /// </summary>
+    public const int IndiceUnSoloSentido = 0;
+    #endregion
+
 
     /// <summary>
     /// Obtiene la clase de ruta.

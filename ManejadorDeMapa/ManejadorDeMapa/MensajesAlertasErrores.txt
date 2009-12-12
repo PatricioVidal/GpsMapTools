@@ -45,6 +45,12 @@ Movido el calificativo de la Vía al principio del nombre.
 M105: Cambiado a Parámetros de Caminería estándar.
 La Vía se detectó como caminería y se le cambiaros los parámetros de ruta para que sea estándar.
 
+M106: La vía tiene el Indicador de Dirección igual a '1' pero no es de un solo sentido. Cambiada a un solo sentido.  
+
+M107: La vía tiene el Indicador de Dirección igual a '0' pero es de un solo sentido. Cambiado el Indicador de Dirección a valor '1'.  
+
+M107: La vía no tiene Indicador de Dirección pero es de un solo sentido. Añadido el Indicadorde Dirrección con valor '1'.  
+
 
 Alertas
 =======
@@ -62,7 +68,6 @@ La Vía tiene la clase de ruta equivocada.
 
 A104: Diferencia de los Indices de la Clase de Ruta es {0}, y la máxima deferencia permitida es {1}.
 La diferencia de los índice de la clase para el grupo de Vías es muy grande.
-
 
 
 Errores

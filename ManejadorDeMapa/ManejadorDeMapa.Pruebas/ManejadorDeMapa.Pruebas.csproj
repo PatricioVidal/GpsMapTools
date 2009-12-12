@@ -70,6 +70,7 @@
     <Compile Include="PruebaEscritorFormatoPolish.cs" />
     <Compile Include="PruebasDeIntegración.cs" />
     <Compile Include="PruebasLímiteDeVelocidad.cs" />
+    <Compile Include="Vías\PruebaArregladorGeneral.cs" />
     <Compile Include="Vías\PruebaVía.cs" />
   </ItemGroup>
   <ItemGroup>

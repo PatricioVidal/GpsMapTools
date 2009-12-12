@@ -78,6 +78,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
   /// </summary>
   public class Vía : Polilínea
   {
+    #region Constantes
+    /// <summary>
+    /// Identificador campo Indicador de Dirección.
+    /// </summary>
+    public const string IdentificadorIndicadorDeDirección = "DirIndicator";
+    #endregion
+
     #region Campos
     private static readonly CampoParámetrosDeRuta miCampoParámetrosDeRutaPorDefecto = new CampoParámetrosDeRuta(
       new LímiteDeVelocidad (0),
@@ -93,6 +100,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Obtiene los Parámetros de Ruta.
     /// </summary>
     public CampoParámetrosDeRuta CampoParámetrosDeRuta { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene el Campo Indicador de Dirección.
+    /// </summary>
+    public CampoGenérico CampoIndicadorDeDirección { get; private set; }
 
 
     /// <summary>
@@ -138,12 +151,14 @@ namespace GpsYv.ManejadorDeMapa.Vías
              losCampos)
     {
       CampoParámetrosDeRuta = miCampoParámetrosDeRutaPorDefecto;
+      CampoIndicadorDeDirección = null;
 
       // Busca los campos específicos de las vías.
       foreach (Campo campo in losCampos)
       {
         CampoParámetrosDeRuta campoParámetrosDeRuta = campo as CampoParámetrosDeRuta;
         CampoNombre campoNombre;
+        CampoGenérico campoGenérico;
         if (campoParámetrosDeRuta != null)
         {
           CampoParámetrosDeRuta = campoParámetrosDeRuta;
@@ -154,6 +169,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
           if (campoNombre.Número == 2)
           {
             miCampoNombreSecundario = campoNombre;
+          }
+        }
+        else if ((campoGenérico = campo as CampoGenérico) != null)
+        {
+          if (campoGenérico.Identificador == IdentificadorIndicadorDeDirección)
+          {
+            CampoIndicadorDeDirección = campoGenérico;
           }
         }
       }
@@ -167,12 +189,13 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     /// <param name="elCampoParámetrosDeRutaNuevo">El Campo de Parámetros de Ruta nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    public void CambiaCampoParámetrosDeRuta(CampoParámetrosDeRuta elCampoParámetrosDeRutaNuevo, string laRazón)
+    /// <returns>Una variable lógica que indica si se cambió el campo.</returns>
+    public bool CambiaCampoParámetrosDeRuta(CampoParámetrosDeRuta elCampoParámetrosDeRutaNuevo, string laRazón)
     {
       // Solo cambia el campo si es diferente.
       if (elCampoParámetrosDeRutaNuevo == CampoParámetrosDeRuta)
       {
-        return;
+        return false;
       }
 
       // Si no tiene Campo de Parámetros de Ruta entonces añadimos 
@@ -191,8 +214,42 @@ namespace GpsYv.ManejadorDeMapa.Vías
         CambiaCampo(elCampoParámetrosDeRutaNuevo, CampoParámetrosDeRuta, laRazón);
         CampoParámetrosDeRuta = elCampoParámetrosDeRutaNuevo;
       }
+
+      return true;
     }
 
+
+    /// <summary>
+    /// Cambia el Campo Indicador de Dirección.
+    /// </summary>
+    /// <param name="elCampoParámetrosDeRutaNuevo">El Campo Indicador de Dirección nuevo.</param>
+    /// <param name="laRazón">La razón del cambio.</param>
+    /// <returns>Una variable lógica que indica si se cambió el campo.</returns>
+    public bool CambiaCampoIndicadorDeDirección(CampoGenérico elCampoNuevo, string laRazón)
+    {
+      // Solo cambia el campo si es diferente.
+      if (elCampoNuevo == CampoIndicadorDeDirección)
+      {
+        return false;
+      }
+
+      // Si no tiene Campo Indicador de Dirección entonces añadimos 
+      // el campo nuevo.
+      if (CampoIndicadorDeDirección == null)
+      {
+        // Añade el campo.
+        AñadeCampo(elCampoNuevo, laRazón);
+        CampoIndicadorDeDirección = elCampoNuevo;
+      }
+      else
+      {
+        // Cambia el campo.
+        CambiaCampo(elCampoNuevo, CampoIndicadorDeDirección, laRazón);
+        CampoIndicadorDeDirección = elCampoNuevo;
+      }
+
+      return true;
+    }
 
     /// <summary>
     /// Actualiza el nombre secundario.

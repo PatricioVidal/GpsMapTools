@@ -124,6 +124,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       númeroDeProblemasDetectados += ArreglaNombres(laVía);
       númeroDeProblemasDetectados += ArreglaCaminerías(laVía);
+      númeroDeProblemasDetectados += ArreglaSentidos(laVía);
 
       return númeroDeProblemasDetectados;
     }
@@ -131,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
     private int ArreglaNombres(Vía laVía)
     {
-       int númeroDeProblemasDetectados = 0;
+      int númeroDeProblemasDetectados = 0;
 
       string nombreACorregir = laVía.Nombre;
 
@@ -221,9 +222,57 @@ namespace GpsYv.ManejadorDeMapa.Vías
         return númeroDeProblemasDetectados;
       }
 
-      laVía.CambiaCampoParámetrosDeRuta(
+      if (laVía.CambiaCampoParámetrosDeRuta(
         miCampoParámetrosDeRutaDeCaminería,
-        "M105: Cambiado a Parámetros de Caminería estándar.");
+        "M105: Cambiado a Parámetros de Caminería estándar."))
+      {
+        ++númeroDeProblemasDetectados;
+      }
+
+      return númeroDeProblemasDetectados;
+    }
+
+
+    private int ArreglaSentidos(Vía laVía)
+    {
+      int númeroDeProblemasDetectados = 0;
+
+      string indicadorDeDirección = null;
+      if (laVía.CampoIndicadorDeDirección != null)
+      {
+        indicadorDeDirección = laVía.CampoIndicadorDeDirección.Texto;
+      }
+      bool unSoloSentido = laVía.CampoParámetrosDeRuta.OtrosParámetros[CampoParámetrosDeRuta.IndiceUnSoloSentido];
+      if ((indicadorDeDirección == null)&& unSoloSentido)
+      {
+       CampoGenérico campoIndicadorDeDirecciónDeUnSoloSentido = new CampoGenérico(Vía.IdentificadorIndicadorDeDirección, "1");
+       laVía.CambiaCampoIndicadorDeDirección(
+          campoIndicadorDeDirecciónDeUnSoloSentido,
+          "M107: La vía no tiene Indicador de Dirección pero es de un solo sentido. Añadido el Indicadorde Dirrección con valor '1'.");
+        ++númeroDeProblemasDetectados;
+      }
+      else if ((indicadorDeDirección == "1") && !unSoloSentido)
+      {
+        CampoParámetrosDeRuta campoParámetrosDeRuta = laVía.CampoParámetrosDeRuta;
+        bool[] otrosParámetrosNuevos = campoParámetrosDeRuta.OtrosParámetros;
+        otrosParámetrosNuevos[CampoParámetrosDeRuta.IndiceUnSoloSentido] = true;
+        CampoParámetrosDeRuta campoParámetrosDeRutaNuevo = new CampoParámetrosDeRuta(
+          campoParámetrosDeRuta.LímiteDeVelocidad,
+          campoParámetrosDeRuta.ClaseDeRuta,
+          otrosParámetrosNuevos);
+        laVía.CambiaCampoParámetrosDeRuta(
+          campoParámetrosDeRutaNuevo,
+          "M106: La vía tiene el Indicador de Dirección igual a '1' pero no es de un solo sentido. Cambiada a un solo sentido.");
+        ++númeroDeProblemasDetectados;
+      }
+      else if ((indicadorDeDirección == "0") && unSoloSentido)
+      {
+         CampoGenérico campoIndicadorDeDirecciónDeUnSoloSentido = new CampoGenérico(Vía.IdentificadorIndicadorDeDirección, "1");
+        laVía.CambiaCampoIndicadorDeDirección(
+          campoIndicadorDeDirecciónDeUnSoloSentido,
+          "M107: La vía tiene el Indicador de Dirección igual a '0' pero es de un solo sentido. Cambiado el Indicador de Dirección a valor '1'.");
+        ++númeroDeProblemasDetectados;
+      }
 
       return númeroDeProblemasDetectados;
     }
