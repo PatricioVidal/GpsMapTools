@@ -254,7 +254,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       else if ((indicadorDeDirección == "1") && !unSoloSentido)
       {
         CampoParámetrosDeRuta campoParámetrosDeRuta = laVía.CampoParámetrosDeRuta;
-        bool[] otrosParámetrosNuevos = campoParámetrosDeRuta.OtrosParámetros;
+        bool[] otrosParámetrosNuevos = (bool[])campoParámetrosDeRuta.OtrosParámetros.Clone();
         otrosParámetrosNuevos[CampoParámetrosDeRuta.IndiceUnSoloSentido] = true;
         CampoParámetrosDeRuta campoParámetrosDeRutaNuevo = new CampoParámetrosDeRuta(
           campoParámetrosDeRuta.LímiteDeVelocidad,
@@ -267,7 +267,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       }
       else if ((indicadorDeDirección == "0") && unSoloSentido)
       {
-         CampoGenérico campoIndicadorDeDirecciónDeUnSoloSentido = new CampoGenérico(Vía.IdentificadorIndicadorDeDirección, "1");
+        CampoGenérico campoIndicadorDeDirecciónDeUnSoloSentido = new CampoGenérico(Vía.IdentificadorIndicadorDeDirección, "1");
         laVía.CambiaCampoIndicadorDeDirección(
           campoIndicadorDeDirecciónDeUnSoloSentido,
           "M107: La vía tiene el Indicador de Dirección igual a '0' pero es de un solo sentido. Cambiado el Indicador de Dirección a valor '1'.");

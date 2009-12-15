@@ -69,6 +69,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using GpsYv.ManejadorDeMapa.Vías;
@@ -126,8 +127,11 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
   
 
     /// <summary>
-    /// Prueba el método Procesa().
+    /// Caso 1 de la prueba del método Procesa().
     /// </summary>
+    /// <remarks>
+    /// Prueba la funcionalidad del los sentidos de las vías.
+    /// </remarks>
     [Test]
     public void PruebaProcesaCaso1()
     {
@@ -135,18 +139,19 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       // Crea el objeto a probar.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
-      ManejadorDeVías manejadorDePdis = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus);
-      ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDePdis, escuchadorDeEstatus);
-     
+      ManejadorDeVías manejadorDeVías = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus);
+      ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDeVías, escuchadorDeEstatus);
+
       // Caso de prueba.
       Caso[] casos = new[] {
         //         Nombre, IndicadorDeDirección, UnSoloSentido, IndicadorDeDirecciónEsperado, UnSoloSentidoEsperado
         new Caso (    "A",                  "0",         false,                          "0",                 false), // Calle doble sentido.
-        new Caso (    "B",                  "0",          true,                          "1",                  true), // Falta indicador de dirección.
+        new Caso (    "B",                  "0",          true,                          "1",                  true), // Indicador de dirección = 0.
         new Caso (    "C",                  "1",         false,                          "1",                  true), // Falta UnSoloSentido.
         new Caso (    "D",                  "1",          true,                          "1",                  true), // Calle un sentido.
+        new Caso (    "E",                 null,          true,                          "1",                  true), // Falta indicador de dirección.
       };
-      const int númeroDeProblemasDetectados = 2;
+      const int númeroDeProblemasDetectados = 3;
 
       // Crea los elementos.
       // Vía típica:
@@ -159,7 +164,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       //   RoadID=47
       //   RouteParam=5,3,1,0,0,0,0,0,0,0,0,0
       //   Data0=(10.16300,-66.00000),(10.16199,-65.99850),(10.16010,-65.99591)
-      IList<Vía> vías = manejadorDePdis.Elementos;
+      IList<Vía> vías = manejadorDeVías.Elementos;
       const string clase = "POI";
       for (int i = 0; i < casos.Length; ++i)
       {
@@ -167,7 +172,6 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
         List<Campo> campos = new List<Campo> {
           new CampoTipo("0x2"),
           new CampoNombre (caso.Nombre),
-          new CampoGenérico("DirIndicator", caso.IndicadorDeDirección),
           new CampoGenérico("EndLevel", "3"),
           new CampoParámetrosDeRuta(
             new LímiteDeVelocidad(5), 
@@ -180,6 +184,10 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
                                               new Coordenadas(10.16010,-65.99591),
                                             })
         };
+        if ( caso.IndicadorDeDirección != null)
+        {
+          campos.Add(new CampoGenérico(Vía.IdentificadorIndicadorDeDirección, caso.IndicadorDeDirección));          
+        }
 
         Vía vía = new Vía(manejadorDeMapa, i, clase, campos);
         vías.Add(vía);

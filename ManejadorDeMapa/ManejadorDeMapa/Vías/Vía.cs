@@ -222,7 +222,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Cambia el Campo Indicador de Dirección.
     /// </summary>
-    /// <param name="elCampoParámetrosDeRutaNuevo">El Campo Indicador de Dirección nuevo.</param>
+    /// <param name="elCampoNuevo">El Campo Indicador de Dirección nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
     /// <returns>Una variable lógica que indica si se cambió el campo.</returns>
     public bool CambiaCampoIndicadorDeDirección(CampoGenérico elCampoNuevo, string laRazón)
