@@ -60,6 +60,10 @@
 0xb00,Small city/town (5-10K)/
 0xc00,Settlement (2-5K)/
 0xd00,Settlement (1-2K)/
+0Xe00,Settlement (500-1K)/
+0xf00,Settlement (200-500)/
+0x1000,Settlement (100-200)/
+0x1100,Settlement (less 100)/
 // COMIDA
 0x2a00,Dining/Comida
 0x2a01,Dining (American)/Comida Americana
