@@ -28,7 +28,18 @@
     /// </summary>
     private void InitializeComponent()
     {
-      components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfaseListaDeVías));
+      this.SuspendLayout();
+      // 
+      // InterfaseListaDeVías
+      // 
+      this.AccessibleDescription = null;
+      this.AccessibleName = null;
+      resources.ApplyResources(this, "$this");
+      this.BackgroundImage = null;
+      this.Font = null;
+      this.ResumeLayout(false);
+
     }
 
     #endregion

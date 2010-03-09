@@ -70,9 +70,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Globalization;
@@ -84,15 +81,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public VentanaDeAcerca()
     {
       InitializeComponent();
-      this.Text = String.Format("Acerca {0}", AssemblyName);
-      this.labelProductName.Text = AssemblyProduct;
-      this.labelVersion.Text = String.Format("Version {0}   ({1})", AssemblyVersion, FechaDelAssembly.ToString("MMM. d, yyyy", CultureInfo.CurrentCulture));
-      this.labelCopyright.Text = AssemblyCopyright;
-      this.labelCompanyName.Text = AssemblyCompany;
-      this.textBoxDescription.Text = 
-        "La búsqueda de palabras similares usa la librería " +
-        "\"Ternary Search Tree Implementation for C#\" de Jonathan de Halleux (http://www.codeproject.com/KB/recipes/tst.aspx)\r\n\r\n" +
-        "Usando la clase PolygonF de Joel: http://www.developingfor.net/free-code/polygonf";
+      Text += " " + Properties.Recursos.DescripciónDelEjecutable;
+      labelProductName.Text = AssemblyProduct;
+      labelVersion.Text = String.Format("Version {0}   ({1})", AssemblyVersion, FechaDelAssembly.ToString("MMM. d, yyyy", CultureInfo.CurrentCulture));
+      labelCopyright.Text = AssemblyCopyright;
+      labelCompanyName.Text = AssemblyCompany;
+      textBoxDescription.Text = Properties.Recursos.VentanaDeAcercaDescripción;
     }
 
     #region Assembly Attribute Accessors

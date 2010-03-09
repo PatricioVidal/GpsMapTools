@@ -117,113 +117,326 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ordenadorDeColumnaDeLista.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ordenadorDeColumnaDeLista.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="miColumnaNúmeroDeElemento.Text" xml:space="preserve">
-    <value>#</value>
-  </data>
-  <data name="miColumnaTipo.Text" xml:space="preserve">
-    <value>Tipo</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miColumnaTipo.Width" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="miColumnaDescripción.Text" xml:space="preserve">
-    <value>Descripción</value>
-  </data>
-  <data name="miColumnaDescripción.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="miColumnaNombre.Text" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="miColumnaNombre.Width" type="System.Int32, mscorlib">
-    <value>211</value>
-  </data>
-  <data name="miColumnaCoordenadas.Text" xml:space="preserve">
-    <value>Coordenadas</value>
-  </data>
-  <data name="miColumnaCoordenadas.Width" type="System.Int32, mscorlib">
-    <value>156</value>
-  </data>
-  <data name="miColumnaDistancia.Text" xml:space="preserve">
-    <value>Distancia (m)</value>
-  </data>
-  <data name="miColumnaDistancia.Width" type="System.Int32, mscorlib">
-    <value>84</value>
-  </data>
-  <metadata name="miMenuEditorDePdis.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>229, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="miBotonEliminarPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 23</value>
+  </data>
   <data name="miMenuEditorDePdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 92</value>
-  </data>
-  <data name="miMenuEditorDePdis.Text" xml:space="preserve">
-    <value>InterfaseEditorDePdi</value>
-  </data>
-  <data name="&gt;&gt;miMenuEditorDePdis.Name" xml:space="preserve">
-    <value>miMenuEditorDePdis</value>
-  </data>
-  <data name="&gt;&gt;miMenuEditorDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.MenuEditorDePdis, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
+    <value>300, 70</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 190</value>
-  </data>
-  <data name="miLista.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Name" xml:space="preserve">
+    <value>miTextoNumeroDePdisSelecionados</value>
   </data>
   <data name="&gt;&gt;miLista.Name" xml:space="preserve">
     <value>miLista</value>
   </data>
-  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miTextoParecidoDelNombre.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
-    <value>miRecipienteDividido.Panel1</value>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 62</value>
   </data>
-  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;miColumnaNúmeroDeElemento.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miTextoNumeroDePdisSelecionados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 4</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="miTextoNumeroDePdisSelecionados.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;miBotónBuscaDuplicados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miLista.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="miBotónBuscaDuplicados.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 21</value>
+  </data>
+  <data name="miColumnaDistancia.Width" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="miColumnaCoordenadas.Text" xml:space="preserve">
+    <value>Coordenadas</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 164</value>
+  </data>
+  <data name="miTextoDistancia.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="miBotonEliminarPdis.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="miColumnaNombre.Width" type="System.Int32, mscorlib">
+    <value>211</value>
+  </data>
+  <data name="&gt;&gt;miColumnaNúmeroDeElemento.Name" xml:space="preserve">
+    <value>miColumnaNúmeroDeElemento</value>
+  </data>
+  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="miRecipienteDividido.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="miLista.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="miRecipienteDividido.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 62</value>
+  <data name="&gt;&gt;miRecipienteDividido.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="miRecipienteDividido.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
+  <data name="miColumnaNúmeroDeElemento.Text" xml:space="preserve">
+    <value>#</value>
   </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel1.Name" xml:space="preserve">
-    <value>miRecipienteDividido.Panel1</value>
+  <data name="miTextoNumeroDePdisSelecionados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 23</value>
   </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;miBotonEliminarPdis.Name" xml:space="preserve">
+    <value>miBotonEliminarPdis</value>
   </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel1.Parent" xml:space="preserve">
-    <value>miRecipienteDividido</value>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>panel3</value>
   </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;miRecipienteDividido.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="miMapa.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="miMapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeParecidoDeNombre.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="miBarraDeDistancia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 32</value>
+  </data>
+  <data name="miColumnaDescripción.Text" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="miBarraDeDistancia.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;miColumnaNombre.Name" xml:space="preserve">
+    <value>miColumnaNombre</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="miTextoDistancia.Text" xml:space="preserve">
+    <value>0 m</value>
+  </data>
+  <data name="&gt;&gt;miColumnaDistancia.Name" xml:space="preserve">
+    <value>miColumnaDistancia</value>
+  </data>
+  <data name="&gt;&gt;miBotonEliminarPdis.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.MenuEditorDePdis, ManejadorDeMapa, Version=1.37.3717.42143, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;miBotónBuscaDuplicados.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="miRecipienteDividido.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;miBotónBuscaDuplicados.Name" xml:space="preserve">
+    <value>miBotónBuscaDuplicados</value>
+  </data>
+  <data name="&gt;&gt;miTextoParecidoDelNombre.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miTextoParecidoDelNombre.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ordenadorDeColumnaDeLista.Name" xml:space="preserve">
+    <value>ordenadorDeColumnaDeLista</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel1.Parent" xml:space="preserve">
+    <value>miRecipienteDividido</value>
+  </data>
+  <data name="miTextoNumeroDePdisSelecionados.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miColumnaTipo.Text" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;miBotonEliminarPdis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBotónBuscaDuplicados.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <data name="miBarraDeParecidoDeNombre.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 32</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeDistancia.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ordenadorDeColumnaDeLista.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.37.3717.42143, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;miMenuEditorDePdis.Name" xml:space="preserve">
+    <value>miMenuEditorDePdis</value>
+  </data>
+  <data name="&gt;&gt;miTextoDistancia.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miBotonEliminarPdis.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="miTextoDistancia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 18</value>
+  </data>
+  <data name="&gt;&gt;miMapa.Name" xml:space="preserve">
+    <value>miMapa</value>
+  </data>
+  <data name="miBotonEliminarPdis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;miLista.Parent" xml:space="preserve">
+    <value>miRecipienteDividido.Panel1</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeDistancia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeDistancia.Name" xml:space="preserve">
+    <value>miBarraDeDistancia</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>InterfaseDePdisDuplicados</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="miBarraDeDistancia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="miBarraDeParecidoDeNombre.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Name" xml:space="preserve">
+    <value>miRecipienteDividido</value>
+  </data>
+  <data name="&gt;&gt;miColumnaDistancia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBarraDeDistancia.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="miTextoParecidoDelNombre.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 18</value>
+  </data>
+  <data name="&gt;&gt;miColumnaTipo.Name" xml:space="preserve">
+    <value>miColumnaTipo</value>
+  </data>
+  <data name="&gt;&gt;miTextoDistancia.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="miLista.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;miBotonEliminarPdis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="miLista.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 190</value>
+  </data>
+  <data name="miRecipienteDividido.SplitterDistance" type="System.Int32, mscorlib">
+    <value>190</value>
+  </data>
+  <data name="miBotónBuscaDuplicados.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBotonEliminarPdis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 420</value>
+  </data>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="miTextoNumeroDePdisSelecionados.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="miTextoParecidoDelNombre.Text" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBotonEliminarPdis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 4</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 3</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 450</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miLista.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.37.3717.42143, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.37.3717.42143, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;miTextoDistancia.Name" xml:space="preserve">
+    <value>miTextoDistancia</value>
+  </data>
+  <data name="miBotónBuscaDuplicados.Text" xml:space="preserve">
+    <value>Busca Duplicados</value>
   </data>
   <data name="miMapa.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -233,394 +446,184 @@
         AAAAAAs=
 </value>
   </data>
-  <data name="miMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 164</value>
+  <data name="&gt;&gt;miTextoParecidoDelNombre.Name" xml:space="preserve">
+    <value>miTextoParecidoDelNombre</value>
   </data>
   <data name="miMapa.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;miMapa.Name" xml:space="preserve">
-    <value>miMapa</value>
+  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Name" xml:space="preserve">
+    <value>miBarraDeParecidoDeNombre</value>
   </data>
-  <data name="&gt;&gt;miMapa.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseMapa, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
-    <value>miRecipienteDividido.Panel2</value>
-  </data>
-  <data name="&gt;&gt;miMapa.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel2.Name" xml:space="preserve">
-    <value>miRecipienteDividido.Panel2</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;miRecipienteDividido.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel2.Parent" xml:space="preserve">
-    <value>miRecipienteDividido</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miRecipienteDividido.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 358</value>
-  </data>
-  <data name="miRecipienteDividido.SplitterDistance" type="System.Int32, mscorlib">
-    <value>190</value>
-  </data>
-  <data name="miRecipienteDividido.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Name" xml:space="preserve">
-    <value>miRecipienteDividido</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;miRecipienteDividido.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miTextoNumeroDePdisSelecionados.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="miTextoNumeroDePdisSelecionados.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 4</value>
-  </data>
-  <data name="miTextoNumeroDePdisSelecionados.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 23</value>
-  </data>
-  <data name="miTextoNumeroDePdisSelecionados.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="miTextoNumeroDePdisSelecionados.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Name" xml:space="preserve">
-    <value>miTextoNumeroDePdisSelecionados</value>
-  </data>
-  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;miTextoNumeroDePdisSelecionados.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miBotonEliminarPdis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="miBotonEliminarPdis.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miBotonEliminarPdis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 4</value>
-  </data>
-  <data name="miBotonEliminarPdis.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="miBotonEliminarPdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 23</value>
-  </data>
-  <data name="miBotonEliminarPdis.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="miBotonEliminarPdis.Text" xml:space="preserve">
-    <value>Eliminar PDI(s) Seleccionados</value>
-  </data>
-  <data name="&gt;&gt;miBotonEliminarPdis.Name" xml:space="preserve">
-    <value>miBotonEliminarPdis</value>
-  </data>
-  <data name="&gt;&gt;miBotonEliminarPdis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miBotonEliminarPdis.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;miBotonEliminarPdis.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 420</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 30</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="miBarraDeDistancia.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miBarraDeDistancia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="miBarraDeDistancia.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 32</value>
-  </data>
-  <data name="miBarraDeDistancia.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeDistancia.Name" xml:space="preserve">
-    <value>miBarraDeDistancia</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeDistancia.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeDistancia.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeDistancia.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miBotónBuscaDuplicados.Location" type="System.Drawing.Point, System.Drawing">
-    <value>477, 21</value>
-  </data>
-  <data name="miBotónBuscaDuplicados.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
-  </data>
-  <data name="miBotónBuscaDuplicados.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="miBotónBuscaDuplicados.Text" xml:space="preserve">
-    <value>Busca Duplicados</value>
-  </data>
-  <data name="&gt;&gt;miBotónBuscaDuplicados.Name" xml:space="preserve">
-    <value>miBotónBuscaDuplicados</value>
-  </data>
-  <data name="&gt;&gt;miBotónBuscaDuplicados.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miBotónBuscaDuplicados.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;miBotónBuscaDuplicados.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miTextoParecidoDelNombre.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="miTextoParecidoDelNombre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 18</value>
-  </data>
-  <data name="miTextoParecidoDelNombre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 13</value>
-  </data>
-  <data name="miTextoParecidoDelNombre.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="miTextoParecidoDelNombre.Text" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;miTextoParecidoDelNombre.Name" xml:space="preserve">
-    <value>miTextoParecidoDelNombre</value>
-  </data>
-  <data name="&gt;&gt;miTextoParecidoDelNombre.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miTextoParecidoDelNombre.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;miTextoParecidoDelNombre.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miBarraDeParecidoDeNombre.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="miBarraDeParecidoDeNombre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="miBarraDeParecidoDeNombre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 32</value>
-  </data>
-  <data name="miBarraDeParecidoDeNombre.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Name" xml:space="preserve">
-    <value>miBarraDeParecidoDeNombre</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;miBarraDeParecidoDeNombre.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 3</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 56</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Parecido del Nombre (Hamming)</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miTextoDistancia.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="miTextoDistancia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 18</value>
-  </data>
-  <data name="miTextoDistancia.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 13</value>
-  </data>
-  <data name="miTextoDistancia.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="miTextoDistancia.Text" xml:space="preserve">
-    <value>0 m</value>
-  </data>
-  <data name="&gt;&gt;miTextoDistancia.Name" xml:space="preserve">
-    <value>miTextoDistancia</value>
-  </data>
-  <data name="&gt;&gt;miTextoDistancia.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miTextoDistancia.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;miTextoDistancia.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 56</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Distancia Máxima</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 62</value>
-  </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 450</value>
-  </data>
-  <data name="&gt;&gt;ordenadorDeColumnaDeLista.Name" xml:space="preserve">
-    <value>ordenadorDeColumnaDeLista</value>
-  </data>
-  <data name="&gt;&gt;ordenadorDeColumnaDeLista.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.OrdenadorDeColumnaDeLista, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miColumnaNúmeroDeElemento.Name" xml:space="preserve">
-    <value>miColumnaNúmeroDeElemento</value>
-  </data>
-  <data name="&gt;&gt;miColumnaNúmeroDeElemento.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miColumnaTipo.Name" xml:space="preserve">
-    <value>miColumnaTipo</value>
-  </data>
-  <data name="&gt;&gt;miColumnaTipo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miColumnaDescripción.Name" xml:space="preserve">
-    <value>miColumnaDescripción</value>
-  </data>
-  <data name="&gt;&gt;miColumnaDescripción.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miColumnaNombre.Name" xml:space="preserve">
-    <value>miColumnaNombre</value>
-  </data>
-  <data name="&gt;&gt;miColumnaNombre.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;miColumnaCoordenadas.Name" xml:space="preserve">
     <value>miColumnaCoordenadas</value>
   </data>
+  <data name="&gt;&gt;miMapa.Parent" xml:space="preserve">
+    <value>miRecipienteDividido.Panel2</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeParecidoDeNombre.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBotonEliminarPdis.Text" xml:space="preserve">
+    <value>Eliminar PDI(s) Seleccionados</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Distancia Máxima</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miBarraDeParecidoDeNombre.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="miTextoDistancia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 13</value>
+  </data>
+  <data name="miColumnaCoordenadas.Width" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="miRecipienteDividido.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 358</value>
+  </data>
+  <data name="miRecipienteDividido.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 62</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="miBarraDeParecidoDeNombre.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="&gt;&gt;miBarraDeDistancia.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;miMapa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miMenuEditorDePdis.Text" xml:space="preserve">
+    <value>InterfaseEditorDePdi</value>
+  </data>
+  <data name="&gt;&gt;miColumnaDescripción.Name" xml:space="preserve">
+    <value>miColumnaDescripción</value>
+  </data>
+  <data name="miColumnaTipo.Width" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel2.Parent" xml:space="preserve">
+    <value>miRecipienteDividido</value>
+  </data>
+  <data name="miTextoDistancia.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="miColumnaDistancia.Text" xml:space="preserve">
+    <value>Distancia (m)</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel2.Name" xml:space="preserve">
+    <value>miRecipienteDividido.Panel2</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Parecido del Nombre (Hamming)</value>
+  </data>
   <data name="&gt;&gt;miColumnaCoordenadas.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miColumnaDistancia.Name" xml:space="preserve">
-    <value>miColumnaDistancia</value>
-  </data>
-  <data name="&gt;&gt;miColumnaDistancia.Type" xml:space="preserve">
+  <data name="&gt;&gt;miColumnaNombre.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>InterfaseDePdisDuplicados</value>
+  <data name="&gt;&gt;miLista.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.36.3389.37003, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;miColumnaDescripción.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 56</value>
+  </data>
+  <data name="&gt;&gt;miTextoParecidoDelNombre.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>607, 30</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 56</value>
+  </data>
+  <data name="miRecipienteDividido.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;miTextoParecidoDelNombre.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;miTextoDistancia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;miColumnaTipo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miMapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miColumnaNombre.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="&gt;&gt;miRecipienteDividido.Panel1.Name" xml:space="preserve">
+    <value>miRecipienteDividido.Panel1</value>
+  </data>
+  <data name="miTextoParecidoDelNombre.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="miRecipienteDividido.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
+  <data name="miColumnaDescripción.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="&gt;&gt;miBotónBuscaDuplicados.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ordenadorDeColumnaDeLista.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ordenadorDeColumnaDeLista.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="miMenuEditorDePdis.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>229, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>English</value>
+  </metadata>
 </root>

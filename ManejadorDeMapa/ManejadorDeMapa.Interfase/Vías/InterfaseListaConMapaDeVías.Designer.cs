@@ -40,10 +40,8 @@
       // 
       // miDivision
       // 
-      this.miDivision.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miDivision.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.miDivision, "miDivision");
       this.miDivision.Name = "miDivision";
-      this.miDivision.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // miDivision.Panel1
       // 
@@ -52,20 +50,15 @@
       // miDivision.Panel2
       // 
       this.miDivision.Panel2.Controls.Add(this.miMapaDeVíasSeleccionadas);
-      this.miDivision.Size = new System.Drawing.Size(602, 485);
-      this.miDivision.SplitterDistance = 288;
-      this.miDivision.TabIndex = 5;
       // 
       // miLista
       // 
       this.miLista.ContextMenuStrip = this.miMenuEditorDeVías;
-      this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
-      this.miLista.Location = new System.Drawing.Point(0, 0);
+      this.miLista.HideSelection = false;
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(602, 288);
-      this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       // 
@@ -74,15 +67,16 @@
       this.miMenuEditorDeVías.Lista = this.miLista;
       this.miMenuEditorDeVías.ManejadorDeVías = null;
       this.miMenuEditorDeVías.Name = "miMenuDeContexto";
-      this.miMenuEditorDeVías.Size = new System.Drawing.Size(325, 114);
+      resources.ApplyResources(this.miMenuEditorDeVías, "miMenuEditorDeVías");
       // 
       // miMapaDeVíasSeleccionadas
       // 
-      this.miMapaDeVíasSeleccionadas.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miMapaDeVíasSeleccionadas, "miMapaDeVíasSeleccionadas");
       this.miMapaDeVíasSeleccionadas.EscuchadorDeEstatus = null;
       this.miMapaDeVíasSeleccionadas.Lista = this.miLista;
-      this.miMapaDeVíasSeleccionadas.Location = new System.Drawing.Point(0, 0);
       this.miMapaDeVíasSeleccionadas.ManejadorDeMapa = null;
+      this.miMapaDeVíasSeleccionadas.MuestraCiudades = false;
+      this.miMapaDeVíasSeleccionadas.MuestraEstados = false;
       this.miMapaDeVíasSeleccionadas.MuestraPdis = false;
       this.miMapaDeVíasSeleccionadas.MuestraPolígonos = false;
       this.miMapaDeVíasSeleccionadas.MuestraPolilíneas = false;
@@ -91,16 +85,13 @@
       this.miMapaDeVíasSeleccionadas.MuestraVías = false;
       this.miMapaDeVíasSeleccionadas.Name = "miMapaDeVíasSeleccionadas";
       this.miMapaDeVíasSeleccionadas.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDeVíasSeleccionadas.RectánguloVisibleEnCoordenadas")));
-      this.miMapaDeVíasSeleccionadas.Size = new System.Drawing.Size(602, 193);
-      this.miMapaDeVíasSeleccionadas.TabIndex = 0;
       // 
       // InterfaseListaConMapaDeVías
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miDivision);
       this.Name = "InterfaseListaConMapaDeVías";
-      this.Size = new System.Drawing.Size(602, 485);
       this.miDivision.Panel1.ResumeLayout(false);
       this.miDivision.Panel2.ResumeLayout(false);
       this.miDivision.ResumeLayout(false);

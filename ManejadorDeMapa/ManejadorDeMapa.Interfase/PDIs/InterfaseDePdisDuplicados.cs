@@ -374,19 +374,19 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       switch (distanciaHamming)
       {
         case 0:
-          texto += " - Idéntico";
+          texto += " - " + Properties.Recursos.Idéntico;
           break;
         case 1:
         case 2:
-          texto += " - Muy Parecido";
+          texto += " - " + Properties.Recursos.MuyParecido;
           break;
         case 3:
-          texto += " - Parecido";
+          texto += " - " + Properties.Recursos.Parecido;
           break;
         case 4:
         case 5:
         case 6:
-          texto += " - Parecido";
+          texto += " - " + Properties.Recursos.Parecido;
           break;
         default:
           texto += " - ???";

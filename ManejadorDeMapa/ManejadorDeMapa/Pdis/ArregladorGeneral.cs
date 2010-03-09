@@ -94,7 +94,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción =
+    public const string Descripción =
       "- Arregla Letras reemplazando letras inválidas en los nombres de PDIs.\n" +
       "- Arregla Palabras reemplazando palabras inválidas en los nombres de PDIs.\n" +
       "- Elimina Caracteres inválidos en los nombres de Pdis.";
@@ -146,7 +146,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elPdi.ActualizaNombre(nombreCorregido, "M002: Cambio a mayúsculas.");
+        elPdi.ActualizaNombre(nombreCorregido, Properties.Recursos.M002);
         ++númeroDeProblemasDetectados;
         nombreACorregir = nombreCorregido;
       }
@@ -165,7 +165,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elPdi.ActualizaNombre(nombreCorregido, "M003: Cambio de Letras.");
+        elPdi.ActualizaNombre(nombreCorregido, Properties.Recursos.M003);
         ++númeroDeProblemasDetectados;
       }
 
@@ -189,7 +189,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       nombreCorregido = string.Join(" ", palabras);
       if (nombreCorregido != nombreACorregir)
       {
-        elPdi.ActualizaNombre(nombreCorregido, "M004: Eliminados espacios en blanco extra.");
+        elPdi.ActualizaNombre(nombreCorregido, Properties.Recursos.M004);
         ++númeroDeProblemasDetectados;
         nombreACorregir = nombreCorregido;
       }
@@ -214,7 +214,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
             if (nombreCorregido != nombreACorregir)
             {
               // Remueve los espacios en blanco que se pudo haber añadido.
-              elPdi.ActualizaNombre(nombreCorregido.Trim(), "M005: Cambio de palabra.");
+              elPdi.ActualizaNombre(nombreCorregido.Trim(), Properties.Recursos.M005);
               ++númeroDeProblemasDetectados;
               nombreACorregir = nombreCorregido;
             }
@@ -247,7 +247,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (nombreCorregido != nombreACorregir)
       {
         // Actualiza el campo del nombre.
-        elPdi.ActualizaNombre(nombreCorregido, "M007: Eliminación de Caracteres Inválidos.");
+        elPdi.ActualizaNombre(nombreCorregido, Properties.Recursos.M007);
         ++númeroDeItemsDetectados;
       }
 
@@ -316,7 +316,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     private class LectorDeCorrecciónDePalabrasPorTipo : LectorDeArchivo
     {
       #region Campos
-      private const string miArchivoDeConversionDePalabras = @"PDIs\CorrecciónDePalabrasPorTipo.csv";
+      private const string ArchivoDeConversionDePalabras = @"PDIs\CorrecciónDePalabrasPorTipo.csv";
       private readonly List<CorrecciónDePalabras> miListaDeCorrecciónDePalabras = new List<CorrecciónDePalabras>();
       #endregion
 
@@ -338,7 +338,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       public LectorDeCorrecciónDePalabrasPorTipo(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Lee(miArchivoDeConversionDePalabras);
+        Lee(ArchivoDeConversionDePalabras);
       }
 
 
@@ -385,7 +385,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     private class LectorDeConversiónDeLetras : LectorDeArchivo
     {
       #region Campos
-      private const string miArchivoDeLetrasAReemplazar = @"PDIs\LetrasAReemplazar.csv";
+      private const string ArchivoDeLetrasAReemplazar = @"PDIs\LetrasAReemplazar.csv";
       private readonly Dictionary<char, char> miDiccionarioDeLetras = new Dictionary<char, char>();
       #endregion
 
@@ -407,7 +407,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       public LectorDeConversiónDeLetras(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Lee(miArchivoDeLetrasAReemplazar);
+        Lee(ArchivoDeLetrasAReemplazar);
       }
 
       #region Métodos Protegidos y Privados
@@ -443,7 +443,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     private class LectorDeCaracteresAEliminar : LectorDeArchivo
     {
       #region Campos
-      private const string miArchivoDeCaracteresAEliminar = @"PDIs\CaracteresAEliminar.csv";
+      private const string ArchivoDeCaracteresAEliminar = @"PDIs\CaracteresAEliminar.csv";
       private readonly List<char> miListaDeCaracteres = new List<char>();
       #endregion
 
@@ -465,7 +465,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       public LectorDeCaracteresAEliminar(IEscuchadorDeEstatus elEscuchadorDeEstatus)
         : base(elEscuchadorDeEstatus)
       {
-        Lee(miArchivoDeCaracteresAEliminar);
+        Lee(ArchivoDeCaracteresAEliminar);
       }
 
       #region Métodos Protegidos y Privados

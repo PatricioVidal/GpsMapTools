@@ -83,7 +83,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción =
+    public const string Descripción =
       "Arregla el Indice de Ciudad (CityIdx) de los PDIs.";
 
 
@@ -125,6 +125,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
         PolygonF polígono = new PolygonF(ciudad.CoordenadasComoPuntos);
         if (polígono.Contains(elPdi.Coordenadas))
         {
+          // Tipo 0x4a representa un Estado.
           if (ciudad.Tipo.Value.TipoPrincipal == 0x4a)
           {
             estadoDelPdi = ciudad;
@@ -141,7 +142,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       {
         bool cambió = elPdi.ActualizaCampoIndiceDeCiudad(
           ciudadDelPdi.Indice,
-          string.Format("M000: El PDI pertenece a la Ciudad {0}", ciudadDelPdi));
+          string.Format(Properties.Recursos.M000, ciudadDelPdi));
         if (cambió)
         {
           ++númeroDeProblemasDetectados;
@@ -151,7 +152,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       {
         bool cambió = elPdi.ActualizaCampoIndiceDeCiudad(
           estadoDelPdi.Indice,
-          string.Format("M008: El PDI pertenece al Estado {0}", estadoDelPdi));
+          string.Format(Properties.Recursos.M008, estadoDelPdi));
         if (cambió)
         {
           ++númeroDeProblemasDetectados;
@@ -159,7 +160,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       }
       else
       {
-        bool cambió = elPdi.RemueveCampoIndiceDeCiudad("M001: El PDI no pertenece a ninguna ciudad o Estado.");
+        bool cambió = elPdi.RemueveCampoIndiceDeCiudad(Properties.Recursos.M001);
         if (cambió)
         {
           ++númeroDeProblemasDetectados;

@@ -99,8 +99,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       miFormatoNumérico.NumberDecimalSeparator = ".";
 
       // Añade las columnas de coordenadas.
-      ColumnHeader columnaLatitud = new ColumnHeader {Text = "Latitud"};
-      ColumnHeader columnaLongitud = new ColumnHeader {Text = "Longitud"};
+      ColumnHeader columnaLatitud = new ColumnHeader {Text = Properties.Recursos.Latitud};
+      ColumnHeader columnaLongitud = new ColumnHeader {Text = Properties.Recursos.Longitud};
       Columns.AddRange(new[] {
         columnaLatitud,
         columnaLongitud});

@@ -93,7 +93,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = 
+    public const string Descripción = 
       "Busca PDIs duplicados basado en distancia y parecido del nombre.\n" + 
       "Duplicados exactos son eliminados.";
     
@@ -206,7 +206,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
           // Si el PDI es idéntico entonces se puede borrar de una.
           if (posiblePdiDuplicado.TieneLaMismaInformación(elPdi))
           {
-            posiblePdiDuplicado.Elimina(string.Format("M006: PDI idéntico al elemento {0}.", elPdi.Número));
+            posiblePdiDuplicado.Elimina(string.Format(Properties.Recursos.M006, elPdi.Número));
             misPdisDuplicados.Add(posiblePdiDuplicado);
             ++miNúmeroDeElementosEliminados;
           }

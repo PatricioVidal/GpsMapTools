@@ -70,9 +70,6 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Tst;
-using System.Collections;
 using SWallTech.Drawing.Shapes;
 
 namespace GpsYv.ManejadorDeMapa.Pdis
@@ -85,7 +82,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     #region Campos
     private readonly IDictionary<Pdi, IList<string>> misAlertas = new Dictionary<Pdi, IList<string>>();
     private readonly List<Pdi> misPdisYaProcesadas = new List<Pdi>();
-    private PolygonF misLímitesDelMapa = null;
+    private PolygonF misLímitesDelMapa;
     #endregion
 
     #region Propiedades
@@ -173,7 +170,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       if (!misLímitesDelMapa.Contains(elPdi.Coordenadas))
       {
         ++númeroDeProblemasDetectados;
-        misAlertas.Add(elPdi, new List<string>() { "A000: PDI fuera de límites del mapa." });
+        misAlertas.Add(elPdi, new List<string> { Properties.Recursos.A000 });
       }
 
       return númeroDeProblemasDetectados;

@@ -40,20 +40,48 @@
       // 
       // miInterfaseListaConMapaDePdis
       // 
+      this.miInterfaseListaConMapaDePdis.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.AccessibleName = null;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis, "miInterfaseListaConMapaDePdis");
+      this.miInterfaseListaConMapaDePdis.BackgroundImage = null;
       // 
       // miInterfaseListaConMapaDePdis.División
       // 
+      this.miInterfaseListaConMapaDePdis.División.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.División.AccessibleName = null;
       resources.ApplyResources(this.miInterfaseListaConMapaDePdis.División, "miInterfaseListaConMapaDePdis.División");
+      this.miInterfaseListaConMapaDePdis.División.BackgroundImage = null;
+      this.miInterfaseListaConMapaDePdis.División.Font = null;
       this.miInterfaseListaConMapaDePdis.División.Name = "División";
-      resources.ApplyResources(this.miInterfaseListaConMapaDePdis, "miInterfaseListaConMapaDePdis");
+      // 
+      // miInterfaseListaConMapaDePdis.División.Panel1
+      // 
+      this.miInterfaseListaConMapaDePdis.División.Panel1.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.División.Panel1.AccessibleName = null;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.División.Panel1, "miInterfaseListaConMapaDePdis.División.Panel1");
+      this.miInterfaseListaConMapaDePdis.División.Panel1.BackgroundImage = null;
+      this.miInterfaseListaConMapaDePdis.División.Panel1.Font = null;
+      // 
+      // miInterfaseListaConMapaDePdis.División.Panel2
+      // 
+      this.miInterfaseListaConMapaDePdis.División.Panel2.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.División.Panel2.AccessibleName = null;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.División.Panel2, "miInterfaseListaConMapaDePdis.División.Panel2");
+      this.miInterfaseListaConMapaDePdis.División.Panel2.BackgroundImage = null;
+      this.miInterfaseListaConMapaDePdis.División.Panel2.Font = null;
       this.miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = null;
+      this.miInterfaseListaConMapaDePdis.Font = null;
       // 
       // miInterfaseListaConMapaDePdis.InterfaseListaDePdis
       // 
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.AccessibleName = null;
+      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis, "miInterfaseListaConMapaDePdis.InterfaseListaDePdis");
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.BackgroundImage = null;
       this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnaModificaciones});
       this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.ContextMenuStrip = this.miInterfaseListaConMapaDePdis.MenuEditorDePdis;
-      resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis, "miInterfaseListaConMapaDePdis.InterfaseListaDePdis");
+      this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Font = null;
       this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.FullRowSelect = true;
       this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.GridLines = true;
       this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis.HideSelection = false;
@@ -63,10 +91,16 @@
       // 
       // miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas
       // 
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.AccessibleDescription = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.AccessibleName = null;
       resources.ApplyResources(this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados, "miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas");
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.BackgroundImage = null;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.EscuchadorDeEstatus = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Font = null;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Lista = this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.ManejadorDeMapa = null;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraCiudades = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraEstados = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPdis = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolígonos = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolilíneas = false;
@@ -85,9 +119,13 @@
       // 
       // InterfaseDePdisModificados
       // 
+      this.AccessibleDescription = null;
+      this.AccessibleName = null;
       resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BackgroundImage = null;
       this.Controls.Add(this.miInterfaseListaConMapaDePdis);
+      this.Font = null;
       this.Name = "InterfaseDePdisModificados";
       this.miInterfaseListaConMapaDePdis.División.Panel1.ResumeLayout(false);
       this.miInterfaseListaConMapaDePdis.División.Panel2.ResumeLayout(false);

@@ -117,104 +117,155 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miInterfaseListaConMapaDePdis.División.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.37.3717.42000, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="miInterfaseListaConMapaDePdis.División.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 287</value>
   </data>
-  <data name="miInterfaseListaConMapaDePdis.División.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseMapaDePdisSeleccionados, ManejadorDeMapa, Version=1.37.3717.42000, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.Name" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.División.Panel1</value>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.Parent" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.División</value>
   </data>
   <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Parent" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.División.Panel2</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="miInterfaseListaConMapaDePdis.División.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaConMapaDePdis, ManejadorDeMapa, Version=1.37.3717.42000, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="columnaModificaciones.Width" type="System.Int32, mscorlib">
+    <value>600</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.División.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 484</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Name" xml:space="preserve">
     <value>miInterfaseListaConMapaDePdis.División</value>
   </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;columnaModificaciones.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Name" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.InterfaseListaDePdis</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.Name" xml:space="preserve">
     <value>miInterfaseListaConMapaDePdis.División.Panel2</value>
   </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.Parent" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.División</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.División.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 484</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="miInterfaseListaConMapaDePdis.División.SplitterDistance" type="System.Int32, mscorlib">
-    <value>287</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.División.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Name" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.División</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Parent" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <metadata name="columnaModificaciones.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
-  <data name="columnaModificaciones.Text" xml:space="preserve">
-    <value>Modificaciones</value>
-  </data>
-  <data name="columnaModificaciones.Width" type="System.Int32, mscorlib">
-    <value>600</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Parent" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.División.Panel1</value>
   </data>
   <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 287</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Name" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.InterfaseListaDePdis</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis, ManejadorDeMapa, Version=1.25.3043.41063, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Parent" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.División.Panel1</value>
-  </data>
   <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Type" xml:space="preserve">
+    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaDePdis, ManejadorDeMapa, Version=1.37.3717.42000, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="columnaModificaciones.Text" xml:space="preserve">
+    <value>Modificaciones</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.División.SplitterDistance" type="System.Int32, mscorlib">
+    <value>287</value>
+  </data>
+  <data name="&gt;&gt;columnaModificaciones.Name" xml:space="preserve">
+    <value>columnaModificaciones</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 484</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.División.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.Name" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 193</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.Name" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.División.Panel1</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Name" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 484</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.División.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.División.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Parent" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis</value>
+  </data>
+  <data name="miInterfaseListaConMapaDePdis.InterfaseListaDePdis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>InterfaseDePdisModificados</value>
+  </data>
+  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.División.Panel1.Parent" xml:space="preserve">
+    <value>miInterfaseListaConMapaDePdis.División</value>
   </data>
   <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.RectánguloVisibleEnCoordenadas" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -224,64 +275,16 @@
         AACAPws=
 </value>
   </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 193</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Name" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseMapaDePdisSeleccionados, ManejadorDeMapa, Version=1.25.3043.41063, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.Parent" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis.División.Panel2</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionadas.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 484</value>
-  </data>
-  <data name="miInterfaseListaConMapaDePdis.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.Name" xml:space="preserve">
-    <value>miInterfaseListaConMapaDePdis</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseListaConMapaDePdis, ManejadorDeMapa, Version=1.25.3043.41063, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;miInterfaseListaConMapaDePdis.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="&gt;&gt;miInterfaseListaConMapaDePdis.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>603, 484</value>
-  </data>
-  <data name="&gt;&gt;columnaModificaciones.Name" xml:space="preserve">
-    <value>columnaModificaciones</value>
-  </data>
-  <data name="&gt;&gt;columnaModificaciones.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>InterfaseDePdisModificados</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GpsYv.ManejadorDeMapa.Interfase.InterfaseBase, ManejadorDeMapa, Version=1.25.3043.41063, Culture=neutral, PublicKeyToken=null</value>
-  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>English</value>
+  </metadata>
+  <metadata name="columnaModificaciones.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
 </root>

@@ -40,10 +40,8 @@
       // 
       // miDivision
       // 
-      this.miDivision.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.miDivision.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.miDivision, "miDivision");
       this.miDivision.Name = "miDivision";
-      this.miDivision.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // miDivision.Panel1
       // 
@@ -52,20 +50,15 @@
       // miDivision.Panel2
       // 
       this.miDivision.Panel2.Controls.Add(this.miMapaDePdisSeleccionados);
-      this.miDivision.Size = new System.Drawing.Size(602, 485);
-      this.miDivision.SplitterDistance = 288;
-      this.miDivision.TabIndex = 5;
       // 
       // miLista
       // 
       this.miLista.ContextMenuStrip = this.miMenuEditorDePdis;
-      this.miLista.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miLista, "miLista");
       this.miLista.FullRowSelect = true;
       this.miLista.GridLines = true;
-      this.miLista.Location = new System.Drawing.Point(0, 0);
+      this.miLista.HideSelection = false;
       this.miLista.Name = "miLista";
-      this.miLista.Size = new System.Drawing.Size(602, 288);
-      this.miLista.TabIndex = 2;
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
       // 
@@ -74,32 +67,31 @@
       this.miMenuEditorDePdis.Lista = this.miLista;
       this.miMenuEditorDePdis.ManejadorDePdis = null;
       this.miMenuEditorDePdis.Name = "miMenuDeContexto";
-      this.miMenuEditorDePdis.Size = new System.Drawing.Size(325, 114);
+      resources.ApplyResources(this.miMenuEditorDePdis, "miMenuEditorDePdis");
       // 
-      // miMapaDePdisSeleccionadas
+      // miMapaDePdisSeleccionados
       // 
-      this.miMapaDePdisSeleccionados.Dock = System.Windows.Forms.DockStyle.Fill;
+      resources.ApplyResources(this.miMapaDePdisSeleccionados, "miMapaDePdisSeleccionados");
       this.miMapaDePdisSeleccionados.EscuchadorDeEstatus = null;
       this.miMapaDePdisSeleccionados.Lista = this.miLista;
-      this.miMapaDePdisSeleccionados.Location = new System.Drawing.Point(0, 0);
       this.miMapaDePdisSeleccionados.ManejadorDeMapa = null;
+      this.miMapaDePdisSeleccionados.MuestraCiudades = false;
+      this.miMapaDePdisSeleccionados.MuestraEstados = false;
       this.miMapaDePdisSeleccionados.MuestraPdis = false;
       this.miMapaDePdisSeleccionados.MuestraPolígonos = false;
       this.miMapaDePdisSeleccionados.MuestraPolilíneas = false;
       this.miMapaDePdisSeleccionados.MuestraTodoElMapa = true;
       this.miMapaDePdisSeleccionados.MuestraTodosLosElementos = true;
-      this.miMapaDePdisSeleccionados.MuestraPdis = false;
+      this.miMapaDePdisSeleccionados.MuestraVías = false;
       this.miMapaDePdisSeleccionados.Name = "miMapaDePdisSeleccionados";
-      this.miMapaDePdisSeleccionados.Size = new System.Drawing.Size(602, 193);
-      this.miMapaDePdisSeleccionados.TabIndex = 0;
+      this.miMapaDePdisSeleccionados.RectánguloVisibleEnCoordenadas = ((System.Drawing.RectangleF)(resources.GetObject("miMapaDePdisSeleccionados.RectánguloVisibleEnCoordenadas")));
       // 
       // InterfaseListaConMapaDePdis
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.miDivision);
       this.Name = "InterfaseListaConMapaDePdis";
-      this.Size = new System.Drawing.Size(602, 485);
       this.miDivision.Panel1.ResumeLayout(false);
       this.miDivision.Panel2.ResumeLayout(false);
       this.miDivision.ResumeLayout(false);

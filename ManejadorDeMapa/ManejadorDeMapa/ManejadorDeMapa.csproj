@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F07EE602-114A-4111-AD1C-E079D8C71E11}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -83,6 +83,12 @@
     <Compile Include="ClaseDeRuta.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManejadorDeElementos.cs" />
+    <Compile Include="Pdis\TiposDeCiudades.cs" />
+    <Compile Include="Properties\Recursos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Recursos.resx</DependentUpon>
+    </Compile>
     <Compile Include="Pdis\ArregladorDeIndicesDeCiudad.cs" />
     <Compile Include="Pdis\BuscadorDeAlertas.cs" />
     <Compile Include="Vías\ArregladorGeneral.cs" />
@@ -178,6 +184,9 @@
     <None Include="Diagramas de Clases\ElementosDeMapa.cd" />
     <None Include="Diagramas de Clases\ManejadorDePDIs.cd" />
     <None Include="Diagramas de Clases\ManejadorDeVías.cd" />
+    <Content Include="Pdis\TiposDeCiudades.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vías\CalificativosDeVías.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -195,7 +204,16 @@
     <Content Include="Licencia.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="License.txt" />
+    <Content Include="License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Recursos.en.resx" />
+    <EmbeddedResource Include="Properties\Recursos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Recursos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

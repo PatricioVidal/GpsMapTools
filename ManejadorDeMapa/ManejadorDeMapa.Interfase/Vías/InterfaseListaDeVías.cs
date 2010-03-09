@@ -98,15 +98,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
       #region Añade las columnas de Párametros de Ruta.
       ColumnHeader columnaLímiteDeVelocidad = new ColumnHeader();
-      columnaLímiteDeVelocidad.Text = "Límite de Velocidad";
+      columnaLímiteDeVelocidad.Text = Properties.Recursos.LímiteDeVelocidad;
       columnaLímiteDeVelocidad.Width = AnchoDeColumnaPorDefecto;
       
       ColumnHeader columnaClaseDeRuta = new ColumnHeader();
-      columnaClaseDeRuta.Text = "Clase de Ruta";
+      columnaClaseDeRuta.Text = Properties.Recursos.ClaseDeRuta;
       columnaClaseDeRuta.Width = AnchoDeColumnaPorDefecto;
 
       ColumnHeader columnaParámetros = new ColumnHeader();
-      columnaParámetros.Text = "Parámetros";
+      columnaParámetros.Text = Properties.Recursos.Parámetros;
       columnaParámetros.Width = AnchoDeColumnaPorDefecto;
 
       this.Columns.AddRange(new ColumnHeader[] {

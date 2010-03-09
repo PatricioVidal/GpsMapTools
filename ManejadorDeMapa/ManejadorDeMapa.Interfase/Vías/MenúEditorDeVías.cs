@@ -117,7 +117,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void AñadeMenúGuardarArchivoPdis()
     {
       ToolStripMenuItem menú = new ToolStripMenuItem {
-        Text = "Guardar archivo de PDIs para localización de Vía(s)",
+        Text = Properties.Recursos.MenuEditorDeViasGuardarArchivo,
         AutoSize = true
       };
       Items.Add(menú);
