@@ -1,4 +1,4 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
+﻿#region Copyright (c) 2011 GPS_YV (http://www.gpsyv.net)
 // (For English, see further down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
@@ -70,9 +70,6 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Tst;
-using System.Collections;
 using SWallTech.Drawing.Shapes;
 
 namespace GpsYv.ManejadorDeMapa.Vías
@@ -164,7 +161,9 @@ namespace GpsYv.ManejadorDeMapa.Vías
       int númeroDeProblemasDetectados = 0;
 
       númeroDeProblemasDetectados += BuscaVíasConParámetrosDeRutaInválidos(laVía);
-      númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(laVía);
+
+      // Desabilitado porque falla en algunos bordes.
+      // númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(laVía);
 
       return númeroDeProblemasDetectados;
     }

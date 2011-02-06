@@ -150,7 +150,8 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     {
       int númeroDeProblemasDetectados = 0;
 
-      númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(elPdi);
+      // Desabilitado porque falla en algunos bordes.
+      // númeroDeProblemasDetectados += BuscaVíaFueraDeLímites(elPdi);
 
       return númeroDeProblemasDetectados;
     }
