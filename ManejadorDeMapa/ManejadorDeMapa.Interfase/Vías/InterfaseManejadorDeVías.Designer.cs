@@ -72,7 +72,6 @@
       resources.ApplyResources(menuEditorDeVías, "menuEditorDeVías");
       menuEditorDeVías.BackgroundImage = null;
       menuEditorDeVías.Font = null;
-      menuEditorDeVías.Lista = this.miLista;
       menuEditorDeVías.ManejadorDeVías = null;
       menuEditorDeVías.Name = "miMenuDeContexto";
       // 
@@ -118,6 +117,7 @@
       this.miLista.Name = "miLista";
       this.miLista.UseCompatibleStateImageBehavior = false;
       this.miLista.View = System.Windows.Forms.View.Details;
+      this.miLista.VirtualMode = true;
       // 
       // miMapaDeVíaSeleccionada
       // 

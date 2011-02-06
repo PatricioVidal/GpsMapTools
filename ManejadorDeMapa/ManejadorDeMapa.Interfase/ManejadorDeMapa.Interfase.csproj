@@ -137,6 +137,9 @@
     <EmbeddedResource Include="PDIs\InterfaseListaDePdis.resx">
       <DependentUpon>InterfaseListaDePdis.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PDIs\InterfaseManejadorDePdis.en.resx">
+      <DependentUpon>InterfaseManejadorDePdis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PDIs\InterfaseManejadorDePdis.resx">
       <DependentUpon>InterfaseManejadorDePdis.cs</DependentUpon>
       <SubType>Designer</SubType>
