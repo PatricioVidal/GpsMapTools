@@ -64,6 +64,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EB8E38A8298E767979C6A65CA7CC51E9"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -71,12 +77,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0CFB58CA3BE97E0EC40AEF82242149C9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -219,7 +219,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.37.3636.1304, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.37.4054.23791, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_EB8E38A8298E767979C6A65CA7CC51E9"
@@ -313,14 +313,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{6EA630DB-1F67-409B-B7E2-9E11AC46AE63}"
-        "PackageCode" = "8:{95D311D7-36A5-4966-98CA-E215CD2692DD}"
+        "ProductCode" = "8:{EED0A3F9-4BC2-48D5-8928-26019B2D8188}"
+        "PackageCode" = "8:{5D9EBC2C-4644-42C7-A722-3C0DA9972F66}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.37.1"
+        "ProductVersion" = "8:1.37.2"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"

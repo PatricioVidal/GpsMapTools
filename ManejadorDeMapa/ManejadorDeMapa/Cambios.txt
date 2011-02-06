@@ -3,6 +3,7 @@ Version 1.37
 - Actualizaciónes menores a los archivos con listas.
 - Removido el tipo 0x2e00 (Shopping)/Centro Comercial) de la lista de características the PDIs.
 - Actualizado el código para internacionalizar la interfase.
+- Desabilitado la búsqueda de PDIs y Vías fuera de límites.
 
 Versión 1.36
 - Añadido el manejo de Estados.  Polígonos tipo 0x4a son considerados Estados.
