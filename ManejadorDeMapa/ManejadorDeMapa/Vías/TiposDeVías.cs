@@ -76,10 +76,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
   /// <summary>
   /// Contiene los tipos que representan vías.
   /// </summary>
-  class TiposDeVías
+  static class TiposDeVías
   {
     #region Campos
-    private const string miArchivoDeTiposDeVías = @"Vías\TiposDeVías.csv";
+    private const string ArchivoDeTiposDeVías = @"Vías\TiposDeVías.csv";
     #endregion
 
     /// <summary>
@@ -129,7 +129,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
 
       // Lee las características de polígonos.
       new LectorTiposDeVías(
-        miArchivoDeTiposDeVías,
+        ArchivoDeTiposDeVías,
         Tipos);
     }
     #endregion

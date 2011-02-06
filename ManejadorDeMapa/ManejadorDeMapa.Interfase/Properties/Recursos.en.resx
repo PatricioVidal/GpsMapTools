@@ -129,6 +129,18 @@
   <data name="Idéntico" xml:space="preserve">
     <value>Identical</value>
   </data>
+  <data name="InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx" xml:space="preserve">
+    <value>Ignore POI type City with no City=Y or CitiIdx fields.</value>
+  </data>
+  <data name="InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0" xml:space="preserve">
+    <value>Ignore POIs with no Level 0 coordinates</value>
+  </data>
+  <data name="InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx" xml:space="preserve">
+    <value>Are you sure you want to ignore the {0} selected POIs if they don't have City=Y or CityIdx fields even if they are City type?</value>
+  </data>
+  <data name="InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0" xml:space="preserve">
+    <value>Are you sure you want to ignore the {0} selected POIs if they don't have coordinates at Level 0?</value>
+  </data>
   <data name="Latitud" xml:space="preserve">
     <value>Latitude</value>
   </data>

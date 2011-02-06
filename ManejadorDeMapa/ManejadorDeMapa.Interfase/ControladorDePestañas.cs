@@ -94,17 +94,15 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Actualiza la pestaña en una página dada.
     /// </summary>
     /// <param name="laPágina">La página dada.</param>
-    /// <param name="elTextoPestaña">El texto de la pestaña.</param>
     /// <param name="elNúmeroDeItems">El número de items.</param>
     /// <param name="elEstadoPositivo">El estado a poner cuando es positivo.</param>
     public void ActualizaPestaña(
       TabPage laPágina,
-      string elTextoPestaña,
       int elNúmeroDeItems,
       EstadoDePestaña elEstadoPositivo)
     {
       // Cambia el texto de la pestaña.
-      laPágina.Text = string.Format("{0} ({1})", elTextoPestaña, elNúmeroDeItems);
+      laPágina.Text = string.Format("{0} ({1})", TextoBase(laPágina), elNúmeroDeItems);
 
       // Si el número de items es positivo entonces cambia
       // el estado de la pestaña al estado positivo.
@@ -117,9 +115,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
       else
       {
-        PoneEstadoDePestaña(
-          laPágina,
-          ControladorDePestañas.EstadoDePestaña.Bién);
+        if (elEstadoPositivo == EstadoDePestaña.Nada)
+        {
+          PoneEstadoDePestaña(
+            laPágina,
+            ControladorDePestañas.EstadoDePestaña.Nada);
+        }
+        else
+        {
+          PoneEstadoDePestaña(
+            laPágina,
+            ControladorDePestañas.EstadoDePestaña.Bién);
+        }
       }
     }
 
@@ -162,8 +169,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// Invalida la pestaña de una página dada.
     /// </summary>
     /// <param name="laPágina">La página dada.</param>
-    /// <param name="elTextoPestaña">El texto de la pestaña.</param>
-    public void InvalidaPestaña(TabPage laPágina, string elTextoPestaña)
+    public void InvalidaPestaña(TabPage laPágina)
     {
       // Pone las pestañas en estado de "No Sé" para indicar que
       // no se sabe si hay errores.
@@ -172,7 +178,26 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         ControladorDePestañas.EstadoDePestaña.NoSé);
 
       // Cambia el texto de la pestaña.
-      laPágina.Text = elTextoPestaña;
+      laPágina.Text = TextoBase(laPágina);
+    }
+    #endregion
+
+    #region Métodos Privados
+    private string TextoBase(TabPage laPágina)
+    {
+      // Busca el texto base guiandose por el primer parentesis.
+      string textoBase = null;
+      int indiceParentesis = laPágina.Text.IndexOf(" (");
+      if (indiceParentesis > 0)
+      {
+        textoBase = laPágina.Text.Substring(0, indiceParentesis);
+      }
+      else
+      {
+        textoBase = laPágina.Text;
+      }
+
+      return textoBase;
     }
     #endregion
   }

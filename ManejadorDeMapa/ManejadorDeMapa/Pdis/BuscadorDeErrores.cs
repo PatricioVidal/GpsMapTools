@@ -94,13 +94,31 @@ namespace GpsYv.ManejadorDeMapa.Pdis
         return misErrores;
       }
     }
+
+
+    /// <summary>
+    /// Atributo "IgnorarNoCoordenadasNivel0".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica ignorar que el PDI no tenga coordenadas a nivel zero.
+    /// </remarks>
+    public const string AtributoIgnorarNoCoordenadasNivel0 = "IgnorarNoCoordenadasNivel0";
+
+
+    /// <summary>
+    /// Atributo "IgnorarCamposCityYCityIdx".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica ignorar Campos City y CityIdx.
+    /// </remarks>
+    public const string AtributoIgnorarCamposCityYCityIdx = "IgnorarCamposCityYCityIdx";
     #endregion
 
     #region Métodos Públicos
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
+    public const string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
 
 
     /// <summary>
@@ -141,14 +159,14 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       Tipo? tipo = elPdi.Tipo;
       if (tipo == null)
       {
-        errores.Add("E000: El tipo está vacío.");
+        errores.Add(Properties.Recursos.E000);
       }
       else
       {
         bool esConocido = CaracterísticasDePdis.Descripciones.ContainsKey((Tipo)tipo);
         if (!esConocido)
         {
-            errores.Add(string.Format("E001: El tipo ({0}) no es conocido.", elPdi.Tipo));
+          errores.Add(string.Format(Properties.Recursos.E001, elPdi.Tipo));
         }
       }
       #endregion 
@@ -167,11 +185,61 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       }
       if (campoCoordenadas == null)
       {
-        errores.Add("E002: No tiene coordenadas.");
+        errores.Add(Properties.Recursos.E002);
       }
-      else if (campoCoordenadas.Nivel != 0)
+      else if ((campoCoordenadas.Nivel != 0) &&
+               !elPdi.TieneAtributo(AtributoIgnorarNoCoordenadasNivel0))
       {
-        errores.Add(string.Format("E003: No tiene coordenadas a nivel 0, sino a nivel {0}.", campoCoordenadas.Nivel));
+        errores.Add(string.Format(Properties.Recursos.E003, campoCoordenadas.Nivel));
+      }
+      #endregion
+
+      #region Verifica City=Y y CityIdx
+      if (!elPdi.TieneAtributo(AtributoIgnorarCamposCityYCityIdx))
+      {
+        if ((elPdi.Tipo != null) && (TiposDeCiudades.Tipos.Contains(elPdi.Tipo.Value)))
+        {
+            // Si el tipo de PDI es de ciudad y no es RGN20 entonces debería
+            // tener un campo EsCiudad con valor verdadero.
+            if (elPdi.Clase != "RGN20")
+            {
+              // Busca el campo EsCiudad.
+              CampoEsCiudad campoEsCiudad = null;
+              foreach (Campo campo in elPdi.Campos)
+              {
+                if (campo is CampoEsCiudad)
+                {
+                  campoEsCiudad = (CampoEsCiudad) campo;
+                  break;
+                }
+              }
+
+              // Añade el error si no tiene el campo o es falso.
+              if ((campoEsCiudad == null) ||
+                  !campoEsCiudad.EsCiudad)
+              {
+                errores.Add(Properties.Recursos.E004);
+              }
+            }
+
+          // Si el tipo de PDI es de ciudad entonces debería tener el campo
+          // Busca el campo EsCiudad.
+          CampoIndiceDeCiudad campoIndiceDeCiudad = null;
+          foreach (Campo campo in elPdi.Campos)
+          {
+            if (campo is CampoIndiceDeCiudad)
+            {
+              campoIndiceDeCiudad = (CampoIndiceDeCiudad)campo;
+              break;
+            }
+          }
+
+          // Añade el error si no tiene el campo.
+          if (campoIndiceDeCiudad == null)
+          {
+            errores.Add(Properties.Recursos.E005);
+          }
+        }
       }
       #endregion
 

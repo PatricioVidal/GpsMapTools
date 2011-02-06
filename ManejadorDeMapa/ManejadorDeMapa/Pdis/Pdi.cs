@@ -79,7 +79,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
   public class Pdi : ElementoDelMapa
   {
     #region Campos
-    private readonly static Coordenadas misCoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
+    private readonly static Coordenadas CoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
     private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
     #endregion
 
@@ -93,7 +93,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
       {
         if (misCoordenadas.Coordenadas.Length == 0)
         {
-          return misCoordenadasVacias;
+          return CoordenadasVacias;
         }
 
         return misCoordenadas.Coordenadas[0];

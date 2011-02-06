@@ -70,7 +70,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -98,12 +97,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         Settings.Default.RequireActualizarOpcionesDelUsuario = false;
       }
 
-      // Crea un rastro (Trace)
-      TextWriterTraceListener escritorDeRastro = new TextWriterTraceListener("Rastro.log");
-      Trace.AutoFlush = true;
-      Trace.WriteLine("Comenzando Aplicación");
-      Trace.Indent();
-
       // Pone opciones.
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
@@ -111,7 +104,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Corre la applicación.
       try
       {
-        Application.Run(new Interfase.InterfaseManejadorDeMapa());
+        Application.Run(new InterfaseManejadorDeMapa());
       }
       catch (Exception e)
       {
@@ -132,7 +125,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     public static void MuestraExcepción(string elMensaje, Exception laExcepción)
     {
       // Crea un archivo de registro.
-      string archivoDeRegistro = Interfase.VentanaDeAcerca.AssemblyName + ".Error.log";
+      string archivoDeRegistro = VentanaDeAcerca.AssemblyName + ".Error.log";
       archivoDeRegistro = Path.GetFullPath(archivoDeRegistro);
       using (StreamWriter registro = new StreamWriter(archivoDeRegistro, true))
       {
@@ -156,7 +149,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       mensaje.AppendFormat("NOTA: Vea archivo '{0}' para mas detalles.", archivoDeRegistro);
       MessageBox.Show(
         mensaje.ToString(),
-        Interfase.VentanaDeAcerca.AssemblyName,
+        VentanaDeAcerca.AssemblyName,
         MessageBoxButtons.OK,
         MessageBoxIcon.Error);
     }

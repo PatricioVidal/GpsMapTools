@@ -71,11 +71,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Pdis;
 
@@ -165,6 +160,23 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         // Busca errores otra vez.
         miBuscadorDeErrores.Procesa();
       };
+
+      // Añade el menú para ignorar que el PDI no tenga coordenadas a nivel zero.
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(new ToolStripSeparator());
+      var menú1 = new ToolStripMenuItem(Properties.Recursos.InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0);
+      menú1.Click += ((s, e) => AñadeAttributo(
+       menú1.Text,
+       Properties.Recursos.InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0,
+       BuscadorDeErrores.AtributoIgnorarNoCoordenadasNivel0));
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(menú1);
+
+      // Añade el menú para ignorar que el PDI de Ciudad no tenga campos City=Y o CityIdx.
+      var menú2 = new ToolStripMenuItem(Properties.Recursos.InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx);
+      menú2.Click += ((s, e) => AñadeAttributo(
+       menú2.Text,
+       Properties.Recursos.InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx,
+       BuscadorDeErrores.AtributoIgnorarCamposCityYCityIdx));
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(menú2);
     }
 
 
@@ -203,6 +215,47 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
       {
         miMenú.Enabled = false;
       }
+    }
+
+
+    private void AñadeAttributo(string elTítulo, string laPregunta, string elAtributo)
+    {
+      ListView lista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+
+      // Retornamos si no hay PDIs seleccionados.
+      int númeroDePdisSeleccionados = lista.SelectedIndices.Count;
+      if (númeroDePdisSeleccionados == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Ignorarque el PDI no tenga coordenadas a Nivel 0.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format(
+          laPregunta,
+          númeroDePdisSeleccionados),
+          elTítulo,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      #region Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta != DialogResult.Yes)
+      {
+        return;
+      }
+
+      // Añade los attributos.
+      ManejadorDeMapa.SuspendeEventos();
+      IList<Pdi> pdis = miInterfaseListaConMapaDePdis.MenuEditorDePdis.ObtieneElementosSeleccionados<Pdi>();
+      foreach (Pdi pdi in pdis)
+      {
+        pdi.AñadeAtributo(elAtributo);
+      }
+      ManejadorDeMapa.RestableceEventos();
+
+      // Busca errores otra vez.
+      miBuscadorDeErrores.Procesa();
+      #endregion
     }
     #endregion
   }

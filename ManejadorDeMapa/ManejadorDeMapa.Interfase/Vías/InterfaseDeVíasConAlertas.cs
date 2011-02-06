@@ -71,11 +71,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using GpsYv.ManejadorDeMapa.Vías;
 
@@ -149,15 +145,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
       miInterfaseListaConMapaDeVías.InterfaseListaDeVías.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de Vías.
-      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += delegate(object elObjecto, EventArgs losArgumentos)
-      {
-        // Busca alertas otra vez.
-        miBuscadorDeAlertas.Procesa();
-      };
+      miInterfaseListaConMapaDeVías.MenuEditorDeVías.Editó += (delegate { miBuscadorDeAlertas.Procesa(); });
 
-      // Añade el menú para 
+      // Añade el menú para Excluir de búsqueda de Parámetros de Ruta Estándar.
       miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(new ToolStripSeparator());
-      ToolStripMenuItem menú = new ToolStripMenuItem("Excluir de búsqueda de Parámetros de Ruta Estándar");
+      var menú = new ToolStripMenuItem("Excluir de búsqueda de Parámetros de Ruta Estándar");
       menú.Click += EnMenúExcluirDeBúsquedaDeParámetrosDeRutaEstándar;
       miInterfaseListaConMapaDeVías.MenuEditorDeVías.Items.Add(menú);
     }

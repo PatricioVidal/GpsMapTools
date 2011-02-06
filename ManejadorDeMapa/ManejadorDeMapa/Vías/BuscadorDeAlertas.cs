@@ -108,7 +108,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// Este atributo indica que la vía debe excluirse de la regla de 
     /// Parámetros de Ruta estándar.
     /// </remarks>
-    public static readonly string AtributoNoParámetrosDeRutaEstándar = "NoParámetrosDeRutaEstándar";
+    public const string AtributoNoParámetrosDeRutaEstándar = "NoParámetrosDeRutaEstándar";
     #endregion
 
     #region Métodos Públicos

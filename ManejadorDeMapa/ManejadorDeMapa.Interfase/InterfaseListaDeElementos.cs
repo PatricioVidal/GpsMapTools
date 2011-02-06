@@ -95,7 +95,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [DefaultValue(true)]
     public new bool VirtualMode
     {
-      get
+      private get
       {
         return base.VirtualMode;
       }

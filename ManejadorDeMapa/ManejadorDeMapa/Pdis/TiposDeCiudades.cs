@@ -69,149 +69,69 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Windows.Forms.Design;
-using GpsYv.ManejadorDeMapa.Pdis;
+using System.Collections.Generic;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
-  /// Interfase de Lista y Mapa de PDIs.
+  /// Contiene los tipos que representan Ciudades.
   /// </summary>
-  [DesignerAttribute(typeof(DiseñadorInterfaseListaConMapaDePdis))]
-  public partial class InterfaseListaConMapaDePdis : UserControl
+  static class TiposDeCiudades
   {
     #region Campos
-    private ManejadorDeMapa miManejadorDeMapa;
-    private ManejadorDePdis miManejadorDePdis;
+    private const string ArchivoDeTiposDeVías = @"Pdis\TiposDeCiudades.csv";
     #endregion
 
-    #region Clases
-    internal class DiseñadorInterfaseListaConMapaDePdis : ControlDesigner
-    {
-      public override void Initialize(IComponent elComponente)
-      {
-        base.Initialize(elComponente);
-        InterfaseListaConMapaDePdis control = elComponente as InterfaseListaConMapaDePdis;
-        EnableDesignMode(control.InterfaseListaDePdis, "InterfaseListaDePdis");
-        EnableDesignMode(control.InterfaseMapaDePdisSeleccionados, "InterfaseMapaDePdisSeleccionadas");
-        EnableDesignMode(control.MenuEditorDePdis, "MenuEditorDePdis");
-        EnableDesignMode(control.División, "División");
-      }
-    }
-
-    #endregion
-
-    #region Propiedades
     /// <summary>
-    /// Obtiene la división.
+    /// Lista con los tipos de Ciudades.
     /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-    public SplitContainer División
+    public static IList<Tipo> Tipos { get; private set; }
+
+
+    #region Métodos Privados
+    private class LectorTiposDeCiudades : LectorDeArchivo
     {
-      get
+      private readonly IList<Tipo> misTipos;
+
+      public LectorTiposDeCiudades(
+        string elArchivo,
+        IList<Tipo> losTipos)
       {
-        return miDivision;
-      }
-    }
+        misTipos = losTipos;
 
-    
-    /// <summary>
-    /// Obtiene la interfase de lista de PDIs.
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-    public InterfaseListaDePdis InterfaseListaDePdis
-    {
-      get
-      {
-        return miLista;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene la interfase de Mapa de PDIs seleccionados.
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-    public InterfaseMapaDePdisSeleccionados InterfaseMapaDePdisSeleccionados
-    {
-      get
-      {
-        return miMapaDePdisSeleccionados;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene el menú editor de PDIs.
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public MenuEditorDePdis MenuEditorDePdis
-    {
-      get
-      {
-        return miMenuEditorDePdis;
-      }
-    }
-
-    /// <summary>
-    /// Obtiene o pone el manejador de mapa.
-    /// </summary>
-    [Browsable(true)]
-    public ManejadorDeMapa ManejadorDeMapa
-    {
-      get
-      {
-        return miManejadorDeMapa;
+        Lee(elArchivo);
       }
 
-      set
+
+      protected override void ProcesaLínea(string laLínea)
       {
-        // Pone el nuevo manejador de mapa.
-        miManejadorDeMapa = value;
+        // Elimina espacios en blanco.
+        string línea = laLínea.Trim();
 
-        // Pone el manejador de mapa en la interfase de mapa.
-        miMapaDePdisSeleccionados.ManejadorDeMapa = value;
-
-        // Pone el manejador de PDIs.
-        if (miManejadorDeMapa != null)
+        // Saltarse lineas en blanco y comentarios.
+        bool laLíneaEstaEnBlanco = (línea == string.Empty);
+        bool laLíneaEsComentario = línea.StartsWith("//");
+        if (!laLíneaEstaEnBlanco & !laLíneaEsComentario)
         {
-          miManejadorDePdis = miManejadorDeMapa.ManejadorDePdis;
-
-          // Pone el manejador de PDIs en el menú editor de PDIs.
-          miMenuEditorDePdis.ManejadorDePdis = miManejadorDePdis;
+          // Añade el tipo.
+          misTipos.Add(new Tipo(línea));
         }
       }
     }
 
 
     /// <summary>
-    /// Obtiene o pone el escuchador de estatus.
-    /// </summary>
-    public IEscuchadorDeEstatus EscuchadorDeEstatus
-    {
-      get
-      {
-        return miMapaDePdisSeleccionados.EscuchadorDeEstatus;
-      }
-
-      set
-      {
-        miMapaDePdisSeleccionados.EscuchadorDeEstatus = value;
-      }
-    }
-    #endregion
-
-    #region Métodos Públicos.
-    /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseListaConMapaDePdis()
+    static TiposDeCiudades()
     {
-      InitializeComponent();
+      Tipos = new List<Tipo>();
+
+      // Lee las características de polígonos.
+      new LectorTiposDeCiudades(
+        ArchivoDeTiposDeVías,
+        Tipos);
     }
     #endregion
   }
 }
-

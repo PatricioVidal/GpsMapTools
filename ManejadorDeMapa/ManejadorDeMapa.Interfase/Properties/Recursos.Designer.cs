@@ -97,6 +97,42 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ignorar que el PDI tipo Ciudad no tenga campos City=Y o CitiIdx.
+        /// </summary>
+        internal static string InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx {
+            get {
+                return ResourceManager.GetString("InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignorar que el PDI no tenga coordenadas a nivel 0.
+        /// </summary>
+        internal static string InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0 {
+            get {
+                return ResourceManager.GetString("InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Esta seguro(a) que quiere ignorar que los {0} PDI seleccionados no tengan campos City=Y o CityIdx a pesar que sean tipo Ciudad?.
+        /// </summary>
+        internal static string InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx {
+            get {
+                return ResourceManager.GetString("InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Está seguro(a) que quiere Ignorar los {0} PDIs seleccionados si no tienen coordenadas a nivel 0?.
+        /// </summary>
+        internal static string InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0 {
+            get {
+                return ResourceManager.GetString("InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latitud.
         /// </summary>
         internal static string Latitud {

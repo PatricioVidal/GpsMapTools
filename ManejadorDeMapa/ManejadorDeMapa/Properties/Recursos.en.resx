@@ -133,7 +133,7 @@
     <value>E004: The POI is has a City type but does not have the field "City=Y".</value>
   </data>
   <data name="E005" xml:space="preserve">
-    <value>E004: The POI has a City type but does not have the field "CityIdx".</value>
+    <value>E005: The POI has a City type but does not have the field "CityIdx".</value>
   </data>
   <data name="M000" xml:space="preserve">
     <value>M000: The POI belongs to the {0} City.</value>

@@ -83,10 +83,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
   {
     #region Campos
     private readonly InterfaseBase[] misInterfases;
-    private readonly string miTextoPestañaErrores = "Errores";
-    private readonly string miTextoPestañaPosibleErroresDeRuteo = "Posibles Errores de Ruteo";
-    private readonly string miTextoPestañaPosiblesNodosDesconectados = "Posibles Nodos Desconectados";
-    private readonly string miTextoPestañaAlertas = "Alertas";
     #endregion
 
     #region Eventos
@@ -216,9 +212,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
-
-      // Actualiza la Pestaña.
-      miPáginaDeTodos.Text = "Todas (" + miLista.NúmeroDeElementos + ")";
     }
 
 
@@ -235,23 +228,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void EnVíasModificadas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      // Cambia el texto de la pestaña.
-      int númeroDeVíasModificadas = losArgumentos.NúmeroDeItems;
-      miPáginaModificadas.Text = "Modificadas (" + númeroDeVíasModificadas + ")";
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaModificadas,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Nada);
     }
 
 
     private void EnVíasEliminadas(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      // Cambia el texto de la pestaña.
-      int númeroDeVíasEliminadas = losArgumentos.NúmeroDeItems;
-      miPáginaEliminadas.Text = "Eliminadas (" + númeroDeVíasEliminadas + ")";
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaEliminadas,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Nada);
     }
 
 
     private void EnInvalidadoVíasConErrores(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaErrores, miTextoPestañaErrores);
+      miControladorDePestañas.InvalidaPestaña(miPáginaErrores);
     }
 
 
@@ -259,7 +254,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaErrores,
-        miTextoPestañaErrores,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Error);
     }
@@ -267,7 +261,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void EnInvalidadoPosiblesErroresDeRuteo(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaPosibleErroresDeRuteo, miTextoPestañaPosibleErroresDeRuteo);
+      miControladorDePestañas.InvalidaPestaña(miPáginaPosibleErroresDeRuteo);
     }
 
 
@@ -275,7 +269,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaPosibleErroresDeRuteo,
-        miTextoPestañaPosibleErroresDeRuteo,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Alerta);
     }
@@ -284,8 +277,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     private void EnInvalidadoPosiblesNodosDesconectados(object elEnviador, EventArgs losArgumentos)
     {
       miControladorDePestañas.InvalidaPestaña(
-        miPáginaPosiblesNodosDesconectados,
-        miTextoPestañaPosiblesNodosDesconectados);
+        miPáginaPosiblesNodosDesconectados);
     }
 
 
@@ -293,7 +285,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaPosiblesNodosDesconectados,
-        miTextoPestañaPosiblesNodosDesconectados,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Alerta);
     }
@@ -301,7 +292,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
 
     private void EnInvalidadoVíasConAlertas(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas, miTextoPestañaAlertas);
+      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas);
     }
 
 
@@ -309,7 +300,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Vías
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaAlertas,
-        miTextoPestañaAlertas,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Alerta);
     }

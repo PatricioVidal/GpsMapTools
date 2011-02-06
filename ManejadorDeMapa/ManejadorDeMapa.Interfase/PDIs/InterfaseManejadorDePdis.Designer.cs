@@ -42,9 +42,9 @@
       this.miPáginaPosiblesDuplicados = new System.Windows.Forms.TabPage();
       this.miInterfasePdisDuplicados = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisDuplicados();
       this.miPáginaAlertas = new System.Windows.Forms.TabPage();
+      this.miInterfaseDePdisConAlertas = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisConAlertas();
       this.miPáginaErrores = new System.Windows.Forms.TabPage();
       this.miInterfasePdisErrores = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisConErrores();
-      this.miInterfaseDePdisConAlertas = new GpsYv.ManejadorDeMapa.Interfase.Pdis.InterfaseDePdisConAlertas();
       this.miInterfaseListaConMapaDePdis.División.Panel1.SuspendLayout();
       this.miInterfaseListaConMapaDePdis.División.Panel2.SuspendLayout();
       this.miInterfaseListaConMapaDePdis.División.SuspendLayout();
@@ -87,6 +87,7 @@
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.Lista = this.miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.ManejadorDeMapa = null;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraCiudades = false;
+      this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraEstados = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPdis = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolígonos = false;
       this.miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados.MuestraPolilíneas = false;
@@ -125,6 +126,7 @@
       this.miInterfaseDeMapa.EscuchadorDeEstatus = null;
       this.miInterfaseDeMapa.ManejadorDeMapa = null;
       this.miInterfaseDeMapa.MuestraCiudades = false;
+      this.miInterfaseDeMapa.MuestraEstados = false;
       this.miInterfaseDeMapa.MuestraPdis = true;
       this.miInterfaseDeMapa.MuestraPolígonos = false;
       this.miInterfaseDeMapa.MuestraPolilíneas = false;
@@ -191,6 +193,13 @@
       this.miPáginaAlertas.Name = "miPáginaAlertas";
       this.miPáginaAlertas.UseVisualStyleBackColor = true;
       // 
+      // miInterfaseDePdisConAlertas
+      // 
+      resources.ApplyResources(this.miInterfaseDePdisConAlertas, "miInterfaseDePdisConAlertas");
+      this.miInterfaseDePdisConAlertas.EscuchadorDeEstatus = null;
+      this.miInterfaseDePdisConAlertas.ManejadorDeMapa = null;
+      this.miInterfaseDePdisConAlertas.Name = "miInterfaseDePdisConAlertas";
+      // 
       // miPáginaErrores
       // 
       this.miPáginaErrores.Controls.Add(this.miInterfasePdisErrores);
@@ -204,11 +213,6 @@
       this.miInterfasePdisErrores.EscuchadorDeEstatus = null;
       this.miInterfasePdisErrores.ManejadorDeMapa = null;
       this.miInterfasePdisErrores.Name = "miInterfasePdisErrores";
-      // 
-      // miInterfaseDePdisConAlertas
-      // 
-      resources.ApplyResources(this.miInterfaseDePdisConAlertas, "miInterfaseDePdisConAlertas");
-      this.miInterfaseDePdisConAlertas.Name = "miInterfaseDePdisConAlertas";
       // 
       // InterfaseManejadorDePdis
       // 

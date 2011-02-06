@@ -77,10 +77,10 @@ using NUnit.Framework.SyntaxHelpers;
 namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 {
   ///<summary>
-  /// Prueba de clase <see cref="ArregladorGeneral"/>.
+  /// Prueba de clase <see cref="BuscadorDeErrores"/>.
   ///</summary>
   [TestFixture]
-  public class PruebaArregladorGeneral
+  public class PruebaBuscadorDeErrores
   {
     /// <summary>
     /// Prueba el constructor.
@@ -94,68 +94,80 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       ManejadorDePdis manejadorDePdis = new ManejadorDePdis(manejadorDeMapa, new List<Pdi>(), escuchadorDeEstatus);
 
       // Llama al contructor bajo prueba.
-      var objectoDePrueba = new ArregladorGeneral(manejadorDePdis, escuchadorDeEstatus); 
+      var objectoDePrueba = new BuscadorDeErrores(manejadorDePdis, escuchadorDeEstatus);
 
       // Prueba propiedades.
       Assert.That(objectoDePrueba.NúmeroDeElementos, Is.EqualTo(0), "NúmeroDeElementos");
-      Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(0), "NúmeroDeElementosModificados");
+      Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(0), "NúmeroDeProblemasDetectados");
     }
 
-    private class Caso
-    {
-      public string Tipo { get; private set; }
-      public string NombreOriginal { get; private set; }
-      public string NombreCorregido { get; private set; }
-
-      public Caso(
-        string elTipo,
-        string elNombreOriginal,
-        string laNombreCorregido)
-      {
-        Tipo = elTipo;
-        NombreOriginal = elNombreOriginal;
-        NombreCorregido = laNombreCorregido;
-      }
-    }
-  
 
     /// <summary>
-    /// Prueba el método Procesa().
+    /// Caso 1 de la prueba del método Procesa().
     /// </summary>
+    /// <remarks>
+    /// Prueba la funcionalidad del los Indices de Ciudad.
+    /// </remarks>
     [Test]
-    public void PruebaProcesa()
+    public void PruebaProcesaCaso1()
     {
       #region Preparación.
       // Crea el objeto a probar.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
       ManejadorDePdis manejadorDePdis = new ManejadorDePdis(manejadorDeMapa, new List<Pdi>(), escuchadorDeEstatus);
-      ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDePdis, escuchadorDeEstatus);
-     
-      // Caso de prueba.
-      Caso[] casos = new[] {
-        //        Tipo,     Nombre Original, Nombre Corregido
-        new Caso ("0x2a06", "RES LA COMIDA", "RESTAURANTE LA COMIDA"), // Cambia Nombre.
-        new Caso ("0x2a07", "RES  LA  COMIDA", "RESTAURANTE LA COMIDA"), // Cambia nombre y elimina espacios.
-        new Caso ("0x9999", "RES LA COMIDA", "RES LA COMIDA"),  // Este no debería cambiar porque el tipo no está en el rango.
-        new Caso ("0x6402", "CONJ RES LAS TORRES", "CONJUNTO RESIDENCIAL LAS TORRES"), // Cambia Nombre.
-      };
-      const int númeroDeProblemasDetectados = 6;
+      var objectoDePrueba = new BuscadorDeErrores(manejadorDePdis, escuchadorDeEstatus);
 
       // Crea los elementos.
       IList<Pdi> pdis = manejadorDePdis.Elementos;
       const string clase = "POI";
-      for (int i = 0; i < casos.Length; ++i)
-      {
-        Caso caso = casos[i];
-        List<Campo> campos = new List<Campo> {
-          new CampoNombre (caso.NombreOriginal),
-          new CampoTipo (caso.Tipo)
-        };
+      var campoCoordenadas = new CampoCoordenadas("Data", 0, new[]
+        {
+          new Coordenadas(10.16300,-66.00000),
+          new Coordenadas(10.16199,-65.99850),
+          new Coordenadas(10.16010,-65.99591),
+        });
 
-        Pdi pdi = new Pdi(manejadorDeMapa, i, clase, campos);
-        pdis.Add(pdi);
-      }
+      var pdiNoCiudad = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0x001"),
+        campoCoordenadas});
+      pdis.Add(pdiNoCiudad);
+
+      var pdiCiudadCorrecta = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0xb00"),
+        new CampoEsCiudad(true),
+        new CampoIndiceDeCiudad(79),
+        campoCoordenadas});
+      pdis.Add(pdiCiudadCorrecta);
+
+      var pdiSinCampoEsCiudad = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0xc00"),
+        new CampoIndiceDeCiudad(79),
+        campoCoordenadas});
+      pdis.Add(pdiSinCampoEsCiudad);
+
+      var pdiSinIndiceDeCiudad = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0xd00"),
+        new CampoEsCiudad(true),
+        campoCoordenadas});
+      pdis.Add(pdiSinIndiceDeCiudad);
+
+      var pdiSinIndiceDeCiudadYConAttributo = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0xf00"),
+        new CampoAtributo(BuscadorDeErrores.AtributoIgnorarCamposCityYCityIdx),
+        campoCoordenadas});
+      pdis.Add(pdiSinIndiceDeCiudadYConAttributo);
+
+      var pdiSinIndiceDeCiudadYSinCampoEsCiudad = new Pdi(manejadorDeMapa, 1, clase, new List<Campo> {
+        new CampoTipo("0xe00"),
+        campoCoordenadas});
+      pdis.Add(pdiSinIndiceDeCiudadYSinCampoEsCiudad);
+
+      // Deberian haber 3 errores:
+      //   - 1 por el PDI sin campo de Ciudad.
+      //   - 1 por el PDI sin índice de Ciudad.
+      //   - 2 por el PDI sin campo de Ciudad y sin índice de Ciudad.
+      const int númeroDeProblemasDetectados = 4;
       #endregion
 
       // Llama al método bajo prueba.
@@ -164,12 +176,37 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
       // Prueba propiedades.
       Assert.That(objectoDePrueba.NúmeroDeElementos, Is.EqualTo(pdis.Count), "NúmeroDeElementos");
       Assert.That(objectoDePrueba.NúmeroDeProblemasDetectados, Is.EqualTo(númeroDeProblemasDetectados), "NúmeroDeProblemasDetectados");
+      Assert.That(objectoDePrueba.Errores.Count, Is.EqualTo(númeroDeProblemasDetectados), "Errores.Count");
+      
+      Assert.That(
+        objectoDePrueba.Errores[pdiSinCampoEsCiudad],
+        Text.StartsWith("E004"),
+        "Errores[pdiSinCampoEsCiudad]");
 
-      // Prueba los nobres de los PDIs.
-      for (int i = 0; i < casos.Length; ++i)
-      {
-        Assert.That(pdis[i].Nombre, Is.EqualTo(casos[i].NombreCorregido), "PDI[" + i + "].Nombre");
-      }
+      Assert.That(
+        objectoDePrueba.Errores[pdiSinIndiceDeCiudad],
+        Text.StartsWith("E005"), 
+        "Errores[pdiSinIndiceDeCiudad]");
+
+      Assert.That(
+       objectoDePrueba.Errores[pdiSinIndiceDeCiudadYSinCampoEsCiudad],
+       Text.StartsWith("E004"),
+       "Errores[pdiSinIndiceDeCiudadYSinCampoEsCiudad]");
+
+      Assert.That(
+       objectoDePrueba.Errores[pdiSinIndiceDeCiudadYSinCampoEsCiudad],
+       Text.Contains("E005"),
+       "Errores[pdiSinIndiceDeCiudadYSinCampoEsCiudad]");
+      
+      Assert.That(
+       objectoDePrueba.Errores.ContainsKey(pdiSinIndiceDeCiudadYConAttributo),
+       Is.False,
+       "Errores.ContainsKey(pdiSinIndiceDeCiudadYConAttributo)");
+      
+      Assert.That(
+       objectoDePrueba.Errores.ContainsKey(pdiCiudadCorrecta),
+       Is.False,
+       "Errores.ContainsKey(pdiCiudadCorrecta)");
     }
   }
 }

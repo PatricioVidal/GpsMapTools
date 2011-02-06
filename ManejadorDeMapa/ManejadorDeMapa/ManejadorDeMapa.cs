@@ -77,6 +77,8 @@ using System.Diagnostics;
 using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
 using System.Drawing;
+using System.Resources;
+using System.Reflection;
 
 namespace GpsYv.ManejadorDeMapa
 {

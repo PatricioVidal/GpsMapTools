@@ -103,7 +103,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     [Browsable(true)]
     public ListView Lista
     {
-      get
+      protected get
       {
         return miLista;
       }
@@ -114,10 +114,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         if (miLista != null)
         {
           // Desconecta el menú si ya estabamos conectados a una lista.
-          if (miLista != null)
-          {
-            miLista.ContextMenuStrip = null;
-          }
+          miLista.ContextMenuStrip = null;
 
           // Conecta el menú a la lista.
           miLista.ContextMenuStrip = this;
@@ -235,7 +232,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // Pone el número de elementos seleccionados en el primer menú para informar
       // al usuario.
       int númeroDeItemsSeleccionados = miLista.SelectedIndices.Count;
-      miMenúNúmeroDeElementosSeleccionados.Text = "[ Hay " + númeroDeItemsSeleccionados + " elementos seleccionados ]";
+      miMenúNúmeroDeElementosSeleccionados.Text = String.Format(Properties.Recursos.MenuEditorDeElementosPrimeraLinea, númeroDeItemsSeleccionados);
       miMenúNúmeroDeElementosSeleccionados.Enabled = false;
     }
     #endregion

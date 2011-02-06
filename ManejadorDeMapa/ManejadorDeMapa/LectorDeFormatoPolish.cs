@@ -263,7 +263,7 @@ namespace GpsYv.ManejadorDeMapa
     }
 
 
-    private bool EsVía(IList<Campo> losCampos)
+    private static bool EsVía(IEnumerable<Campo> losCampos)
     {
       Tipo? tipo = null;
       bool tieneCamposDeVía = false;

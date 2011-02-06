@@ -70,9 +70,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -187,9 +184,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     public override string ToString()
     {
-      string texto = string.Empty;
-
-      texto = "0x" + miTipoPrincipal.ToString("x");
+      string texto = "0x" + miTipoPrincipal.ToString("x");
 
       // Si el Tipo tiene un sub-tipo entonces lo añadimos al texto.
       if (miSubTipo.HasValue)

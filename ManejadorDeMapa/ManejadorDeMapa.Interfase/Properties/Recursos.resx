@@ -158,4 +158,16 @@
 
 Usando la clase PolygonF de Joel: http://www.developingfor.net/free-code/polygonf</value>
   </data>
+  <data name="InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0" xml:space="preserve">
+    <value>Ignorar que el PDI no tenga coordenadas a nivel 0</value>
+  </data>
+  <data name="InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0" xml:space="preserve">
+    <value>Está seguro(a) que quiere Ignorar los {0} PDIs seleccionados si no tienen coordenadas a nivel 0?</value>
+  </data>
+  <data name="InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx" xml:space="preserve">
+    <value>Ignorar que el PDI tipo Ciudad no tenga campos City=Y o CitiIdx</value>
+  </data>
+  <data name="InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx" xml:space="preserve">
+    <value>Esta seguro(a) que quiere ignorar que los {0} PDI seleccionados no tengan campos City=Y o CityIdx a pesar que sean tipo Ciudad?</value>
+  </data>
 </root>

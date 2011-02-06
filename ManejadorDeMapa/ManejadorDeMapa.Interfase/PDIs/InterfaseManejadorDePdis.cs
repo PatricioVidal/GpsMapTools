@@ -88,9 +88,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     #region Campos
     private readonly InterfaseBase[] misInterfases;
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
-    private readonly string miTextoPestañaAlertas = "Alertas";
-    private readonly string miTextoPestañaErrores = "Errores";
-    private readonly string miTextoPestañaDuplicados = "Posibles Duplicados";
     private readonly InterfaseListaDePdis miLista;
     private readonly InterfaseMapaDePdisSeleccionados miMapa;
     #endregion
@@ -227,31 +224,30 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     protected override void EnElementosModificados(object elEnviador, EventArgs losArgumentos)
     {
       miLista.RegeneraLista();
-
-      // Actualiza la Pestaña.
-      miPáginaDeTodos.Text = "Todos (" + miLista.NúmeroDeElementos + ")";
     }
 
 
     private void EnPdisModificados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      // Cambia el texto de la pestaña.
-      int númeroDePdisModificados = losArgumentos.NúmeroDeItems;
-      miPáginaModificados.Text = "Modificados (" + númeroDePdisModificados + ")";
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaModificados,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Nada);
     }
 
 
     private void EnPdisEliminados(object elEnviador, NúmeroDeItemsEventArgs losArgumentos)
     {
-      // Cambia el texto de la pestaña.
-      int númeroDePdisEliminados = losArgumentos.NúmeroDeItems;
-      miPáginaEliminados.Text = "Eliminados (" + númeroDePdisEliminados + ")";
+      miControladorDePestañas.ActualizaPestaña(
+        miPáginaEliminados,
+        losArgumentos.NúmeroDeItems,
+        ControladorDePestañas.EstadoDePestaña.Nada);
     }
 
 
     private void EnInvalidadoPdisDuplicados(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaPosiblesDuplicados, miTextoPestañaDuplicados);
+      miControladorDePestañas.InvalidaPestaña(miPáginaPosiblesDuplicados);
     }
 
 
@@ -259,7 +255,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaPosiblesDuplicados,
-        miTextoPestañaDuplicados,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Alerta);
     }
@@ -267,7 +262,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 
     private void EnInvalidadoPdisConErrores(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaErrores, miTextoPestañaErrores);
+      miControladorDePestañas.InvalidaPestaña(miPáginaErrores);
     }
 
 
@@ -275,7 +270,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaErrores,
-        miTextoPestañaErrores,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Error);
     }
@@ -283,7 +277,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 
     private void EnInvalidadoPdisConAlertas(object elEnviador, EventArgs losArgumentos)
     {
-      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas, miTextoPestañaAlertas);
+      miControladorDePestañas.InvalidaPestaña(miPáginaAlertas);
     }
 
 
@@ -291,7 +285,6 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
     {
       miControladorDePestañas.ActualizaPestaña(
         miPáginaAlertas,
-        miTextoPestañaAlertas,
         losArgumentos.NúmeroDeItems,
         ControladorDePestañas.EstadoDePestaña.Alerta);
     }

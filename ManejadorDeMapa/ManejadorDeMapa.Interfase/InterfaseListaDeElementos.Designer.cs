@@ -64,15 +64,19 @@
       // 
       // InterfaseListaDeElementos
       // 
+      this.AccessibleDescription = null;
+      this.AccessibleName = null;
+      resources.ApplyResources(this, "$this");
+      this.BackgroundImage = null;
       this.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             columnaNúmero,
             columnaTipo,
             columnaDescripción,
             columnaNombre});
+      this.Font = null;
       this.FullRowSelect = true;
       this.GridLines = true;
       this.HideSelection = false;
-      resources.ApplyResources(this, "$this");
       this.View = System.Windows.Forms.View.Details;
       this.VirtualMode = true;
       this.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ObtieneItemDeLista);
