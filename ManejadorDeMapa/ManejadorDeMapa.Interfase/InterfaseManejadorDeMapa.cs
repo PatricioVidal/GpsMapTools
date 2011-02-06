@@ -72,14 +72,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 using GpsYv.ManejadorDeMapa.Interfase.Properties;
-using System.Reflection;
+using System.Threading;
 
 namespace GpsYv.ManejadorDeMapa.Interfase
 {
@@ -89,11 +86,12 @@ namespace GpsYv.ManejadorDeMapa.Interfase
   public partial class InterfaseManejadorDeMapa : Form
   {
     #region Campos
-    private ManejadorDeMapa miManejadorDeMapa;
+    private readonly ManejadorDeMapa miManejadorDeMapa;
     private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private readonly Dictionary<TabPage, int> misIndicesDePestañas = new Dictionary<TabPage, int>();
     private readonly List<ToolStripMenuItem> misMenúsADesabilitar;
-    private readonly Timer miTimerParaMostrarBotónParaDeProcesar = new Timer();
+    private readonly System.Windows.Forms.Timer miTimerParaMostrarBotónParaDeProcesar = new System.Windows.Forms.Timer();
+    private readonly List<ToolStripMenuItem> misMenúsDeLenguage;
     #endregion
 
     #region Métodos Públicos
@@ -102,6 +100,25 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     /// </summary>
     public InterfaseManejadorDeMapa()
     {
+      // Lee la cultura de las opciones.
+      // Si la cultura no esta definida entonces usamos Inglés
+      // para todas las culturas que no deriven del Español.
+      var culturaTexto = Settings.Default.Cultura;
+      CultureInfo cultura;
+      if (string.IsNullOrEmpty(culturaTexto))
+      {
+        cultura = CultureInfo.CurrentCulture;
+        if (cultura.TwoLetterISOLanguageName != "es")
+        {
+          cultura = new CultureInfo("en");
+        }
+      }
+      else
+      {
+        cultura = new CultureInfo(culturaTexto);
+      }
+      Thread.CurrentThread.CurrentUICulture = cultura;
+
       InitializeComponent();
 
       // Crea la lista de menús a desabilitar.
@@ -109,8 +126,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         miMenúMapa,
         miMenúProcesar};
 
+      // Crea la lista de menús de lenguage.
+      misMenúsDeLenguage = new List<ToolStripMenuItem> {
+        miMenúLenguajeEspañol,
+        miMenúLenguajeInglés,
+        miMenúLenguajeAutomático};
+      miMenúLenguajeAutomático.Tag = string.Empty;
+      CambiaCultura(culturaTexto);
+
       // Pone el nombre.
-      this.Text = VentanaDeAcerca.AssemblyName + " - " + VentanaDeAcerca.AssemblyCompany;
+      Text = Recursos.DescripciónDelEjecutable + " - " + VentanaDeAcerca.AssemblyCompany;
 
       #region Asigna los ToolTips de los menús.
       miMenúAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
@@ -325,15 +350,24 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       }
 
       // Actualiza las Pestañas.
-      miPaginaDeElementos.Text = "Elementos (" + laLista.NúmeroDeElementos + ")";
-      miPaginaDePdis.Text = "PDIs (" + miManejadorDeMapa.ManejadorDePdis.Elementos.Count + ")";
-      miPáginaDeVías.Text = "Vías (" + miManejadorDeMapa.ManejadorDeVías.Elementos.Count + ")";
+      miControladorDePestañasPrincipal.ActualizaPestaña(
+        miPaginaDeElementos, 
+        laLista.NúmeroDeElementos,
+        ControladorDePestañas.EstadoDePestaña.Nada);
+      miControladorDePestañasPrincipal.ActualizaPestaña(
+        miPaginaDePdis, 
+        miManejadorDeMapa.ManejadorDePdis.Elementos.Count,
+        ControladorDePestañas.EstadoDePestaña.Nada);
+      miControladorDePestañasPrincipal.ActualizaPestaña(
+        miPáginaDeVías,
+        miManejadorDeMapa.ManejadorDeVías.Elementos.Count,
+        ControladorDePestañas.EstadoDePestaña.Nada);
     }
 
 
     private void EnMenúAcerca(object sender, EventArgs e)
     {
-      Form ventanaDeAcerca = new Interfase.VentanaDeAcerca();
+      Form ventanaDeAcerca = new VentanaDeAcerca();
       ventanaDeAcerca.ShowDialog();
     }
 
@@ -354,14 +388,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       string nombreDeSalida = Path.ChangeExtension(nombre , ".Corregido.mp");
 
       // Ventana de guardar.
-      SaveFileDialog ventanaDeGuardar = new SaveFileDialog();
-      ventanaDeGuardar.AddExtension = true;
-      ventanaDeGuardar.CheckPathExists = true;
-      ventanaDeGuardar.Filter = ManejadorDeMapa.FiltrosDeExtensiones;
-      ventanaDeGuardar.InitialDirectory = directorio;
-      ventanaDeGuardar.FileName = nombreDeSalida;
-      ventanaDeGuardar.OverwritePrompt = true;
-      ventanaDeGuardar.ValidateNames = true;
+      SaveFileDialog ventanaDeGuardar = new SaveFileDialog
+        {
+          AddExtension = true,
+          CheckPathExists = true,
+          Filter = ManejadorDeMapa.FiltrosDeExtensiones,
+          InitialDirectory = directorio,
+          FileName = nombreDeSalida,
+          OverwritePrompt = true,
+          ValidateNames = true
+        };
       DialogResult respuesta = ventanaDeGuardar.ShowDialog();
       if (respuesta == DialogResult.OK)
       {
@@ -450,24 +486,20 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
       // Lee la posición y el tamaño de la Forma de la configuración
       // del usuario. Estos valores se asignan solo si son válidos.
-      if (Settings.Default.PosiciónDeLaFormaPrincipal != null)
+      if (
+        (Settings.Default.PosiciónDeLaFormaPrincipal.X >= 0) &
+        (Settings.Default.PosiciónDeLaFormaPrincipal.Y >= 0))
       {
-        if (
-          (Settings.Default.PosiciónDeLaFormaPrincipal.X >= 0) &
-          (Settings.Default.PosiciónDeLaFormaPrincipal.Y >= 0))
-        {
-          Location = Settings.Default.PosiciónDeLaFormaPrincipal;
-        }
+        Location = Settings.Default.PosiciónDeLaFormaPrincipal;
       }
-      if (Settings.Default.TamañoDeLaFormaPrincipal != null)
+
+      if (
+        (Settings.Default.TamañoDeLaFormaPrincipal.Width >= MinimumSize.Width) &
+        (Settings.Default.TamañoDeLaFormaPrincipal.Height >= MinimumSize.Height))
       {
-        if (
-          (Settings.Default.TamañoDeLaFormaPrincipal.Width >= MinimumSize.Width) &
-          (Settings.Default.TamañoDeLaFormaPrincipal.Height >= MinimumSize.Height))
-        {
-          Size = Settings.Default.TamañoDeLaFormaPrincipal;
-        }
+        Size = Settings.Default.TamañoDeLaFormaPrincipal;
       }
+
       if (Settings.Default.EstáMaximizada)
       {
         WindowState = FormWindowState.Maximized;
@@ -487,7 +519,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       // del usuario.  
       // Si la Forma está Minimizada o Maximizada entonces hay que
       // guardar los valores de la propiedad "RestoreBounds".
-      switch (this.WindowState)
+      switch (WindowState)
       {
         case FormWindowState.Normal:
           Settings.Default.PosiciónDeLaFormaPrincipal = Location;
@@ -500,8 +532,8 @@ namespace GpsYv.ManejadorDeMapa.Interfase
           Settings.Default.EstáMaximizada = true;
           break;
         case FormWindowState.Minimized:
-          Settings.Default.PosiciónDeLaFormaPrincipal = this.RestoreBounds.Location;
-          Settings.Default.TamañoDeLaFormaPrincipal = this.RestoreBounds.Size;
+          Settings.Default.PosiciónDeLaFormaPrincipal = RestoreBounds.Location;
+          Settings.Default.TamañoDeLaFormaPrincipal = RestoreBounds.Size;
           Settings.Default.EstáMaximizada = false;
           break;
       }
@@ -612,15 +644,95 @@ namespace GpsYv.ManejadorDeMapa.Interfase
     }
 
 
+    private void EnMenúLenguaje(object elEnviador, EventArgs losArgumentos)
+    {
+      string cultura = (string)(((ToolStripMenuItem)elEnviador).Tag);
+      CambiaCultura(cultura);
+    }
+
+
+    private void CambiaCultura(string laCultura)
+    {
+      if (laCultura == null)
+      {
+        laCultura = string.Empty;
+      }
+
+      // Activa el menu correcto.
+      foreach (var menu in misMenúsDeLenguage)
+      {
+        if ((string)menu.Tag == laCultura)
+        {
+          menu.Checked = true;
+        }
+        else
+        {
+          menu.Checked = false;
+        }
+      }
+
+      // Nos salimos si no hay cambios en la cultura.
+      if (laCultura == Settings.Default.Cultura)
+      {
+        return;
+      }
+
+      // Guarda la cultura en las opciones.
+      Settings.Default.Cultura = laCultura;
+
+      // Cambia la cultura de la interfase.
+      var cultura = new CultureInfo(laCultura);
+      ComponentResourceManager recursos = new ComponentResourceManager(typeof(InterfaseManejadorDeMapa));
+      CambiaCultura(this, cultura, recursos);
+      CambiaCultura(miInterfaseManejadorDePdis, cultura, recursos);
+      CambiaCultura(miInterfaseManejadorDeVías, cultura, recursos);
+      CambiaCultura(miMenuPrincipal, cultura, recursos);
+    }
+
+
+    private static void CambiaCultura(object elObjecto, CultureInfo laCultura, ComponentResourceManager losRecursos)
+    {
+      var control = elObjecto as Control;
+      if (control != null)
+      {
+        losRecursos.ApplyResources(control, control.Name, laCultura);
+        foreach (Control controlItem in control.Controls)
+        {
+          CambiaCultura(controlItem, laCultura, losRecursos);
+        }
+      }
+
+      var menuStrip = elObjecto as MenuStrip;
+      if (menuStrip != null)
+      {
+        losRecursos.ApplyResources(menuStrip, menuStrip.Name, laCultura);
+        foreach (ToolStripMenuItem menuItem in menuStrip.Items)
+        {
+          CambiaCultura(menuItem, laCultura, losRecursos);
+        }
+      }
+
+      var toolStripMenuItem = elObjecto as ToolStripMenuItem;
+      if (toolStripMenuItem != null)
+      {
+        losRecursos.ApplyResources(toolStripMenuItem, toolStripMenuItem.Name, laCultura);
+        foreach (ToolStripItem menuItem in toolStripMenuItem.DropDownItems)
+        {
+          CambiaCultura(menuItem, laCultura, losRecursos);
+        }
+      }
+    }
+
     private void EnMenúBuscarAlertasEnPdis(object sender, EventArgs e)
     {
       miManejadorDeMapa.ManejadorDePdis.BuscadorDeAlertas.Procesa();
     }
 
+
     private void EnMenúLicencia(object sender, EventArgs e)
     {
       string directorioDeLaAplicación = Path.GetDirectoryName(Application.ExecutablePath);
-      string archivo = Path.Combine(directorioDeLaAplicación, "Licencia.htm");
+      string archivo = Path.Combine(directorioDeLaAplicación, Recursos.ArchivoLicencia);
       System.Diagnostics.Process.Start(archivo);
     }
 
