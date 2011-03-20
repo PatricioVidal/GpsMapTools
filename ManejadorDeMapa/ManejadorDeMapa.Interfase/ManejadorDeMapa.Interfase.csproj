@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -280,6 +283,7 @@
     <Compile Include="InterfaseMapaDeElementosSeleccionados.Designer.cs">
       <DependentUpon>InterfaseMapaDeElementosSeleccionados.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenFileDialogService.cs" />
     <Compile Include="MenúEditorDeElementos.cs">
       <SubType>Component</SubType>
     </Compile>
