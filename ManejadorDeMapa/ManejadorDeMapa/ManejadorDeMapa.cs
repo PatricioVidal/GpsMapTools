@@ -77,8 +77,6 @@ using System.Diagnostics;
 using GpsYv.ManejadorDeMapa.Pdis;
 using GpsYv.ManejadorDeMapa.Vías;
 using System.Drawing;
-using System.Resources;
-using System.Reflection;
 
 namespace GpsYv.ManejadorDeMapa
 {
@@ -91,7 +89,6 @@ namespace GpsYv.ManejadorDeMapa
     private readonly IList<ElementoDelMapa> misElementos = new List<ElementoDelMapa>();
     private readonly IList<Pdi> misPdis = new List<Pdi>();
     private readonly IList<Vía> misVías = new List<Vía>();
-    private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private int miNúmeroDeSuspensiónDeEventos;
     private bool miHayEventosDeModificaciónDeElementoPendientes;
     private bool miHayEventosDeModificaciónDePdisPendientes;
@@ -132,6 +129,11 @@ namespace GpsYv.ManejadorDeMapa
     #endregion
 
     #region Propiedades
+    /// <summary>
+    /// Gets the status listener.
+    /// </summary>
+    public IEscuchadorDeEstatus EscuchadorDeEstatus { get; private set; }
+
     /// <summary>
     /// Descripción del método AceptarModificaciones().
     /// </summary>
@@ -231,12 +233,25 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
     public ManejadorDeMapa(IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      : this (elEscuchadorDeEstatus, null)
+    {
+    }
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
+    /// <param name="elServicioDiálogoAbrirArchivos">El servicio de diálogo para abrir archivos.</param>
+    public ManejadorDeMapa(
+      IEscuchadorDeEstatus elEscuchadorDeEstatus,
+      IOpenFileDialogService elServicioDiálogoAbrirArchivos)
     {
       Trace.WriteLine("Inicializando ManejadorDeMapa");
-      miEscuchadorDeEstatus = elEscuchadorDeEstatus;
+      EscuchadorDeEstatus = elEscuchadorDeEstatus;
       ManejadorDeElementos = new ManejadorDeElementos(this, misElementos, elEscuchadorDeEstatus);
       ManejadorDePdis = new ManejadorDePdis(this, misPdis, elEscuchadorDeEstatus);
-      ManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus);
+      ManejadorDeVías = new ManejadorDeVías(this, misVías, elEscuchadorDeEstatus, elServicioDiálogoAbrirArchivos);
       Polígonos = new List<Polígono>();
       Polilíneas = new List<Polilínea>();
       Ciudades = new List<Ciudad>();
@@ -251,10 +266,10 @@ namespace GpsYv.ManejadorDeMapa
     public void Abrir(string elArchivo)
     {
       Archivo = elArchivo;
-      miEscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
+      EscuchadorDeEstatus.ArchivoActivo = Path.GetFullPath(elArchivo);
 
       // Por ahora el único formato es el Polish.
-      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
+      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo);
 
       IList<ElementoDelMapa> losElementos = lector.ElementosDelMapa;
 
@@ -269,7 +284,8 @@ namespace GpsYv.ManejadorDeMapa
     public void AbrirLímites(string elArchivo)
     {
       // Por ahora el único formato es el Polish.
-      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(this, elArchivo, miEscuchadorDeEstatus);
+      var limitsMapManager = new ManejadorDeMapa(EscuchadorDeEstatus);
+      LectorDeFormatoPolish lector = new LectorDeFormatoPolish(limitsMapManager, elArchivo);
 
       // Extrae los polígonos como los límites.
       IList<ElementoDelMapa> elementos = lector.ElementosDelMapa;
@@ -291,7 +307,7 @@ namespace GpsYv.ManejadorDeMapa
       }
 
       // Reportar los límites encontrados.
-      miEscuchadorDeEstatus.Estatus = string.Format("Leídos {0} límites.", misLímitesPorMapas.Count);
+      EscuchadorDeEstatus.Estatus = string.Format("Leídos {0} límites.", misLímitesPorMapas.Count);
 
       // Actualizar los límites del mapa.
       ActualizaLímitesDelMapa();
@@ -358,7 +374,7 @@ namespace GpsYv.ManejadorDeMapa
 
       #region Guarda los diferentes archivos.
       // Guarda el mapa nuevo.
-      new EscritorDeFormatoPolish(elArchivo, elementosDelMapa, miEscuchadorDeEstatus);
+      new EscritorDeFormatoPolish(elArchivo, elementosDelMapa, EscuchadorDeEstatus);
 
       // Crea el nobre del archivo base.
       string directorio = Path.GetFullPath(Path.GetDirectoryName(elArchivo));
@@ -369,34 +385,34 @@ namespace GpsYv.ManejadorDeMapa
       if (elementosEliminados.Count > elementosComunes.Length)
       {
         string archivo = archivoBase + ".Eliminados.mp";
-        new EscritorDeFormatoPolish(archivo, elementosEliminados, miEscuchadorDeEstatus);
+        new EscritorDeFormatoPolish(archivo, elementosEliminados, EscuchadorDeEstatus);
       }
 
       // Guarda los originales de los elementos modificados.
       if (originalDeLosElementosModificados.Count > elementosComunes.Length)
       {
         string archivo = archivoBase + ".Modificados.Originales.mp";
-        new EscritorDeFormatoPolish(archivo, originalDeLosElementosModificados, miEscuchadorDeEstatus);
+        new EscritorDeFormatoPolish(archivo, originalDeLosElementosModificados, EscuchadorDeEstatus);
       }
 
       // Guarda los finales de los elementos modificados.
       if (finalDeLosElementosModificados.Count > elementosComunes.Length)
       {
         string archivo = archivoBase + ".Modificados.Finales.mp";
-        new EscritorDeFormatoPolish(archivo, finalDeLosElementosModificados, miEscuchadorDeEstatus);
+        new EscritorDeFormatoPolish(archivo, finalDeLosElementosModificados, EscuchadorDeEstatus);
       }
 
       // Guarda los finales de los elementos modificados.
       if (elementosConErrores.Count > elementosComunes.Length)
       {
         string archivo = archivoBase + ".Errores.mp";
-        new EscritorDeFormatoPolish(archivo, elementosConErrores, miEscuchadorDeEstatus);
+        new EscritorDeFormatoPolish(archivo, elementosConErrores, EscuchadorDeEstatus);
       }
       #endregion
 
       // Actualiza el archivo activo.
       Archivo = elArchivo;
-      miEscuchadorDeEstatus.ArchivoActivo = elArchivo;
+      EscuchadorDeEstatus.ArchivoActivo = elArchivo;
     }
 
 
@@ -527,7 +543,7 @@ namespace GpsYv.ManejadorDeMapa
       númeroDeElementosModificados += ManejadorDePdis.ProcesarTodo();
       númeroDeElementosModificados += ManejadorDeVías.ProcesarTodo();
 
-      miEscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
+      EscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
 
       return númeroDeElementosModificados;
     }

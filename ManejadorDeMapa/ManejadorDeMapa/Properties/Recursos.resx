@@ -165,4 +165,7 @@
   <data name="M007" xml:space="preserve">
     <value>M007: Eliminación de Caracteres Inválidos.</value>
   </data>
+  <data name="M108" xml:space="preserve">
+    <value>M108: La vía fué cambiada por el nombre en otro archivo. Distancia: {0}</value>
+  </data>
 </root>

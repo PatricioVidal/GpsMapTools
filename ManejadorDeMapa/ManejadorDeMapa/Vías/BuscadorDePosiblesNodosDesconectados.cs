@@ -137,12 +137,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
-    protected override void ComenzóAProcesar()
+    protected override bool ComenzóAProcesar()
     {
       PosibleNodosDesconectados.Clear();
       FiltroDeVíasConPosiblesNodosDesconectados = new bool[NúmeroDeElementos];
 
-      base.ComenzóAProcesar();
+      return base.ComenzóAProcesar();
     }
 
 

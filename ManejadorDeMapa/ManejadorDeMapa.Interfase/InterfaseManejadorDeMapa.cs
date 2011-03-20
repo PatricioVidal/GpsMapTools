@@ -138,7 +138,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       Text = Recursos.DescripciónDelEjecutable + " - " + VentanaDeAcerca.AssemblyCompany;
 
       #region Asigna los ToolTips de los menús.
-      miMenúAceptarModificaciones.ToolTipText = GpsYv.ManejadorDeMapa.ManejadorDeMapa.DescripciónAceptarModificaciones;
+      miMenúAceptarModificaciones.ToolTipText = ManejadorDeMapa.DescripciónAceptarModificaciones;
 
       // PDIs.
       miMenúProcesarTodoEnPdis.ToolTipText = GpsYv.ManejadorDeMapa.Pdis.ManejadorDePdis.DescripciónProcesarTodo;
@@ -165,7 +165,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase
         miBarraDeProgreso,
         miTextoDeCoordenadas);
 
-      miManejadorDeMapa = new ManejadorDeMapa(miEscuchadorDeEstatus);
+      // Crea el objecto Manejador de Mapa.
+      miManejadorDeMapa = new ManejadorDeMapa(
+        miEscuchadorDeEstatus,
+        new OpenFileDialogService());
 
       // Maneja eventos de modificación de elementos.
       miManejadorDeMapa.MapaNuevo += EnMapaNuevo;
@@ -741,6 +744,11 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       string directorioDeLaAplicación = Path.GetDirectoryName(Application.ExecutablePath);
       string archivo = Path.Combine(directorioDeLaAplicación, "MensajesAlertasErrores.txt");
       System.Diagnostics.Process.Start(archivo);
+    }
+
+    private void EnMenuRemplazarNombresDeVias(object sender, EventArgs e)
+    {
+      miManejadorDeMapa.ManejadorDeVías.RemplazadorDeNombresDeVias.Procesa();  
     }
     #endregion
   }

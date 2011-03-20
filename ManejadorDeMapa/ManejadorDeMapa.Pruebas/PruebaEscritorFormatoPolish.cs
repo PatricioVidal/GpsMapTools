@@ -89,9 +89,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas
         #region Preparación.
         // Lee un mapa de prueba.
         const string archivoDeEntrada = @"..\..\Data\PruebaEscritorFormatoPolish.mp";
-        const ManejadorDeMapa manejadorDeMapa = null;
         IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
-        LectorDeFormatoPolish lector = new LectorDeFormatoPolish(manejadorDeMapa, archivoDeEntrada, escuchadorDeEstatus);
+        ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
+        LectorDeFormatoPolish lector = new LectorDeFormatoPolish(manejadorDeMapa, archivoDeEntrada);
         IList<ElementoDelMapa> elementos = lector.ElementosDelMapa;
 
         const string archivoDeSalida = @"PruebaEscritorFormatoPolish.Caso1.mp";

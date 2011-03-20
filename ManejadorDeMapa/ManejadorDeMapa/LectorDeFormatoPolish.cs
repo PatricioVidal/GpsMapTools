@@ -109,9 +109,8 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
     /// <param name="elArchivo">El archivo a abrir.</param>
-    /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public LectorDeFormatoPolish(ManejadorDeMapa elManejadorDeMapa, string elArchivo, IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elEscuchadorDeEstatus)
+    public LectorDeFormatoPolish(ManejadorDeMapa elManejadorDeMapa, string elArchivo)
+      : base(elManejadorDeMapa.EscuchadorDeEstatus)
     {
       miManejadorDeMapa = elManejadorDeMapa;
 

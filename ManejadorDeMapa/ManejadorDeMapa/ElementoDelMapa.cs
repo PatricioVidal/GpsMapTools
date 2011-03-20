@@ -326,10 +326,10 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elNombreNuevo">El nombre nuevo.</param>
     /// <param name="laRazón">La razón del cambio.</param>
-    public void ActualizaNombre(string elNombreNuevo, string laRazón)
+    public bool ActualizaNombre(string elNombreNuevo, string laRazón)
     {
       CampoNombre nuevoCampoNombre = new CampoNombre(elNombreNuevo);
-      ActualizaCampo(nuevoCampoNombre, ref miCampoNombre, laRazón);
+      return ActualizaCampo(nuevoCampoNombre, ref miCampoNombre, laRazón);
     }
 
     
@@ -360,9 +360,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <returns>Una variable lógica que indica si el elemento se modificó.</returns>
     public bool ActualizaCampoIndiceDeCiudad(CampoIndiceDeCiudad elCampoIndiceDeCiudadNuevo, string laRazón)
     {
-      bool cambió = ActualizaCampo(elCampoIndiceDeCiudadNuevo, ref miCampoIndiceDeCiudad, laRazón);
-
-      return cambió;
+      return ActualizaCampo(elCampoIndiceDeCiudadNuevo, ref miCampoIndiceDeCiudad, laRazón);
     }
 
 
@@ -580,7 +578,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elCampoARemover">El campo a remover.</param>
     /// <param name="laRazón">La razón.</param>
-    protected void RemueveCampo(Campo elCampoARemover, string laRazón)
+    private void RemueveCampo(Campo elCampoARemover, string laRazón)
     {
       // Avísale al manejador de mapa que se va a cambiar un elemento.
       SeVaAModificarElemento();

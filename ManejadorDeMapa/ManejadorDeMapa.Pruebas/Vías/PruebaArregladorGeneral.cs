@@ -92,7 +92,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       // Preparación.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
-      ManejadorDeVías manejadorDePdis = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus);
+      ManejadorDeVías manejadorDePdis = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus, null);
 
       // Llama al contructor bajo prueba.
       ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDePdis, escuchadorDeEstatus); 
@@ -139,7 +139,7 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.Vías
       // Crea el objeto a probar.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
-      ManejadorDeVías manejadorDeVías = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus);
+      ManejadorDeVías manejadorDeVías = new ManejadorDeVías(manejadorDeMapa, new List<Vía>(), escuchadorDeEstatus, null);
       ArregladorGeneral objectoDePrueba = new ArregladorGeneral(manejadorDeVías, escuchadorDeEstatus);
 
       // Caso de prueba.

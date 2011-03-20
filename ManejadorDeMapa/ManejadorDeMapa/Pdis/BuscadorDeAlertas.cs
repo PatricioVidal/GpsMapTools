@@ -122,7 +122,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
-    protected override void ComenzóAProcesar()
+    protected override bool ComenzóAProcesar()
     {
       misAlertas.Clear();
       misPdisYaProcesadas.Clear();
@@ -137,7 +137,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
         misLímitesDelMapa = null;
       }
 
-      base.ComenzóAProcesar();
+      return base.ComenzóAProcesar();
     }
 
 

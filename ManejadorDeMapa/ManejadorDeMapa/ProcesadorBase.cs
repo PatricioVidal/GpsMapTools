@@ -73,20 +73,20 @@
 using System;
 using System.Collections.Generic;
 using System.Timers;
+using System.Windows.Input;
 
 namespace GpsYv.ManejadorDeMapa
 {
   /// <summary>
   /// Clase base para procesadores de elementos.
   /// </summary>
-  public abstract class ProcesadorBase<T,K> 
+  public abstract class ProcesadorBase<T,K> : ICommand
     where T: ManejadorBase<K>
     where K: ElementoDelMapa
   {
     #region Campos
     private readonly T miManejador;
     private readonly string miNombreDeElemento;
-    private readonly IEscuchadorDeEstatus miEscuchadorDeEstatus;
     private readonly Timer miTimerParaReportarEstatus = new Timer(25);
     private bool miReportaEstatus = true;
     private static bool miEstáProcesando;
@@ -119,7 +119,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el manejador de mapa.
     /// </summary>
-    public ManejadorDeMapa ManejadorDeMapa { get; private set; }
+    protected ManejadorDeMapa ManejadorDeMapa { get; set; }
 
 
     /// <summary>
@@ -137,7 +137,7 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Obtiene el índice del elemento procesándose.
     /// </summary>
-    public int IndiceDeElementoProcesándose { get; private set; }
+    protected int IndiceDeElementoProcesándose { get; set; }
 
 
     /// <summary>
@@ -145,13 +145,18 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="elIndice">El número índice dado.</param>
     /// <returns>El elemento el el índice dado.</returns>
-    public K this[int elIndice]
+    protected K this[int elIndice]
     {
       get
       {
         return miManejador.Elementos[elIndice];
       }
     }
+
+    /// <summary>
+    /// Gets the status listener.
+    /// </summary>
+    protected IEscuchadorDeEstatus EscuchadorDeEstatus { get; set; }
     #endregion
 
     #region Métodos Públicos
@@ -167,7 +172,7 @@ namespace GpsYv.ManejadorDeMapa
       miManejador = elManejador;
       NúmeroDeElementos = miManejador.Elementos.Count;
       ManejadorDeMapa = elManejador.ManejadorDeMapa;
-      miEscuchadorDeEstatus = elEscuchadorDeEstatus;
+      EscuchadorDeEstatus = elEscuchadorDeEstatus;
 
       // Pone el manejador de eventos del timer.
       miTimerParaReportarEstatus.Elapsed += EnTimerElapsed;
@@ -184,6 +189,35 @@ namespace GpsYv.ManejadorDeMapa
       int últimoIndice = palabras.Length - 1;
       miNombreDeElemento = palabras[últimoIndice];
     }
+
+
+    /// <summary>
+    /// Defines the method to be called when the command is invoked.
+    /// </summary>
+    /// <param name="elParámetro">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+    public void Execute(object elParámetro)
+    {
+      Procesa();
+    }
+
+
+    /// <summary>
+    /// Defines the method that determines whether the command can execute in its current state.
+    /// </summary>
+    /// <returns>
+    /// true if this command can be executed; otherwise, false.
+    /// </returns>
+    /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+    public bool CanExecute(object parameter)
+    {
+      return true;
+    }
+
+
+    /// <summary>
+    /// Occurs when changes occur that affect whether or not the command should execute.
+    /// </summary>
+    public event EventHandler CanExecuteChanged;
 
 
     /// <summary>
@@ -217,6 +251,15 @@ namespace GpsYv.ManejadorDeMapa
         return 0;
       }
 
+      // Indica que se van a procesar los elementos.
+      bool go = ComenzóAProcesar();
+
+      // Exit early if there is a cancellation.
+      if (!go)
+      {
+        return 0;
+      }
+
       using (ManejadorDeMapa.IndicaProcesoExclusivo())
       {
         // Envia evento.
@@ -240,20 +283,17 @@ namespace GpsYv.ManejadorDeMapa
           }
         }
 
-        // Indica que se van a procesar los elementos.
-        ComenzóAProcesar();
-
         // Comienza el timer.
         miTimerParaReportarEstatus.Start();
 
         // Reporta estatus.
-        miEscuchadorDeEstatus.Progreso = 0;
+        EscuchadorDeEstatus.Progreso = 0;
 
         // Suspende notificaciones.
         miManejador.SuspendeEventos();
 
         // Procesar todos los elementos.
-        miEscuchadorDeEstatus.ProgresoMáximo = elementos.Count;
+        EscuchadorDeEstatus.ProgresoMáximo = elementos.Count;
         miReportaEstatus = true;
         int númeroDelElementoProcesándose = 0;
         for (IndiceDeElementoProcesándose = 0;
@@ -275,7 +315,7 @@ namespace GpsYv.ManejadorDeMapa
             
           // Actualiza estatus.
           ++númeroDelElementoProcesándose;
-          miEscuchadorDeEstatus.Progreso = númeroDelElementoProcesándose;
+          EscuchadorDeEstatus.Progreso = númeroDelElementoProcesándose;
           if (miReportaEstatus)
           {
             Estatus = string.Format("Procesando {0} # {1}/{2}: [{3}]",
@@ -300,8 +340,8 @@ namespace GpsYv.ManejadorDeMapa
         miTimerParaReportarEstatus.Stop();
 
         // Reporta estatus.
-        miEscuchadorDeEstatus.Progreso = 0;
-        miEscuchadorDeEstatus.Estatus = "Listo.";
+        EscuchadorDeEstatus.Progreso = 0;
+        EscuchadorDeEstatus.Estatus = "Listo.";
 
         // Restablece notificaciones.
         miManejador.RestableceEventos();
@@ -334,8 +374,11 @@ namespace GpsYv.ManejadorDeMapa
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
-    protected virtual void ComenzóAProcesar()
+    /// <returns>A boolean indicating whether to continue
+    /// processing.</returns>
+    protected virtual bool ComenzóAProcesar()
     {
+      return true;
     }
 
 
@@ -364,12 +407,12 @@ namespace GpsYv.ManejadorDeMapa
     {
       get
       {
-        return miEscuchadorDeEstatus.Estatus;
+        return EscuchadorDeEstatus.Estatus;
       }
 
       set
       {
-        miEscuchadorDeEstatus.Estatus = value;
+        EscuchadorDeEstatus.Estatus = value;
       }
     }
 

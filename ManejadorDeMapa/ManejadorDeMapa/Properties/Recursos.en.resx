@@ -162,4 +162,7 @@
   <data name="M008" xml:space="preserve">
     <value>M008: The POI belongs to the {0} State.</value>
   </data>
+  <data name="M108" xml:space="preserve">
+    <value>M108: The road name was updated from another file. Distance: {0}</value>
+  </data>
 </root>

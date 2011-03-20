@@ -132,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
-    protected override void ComenzóAProcesar()
+    protected override bool ComenzóAProcesar()
     {
       misAlertas.Clear();
       misVíasYaProcesadas.Clear();
@@ -146,8 +146,8 @@ namespace GpsYv.ManejadorDeMapa.Vías
       {
         misLímitesDelMapa = null;
       }
-      
-      base.ComenzóAProcesar();
+
+      return base.ComenzóAProcesar();
     }
 
 
