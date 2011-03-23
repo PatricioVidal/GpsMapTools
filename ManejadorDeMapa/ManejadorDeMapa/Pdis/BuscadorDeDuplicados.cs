@@ -222,7 +222,7 @@ namespace GpsYv.ManejadorDeMapa.Pdis
               (posiblePdiDuplicado.Tipo != null) &&
               (((Tipo)elPdi.Tipo).TipoPrincipal == ((Tipo)posiblePdiDuplicado.Tipo).TipoPrincipal))
             {
-              double distanciaEnMetros = Coordenadas.Distancia(elPdi.Coordenadas, posiblePdiDuplicado.Coordenadas);
+              double distanciaEnMetros = Coordenadas.DistanciaEnMetros(elPdi.Coordenadas, posiblePdiDuplicado.Coordenadas);
               if (distanciaEnMetros <= miDistanciaMáxima)
               {
                 bool esDuplicado = false;

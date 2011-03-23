@@ -185,7 +185,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
         miLista.Items.Add(CreaItemDeLista(pdiBase, grupo, 0));
         foreach (Pdi duplicado in duplicados)
         {
-          double distancia = Coordenadas.Distancia(pdiBase.Coordenadas, duplicado.Coordenadas);
+          double distancia = Coordenadas.DistanciaEnMetros(pdiBase.Coordenadas, duplicado.Coordenadas);
           miLista.Items.Add(CreaItemDeLista(duplicado, grupo, distancia));
         }
       }

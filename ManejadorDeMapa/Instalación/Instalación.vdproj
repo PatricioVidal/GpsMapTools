@@ -15,19 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0CFB58CA3BE97E0EC40AEF82242149C9"
-        "OwnerKey" = "8:_EB8E38A8298E767979C6A65CA7CC51E9"
+        "MsmKey" = "8:_024E47006BCD846F272F6970C680F55C"
+        "OwnerKey" = "8:_97038CD4EAA5A4BBB0D5EA95D20894CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CFB58CA3BE97E0EC40AEF82242149C9"
+        "MsmKey" = "8:_024E47006BCD846F272F6970C680F55C"
         "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CFB58CA3BE97E0EC40AEF82242149C9"
+        "MsmKey" = "8:_024E47006BCD846F272F6970C680F55C"
         "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,13 +39,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EB8E38A8298E767979C6A65CA7CC51E9"
+        "MsmKey" = "8:_97038CD4EAA5A4BBB0D5EA95D20894CA"
         "OwnerKey" = "8:_56556B94D73A488DB3CC41EFBFD7127D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EB8E38A8298E767979C6A65CA7CC51E9"
+        "MsmKey" = "8:_97038CD4EAA5A4BBB0D5EA95D20894CA"
         "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,19 +64,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_97038CD4EAA5A4BBB0D5EA95D20894CA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_024E47006BCD846F272F6970C680F55C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FB1C065BBCCD4F0E9444688B6ECC59E8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EB8E38A8298E767979C6A65CA7CC51E9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0CFB58CA3BE97E0EC40AEF82242149C9"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -184,14 +184,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0CFB58CA3BE97E0EC40AEF82242149C9"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_024E47006BCD846F272F6970C680F55C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Tst, Version=1.0.1487.21665, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_0CFB58CA3BE97E0EC40AEF82242149C9"
+                    "_024E47006BCD846F272F6970C680F55C"
                     {
                     "Name" = "8:Tst.dll"
                     "Attributes" = "3:512"
@@ -215,14 +215,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB8E38A8298E767979C6A65CA7CC51E9"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97038CD4EAA5A4BBB0D5EA95D20894CA"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.37.4054.23791, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GpsYv.ManejadorDeMapa, Version=1.37.4098.43196, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_EB8E38A8298E767979C6A65CA7CC51E9"
+                    "_97038CD4EAA5A4BBB0D5EA95D20894CA"
                     {
                     "Name" = "8:GpsYv.ManejadorDeMapa.dll"
                     "Attributes" = "3:512"
@@ -313,14 +313,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ManejadorDeMapa"
-        "ProductCode" = "8:{EED0A3F9-4BC2-48D5-8928-26019B2D8188}"
-        "PackageCode" = "8:{5D9EBC2C-4644-42C7-A722-3C0DA9972F66}"
+        "ProductCode" = "8:{4D72A0E0-C623-4CFA-97CB-74D8716836AC}"
+        "PackageCode" = "8:{86B3461A-9964-4745-AA8B-57A23C662B85}"
         "UpgradeCode" = "8:{4A979896-9941-408D-87A7-CC37B6B522C9}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.37.2"
+        "ProductVersion" = "8:1.38.0"
         "Manufacturer" = "8:GPS_YV"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.gpsyv.net"
@@ -848,7 +848,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_56556B94D73A488DB3CC41EFBFD7127D"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Release\\ManejadorDeMapa.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa.Interfase\\obj\\Debug\\ManejadorDeMapa.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"
@@ -904,7 +904,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FB1C065BBCCD4F0E9444688B6ECC59E8"
             {
-            "SourcePath" = "8:..\\ManejadorDeMapa.Consola\\obj\\Release\\ManejadorDeMapa.Consola.exe"
+            "SourcePath" = "8:..\\ManejadorDeMapa.Consola\\obj\\Debug\\ManejadorDeMapa.Consola.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_21F61EEA82DC43089C91F48F0205B7AB"

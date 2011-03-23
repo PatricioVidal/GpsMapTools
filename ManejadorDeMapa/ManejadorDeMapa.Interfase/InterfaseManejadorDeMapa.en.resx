@@ -148,11 +148,23 @@
   <data name="miMenúLenguajeEspañol.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
   </data>
+  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="miMenúProcesar.Text" xml:space="preserve">
+    <value>Process</value>
+  </data>
   <data name="miMenúProcesarTodo.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 22</value>
   </data>
   <data name="miMenúProcesarTodo.Text" xml:space="preserve">
     <value>Process All</value>
+  </data>
+  <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 22</value>
+  </data>
+  <data name="miMenuPdis.Text" xml:space="preserve">
+    <value>POIs</value>
   </data>
   <data name="miMenúProcesarTodoEnPdis.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 22</value>
@@ -190,11 +202,11 @@
   <data name="miMenúBuscarErroresEnPdis.Text" xml:space="preserve">
     <value>5. Search for Errors</value>
   </data>
-  <data name="miMenuPdis.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="miMenúVías.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 22</value>
   </data>
-  <data name="miMenuPdis.Text" xml:space="preserve">
-    <value>POIs</value>
+  <data name="miMenúVías.Text" xml:space="preserve">
+    <value>Roads</value>
   </data>
   <data name="miMenúProcesarTodoEnVías.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 22</value>
@@ -241,17 +253,11 @@
   <data name="miMenúBuscarPosiblesNodosDesconectadosEnVías.Text" xml:space="preserve">
     <value>Search for Possible Disconnected Nodes</value>
   </data>
-  <data name="miMenúVías.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 22</value>
+  <data name="miMenúMapa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
   </data>
-  <data name="miMenúVías.Text" xml:space="preserve">
-    <value>Roads</value>
-  </data>
-  <data name="miMenúProcesar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="miMenúProcesar.Text" xml:space="preserve">
-    <value>Process</value>
+  <data name="miMenúMapa.Text" xml:space="preserve">
+    <value>Map</value>
   </data>
   <data name="miMenuAbrirArchivo.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
@@ -304,11 +310,11 @@
   <data name="miMenuSalir.ToolTipText" xml:space="preserve">
     <value>Exit the application.</value>
   </data>
-  <data name="miMenúMapa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
+  <data name="miMenuHerramientas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
   </data>
-  <data name="miMenúMapa.Text" xml:space="preserve">
-    <value>Map</value>
+  <data name="miMenuHerramientas.Text" xml:space="preserve">
+    <value>Tools</value>
   </data>
   <data name="miMenuRemplazarNombresDeVias.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
@@ -319,11 +325,11 @@
   <data name="miMenuRemplazarNombresDeVias.ToolTipText" xml:space="preserve">
     <value>Replaces the Road names with the names from Another file.</value>
   </data>
-  <data name="miMenuHerramientas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
+  <data name="miMenúAyuda.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
   </data>
-  <data name="miMenuHerramientas.Text" xml:space="preserve">
-    <value>Tools</value>
+  <data name="miMenúAyuda.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="miMenuAcerca.Text" xml:space="preserve">
     <value>About</value>
@@ -333,12 +339,6 @@
   </data>
   <data name="etiquetasToolStripMenuItem.Text" xml:space="preserve">
     <value>Labels</value>
-  </data>
-  <data name="miMenúAyuda.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="miMenúAyuda.Text" xml:space="preserve">
-    <value>Help</value>
   </data>
   <data name="miBotónParaDeProcesar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -352,12 +352,6 @@
         r9SdeAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="miPáginaMapa.Text" xml:space="preserve">
-    <value>Map</value>
-  </data>
-  <data name="miPáginaTodos.Text" xml:space="preserve">
-    <value>All</value>
-  </data>
   <data name="miPaginaDeElementos.Text" xml:space="preserve">
     <value>Elements</value>
   </data>
@@ -366,6 +360,15 @@
   </data>
   <data name="miPáginaDeVías.Text" xml:space="preserve">
     <value>Roads</value>
+  </data>
+  <data name="miPáginaMapa.Text" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="miPáginaTodos.Text" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="userPreferencesToolStripMenuItem.Text" xml:space="preserve">
+    <value>User Preferences</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

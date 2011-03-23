@@ -132,7 +132,7 @@ namespace GpsYv.ManejadorDeMapa
     /// </summary>
     /// <param name="laPrimeraCoordenada">La primera coordenada.</param>
     /// <param name="laSegundaCoordenada">La segunda coordenada.</param>
-    public static double Distancia(
+    public static double DistanciaEnMetros(
       Coordenadas laPrimeraCoordenada,
       Coordenadas laSegundaCoordenada)
     {

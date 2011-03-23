@@ -1033,7 +1033,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase
       PointF origenDelSegmentoEnCoordenadas = PixelsACoordenadas(origenDelSegmentoEnPixels);
       Point finalDelSegmentoMínimoEnPixels = new Point(origenDelSegmentoEnPixels.X + miLargoDelSegmentoMínimoEnPixels, origenDelSegmentoEnPixels.Y);
       PointF finalDelSegmentoMínimoEnCoordenadas = PixelsACoordenadas(finalDelSegmentoMínimoEnPixels);
-      miLargoDelSegmentoMínimoEnMetros = Coordenadas.Distancia(origenDelSegmentoEnCoordenadas, finalDelSegmentoMínimoEnCoordenadas);
+      miLargoDelSegmentoMínimoEnMetros = Coordenadas.DistanciaEnMetros(origenDelSegmentoEnCoordenadas, finalDelSegmentoMínimoEnCoordenadas);
 
       // Si el largo del segmento es zero entonces nos salimos.
       if (miLargoDelSegmentoMínimoEnMetros <= 0)

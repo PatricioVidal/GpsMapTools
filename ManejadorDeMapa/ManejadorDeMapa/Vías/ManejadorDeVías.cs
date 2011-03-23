@@ -78,6 +78,10 @@ namespace GpsYv.ManejadorDeMapa.Vías
   /// </summary>
   public class ManejadorDeVías : ManejadorBase<Vía>
   {
+    #region Campos
+    private readonly IOpenFileDialogService miServicioDiálogoAbrirArchivos;
+    #endregion
+
     #region Propiedades
     /// <summary>
     /// Descripción de la acción "Procesar Todo".
@@ -121,6 +125,11 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// </summary>
     public BuscadorDeErrores BuscadorDeErrores { get; private set; }
 
+
+    /// <summary>
+    /// Obtiene el servicio de diálogo para abrir archivos.
+    /// </summary>
+    public RemplazadorDeNombresDeVias RemplazadorDeNombresDeVias { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -130,10 +139,12 @@ namespace GpsYv.ManejadorDeMapa.Vías
     /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
     /// <param name="lasVías">Las Vías.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
+    /// <param name="elServicioDiálogoAbrirArchivos">El servicio de diálogo para abrir archivos.</param>
     public ManejadorDeVías(
       ManejadorDeMapa elManejadorDeMapa,
       IList<Vía> lasVías,
-      IEscuchadorDeEstatus elEscuchadorDeEstatus)
+      IEscuchadorDeEstatus elEscuchadorDeEstatus,
+      IOpenFileDialogService elServicioDiálogoAbrirArchivos)
       : base(elManejadorDeMapa, lasVías, elEscuchadorDeEstatus)
     {
       // Crea los procesadores.
@@ -143,6 +154,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
       BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
       BuscadorDePosiblesErroresDeRuteo = new BuscadorDePosiblesErroresDeRuteo(this, elEscuchadorDeEstatus);
       BuscadorDePosiblesNodosDesconectados = new BuscadorDePosiblesNodosDesconectados(this, elEscuchadorDeEstatus);
+      RemplazadorDeNombresDeVias = new RemplazadorDeNombresDeVias(this, elEscuchadorDeEstatus, elServicioDiálogoAbrirArchivos);
 
       // Escucha eventos.
       elManejadorDeMapa.VíasModificadas += EnElementosModificados;

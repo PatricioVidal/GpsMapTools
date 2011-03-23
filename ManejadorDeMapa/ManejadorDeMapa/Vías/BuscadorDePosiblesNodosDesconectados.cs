@@ -312,7 +312,7 @@ namespace GpsYv.ManejadorDeMapa.Vías
             }
 
             // Busca el nodo mas cercano.
-            double distancia = Coordenadas.Distancia(nodo, nodoDestino);
+            double distancia = Coordenadas.DistanciaEnMetros(nodo, nodoDestino);
             if (distancia < distanciaNodoMasCercano)
             {
               distanciaNodoMasCercano = distancia;

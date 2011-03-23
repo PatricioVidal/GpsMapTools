@@ -748,8 +748,16 @@ namespace GpsYv.ManejadorDeMapa.Interfase
 
     private void EnMenuRemplazarNombresDeVias(object sender, EventArgs e)
     {
+      miManejadorDeMapa.ManejadorDeVías.RemplazadorDeNombresDeVias.MinimumDistanceInMeters =
+        Settings.Default.MinimumDistanceToMatchRoads;
       miManejadorDeMapa.ManejadorDeVías.RemplazadorDeNombresDeVias.Procesa();  
     }
     #endregion
+
+    private void OnUserPreferencesMenu(object sender, EventArgs e)
+    {
+      var dialog = new UserSettingsForm();
+      dialog.ShowDialog();
+    }
   }
 }

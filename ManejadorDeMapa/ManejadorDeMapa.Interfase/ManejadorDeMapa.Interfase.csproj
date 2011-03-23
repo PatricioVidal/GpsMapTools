@@ -168,6 +168,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Recursos.en.resx" />
+    <EmbeddedResource Include="UserSettingsForm.en.resx">
+      <DependentUpon>UserSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSettingsForm.resx">
+      <DependentUpon>UserSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VentanaDeAcerca.en.resx">
       <DependentUpon>VentanaDeAcerca.cs</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +379,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSettingsForm.Designer.cs">
+      <DependentUpon>UserSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VentanaDeAcerca.cs">
       <SubType>Form</SubType>
