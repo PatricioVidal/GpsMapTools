@@ -1,3 +1,8 @@
+Version 1.38
+- Añadida la funcionalidad "Herramientas->RemplazadorDeNombre de Vías".
+- Añadida la funcionalidad "Herramientas->Preferencias del Usuario".
+- Actualizado el ManejadorDeMapa.Consola para que imprima las estadísticas correctas.
+
 Version 1.37
 - Añadido al Arreglador de Vías el arreglo automático de calles en un solo sentido.
 - Actualizaciónes menores a los archivos con listas.
