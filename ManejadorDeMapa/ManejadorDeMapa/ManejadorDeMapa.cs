@@ -539,13 +539,13 @@ namespace GpsYv.ManejadorDeMapa
     /// <returns>El número de cambios.</returns>
     public int ProcesarTodo()
     {
-      int númeroDeElementosModificados = 0;
-      númeroDeElementosModificados += ManejadorDePdis.ProcesarTodo();
-      númeroDeElementosModificados += ManejadorDeVías.ProcesarTodo();
+      int númeroDeProblemas = 0;
+      númeroDeProblemas += ManejadorDePdis.ProcesarTodo();
+      númeroDeProblemas += ManejadorDeVías.ProcesarTodo();
 
-      EscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeElementosModificados);
+      EscuchadorDeEstatus.Estatus = string.Format("Se detectaron {0} problemas", númeroDeProblemas);
 
-      return númeroDeElementosModificados;
+      return númeroDeProblemas;
     }
 
 

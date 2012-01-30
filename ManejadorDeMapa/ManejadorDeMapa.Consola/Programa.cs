@@ -71,10 +71,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Genghis;
 using System.IO;
-using GpsYv.ManejadorDeMapa;
 
 class Argumentos : CommandLineParser
 {
@@ -131,6 +131,14 @@ namespace GpsYv.ManejadorDeMapa.Consola
       FileInfo[] archivosFuente = informaciónDelDirectorio.GetFiles("*.mp");
       foreach (FileInfo archivo in archivosFuente)
       {
+        // Verifica que el archivo de salida no existe.
+        string archivoDeSalida = Path.Combine(argumentos.DirectorioDeSalida, archivo.Name);
+        if (File.Exists(archivoDeSalida))
+        {
+          Console.WriteLine(string.Format("ERROR: Archivo de salida '{0}' ya existe.", archivoDeSalida));
+          Environment.Exit(1);
+          break;
+        }
 
         // Lee mapa.
         Console.Write(string.Format("Leyendo '{0}' ... ", archivo.FullName));
@@ -142,18 +150,18 @@ namespace GpsYv.ManejadorDeMapa.Consola
         foreach (string procesamiento in argumentos.Procesamientos)
         {
           Console.Write(string.Format(" -> {0} ...", procesamiento));
-          int número = 0;
+          int númeroDeProblemas = 0;
           switch (procesamiento)
           {
             case "ProcesarTodo":
               {
-                número += manejadorDeMapa.ProcesarTodo();
+                númeroDeProblemas += manejadorDeMapa.ProcesarTodo();
               }
               break;
             case "ArreglaIndices":
               {
-                número += manejadorDeMapa.ManejadorDePdis.ArregladorDeIndicesDeCiudad.Procesa();
-                número += manejadorDeMapa.ManejadorDeVías.ArregladorDeIndicesDeCiudad.Procesa();
+                númeroDeProblemas += manejadorDeMapa.ManejadorDePdis.ArregladorDeIndicesDeCiudad.Procesa();
+                númeroDeProblemas += manejadorDeMapa.ManejadorDeVías.ArregladorDeIndicesDeCiudad.Procesa();
               }
               break;
             default:
@@ -163,16 +171,12 @@ namespace GpsYv.ManejadorDeMapa.Consola
               break;
           }
 
-          Console.WriteLine(string.Format(" {0} cambios.", número));
-        }
+          // Imprime el número de problemas encontrados.
+          Console.WriteLine(string.Format(" {0} problemas.", númeroDeProblemas));
 
-        // Verifica que el archivo de salida no existe.
-        string archivoDeSalida = Path.Combine(argumentos.DirectorioDeSalida, archivo.Name);
-        if (File.Exists(archivoDeSalida))
-        {
-          Console.WriteLine(string.Format("ERROR: Archivo de salida '{0}' ya existe.", archivoDeSalida));
-          Environment.Exit(1);
-          break;
+          // Imprime cambios.
+          ImprimeCambios(manejadorDeMapa.ManejadorDePdis.Elementos, "PDI");
+          ImprimeCambios(manejadorDeMapa.ManejadorDeVías.Elementos, "Via");
         }
 
         // Escribe el archivo de salida.
@@ -183,6 +187,19 @@ namespace GpsYv.ManejadorDeMapa.Consola
         Console.WriteLine("listo.");
         Console.WriteLine();
       }
+    }
+
+
+    private static void ImprimeCambios<T>(IEnumerable<T> losElementos, string elTipoDeElemento) where T: ElementoDelMapa
+    {
+      int numeroDeModificaciones = (from e in losElementos
+                                    where e.FuéModificado && !e.FuéEliminado
+                                    select e.Número).Count();
+      Console.WriteLine(string.Format(" {0} {1}(s) modificado(a)(s).", numeroDeModificaciones, elTipoDeElemento));
+      int numeroDeEliminaciones = (from e in losElementos
+                                   where e.FuéEliminado
+                                   select e.Número).Count();
+      Console.WriteLine(string.Format(" {0} {1}(s) eliminado(a)(s).", numeroDeEliminaciones, elTipoDeElemento));
     }
   }
 }
