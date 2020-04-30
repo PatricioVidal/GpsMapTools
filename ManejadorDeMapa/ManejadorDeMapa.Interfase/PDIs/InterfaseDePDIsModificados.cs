@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -71,35 +71,68 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
   /// <summary>
   /// Interfase de PDIs modificados.
   /// </summary>
-  public partial class InterfaseDePDIsModificados : InterfaseBase
+  public partial class InterfaseDePdisModificados : InterfaseBase
   {
+    #region Campos
+    private readonly InterfaseListaDePdis miLista;
+    #endregion
+
     /// <summary>
     /// Evento cuando hay PDIs modificados.
     /// </summary>
-    public event EventHandler<NúmeroDeItemsEventArgs> PDIsModificados;
+    public event EventHandler<NúmeroDeItemsEventArgs> PdisModificados;
 
+    #region Propiedades
+    /// <summary>
+    /// Obtiene o pone el manejador de mapa.
+    /// </summary>
+    public override ManejadorDeMapa ManejadorDeMapa
+    {
+      set
+      {
+        // Pone el nuevo manejador de mapa.
+        base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
+      }
+    }
+
+
+    /// <summary>
+    /// Obtiene o pone el escuchador de estatus.
+    /// </summary>
+    public override IEscuchadorDeEstatus EscuchadorDeEstatus
+    {
+      set
+      {
+        base.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
+      }
+    }
+    #endregion
+
+
+    #region Constructor.
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsModificados()
+    public InterfaseDePdisModificados()
     {
       InitializeComponent();
+
+      // Asigna los campos.
+      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
     }
+    #endregion
 
 
     /// <summary>
@@ -123,9 +156,10 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       miLista.RegeneraLista();
 
       // Genera el evento.
-      if (PDIsModificados != null)
+      if (PdisModificados != null)
       {
-        PDIsModificados(this, new NúmeroDeItemsEventArgs(miLista.NúmeroDeElementos));
+        PdisModificados(this, new NúmeroDeItemsEventArgs(
+          miLista.NúmeroDeElementos));
       }
     }
 
@@ -133,13 +167,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los PDIs.
-      IList<PDI> pdis = ManejadorDeMapa.ManejadorDePDIs.Elementos;
-      foreach (PDI pdi in pdis)
+      IList<Pdi> pdis = ManejadorDeMapa.ManejadorDePdis.Elementos;
+      foreach (Pdi pdi in pdis)
       {
         // Si el PDI fué cambiado y no eliminado entonces añadelo a la lista de cambios.
         if (pdi.FuéModificado && !pdi.FuéEliminado)
         {
-          laLista.AñadeItem(pdi, pdi.Modificaciones);
+          laLista.AñadeItem(new ElementoConEtiqueta(pdi), pdi.Modificaciones);
         }
       }
     }

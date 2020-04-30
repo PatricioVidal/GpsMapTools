@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -69,30 +69,32 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
+namespace GpsYv.ManejadorDeMapa.Pruebas.Pdis
 {
+  /// <summary>
+  /// Pruebas de la clase <see cref="ManejadorDePdis"/>.
+  /// </summary>
   [TestFixture]
-  public class PruebaManejadorDePDIs
+  public class PruebaManejadorDePdis
   {
+    /// <summary>
+    /// Prueba el constructor.
+    /// </summary>
     [Test]
     public void PruebaConstructor()
     {
       // Preparación.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
-      IList<PDI> pdis = new List<PDI>();
+      IList<Pdi> pdis = new List<Pdi>();
 
       // Llama al contructor bajo prueba.
-      ManejadorDePDIs objectoDePrueba = new ManejadorDePDIs(manejadorDeMapa, pdis, escuchadorDeEstatus);
+      ManejadorDePdis objectoDePrueba = new ManejadorDePdis(manejadorDeMapa, pdis, escuchadorDeEstatus);
 
       // Prueba propiedades.
       Assert.That(objectoDePrueba.Elementos, Is.EqualTo(pdis), "Elementos");
@@ -102,14 +104,15 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
 
     private struct Caso
     {
-      public readonly string Tipo;
-      public readonly string NombreOriginal;
-      public readonly string NombreCorregido;
+      public string Tipo { get; private set; }
+      public string NombreOriginal { get; private set; }
+      public string NombreCorregido { get; private set; }
 
       public Caso(
         string elTipo,
         string elNombreOriginal,
         string laNombreCorregido)
+        : this()
       {
         Tipo = elTipo;
         NombreOriginal = elNombreOriginal;
@@ -118,6 +121,9 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
     }
 
 
+    /// <summary>
+    /// Prueba el método ProcesarTodo()
+    /// </summary>
     [Test]
     public void PruebaProcesarTodo()
     {
@@ -125,10 +131,10 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       // Crea el objeto a probar.
       IEscuchadorDeEstatus escuchadorDeEstatus = new EscuchadorDeEstatusPorOmisión();
       ManejadorDeMapa manejadorDeMapa = new ManejadorDeMapa(escuchadorDeEstatus);
-      ManejadorDePDIs objectoDePrueba = new ManejadorDePDIs(manejadorDeMapa, new List<PDI>(), escuchadorDeEstatus);
+      ManejadorDePdis objectoDePrueba = new ManejadorDePdis(manejadorDeMapa, new List<Pdi>(), escuchadorDeEstatus);
 
       // Caso de prueba.
-      Caso[] casos = new Caso[] {
+      Caso[] casos = new[] {
         //        Tipo,     Nombre Original, Nombre Corregido
         new Caso ("0x2a06", "RES. LA COMIDA", "RESTAURANTE LA COMIDA"), // Cambia Nombre.
         new Caso ("0x2a07", "RES  LA  COMIDA", "RESTAURANTE LA COMIDA"), // Cambia nombre y elimina espacios.
@@ -137,8 +143,8 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
       };
 
       // Crea los PDIs originales.
-      IList<PDI> pdis = objectoDePrueba.Elementos;
-      string clase = "POI";
+      IList<Pdi> pdis = objectoDePrueba.Elementos;
+      const string clase = "POI";
       for (int i = 0; i < casos.Length; ++i)
       {
         Caso caso = casos[i];
@@ -147,19 +153,19 @@ namespace GpsYv.ManejadorDeMapa.Pruebas.PDIs
           new CampoTipo (caso.Tipo)
         };
 
-        PDI pdi = new PDI(manejadorDeMapa, i, clase, campos);
+        Pdi pdi = new Pdi(manejadorDeMapa, i, clase, campos);
         pdis.Add(pdi);
       }
 
       // Crea los PDIs finales.
-      IList<PDI> pdisEsperados = new List<PDI>(pdis.Count);
+      IList<Pdi> pdisEsperados = new List<Pdi>(pdis.Count);
       for (int i = 0; i < pdis.Count; ++i)
       {
-        PDI pdiEsperado = (PDI)pdis[i].Clone();
+        Pdi pdiEsperado = (Pdi)pdis[i].Clone();
         string nombreEsperado = casos[i].NombreCorregido;
         if (pdiEsperado.Nombre != nombreEsperado)
         {
-          pdiEsperado.CambiaNombre(nombreEsperado, "");
+          pdiEsperado.ActualizaNombre(nombreEsperado, "");
         }
 
         pdisEsperados.Add(pdiEsperado);

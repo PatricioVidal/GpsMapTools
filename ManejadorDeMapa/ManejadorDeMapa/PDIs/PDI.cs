@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -69,20 +69,17 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
   /// Representa un Punto De Interés (PDI/POI)
   /// </summary>
-  public class PDI : ElementoDelMapa
+  public class Pdi : ElementoDelMapa
   {
     #region Campos
-    private readonly static Coordenadas misCoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
+    private readonly static Coordenadas CoordenadasVacias = new Coordenadas(double.NaN, double.NaN);
     private readonly CampoCoordenadas misCoordenadas = CampoCoordenadas.Nulas;
     #endregion
 
@@ -96,12 +93,18 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       {
         if (misCoordenadas.Coordenadas.Length == 0)
         {
-          return misCoordenadasVacias;
+          return CoordenadasVacias;
         }
 
         return misCoordenadas.Coordenadas[0];
       }
     }
+
+
+    /// <summary>
+    /// Obtiene una variable lógica que indica si el PDI es una ciudad.
+    /// </summary>
+    public bool EsCiudad { get; private set; }
     #endregion
 
     #region Métodos Públicos
@@ -112,7 +115,30 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <param name="elNúmero">El número del PDI.</param>
     /// <param name="laClase">La clase de PDI.</param>
     /// <param name="losCampos">Los campos del PDI.</param>
-    public PDI(
+    /// <param name="elEsCiudad">Variable lógica que indica si el PDI es una ciudad.</param>
+    public Pdi(
+      ManejadorDeMapa elManejadorDeMapa,
+      int elNúmero,
+      string laClase,
+      IList<Campo> losCampos,
+      bool elEsCiudad)
+      : this(elManejadorDeMapa,
+             elNúmero,
+             laClase,
+             losCampos)
+    {
+      EsCiudad = elEsCiudad;
+    }
+
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="elManejadorDeMapa">El manejador del mapa.</param>
+    /// <param name="elNúmero">El número del PDI.</param>
+    /// <param name="laClase">La clase de PDI.</param>
+    /// <param name="losCampos">Los campos del PDI.</param>
+    public Pdi(
       ManejadorDeMapa elManejadorDeMapa,
       int elNúmero,
       string laClase,
@@ -120,15 +146,21 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       : base(elManejadorDeMapa, 
              elNúmero, 
              laClase,
-             CaracterísticasDePDIs.Descripciones,
+             CaracterísticasDePdis.Descripciones,
              losCampos)
     {
       // Busca los campos especificos de los PDIs.
       foreach (Campo campo in losCampos)
       {
-        if (campo is CampoCoordenadas)
+        CampoCoordenadas campoCoordenadas;
+        CampoEsCiudad campoCiudad;
+        if ((campoCoordenadas  = campo as CampoCoordenadas) != null)
         {
-          misCoordenadas = (CampoCoordenadas)campo;
+          misCoordenadas = campoCoordenadas;
+        }
+        else if ((campoCiudad = campo as CampoEsCiudad) != null)
+        {
+          EsCiudad = campoCiudad.EsCiudad;
         }
       }
     }
@@ -139,7 +171,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// </summary>
     public override string ToString()
     {
-      string texto = "#" + Número  + ", " + Nombre + ", " + Tipo.ToString() + ", " + Coordenadas.ToString();
+      string texto = "#" + Número  + ", " + Nombre + ", " + Tipo + ", " + Coordenadas;
 
       return texto;
     }
@@ -158,7 +190,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         camposNuevos.Add(campo);
       }
 
-      PDI clone = new PDI(ManejadorDeMapa, Número, Clase, camposNuevos);
+      Pdi clone = new Pdi(ManejadorDeMapa, Número, Clase, camposNuevos);
       return clone;
     }
 
@@ -167,8 +199,8 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// Retorna una variable lógica indicando si un PDI dado
     /// tien la misma información que este PDI.
     /// </summary>
-    /// <param name="elPDI">El PDI dado.</param>
-    public bool TieneLaMismaInformación(PDI elPDI)
+    /// <param name="elPdi">El PDI dado.</param>
+    public bool TieneLaMismaInformación(Pdi elPdi)
     {
       bool tieneLaMismaInformación = false;
 
@@ -177,10 +209,10 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       //  - El tipo es igual.
       //  - Las coordenadas son iguales.
       //  - La información de los campos son iguales.
-      if ((Nombre == elPDI.Nombre) &&
-        (Tipo == elPDI.Tipo) &&
-        (Coordenadas == elPDI.Coordenadas) &&
-        (Campos.Count == elPDI.Campos.Count))
+      if ((Nombre == elPdi.Nombre) &&
+        (Tipo == elPdi.Tipo) &&
+        (Coordenadas == elPdi.Coordenadas) &&
+        (Campos.Count == elPdi.Campos.Count))
       {
         // Ahora hay que asegurarse que todos lo campos son iguales.
         tieneLaMismaInformación = true;
@@ -188,9 +220,9 @@ namespace GpsYv.ManejadorDeMapa.PDIs
         foreach (Campo campo in Campos)
         {
           bool encontróCampoIgual = false;
-          foreach (Campo campoAComparar in elPDI.Campos)
+          foreach (Campo campoAComparar in elPdi.Campos)
           {
-            if (campo.Equals(campoAComparar))
+            if (campo == campoAComparar)
             {
               encontróCampoIgual = true;
               break;

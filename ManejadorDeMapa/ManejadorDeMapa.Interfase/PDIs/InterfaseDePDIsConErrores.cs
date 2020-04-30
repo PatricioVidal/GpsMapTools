@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -71,24 +71,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
   /// <summary>
   /// Interfase de Errores de PDIs.
   /// </summary>
-  public partial class InterfaseDePDIsConErrores : InterfaseBase
+  public partial class InterfaseDePdisConErrores : InterfaseBase
   {
     #region Campos
-    private List<ListViewItem> misItems = new List<ListViewItem>();
     private BuscadorDeErrores miBuscadorDeErrores;
+    private readonly InterfaseListaDePdis miLista;
+    private readonly InterfaseMapaDeElementosSeleccionados miMapa;
+    private readonly MenuEditorDePdis miMenú;
     #endregion
 
     #region Propiedades
@@ -108,23 +105,18 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
 
         // Pone el nuevo manejador de mapa.
         base.ManejadorDeMapa = value;
+        miInterfaseListaConMapaDePdis.ManejadorDeMapa = value;
 
         // Maneja eventos.
         if (value != null)
         {
-          miBuscadorDeErrores = value.ManejadorDePDIs.BuscadorDeErrores;
+          miBuscadorDeErrores = value.ManejadorDePdis.BuscadorDeErrores;
 
           if (miBuscadorDeErrores != null)
           {
             miBuscadorDeErrores.Invalidado += EnInvalidado;
             miBuscadorDeErrores.Procesó += EnSeBuscaronErrores;
           }
-
-          // Pone el manejador de mapa en la interfase de mapa.
-          miMapa.ManejadorDeMapa = value;
-
-          // Pone el manejador de PDIs en la interfase de edición de PDIs.
-          miMenúEditorDePDI.ManejadorDePDIs = value.ManejadorDePDIs;
         }
       }
     }
@@ -138,7 +130,7 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
       set
       {
         base.EscuchadorDeEstatus = value;
-        miMapa.EscuchadorDeEstatus = value;
+        miInterfaseListaConMapaDePdis.EscuchadorDeEstatus = value;
       }
     }
     #endregion
@@ -147,15 +139,20 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseDePDIsConErrores()
+    public InterfaseDePdisConErrores()
     {
       InitializeComponent();
+
+      // Asigna los campos.
+      miLista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+      miMapa = miInterfaseListaConMapaDePdis.InterfaseMapaDePdisSeleccionados;
+      miMenú = miInterfaseListaConMapaDePdis.MenuEditorDePdis;
 
       // Pone el método llenador de items.
       miLista.PoneLlenadorDeItems(LlenaItems);
 
       // Escucha el evento de edición de PDIs.
-      miMenúEditorDePDI.Editó += delegate(object elObjecto, EventArgs losArgumentos)
+      miMenú.Editó += delegate
       {
         // Borra los puntos adicionales que estén en el mapa.
         miMapa.PuntosAddicionales.Clear();
@@ -163,6 +160,23 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
         // Busca errores otra vez.
         miBuscadorDeErrores.Procesa();
       };
+
+      // Añade el menú para ignorar que el PDI no tenga coordenadas a nivel zero.
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(new ToolStripSeparator());
+      var menú1 = new ToolStripMenuItem(Properties.Recursos.InterfaseDePdisConErroresMenuIgnorarPdiNoCoordenadasANivel0);
+      menú1.Click += ((s, e) => AñadeAttributo(
+       menú1.Text,
+       Properties.Recursos.InterfaseDePdisConErroresPreguntaIgnorarPdiNoCoordenadasANivel0,
+       BuscadorDeErrores.AtributoIgnorarNoCoordenadasNivel0));
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(menú1);
+
+      // Añade el menú para ignorar que el PDI de Ciudad no tenga campos City=Y o CityIdx.
+      var menú2 = new ToolStripMenuItem(Properties.Recursos.InterfaseDePdisConErroresMenuIgnorarPdiCiudadNoCamposCityOCityIdx);
+      menú2.Click += ((s, e) => AñadeAttributo(
+       menú2.Text,
+       Properties.Recursos.InterfaseDePdisConErroresPreguntaIgnorarPdiCiudadNoCamposCityOCityIdx,
+       BuscadorDeErrores.AtributoIgnorarCamposCityYCityIdx));
+      miInterfaseListaConMapaDePdis.MenuEditorDePdis.Items.Add(menú2);
     }
 
 
@@ -184,23 +198,64 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     private void LlenaItems(InterfaseListaDeElementos laLista)
     {
       // Añade los PDIs.
-      IDictionary<PDI, string> errores = miBuscadorDeErrores.Errores;
-      foreach (KeyValuePair<PDI, string> error in errores)
+      IDictionary<Pdi, string> errores = miBuscadorDeErrores.Errores;
+      foreach (KeyValuePair<Pdi, string> error in errores)
       {
-        PDI pdi = error.Key;
+        Pdi pdi = error.Key;
         string razón = error.Value;
-        laLista.AñadeItem(pdi, razón);
+        laLista.AñadeItem(new ElementoConEtiqueta(pdi), razón);
       }
 
       // Activa el menú de Edición si hay elementos en la lista.
       if (errores.Count > 0)
       {
-        miMenúEditorDePDI.Enabled = true;
+        miMenú.Enabled = true;
       }
       else
       {
-        miMenúEditorDePDI.Enabled = false;
+        miMenú.Enabled = false;
       }
+    }
+
+
+    private void AñadeAttributo(string elTítulo, string laPregunta, string elAtributo)
+    {
+      ListView lista = miInterfaseListaConMapaDePdis.InterfaseListaDePdis;
+
+      // Retornamos si no hay PDIs seleccionados.
+      int númeroDePdisSeleccionados = lista.SelectedIndices.Count;
+      if (númeroDePdisSeleccionados == 0)
+      {
+        return;
+      }
+
+      // Pregunta si se quiere Ignorarque el PDI no tenga coordenadas a Nivel 0.
+      DialogResult respuesta = MessageBox.Show(
+        string.Format(
+          laPregunta,
+          númeroDePdisSeleccionados),
+          elTítulo,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+      #region Estandarizar el Límite de Velocidad si el usuario dice que si.
+      if (respuesta != DialogResult.Yes)
+      {
+        return;
+      }
+
+      // Añade los attributos.
+      ManejadorDeMapa.SuspendeEventos();
+      IList<Pdi> pdis = miInterfaseListaConMapaDePdis.MenuEditorDePdis.ObtieneElementosSeleccionados<Pdi>();
+      foreach (Pdi pdi in pdis)
+      {
+        pdi.AñadeAtributo(elAtributo);
+      }
+      ManejadorDeMapa.RestableceEventos();
+
+      // Busca errores otra vez.
+      miBuscadorDeErrores.Procesa();
+      #endregion
     }
     #endregion
   }

@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -71,50 +71,65 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Tst;
-using System.Collections;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
   /// Buscador de errores en PDIs.
   /// </summary>
-  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePDIs, PDI>
+  public class BuscadorDeErrores : ProcesadorBase<ManejadorDePdis, Pdi>
   {
     #region Campos
-    private readonly IDictionary<PDI, string> misErrores = new Dictionary<PDI, string>();
+    private readonly IDictionary<Pdi, string> misErrores = new Dictionary<Pdi, string>();
     #endregion
 
     #region Propiedades
     /// <summary>
     /// Devuelve los PDIs con errores.
     /// </summary>
-    public IDictionary<PDI, string> Errores
+    public IDictionary<Pdi, string> Errores
     {
       get
       {
         return misErrores;
       }
     }
+
+
+    /// <summary>
+    /// Atributo "IgnorarNoCoordenadasNivel0".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica ignorar que el PDI no tenga coordenadas a nivel zero.
+    /// </remarks>
+    public const string AtributoIgnorarNoCoordenadasNivel0 = "IgnorarNoCoordenadasNivel0";
+
+
+    /// <summary>
+    /// Atributo "IgnorarCamposCityYCityIdx".
+    /// </summary>
+    /// <remarks>
+    /// Este atributo indica ignorar Campos City y CityIdx.
+    /// </remarks>
+    public const string AtributoIgnorarCamposCityYCityIdx = "IgnorarCamposCityYCityIdx";
     #endregion
 
     #region Métodos Públicos
     /// <summary>
     /// Descripción de éste procesador.
     /// </summary>
-    public static readonly string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
+    public const string Descripción = "Busca errores en los PDIs.  Incluye Tipos desconocidos, PDIs sin coordenadas a nivel 0, etc.";
 
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="elManejadorDePDIs">El manejador de PDIs.</param>
+    /// <param name="elManejadorDePdis">El manejador de PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
     public BuscadorDeErrores(
-      ManejadorDePDIs elManejadorDePDIs,
+      ManejadorDePdis elManejadorDePdis,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
-      : base(elManejadorDePDIs, elEscuchadorDeEstatus)
+      : base(elManejadorDePdis, elEscuchadorDeEstatus)
     {
     }
     #endregion
@@ -123,37 +138,36 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <summary>
     /// Este método se llama antes de comenzar a procesar los elementos.
     /// </summary>
-    protected override void ComenzóAProcesar()
+    protected override bool ComenzóAProcesar()
     {
       misErrores.Clear();
-      base.ComenzóAProcesar();
+      return base.ComenzóAProcesar();
     }
 
 
     /// <summary>
     /// Procesa un PDI.
     /// </summary>
-    /// <param name="elPDI">El PDI.</param>
+    /// <param name="elPdi">El PDI.</param>
     /// <returns>El número de problemas detectados al procesar el elemento.</returns>
-    protected override int ProcesaElemento(PDI elPDI)
+    protected override int ProcesaElemento(Pdi elPdi)
     {
       int númeroDeProblemasDetectados = 0;
       List<string> errores = new List<string>();
 
-      #region Verifica que el tipo de PDI no es vacio.
-      Tipo tipo = elPDI.Tipo;
-      bool esVacio = (tipo == Tipo.TipoNulo);
-      if (esVacio)
+      #region Verifica que el tipo de PDI no es vacio y que es conocido.
+      Tipo? tipo = elPdi.Tipo;
+      if (tipo == null)
       {
-        errores.Add("El tipo está vacío.");
+        errores.Add(Properties.Recursos.E000);
       }
-      #endregion 
-
-      #region Verifica que el tipo de PDI es conocido.
-      bool esConocido = CaracterísticasDePDIs.Descripciones.ContainsKey(tipo);
-      if (!esConocido)
+      else
       {
-        errores.Add("El tipo (" + elPDI.Tipo.ToString() + ") no es conocido");
+        bool esConocido = CaracterísticasDePdis.Descripciones.ContainsKey((Tipo)tipo);
+        if (!esConocido)
+        {
+          errores.Add(string.Format(Properties.Recursos.E001, elPdi.Tipo));
+        }
       }
       #endregion 
 
@@ -161,7 +175,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       // El PDI debe tener un campo de coordenadas y además tienen que
       // tener nivel zero.
       CampoCoordenadas campoCoordenadas = null;
-      foreach (Campo campo in elPDI.Campos)
+      foreach (Campo campo in elPdi.Campos)
       {
         if (campo is CampoCoordenadas)
         {
@@ -171,11 +185,61 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       }
       if (campoCoordenadas == null)
       {
-        errores.Add("No tiene coordenadas.");
+        errores.Add(Properties.Recursos.E002);
       }
-      else if (campoCoordenadas.Nivel != 0)
+      else if ((campoCoordenadas.Nivel != 0) &&
+               !elPdi.TieneAtributo(AtributoIgnorarNoCoordenadasNivel0))
       {
-        errores.Add("No tiene coordenadas a nivel 0, sino a nivel " + campoCoordenadas.Nivel);
+        errores.Add(string.Format(Properties.Recursos.E003, campoCoordenadas.Nivel));
+      }
+      #endregion
+
+      #region Verifica City=Y y CityIdx
+      if (!elPdi.TieneAtributo(AtributoIgnorarCamposCityYCityIdx))
+      {
+        if ((elPdi.Tipo != null) && (TiposDeCiudades.Tipos.Contains(elPdi.Tipo.Value)))
+        {
+            // Si el tipo de PDI es de ciudad y no es RGN20 entonces debería
+            // tener un campo EsCiudad con valor verdadero.
+            if (elPdi.Clase != "RGN20")
+            {
+              // Busca el campo EsCiudad.
+              CampoEsCiudad campoEsCiudad = null;
+              foreach (Campo campo in elPdi.Campos)
+              {
+                if (campo is CampoEsCiudad)
+                {
+                  campoEsCiudad = (CampoEsCiudad) campo;
+                  break;
+                }
+              }
+
+              // Añade el error si no tiene el campo o es falso.
+              if ((campoEsCiudad == null) ||
+                  !campoEsCiudad.EsCiudad)
+              {
+                errores.Add(Properties.Recursos.E004);
+              }
+            }
+
+          // Si el tipo de PDI es de ciudad entonces debería tener el campo
+          // Busca el campo EsCiudad.
+          CampoIndiceDeCiudad campoIndiceDeCiudad = null;
+          foreach (Campo campo in elPdi.Campos)
+          {
+            if (campo is CampoIndiceDeCiudad)
+            {
+              campoIndiceDeCiudad = (CampoIndiceDeCiudad)campo;
+              break;
+            }
+          }
+
+          // Añade el error si no tiene el campo.
+          if (campoIndiceDeCiudad == null)
+          {
+            errores.Add(Properties.Recursos.E005);
+          }
+        }
       }
       #endregion
 
@@ -183,7 +247,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
       if (errores.Count > 0)
       {
         string todosLosErrores = string.Join("|", errores.ToArray());
-        misErrores.Add(elPDI, todosLosErrores);
+        misErrores.Add(elPdi, todosLosErrores);
         ++númeroDeProblemasDetectados;
       }
 

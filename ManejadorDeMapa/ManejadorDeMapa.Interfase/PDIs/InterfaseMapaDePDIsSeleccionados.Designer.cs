@@ -1,25 +1,9 @@
-﻿namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+﻿using System.ComponentModel;
+
+namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
-  partial class InterfaseMapaDePDIsSeleccionados
+  partial class InterfaseMapaDePdisSeleccionados
   {
-    /// <summary> 
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
-
-    /// <summary> 
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && (components != null))
-      {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
-    }
-
     #region Component Designer generated code
 
     /// <summary> 
@@ -30,13 +14,13 @@
     {
       this.SuspendLayout();
       // 
-      // InterfaseMapaDePDIsSeleccionados
+      // InterfaseMapaDePdisSeleccionados
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.MuestraPDIs = true;
+      this.MuestraPdis = true;
       this.MuestraTodosLosElementos = true;
-      this.Name = "InterfaseMapaDePDIsSeleccionados";
+      this.Name = "InterfaseMapaDePdisSeleccionados";
       this.Size = new System.Drawing.Size(544, 472);
       this.ResumeLayout(false);
 

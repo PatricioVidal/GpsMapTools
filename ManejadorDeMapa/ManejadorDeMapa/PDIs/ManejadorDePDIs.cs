@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -69,28 +69,15 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
   /// Manejados de PDIs.
   /// </summary>
-  public class ManejadorDePDIs : ManejadorBase<PDI>
+  public class ManejadorDePdis : ManejadorBase<Pdi>
   {
-    #region Campos
-    private readonly EliminadorDeCaracteres miEliminadorDeCaracteres;
-    private readonly ArregladorDeLetras miArregladorDeLetras;
-    private readonly ArregladorDePalabrasPorTipo miArregladorDePalabrasPorTipo;
-    private readonly BuscadorDeDuplicados miBuscadorDeDuplicados;
-    private readonly BuscadorDeErrores miBuscadorDeErrores;
-    #endregion
-    
     #region Propiedades
     /// <summary>
     /// Descripción de la acción "Procesar Todo".
@@ -100,63 +87,34 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
 
     /// <summary>
-    /// Obtiene el Eliminador de Caracteres.
+    /// Obtiene el Arreglador de Indices de Ciudades.
     /// </summary>
-    public EliminadorDeCaracteres EliminadorDeCaracteres
-    {
-      get
-      {
-        return miEliminadorDeCaracteres;
-      }
-    }
+    public ArregladorDeIndicesDeCiudad ArregladorDeIndicesDeCiudad { get; private set; }
 
-
+    
     /// <summary>
-    /// Obtiene el Arreglador de Letras.
+    /// Obtiene el Arreglador General de PDIs.
     /// </summary>
-    public ArregladorDeLetras ArregladorDeLetras
-    {
-      get
-      {
-        return miArregladorDeLetras;
-      }
-    }
-
-
-    /// <summary>
-    /// Obtiene el Arreglador de Palabras por Tipo.
-    /// </summary>
-    public ArregladorDePalabrasPorTipo ArregladorDePalabrasPorTipo
-    {
-      get
-      {
-        return miArregladorDePalabrasPorTipo;
-      }
-    }
+    public ArregladorGeneral ArregladorGeneral { get; private set; }
 
 
     /// <summary>
     /// Obtiene el Buscador de Duplicados.
     /// </summary>
-    public BuscadorDeDuplicados BuscadorDeDuplicados
-    {
-      get
-      {
-        return miBuscadorDeDuplicados;
-      }
-    }
+    public BuscadorDeDuplicados BuscadorDeDuplicados { get; private set; }
+
+
+    /// <summary>
+    /// Obtiene el Buscador de Alertas.
+    /// </summary>
+    public BuscadorDeAlertas BuscadorDeAlertas { get; private set; }
 
 
     /// <summary>
     /// Obtiene el Buscador de Errores.
     /// </summary>
-    public BuscadorDeErrores BuscadorDeErrores
-    {
-      get
-      {
-        return miBuscadorDeErrores;
-      }
-    }
+    public BuscadorDeErrores BuscadorDeErrores { get; private set; }
+
     #endregion
 
     #region Métodos Públicos
@@ -166,21 +124,21 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <param name="elManejadorDeMapa">El Manejador de Mapa.</param>
     /// <param name="losPuntosDeInteres">Los PDIs.</param>
     /// <param name="elEscuchadorDeEstatus">El escuchador de estatus.</param>
-    public ManejadorDePDIs(
+    public ManejadorDePdis(
       ManejadorDeMapa elManejadorDeMapa,
-      IList<PDI> losPuntosDeInteres,
+      IList<Pdi> losPuntosDeInteres,
       IEscuchadorDeEstatus elEscuchadorDeEstatus)
       : base (elManejadorDeMapa, losPuntosDeInteres, elEscuchadorDeEstatus)
     {
       // Crea los procesadores.
-      miEliminadorDeCaracteres = new EliminadorDeCaracteres(this, elEscuchadorDeEstatus);
-      miArregladorDeLetras = new ArregladorDeLetras(this, elEscuchadorDeEstatus);
-      miArregladorDePalabrasPorTipo = new ArregladorDePalabrasPorTipo(this, elEscuchadorDeEstatus);
-      miBuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
-      miBuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
+      ArregladorDeIndicesDeCiudad = new ArregladorDeIndicesDeCiudad(this, elEscuchadorDeEstatus);
+      ArregladorGeneral = new ArregladorGeneral(this, elEscuchadorDeEstatus);
+      BuscadorDeDuplicados = new BuscadorDeDuplicados(this, elEscuchadorDeEstatus);
+      BuscadorDeAlertas = new BuscadorDeAlertas(this, elEscuchadorDeEstatus);
+      BuscadorDeErrores = new BuscadorDeErrores(this, elEscuchadorDeEstatus);
 
       // Escucha eventos.
-      elManejadorDeMapa.PDIsModificados += EnElementosModificados;
+      elManejadorDeMapa.PdisModificados += EnElementosModificados;
     }
 
 
@@ -191,17 +149,17 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     public int ProcesarTodo()
     {
       // Hacer todos las operaciones en orden.
-      int númeroDeProblemasEnPDIs = 0;
-      númeroDeProblemasEnPDIs += miEliminadorDeCaracteres.Procesa();
-      númeroDeProblemasEnPDIs += miArregladorDeLetras.Procesa();
-      númeroDeProblemasEnPDIs += miArregladorDePalabrasPorTipo.Procesa();
-      númeroDeProblemasEnPDIs += miBuscadorDeDuplicados.Procesa();
-      númeroDeProblemasEnPDIs += miBuscadorDeErrores.Procesa();
+      int númeroDeProblemasEnPdis = 0;
+      númeroDeProblemasEnPdis += ArregladorDeIndicesDeCiudad.Procesa();
+      númeroDeProblemasEnPdis += ArregladorGeneral.Procesa();
+      númeroDeProblemasEnPdis += BuscadorDeDuplicados.Procesa();
+      númeroDeProblemasEnPdis += BuscadorDeAlertas.Procesa();
+      númeroDeProblemasEnPdis += BuscadorDeErrores.Procesa();
 
       // Reporta estatus.
-      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnPDIs + " problemas en PDIs.";
+      EscuchadorDeEstatus.Estatus = "Se detectaron " + númeroDeProblemasEnPdis + " problemas en PDIs.";
 
-      return númeroDeProblemasEnPDIs;
+      return númeroDeProblemasEnPdis;
     }
     #endregion
   }

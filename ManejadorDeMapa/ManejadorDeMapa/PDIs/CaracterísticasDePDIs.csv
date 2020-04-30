@@ -1,4 +1,4 @@
-//
+﻿//
 // Esta lista contiene las descripciones de los PDIs según su Tipo.
 //
 // La data se creó de la información en "http://cricri-blog.blogspot.com/2006/06/code-objets-garmin-poi.html"
@@ -54,19 +54,23 @@
 0x500,Medium city (0.5-1M)/Ciudad Media 0.5-1M
 0x600,Medium city (200-500K)/Ciudad Media 200-500K
 0x700,Medium city (100-200K))/Ciudad Media 100-200K
+0x800,Small city (50-100K)/
 0x900,Small city (20-50K)/
 0xa00,Small city/town (10-20K)/
 0xb00,Small city/town (5-10K)/
 0xc00,Settlement (2-5K)/
 0xd00,Settlement (1-2K)/
-0xe00,Settlement (500-1K)/
+0Xe00,Settlement (500-1K)/
+0xf00,Settlement (200-500)/
+0x1000,Settlement (100-200)/
+0x1100,Settlement (less 100)/
 // COMIDA
 0x2a00,Dining/Comida
 0x2a01,Dining (American)/Comida Americana
 0x2a02,Dining (Asian)/Comida Asiatica
 0x2a03,Dining (barbecue)/Comida Parrilla
 0x2a04,Dining (Chinese)/Comida China
-0x2a05,Dining (Deli/Bakery)/Comida Panaderia/Pasteleria
+0x2a05,Dining (Deli/Bakery)/Comida Panaderia
 0x2a06,Dining (international)/Comida Internacional
 0x2a07,Fast food/Comida Rapida
 0x2a08,Dining (Italian)/Comida Italiana
@@ -74,7 +78,7 @@
 0x2a0a,Dining (pizza)/Comida Pizzas
 0x2a0b,Dining (sea food)/Comida del Mar
 0x2a0c,Dining (steak/grill)/Comida Carne/Parrilla
-0x2a0d,Dining (bagel/donut)/Comida Pasteleria/Panaderia
+0x2a0d,Dining (bagel/donut)/Comida Pasteleria
 0x2a0e,Dining (cafe/diner)/Comida Cafe/Cena
 0x2a0f,Dining (French)/Comida Francesa
 0x2a10,Dining (German)/Comida Alemana
@@ -107,6 +111,11 @@
 0x2d03,Cinema/Cine
 0x2d02,Bar/Nightclub/Bar/Club nocturno
 0x2d00,Entertainment/Entretenimiento
+// LABELS
+0x1400,Nombre del Pais
+0x1e00,Nombre del Estado
+0x1f00,Nombre del Municipio
+0x2800,Nombre
 // LAND
 0x6600,Land feature/Objeto terreste
 0x6601,Arch/Arco
@@ -179,7 +188,7 @@
 0x2f15,Public utilities/Instalaciones publicas
 0x640f,Post office/Correo
 // SHOPPING
-0x2e00,Shopping)/Centro Comercial
+// 0x2e00,Shopping)/Centro Comercial
 0x2e01,Department store/Grandes tiendas
 0x2e02,Grocery store/Tienda de Comestibles
 0x2e03,General merchandiser/Comercio general
@@ -242,3 +251,14 @@
 0x1b12,Navaid yellow/amber
 0x1b13,Navaid orange
 0x1b16,Navaid multi colored
+// SALIDAS NO APARECEN EN LOS GPS
+0x2000,HW Exit
+0x2100,HW Exit with facilities
+0x210f,HW Exit service
+0x2110,HW Exit with facilities
+0x2200,HW Exit restroom
+0x2300,HW Exit convenience store
+0x2400,HW Exit weight station
+0x2500,HW Exit toll booth
+0x2600,HW Exit information
+0x2700,HW Exit

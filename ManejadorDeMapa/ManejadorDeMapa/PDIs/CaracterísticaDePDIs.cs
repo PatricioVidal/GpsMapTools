@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -71,19 +71,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 
-namespace GpsYv.ManejadorDeMapa.PDIs
+namespace GpsYv.ManejadorDeMapa.Pdis
 {
   /// <summary>
   /// Clase que contiene las características de los PDIs.
   /// </summary>
-  public static class CaracterísticasDePDIs
+  public static class CaracterísticasDePdis
   {
     #region Campos
-    private static readonly string miArchivoDeCaracterísticasDePDIs = @"PDIs\CaracterísticasDePDIs.csv";
+    private const string miArchivoDeCaracterísticasDePdis = @"PDIs\CaracterísticasDePDIs.csv";
     #endregion
 
     #region Campos y Métodos Públicos
@@ -111,11 +108,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     #endregion
 
     #region Métodos Privados
-    private class LectorDeCaracterísticasDePDIs : LectorDeArchivo
+    private class LectorDeCaracterísticasDePdis : LectorDeArchivo
     {
       public readonly IDictionary<Tipo, string> misDescripciones;
 
-      public LectorDeCaracterísticasDePDIs(
+      public LectorDeCaracterísticasDePdis(
         string elArchivo,
         IDictionary<Tipo, string> lasDescripciones)
       {
@@ -146,7 +143,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
 
           // Lee las partes.
           string[] tipos = partes[0].Split('-');
-          int índiceDeDescripción = 1;
+          const int índiceDeDescripción = 1;
           int númeroDePartes = partes.Length - índiceDeDescripción;
           string descripción = string.Join(",", partes, índiceDeDescripción, númeroDePartes);
 
@@ -159,7 +156,7 @@ namespace GpsYv.ManejadorDeMapa.PDIs
           }
           for (int tipo = primerTipo; tipo <= últimoTipo; ++tipo)
           {
-            Descripciones.Add(new Tipo(tipo), descripción);
+            misDescripciones.Add(new Tipo(tipo), descripción);
           }
         }
       }
@@ -169,11 +166,11 @@ namespace GpsYv.ManejadorDeMapa.PDIs
     /// <summary>
     /// Constructor.
     /// </summary>
-    static CaracterísticasDePDIs()
+    static CaracterísticasDePdis()
     {
       // Lee las características de PDIs.
-      LectorDeCaracterísticasDePDIs lector = new LectorDeCaracterísticasDePDIs(
-        miArchivoDeCaracterísticasDePDIs,
+      LectorDeCaracterísticasDePdis lector = new LectorDeCaracterísticasDePdis(
+        miArchivoDeCaracterísticasDePdis,
         Descripciones);
 
       if (!Descripciones.ContainsKey(Tipo.TipoNulo))

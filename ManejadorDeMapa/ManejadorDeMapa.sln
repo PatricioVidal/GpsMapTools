@@ -1,14 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54B82A62-58F2-4F96-A3FE-95908E23C32E}"
 	ProjectSection(SolutionItems) = preProject
 		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Pruebas", "ManejadorDeMapa.Pruebas\ManejadorDeMapa.Pruebas.csproj", "{7E361239-BD1B-4CD9-974B-CFF0B456A297}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa", "ManejadorDeMapa\ManejadorDeMapa.csproj", "{F07EE602-114A-4111-AD1C-E079D8C71E11}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Información", "{D85C74CE-E6A7-44AE-81D7-A9430E8166F5}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Información", "Informació
 		Informacion\Garmin City Select North America Elements.txt = Informacion\Garmin City Select North America Elements.txt
 		Informacion\Garmin POIs.txt = Informacion\Garmin POIs.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa.Pruebas", "ManejadorDeMapa.Pruebas\ManejadorDeMapa.Pruebas.csproj", "{7E361239-BD1B-4CD9-974B-CFF0B456A297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejadorDeMapa", "ManejadorDeMapa\ManejadorDeMapa.csproj", "{F07EE602-114A-4111-AD1C-E079D8C71E11}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalación", "Instalación\Instalación.vdproj", "{B551FA61-71A2-419B-A611-F33523779D47}"
 EndProject
@@ -31,36 +33,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArregladorDeMapasTopográficos", "ArregladorDeMapasTopográficos\ArregladorDeMapasTopográficos.csproj", "{F988FFAC-B343-4186-AB05-9E483C3472FB}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS07
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ManejadorDeMapa.Pruebas\\ManejadorDeMapa.Pruebas.csproj
-		SccProjectName1 = ManejadorDeMapa.Pruebas
-		SccLocalPath1 = ManejadorDeMapa.Pruebas
-		SccProjectUniqueName2 = ManejadorDeMapa\\ManejadorDeMapa.csproj
-		SccProjectName2 = ManejadorDeMapa
-		SccLocalPath2 = ManejadorDeMapa
-		SccProjectUniqueName3 = Instalación\\Instalación.vdproj
-		SccProjectName3 = Instalación
-		SccLocalPath3 = Instalación
-		SccProjectUniqueName4 = ManejadorDeMapa.Interfase\\ManejadorDeMapa.Interfase.csproj
-		SccProjectName4 = ManejadorDeMapa.Interfase
-		SccLocalPath4 = ManejadorDeMapa.Interfase
-		SccProjectUniqueName5 = RemplazadorDeLetrasEspeciales\\RemplazadorDeLetrasEspeciales.csproj
-		SccProjectName5 = RemplazadorDeLetrasEspeciales
-		SccLocalPath5 = RemplazadorDeLetrasEspeciales
-		SccProjectUniqueName6 = RemplazadorDeNombres\\RemplazadorDeNombres.csproj
-		SccProjectName6 = RemplazadorDeNombres
-		SccLocalPath6 = RemplazadorDeNombres
-		SccProjectUniqueName7 = ManejadorDeMapa.Consola\\ManejadorDeMapa.Consola.csproj
-		SccProjectName7 = ManejadorDeMapa.Consola
-		SccLocalPath7 = ManejadorDeMapa.Consola
-		SccProjectUniqueName8 = ArregladorDeMapasTopográficos\\ArregladorDeMapasTopográficos.csproj
-		SccProjectName8 = ArregladorDeMapasTopográficos
-		SccLocalPath8 = ArregladorDeMapasTopográficos
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -102,5 +74,35 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D85C74CE-E6A7-44AE-81D7-A9430E8166F5} = {54B82A62-58F2-4F96-A3FE-95908E23C32E}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs07
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ManejadorDeMapa.Pruebas\\ManejadorDeMapa.Pruebas.csproj
+		SccProjectName1 = ManejadorDeMapa.Pruebas
+		SccLocalPath1 = ManejadorDeMapa.Pruebas
+		SccProjectUniqueName2 = ManejadorDeMapa\\ManejadorDeMapa.csproj
+		SccProjectName2 = ManejadorDeMapa
+		SccLocalPath2 = ManejadorDeMapa
+		SccProjectUniqueName3 = Instalación\\Instalación.vdproj
+		SccProjectName3 = Instalación
+		SccLocalPath3 = Instalación
+		SccProjectUniqueName4 = ManejadorDeMapa.Interfase\\ManejadorDeMapa.Interfase.csproj
+		SccProjectName4 = ManejadorDeMapa.Interfase
+		SccLocalPath4 = ManejadorDeMapa.Interfase
+		SccProjectUniqueName5 = RemplazadorDeLetrasEspeciales\\RemplazadorDeLetrasEspeciales.csproj
+		SccProjectName5 = RemplazadorDeLetrasEspeciales
+		SccLocalPath5 = RemplazadorDeLetrasEspeciales
+		SccProjectUniqueName6 = RemplazadorDeNombres\\RemplazadorDeNombres.csproj
+		SccProjectName6 = RemplazadorDeNombres
+		SccLocalPath6 = RemplazadorDeNombres
+		SccProjectUniqueName7 = ManejadorDeMapa.Consola\\ManejadorDeMapa.Consola.csproj
+		SccProjectName7 = ManejadorDeMapa.Consola
+		SccLocalPath7 = ManejadorDeMapa.Consola
+		SccProjectUniqueName8 = ArregladorDeMapasTopográficos\\ArregladorDeMapasTopográficos.csproj
+		SccProjectName8 = ArregladorDeMapasTopográficos
+		SccLocalPath8 = ArregladorDeMapasTopográficos
 	EndGlobalSection
 EndGlobal

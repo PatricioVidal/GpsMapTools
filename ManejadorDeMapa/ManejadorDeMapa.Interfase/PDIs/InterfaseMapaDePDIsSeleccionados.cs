@@ -1,5 +1,5 @@
-﻿#region Copyright (c) 2008 GPS_YV (http://www.gpsyv.net)
-// (For English, see further down.)
+﻿#region Copyright (c) Patricio Vidal (http://www.gpsyv.net)
+// (For English scroll down.)
 //
 // GpsYv.ManejadorDeMapa es una aplicación para manejar Mapas de GPS en el
 // formato Polish (.mp).  Esta escrito en C# usando el .NET Framework 3.5. 
@@ -11,12 +11,12 @@
 // individuos que hacen mapas, y también para promover la colaboración 
 // con este proyecto.
 //
-// Visita http://www.codeplex.com/GPSYVManejadorDeMapa para más información.
+// Visita https://github.com/PatricioVidal/GpsMapTools para más información.
 //
 // La lógica de este programa se ha desarrollado con las ideas de los miembros
 // del grupo GPS_YV. 
 //
-// Programador: Patricio Vidal (PatricioV2@hotmail.com)
+// Autor: Patricio Vidal.
 //
 // Este programa es software libre. Puede redistribuirlo y/o modificarlo
 // bajo los términos de la Licencia Pública General de GNU según es publicada
@@ -46,12 +46,12 @@
 // be useful for other groups or individuals that create maps, and 
 // also to promote the collaboration with this project.
 //
-// Visit http://www.codeplex.com/GPSYVManejadorDeMapa for more information.
+// Visit https://github.com/PatricioVidal/GpsMapTools for more information.
 //
 // The logic of this program has been develop with ideas of the members
 // of the GPS_YV group.
 //
-// Programmer: Patricio Vidal (PatricioV2@hotmail.com)
+// Author: Patricio Vidal.
 //
 //
 // This program is free software; you can redistribute it and/or modify
@@ -69,33 +69,26 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Collections;
-using GpsYv.ManejadorDeMapa.PDIs;
+using GpsYv.ManejadorDeMapa.Pdis;
 
-namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
+namespace GpsYv.ManejadorDeMapa.Interfase.Pdis
 {
   /// <summary>
   /// Interfase Mapa de PDIs seleccionados.
   /// </summary>
-  public partial class InterfaseMapaDePDIsSeleccionados : InterfaseMapaDeElementosSeleccionados
+  public partial class InterfaseMapaDePdisSeleccionados : InterfaseMapaDeElementosSeleccionados
   {
     #region Campos
-    private Brush miPincelDePDI = new SolidBrush(Color.Yellow);
+    private readonly Brush miPincelDePdi = new SolidBrush(Color.Yellow);
     #endregion
 
     #region Constructor
     /// <summary>
     /// Constructor.
     /// </summary>
-    public InterfaseMapaDePDIsSeleccionados()
+    public InterfaseMapaDePdisSeleccionados()
     {
       InitializeComponent();
     }
@@ -108,13 +101,13 @@ namespace GpsYv.ManejadorDeMapa.Interfase.PDIs
     /// <param name="losElementos">Los elementos seleccionados.</param>
     protected override void DibujaObjectosAdicionales(IList<ElementoDelMapa> losElementos)
     {
-      // Dibuja la vías como polilíneas adicional para resaltarlas.
+      // Dibuja los PDI seleccionados como puntos adicionales para resaltarlos.
       PuntosAddicionales.Clear();
-      foreach (PDI pdi in losElementos)
+      foreach (Pdi pdi in losElementos)
       {
         // Dibuja los PDIs como PDIs adicionales para resaltarlos.
         PuntosAddicionales.Add(
-          new InterfaseMapa.PuntoAdicional(pdi.Coordenadas, miPincelDePDI, 13));
+          new PuntoAdicional(pdi.Coordenadas, miPincelDePdi, 13));
       }
     }
     #endregion
