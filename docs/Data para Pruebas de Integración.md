@@ -1,3 +1,3 @@
-[English](Data-for-Integration-Tests)
+[English](Data-for-Integration-Tests.md)
 
-Para obtener la data para las pruebas automáticas de integración, por favor contacta a [Patricio Vidal](http://www.codeplex.com/UserAccount/ContactUser.aspx?ContactUser=PatricioVidal) o algún [otro coordinador](http://www.codeplex.com/GPSYVManejadorDeMapa/People/ProjectPeople.aspx).
+Para obtener la data para las pruebas automáticas de integración, por favor contacta a [Patricio Vidal](https://github.com/PatricioVidal).

@@ -7,7 +7,7 @@
 * Buscar y corregir PDIs con errores: tipos desconocidos, sin coordenadas en el nivel 0, etc.
 * Buscar y corregir Vías con Parámetros de Ruta no estándar
 * Buscar y corregir Vías con errores: con una o cero coordenadas, sin coordenadas en el nivel 0, etc.
-[Manual del Usuario del ManejadorDeMapa](Manual-del-Usuario-del-ManejadorDeMapa).
+[Manual del Usuario del ManejadorDeMapa](Manual-del-Usuario-del-ManejadorDeMapa.md).
 
 **ManejadorDeMapa** esta escrito en C# usando el .NET Framework 3.5.
 

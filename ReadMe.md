@@ -1,4 +1,4 @@
-[Español](docs/Home)
+[Español](docs/Home.md)
 
 **ManejadorDeMapa (GPS Map Manager)** is an application to verify, validate, and fix GPS Maps in **Polish** format (.mp). For now it allows to:
 * Eliminate invalid characters in Points of Interests (POIs) names
@@ -14,7 +14,7 @@ The Polish format is documented in the [cGPSmapper Manual](http://www.cgpsmapper
 
 This application was born by the need of the GPS Group of Venezuela ([GPS_YV](http://www.gpsyv.net/)) to analyze and fix the maps [GPS_YV generates](http://www.gpsve.net) for the community.  GpsYv.ManejadorDeMapa is distributed under the [GPL](http://www.codeplex.com/GPSYVManejadorDeMapa/license) license with the purpose that it could be useful for other groups or individuals that create maps, and also to promote the collaboration with this project.
 
-If you wish to contribute go to [Configuration for Contributors](Configuration-for-Contributors).
+If you wish to contribute go to [Configuration for Contributors](docs/Configuration-for-Contributors.md).
 
 #### Main GUI
 ![Main Interface](docs/English_InterfacePrincipal.png)

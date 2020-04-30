@@ -1,4 +1,4 @@
-[Español](Configuración-para-Colaboradores)
+[Español](Configuración-para-Colaboradores.md)
 
 **CodePlex** is based on Microsoft Team Foundation Server (TFS), therefore it works better with  **Visual Studio 2008** Standard, Professional, or any of the Team System versions (but it does not work with Visual C# 2008 Express).  If you already have one of these Visual Studio 2008 version then:
 * Install [Team Explorer 2008](http://www.codeplex.com/CodePlex/Wiki/View.aspx?titleObtaining%20the%20Team%20Explorer%20Client) and configure it with the information [here](http://www.codeplex.com/GPSYVManejadorDeMapa/SourceControl/ListDownloadableCommits.aspx).
@@ -20,4 +20,4 @@ It is also possible to use Visual C# 2008 Express, but it is very limited compar
 * To have the Source Control commands available within the IDE you can try [this](http://garrys-brain.blogspot.com/2007/07/tortoisesvn-and-visual-studio.html). **NOTA**: I tried and it worked in Visual Studio 2008 Professional, but I'm not sure that it will work with Visual C# 2008 Express because the author had an specific version for [Visual C++/C# 2005 Express](http://garrys-brain.blogspot.com/2006/10/tortoisesvn-vsnet-2005-good-stuff.html) and there is only one version for 2008.
 
 
-To run the automated Integration Tests you have to download the [Data for Integration Tests](Data-for-Integration-Tests).
+To run the automated Integration Tests you have to download the [Data for Integration Tests](Data-for-Integration-Tests.md).
