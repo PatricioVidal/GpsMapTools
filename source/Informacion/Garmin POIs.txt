@@ -1,0 +1,193 @@
+http://cricri-blog.blogspot.com/2006/06/code-objets-garmin-poi.html
+
+POI
+City1 - Large City ...........0x01 .....Dining(American) .......0x2a01
+Namedpoint (big) .............0x0100 ...Dining(Asian) ..........0x2a02
+City2 - Large City ...........0x02 .....Dining(Barbecue) .......0x2a03
+City3 - Large City ...........0x03 .....Dining(Chinese) ........0x2a04
+City4 - Large City ...........0x04 .....Dining(Deli/Bakery) ....0x2a05
+City5 - Large City ...........0x05 .....Dining(International) ..0x2a06
+City6 - Large City ...........0x06 .....Fast Food ..............0x2a07
+Namedpoint (big point) .......0x0600 ...Dining(Italian) ........0x2a08
+City7 - Medium City ..........0x07 .....Dining(Mexican) ........0x2a09
+City8 - Medium City ..........0x08 .....Dining(Pizza) ..........0x2a0a
+City9 - Small City ...........0x09 .....Dining(Sea Food) .......0x2a0b
+City10 - Small City ..........0x0a .....Dining(Steak/Grill) ....0x2a0c
+City11 - Small City ..........0x0b .....Dining(Bagel/Donut) ....0x2a0d
+Namedpoint (small point) .....0x0b00 ...Dining(Cafe/Diner) .....0x2a0e
+City12 - Small Town ..........0x0c .....Dining(French) .........0x2a0f
+Namedpoint (small point) .....0x0c00 ...Dining(German) .........0x2a10
+City13 - Unknown City ........0x0d .....Dining(British Isle) ...0x2a11
+Namedpoint (small point) .....0x0d00 ...Hotel(Other) ...........0x2b00
+* ............................0x0e .....Hotel/Motel ............0x2b01
+Namedpoint (big point) .......0x0e00 ...Breakfast inn ..........0x2b02
+* ............................0x0f .....Camping/RV-Park ........0x2b03
+* ............................0x10 .....Resort .................0x2b04
+* ............................0x11 .....Amusment Park ..........0x2c01
+Info(not vis) ................0x12 .....Museum/History .........0x2c02
+* ............................0x13 .....Libraries ..............0x2c03
+Region name ..................0x14 .....Land Mark ..............0x2c04
+Namedpoint (big) .............0x1400 ...School .................0x2c05
+Region name ..................0x15 .....Park ...................0x2c06
+Navaid .......................0x16 .....Zoo ....................0x2c07
+Fog Horn .....................0x1601 ...Sportcenter,Stadion.....0x2c08
+Radio Beacon .................0x1602 ...Conference .............0x2c09
+Racon ........................0x1603 ...Vine ...................0x2c0a
+Daybeacon,red Triangle .......0x1604 ...Theatre ................0x2d01
+Daybeacon,green Square .......0x1605 ...Bar ....................0x2d02
+Daybeacon,white Diamond ......0x1606 ...Cinema .................0x2d03
+unlit Navaid,white ...........0x1607 ...Casino .................0x2d04
+unlit Navaid,red .............0x1608 ...Golf ...................0x2d05
+unlit Navaid,green ...........0x1609 ...Skiing Center ..........0x2d06
+unlit Navaid,black ...........0x160a ...Bowling ................0x2d07
+unlit Navaid,yellow or amber .0x160b ...Ice-Skate ..............0x2d08
+unlit Navaid,orange ..........0x160c ...Swimming ...............0x2d09
+unlit Navaid,multi colored ...0x160d ...Sports .................0x2d0a
+Navaid,unknown ...............0x160e ...Sport Airport ..........0x2d0b
+lighted Navaid,white .........0x160f ...Department Store .......0x2e01
+lighted Navaid,red ...........0x1610 ...Grocery ................0x2e02
+lighted Navaid,green .........0x1611 ...General Merchandiser ...0x2e03
+lighted Navaid,yellow / amber 0x1612 ...Shopping-Center ........0x2e04
+lighted Navaid,orange ........0x1613 ...Pharmacie ..............0x2e05
+lighted Navaid,violet ........0x1614 ...Convinienc .............0x2e06
+lighted Navaid,blue ..........0x1615 ...Special ................0x2f
+lighted Navaid,milti colored .0x1616 ...Petrol .................0x2f01
+Navaid .......................0x17 .....Auto Rental ............0x2f02
+Fog Horn .....................0x1701 ...Auto Repair ............0x2f03
+Radio Beacon .................0x1702 ...Airport ................0x2f04
+Racon ........................0x1703 ...Post Office ............0x2f05
+Daybeacon,red Triangle .......0x1704 ...Bank ...................0x2f06
+Daybeacon,green Square .......0x1705 ...Autohandel .............0x2f07
+Daybeacon,white Diamond ......0x1706 ...Bus Station ............0x2f08
+unlit Navaid,white ...........0x1707 ...Marina .................0x2f09
+unlit Navaid,red .............0x1708 ...Wrecker Service........ 0x2f0a
+unlit Navaid,green ...........0x1709 ...Parking ................0x2f0b
+unlit Navaid,black ...........0x170a ...Restroom ...............0x2f0c
+unlit Navaid,yellow or amber .0x170b ...Automobil Club .........0x2f0d
+unlit Navaid,orange ..........0x170c ...Car Wash............... 0x2f0e
+unlit Navaid,multi colored ...0x170d ...Policestation ..........0x3001
+Navaid,unknown ...............0x170e ...Hospital ...............0x3002
+lighted Navaid,white .........0x170f ...Public Office ..........0x3003
+lighted Navaid,red ...........0x1710 ...Court ..................0x3004
+lighted Navaid,green .........0x1711 ...Disco.................. 0x3005
+lighted Navaid,yellow / amber 0x1712 ...Zoll ...................0x3006
+lighted Navaid,orange ........0x1713 ...Golf ...................0x4000
+lighted Navaid,violet ........0x1714 ...Fish ...................0x41
+lighted Navaid,blue ..........0x1715 ...Fish ...................0x4100
+lighted Navaid,milti colored .0x1716 ...Wreck ..................0x42
+Navaid .......................0x18 .....Wreck ..................0x4200
+Fog Horn .....................0x1801 ...Marina .................0x43
+Radio Beacon .................0x1802 ...Marina .................0x4300
+Racon ........................0x1803 ...Fuel ...................0x44
+Daybeacon,red Triangle .......0x1804 ...Gas Station ............0x4400
+Daybeacon,green Square .......0x1805 ...Restaurant .............0x4500
+Daybeacon,white Diamond ......0x1806 ...Bar ....................0x4600
+unlit Navaid,white ...........0x1807 ...Ramp ...................0x47
+unlit Navaid,red .............0x1808 ...Boat Ramp ..............0x4700
+unlit Navaid,green ...........0x1809 ...Campground .............0x48
+unlit Navaid,black ...........0x180a ...Camping ................0x4800
+unlit Navaid,yellow or amber .0x180b ...Park ...................0x49
+unlit Navaid,orange ..........0x180c ...Park ...................0x4900
+unlit Navaid,multi colored ...0x180d ...Picnic Area ............0x4a
+Navaid,unknown ...............0x180e ...Picnic Area ............0x4a00
+lighted Navaid,white .........0x180f ...First Aid ..............0x4b
+lighted Navaid,red ...........0x1810 ...Hospital ...............0x4b00
+lighted Navaid,green .........0x1811 ...Information ............0x4c
+lighted Navaid,orange ........0x1813 ...Information ............0x4c00
+lighted Navaid,violet ........0x1814 ...Parking ................0x4d00
+lighted Navaid,blue ..........0x1815 ...Restroom ...............0x4e
+lighted Navaid,milti colored .0x1816 ...Restroom ...............0x4e00
+Navaid .......................0x19 .....Showers ................0x4f
+Fog Horn .....................0x1901 ...Shower .................0x4f00
+Radio Beacon .................0x1902 ...Drinking Water .........0x50
+Racon ........................0x1903 ...Drinking Water .........0x5000
+Daybeacon,red Triangle .......0x1904 ...Telephone ..............0x51
+Daybeacon,green Square .......0x1905 ...Telephone ..............0x5100
+Daybeacon,white Diamond ......0x1906 ...Sceneic Area ...........0x52
+unlit Navaid,white ...........0x1907 ...Scenic Area ............0x5200
+unlit Navaid,red .............0x1908 ...Skiing .................0x53
+unlit Navaid,green ...........0x1909 ...Skiing .................0x5300
+unlit Navaid,black ...........0x190a ...Swimming ...............0x54
+unlit Navaid,yellow or amber .0x190b ...Swimming ...............0x5400
+unlit Navaid,orange ..........0x190c ...Dam ....................0x55
+unlit Navaid,multi colored ...0x190d ...Dam ....................0x5500
+Navaid,unknown ...............0x190e ...Danger Area ............0x57
+lighted Navaid,white .........0x190f ...Danger Area ............0x5700
+lighted Navaid,red ...........0x1910 ...Airport ................0x59
+lighted Navaid,green .........0x1911 ...Airport ................0x5900
+lighted Navaid,yellow / amber 0x1912 ...Heliport ...............0x5904
+lighted Navaid,yellow / amber 0x1912 ...Airport ................0x5905
+lighted Navaid,orange ........0x1913 ...Daymark, Green Square ..0x5d
+lighted Navaid,violet ........0x1914 ...Daymark,Green Square ...0x5d00
+lighted Navaid,blue ..........0x1915 ...Daymark, Red Triangle ..0x5e
+lighted Navaid,milti colored .0x1916 ...Daymark,Red Triangle ...0x5e00
+Navaid .......................0x1a .....(height point [feet]) ..0x62
+Fog Horn .....................0x1a01 ...(height point [feet]) ..0x63
+Radio Beacon .................0x1a02 ...(blue point) ...........0x64
+Racon ........................0x1a03 ...Bridge .................0x6401
+Daybeacon,red Triangle .......0x1a04 ...Building ...............0x6402
+Daybeacon,green Square .......0x1a05 ...Cemetery ...............0x6403
+Daybeacon,white Diamond ......0x1a06 ...Church .................0x6404
+unlit Navaid,white ...........0x1a07 ...Civil ..................0x6405
+unlit Navaid,red .............0x1a08 ...Crossing ...............0x6406
+unlit Navaid,green ...........0x1a09 ...Dam ....................0x6407
+unlit Navaid,black ...........0x1a0a ...Hospital ...............0x6408
+unlit Navaid,yellow or amber .0x1a0b ...Levee ..................0x6409
+unlit Navaid,orange ..........0x1a0c ...Locale .................0x640a
+unlit Navaid,multi colored ...0x1a0d ...Military ...............0x640b
+Navaid,unknown ...............0x1a0e ...Mine ...................0x640c
+lighted Navaid,white .........0x1a0f ...Oil Field ..............0x640d
+lighted Navaid,red ...........0x1a10 ...Park ...................0x640e
+lighted Navaid,green .........0x1a11 ...Post ...................0x640f
+lighted Navaid,yellow / amber 0x1a12 ...School .................0x6410
+lighted Navaid,orange ........0x1a13 ...Tower ..................0x6411
+lighted Navaid,violet ........0x1a14 ...Trial ..................0x6412
+lighted Navaid,blue ..........0x1a15 ...Tunnel .................0x6413
+lighted Navaid,milti colored .0x1a16 ...Drinking Water .........0x6414
+Fog Horn .....................0x1b01 ...Ghost Town .............0x6415
+Radio Beacon .................0x1b02 ...Subdivision ............0x6416
+Racon ........................0x1b03 ...(blue point) ...........0x65
+Daybeacon,red Triangle .......0x1b04 ...Arroyo .................0x6501
+Daybeacon,green Square .......0x1b05 ...Sand Bar ...............0x6502
+Daybeacon,white Diamond ......0x1b06 ...Bay ....................0x6503
+unlit Navaid,white ...........0x1b07 ...Bend ...................0x6504
+unlit Navaid,red .............0x1b08 ...Canal ..................0x6505
+unlit Navaid,green ...........0x1b09 ...Channel ................0x6506
+unlit Navaid,black ...........0x1b0a ...Cove ...................0x6507
+unlit Navaid,yellow or amber .0x1b0b ...Falls ..................0x6508
+unlit Navaid,orange ..........0x1b0c ...Geyser .................0x6509
+unlit Navaid,multi colored ...0x1b0d ...Glacier ................0x650a
+Navaid,unknown ...............0x1b0e ...Harbor .................0x650b
+lighted Navaid,white .........0x1b0f ...Island .................0x650c
+lighted Navaid,red ...........0x1b10 ...Lake ...................0x650d
+lighted Navaid,green .........0x1b11 ...Rapids .................0x650e
+lighted Navaid,yellow / amber 0x1b12 ...Reservoir ..............0x650f
+lighted Navaid,orange ........0x1b13 ...Sea ....................0x6510
+lighted Navaid,violet ........0x1b14 ...Spring .................0x6511
+lighted Navaid,blue ..........0x1b15 ...Stream .................0x6512
+lighted Navaid,milti colored .0x1b16 ...Swamp ..................0x6513
+Unclasified Obstruction ......0x1c00 ...(blue point) ...........0x66
+Wreck ........................0x1c01 ...Arch ...................0x6601
+submerged Wreck,dangerous ....0x1c02 ...Area ...................0x6602
+submerged Wreck,non-dangerous 0x1c03 ...Basin ..................0x6603
+Wreck,cleared by Wire-drag ...0x1c04 ...Beach ..................0x6604
+Obstr.,visible at high Water .0x1c05 ...Beach ..................0x6605
+Obstruction,awash ............0x1c06 ...Cape ...................0x6606
+Obstruction,submerged ........0x1c07 ...Cliff ..................0x6607
+Obstr.,cleared by Wire-drag ..0x1c08 ...Crater .................0x6608
+Rock,awash ...................0x1c09 ...Flat ...................0x6609
+Rock,submerged at low Water ..0x1c0a ...Forest .................0x660a
+Sounding .....................0x1c0b ...Gap ....................0x660b
+Tide .........................0x1d .....Gut ....................0x660c
+Namedpoint (middle) ..........0x1e00 ...Isthmus ................0x660d
+Exit .........................0x20 .....Lava ...................0x660e
+Exit with facilities .........0x2100 ...Pillar .................0x660f
+Exit(Restroom) ...............0x22 .....Plain ..................0x6610
+Exit(Convenience Store) ......0x23 .....Range ..................0x6611
+Exit(Weigh Station) ..........0x24 .....Reserve ................0x6612
+Exit(Toll Booth) .............0x25 .....Ridge ..................0x6613
+Exit(Information) ............0x26 .....Rock ...................0x6614
+Exit .........................0x27 .....Slope ..................0x6615
+Namedpoint (small point) .....0x2800... Summit .................0x6616
+Dining(Other) ................0x2a .....Valley .................0x6617
+........................................Woods ..................0x6618

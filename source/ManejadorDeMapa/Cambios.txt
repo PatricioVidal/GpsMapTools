@@ -1,0 +1,329 @@
+Version 1.38
+- Añadida la funcionalidad "Herramientas->RemplazadorDeNombre de Vías".
+- Añadida la funcionalidad "Herramientas->Preferencias del Usuario".
+- Actualizado el ManejadorDeMapa.Consola para que imprima las estadísticas correctas.
+
+Version 1.37
+- Añadido al Arreglador de Vías el arreglo automático de calles en un solo sentido.
+- Actualizaciónes menores a los archivos con listas.
+- Removido el tipo 0x2e00 (Shopping)/Centro Comercial) de la lista de características the PDIs.
+- Actualizado el código para internacionalizar la interfase.
+- Desabilitado la búsqueda de PDIs y Vías fuera de límites.
+
+Versión 1.36
+- Añadido el manejo de Estados.  Polígonos tipo 0x4a son considerados Estados.
+- Actualizada la lista de tipos de vías.
+- Arreglada secuencia del arreglador general de PDIs. Ahora se eliminan los carácteres inválidos antes de arreglar las palabras por tipo.
+- Actualizado para manejar correctamente elementos con tipo 0x0.
+- Arreglada la lógica de búsqueda de errores en vías para que utilice la lista de Tipos de Vías para validación.
+- Añadido el menu de contexto de PDIs a la interfase de PDIs duplicados.
+- Arreglada lógica del dibujo de las escala del mapa para que no falle cuando hay un solo PDI en el mapa.
+- Actualizada la lista de Calificativos de Vías, Características de Polígonos, y Corrección de Palabras por Tipo.
+- Añadida la opción para "Ignorar Cambios Bruscos en la Clase de Ruta" en la pestaña de "Posibles Errores de Ruteo".
+- Creado los Arregladores Generales de PDIs y Vías para consolidar funciones.
+- Creados etiquetas para los mensajes, alertas y errores (menú Ayuda->Etiquetas).  
+- Añadido menú Ayuda->Licencia.  
+
+Versión 1.35
+- Actualizada Lista de Corrección de Palabras por Tipo de PDI.
+- Actualizado para no remover el índice de ciudad de los PDI de ciudades.
+- Arreglado límite superior de la barra de selección del parecido del nombre para la búsqueda de PDIs duplicados.
+- Interno: Restructurado el código para simplificar la lógica de manejo de los campos de nodos ruteables.
+
+Versión 1.34
+- Arreglada lógica para evitar confundir el nombre secundario con el nombre del elemento.
+- ArregladorDeMapasTopográficos: Añadido la eliminación de polilíneas sin data0, y polígonos.
+
+Versión 1.33
+- Arreglado el Instalador para que incluya el archivo csv que faltaba.
+
+Versión 1.32
+- Creado programa ArregladorDeMapasTopográficos.
+- Añadido el arreglo de nombres de vías, incluyendo el nombre secundario (Label2).
+- Removida la validación de velocidad de la lógica de Posibles Errores de Ruteo.
+- Interno: Añadido número al Campo Nombre.
+- Interno: Restructurado el código.
+- Interno: Añadido el concepto de "ruteable" a la clase Nodo. La clase Vía ahora tiene un vector de Nodos. Cambiada la lógica de las otras clases para usar los Nodos de la clase Vía.
+- Interno: Cambios menores del diseño.
+- Interno: Corrección de errores ortográficos.
+- Interno: Actualizadas las pruebas de integración.
+
+Versión 1.31
+- Añadido el procesamiento "ProcesarTodo" a la versión de Consola.
+- Mejorado los mensajes de errores al leer un archivo .mp.
+
+Versión 1.30
+- Creada versión de consola (ManejadorDeMapa.Consola.exe):
+    Usage: ManejadorDeMapa.Consola.exe [@argfile] [/de:<directorio>]
+           [/ds:<directorio>] [/p:<procesamiento>] [/help|?|h] [/version|v]
+    @argfile            Read arguments from a file.
+    /de <directorio>    Directorio de Entrada.
+    /ds <directorio>    Directorio de Salida.
+    /p <procesamiento>  Procesamientos: 'ArreglaIndices'.
+    /help               Show usage.
+    /version            Show version.
+  Por ahora el único procesamiento que está implementado es 'ArreglaIndices'.
+  Ejemplo: ManejadorDeMapa.Consola.exe /de:"U:\Data\" /ds:"U:\Data\Procesados" /p:ArreglaIndices
+- Actualizado "MAC DONALD'S" en la tabla de corrección de palabras en nombres de PDIs.
+- Interno: Optimizada la clase Coordenadas para mejorar velocidad de búsqueda de nodos desconectados. Optimizados todas las implementaciones del método Equals().
+
+Versión 1.29
+- Añadido botón para actualizar la lista en la página de Posibles Nodos Desconectados. Este botón actualiza la lista de posibles nodos desconectados pero solamente usando las vías que están en la lista. Esto hace el proceso mucho mas rápido.
+- Interno: Creada clase Nodo.
+
+Versión 1.28
+- Ahora se muestran en detalle los nodos de las vías seleccionadas en la página de Posibles Nodos Desconectados.
+- Ahora cuando se edita un Nodo Desconectado en mapa se actualiza correctamente.
+- Ahora cuando de marca un nodo como "Desconectado" también se marca de color verde en la lista para que el usuario sepa que se editó el nodo.
+
+Versión 1.27
+- Mejorada la lógica de detección de nodos desconectados:
+    - Se mejoró la lógica para que no se detectaran como nodo desconectados aquellos casos cuando hay dos nodos cercanos sin conectar pero las vía si está conectada en el nodo siguiente. 
+    - Cuando se usa el menú de "Conectar Nodos Desconectados" la lógica ahora chequea que no se vaya a poner un nodo sobrepuesto.  En ese caso se muestra un mensaje al usuario y no se hace la conección.
+    - Cuando dos nodos ruteables coinciden ahora se chequea que el Identificador Global de los nodos sea igual.
+    - Se mejoró la visualizacón del mapa de manera que no haya un "brinco" cuando se seleccionan los nodos desconectados en la lista.
+    - Ahora cuando se conectan los nodos se marcan de color verde en la lista para que el usuario sepa cuales a editado.
+ 
+Versión 1.26
+- Ahora los Indices de Ciudad de PDIs y Vías que están fuera de ciudades son eliminados.
+- Arreglado error que borraba la información de Parámetros de Ruta de las Vías.
+
+Versión 1.25
+- Creada la lógica de los menús de "Conectar Nodos Desconectados" y "Marcar Nodos como Desconectados" en la página de Posibles Nodos Desconectados.  El menú de "Conectar Nodos Desconectados" no se debe usar cuando la vía ya tiene un nodo conectado al nodo destino porque entonces la vía tendría dos nodos sobrepuestos.
+- Añadidos mapas a las páginas de PDIs. 
+- Añadido al mapa el nombre de los polígonos de ciudades. 
+
+Versión 1.24
+- Implementado el menú para el arreglo del índice de ciudad de las Vías.
+
+Versión 1.23
+- Implementado el menú para el arreglo del índice de ciudad de los PDIs.
+
+Versión 1.22
+- Ahora la vía que aparece en la lista de posibles nodos desconectados es la vía que tiene el nodo en cuestión.
+- Ahora los PDIs de localización de vía se colocan en la coordenada central de la vía.
+
+Versión 1.21
+- Arreglado error cuando las vías tienen coordenadas a varios niveles.
+
+Versión 1.20
+- Añadido menú de "Guardar archivo de PDIs para localización de Nodos Desconectados". 
+- Añadido un botón que permite parar el procesamiento cuando éste se pone muy largo.
+- Ahora se persiste el estado Maximizado de la Ventana entre sesiones.
+- Actualizada lista de corrección de nombres de PDIS.
+- Interno: Añadida lógica para evitar procesar en paralelo. 
+
+Versión 1.19
+- Mejorada la lógica y la velocidad de detección de posibles nodos desconectados. 
+- Arreglado error que causaba que los menús de edición no funcionaran. 
+- Interno: Eliminado Post Build Event que no era necesitado. 
+
+Versión 1.18
+- Añadido módulo de detección de posibles nodos de Vías desconectados. La lógica y la velocidad de procesamiento necesita mejorarse. 
+- Eliminada la Ñ de las letras a remplazar. 
+- Añadida "RESID" a la tabla de remplazo de palabras. 
+- Interno: Actualizado el código de acuerdo a las reglas estándares de Microsoft y ReSharper. 
+- Interno: Movidas las Interfases a su propio proyecto. 
+
+Versión 1.17
+- Añadida la funcionalidad de excluir Vías de la búsqueda de Parámetros de Ruta Estándar.
+- Añadida columna de detalles en la página de Vías modificadas.
+
+Versión 1.16
+- Arreglado el error al dibujar en el Mapa Vías con una sola coordenada.
+- Arreglado el error que dejaba dibujadas en el Mapa las Vías seleccionas del mapa anterior.
+- Extendida la lógica de búsqueda de errores en Vías para detectar Vías con un solo par de coordenadas.
+- Añadido menú para eliminar Vías manualmente.
+- Añadida interfase de Vías Eliminadas.
+- Añadida la opción para buscar posibles errores de ruteo en Vías.  La lógica tiene que actualizarse porque por ahora detecta muchs errores falsos.
+
+Versión 1.15
+- Ahora se maneja correctamente las vías sin Campo de Parámetros de Ruta definido.
+- Arreglado problema de no mantener los otros parámetros de ruta al poner las Vías con Parámetros de Ruta estandar.
+- Añadida actualización automática de los Parámetros de Ruta para las Vías tipo Caminería (0x16).
+- Actualizada la tabla de Parámetros de Ruta.
+- Ahora la búsqueda de Vías con incongruencias se hace de forma exacta, es decir, sin permitir una diferencia de +-1 en el Límite de Velocidad o la Clase de Ruta.
+- Interno: Extendida las Pruebas de la clase Vía para duplicar el problema en el que los Parámetros de Ruta no mantienen los elementos despues del tercer elemento cuando se cambia el Límite de Velocidad o la Clase de Ruta.
+
+Versión 1.14
+- Arreglado el error cuando hay líneas en blanco dentro de un elemento en el archivo .mp.
+- Arreglada la lógica de búsqueda de Vías con incongruencias.
+
+Versión 1.13
+- Extendido el menú de editar Vías para poder cambiar el Límite de Velocidad y la Clase de Ruta a los valores estándares.
+- Cambiada la lógica de la ventana de confirmación de duplicados a borrar para evitar el problema gráfico en los casos de muchos duplicados.
+- Interno: Mejorado el tiempo de respuesta al seleccionar múltiple Vías en la Interfase de Vías con Incongruencias.
+
+Versión 1.12
+- Añadida regla de restricción del Límite de Velocidad y Clase de Ruta en incongruencias de Vías.
+- Extendida la lista de palabras a corregir en los nombres de PDIs.
+- Interno: Re-structurado para incrementar re-uso, evitar interfases planas, etc. 
+- Interno: Creados diagramas de clases. 
+- Interno: Creado un diseñador para los controles compuestos. 
+
+Versión 1.11
+- Ahora la búsqueda de posibles PDIs duplicados se hace con el Tipo Principal (primer byte) en vez de con el Tipo Completo.
+- Ahora las Vías con incongruencias están agrupadas, y los posibles errores son resaltados. 
+- Arreglada función de Guardar archivo.
+- Interno: Ahora el Tipo es procesado como Tipo-Principal y Sub-Tipo.
+- Interno: Añadida prueba automática para la clase EscritorDeFormatoPolish.
+
+Versión 1.10
+- Se comenzó la implementación de la busqueda de vías con incongruencias (diferencia del "límite de velocidad" o "clase de ruta" > 2).
+
+Versión 1.9
+- Añadido menú de contexto en la página de errores de vías para: 1) cambiar vías a nivel 0, y 2) guardar un archivo con PDIs para localizar las vías.
+- Añadidos indicadores visuales en las pestañas para indicar elementos modificados y con errores.
+- Interno: Ahora se usan eventos para las páginas de pestañas.
+- Interno: Añadida documentación faltante de métodos. 
+- Interno: Creada clase base para los mapas con elementos seleccionados. 
+
+Versión 1.8
+- Se actualizó la lista de PDIs conocidos.
+- Ahora se permite cambiar el tipo de PDI en selección múltiple.
+- Añadida la Interfase para el manejo de Vías.
+- Se reestructuro el menú de PDIs para incluir el nuevo menú de Vías.
+- Todas las listas permiten ordenarse por columna al clic en el encabezado. Con cada clic se cambia el ordenamiento de ascendiente a descendiente y viceversa.
+- Ahora las listas que tiene mapas visualizan todos los elementos en selección múltiple.
+- Interno: Reestructurado el código para mejorar re-uso y evitar repetición de código.
+- Interno: Creada la estructura para el manejo de vías.
+- Interno: Creada clase base para listas de elementos.
+
+Versión 1.7
+- Arreglada la forma que el campo de Tipo (Type) es escrito en los archivos.
+- Implementada la lógica para guardar archivos con los cambios hechos a los elementos.  Ahora al grabar el mapa se crean archivos con los elementos eliminados, modificados, y errores.
+- Añadido menú para aceptar las modificaciones a los elementos del mapa. Elementos marcados como eliminados son eliminados definitivamente. Elementos modificados son re-inicializados borrando el estado de modificados.  Las listas de errores y duplicados son borradas.
+- Interno: Actualizadas las Pruebas de Ventana de Cambio de Tipo para tener 100% de cobertura.
+- Interno: Cambiado "TipoVacio" a "TipoNulo".
+
+Versión 1.6
+- Arreglada la lógica en la Ventana de Cambiar Tipo de PDI.
+- Cambiado "Símbolo" a "Caracter".
+- Interno: Movido todo lo relacionado a PDIs al namespace PDIs.
+- Interno: Añadidas pruebas para la Ventana de Cambiar Tipo de PDI.
+
+Version 1.5
+- Añadida la opción para Eliminar Símbolos Inválidos en los nombres de PDIs. 
+- Ahora las listas de PDIs Eliminados, Modificados, y Errores se pueden ordenar por columna cuando el usuario click en los títulos.
+- Extendida la lista de PDIs conocidos.
+- Ahora la configuración de la búsqueda de duplicados se mantiene de una sesion a la otra.
+- Se movieron los archivos csv relacionados a PDIs al directorio PDIs.
+- Se renombraron algunos archivos csv para que tuvieran un nombre mas claro.
+- Añadida la licencia al código fuente.
+
+Version 1.4
+- Creado el instalador.
+- Añadido el ícono de la aplicación con el gráfico de GPS_YV.
+
+Versión 1.3
+- Añadida escala al mapa.
+- Evita que el acercamiento del mapa sea < 1m, y que el alejamiento del mapa sea > 500km.
+- Actualizados la lista de PDIs válidos.
+- Actualizada la lista de corrección de palabras por tipo de PDI.
+
+Version 1.2
+- Corregida y actualizada la lógica para cambiar el Tipo de PDI.
+
+Version 1.1
+- Añadida la opción para cambiar el tipo de PDI en la Interfase de Errores.
+- Arreglada la lógica de correción de palabras por tipo.
+- Ahora se lista el tipo de modificación.
+- Creada clase Tipo.
+
+Versión 1.0
+- Ahora se maneja correctamente PDIs con coordenadas a niveles distinto de 0 (pero se reporta en los errores de PDIs).
+- Arreglada la lógica de detección de errores en PDIs para evitar excepciones cuando un mismo PDI tiene varios errores a la vez.
+- Actualizadas las características de polilíneas y PDIs.
+
+  Estadísticas de PDIs:
+       Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
+    "58090.mp",  1713,          58,         19,          2,      19
+    "58170.mp",  6837,          82,          8,        189,       1
+    "58220.mp",  6460,         408,         30,         58,      28
+    "58370.mp",  1808,          14,         46,          8,       2
+    "58460.mp",   980,          17,        151,          4,       0
+
+Versión 0.9
+- Se implementó la lectura correcta del formato con RGN10/20/40/80.
+- Se consolidó las descripciones de PDIs.
+
+  Estadísticas de PDIs:
+       Archivo, Todos, Modificados, Duplicados, Eliminados, Errores
+    "58170.mp",  6837,          82,          8,        189,       0
+    "58220.mp",  6460,         408,         30,         58,       7
+    "58370.mp",  1808,          14,         46,          8,      12
+
+Versión 0.8
+- Cambio de nombre a "ManejadorDeMapa".
+- Extendida la lógica del Buscador de Duplicados para encontrar nombres similares y siglas.
+- Implementada lógica para variar los parámetros de búsqueda de duplicados.
+- Cambiado el "Arreglador de Prefijos" a "Arreglador de Palabras" (incluyendo Banco del Caribe -> Bancaribe, etc.).
+- Cambiada la lógica de Posibles PDIs Duplicados para eliminar los que se seleccionen.
+- Ahora se asegura que los nombres de los PDIs estén en mayúscula.
+- Se eliminan espacios en blanco extras en los nombres de los PDIs.
+- Se verifica que los PDI tengan tipos conocidos y coordenadas definidas.
+- Añadida visualización de los elementos del mapa.
+- Añadido acercamiento/alejamiento del mapa con la rueda del ratón.
+- Añadido restauración de la ventana de visualización del mapa usando el doble-click del ratón.
+- Añadidas coordenadas del cursor al mapa.
+- Añadida la descripción de elementos.
+- Añadido los polígonos y polilíneas al mapa.
+- Ahora los menus de Guardar son mas estándar
+- Ahora se usan eventos para la actualización de listas.
+- Actualizada la ventana de Acerca.
+- Empezadas las pruebas automáticas
+- Cambiado el concepto Tipo de texto a número hexadecimal.
+- Estadísticas de 58170.mp:
+    PDIs -> Todos: 6837, Modificados:  99, Duplicados:  8, Eliminados: 189
+- Estadísticas de 58220.mp:
+    PDIs -> Todos: 6460, Modificados: 416, Duplicados: 30, Eliminados:  58
+
+Versión 0.7 (19/2/2008)
+- Actualizada la lógica para que se pueda procesar el mismo tipo de PDIs al arreglar prefijos.
+- Añadido a las pestañas el número de elementos.
+- Añadida la distancia entre PDIs duplicados.
+- Añadida la funcionalidad de eliminar duplicados manualmente.
+
+Version 0.6 (18/2/2008)
+- Añadida la fuente a Control de Versiones.
+- Cambiadas las listas a modo virtual para mejorar la velocidad de visualización.
+- Ahora se muestra en la interfase los cambios hechos.
+- Ya está la estructura suficientemente madura para que otros puedan colaborar con el código.
+- Se comenzó la corrección de prefijos basado en abreviaciones y el tipo de PDI.
+- Se comenzó la implementación se la búsqueda y eliminación de PDIs duplicados.
+
+Version 0.5 (13/3/2008)
+- Ahora se fuerza el uso de punto decimal para lectura/escritura de números.
+- Ahora los PDIs mantienen el número de elemento.
+- Se implementó la lectura del CampoCoordenada (Data0) de forma generica.
+- Se mejoró el reuso de código.
+
+Version 0.4 (11/2/2008)
+- Lectura y escritura de archivos ahora usan la codificación 1252 para evitar usar la que tiene el sistema operativo por defecto.
+
+Versión 0.3 (10/2/2008)
+- Varias mejoras en la estructura del programa.
+- Se implementó la lógica para mostrar y registrar errores en el programa. 
+- El registro de errores se graba en el archivo <programa>.Error.log en el directorio de trabajo. 
+- Arreglada barra de progreso para que llegue al 100%.
+- Ahora la barra de progreso se limpia cuando termina la lectura del archivo.
+- Arreglado error cuando se manda a procesar algo y todavía no se ha leído un archivo.
+- Añadidos [RGN10] y [RGN20] como identificador de PDI.
+- Finalizada la clase/módulo para arreglar las letras con acentos y la ñ.
+- Implementado el guardado del archivo corregido.
+
+Versión 0.2 (8/2/2008)
+- Se cambiaros las referencias a "Mapdekode" por "Formato Polish".
+- Añadido filtro .mp para leer los archivos.
+- La lista de PDIs está ahora dentro de un Componente tabulador con miras a futuras expansiones.
+- Añadido mensaje de estatus, barra de progreso, y mensaje de información en la barra de estatus.
+- Se creo la clase ManejadorDePDIs para contener toda la lógica relacionada con PDIs.
+- Se cambio Punto por PuntoDeInteres.
+- Se implementó la lectura e interpretación de las coordenadas como números. para separar la latitud y longitud.
+- Los nombres de los PDIs ahora se convierten automaticamente a mayúsculas.
+- Se empezó la clase/módulo para arreglar las letras con acentos y la ñ.
+
+Versión 0.1 (7/2/2008)
+- Lectura de archivos formato Polish (.txt).
+- Mostrar PDIs (Nombre, Tipo, y Coordenadas) en la applicación.
+ 

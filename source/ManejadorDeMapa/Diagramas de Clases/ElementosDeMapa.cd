@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GpsYv.ManejadorDeMapa.Polígono">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAIAABA=</HashCode>
+      <FileName>Poligono.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Polilínea">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAIAABA=</HashCode>
+      <FileName>Polilínea.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Coordenadas" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.ElementoDelMapa" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAAFAAAQAAAgAAAAgEgCCAAKAIAAgALDWGCACAChU=</HashCode>
+      <FileName>ElementoDelMapa.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Comentario">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAgAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Comentario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.ElementoDesconocido">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ElementoDesconocido.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Vías.Vía">
+    <Position X="8" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Vías\Vía.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ClaseDeRuta" />
+      <Property Name="LímiteDeVelocidad" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Pdis.Pdi">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAEAAAAAAAAAAIAAAAAAAAAAAIAABA=</HashCode>
+      <FileName>Pdis\Pdi.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Coordenadas" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GpsYv.ManejadorDeMapa.Coordenadas" Collapsed="true">
+    <Position X="4" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAEgAAAAAAAAABAAIAAAABBAAAAEiA=</HashCode>
+      <FileName>Coordenadas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GpsYv.ManejadorDeMapa.ClaseDeRuta" Collapsed="true">
+    <Position X="9.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAEQCAAAAAAAAQAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>ClaseDeRuta.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GpsYv.ManejadorDeMapa.LímiteDeVelocidad" Collapsed="true">
+    <Position X="8" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAEQCAAAAAAAAQAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>LímiteDeVelocidad.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
